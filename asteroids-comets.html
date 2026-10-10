@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore asteroids, comets, meteoroids, meteors, meteorites, near-Earth objects, and planetary defense.">
+  <title>Asteroids &amp; Comets | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .research-detail{width:min(1100px,calc(100% - 40px));margin:auto;padding:38px 0 70px;color:#edf4ff}
+    .research-detail a{color:#65e4df}
+    .detail-back{display:inline-block;margin-bottom:26px;text-decoration:none}
+    .detail-hero{padding:clamp(24px,5vw,48px);border:1px solid #263d56;border-radius:16px;background:radial-gradient(ellipse at 85% 15%,rgba(70,145,180,.22),transparent 45%),linear-gradient(135deg,#101b30,#0a1323)}
+    .detail-eyebrow{color:#65e4df;font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+    .detail-hero h1{margin:12px 0;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-1.5px}
+    .detail-hero p,.detail-section p,.detail-section li{color:#aab8ce;font-size:.97rem;line-height:1.85}
+    .detail-hero p{max-width:740px;margin-bottom:0}
+    .detail-section{margin-top:36px}
+    .detail-section h2{margin-bottom:14px;font-size:clamp(1.4rem,3vw,1.9rem)}
+    .detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+    .detail-card{padding:22px;border:1px solid #263d56;border-radius:12px;background:linear-gradient(145deg,#101b2d,#0b1424)}
+    .detail-card h3{margin-top:0;font-size:1.05rem}
+    .detail-card p{margin-bottom:0;font-size:.88rem}
+    .detail-list{padding-left:22px}
+    .detail-links{display:flex;flex-wrap:wrap;gap:12px}
+    .detail-link{display:inline-block;padding:10px 14px;border:1px solid #2a5263;border-radius:8px;text-decoration:none}
+    .detail-link:hover{border-color:#65e4df;background:#122239}
+    .fact-panel{margin-top:18px;padding:20px;border-left:3px solid #65e4df;border-radius:0 10px 10px 0;background:#0e1b2b}
+    .fact-panel p{margin:0}
+    @media(max-width:760px){.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:520px){.research-detail{width:calc(100% - 28px);padding-top:25px}.detail-grid{grid-template-columns:1fr}.detail-card{padding:18px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="planets.html">Planets</a>
+      <a href="missions.html">Missions</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="research-detail">
+    <a class="detail-back" href="research.html">← Back to Research</a>
+
+    <section class="detail-hero">
+      <span class="detail-eyebrow">Research Field 08</span>
+      <h1>Asteroids &amp; Comets</h1>
+      <p>
+        Explore the small bodies of our Solar System: rocky asteroids,
+        icy comets, meteoroids, and the fragments that sometimes reach
+        Earth's surface. These objects preserve clues about our cosmic past.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Small Bodies of the Solar System</h2>
+      <p>
+        Not every object orbiting the Sun is a planet or dwarf planet.
+        Asteroids, comets, and smaller fragments are remnants of the
+        material from which the Solar System formed about 4.6 billion
+        years ago.
+      </p>
+      <p>
+        Studying these objects helps scientists understand planetary
+        formation, the delivery of water and organic compounds, and the
+        impact hazards that can affect planets.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Types of Small Solar System Objects</h2>
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Asteroids</h3>
+          <p>
+            Mostly rocky or metallic objects orbiting the Sun. Many are
+            found in the main asteroid belt between Mars and Jupiter.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Comets</h3>
+          <p>
+            Icy bodies that can release gas and dust when warmed by the Sun,
+            creating a glowing coma and sometimes long tails.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Meteoroids</h3>
+          <p>
+            Small pieces of rock or metal moving through space, often
+            produced by asteroid collisions or comet activity.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Meteors</h3>
+          <p>
+            Streaks of light produced when material enters an atmosphere
+            and heats the surrounding gas. They are commonly called
+            shooting stars.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Meteorites</h3>
+          <p>
+            Fragments of natural space objects that survive passage through
+            an atmosphere and reach the ground.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Dwarf Planets</h3>
+          <p>
+            Objects such as Ceres and Pluto that orbit the Sun and are
+            rounded by their own gravity but have not cleared their
+            orbital neighbourhoods.
+          </p>
+        </article>
+      </div>
+
+      <div class="fact-panel">
+        <p>
+          <strong>Remember:</strong> A meteoroid is the object in space,
+          a meteor is the light phenomenon in an atmosphere, and a meteorite
+          is material that reaches the ground.
+        </p>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Where Are Asteroids Found?</h2>
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Main Asteroid Belt</h3>
+          <p>
+            A region between Mars and Jupiter containing many rocky bodies
+            orbiting the Sun.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Near-Earth Asteroids</h3>
+          <p>
+            Asteroids whose orbits bring them relatively close to Earth's
+            orbital region. Their paths are monitored by astronomers.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Trojan Asteroids</h3>
+          <p>
+            Asteroids that share a planet's orbit while gathering around
+            stable gravitational regions ahead of or behind the planet.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Why Do Comets Have Tails?</h2>
+      <p>
+        Many comets contain frozen water and other volatile substances mixed
+        with dust and rocky material. As a comet approaches the Sun, its
+        surface warms and releases gas and dust, forming a cloud called a coma.
+      </p>
+      <p>
+        Sunlight and the solar wind help produce two common tail components:
+        a dust tail and an ion tail. Both generally point away from the Sun,
+        though their shapes and directions can differ.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Famous Objects</h2>
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Halley's Comet</h3>
+          <p>
+            A famous periodic comet that returns to the inner Solar System
+            roughly every 76 years.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Asteroid Bennu</h3>
+          <p>
+            A near-Earth asteroid sampled by NASA's OSIRIS-REx mission.
+            Its returned samples help scientists investigate early
+            Solar System chemistry.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Comet 67P</h3>
+          <p>
+            The comet studied in detail by ESA's Rosetta mission, which
+            included the Philae lander.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Ceres</h3>
+          <p>
+            The largest object in the main asteroid belt and a dwarf
+            planet studied by NASA's Dawn spacecraft.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Chicxulub Impactor</h3>
+          <p>
+            The impactor associated with the mass extinction about
+            66 million years ago that ended the age of non-avian dinosaurs.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Interstellar Visitors</h3>
+          <p>
+            Objects such as 1I/'Oumuamua and 2I/Borisov passed through
+            our Solar System after arriving from interstellar space.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Planetary Defense</h2>
+      <p>
+        Planetary defense is the work of finding, tracking, and characterising
+        asteroids and comets that could pose an impact risk to Earth.
+        Scientists calculate their orbits, improve observations, and study
+        possible ways to reduce future hazards.
+      </p>
+      <ul class="detail-list">
+        <li><strong>Detection:</strong> Search the sky for previously unknown objects.</li>
+        <li><strong>Orbit tracking:</strong> Measure positions over time to refine orbital predictions.</li>
+        <li><strong>Risk assessment:</strong> Estimate the probability and potential consequences of an impact.</li>
+        <li><strong>Deflection research:</strong> Investigate whether a spacecraft could change an object's trajectory.</li>
+      </ul>
+      <p>
+        NASA's DART mission demonstrated that a spacecraft impact can change
+        the orbit of a small asteroid moon. This was a technology test,
+        not a response to an imminent threat to Earth.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>How Do Scientists Study These Objects?</h2>
+      <ul class="detail-list">
+        <li><strong>Ground-based telescopes:</strong> Track motion, brightness, and colour.</li>
+        <li><strong>Radar observations:</strong> Help measure distances, rotation, shapes, and orbits for suitable nearby objects.</li>
+        <li><strong>Spectroscopy:</strong> Provides clues about surface composition.</li>
+        <li><strong>Spacecraft flybys and orbiters:</strong> Capture close-up observations.</li>
+        <li><strong>Sample-return missions:</strong> Bring material to Earth for detailed laboratory analysis.</li>
+      </ul>
+    </section>
+
+    <section class="detail-section">
+      <h2>Questions Scientists Are Investigating</h2>
+      <ul class="detail-list">
+        <li>How did asteroids and comets contribute to the early Solar System?</li>
+        <li>What can their minerals and organic compounds tell us about Earth's history?</li>
+        <li>How many potentially hazardous objects remain undiscovered?</li>
+        <li>Can future missions reliably deflect a dangerous asteroid if needed?</li>
+        <li>What can interstellar objects reveal about other planetary systems?</li>
+      </ul>
+    </section>
+
+    <section class="detail-section">
+      <h2>Explore Related Research</h2>
+      <div class="detail-links">
+        <a class="detail-link" href="planetary-science.html">Planetary Science</a>
+        <a class="detail-link" href="space-technology.html">Space Technology</a>
+        <a class="detail-link" href="solar-physics.html">Solar Physics</a>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Official Resources</h2>
+      <p>
+        <a href="https://science.nasa.gov/solar-system/asteroids/"
+           target="_blank" rel="noopener noreferrer">
+          NASA — Asteroids ↗
+        </a>
+      </p>
+      <p>
+        <a href="https://science.nasa.gov/solar-system/comets/"
+           target="_blank" rel="noopener noreferrer">
+          NASA — Comets ↗
+        </a>
+      </p>
+      <p>
+        <a href="https://science.nasa.gov/planetary-defense/"
+           target="_blank" rel="noopener noreferrer">
+          NASA — Planetary Defense ↗
+        </a>
+      </p>
+    </section>
+
+    <a class="detail-back" href="research.html">← Back to All Research Fields</a>
+  </main>
+
+  <footer>
+    <p>© COSMOS — Exploring the Universe</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
