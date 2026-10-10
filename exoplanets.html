@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore exoplanets, planets beyond our Solar System, and the methods astronomers use to discover distant worlds.">
+  <title>Exoplanets | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .research-detail{width:min(1100px,calc(100% - 40px));margin:auto;padding:38px 0 70px;color:#edf4ff}
+    .research-detail a{color:#65e4df}
+    .detail-back{display:inline-block;margin-bottom:26px;text-decoration:none}
+    .detail-hero{padding:clamp(24px,5vw,48px);border:1px solid #263d56;border-radius:16px;background:radial-gradient(ellipse at 90% 10%,rgba(80,90,210,.2),transparent 45%),linear-gradient(135deg,#101b30,#0a1323)}
+    .detail-eyebrow{color:#65e4df;font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+    .detail-hero h1{margin:12px 0;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-1.5px}
+    .detail-hero p,.detail-section p,.detail-section li{color:#aab8ce;font-size:.97rem;line-height:1.85}
+    .detail-hero p{max-width:740px;margin-bottom:0}
+    .detail-section{margin-top:36px}
+    .detail-section h2{margin-bottom:14px;font-size:clamp(1.4rem,3vw,1.9rem)}
+    .detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+    .detail-card{padding:22px;border:1px solid #263d56;border-radius:12px;background:linear-gradient(145deg,#101b2d,#0b1424)}
+    .detail-card h3{margin-top:0;font-size:1.05rem}
+    .detail-card p{margin-bottom:0;font-size:.88rem}
+    .detail-list{padding-left:22px}
+    .detail-links{display:flex;flex-wrap:wrap;gap:12px}
+    .detail-link{display:inline-block;padding:10px 14px;border:1px solid #2a5263;border-radius:8px;text-decoration:none}
+    .detail-link:hover{border-color:#65e4df;background:#122239}
+    @media(max-width:760px){.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:520px){.research-detail{width:calc(100% - 28px);padding-top:25px}.detail-grid{grid-template-columns:1fr}.detail-card{padding:18px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="planets.html">Planets</a>
+      <a href="missions.html">Missions</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="research-detail">
+    <a class="detail-back" href="research.html">← Back to Research</a>
+
+    <section class="detail-hero">
+      <span class="detail-eyebrow">Research Field 03</span>
+      <h1>Exoplanets</h1>
+      <p>
+        Discover worlds beyond our Solar System, from giant planets orbiting
+        close to their stars to small rocky planets that may have conditions
+        suitable for life.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>What Are Exoplanets?</h2>
+      <p>
+        An exoplanet, or extrasolar planet, is a planet that orbits a star
+        outside our Solar System. Some orbit stars similar to the Sun, while
+        others orbit smaller, cooler stars or even multiple stars.
+      </p>
+      <p>
+        Thousands of exoplanets have been confirmed. They show that planetary
+        systems can be very different from our own, giving astronomers new ways
+        to understand how planets form, evolve, and interact with their stars.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Types of Exoplanets</h2>
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Gas Giants</h3>
+          <p>
+            Massive planets dominated by hydrogen and helium, similar in broad
+            composition to Jupiter and Saturn.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Super-Earths</h3>
+          <p>
+            Planets more massive than Earth but smaller than Neptune.
+            Their composition can vary and is not determined by size alone.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Mini-Neptunes</h3>
+          <p>
+            Planets smaller than Neptune that may have thick atmospheres
+            surrounding rocky or icy interiors.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Rocky Planets</h3>
+          <p>
+            Dense worlds that may have solid surfaces, although their
+            temperatures and atmospheres can vary widely.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Hot Jupiters</h3>
+          <p>
+            Large gas giants that orbit extremely close to their stars,
+            completing an orbit in a relatively short time.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Ocean Worlds</h3>
+          <p>
+            Possible water-rich worlds that may contain deep oceans beneath
+            their surfaces or within thick outer layers.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>How Do Astronomers Find Exoplanets?</h2>
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Transit Method</h3>
+          <p>
+            A planet passes in front of its star and causes a tiny, repeating
+            dip in the star's observed brightness.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Radial Velocity</h3>
+          <p>
+            Astronomers measure small shifts in a star's spectrum caused by
+            the gravitational pull of an orbiting planet.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Direct Imaging</h3>
+          <p>
+            Special instruments block or reduce a star's glare to capture
+            light from certain planets directly.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Gravitational Microlensing</h3>
+          <p>
+            A star's gravity bends and magnifies light from a more distant
+            background star; a planet can add a detectable signal.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Astrometry</h3>
+          <p>
+            Scientists measure tiny movements in a star's position on the sky
+            that can reveal the influence of an orbiting planet.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Atmosphere Studies</h3>
+          <p>
+            During suitable observations, starlight passing through a planet's
+            atmosphere can reveal clues about its chemical composition.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>The Habitable Zone</h2>
+      <p>
+        The habitable zone is the range of distances from a star where a
+        planet with suitable atmospheric conditions could potentially maintain
+        liquid water on its surface. Being inside this zone does not prove
+        that a planet has water or life.
+      </p>
+      <p>
+        Scientists also consider atmospheric composition, planetary geology,
+        magnetic activity, radiation, and the history of the planet's climate
+        when evaluating its potential habitability.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Notable Exoplanet Missions</h2>
+      <ul class="detail-list">
+        <li><strong>Kepler:</strong> Revealed that planets are common around stars in our galaxy.</li>
+        <li><strong>TESS:</strong> Searches large areas of the sky for planets transiting nearby bright stars.</li>
+        <li><strong>James Webb Space Telescope:</strong> Studies selected exoplanet atmospheres and other distant objects.</li>
+      </ul>
+    </section>
+
+    <section class="detail-section">
+      <h2>Questions Scientists Are Investigating</h2>
+      <ul class="detail-list">
+        <li>How common are Earth-sized rocky planets?</li>
+        <li>What are the atmospheres of distant planets made of?</li>
+        <li>Can scientists identify reliable signs of habitability?</li>
+        <li>How do planetary systems form and change over time?</li>
+        <li>Could any exoplanet support life as we know it?</li>
+      </ul>
+    </section>
+
+    <section class="detail-section">
+      <h2>Explore Related Research</h2>
+      <div class="detail-links">
+        <a class="detail-link" href="astrobiology.html">Astrobiology</a>
+        <a class="detail-link" href="planetary-science.html">Planetary Science</a>
+        <a class="detail-link" href="cosmology.html">Cosmology</a>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Official Resources</h2>
+      <p>
+        <a href="https://science.nasa.gov/exoplanets/"
+           target="_blank" rel="noopener noreferrer">
+          NASA Exoplanet Exploration ↗
+        </a>
+      </p>
+      <p>
+        <a href="https://science.nasa.gov/mission/tess/"
+           target="_blank" rel="noopener noreferrer">
+          NASA TESS Mission ↗
+        </a>
+      </p>
+      <p>
+        <a href="https://science.nasa.gov/mission/kepler/"
+           target="_blank" rel="noopener noreferrer">
+          NASA Kepler Mission ↗
+        </a>
+      </p>
+    </section>
+
+    <a class="detail-back" href="research.html">← Back to All Research Fields</a>
+  </main>
+
+  <footer>
+    <p>© COSMOS — Exploring the Universe</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
