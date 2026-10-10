@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore NASA's OSIRIS-REx mission, which collected a sample from asteroid Bennu and returned it to Earth.">
+  <title>OSIRIS-REx | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .mission-detail {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+      padding: 45px 0 80px;
+    }
+
+    .mission-back {
+      display: inline-block;
+      margin-bottom: 28px;
+      color: #9ecbff;
+      text-decoration: none;
+    }
+
+    .mission-back:hover { text-decoration: underline; }
+
+    .mission-hero {
+      padding: 45px 35px;
+      border: 1px solid rgba(150,190,255,.22);
+      border-radius: 22px;
+      background: linear-gradient(135deg,#29231b,#403a2b 55%,#111827);
+      margin-bottom: 30px;
+    }
+
+    .mission-label {
+      display: inline-block;
+      color: #e9d5a6;
+      font-size: .82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .mission-hero h1 {
+      font-size: clamp(2.2rem,6vw,4.3rem);
+      line-height: 1.1;
+      margin: 0 0 18px;
+    }
+
+    .mission-hero p {
+      max-width: 760px;
+      line-height: 1.8;
+      color: #e3ddd0;
+    }
+
+    .mission-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap: 16px;
+      margin: 25px 0 35px;
+    }
+
+    .mission-fact,.mission-section {
+      padding: 23px;
+      border: 1px solid rgba(150,190,255,.17);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .mission-fact span {
+      display: block;
+      color: #e9d5a6;
+      font-size: .82rem;
+      margin-bottom: 9px;
+    }
+
+    .mission-fact strong { font-size: 1.05rem; }
+    .mission-section { margin-top: 20px; }
+    .mission-section h2 { margin-top: 0; margin-bottom: 14px; }
+
+    .mission-section p,.mission-section li {
+      color: #cbd5e1;
+      line-height: 1.85;
+    }
+
+    .mission-section ul { padding-left: 22px; }
+
+    .mission-highlight {
+      border-left: 3px solid #e5c77e;
+      padding: 12px 18px;
+      margin-top: 18px;
+      background: rgba(229,199,126,.07);
+      color: #f5ebcf;
+      line-height: 1.8;
+    }
+
+    .mission-navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .mission-navigation a {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid rgba(150,190,255,.3);
+      border-radius: 10px;
+      color: #e5efff;
+      text-decoration: none;
+    }
+
+    .mission-navigation a:hover {
+      background: rgba(117,182,255,.12);
+    }
+
+    @media(max-width:600px) {
+      .mission-detail {
+        width: calc(100% - 28px);
+        padding-top: 25px;
+      }
+      .mission-hero { padding: 30px 22px; }
+      .mission-section,.mission-fact { padding: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="mission-detail">
+    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+
+    <header class="mission-hero">
+      <span class="mission-label">Asteroid Sample Return</span>
+      <h1>OSIRIS-REx</h1>
+      <p>
+        NASA's OSIRIS-REx mission traveled to asteroid Bennu, collected a
+        sample of its surface material, and delivered that sample to Earth.
+        By studying the material in laboratories, scientists can investigate
+        the early Solar System and the ingredients that helped form planets.
+      </p>
+    </header>
+
+    <section class="mission-facts" aria-label="Mission facts">
+      <div class="mission-fact">
+        <span>Space Agency</span>
+        <strong>NASA</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Launch Date</span>
+        <strong>September 8, 2016</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Target Asteroid</span>
+        <strong>101955 Bennu</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Sample Returned</span>
+        <strong>September 24, 2023</strong>
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>What Was OSIRIS-REx?</h2>
+      <p>
+        OSIRIS-REx stands for Origins, Spectral Interpretation, Resource
+        Identification, and Security–Regolith Explorer. It was a robotic
+        spacecraft developed to map asteroid Bennu, investigate its properties,
+        collect surface material, and return the sample to Earth.
+      </p>
+      <p>
+        Bennu is a small, carbon-rich near-Earth asteroid. Its material
+        preserves clues about the substances present when the Solar System
+        formed billions of years ago.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Mission Timeline</h2>
+      <ul>
+        <li><strong>2016:</strong> OSIRIS-REx launched from Earth.</li>
+        <li><strong>2018:</strong> The spacecraft arrived at Bennu and began detailed mapping.</li>
+        <li><strong>2020:</strong> It touched the asteroid's surface with its sampling mechanism and collected material.</li>
+        <li><strong>2021:</strong> The spacecraft departed Bennu and began its return journey.</li>
+        <li><strong>2023:</strong> The sample capsule landed in Utah, USA, delivering asteroid material to Earth.</li>
+        <li><strong>After sample delivery:</strong> The spacecraft continued into an extended mission called OSIRIS-APEX to study asteroid Apophis.</li>
+      </ul>
+    </section>
+
+    <section class="mission-section">
+      <h2>How Did It Collect the Sample?</h2>
+      <p>
+        OSIRIS-REx used a system called Touch-And-Go Sample Acquisition
+        Mechanism, or TAGSAM. The spacecraft briefly contacted Bennu's
+        surface and released a burst of nitrogen gas to stir up surface
+        material. The collection head captured some of this material.
+      </p>
+      <p>
+        The sample was stored in a return capsule, which separated from the
+        spacecraft and descended to Earth by parachute in September 2023.
+      </p>
+
+      <div class="mission-highlight">
+        Unlike missions that only send images and measurements, OSIRIS-REx
+        returned physical asteroid material for scientists to examine
+        directly in laboratories.
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>What Can Scientists Learn?</h2>
+      <ul>
+        <li>Which minerals and chemical compounds occur in Bennu's material.</li>
+        <li>How carbon-rich asteroids formed and changed over time.</li>
+        <li>Whether the sample contains organic molecules and water-related minerals.</li>
+        <li>What small bodies may have delivered to the early Earth.</li>
+        <li>How scientists can better characterize near-Earth asteroids.</li>
+      </ul>
+      <p>
+        Finding organic molecules does not by itself prove that life existed
+        on Bennu. These substances can also form through non-biological
+        chemical processes.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Why Is Bennu Important?</h2>
+      <p>
+        Bennu's orbit brings it relatively close to Earth, making it important
+        for asteroid research. Studying its physical structure and composition
+        helps scientists improve their understanding of asteroid evolution
+        and assess the properties of potentially hazardous near-Earth objects.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Mission Status</h2>
+      <p>
+        The original OSIRIS-REx sample-return mission has been completed.
+        Its spacecraft continues as OSIRIS-APEX, a separate extended mission
+        that is planned to investigate asteroid Apophis after its close
+        approach to Earth in 2029. Check NASA's official page for current
+        mission updates.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Explore More</h2>
+      <div class="mission-navigation">
+        <a href="https://science.nasa.gov/mission/osiris-rex/" target="_blank" rel="noopener noreferrer">NASA OSIRIS-REx</a>
+        <a href="missions.html">All Space Missions</a>
+        <a href="index.html">COSMOS Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
