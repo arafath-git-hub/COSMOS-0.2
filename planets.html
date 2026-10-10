@@ -1,0 +1,549 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b16">
+  <meta name="description" content="Explore all eight planets of our Solar System with COSMOS.">
+  <title>Planet Explorer | COSMOS</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b16;
+      --panel: #101626;
+      --text: #f4f6ff;
+      --muted: #9aa6bd;
+      --accent: #a8c7ff;
+      --line: rgba(255,255,255,.09);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 80% 0%, #1b2850 0%, transparent 36%),
+        var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(1300px, 100%);
+      margin: auto;
+      padding: 24px clamp(18px, 4vw, 52px) 40px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font: 700 22px "Space Grotesk", sans-serif;
+      letter-spacing: 2px;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border: 1px solid #7796d9;
+      border-radius: 50%;
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+    }
+
+    nav a {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    nav a:hover, nav a[aria-current="page"] {
+      color: white;
+    }
+
+    .intro {
+      padding: 58px 0 35px;
+      animation: fade-in .6s ease both;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 15px 0;
+      font: 600 clamp(38px, 6vw, 68px)/1.08 "Space Grotesk", sans-serif;
+      letter-spacing: -2px;
+    }
+
+    h1 span { color: var(--accent); }
+
+    .intro p {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .count {
+      margin-top: 23px;
+      color: #c7d4ee;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .planet-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .planet-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: linear-gradient(145deg, #ffffff09, #ffffff02);
+      transition: transform .25s ease, border-color .25s ease;
+      animation: fade-in .6s ease both;
+    }
+
+    .planet-card:hover {
+      transform: translateY(-5px);
+      border-color: #a8c7ff65;
+    }
+
+    .planet-visual {
+      position: relative;
+      min-height: 190px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: radial-gradient(ellipse at center, #202d4b 0%, #0c1121 72%);
+    }
+
+    .planet-visual::before,
+    .planet-visual::after {
+      content: "";
+      position: absolute;
+      width: 210px;
+      height: 65px;
+      border: 1px solid #ffffff12;
+      border-radius: 50%;
+      transform: rotate(-20deg);
+    }
+
+    .planet-visual::after {
+      width: 165px;
+      height: 45px;
+      transform: rotate(30deg);
+      border-color: #ffffff0c;
+    }
+
+    .planet {
+      position: relative;
+      z-index: 1;
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      box-shadow: inset -20px -12px 28px #0009,
+                  inset 8px 7px 19px #ffffff20,
+                  0 0 32px var(--glow);
+      transition: transform .4s ease;
+    }
+
+    .planet-card:hover .planet {
+      transform: scale(1.07) rotate(5deg);
+    }
+
+    .mercury {
+      --glow: #8b8d9d30;
+      background: radial-gradient(circle at 30% 25%, #c9c4b9, #777782 45%, #343743 80%);
+    }
+
+    .venus {
+      --glow: #e7a45c35;
+      background: radial-gradient(circle at 30% 25%, #ffe0a3, #d79552 43%, #784c35 80%);
+    }
+
+    .earth {
+      --glow: #529aff45;
+      background:
+        radial-gradient(ellipse at 35% 38%, #78b98a 0 9%, transparent 10%),
+        radial-gradient(ellipse at 65% 62%, #83bd8e 0 13%, transparent 14%),
+        radial-gradient(circle at 30% 25%, #9ad8ff, #2770c7 43%, #10366e 80%);
+    }
+
+    .mars {
+      --glow: #e9794b35;
+      background: radial-gradient(circle at 30% 25%, #ffb18a, #c65e40 48%, #672e2c 80%);
+    }
+
+    .jupiter {
+      --glow: #e6b38d30;
+      background: repeating-linear-gradient(0deg, #c68d67 0 9px, #e8c7a0 10px 19px, #93644d 20px 25px);
+    }
+
+    .saturn {
+      --glow: #d8bd8130;
+      background: repeating-linear-gradient(0deg, #f1dbad 0 12px, #b49a6e 13px 19px, #dfc89a 20px 26px);
+    }
+
+    .saturn::after {
+      content: "";
+      position: absolute;
+      width: 155px;
+      height: 45px;
+      border: 10px solid #c6b38c;
+      border-left-color: #e4d2aa;
+      border-right-color: #7c6a50;
+      border-radius: 50%;
+      transform: rotate(-20deg);
+    }
+
+    .uranus {
+      --glow: #74e2eb30;
+      background: radial-gradient(circle at 30% 25%, #d0ffff, #78d4e0 48%, #398aab 80%);
+    }
+
+    .neptune {
+      --glow: #4b8cff40;
+      background: radial-gradient(circle at 30% 25%, #84b9ff, #326fe0 48%, #122c83 80%);
+    }
+
+    .planet-number {
+      position: absolute;
+      z-index: 2;
+      top: 13px;
+      left: 14px;
+      color: #a6b4ce;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+    }
+
+    .planet-info { padding: 19px; }
+
+    .planet-type {
+      color: var(--accent);
+      font-size: 10px;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .planet-info h2 {
+      margin: 8px 0;
+      font: 600 23px "Space Grotesk", sans-serif;
+    }
+
+    .planet-info p {
+      min-height: 66px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .planet-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 15px 0;
+      margin-top: 12px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .fact-label {
+      display: block;
+      color: #8391aa;
+      font-size: 10px;
+      margin-bottom: 5px;
+    }
+
+    .fact-value {
+      color: #edf2ff;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .explore {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 15px;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .explore span {
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    .note {
+      margin-top: 28px;
+      padding: 17px 19px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+      color: #8391aa;
+      font-size: 11px;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 1000px) {
+      .planet-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 520px) {
+      .shell { padding: 18px; }
+      nav { gap: 14px; }
+      .intro { padding-top: 40px; }
+      .planet-grid { grid-template-columns: 1fr; }
+      .planet-visual { min-height: 220px; }
+      .planet-info p { min-height: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true">✳</span>
+        <span>COSMOS</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="planets.html" aria-current="page">Planets</a>
+        <a href="missions.html">Missions</a>
+        <a href="research.html">Research</a>
+        <a href="about.html">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div class="eyebrow">THE SOLAR SYSTEM / EXPLORER</div>
+        <h1>Worlds beyond <span>our own.</span></h1>
+        <p>
+          Eight planets. Eight extraordinary worlds.
+          From the scorched surface of Mercury to the distant
+          blue atmosphere of Neptune, every planet has a story
+          written in its geology, atmosphere and history.
+          Choose a world to begin your exploration.
+        </p>
+        <div class="count">01 — 08 &nbsp; / &nbsp; EIGHT PLANETS</div>
+      </section>
+
+      <section class="planet-grid" aria-label="Eight planets">
+
+        <a class="planet-card" href="mercury.html">
+          <div class="planet-visual">
+            <span class="planet-number">01 / TERRESTRIAL</span>
+            <div class="planet mercury"></div>
+          </div>
+          <div class="planet-info">
+            <div class="planet-type">Terrestrial planet</div>
+            <h2>Mercury</h2>
+            <p>The smallest planet, with a heavily cratered surface and extreme temperature changes.</p>
+            <div class="planet-facts">
+              <div><span class="fact-label">DAY LENGTH</span><span class="fact-value">58.6 Earth days</span></div>
+              <div><span class="fact-label">MOONS</span><span class="fact-value">0</span></div>
+            </div>
+            <div class="explore">Explore Mercury <span>↗</span></div>
+          </div>
+        </a>
+
+        <a class="planet-card" href="venus.html">
+          <div class="planet-visual">
+            <span class="planet-number">02 / TERRESTRIAL</span>
+            <div class="planet venus"></div>
+          </div>
+          <div class="planet-info">
+            <div class="planet-type">Terrestrial planet</div>
+            <h2>Venus</h2>
+            <p>A rocky world wrapped in dense clouds, with a surface hot enough to melt lead.</p>
+            <div class="planet-facts">
+              <div><span class="fact-label">DAY LENGTH</span><span class="fact-value">243 Earth days</span></div>
+              <div><span class="fact-label">MOONS</span><span class="fact-value">0</span></div>
+            </div>
+            <div class="explore">Explore Venus <span>↗</span></div>
+          </div>
+        </a>
+
+        <a class="planet-card" href="earth.html">
+          <div class="planet-visual">
+            <span class="planet-number">03 / TERRESTRIAL</span>
+            <div class="planet earth"></div>
+          </div>
+          <div class="planet-info">
+            <div class="planet-type">Terrestrial planet</div>
+            <h2>Earth</h2>
+            <p>Our home world, with abundant liquid water and the only confirmed life we know.</p>
+            <div class="planet-facts">
+              <div><span class="fact-label">DAY LENGTH</span><span class="fact-value">23.9 hours</span></div>
+              <div><span class="fact-label">MOONS</span><span class="fact-value">1</span></div>
+            </div>
+            <div class="explore">Explore Earth <span>↗</span></div>
+          </div>
+        </a>
+
+        <a class="planet-card" href="mars.html">
+          <div class="planet-visual">
+            <span class="planet-number">04 / TERRESTRIAL</span>
+            <div class="planet mars"></div>
+          </div>
+          <div class="planet-info">
+            <div class="planet-type">Terrestrial planet</div>
+            <h2>Mars</h2>
+            <p>The Red Planet, home to ancient river valleys, enormous volcanoes and robotic explorers.</p>
+            <div class="planet-facts">
+              <div><span class="fact-label">DAY LENGTH</span><span class="fact-value">24.6 hours</span></div>
+              <div><span class="fact-label">MOONS</span><span class="fact-value">2</span></div>
+            </div>
+            <div class="explore">Explore Mars <span>↗</span></div>
+          </div>
+        </a>
+
+        <a class="planet-card" href="jupiter.html">
+          <div class="planet-visual">
+            <span class="planet-number">05 / GAS GIANT</span>
+            <div class="planet jupiter"></div>
+          </div>
+          <div class="planet-info">
+            <div class="planet-type">Gas giant</div>
+            <h2>Jupiter</h2>
+            <p>The largest planet, known for powerful storms and a vast family of moons.</p>
+            <div class="planet-facts">
+              <div><span class="fact-label">DAY LENGTH</span><span class="fact-value">9.9 hours</span></div>
+              <div><span class="fact-label">MOONS</span><span class="fact-value">Many</span></div>
+            </div>
+            <div class="explore">Explore Jupiter <span>↗</span></div>
+          </div>
+        </a>
+
+        <a class="planet-card" href="saturn.html">
+          <div class="planet-visual">
+            <span class="planet-number">06 / GAS GIANT</span>
+            <div class="planet saturn"></div>
+          </div>
+          <div class="planet-info">
+            <div class="planet-type">Gas giant</div>
+            <h2>Saturn</h2>
+            <p>A giant world with spectacular rings made mainly of countless pieces of ice and rock.</p>
+            <div class="planet-facts">
+              <div><span class="fact-label">DAY LENGTH</span><span class="fact-value">About 10.7 hours</span></div>
+              <div><span class="fact-label">MOONS</span><span class="fact-value">Many</span></div>
+            </div>
+            <div class="explore">Explore Saturn <span>↗</span></div>
+          </div>
+        </a>
+
+        <a class="planet-card" href="uranus.html">
+          <div class="planet-visual">
+            <span class="planet-number">07 / ICE GIANT</span>
+            <div class="planet uranus"></div>
+          </div>
+          <div class="planet-info">
+            <div class="planet-type">Ice giant</div>
+            <h2>Uranus</h2>
+            <p>A pale blue ice giant that rotates almost on its side, producing unusual seasons.</p>
+            <div class="planet-facts">
+              <div><span class="fact-label">DAY LENGTH</span><span class="fact-value">17.2 hours</span></div>
+              <div><span class="fact-label">MOONS</span><span class="fact-value">Many</span></div>
+            </div>
+            <div class="explore">Explore Uranus <span>↗</span></div>
+          </div>
+        </a>
+
+        <a class="planet-card" href="neptune.html">
+          <div class="planet-visual">
+            <span class="planet-number">08 / ICE GIANT</span>
+            <div class="planet neptune"></div>
+          </div>
+          <div class="planet-info">
+            <div class="planet-type">Ice giant</div>
+            <h2>Neptune</h2>
+            <p>A distant blue world with supersonic winds and a dynamic, cold atmosphere.</p>
+            <div class="planet-facts">
+              <div><span class="fact-label">DAY LENGTH</span><span class="fact-value">16.1 hours</span></div>
+              <div><span class="fact-label">MOONS</span><span class="fact-value">Many</span></div>
+            </div>
+            <div class="explore">Explore Neptune <span>↗</span></div>
+          </div>
+        </a>
+
+      </section>
+
+      <aside class="note">
+        <strong>About the data:</strong>
+        Planet values are rounded for readability. The giant planets have many
+        confirmed moons, and moon counts can change as new objects are confirmed.
+        Detailed planet pages will include scientific sources and mission histories.
+      </aside>
+    </main>
+
+    <footer>
+      <span>© 2026 COSMOS · Explore. Understand. Discover.</span>
+      <span>Curiosity has no boundaries.</span>
+    </footer>
+
+  </div>
+</body>
+</html>
