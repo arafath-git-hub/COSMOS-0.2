@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore planetary science, planetary formation, surfaces, atmospheres, and exploration missions with COSMOS.">
+  <title>Planetary Science | COSMOS</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .research-detail {
+      width: min(1100px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 38px 0 70px;
+      color: #edf4ff;
+    }
+
+    .research-detail a {
+      color: #65e4df;
+    }
+
+    .detail-back {
+      display: inline-block;
+      margin-bottom: 26px;
+      text-decoration: none;
+    }
+
+    .detail-hero {
+      padding: clamp(24px, 5vw, 48px);
+      border: 1px solid #263d56;
+      border-radius: 16px;
+      background:
+        radial-gradient(ellipse at 90% 10%, rgba(55, 134, 180, .19), transparent 45%),
+        linear-gradient(135deg, #101b30, #0a1323);
+    }
+
+    .detail-eyebrow {
+      color: #55dcd7;
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .detail-hero h1 {
+      margin: 12px 0;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      letter-spacing: -1.5px;
+    }
+
+    .detail-hero p,
+    .detail-section p,
+    .detail-section li {
+      color: #aab8ce;
+      font-size: .97rem;
+      line-height: 1.85;
+    }
+
+    .detail-hero p {
+      max-width: 720px;
+      margin-bottom: 0;
+    }
+
+    .detail-section {
+      margin-top: 36px;
+    }
+
+    .detail-section h2 {
+      margin-bottom: 14px;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .detail-card {
+      padding: 22px;
+      border: 1px solid #263d56;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #101b2d, #0b1424);
+    }
+
+    .detail-card h3 {
+      margin-top: 0;
+      font-size: 1.05rem;
+    }
+
+    .detail-card p {
+      margin-bottom: 0;
+      font-size: .88rem;
+    }
+
+    .detail-list {
+      padding-left: 22px;
+    }
+
+    .detail-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .detail-link {
+      display: inline-block;
+      padding: 10px 14px;
+      border: 1px solid #2a5263;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .detail-link:hover {
+      border-color: #55dcd7;
+      background: #122239;
+    }
+
+    @media (max-width: 760px) {
+      .detail-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .research-detail {
+        width: calc(100% - 28px);
+        padding-top: 25px;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-card {
+        padding: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="planets.html">Planets</a>
+      <a href="missions.html">Missions</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="research-detail">
+    <a class="detail-back" href="research.html">← Back to Research</a>
+
+    <section class="detail-hero">
+      <span class="detail-eyebrow">Research Field 01</span>
+      <h1>Planetary Science</h1>
+      <p>
+        Discover how planets form, what their surfaces and atmospheres reveal,
+        and how scientists explore worlds across our Solar System.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>What is Planetary Science?</h2>
+      <p>
+        Planetary science is the study of planets, moons, dwarf planets,
+        asteroids, comets, and other planetary bodies. It combines astronomy,
+        geology, chemistry, physics, and atmospheric science to understand
+        how these worlds formed and how they have changed over time.
+      </p>
+      <p>
+        Scientists study Earth alongside other worlds to understand what makes
+        planets similar or different and how planetary environments evolve.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Major Research Areas</h2>
+
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Planetary Surfaces</h3>
+          <p>
+            Investigate craters, mountains, volcanoes, dunes, canyons, and
+            icy landscapes to learn about a world's geological history.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Atmospheres &amp; Climate</h3>
+          <p>
+            Compare atmospheric gases, clouds, storms, winds, and temperatures
+            across planets and their moons.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Planet Formation</h3>
+          <p>
+            Study how dust and gas around young stars gradually form planets
+            and smaller objects.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Planetary Interiors</h3>
+          <p>
+            Use gravity, magnetic fields, and seismic measurements to infer
+            the internal structures of planetary bodies.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Moons &amp; Icy Worlds</h3>
+          <p>
+            Explore natural satellites, including worlds that may contain
+            oceans beneath their icy surfaces.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Small Solar System Bodies</h3>
+          <p>
+            Examine asteroids and comets to understand the materials left
+            over from the Solar System's formation.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>How Do Scientists Study Planets?</h2>
+      <ul class="detail-list">
+        <li>
+          <strong>Telescopes:</strong> Observe planets from Earth and space
+          using different wavelengths of light.
+        </li>
+        <li>
+          <strong>Orbiters:</strong> Map surfaces and measure atmospheres,
+          gravity, magnetic fields, and other properties.
+        </li>
+        <li>
+          <strong>Landers and rovers:</strong> Investigate planetary surfaces
+          directly using cameras and scientific instruments.
+        </li>
+        <li>
+          <strong>Laboratory analysis:</strong> Examine meteorites and returned
+          samples to identify minerals and chemical compounds.
+        </li>
+        <li>
+          <strong>Computer models:</strong> Test explanations of planetary
+          formation, climate, and geological processes.
+        </li>
+      </ul>
+    </section>
+
+    <section class="detail-section">
+      <h2>Important Scientific Questions</h2>
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>How did planets form?</h3>
+          <p>
+            Researchers investigate how material in young planetary systems
+            gathered into planets with different sizes and compositions.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Why are worlds different?</h3>
+          <p>
+            Planetary mass, distance from the Sun, chemistry, and geological
+            history all influence how a world develops.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Could other worlds support life?</h3>
+          <p>
+            Scientists examine water, energy sources, and environmental
+            conditions to assess whether a world may be habitable.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Explore Related Planets</h2>
+      <div class="detail-links">
+        <a class="detail-link" href="mercury.html">Mercury</a>
+        <a class="detail-link" href="venus.html">Venus</a>
+        <a class="detail-link" href="earth.html">Earth</a>
+        <a class="detail-link" href="mars.html">Mars</a>
+        <a class="detail-link" href="jupiter.html">Jupiter</a>
+        <a class="detail-link" href="saturn.html">Saturn</a>
+        <a class="detail-link" href="uranus.html">Uranus</a>
+        <a class="detail-link" href="neptune.html">Neptune</a>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Explore Further</h2>
+      <p>
+        Read official educational material from NASA for more information
+        about planetary worlds and their exploration.
+      </p>
+      <p>
+        <a href="https://science.nasa.gov/solar-system/"
+           target="_blank" rel="noopener noreferrer">
+          NASA Solar System Science ↗
+        </a>
+      </p>
+    </section>
+
+    <div class="detail-section">
+      <a class="detail-back" href="research.html">← Back to All Research Fields</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>© COSMOS — Exploring the Universe</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
