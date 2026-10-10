@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore the spacecraft, telescopes, robotics, and technologies that help humanity study the universe.">
+  <title>Space Technology | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .research-detail {
+      width: min(1100px, calc(100% - 40px));
+      margin: auto;
+      padding: 38px 0 70px;
+      color: #edf4ff;
+    }
+
+    .research-detail a { color: #65e4df; }
+
+    .detail-back {
+      display: inline-block;
+      margin-bottom: 26px;
+      text-decoration: none;
+    }
+
+    .detail-hero {
+      padding: clamp(24px, 5vw, 48px);
+      border: 1px solid #263d56;
+      border-radius: 16px;
+      background:
+        radial-gradient(ellipse at 85% 15%, rgba(80, 90, 210, .2), transparent 45%),
+        linear-gradient(135deg, #101b30, #0a1323);
+    }
+
+    .detail-eyebrow {
+      color: #55dcd7;
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .detail-hero h1 {
+      margin: 12px 0;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      letter-spacing: -1.5px;
+    }
+
+    .detail-hero p,
+    .detail-section p,
+    .detail-section li {
+      color: #aab8ce;
+      font-size: .97rem;
+      line-height: 1.85;
+    }
+
+    .detail-section { margin-top: 36px; }
+
+    .detail-section h2 {
+      margin-bottom: 14px;
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .detail-card {
+      padding: 22px;
+      border: 1px solid #263d56;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #101b2d, #0b1424);
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .detail-card:hover {
+      transform: translateY(-4px);
+      border-color: #55dcd7;
+    }
+
+    .detail-card h3 {
+      margin-top: 0;
+      font-size: 1.05rem;
+    }
+
+    .detail-card p {
+      margin-bottom: 0;
+      font-size: .88rem;
+    }
+
+    .detail-list { padding-left: 22px; }
+
+    .detail-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .detail-link {
+      display: inline-block;
+      padding: 10px 14px;
+      border: 1px solid #2a5263;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .detail-link:hover {
+      border-color: #55dcd7;
+      background: #122239;
+    }
+
+    @media (max-width: 760px) {
+      .detail-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 520px) {
+      .research-detail {
+        width: calc(100% - 28px);
+        padding-top: 25px;
+      }
+
+      .detail-grid { grid-template-columns: 1fr; }
+      .detail-card { padding: 18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="planets.html">Planets</a>
+      <a href="missions.html">Missions</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="research-detail">
+    <a class="detail-back" href="research.html">← Back to Research</a>
+
+    <section class="detail-hero">
+      <div class="detail-eyebrow">Research Field 09</div>
+      <h1>Space Technology</h1>
+      <p>
+        Space technology makes it possible to explore distant worlds, observe
+        the universe, communicate across enormous distances, and study Earth
+        from orbit. Discover the machines and engineering that turn scientific
+        questions into real space missions.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>What Is Space Technology?</h2>
+      <p>
+        Space technology includes the spacecraft, instruments, computers,
+        communication systems, launch vehicles, and robotic systems designed
+        to operate in space. These systems must work in demanding conditions,
+        including extreme temperatures, radiation, and long periods without
+        direct human assistance.
+      </p>
+      <p>
+        Engineers and scientists work together to design reliable equipment,
+        test it on Earth, launch it safely, and receive useful data from
+        missions millions or even billions of kilometres away.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Major Areas of Space Technology</h2>
+
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>🚀 Launch Vehicles</h3>
+          <p>
+            Rockets carry satellites, scientific instruments, crewed
+            spacecraft, and robotic explorers beyond Earth's atmosphere.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>🛰️ Satellites</h3>
+          <p>
+            Satellites support weather forecasting, navigation,
+            telecommunications, Earth observation, and scientific research.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>🔭 Space Telescopes</h3>
+          <p>
+            Telescopes in space observe wavelengths that Earth's atmosphere
+            can block or distort, helping us study stars, galaxies, and planets.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>🤖 Robotic Explorers</h3>
+          <p>
+            Rovers, landers, orbiters, and robotic arms explore places that
+            are difficult or dangerous for humans to reach.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>📡 Communication Systems</h3>
+          <p>
+            Antennas and radio systems transmit commands to spacecraft and
+            return images, measurements, and other scientific data to Earth.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>🧭 Navigation and Guidance</h3>
+          <p>
+            Sensors, onboard computers, and control systems help spacecraft
+            maintain their orientation and follow planned trajectories.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>How Does a Spacecraft Work?</h2>
+      <ul class="detail-list">
+        <li>
+          <strong>Power:</strong> Solar panels or other power systems provide
+          electricity for onboard equipment.
+        </li>
+        <li>
+          <strong>Instruments:</strong> Cameras, spectrometers, and sensors
+          collect scientific observations.
+        </li>
+        <li>
+          <strong>Communication:</strong> Antennas send information to Earth
+          and receive commands from mission controllers.
+        </li>
+        <li>
+          <strong>Thermal control:</strong> Insulation, radiators, and heaters
+          help keep sensitive equipment within safe operating temperatures.
+        </li>
+        <li>
+          <strong>Flight control:</strong> Thrusters, reaction wheels, and
+          navigation systems help control movement and orientation.
+        </li>
+        <li>
+          <strong>Onboard computing:</strong> Computers manage spacecraft
+          operations and can respond to certain problems automatically.
+        </li>
+      </ul>
+    </section>
+
+    <section class="detail-section">
+      <h2>Technologies That Changed Space Exploration</h2>
+
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Hubble Space Telescope</h3>
+          <p>
+            Launched in 1990, Hubble has produced detailed observations of
+            planets, nebulae, stars, and galaxies.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>James Webb Space Telescope</h3>
+          <p>
+            Webb observes mainly infrared light, helping scientists investigate
+            early galaxies, star formation, and planetary atmospheres.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Mars Rovers</h3>
+          <p>
+            Robotic vehicles such as Curiosity and Perseverance examine Martian
+            rocks, soil, climate, and evidence of ancient environments.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Voyager Spacecraft</h3>
+          <p>
+            Voyager 1 and Voyager 2 explored the outer planets and continue
+            transmitting limited scientific information from interstellar space.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Reusable Rockets</h3>
+          <p>
+            Reusing certain rocket components can reduce the need to build
+            entirely new hardware for every launch.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Autonomous Systems</h3>
+          <p>
+            Spacecraft use onboard software and sensors to perform tasks when
+            communication delays make constant control from Earth impractical.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Why Space Technology Matters</h2>
+      <p>
+        Space technology expands scientific knowledge and also provides
+        practical benefits on Earth. Satellite systems support disaster
+        monitoring, weather observations, environmental research, and global
+        communication. Technologies developed for space can also inspire
+        advances in materials, sensors, robotics, and computing.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Explore More</h2>
+      <div class="detail-links">
+        <a class="detail-link" href="missions.html">Explore Space Missions →</a>
+        <a class="detail-link" href="planets.html">Explore the Planets →</a>
+        <a class="detail-link" href="research.html">All Research Topics →</a>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Learn from Official Sources</h2>
+      <div class="detail-links">
+        <a class="detail-link"
+           href="https://science.nasa.gov/"
+           target="_blank" rel="noopener noreferrer">
+          NASA Science
+        </a>
+        <a class="detail-link"
+           href="https://www.nasa.gov/"
+           target="_blank" rel="noopener noreferrer">
+          NASA Official Website
+        </a>
+        <a class="detail-link"
+           href="https://science.nasa.gov/mission/webb/"
+           target="_blank" rel="noopener noreferrer">
+          James Webb Space Telescope
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© COSMOS | Explore. Discover. Understand.</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
