@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore NASA's Apollo Program, the historic missions that carried humans to the Moon.">
+  <title>Apollo Program | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .mission-detail {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+      padding: 45px 0 80px;
+    }
+
+    .mission-back {
+      display: inline-block;
+      margin-bottom: 28px;
+      color: #9ecbff;
+      text-decoration: none;
+    }
+
+    .mission-back:hover {
+      text-decoration: underline;
+    }
+
+    .mission-hero {
+      padding: 45px 35px;
+      border: 1px solid rgba(150, 190, 255, 0.22);
+      border-radius: 22px;
+      background: linear-gradient(135deg, #101d37, #172b49 55%, #111827);
+      margin-bottom: 30px;
+    }
+
+    .mission-label {
+      display: inline-block;
+      color: #a9ceff;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .mission-hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4.3rem);
+      line-height: 1.1;
+      margin: 0 0 18px;
+    }
+
+    .mission-hero p {
+      max-width: 760px;
+      line-height: 1.8;
+      color: #d0d9e8;
+    }
+
+    .mission-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 25px 0 35px;
+    }
+
+    .mission-fact,
+    .mission-section {
+      padding: 23px;
+      border: 1px solid rgba(150, 190, 255, 0.17);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .mission-fact span {
+      display: block;
+      color: #9ecbff;
+      font-size: 0.82rem;
+      margin-bottom: 9px;
+    }
+
+    .mission-fact strong {
+      font-size: 1.05rem;
+    }
+
+    .mission-section {
+      margin-top: 20px;
+    }
+
+    .mission-section h2 {
+      margin-top: 0;
+      margin-bottom: 14px;
+    }
+
+    .mission-section p,
+    .mission-section li {
+      color: #cbd5e1;
+      line-height: 1.85;
+    }
+
+    .mission-section ul {
+      padding-left: 22px;
+    }
+
+    .mission-highlight {
+      border-left: 3px solid #75b6ff;
+      padding: 12px 18px;
+      margin-top: 18px;
+      background: rgba(117, 182, 255, 0.07);
+      color: #e2edff;
+      line-height: 1.8;
+    }
+
+    .mission-navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .mission-navigation a {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid rgba(150, 190, 255, 0.3);
+      border-radius: 10px;
+      color: #e5efff;
+      text-decoration: none;
+    }
+
+    .mission-navigation a:hover {
+      background: rgba(117, 182, 255, 0.12);
+    }
+
+    @media (max-width: 600px) {
+      .mission-detail {
+        width: min(100% - 28px, 1100px);
+        padding-top: 25px;
+      }
+
+      .mission-hero {
+        padding: 30px 22px;
+      }
+
+      .mission-section,
+      .mission-fact {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="mission-detail">
+    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+
+    <header class="mission-hero">
+      <span class="mission-label">Historic Human Spaceflight</span>
+      <h1>Apollo Program</h1>
+      <p>
+        The Apollo Program was NASA's historic effort to send humans to the
+        Moon. It advanced spaceflight technology, expanded scientific knowledge
+        about the Moon, and achieved the first human landing on another world.
+      </p>
+    </header>
+
+    <section class="mission-facts" aria-label="Mission facts">
+      <div class="mission-fact">
+        <span>Organization</span>
+        <strong>NASA</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Program Era</span>
+        <strong>1961–1972</strong>
+      </div>
+      <div class="mission-fact">
+        <span>First Human Moon Landing</span>
+        <strong>Apollo 11 · 1969</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Successful Moon Landings</span>
+        <strong>6 missions</strong>
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>What Was the Apollo Program?</h2>
+      <p>
+        Announced in 1961, Apollo was designed to develop the capabilities
+        needed for human lunar exploration. The program included crewed test
+        flights, lunar missions, spacecraft development, astronaut training,
+        and scientific investigations.
+      </p>
+      <p>
+        Apollo used the Saturn V rocket to launch astronauts and spacecraft
+        toward the Moon. The Apollo spacecraft included a Command Module for
+        the crew's journey home and a Lunar Module for landing on and leaving
+        the lunar surface.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Major Apollo Missions</h2>
+      <ul>
+        <li><strong>Apollo 8 (1968):</strong> The first crewed mission to orbit the Moon.</li>
+        <li><strong>Apollo 11 (1969):</strong> Neil Armstrong and Buzz Aldrin became the first two humans to walk on the Moon, while Michael Collins remained in lunar orbit.</li>
+        <li><strong>Apollo 12 (1969):</strong> The second successful crewed lunar landing.</li>
+        <li><strong>Apollo 13 (1970):</strong> An onboard oxygen tank failure forced the crew to abort the planned landing and return safely to Earth.</li>
+        <li><strong>Apollo 15, 16 and 17 (1971–1972):</strong> Later missions expanded lunar surface exploration and scientific research. Apollo 17 was the final crewed Moon landing of the Apollo era.</li>
+      </ul>
+    </section>
+
+    <section class="mission-section">
+      <h2>What Did Scientists Learn?</h2>
+      <ul>
+        <li>Astronauts collected lunar rocks and soil for scientific analysis.</li>
+        <li>Experiments helped scientists investigate the Moon's structure, history, and environment.</li>
+        <li>Photographs and observations improved understanding of lunar geology.</li>
+        <li>Technology developed for Apollo helped advance guidance, computing, communications, and human spaceflight.</li>
+      </ul>
+
+      <div class="mission-highlight">
+        <strong>Why it matters:</strong> Apollo showed that humans could travel to
+        another world, work on its surface, conduct scientific experiments, and
+        return safely to Earth.
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>Is Apollo Still Active?</h2>
+      <p>
+        The Apollo lunar missions are complete. The spacecraft and equipment
+        left on the Moon are historical artifacts, not an active crewed mission.
+        Scientists continue to study the samples and data collected during
+        Apollo, and later lunar programs build on the knowledge it produced.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Explore More</h2>
+      <p>
+        Learn about the Apollo missions and their scientific legacy through
+        NASA's official resources.
+      </p>
+      <div class="mission-navigation">
+        <a href="https://www.nasa.gov/the-apollo-program/" target="_blank" rel="noopener noreferrer">
+          NASA: The Apollo Program
+        </a>
+        <a href="missions.html">All Space Missions</a>
+        <a href="index.html">COSMOS Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
