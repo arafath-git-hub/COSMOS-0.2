@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore solar physics, the Sun's layers, sunspots, solar flares, coronal mass ejections, solar wind, and space weather.">
+  <title>Solar Physics | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .research-detail{width:min(1100px,calc(100% - 40px));margin:auto;padding:38px 0 70px;color:#edf4ff}
+    .research-detail a{color:#65e4df}
+    .detail-back{display:inline-block;margin-bottom:26px;text-decoration:none}
+    .detail-hero{padding:clamp(24px,5vw,48px);border:1px solid #4a382b;border-radius:16px;background:radial-gradient(ellipse at 85% 15%,rgba(255,151,50,.23),transparent 45%),linear-gradient(135deg,#211a25,#0a1323)}
+    .detail-eyebrow{color:#ffbd70;font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+    .detail-hero h1{margin:12px 0;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-1.5px}
+    .detail-hero p,.detail-section p,.detail-section li{color:#aab8ce;font-size:.97rem;line-height:1.85}
+    .detail-hero p{max-width:740px;margin-bottom:0}
+    .detail-section{margin-top:36px}
+    .detail-section h2{margin-bottom:14px;font-size:clamp(1.4rem,3vw,1.9rem)}
+    .detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+    .detail-card{padding:22px;border:1px solid #3c3944;border-radius:12px;background:linear-gradient(145deg,#191b2b,#0b1424)}
+    .detail-card h3{margin-top:0;font-size:1.05rem}
+    .detail-card p{margin-bottom:0;font-size:.88rem}
+    .detail-list{padding-left:22px}
+    .detail-links{display:flex;flex-wrap:wrap;gap:12px}
+    .detail-link{display:inline-block;padding:10px 14px;border:1px solid #2a5263;border-radius:8px;text-decoration:none}
+    .detail-link:hover{border-color:#65e4df;background:#122239}
+    .fact-panel{margin-top:18px;padding:20px;border-left:3px solid #ffbd70;border-radius:0 10px 10px 0;background:#191b29}
+    .fact-panel p{margin:0}
+    @media(max-width:760px){.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:520px){.research-detail{width:calc(100% - 28px);padding-top:25px}.detail-grid{grid-template-columns:1fr}.detail-card{padding:18px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="planets.html">Planets</a>
+      <a href="missions.html">Missions</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="research-detail">
+    <a class="detail-back" href="research.html">← Back to Research</a>
+
+    <section class="detail-hero">
+      <span class="detail-eyebrow">Research Field 06</span>
+      <h1>Solar Physics</h1>
+      <p>
+        Discover how our star produces energy, generates magnetic activity,
+        and influences the space environment around Earth and throughout
+        the Solar System.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>What Is Solar Physics?</h2>
+      <p>
+        Solar physics is the study of the Sun's structure, magnetic fields,
+        atmosphere, and changing activity. The Sun is a star made mostly of
+        hydrogen and helium. Its energy is produced by nuclear fusion in
+        its core, where hydrogen nuclei combine to form helium.
+      </p>
+      <p>
+        Understanding the Sun helps scientists explain how stars work,
+        predict some forms of space weather, and protect satellites,
+        astronauts, communication systems, and electrical infrastructure.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Layers of the Sun</h2>
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Core</h3>
+          <p>
+            The central region where nuclear fusion releases the energy
+            that eventually travels outward through the Sun.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Radiative Zone</h3>
+          <p>
+            Energy moves outward mainly through radiation, repeatedly
+            interacting with matter along the way.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Convective Zone</h3>
+          <p>
+            Hot plasma rises and cooler plasma sinks, carrying energy
+            toward the Sun's visible surface.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Photosphere</h3>
+          <p>
+            The visible layer from which most of the sunlight we see
+            directly escapes into space.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Chromosphere</h3>
+          <p>
+            A layer above the photosphere that can be observed especially
+            well using specific wavelengths of light.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Corona</h3>
+          <p>
+            The Sun's extremely hot outer atmosphere, extending millions
+            of kilometres into space and feeding the solar wind.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Solar Activity</h2>
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Sunspots</h3>
+          <p>
+            Darker, cooler regions on the photosphere associated with
+            concentrated magnetic fields. Their numbers change over time.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Solar Flares</h3>
+          <p>
+            Sudden releases of magnetic energy that produce intense
+            radiation across the electromagnetic spectrum.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Coronal Mass Ejections</h3>
+          <p>
+            Large eruptions of magnetised plasma from the Sun's corona.
+            Earth-directed events can disturb Earth's magnetic environment.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Solar Prominences</h3>
+          <p>
+            Large structures of relatively cool, dense plasma held above
+            the Sun's surface by magnetic fields.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Solar Wind</h3>
+          <p>
+            A continuous flow of charged particles escaping from the Sun
+            and travelling through interplanetary space.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Magnetic Reconnection</h3>
+          <p>
+            A process in which magnetic field configurations change,
+            releasing energy and helping drive solar eruptions.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>The Solar Activity Cycle</h2>
+      <p>
+        The Sun's magnetic activity follows an approximately 11-year cycle.
+        The number of sunspots and the frequency of many solar eruptions
+        generally rise toward solar maximum and decline toward solar minimum.
+        The cycle is not perfectly regular.
+      </p>
+      <p>
+        During this cycle, the Sun's large-scale magnetic field also changes
+        and reverses polarity around solar maximum. Scientists use sunspot
+        records, spacecraft, and ground-based observatories to track these
+        changes.
+      </p>
+
+      <div class="fact-panel">
+        <p>
+          <strong>Remember:</strong> A solar flare and a coronal mass ejection
+          are different phenomena. A flare is a burst of radiation; a CME is
+          a large expulsion of plasma and magnetic field. They can occur
+          together, but one does not always accompany the other.
+        </p>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>What Is Space Weather?</h2>
+      <p>
+        Space weather describes changing conditions in space caused mainly
+        by solar activity. When energetic particles or solar eruptions
+        interact with Earth's magnetic field and atmosphere, they can produce
+        both beautiful effects and technological challenges.
+      </p>
+
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Auroras</h3>
+          <p>
+            Charged particles interacting with gases in Earth's upper
+            atmosphere produce auroras near the polar regions and, during
+            strong geomagnetic storms, sometimes at lower latitudes.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Satellites</h3>
+          <p>
+            Solar activity can increase radiation exposure, interfere with
+            electronics, and affect satellite operations.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Communications</h3>
+          <p>
+            Solar radiation and geomagnetic disturbances can disrupt some
+            radio communications and navigation signals.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Power Grids</h3>
+          <p>
+            Strong geomagnetic storms can induce currents in long conductors
+            and create challenges for electrical power systems.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Astronaut Safety</h3>
+          <p>
+            Solar energetic particle events can increase radiation risks
+            for astronauts beyond Earth's protective environment.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Spacecraft Planning</h3>
+          <p>
+            Solar observations help mission teams assess radiation hazards
+            and plan for changing space conditions.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>How Do Scientists Study the Sun?</h2>
+      <ul class="detail-list">
+        <li><strong>Solar telescopes:</strong> Observe the Sun in visible light and other wavelengths.</li>
+        <li><strong>Helioseismology:</strong> Uses waves travelling through the Sun to investigate its interior.</li>
+        <li><strong>Magnetograms:</strong> Map magnetic field strength and direction across the solar surface.</li>
+        <li><strong>Spacecraft:</strong> Observe solar radiation, particles, the corona, and the solar wind from space.</li>
+        <li><strong>Computer models:</strong> Simulate solar magnetic fields, plasma behaviour, and eruptive events.</li>
+      </ul>
+    </section>
+
+    <section class="detail-section">
+      <h2>Important Solar Missions</h2>
+      <ul class="detail-list">
+        <li><strong>Solar Dynamics Observatory (SDO):</strong> Monitors the Sun and its changing activity.</li>
+        <li><strong>Solar and Heliospheric Observatory (SOHO):</strong> Studies the Sun's interior, atmosphere, and solar wind.</li>
+        <li><strong>Parker Solar Probe:</strong> Travels through the Sun's outer atmosphere to investigate its heating and solar wind.</li>
+        <li><strong>Solar Orbiter:</strong> Studies the Sun and its polar regions using a combination of remote sensing and in-situ measurements.</li>
+      </ul>
+    </section>
+
+    <section class="detail-section">
+      <h2>Questions Scientists Are Investigating</h2>
+      <ul class="detail-list">
+        <li>Why is the Sun's corona much hotter than its visible surface?</li>
+        <li>How are solar flares and coronal mass ejections triggered?</li>
+        <li>How does the solar wind accelerate away from the Sun?</li>
+        <li>How accurately can scientists forecast severe space weather?</li>
+        <li>How will the Sun's activity change over future solar cycles?</li>
+      </ul>
+    </section>
+
+    <section class="detail-section">
+      <h2>Explore Related Research</h2>
+      <div class="detail-links">
+        <a class="detail-link" href="planetary-science.html">Planetary Science</a>
+        <a class="detail-link" href="space-technology.html">Space Technology</a>
+        <a class="detail-link" href="galaxies-stars.html">Galaxies &amp; Stars</a>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Official Resources</h2>
+      <p>
+        <a href="https://science.nasa.gov/sun/"
+           target="_blank" rel="noopener noreferrer">
+          NASA — The Sun ↗
+        </a>
+      </p>
+      <p>
+        <a href="https://science.nasa.gov/mission/parker-solar-probe/"
+           target="_blank" rel="noopener noreferrer">
+          NASA — Parker Solar Probe ↗
+        </a>
+      </p>
+      <p>
+        <a href="https://sdo.gsfc.nasa.gov/"
+           target="_blank" rel="noopener noreferrer">
+          Solar Dynamics Observatory ↗
+        </a>
+      </p>
+    </section>
+
+    <a class="detail-back" href="research.html">← Back to All Research Fields</a>
+  </main>
+
+  <footer>
+    <p>© COSMOS — Exploring the Universe</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
