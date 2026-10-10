@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover NASA's Voyager 1 and Voyager 2 missions and their journey into interstellar space.">
+  <title>Voyager Missions | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .mission-detail {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+      padding: 45px 0 80px;
+    }
+
+    .mission-back {
+      display: inline-block;
+      margin-bottom: 28px;
+      color: #9ecbff;
+      text-decoration: none;
+    }
+
+    .mission-back:hover { text-decoration: underline; }
+
+    .mission-hero {
+      padding: 45px 35px;
+      border: 1px solid rgba(150, 190, 255, .22);
+      border-radius: 22px;
+      background: linear-gradient(135deg, #101d37, #172b49 55%, #111827);
+      margin-bottom: 30px;
+    }
+
+    .mission-label {
+      display: inline-block;
+      color: #a9ceff;
+      font-size: .82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .mission-hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4.3rem);
+      line-height: 1.1;
+      margin: 0 0 18px;
+    }
+
+    .mission-hero p {
+      max-width: 760px;
+      line-height: 1.8;
+      color: #d0d9e8;
+    }
+
+    .mission-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 25px 0 35px;
+    }
+
+    .mission-fact, .mission-section {
+      padding: 23px;
+      border: 1px solid rgba(150, 190, 255, .17);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .035);
+    }
+
+    .mission-fact span {
+      display: block;
+      color: #9ecbff;
+      font-size: .82rem;
+      margin-bottom: 9px;
+    }
+
+    .mission-fact strong { font-size: 1.05rem; }
+
+    .mission-section { margin-top: 20px; }
+    .mission-section h2 { margin-top: 0; margin-bottom: 14px; }
+
+    .mission-section p, .mission-section li {
+      color: #cbd5e1;
+      line-height: 1.85;
+    }
+
+    .mission-section ul { padding-left: 22px; }
+
+    .mission-highlight {
+      border-left: 3px solid #75b6ff;
+      padding: 12px 18px;
+      margin-top: 18px;
+      background: rgba(117, 182, 255, .07);
+      color: #e2edff;
+      line-height: 1.8;
+    }
+
+    .mission-navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .mission-navigation a {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid rgba(150, 190, 255, .3);
+      border-radius: 10px;
+      color: #e5efff;
+      text-decoration: none;
+    }
+
+    .mission-navigation a:hover {
+      background: rgba(117, 182, 255, .12);
+    }
+
+    @media (max-width: 600px) {
+      .mission-detail {
+        width: calc(100% - 28px);
+        padding-top: 25px;
+      }
+
+      .mission-hero { padding: 30px 22px; }
+      .mission-section, .mission-fact { padding: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="mission-detail">
+    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+
+    <header class="mission-hero">
+      <span class="mission-label">Deep Space Exploration</span>
+      <h1>Voyager Missions</h1>
+      <p>
+        Voyager 1 and Voyager 2 are NASA spacecraft launched in 1977 to explore
+        the outer Solar System. Their remarkable journeys transformed our
+        understanding of the giant planets and eventually carried both
+        spacecraft into interstellar space.
+      </p>
+    </header>
+
+    <section class="mission-facts" aria-label="Mission facts">
+      <div class="mission-fact">
+        <span>Organization</span>
+        <strong>NASA</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Launch Year</span>
+        <strong>1977</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Spacecraft</span>
+        <strong>Voyager 1 and 2</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Mission Region</span>
+        <strong>Outer Solar System and beyond</strong>
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>What Are the Voyager Spacecraft?</h2>
+      <p>
+        Voyager 1 launched on September 5, 1977, and Voyager 2 launched on
+        August 20, 1977. Each spacecraft carries scientific instruments to
+        measure magnetic fields, charged particles, plasma waves, and other
+        features of space.
+      </p>
+      <p>
+        The spacecraft also carry a Golden Record: a message from Earth
+        containing sounds, music, greetings, and images intended to represent
+        life and culture on our planet.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Voyager 1</h2>
+      <p>
+        Voyager 1 flew past Jupiter in 1979 and Saturn in 1980. Its observations
+        revealed details about the planets, their moons, rings, and magnetic
+        environments. It later traveled outward and entered interstellar space
+        in 2012, becoming the first spacecraft to do so.
+      </p>
+      <div class="mission-highlight">
+        Voyager 1 studies the environment beyond the heliosphere, the vast
+        region influenced by the Sun's solar wind.
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>Voyager 2</h2>
+      <p>
+        Voyager 2 visited Jupiter and Saturn before continuing to Uranus in
+        1986 and Neptune in 1989. It remains the only spacecraft to have
+        visited both of these ice giant planets up close. Voyager 2 entered
+        interstellar space in 2018.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Major Discoveries</h2>
+      <ul>
+        <li>Observed active volcanoes on Jupiter's moon Io.</li>
+        <li>Investigated the complex rings and moons of Saturn.</li>
+        <li>Revealed unexpected atmospheric and magnetic features at Uranus.</li>
+        <li>Studied Neptune's powerful winds and its moon Triton.</li>
+        <li>Provided the first direct measurements of the interstellar environment beyond the heliosphere.</li>
+      </ul>
+    </section>
+
+    <section class="mission-section">
+      <h2>Are the Voyagers Still Working?</h2>
+      <p>
+        Both spacecraft have operated far longer than their original planetary
+        exploration missions. Their electrical power decreases over time, so
+        NASA has had to turn off some instruments and systems to conserve
+        energy. Their operational status can change as engineers manage the
+        aging spacecraft.
+      </p>
+      <p>
+        They communicate with Earth across enormous distances, where radio
+        signals take many hours to travel one way.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Why Do These Missions Matter?</h2>
+      <p>
+        The Voyager missions expanded humanity's view of the outer planets and
+        opened a new chapter in the exploration of interstellar space. They
+        continue to help scientists understand how the Sun interacts with the
+        space between stars.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Explore More</h2>
+      <div class="mission-navigation">
+        <a href="https://science.nasa.gov/mission/voyager/" target="_blank" rel="noopener noreferrer">NASA Voyager Mission</a>
+        <a href="missions.html">All Space Missions</a>
+        <a href="index.html">COSMOS Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
