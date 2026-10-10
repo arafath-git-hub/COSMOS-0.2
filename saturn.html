@@ -1,0 +1,992 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b13">
+  <meta name="description" content="Explore Saturn, its spectacular rings, giant storms, icy moons Titan and Enceladus, and the Cassini-Huygens mission.">
+  <title>Saturn | COSMOS — Explore the Universe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #090b13;
+      --surface: #111521;
+      --surface-2: #171c2b;
+      --text: #f5f2eb;
+      --muted: #a2a8b8;
+      --accent: #e8c18b;
+      --accent-2: #c99b63;
+      --line: rgba(255,255,255,.10);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 78% 12%, rgba(201,155,99,.12), transparent 36%),
+        var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1160px, calc(100% - 44px));
+      margin-inline: auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9,11,19,.88);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      letter-spacing: 3px;
+      font-size: 19px;
+    }
+
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-size: 15px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 25px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .nav-links a { transition: color .2s; }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--accent); }
+
+    .hero {
+      min-height: 630px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 30px;
+      padding-block: 75px 65px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.8px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 27px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1, h2, h3 {
+      font-family: "Space Grotesk", sans-serif;
+      line-height: 1.13;
+    }
+
+    h1 {
+      margin: 23px 0 20px;
+      font-size: clamp(54px, 8vw, 94px);
+      letter-spacing: -5px;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--accent);
+    }
+
+    .hero-copy {
+      max-width: 550px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      min-height: 47px;
+      padding: 12px 19px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform .2s, background .2s, border-color .2s;
+    }
+
+    .btn:hover { transform: translateY(-3px); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #19130d;
+      border-color: var(--accent);
+    }
+
+    .btn-secondary { background: rgba(255,255,255,.035); }
+    .btn-secondary:hover { border-color: var(--accent); }
+
+    .hero-visual {
+      position: relative;
+      min-height: 450px;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .planet-system {
+      position: relative;
+      width: min(100%, 460px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+    }
+
+    .back-ring {
+      position: absolute;
+      width: 100%;
+      height: 38%;
+      border: 24px solid rgba(199,165,118,.35);
+      border-left-color: rgba(239,218,177,.56);
+      border-right-color: rgba(133,102,68,.45);
+      border-radius: 50%;
+      transform: rotate(-17deg);
+      box-shadow: 0 0 30px rgba(232,193,139,.07);
+    }
+
+    .saturn-planet {
+      position: relative;
+      z-index: 2;
+      width: 51%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      overflow: hidden;
+      background:
+        repeating-linear-gradient(
+          176deg,
+          #f1ddb1 0 8px,
+          #d7b67d 9px 16px,
+          #b78e5c 17px 21px,
+          #ead4a4 22px 31px,
+          #c8a06c 32px 37px
+        );
+      box-shadow:
+        inset -28px -12px 45px rgba(31,19,12,.77),
+        inset 12px 5px 22px rgba(255,255,255,.20),
+        0 0 50px rgba(230,190,128,.12);
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .saturn-planet::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(100deg, transparent 28%, rgba(0,0,0,.1) 52%, rgba(0,0,0,.78) 100%);
+    }
+
+    .front-ring {
+      position: absolute;
+      z-index: 3;
+      width: 100%;
+      height: 38%;
+      border: 24px solid transparent;
+      border-top-color: rgba(242,221,177,.92);
+      border-bottom-color: rgba(193,151,96,.82);
+      border-radius: 50%;
+      transform: rotate(-17deg);
+      filter: drop-shadow(0 0 8px rgba(231,192,134,.12));
+    }
+
+    .orbit-dot {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      top: 13%;
+      right: 20%;
+      box-shadow: 0 0 16px var(--accent);
+    }
+
+    .hero-note {
+      position: absolute;
+      top: 24px;
+      left: 0;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .visual-label {
+      position: absolute;
+      right: 0;
+      bottom: 22px;
+      padding: 13px 16px;
+      background: rgba(17,21,33,.94);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      backdrop-filter: blur(12px);
+    }
+
+    .visual-label strong {
+      display: block;
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--accent);
+      font-size: 19px;
+    }
+
+    .visual-label small { color: var(--muted); font-size: 11px; }
+
+    .section { padding-block: 76px; }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+      margin: 12px 0 0;
+      font-size: clamp(30px, 4vw, 43px);
+      letter-spacing: -1.7px;
+    }
+
+    .section-heading p {
+      max-width: 440px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 13px;
+    }
+
+    .fact {
+      padding: 23px;
+      background: linear-gradient(145deg, #1b1b27, var(--surface));
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      transition: transform .25s, border-color .25s;
+    }
+
+    .fact:hover {
+      transform: translateY(-5px);
+      border-color: rgba(232,193,139,.45);
+    }
+
+    .fact-label {
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+    }
+
+    .fact-value {
+      margin-top: 11px;
+      color: var(--accent);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(21px, 2.5vw, 29px);
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .fact small {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .info-card {
+      padding: 28px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .card-number {
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+
+    .info-card h3 { margin: 15px 0 12px; font-size: 23px; }
+    .info-card p { margin-bottom: 0; color: var(--muted); font-size: 14px; }
+
+    .highlight {
+      margin-top: 20px;
+      padding: 23px 25px;
+      border: 1px solid rgba(232,193,139,.25);
+      border-left: 3px solid var(--accent);
+      background: linear-gradient(90deg, rgba(232,193,139,.09), transparent);
+      border-radius: 0 14px 14px 0;
+    }
+
+    .highlight strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+
+    .highlight p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .moon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .moon-card {
+      padding: 22px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      transition: transform .25s, border-color .25s;
+    }
+
+    .moon-card:hover { transform: translateY(-4px); border-color: rgba(232,193,139,.4); }
+
+    .moon-art {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      box-shadow: inset -12px -7px 18px rgba(0,0,0,.48);
+    }
+
+    .moon-art.titan {
+      background:
+        radial-gradient(circle at 30% 25%, #edc98a, #c17e36 48%, #593a27);
+    }
+
+    .moon-art.enceladus {
+      background:
+        radial-gradient(circle at 30% 25%, #fff, #d8e1e7 50%, #737f91);
+    }
+
+    .moon-art.rhea {
+      background:
+        radial-gradient(circle at 32% 25%, #d5d2c9, #8e9293 48%, #454a53);
+    }
+
+    .moon-art.iapetus {
+      background:
+        linear-gradient(130deg, #ded4bc 0 48%, #3a3331 50% 100%);
+    }
+
+    .moon-art.dione {
+      background:
+        radial-gradient(circle at 30% 25%, #e7e5df, #9b9da3 52%, #4e5360);
+    }
+
+    .moon-art.mimas {
+      background:
+        radial-gradient(circle at 30% 25%, #d9d8d0, #92959a 52%, #484c55);
+    }
+
+    .moon-card h3 { margin: 0 0 7px; font-size: 19px; }
+    .moon-card p { margin: 0; color: var(--muted); font-size: 12px; }
+
+    .mission-list { display: grid; gap: 12px; }
+
+    .mission {
+      display: grid;
+      grid-template-columns: 115px 1fr;
+      gap: 20px;
+      padding: 22px 24px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+    }
+
+    .mission-year {
+      color: var(--accent);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .mission h3 { margin: 0 0 7px; font-size: 18px; }
+    .mission p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .question-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .question {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: linear-gradient(140deg, rgba(232,193,139,.07), var(--surface));
+    }
+
+    .question span { color: var(--accent); font-size: 12px; font-weight: 700; }
+    .question h3 { margin: 12px 0 0; font-size: 17px; }
+
+    .sources { display: flex; flex-wrap: wrap; gap: 11px; }
+
+    .source-link {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      transition: color .2s, border-color .2s;
+    }
+
+    .source-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    .planet-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-block: 55px 80px;
+    }
+
+    .planet-nav a {
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+      transition: border-color .2s, transform .2s;
+    }
+
+    .planet-nav a:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .planet-nav a:last-child { text-align: right; }
+    .planet-nav small { display: block; color: var(--muted); font-size: 11px; }
+    .planet-nav strong { display: block; margin-top: 5px; font-family: "Space Grotesk", sans-serif; font-size: 20px; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-12px) rotate(2deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 850px) {
+      .nav-inner { padding-block: 15px; align-items: flex-start; }
+      .nav-links { justify-content: flex-end; gap: 12px 17px; }
+      .hero { grid-template-columns: 1fr; padding-top: 60px; }
+      .hero-visual { min-height: 390px; }
+      .facts-grid { grid-template-columns: repeat(2, 1fr); }
+      .moon-grid { grid-template-columns: repeat(2, 1fr); }
+      .question-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(100% - 30px, 1160px); }
+      .nav-inner { display: block; }
+      .logo { margin-bottom: 12px; }
+      .nav-links { justify-content: flex-start; gap: 10px 17px; font-size: 12px; }
+      .hero { padding-block: 50px 30px; gap: 8px; }
+      h1 { letter-spacing: -3px; }
+      .hero-copy { font-size: 14px; }
+      .hero-visual { min-height: 320px; }
+      .planet-system { width: 330px; max-width: 100%; }
+      .back-ring, .front-ring { border-width: 16px; }
+      .hero-note { top: 4px; }
+      .visual-label { bottom: 0; }
+      .section { padding-block: 50px; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 14px; }
+      .facts-grid { gap: 9px; }
+      .fact { padding: 16px; }
+      .content-grid, .question-grid { grid-template-columns: 1fr; }
+      .info-card { padding: 22px; }
+      .moon-grid { gap: 9px; }
+      .moon-card { padding: 16px; }
+      .mission { grid-template-columns: 1fr; gap: 6px; padding: 19px; }
+      .planet-nav strong { font-size: 17px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="logo" href="index.html" aria-label="COSMOS homepage">
+        <span class="logo-mark">✳</span> COSMOS
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="planets.html" class="active">Planets</a>
+        <a href="missions.html">Missions</a>
+        <a href="research.html">Research</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div>
+        <div class="eyebrow">Planet Explorer / 06</div>
+        <h1>Saturn<span>The Ringed World.</span></h1>
+        <p class="hero-copy">
+          A magnificent gas giant surrounded by an immense system of icy rings.
+          Saturn is home to extraordinary moons, including Titan with its methane
+          lakes and Enceladus with its water-rich plumes. Together, these worlds
+          offer some of the Solar System's most intriguing scientific mysteries.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#overview">Explore Saturn ↓</a>
+          <a class="btn btn-secondary" href="#missions">Discover its missions ↗</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Stylized illustration of Saturn and its rings">
+        <div class="hero-note">6TH PLANET FROM THE SUN · GAS GIANT</div>
+        <div class="planet-system">
+          <div class="back-ring"></div>
+          <div class="saturn-planet"></div>
+          <div class="front-ring"></div>
+          <div class="orbit-dot"></div>
+        </div>
+        <div class="visual-label">
+          <strong>~282,000 km</strong>
+          <small>Approximate outer ring diameter</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="container section reveal" id="overview">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">At a glance</div>
+          <h2>Saturn by the numbers</h2>
+        </div>
+        <p>Saturn is the second-largest planet in our Solar System and has an average density lower than that of liquid water.</p>
+      </div>
+
+      <div class="facts-grid">
+        <article class="fact">
+          <div class="fact-label">Solar distance</div>
+          <div class="fact-value">1.43B km</div>
+          <small>Average distance from the Sun</small>
+        </article>
+        <article class="fact">
+          <div class="fact-label">Diameter</div>
+          <div class="fact-value">120,536 km</div>
+          <small>Approximate equatorial diameter</small>
+        </article>
+        <article class="fact">
+          <div class="fact-label">Day length</div>
+          <div class="fact-value">~10.7 hours</div>
+          <small>Estimates vary by measurement method</small>
+        </article>
+        <article class="fact">
+          <div class="fact-label">Year length</div>
+          <div class="fact-value">29.4 years</div>
+          <small>One orbit around the Sun</small>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section reveal">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">An extraordinary planet</div>
+          <h2>What makes Saturn unique?</h2>
+        </div>
+        <p>Its rings are spectacular, but Saturn's atmosphere and interior are equally fascinating.</p>
+      </div>
+
+      <div class="content-grid">
+        <article class="info-card">
+          <div class="card-number">01 / THE RINGS</div>
+          <h3>A vast system of icy particles</h3>
+          <p>
+            Saturn's rings consist mainly of countless pieces of water ice, ranging
+            from tiny grains to much larger chunks. The major rings extend hundreds
+            of thousands of kilometres across, yet are surprisingly thin compared
+            with their width. Gaps and waves within them are shaped by gravity,
+            including interactions with Saturn's moons.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <div class="card-number">02 / ATMOSPHERE</div>
+          <h3>Hydrogen, helium and powerful winds</h3>
+          <p>
+            Saturn's atmosphere is composed mostly of hydrogen and helium, with
+            traces of other gases such as methane and ammonia. Pale cloud bands,
+            fast winds and large storms circle the planet. Seasonal sunlight changes
+            its appearance as Saturn travels around the Sun.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <div class="card-number">03 / INTERIOR</div>
+          <h3>A deep, hot interior</h3>
+          <p>
+            Saturn has no ordinary solid surface. Pressure increases deep beneath
+            the clouds, where hydrogen can become metallic. Its interior likely
+            contains heavier materials concentrated toward the centre, but the
+            exact structure and distribution remain subjects of scientific research.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <div class="card-number">04 / THE HEXAGON</div>
+          <h3>A mysterious six-sided jet stream</h3>
+          <p>
+            A remarkably persistent six-sided pattern surrounds Saturn's north
+            pole. This enormous atmospheric jet stream contains a central polar
+            vortex. Scientists use it to investigate how rotating atmospheres
+            produce stable geometric patterns.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <div class="card-number">05 / MAGNETIC FIELD</div>
+          <h3>A surprisingly aligned magnetic field</h3>
+          <p>
+            Saturn has a large magnetic field generated inside the planet. Its
+            magnetic axis is unusually well aligned with its rotation axis.
+            This makes Saturn an important natural laboratory for understanding
+            planetary magnetic fields and how they are generated.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <div class="card-number">06 / DENSITY</div>
+          <h3>Less dense than water on average</h3>
+          <p>
+            Saturn's average density is lower than that of liquid water. The familiar
+            claim that it could float in a giant ocean is a thought experiment:
+            no real ocean could hold a planet of Saturn's size, and the planet is
+            made largely of fluid and gas under extreme conditions.
+          </p>
+        </article>
+      </div>
+
+      <div class="highlight">
+        <strong>Why do Saturn's rings shine?</strong>
+        <p>
+          Sunlight reflects from the rings' abundant ice particles. Their brightness
+          and colour change with viewing angle, shadowing and the size of particles.
+        </p>
+      </div>
+    </section>
+
+    <section class="container section reveal" id="moons">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">A family of worlds</div>
+          <h2>Saturn's fascinating moons</h2>
+        </div>
+        <p>Saturn has a large and changing catalogue of known moons. These six illustrate the remarkable diversity of its system.</p>
+      </div>
+
+      <div class="moon-grid">
+        <article class="moon-card">
+          <div class="moon-art titan" aria-hidden="true"></div>
+          <h3>Titan</h3>
+          <p>Saturn's largest moon has a thick nitrogen-rich atmosphere, methane clouds, rivers and lakes of liquid hydrocarbons.</p>
+        </article>
+
+        <article class="moon-card">
+          <div class="moon-art enceladus" aria-hidden="true"></div>
+          <h3>Enceladus</h3>
+          <p>An icy moon that sprays water-rich plumes from fractures near its south pole. Evidence points to a global subsurface ocean.</p>
+        </article>
+
+        <article class="moon-card">
+          <div class="moon-art rhea" aria-hidden="true"></div>
+          <h3>Rhea</h3>
+          <p>A heavily cratered icy moon with a bright, frozen surface and a long history recorded in its impact scars.</p>
+        </article>
+
+        <article class="moon-card">
+          <div class="moon-art iapetus" aria-hidden="true"></div>
+          <h3>Iapetus</h3>
+          <p>Known for its striking two-tone surface and an unusual ridge that runs along much of its equator.</p>
+        </article>
+
+        <article class="moon-card">
+          <div class="moon-art dione" aria-hidden="true"></div>
+          <h3>Dione</h3>
+          <p>An icy moon with bright fractures and evidence suggesting possible internal activity and a subsurface ocean.</p>
+        </article>
+
+        <article class="moon-card">
+          <div class="moon-art mimas" aria-hidden="true"></div>
+          <h3>Mimas</h3>
+          <p>A small icy moon recognised by its enormous Herschel crater, which gives it a resemblance to a science-fiction spacecraft.</p>
+        </article>
+      </div>
+
+      <div class="highlight">
+        <strong>Two worlds of special interest</strong>
+        <p>
+          Titan's surface chemistry and Enceladus's ocean and water-rich plumes
+          make both moons major targets for future astrobiology research. Neither
+          has been confirmed to host life.
+        </p>
+      </div>
+    </section>
+
+    <section class="container section reveal" id="missions">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Robotic exploration</div>
+          <h2>Our journey to Saturn</h2>
+        </div>
+        <p>Spacecraft transformed Saturn from a distant point of light into a complex system of rings, storms and worlds.</p>
+      </div>
+
+      <div class="mission-list">
+        <article class="mission">
+          <div class="mission-year">1979</div>
+          <div>
+            <h3>Pioneer 11</h3>
+            <p>
+              NASA's Pioneer 11 made the first close spacecraft flyby of Saturn,
+              helping measure its environment and preparing the way for Voyager.
+            </p>
+          </div>
+        </article>
+
+        <article class="mission">
+          <div class="mission-year">1980–81</div>
+          <div>
+            <h3>Voyager 1 and Voyager 2</h3>
+            <p>
+              The Voyager spacecraft returned detailed images of Saturn's rings,
+              atmosphere and moons. Voyager 1 made a particularly important
+              close study of Titan.
+            </p>
+          </div>
+        </article>
+
+        <article class="mission">
+          <div class="mission-year">1997–2017</div>
+          <div>
+            <h3>Cassini–Huygens</h3>
+            <p>
+              The international Cassini mission orbited Saturn from 2004 to 2017.
+              It studied the rings, atmosphere and moons. Its Huygens probe landed
+              on Titan in 2005, delivering the first landing on a world in the
+              outer Solar System.
+            </p>
+          </div>
+        </article>
+
+        <article class="mission">
+          <div class="mission-year">Future</div>
+          <div>
+            <h3>Dragonfly — NASA</h3>
+            <p>
+              Dragonfly is a planned rotorcraft mission to Titan. It is designed
+              to investigate the moon's surface chemistry, prebiotic processes and
+              habitability. Its planned launch and arrival schedule may change;
+              consult NASA's official mission page for the latest timeline.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section reveal" id="research">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Beyond what we know</div>
+          <h2>Questions for future explorers</h2>
+        </div>
+        <p>Saturn's rings and moons still hold clues to how planetary systems form and evolve.</p>
+      </div>
+
+      <div class="question-grid">
+        <article class="question">
+          <span>QUESTION 01</span>
+          <h3>How old are Saturn's rings?</h3>
+        </article>
+        <article class="question">
+          <span>QUESTION 02</span>
+          <h3>How do ring particles evolve and spread?</h3>
+        </article>
+        <article class="question">
+          <span>QUESTION 03</span>
+          <h3>What chemistry occurs in Titan's lakes?</h3>
+        </article>
+        <article class="question">
+          <span>QUESTION 04</span>
+          <h3>Could Enceladus's ocean support life?</h3>
+        </article>
+        <article class="question">
+          <span>QUESTION 05</span>
+          <h3>How does Saturn generate its magnetic field?</h3>
+        </article>
+        <article class="question">
+          <span>QUESTION 06</span>
+          <h3>What can Saturn teach us about giant planets elsewhere?</h3>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section reveal">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Explore the evidence</div>
+          <h2>Trusted science sources</h2>
+        </div>
+        <p>Use these official sources to explore Saturn and its moons in greater detail.</p>
+      </div>
+
+      <div class="sources">
+        <a class="source-link" href="https://science.nasa.gov/saturn/" target="_blank" rel="noopener noreferrer">NASA — Saturn ↗</a>
+        <a class="source-link" href="https://science.nasa.gov/mission/cassini/" target="_blank" rel="noopener noreferrer">NASA — Cassini ↗</a>
+        <a class="source-link" href="https://science.nasa.gov/mission/dragonfly/" target="_blank" rel="noopener noreferrer">NASA — Dragonfly ↗</a>
+        <a class="source-link" href="https://science.nasa.gov/saturn/moons/" target="_blank" rel="noopener noreferrer">NASA — Saturn's Moons ↗</a>
+        <a class="source-link" href="https://science.nasa.gov/saturn/facts/" target="_blank" rel="noopener noreferrer">NASA — Saturn Facts ↗</a>
+      </div>
+    </section>
+
+    <nav class="container planet-nav" aria-label="Browse planets">
+      <a href="jupiter.html">
+        <small>← Previous planet</small>
+        <strong>Jupiter</strong>
+      </a>
+      <a href="uranus.html">
+        <small>Next planet →</small>
+        <strong>Uranus</strong>
+      </a>
+    </nav>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="logo" href="index.html"><span class="logo-mark">✳</span> COSMOS</a>
+      <span>Explore. Understand. Discover.</span>
+      <span>Educational project · Space science</span>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const revealItems = document.querySelectorAll(".reveal");
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries, currentObserver) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              currentObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+
+        revealItems.forEach(item => observer.observe(item));
+      } else {
+        revealItems.forEach(item => item.classList.add("visible"));
+      }
+    })();
+  </script>
+</body>
+</html>
