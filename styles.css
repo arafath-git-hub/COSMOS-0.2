@@ -1,0 +1,1299 @@
+
+/* ==========================================
+   COSMOS — Space Science Website
+   Complete Global Stylesheet
+   ========================================== */
+
+/* ---------- 1. Global Variables ---------- */
+
+:root {
+  --bg: #070b18;
+  --bg-secondary: #0b1122;
+  --surface: #10192d;
+  --surface-hover: #17243d;
+
+  --text: #f3f6ff;
+  --text-muted: #a7b4cf;
+
+  --primary: #8bb5ff;
+  --primary-light: #c1d5ff;
+  --secondary: #b5a0ff;
+  --cyan: #81e2f3;
+
+  --border: rgba(160, 185, 255, 0.17);
+  --border-hover: rgba(139, 181, 255, 0.5);
+
+  --shadow: 0 20px 55px rgba(0, 0, 0, 0.28);
+  --glow: 0 0 30px rgba(106, 146, 255, 0.13);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --container: 1180px;
+  --transition: 0.25s ease;
+}
+
+/* ---------- 2. Reset ---------- */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 95px;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+  background:
+    radial-gradient(
+      ellipse at 12% 0%,
+      rgba(65, 91, 170, 0.16),
+      transparent 34%
+    ),
+    radial-gradient(
+      ellipse at 90% 25%,
+      rgba(103, 64, 166, 0.11),
+      transparent 30%
+    ),
+    var(--bg);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+
+img,
+picture,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+  object-fit: cover;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style-position: inside;
+}
+
+::selection {
+  color: #07101f;
+  background: var(--primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+/* ---------- 3. Scrollbar ---------- */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #080d1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #35466c;
+  border: 2px solid #080d1a;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7898e2;
+}
+
+/* ---------- 4. Shared Containers ---------- */
+
+.container,
+.wrapper,
+.main-container {
+  width: min(var(--container), calc(100% - 40px));
+  margin-inline: auto;
+}
+
+section {
+  position: relative;
+}
+
+.section {
+  padding-block: 80px;
+}
+
+.section-header {
+  margin-bottom: 35px;
+}
+
+.section-header h2,
+.section-title {
+  margin-bottom: 12px;
+  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.section-header p,
+.section-description {
+  max-width: 720px;
+  color: var(--text-muted);
+}
+
+/* ---------- 5. Typography ---------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text);
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  letter-spacing: -2px;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  letter-spacing: -1px;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+p {
+  margin-bottom: 14px;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+small,
+.small-text {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.gradient-text {
+  color: var(--primary);
+  background: linear-gradient(
+    100deg,
+    #92baff,
+    #c0a5ff 55%,
+    #83e7f6
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.eyebrow,
+.section-label {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: var(--primary);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+}
+
+/* ---------- 6. Navigation ---------- */
+
+header,
+.site-header,
+.navbar {
+  position: relative;
+  z-index: 100;
+}
+
+.site-header,
+.navbar {
+  border-bottom: 1px solid var(--border);
+  background: rgba(7, 11, 24, 0.88);
+  backdrop-filter: blur(18px);
+}
+
+nav,
+.navbar-inner,
+.nav-container {
+  width: min(var(--container), calc(100% - 40px));
+  min-height: 76px;
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.logo,
+.brand,
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  flex-shrink: 0;
+  color: var(--text);
+  font-size: 1.35rem;
+  font-weight: 850;
+  letter-spacing: 2px;
+}
+
+.logo img,
+.brand img,
+.site-logo img {
+  width: auto;
+  max-width: 48px;
+  max-height: 48px;
+  object-fit: contain;
+}
+
+.nav-links,
+nav ul,
+.nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 24px;
+  list-style: none;
+}
+
+.nav-links a,
+nav ul a,
+.nav-menu a {
+  position: relative;
+  color: var(--text-muted);
+  font-size: 0.91rem;
+  font-weight: 550;
+  transition: color var(--transition);
+}
+
+.nav-links a:hover,
+nav ul a:hover,
+.nav-menu a:hover,
+.nav-links a.active,
+nav ul a.active,
+.nav-menu a.active {
+  color: #fff;
+}
+
+.nav-links a::after,
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -9px;
+  left: 0;
+  height: 2px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after,
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
+  transform: scaleX(1);
+}
+
+/* ---------- 7. Hero Sections ---------- */
+
+.hero,
+.page-hero,
+.hero-section {
+  position: relative;
+  isolation: isolate;
+  padding: 100px 0 75px;
+  overflow: hidden;
+}
+
+.hero-content,
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  width: min(var(--container), calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.hero h1,
+.page-hero h1,
+.hero-section h1 {
+  max-width: 850px;
+  margin-bottom: 22px;
+}
+
+.hero p,
+.page-hero p,
+.hero-section p {
+  max-width: 720px;
+  color: var(--text-muted);
+  font-size: 1.04rem;
+  line-height: 1.9;
+}
+
+.hero-actions,
+.hero-buttons,
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 45px;
+}
+
+.hero-visual {
+  position: relative;
+  min-height: 320px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(110, 139, 255, 0.19),
+      transparent 60%
+    ),
+    var(--bg-secondary);
+}
+
+/* ---------- 8. Buttons ---------- */
+
+.btn,
+.button,
+button.primary,
+.button-primary {
+  min-height: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 11px 20px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: #08101f;
+  background: linear-gradient(110deg, #9cc3ff, #c0adff);
+  font-size: 0.9rem;
+  font-weight: 750;
+  text-align: center;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition),
+    background var(--transition);
+}
+
+.btn:hover,
+.button:hover,
+button.primary:hover,
+.button-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(124, 158, 255, 0.2);
+}
+
+.btn-secondary,
+.button-secondary,
+button.secondary {
+  color: var(--text);
+  border-color: var(--border);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.btn-secondary:hover,
+.button-secondary:hover,
+button.secondary:hover {
+  border-color: var(--border-hover);
+  background: rgba(139, 181, 255, 0.1);
+}
+
+.btn-outline,
+.button-outline {
+  color: var(--primary-light);
+  border-color: var(--border-hover);
+  background: transparent;
+}
+
+.btn-outline:hover,
+.button-outline:hover {
+  background: rgba(139, 181, 255, 0.1);
+}
+
+/* ---------- 9. Cards ---------- */
+
+.card,
+.info-card,
+.content-card,
+.planet-card,
+.mission-card,
+.research-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    145deg,
+    rgba(20, 30, 53, 0.94),
+    rgba(11, 17, 33, 0.97)
+  );
+  transition:
+    transform var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.card:hover,
+.info-card:hover,
+.content-card:hover,
+.planet-card:hover,
+.mission-card:hover,
+.research-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow), var(--glow);
+}
+
+.card-content,
+.card-body,
+.planet-card-content,
+.mission-card-content,
+.research-card-content {
+  padding: 21px;
+}
+
+.card h3,
+.info-card h3,
+.content-card h3,
+.planet-card h3,
+.mission-card h3,
+.research-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+}
+
+.card p,
+.info-card p,
+.content-card p,
+.planet-card p,
+.mission-card p,
+.research-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.card img,
+.info-card img,
+.content-card img,
+.planet-card img,
+.mission-card img,
+.research-card img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-link,
+.learn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  color: var(--primary);
+  font-size: 0.88rem;
+  font-weight: 750;
+  transition: gap var(--transition);
+}
+
+.card:hover .card-link,
+.card:hover .learn-more,
+.planet-card:hover .card-link,
+.mission-card:hover .card-link,
+.research-card:hover .card-link {
+  gap: 13px;
+}
+
+/* ---------- 10. Grid Layouts ---------- */
+
+.grid,
+.card-grid,
+.planet-grid,
+.mission-grid,
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* ---------- 11. Statistics ---------- */
+
+.stats,
+.stats-grid,
+.statistics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.stat-card,
+.stat,
+.statistic-card {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: rgba(16, 25, 45, 0.75);
+}
+
+.stat-card strong,
+.stat strong,
+.statistic-card strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--primary-light);
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
+  line-height: 1.3;
+}
+
+.stat-card span,
+.stat span,
+.statistic-card span {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+/* ---------- 12. Search and Filters ---------- */
+
+.search-box,
+.search-container {
+  width: 100%;
+  max-width: 650px;
+}
+
+.search-box input,
+.search-container input,
+input[type="search"],
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 15px;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: rgba(16, 25, 45, 0.9);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #8391ae;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(139, 181, 255, 0.1);
+}
+
+select option {
+  color: var(--text);
+  background: var(--surface);
+}
+
+textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.filters,
+.filter-buttons,
+.category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+}
+
+.filter-btn,
+.filter-button,
+.category-btn {
+  padding: 9px 15px;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: rgba(16, 25, 45, 0.8);
+  transition: var(--transition);
+}
+
+.filter-btn:hover,
+.filter-button:hover,
+.category-btn:hover,
+.filter-btn.active,
+.filter-button.active,
+.category-btn.active {
+  color: #fff;
+  border-color: var(--border-hover);
+  background: rgba(139, 181, 255, 0.13);
+}
+
+/* ---------- 13. Tags and Badges ---------- */
+
+.badge,
+.tag,
+.category-label,
+.card-category {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 5px 10px;
+  color: var(--primary-light);
+  border: 1px solid rgba(139, 181, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(139, 181, 255, 0.08);
+  font-size: 0.73rem;
+  font-weight: 750;
+  letter-spacing: 0.5px;
+}
+
+.status,
+.status-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  color: var(--cyan);
+  border: 1px solid rgba(129, 226, 243, 0.2);
+  border-radius: 8px;
+  background: rgba(129, 226, 243, 0.07);
+  font-size: 0.75rem;
+}
+
+/* ---------- 14. Planet and Space Artwork ---------- */
+
+.planet,
+.planet-image,
+.celestial-body {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 25%,
+    #d4e0ff,
+    #7c92d9 36%,
+    #354574 70%,
+    #141c39
+  );
+  box-shadow:
+    inset -20px -15px 30px rgba(0, 0, 0, 0.45),
+    0 0 45px rgba(118, 151, 255, 0.13);
+}
+
+.planet-ring,
+.saturn-ring {
+  position: absolute;
+  top: 35%;
+  left: -30%;
+  width: 160%;
+  height: 30%;
+  border: 7px solid rgba(202, 188, 255, 0.75);
+  border-left-color: rgba(151, 139, 224, 0.65);
+  border-right-color: rgba(224, 218, 255, 0.9);
+  border-radius: 50%;
+  transform: rotate(-20deg);
+}
+
+.space-visual,
+.cosmos-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(circle at center, rgba(117, 145, 255, 0.2), transparent 60%),
+    var(--bg-secondary);
+}
+
+/* ---------- 15. Detail Pages ---------- */
+
+.detail-hero,
+.planet-hero,
+.mission-hero,
+.research-hero {
+  padding: 80px 0 55px;
+}
+
+.detail-layout,
+.planet-detail-layout,
+.mission-detail-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 40px;
+}
+
+.detail-content,
+.planet-details,
+.mission-details {
+  min-width: 0;
+}
+
+.detail-image,
+.planet-detail-image,
+.mission-detail-image {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.detail-image img,
+.planet-detail-image img,
+.mission-detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-content h1,
+.planet-details h1,
+.mission-details h1 {
+  margin-bottom: 18px;
+}
+
+.detail-content p,
+.planet-details p,
+.mission-details p {
+  margin-bottom: 17px;
+  color: var(--text-muted);
+  line-height: 1.9;
+}
+
+/* ---------- 16. Information Tables ---------- */
+
+.info-table,
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: rgba(16, 25, 45, 0.7);
+}
+
+th,
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  color: var(--primary-light);
+  background: rgba(139, 181, 255, 0.08);
+  font-weight: 750;
+}
+
+td {
+  color: var(--text-muted);
+}
+
+tr:last-child td {
+  border-bottom: 0;
+}
+
+/* ---------- 17. Timeline ---------- */
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 25px;
+  padding-left: 28px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: 6px;
+  width: 2px;
+  background: linear-gradient(var(--primary), var(--secondary));
+  opacity: 0.65;
+}
+
+.timeline-item {
+  position: relative;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 25px;
+  left: -28px;
+  width: 12px;
+  height: 12px;
+  border: 3px solid var(--bg);
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 14px rgba(139, 181, 255, 0.4);
+}
+
+.timeline-item h3 {
+  margin-bottom: 8px;
+}
+
+.timeline-item p {
+  color: var(--text-muted);
+}
+
+/* ---------- 18. Call to Action ---------- */
+
+.cta,
+.cta-section,
+.call-to-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 38px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(
+      ellipse at 90% 0%,
+      rgba(139, 181, 255, 0.15),
+      transparent 45%
+    ),
+    linear-gradient(120deg, #111b34, #101326);
+}
+
+.cta h2,
+.cta-section h2,
+.call-to-action h2 {
+  margin-bottom: 10px;
+}
+
+.cta p,
+.cta-section p,
+.call-to-action p {
+  max-width: 700px;
+  color: var(--text-muted);
+}
+
+/* ---------- 19. Footer ---------- */
+
+footer,
+.site-footer {
+  margin-top: 40px;
+  padding: 30px 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  background: rgba(6, 10, 21, 0.8);
+  text-align: center;
+  font-size: 0.86rem;
+}
+
+footer a,
+.site-footer a {
+  color: var(--primary-light);
+  transition: color var(--transition);
+}
+
+footer a:hover,
+.site-footer a:hover {
+  color: #fff;
+}
+
+.footer-content {
+  width: min(var(--container), calc(100% - 40px));
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ---------- 20. Utility Classes ---------- */
+
+.hidden,
+.is-hidden {
+  display: none !important;
+}
+
+.visible {
+  display: block;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.gap-sm {
+  gap: 10px;
+}
+
+.gap-md {
+  gap: 20px;
+}
+
+.gap-lg {
+  gap: 30px;
+}
+
+.mt-1 {
+  margin-top: 10px;
+}
+
+.mt-2 {
+  margin-top: 20px;
+}
+
+.mt-3 {
+  margin-top: 30px;
+}
+
+.mb-1 {
+  margin-bottom: 10px;
+}
+
+.mb-2 {
+  margin-bottom: 20px;
+}
+
+.mb-3 {
+  margin-bottom: 30px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.max-width {
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+/* ---------- 21. Animations ---------- */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatSpace {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes softPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 18px rgba(139, 181, 255, 0.08);
+  }
+
+  50% {
+    box-shadow: 0 0 35px rgba(139, 181, 255, 0.2);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.65s ease both;
+}
+
+.animate-float {
+  animation: floatSpace 5s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: softPulse 4s ease-in-out infinite;
+}
+
+/* ---------- 22. Responsive: Tablets ---------- */
+
+@media (max-width: 1000px) {
+  .grid,
+  .card-grid,
+  .planet-grid,
+  .mission-grid,
+  .research-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-grid,
+  .detail-layout,
+  .planet-detail-layout,
+  .mission-detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    min-height: 280px;
+  }
+
+  .nav-links,
+  nav ul,
+  .nav-menu {
+    gap: 15px;
+  }
+
+  .section {
+    padding-block: 65px;
+  }
+}
+
+/* ---------- 23. Responsive: Mobile ---------- */
+
+@media (max-width: 650px) {
+  .container,
+  .wrapper,
+  .main-container,
+  .hero-content,
+  .hero-inner {
+    width: calc(100% - 28px);
+  }
+
+  nav,
+  .navbar-inner,
+  .nav-container {
+    width: calc(100% - 28px);
+    padding-block: 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .nav-links,
+  nav ul,
+  .nav-menu {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+  }
+
+  .nav-links a,
+  nav ul a,
+  .nav-menu a {
+    font-size: 0.84rem;
+  }
+
+  .nav-links a::after,
+  .nav-menu a::after {
+    bottom: -4px;
+  }
+
+  h1 {
+    font-size: clamp(2.35rem, 11vw, 3.5rem);
+    letter-spacing: -1.5px;
+  }
+
+  h2 {
+    font-size: clamp(1.7rem, 8vw, 2.4rem);
+  }
+
+  .hero,
+  .page-hero,
+  .hero-section {
+    padding: 55px 0 40px;
+  }
+
+  .hero p,
+  .page-hero p,
+  .hero-section p {
+    font-size: 0.95rem;
+  }
+
+  .grid,
+  .card-grid,
+  .planet-grid,
+  .mission-grid,
+  .research-grid,
+  .grid-2,
+  .grid-4,
+  .stats,
+  .stats-grid,
+  .statistics {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding-block: 48px;
+  }
+
+  .section-header {
+    margin-bottom: 25px;
+  }
+
+  .hero-actions,
+  .hero-buttons,
+  .button-group {
+    align-items: stretch;
+  }
+
+  .hero-actions .btn,
+  .hero-actions .button,
+  .hero-buttons .btn,
+  .hero-buttons .button {
+    flex: 1 1 auto;
+  }
+
+  .card-content,
+  .card-body,
+  .planet-card-content,
+  .mission-card-content,
+  .research-card-content {
+    padding: 18px;
+  }
+
+  .cta,
+  .cta-section,
+  .call-to-action {
+    padding: 25px 20px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .footer-content {
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    font-size: 0.84rem;
+  }
+}
+
+/* ---------- 24. Reduced Motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
