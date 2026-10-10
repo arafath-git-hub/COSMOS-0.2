@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore humanity's greatest space missions, from Voyager and Apollo to Mars rovers, the James Webb Space Telescope, and future exploration.">
+  <meta name="theme-color" content="#050914">
+  <title>Space Missions | COSMOS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root{--bg:#050914;--surface:#0b1324;--surface2:#101d33;--text:#edf5ff;--muted:#9cacc4;--accent:#8a7dff;--border:rgba(166,158,255,.17)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:95px}
+    body{margin:0;background:radial-gradient(ellipse at 80% 0%,rgba(92,64,190,.16),transparent 38%),var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;line-height:1.7}
+    a{color:inherit;text-decoration:none}.container{width:min(1160px,calc(100% - 40px));margin:auto}
+    .navbar{position:sticky;top:0;z-index:10;background:rgba(5,9,20,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+    .nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .logo,h1,h2,h3{font-family:"Space Grotesk",sans-serif}.logo{font-size:1.4rem;font-weight:700;letter-spacing:3px}.logo span{color:#aaa2ff}
+    .links{display:flex;gap:23px;flex-wrap:wrap;font-size:.88rem;color:var(--muted)}.links a:hover,.links .active{color:var(--text)}
+    .hero{padding:100px 0 80px;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+    .eyebrow{color:#b9b1ff;text-transform:uppercase;letter-spacing:2.5px;font-size:.75rem;font-weight:700}
+    h1{font-size:clamp(3rem,7vw,6rem);letter-spacing:-4px;line-height:1.02;margin:20px 0}
+    h1 span{display:block;color:#aaa2ff}.lead,.section-head p{color:var(--muted);font-size:1.04rem;max-width:660px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}
+    .btn{padding:12px 18px;border:1px solid var(--border);border-radius:7px;display:inline-block;font-weight:600;font-size:.9rem}
+    .primary{background:#7668ef;border-color:#7668ef;color:white}.btn:hover{transform:translateY(-2px)}
+    .visual{min-height:340px;display:grid;place-items:center;position:relative;overflow:hidden}
+    .orbit{position:absolute;width:320px;height:320px;border:1px solid rgba(170,162,255,.3);border-radius:50%;transform:rotate(-28deg) scaleY(.42)}
+    .orbit.two{width:390px;height:390px;transform:rotate(40deg) scaleY(.4);border-color:rgba(170,162,255,.15)}
+    .planet{width:200px;height:200px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff0d6,transparent 13%),radial-gradient(circle at 36% 35%,#ffb76d,#b95c4e 43%,#4d306f 72%,#0c1028);box-shadow:inset -35px -20px 50px #050914,0 0 65px rgba(138,125,255,.25);animation:float 7s ease-in-out infinite}
+    .section{padding:70px 0}.section-head{margin-bottom:30px}.section-head h2{font-size:clamp(2rem,4vw,3rem);letter-spacing:-1.5px;margin:12px 0}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+    .card{background:linear-gradient(145deg,var(--surface2),var(--surface));border:1px solid var(--border);border-radius:13px;padding:25px;transition:.25s}
+    .card:hover{transform:translateY(-4px);border-color:rgba(170,162,255,.55)}
+    .number{color:#b9b1ff;letter-spacing:2px;font-size:.75rem;font-weight:700}
+    .card h3{font-size:1.3rem;margin:12px 0}.card p{color:var(--muted);font-size:.94rem}
+    .pill{display:inline-block;border:1px solid var(--border);padding:5px 9px;border-radius:20px;color:#c5bfff;font-size:.75rem}
+    .timeline{border-left:1px solid rgba(170,162,255,.4);padding-left:25px;margin-left:8px}
+    .event{position:relative;padding-bottom:28px}.event:last-child{padding-bottom:0}
+    .event:before{content:"";position:absolute;left:-31px;top:8px;width:10px;height:10px;border-radius:50%;background:#9d91ff;box-shadow:0 0 15px #7668ef}
+    .event strong{color:#c3bdff}.event p{color:var(--muted);margin:5px 0}
+    .banner{padding:35px;border:1px solid var(--border);border-radius:15px;background:radial-gradient(ellipse at 100% 0%,rgba(138,125,255,.17),transparent 55%),var(--surface)}
+    .banner p{color:var(--muted);max-width:800px}
+    .source-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .source{display:flex;justify-content:space-between;gap:12px;padding:16px 18px;border:1px solid var(--border);border-radius:9px;background:var(--surface)}
+    .source:hover{border-color:#8a7dff}.source span{color:#b9b1ff}
+    footer{border-top:1px solid var(--border);padding:30px 0;color:var(--muted);font-size:.86rem}
+    .foot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.footlinks{display:flex;gap:17px;flex-wrap:wrap}
+    .reveal{opacity:0;transform:translateY(18px);transition:.65s}.reveal.visible{opacity:1;transform:none}
+    @keyframes float{50%{transform:translateY(-12px)}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+    @media(max-width:850px){.hero{grid-template-columns:1fr;padding-top:65px}.visual{min-height:300px}.grid{grid-template-columns:repeat(2,1fr)}.nav{align-items:flex-start;flex-direction:column;padding:15px 0}.links{gap:15px}}
+    @media(max-width:560px){.container{width:calc(100% - 30px)}h1{letter-spacing:-2px}.grid,.source-list{grid-template-columns:1fr}.section{padding:50px 0}.banner{padding:24px}.visual{min-height:250px}.planet{width:170px;height:170px}.links{font-size:.8rem;gap:11px}}
+  </style>
+</head>
+<body>
+<header class="navbar"><div class="container nav">
+  <a class="logo" href="index.html">COS<span>M</span>OS</a>
+  <nav class="links" aria-label="Main navigation">
+    <a href="index.html">Home</a><a href="planets.html">Planets</a>
+    <a class="active" aria-current="page" href="missions.html">Missions</a>
+    <a href="research.html">Research</a><a href="about.html">About</a>
+  </nav>
+</div></header>
+
+<main>
+  <section class="container hero">
+    <div class="reveal">
+      <div class="eyebrow">Humanity beyond Earth</div>
+      <h1>Space <span>Missions</span></h1>
+      <p class="lead">Every mission is a journey into the unknown. Explore the spacecraft, telescopes, landers, and robotic explorers expanding our understanding of the Solar System and the universe.</p>
+      <div class="actions"><a class="btn primary" href="#missions">Explore missions ↓</a><a class="btn" href="#timeline">Mission timeline</a></div>
+    </div>
+    <div class="visual reveal" role="img" aria-label="Stylized distant planet and orbital paths"><div class="orbit"></div><div class="orbit two"></div><div class="planet"></div></div>
+  </section>
+
+  <section class="container section" id="missions">
+    <div class="section-head reveal"><div class="eyebrow">Explore by destination</div><h2>Machines that changed our view of space</h2><p>Space exploration uses different tools for different questions: orbiters map worlds, landers study surfaces, rovers travel across terrain, and telescopes observe distant objects.</p></div>
+    <div class="grid">
+      <article class="card reveal"><span class="number">MISSION 01</span><h3>Apollo</h3><span class="pill">The Moon</span><p>NASA's Apollo program carried astronauts to the lunar surface. Apollo 11 landed humans on the Moon in July 1969 and returned samples that continue to support scientific research.</p><a href="https://www.nasa.gov/the-apollo-program/" target="_blank" rel="noopener noreferrer">Explore Apollo ↗</a></article>
+      <article class="card reveal"><span class="number">MISSION 02</span><h3>Voyager</h3><span class="pill">Deep space</span><p>Launched in 1977, Voyager 1 and Voyager 2 explored the outer planets. Both spacecraft later crossed into interstellar space, carrying instruments that study the environment beyond the heliosphere.</p><a href="https://science.nasa.gov/mission/voyager/" target="_blank" rel="noopener noreferrer">Explore Voyager ↗</a></article>
+      <article class="card reveal"><span class="number">MISSION 03</span><h3>Mars Rovers</h3><span class="pill">Mars</span><p>Robotic rovers examine Martian rocks, landscapes, and past environments. Curiosity investigates habitability, while Perseverance studies ancient environments and collects samples for possible future return.</p><a href="https://science.nasa.gov/mars/" target="_blank" rel="noopener noreferrer">Explore Mars ↗</a></article>
+      <article class="card reveal"><span class="number">MISSION 04</span><h3>Juno</h3><span class="pill">Jupiter</span><p>Juno studies Jupiter's atmosphere, gravity, magnetic field, and interior. Its observations help scientists understand how giant planets form and evolve.</p><a href="https://science.nasa.gov/mission/juno/" target="_blank" rel="noopener noreferrer">Explore Juno ↗</a></article>
+      <article class="card reveal"><span class="number">MISSION 05</span><h3>James Webb</h3><span class="pill">Space telescope</span><p>The James Webb Space Telescope observes infrared light to investigate early galaxies, star formation, planetary systems, and the atmospheres of exoplanets.</p><a href="https://science.nasa.gov/mission/webb/" target="_blank" rel="noopener noreferrer">Explore Webb ↗</a></article>
+      <article class="card reveal"><span class="number">MISSION 06</span><h3>Europa Clipper</h3><span class="pill">Icy moon</span><p>NASA's Europa Clipper mission is travelling to Jupiter's system to investigate whether Europa has conditions that could support life. It is designed to perform repeated close flybys of the moon.</p><a href="https://science.nasa.gov/mission/europa-clipper/" target="_blank" rel="noopener noreferrer">Explore Europa Clipper ↗</a></article>
+      <article class="card reveal"><span class="number">MISSION 07</span><h3>OSIRIS-REx</h3><span class="pill">Asteroid Bennu</span><p>OSIRIS-REx collected a sample from asteroid Bennu and delivered it to Earth in 2023. The sample helps researchers investigate the early Solar System and the chemistry of primitive asteroids.</p><a href="https://science.nasa.gov/mission/osiris-rex/" target="_blank" rel="noopener noreferrer">Explore OSIRIS-REx ↗</a></article>
+      <article class="card reveal"><span class="number">MISSION 08</span><h3>Hubble</h3><span class="pill">Cosmos</span><p>The Hubble Space Telescope has observed planets, nebulae, galaxies, and distant cosmic events, producing discoveries and images that have transformed astronomy.</p><a href="https://science.nasa.gov/mission/hubble/" target="_blank" rel="noopener noreferrer">Explore Hubble ↗</a></article>
+      <article class="card reveal"><span class="number">MISSION 09</span><h3>Artemis</h3><span class="pill">Lunar exploration</span><p>NASA's Artemis program aims to return astronauts to the lunar environment and build experience for longer-term exploration. Mission schedules and milestones can change.</p><a href="https://www.nasa.gov/humans-in-space/artemis/" target="_blank" rel="noopener noreferrer">Explore Artemis ↗</a></article>
+    </div>
+  </section>
+
+  <section class="container section" id="timeline">
+    <div class="section-head reveal"><div class="eyebrow">A timeline of discovery</div><h2>Milestones in space exploration</h2><p>Selected landmarks in humanity's effort to explore beyond Earth.</p></div>
+    <div class="timeline reveal">
+      <div class="event"><strong>1957 — Sputnik 1</strong><p>The first artificial satellite to orbit Earth marked the beginning of the Space Age.</p></div>
+      <div class="event"><strong>1969 — Apollo 11</strong><p>Humans walked on the Moon for the first time and returned lunar samples for scientific study.</p></div>
+      <div class="event"><strong>1977 — Voyager launches</strong><p>Two spacecraft began journeys that would transform knowledge of the outer planets and eventually reach interstellar space.</p></div>
+      <div class="event"><strong>1990 — Hubble Space Telescope</strong><p>Hubble began its observations from Earth orbit, producing major advances across astronomy.</p></div>
+      <div class="event"><strong>2012 — Curiosity lands on Mars</strong><p>The rover began investigating whether ancient Mars had environments suitable for microbial life.</p></div>
+      <div class="event"><strong>2021 — James Webb launched</strong><p>Webb began a new era of infrared astronomy after its journey to its observing location.</p></div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="banner reveal"><div class="eyebrow">The next frontier</div><h2>What will we discover next?</h2><p>Future missions may investigate icy ocean worlds, return samples from Mars, study the Sun in greater detail, search for habitable exoplanets, and explore destinations humans have never visited. Every mission starts with a question—and a plan to gather evidence.</p><div class="actions"><a class="btn primary" href="research.html">Explore research questions →</a><a class="btn" href="planets.html">Visit the planets</a></div></div>
+  </section>
+
+  <section class="container section">
+    <div class="section-head reveal"><div class="eyebrow">Official sources</div><h2>Learn directly from mission teams</h2><p>Use these official NASA resources to explore mission updates, spacecraft data, images, and science discoveries.</p></div>
+    <div class="source-list reveal">
+      <a class="source" href="https://science.nasa.gov/missions/" target="_blank" rel="noopener noreferrer">NASA Science Missions <span>↗</span></a>
+      <a class="source" href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener noreferrer">Solar System Exploration <span>↗</span></a>
+      <a class="source" href="https://science.nasa.gov/earth/" target="_blank" rel="noopener noreferrer">Earth Science Missions <span>↗</span></a>
+      <a class="source" href="https://www.esa.int/Science_Exploration/Space_Science" target="_blank" rel="noopener noreferrer">ESA Space Science <span>↗</span></a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="container foot"><a class="logo" href="index.html">COS<span>M</span>OS</a><span>Explore beyond what we know.</span><div class="footlinks"><a href="index.html">Home</a><a href="planets.html">Planets</a><a href="research.html">Research</a><a href="about.html">About</a></div></div></footer>
+<script>
+(() => {
+  const items = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) {
+    items.forEach(item => item.classList.add("visible"));
+    return;
+  }
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.12});
+  items.forEach(item => observer.observe(item));
+})();
+</script>
+</body>
+</html>
