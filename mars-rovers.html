@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore NASA's Mars rovers, their discoveries, and the search for evidence of ancient life on Mars.">
+  <title>Mars Rovers | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .mission-detail {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+      padding: 45px 0 80px;
+    }
+
+    .mission-back {
+      display: inline-block;
+      margin-bottom: 28px;
+      color: #9ecbff;
+      text-decoration: none;
+    }
+
+    .mission-back:hover { text-decoration: underline; }
+
+    .mission-hero {
+      padding: 45px 35px;
+      border: 1px solid rgba(150,190,255,.22);
+      border-radius: 22px;
+      background: linear-gradient(135deg,#281b19,#47302a 55%,#151b29);
+      margin-bottom: 30px;
+    }
+
+    .mission-label {
+      display: inline-block;
+      color: #ffc5a8;
+      font-size: .82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .mission-hero h1 {
+      font-size: clamp(2.2rem,6vw,4.3rem);
+      line-height: 1.1;
+      margin: 0 0 18px;
+    }
+
+    .mission-hero p {
+      max-width: 760px;
+      line-height: 1.8;
+      color: #eadbd6;
+    }
+
+    .mission-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap: 16px;
+      margin: 25px 0 35px;
+    }
+
+    .mission-fact,.mission-section {
+      padding: 23px;
+      border: 1px solid rgba(150,190,255,.17);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .mission-fact span {
+      display: block;
+      color: #ffc5a8;
+      font-size: .82rem;
+      margin-bottom: 9px;
+    }
+
+    .mission-fact strong { font-size: 1.05rem; }
+    .mission-section { margin-top: 20px; }
+    .mission-section h2 { margin-top: 0; margin-bottom: 14px; }
+
+    .mission-section p,.mission-section li {
+      color: #cbd5e1;
+      line-height: 1.85;
+    }
+
+    .mission-section ul { padding-left: 22px; }
+
+    .mission-highlight {
+      border-left: 3px solid #ffad85;
+      padding: 12px 18px;
+      margin-top: 18px;
+      background: rgba(255,173,133,.07);
+      color: #f9e6dc;
+      line-height: 1.8;
+    }
+
+    .mission-navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .mission-navigation a {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid rgba(150,190,255,.3);
+      border-radius: 10px;
+      color: #e5efff;
+      text-decoration: none;
+    }
+
+    .mission-navigation a:hover {
+      background: rgba(117,182,255,.12);
+    }
+
+    @media(max-width:600px) {
+      .mission-detail {
+        width: calc(100% - 28px);
+        padding-top: 25px;
+      }
+      .mission-hero { padding: 30px 22px; }
+      .mission-section,.mission-fact { padding: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="mission-detail">
+    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+
+    <header class="mission-hero">
+      <span class="mission-label">Robotic Planetary Exploration</span>
+      <h1>Mars Rovers</h1>
+      <p>
+        NASA's Mars rovers are robotic explorers designed to study the Red
+        Planet. They examine rocks, soil, landscapes, and the Martian
+        environment to help scientists understand how Mars changed over time
+        and whether it once had conditions suitable for life.
+      </p>
+    </header>
+
+    <section class="mission-facts" aria-label="Mission facts">
+      <div class="mission-fact">
+        <span>Organization</span>
+        <strong>NASA</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Exploration Begins</span>
+        <strong>1997</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Notable Rovers</span>
+        <strong>Sojourner, Spirit, Opportunity, Curiosity, Perseverance</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Destination</span>
+        <strong>Mars</strong>
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>Why Use Rovers?</h2>
+      <p>
+        Mars is too distant for scientists to examine every location directly.
+        Rovers act as mobile laboratories, using cameras, robotic arms,
+        spectrometers, drills, and other scientific tools to investigate
+        locations that would otherwise be difficult to study.
+      </p>
+      <p>
+        Engineers on Earth plan rover activities using data sent back from
+        Mars. Because radio signals take time to travel between Earth and
+        Mars, the rovers must carry out many tasks with onboard systems.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Important Mars Rovers</h2>
+      <ul>
+        <li><strong>Sojourner (1997):</strong> The first successful NASA rover on Mars. It demonstrated that a small robotic vehicle could explore the Martian surface.</li>
+        <li><strong>Spirit (2004):</strong> Explored Gusev Crater and found evidence that water had altered Martian rocks.</li>
+        <li><strong>Opportunity (2004):</strong> Studied rocks and minerals that showed Mars had a wetter past. Its mission lasted far beyond its original planned duration.</li>
+        <li><strong>Curiosity (2012):</strong> Investigates Gale Crater and Mount Sharp, studying ancient environments and whether they could have supported microbial life.</li>
+        <li><strong>Perseverance (2021):</strong> Explores Jezero Crater, studies ancient environments, and collects rock samples for a possible future return to Earth.</li>
+      </ul>
+    </section>
+
+    <section class="mission-section">
+      <h2>What Have Rovers Discovered?</h2>
+      <ul>
+        <li>Evidence that liquid water once shaped parts of the Martian surface.</li>
+        <li>Minerals that formed in the presence of water.</li>
+        <li>Ancient lake and river environments that may have been suitable for microbial life.</li>
+        <li>Changes in Martian weather, radiation, dust, and surface conditions.</li>
+        <li>Detailed images and measurements that help scientists choose future exploration sites.</li>
+      </ul>
+
+      <div class="mission-highlight">
+        Finding evidence of an ancient habitable environment does not mean
+        scientists have confirmed that life ever existed on Mars.
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>Are the Rovers Still Active?</h2>
+      <p>
+        Rover status differs by mission. Sojourner, Spirit, and Opportunity
+        completed their operations years ago. Curiosity and Perseverance have
+        continued scientific exploration, but their current operating status
+        can change. Consult NASA's mission pages for the latest updates.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Why These Missions Matter</h2>
+      <p>
+        Mars rovers help scientists reconstruct the planet's environmental
+        history, test technologies for robotic exploration, and prepare for
+        future human missions. Their findings also guide the search for signs
+        of ancient microbial life beyond Earth.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Explore More</h2>
+      <div class="mission-navigation">
+        <a href="https://science.nasa.gov/mars/" target="_blank" rel="noopener noreferrer">NASA Mars Exploration</a>
+        <a href="https://science.nasa.gov/mission/mars-2020-perseverance/" target="_blank" rel="noopener noreferrer">Perseverance Rover</a>
+        <a href="missions.html">All Space Missions</a>
+        <a href="index.html">COSMOS Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
