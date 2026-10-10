@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover NASA's Europa Clipper mission investigating whether Jupiter's moon Europa has conditions suitable for life.">
+  <title>Europa Clipper | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .mission-detail {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+      padding: 45px 0 80px;
+    }
+
+    .mission-back {
+      display: inline-block;
+      margin-bottom: 28px;
+      color: #9ecbff;
+      text-decoration: none;
+    }
+
+    .mission-back:hover { text-decoration: underline; }
+
+    .mission-hero {
+      padding: 45px 35px;
+      border: 1px solid rgba(150,190,255,.22);
+      border-radius: 22px;
+      background: linear-gradient(135deg,#142b36,#1b4250 55%,#111827);
+      margin-bottom: 30px;
+    }
+
+    .mission-label {
+      display: inline-block;
+      color: #a8e7ed;
+      font-size: .82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .mission-hero h1 {
+      font-size: clamp(2.2rem,6vw,4.3rem);
+      line-height: 1.1;
+      margin: 0 0 18px;
+    }
+
+    .mission-hero p {
+      max-width: 760px;
+      line-height: 1.8;
+      color: #d0e4e8;
+    }
+
+    .mission-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap: 16px;
+      margin: 25px 0 35px;
+    }
+
+    .mission-fact,.mission-section {
+      padding: 23px;
+      border: 1px solid rgba(150,190,255,.17);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .mission-fact span {
+      display: block;
+      color: #a8e7ed;
+      font-size: .82rem;
+      margin-bottom: 9px;
+    }
+
+    .mission-fact strong { font-size: 1.05rem; }
+    .mission-section { margin-top: 20px; }
+    .mission-section h2 { margin-top: 0; margin-bottom: 14px; }
+
+    .mission-section p,.mission-section li {
+      color: #cbd5e1;
+      line-height: 1.85;
+    }
+
+    .mission-section ul { padding-left: 22px; }
+
+    .mission-highlight {
+      border-left: 3px solid #83d7df;
+      padding: 12px 18px;
+      margin-top: 18px;
+      background: rgba(131,215,223,.07);
+      color: #ddf7f8;
+      line-height: 1.8;
+    }
+
+    .mission-navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .mission-navigation a {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid rgba(150,190,255,.3);
+      border-radius: 10px;
+      color: #e5efff;
+      text-decoration: none;
+    }
+
+    .mission-navigation a:hover {
+      background: rgba(117,182,255,.12);
+    }
+
+    @media(max-width:600px) {
+      .mission-detail {
+        width: calc(100% - 28px);
+        padding-top: 25px;
+      }
+      .mission-hero { padding: 30px 22px; }
+      .mission-section,.mission-fact { padding: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="mission-detail">
+    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+
+    <header class="mission-hero">
+      <span class="mission-label">Ocean Worlds Exploration</span>
+      <h1>Europa Clipper</h1>
+      <p>
+        NASA's Europa Clipper mission is designed to investigate Europa, one
+        of Jupiter's largest moons. Beneath its icy surface, Europa is believed
+        to contain a global ocean of liquid water. The mission will examine
+        whether this moon has environments that could support life.
+      </p>
+    </header>
+
+    <section class="mission-facts" aria-label="Mission facts">
+      <div class="mission-fact">
+        <span>Space Agency</span>
+        <strong>NASA</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Launch Date</span>
+        <strong>October 14, 2024</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Destination</span>
+        <strong>Europa, Jupiter's moon</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Primary Goal</span>
+        <strong>Assess habitability</strong>
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>What Is Europa Clipper?</h2>
+      <p>
+        Europa Clipper is a robotic spacecraft built to make repeated close
+        flybys of Europa. Rather than orbiting Europa directly, the spacecraft
+        will orbit Jupiter and pass by the moon many times, collecting
+        measurements from different locations.
+      </p>
+      <p>
+        Its large solar arrays generate electricity far from the Sun, while
+        its scientific instruments investigate Europa's ice shell, surface,
+        possible ocean, and surrounding environment.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Why Is Europa Interesting?</h2>
+      <p>
+        Europa's surface is made largely of water ice. Several lines of
+        evidence suggest that a salty liquid-water ocean exists beneath this
+        frozen exterior. Tidal forces from Jupiter and interactions with
+        neighbouring moons may provide energy that affects Europa's interior.
+      </p>
+      <p>
+        On Earth, life exists in environments where sunlight is limited or
+        absent. Scientists therefore investigate whether Europa could have
+        liquid water, useful chemical ingredients, and energy sources that
+        might make it habitable.
+      </p>
+
+      <div class="mission-highlight">
+        A potentially habitable environment is not proof of life. Europa
+        Clipper is designed to assess habitability, not to directly detect
+        living organisms.
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>Mission Objectives</h2>
+      <ul>
+        <li>Measure the thickness and properties of Europa's icy shell.</li>
+        <li>Investigate the ocean's potential depth, salinity, and other properties.</li>
+        <li>Map Europa's surface geology and identify regions of scientific interest.</li>
+        <li>Analyze the moon's surface composition and search for organic and other chemical materials.</li>
+        <li>Study Europa's atmosphere and its interaction with Jupiter's radiation environment.</li>
+      </ul>
+    </section>
+
+    <section class="mission-section">
+      <h2>Scientific Instruments</h2>
+      <ul>
+        <li><strong>Imaging system:</strong> Maps surface features in detail.</li>
+        <li><strong>Ice-penetrating radar:</strong> Investigates the ice shell and structures beneath the surface.</li>
+        <li><strong>Spectrometers:</strong> Study the chemical composition of surface materials and gases.</li>
+        <li><strong>Magnetometer:</strong> Measures magnetic fields that can help scientists investigate the subsurface ocean.</li>
+        <li><strong>Plasma and dust instruments:</strong> Examine particles and the space environment around Europa.</li>
+      </ul>
+    </section>
+
+    <section class="mission-section">
+      <h2>Journey to Jupiter</h2>
+      <p>
+        After launching in October 2024, Europa Clipper began its journey
+        toward the Jupiter system. The spacecraft is planned to arrive in 2030.
+        It will then conduct a series of close Europa flybys to gather data
+        from multiple regions of the moon.
+      </p>
+      <p>
+        Mission schedules can change. Check NASA's official mission page for
+        the latest trajectory, arrival plans, and operational updates.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Why Does This Mission Matter?</h2>
+      <p>
+        Europa Clipper will help scientists understand whether an ocean world
+        beyond Earth has the chemical and physical conditions that could
+        support life. Its findings will also improve our understanding of icy
+        moons and ocean worlds throughout the Solar System.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Explore More</h2>
+      <div class="mission-navigation">
+        <a href="https://science.nasa.gov/mission/europa-clipper/" target="_blank" rel="noopener noreferrer">NASA Europa Clipper</a>
+        <a href="missions.html">All Space Missions</a>
+        <a href="index.html">COSMOS Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
