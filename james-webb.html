@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover the James Webb Space Telescope and how it studies the early universe, galaxies, stars, and exoplanets.">
+  <title>James Webb Space Telescope | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .mission-detail {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+      padding: 45px 0 80px;
+    }
+
+    .mission-back {
+      display: inline-block;
+      margin-bottom: 28px;
+      color: #9ecbff;
+      text-decoration: none;
+    }
+
+    .mission-back:hover { text-decoration: underline; }
+
+    .mission-hero {
+      padding: 45px 35px;
+      border: 1px solid rgba(150,190,255,.22);
+      border-radius: 22px;
+      background: linear-gradient(135deg,#19172d,#30264a 55%,#111827);
+      margin-bottom: 30px;
+    }
+
+    .mission-label {
+      display: inline-block;
+      color: #d1c4ff;
+      font-size: .82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .mission-hero h1 {
+      font-size: clamp(2.2rem,6vw,4.3rem);
+      line-height: 1.1;
+      margin: 0 0 18px;
+    }
+
+    .mission-hero p {
+      max-width: 760px;
+      line-height: 1.8;
+      color: #d8d5e8;
+    }
+
+    .mission-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap: 16px;
+      margin: 25px 0 35px;
+    }
+
+    .mission-fact,.mission-section {
+      padding: 23px;
+      border: 1px solid rgba(150,190,255,.17);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .mission-fact span {
+      display: block;
+      color: #c7b6ff;
+      font-size: .82rem;
+      margin-bottom: 9px;
+    }
+
+    .mission-fact strong { font-size: 1.05rem; }
+    .mission-section { margin-top: 20px; }
+    .mission-section h2 { margin-top: 0; margin-bottom: 14px; }
+
+    .mission-section p,.mission-section li {
+      color: #cbd5e1;
+      line-height: 1.85;
+    }
+
+    .mission-section ul { padding-left: 22px; }
+
+    .mission-highlight {
+      border-left: 3px solid #b8a4ff;
+      padding: 12px 18px;
+      margin-top: 18px;
+      background: rgba(184,164,255,.07);
+      color: #e9e3ff;
+      line-height: 1.8;
+    }
+
+    .mission-navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .mission-navigation a {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid rgba(150,190,255,.3);
+      border-radius: 10px;
+      color: #e5efff;
+      text-decoration: none;
+    }
+
+    .mission-navigation a:hover {
+      background: rgba(117,182,255,.12);
+    }
+
+    @media(max-width:600px) {
+      .mission-detail {
+        width: calc(100% - 28px);
+        padding-top: 25px;
+      }
+      .mission-hero { padding: 30px 22px; }
+      .mission-section,.mission-fact { padding: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="mission-detail">
+    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+
+    <header class="mission-hero">
+      <span class="mission-label">Infrared Space Observatory</span>
+      <h1>James Webb Space Telescope</h1>
+      <p>
+        The James Webb Space Telescope, known as JWST, is a powerful space
+        observatory designed to study the universe primarily in infrared light.
+        It helps scientists investigate the earliest galaxies, the formation
+        of stars and planetary systems, and the atmospheres of planets beyond
+        our Solar System.
+      </p>
+    </header>
+
+    <section class="mission-facts" aria-label="Mission facts">
+      <div class="mission-fact">
+        <span>Space Agencies</span>
+        <strong>NASA, ESA, CSA</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Launch Date</span>
+        <strong>December 25, 2021</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Location</span>
+        <strong>Near Sun–Earth L2</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Main Observing Range</span>
+        <strong>Infrared light</strong>
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>What Is JWST?</h2>
+      <p>
+        Webb is a space telescope with a segmented primary mirror about
+        6.5 metres across. Its large mirror collects faint light from distant
+        cosmic objects. A five-layer sunshield protects the telescope from
+        heat and helps keep its infrared instruments cold enough to operate.
+      </p>
+      <p>
+        Unlike a conventional visible-light telescope, Webb is optimized for
+        infrared observations. Infrared light can reveal objects hidden by
+        dust and can help scientists study light stretched by the expansion
+        of the universe.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Mission Objectives</h2>
+      <ul>
+        <li>Observe some of the earliest galaxies that formed after the Big Bang.</li>
+        <li>Study how galaxies grow and change over cosmic time.</li>
+        <li>Investigate how stars and planetary systems form inside clouds of gas and dust.</li>
+        <li>Analyze the atmospheres of exoplanets to learn about their chemical composition.</li>
+        <li>Study objects within our Solar System, including planets, moons, comets, and asteroids.</li>
+      </ul>
+    </section>
+
+    <section class="mission-section">
+      <h2>How Does Webb Work?</h2>
+      <p>
+        Webb gathers infrared light using its primary mirror and directs it
+        toward specialized scientific instruments. These instruments capture
+        images and spectra that reveal details about the temperature,
+        composition, and physical properties of astronomical objects.
+      </p>
+      <p>
+        Webb orbits the Sun near the second Sun–Earth Lagrange point, called
+        L2, approximately 1.5 million kilometres from Earth. This location
+        allows the telescope to remain aligned with Earth and its sunshield
+        to help block heat and light from the Sun and Earth.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Major Scientific Contributions</h2>
+      <ul>
+        <li>Observed very distant galaxies whose light has traveled for billions of years.</li>
+        <li>Revealed detailed structures in star-forming regions and dusty cosmic environments.</li>
+        <li>Measured atmospheric signatures in selected exoplanets.</li>
+        <li>Studied the chemistry of planets, moons, and small Solar System bodies.</li>
+        <li>Provided new evidence to help researchers test theories of galaxy formation and planetary evolution.</li>
+      </ul>
+
+      <div class="mission-highlight">
+        Looking farther into space can mean looking further back in time,
+        because light takes time to travel from distant objects to our
+        telescopes.
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>Why Is Webb Important?</h2>
+      <p>
+        Webb allows scientists to investigate questions that could not be
+        studied in the same detail with previous observatories. Its observations
+        help researchers understand how the universe developed, how stars and
+        planets form, and how planetary atmospheres differ from one another.
+      </p>
+      <p>
+        Although Webb can study exoplanet atmospheres, a possible chemical
+        signature alone is not enough to confirm that life exists on another
+        world.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Mission Status</h2>
+      <p>
+        Webb is an active scientific observatory. Its observations and
+        discoveries continue to be released through scientific publications
+        and official mission updates. Check NASA's website for current
+        operations and the latest results.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Explore More</h2>
+      <div class="mission-navigation">
+        <a href="https://science.nasa.gov/mission/webb/" target="_blank" rel="noopener noreferrer">NASA Webb Mission</a>
+        <a href="https://webbtelescope.org/" target="_blank" rel="noopener noreferrer">Webb Telescope Images and News</a>
+        <a href="missions.html">All Space Missions</a>
+        <a href="index.html">COSMOS Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
