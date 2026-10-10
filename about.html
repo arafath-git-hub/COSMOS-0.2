@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn about COSMOS, a space exploration project designed to make planetary science and astronomy easier to explore.">
+  <meta name="theme-color" content="#050914">
+  <title>About COSMOS | Explore the Universe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root{--bg:#050914;--surface:#0b1324;--surface2:#101d33;--text:#edf5ff;--muted:#9cacc4;--accent:#f2c078;--border:rgba(242,192,120,.17)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;background:radial-gradient(ellipse at 75% 0%,rgba(178,112,48,.14),transparent 40%),var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;line-height:1.7}
+    a{color:inherit;text-decoration:none}.container{width:min(1160px,calc(100% - 40px));margin:auto}
+    .navbar{position:sticky;top:0;z-index:10;background:rgba(5,9,20,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+    .nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .logo,h1,h2,h3{font-family:"Space Grotesk",sans-serif}.logo{font-size:1.4rem;font-weight:700;letter-spacing:3px}.logo span{color:var(--accent)}
+    .links{display:flex;gap:23px;flex-wrap:wrap;font-size:.88rem;color:var(--muted)}.links a:hover,.links .active{color:var(--text)}
+    .hero{padding:100px 0 80px;display:grid;grid-template-columns:1.1fr .9fr;gap:35px;align-items:center}
+    .eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:2.5px;font-size:.75rem;font-weight:700}
+    h1{font-size:clamp(3.2rem,7vw,6rem);letter-spacing:-4px;line-height:1.03;margin:20px 0}h1 span{display:block;color:var(--accent)}
+    .lead,.section-head p{color:var(--muted);font-size:1.04rem;max-width:680px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}.btn{padding:12px 18px;border:1px solid var(--border);border-radius:7px;display:inline-block;font-size:.9rem;font-weight:600}.primary{background:#98662e;border-color:#98662e;color:#fff}
+    .visual{min-height:350px;display:grid;place-items:center;position:relative;overflow:hidden}
+    .orbit{position:absolute;width:330px;height:330px;border:1px solid rgba(242,192,120,.28);border-radius:50%;transform:rotate(-25deg) scaleY(.42)}
+    .orbit.two{width:410px;height:410px;transform:rotate(35deg) scaleY(.4);border-color:rgba(242,192,120,.13)}
+    .sun{width:200px;height:200px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff8db,#ffd68b 18%,#df8d4d 50%,#743d40 78%);box-shadow:inset -35px -25px 50px #050914,0 0 70px rgba(242,192,120,.2);animation:float 7s ease-in-out infinite}
+    .section{padding:70px 0}.section-head{margin-bottom:30px}.section-head h2{font-size:clamp(2rem,4vw,3rem);letter-spacing:-1.5px;margin:12px 0}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.card{padding:26px;background:linear-gradient(145deg,var(--surface2),var(--surface));border:1px solid var(--border);border-radius:13px;transition:.25s}
+    .card:hover{transform:translateY(-4px);border-color:rgba(242,192,120,.5)}.num{color:var(--accent);font-size:.75rem;letter-spacing:2px}.card h3{font-size:1.25rem;margin:12px 0}.card p{color:var(--muted);font-size:.94rem}
+    .feature{padding:36px;border:1px solid var(--border);border-radius:15px;background:radial-gradient(ellipse at 100% 0%,rgba(242,192,120,.13),transparent 55%),var(--surface)}
+    .feature p{color:var(--muted);max-width:850px}.values{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
+    .value{padding:22px;border-left:2px solid var(--accent);background:var(--surface)}.value h3{font-size:1.1rem;margin:0 0 8px}.value p{color:var(--muted);margin:0}
+    .sources{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.source{padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:9px;display:flex;justify-content:space-between;gap:12px}.source:hover{border-color:var(--accent)}.source span{color:var(--accent)}
+    footer{padding:30px 0;border-top:1px solid var(--border);color:var(--muted);font-size:.86rem}.foot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.footlinks{display:flex;gap:17px;flex-wrap:wrap}
+    .reveal{opacity:0;transform:translateY(18px);transition:.65s}.reveal.visible{opacity:1;transform:none}@keyframes float{50%{transform:translateY(-12px)}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+    @media(max-width:850px){.hero{grid-template-columns:1fr;padding-top:60px}.grid{grid-template-columns:repeat(2,1fr)}.nav{align-items:flex-start;flex-direction:column;padding:15px 0}.links{gap:15px}}
+    @media(max-width:560px){.container{width:calc(100% - 30px)}h1{letter-spacing:-2px}.grid,.values,.sources{grid-template-columns:1fr}.section{padding:48px 0}.visual{min-height:250px}.sun{width:160px;height:160px}.feature{padding:24px}.links{font-size:.8rem;gap:11px}}
+  </style>
+</head>
+<body>
+<header class="navbar"><div class="container nav">
+  <a class="logo" href="index.html">COS<span>M</span>OS</a>
+  <nav class="links" aria-label="Main navigation">
+    <a href="index.html">Home</a><a href="planets.html">Planets</a>
+    <a href="missions.html">Missions</a><a href="research.html">Research</a><a class="active" aria-current="page" href="about.html">About</a>
+  </nav>
+</div></header>
+
+<main>
+  <section class="container hero">
+    <div class="reveal">
+      <div class="eyebrow">A universe of discovery</div>
+      <h1>About <span>COSMOS</span></h1>
+      <p class="lead">COSMOS is a space exploration website designed to make astronomy and planetary science easier to discover. Explore planets, learn about historic missions, and investigate the questions that continue to inspire scientists.</p>
+      <div class="actions"><a class="btn primary" href="planets.html">Start exploring →</a><a class="btn" href="#purpose">Our purpose</a></div>
+    </div>
+    <div class="visual reveal" role="img" aria-label="Stylized golden planet with orbital rings"><div class="orbit"></div><div class="orbit two"></div><div class="sun"></div></div>
+  </section>
+
+  <section class="container section" id="purpose">
+    <div class="feature reveal">
+      <div class="eyebrow">Our purpose</div>
+      <h2>Making space easier to explore</h2>
+      <p>The universe can feel enormous and complicated. COSMOS organizes space-related topics into clear, accessible sections so visitors can explore one idea at a time—from the planets in our Solar System to distant galaxies and unanswered questions about the cosmos.</p>
+      <p>The project combines educational explanations, mission histories, scientific concepts, and links to trusted sources. It is intended as a learning resource and a starting point for further exploration, not a replacement for original scientific publications or mission data.</p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="section-head reveal"><div class="eyebrow">What you can explore</div><h2>Four ways into the cosmos</h2><p>Move between different areas of space science using the main navigation.</p></div>
+    <div class="grid">
+      <article class="card reveal"><span class="num">01 / WORLDS</span><h3>Planet Explorer</h3><p>Discover the eight planets through individual pages covering their properties, atmospheres, interiors, moons, missions, and open scientific questions.</p><a href="planets.html">Explore the planets →</a></article>
+      <article class="card reveal"><span class="num">02 / JOURNEYS</span><h3>Space Missions</h3><p>Learn how spacecraft, landers, rovers, and telescopes collect evidence and expand humanity's knowledge of space.</p><a href="missions.html">Explore missions →</a></article>
+      <article class="card reveal"><span class="num">03 / QUESTIONS</span><h3>Scientific Research</h3><p>Explore astrobiology, exoplanets, black holes, planetary science, and some of the biggest unanswered questions in astronomy.</p><a href="research.html">Explore research →</a></article>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="section-head reveal"><div class="eyebrow">What guides the project</div><h2>Our principles</h2><p>Good science communication should help people become curious, ask better questions, and understand what evidence can—and cannot—tell us.</p></div>
+    <div class="values">
+      <article class="value reveal"><h3>Scientific accuracy</h3><p>Present established findings carefully, distinguish hypotheses from confirmed observations, and link to reputable scientific resources.</p></article>
+      <article class="value reveal"><h3>Accessible learning</h3><p>Explain complex topics in clear language without losing the important scientific meaning.</p></article>
+      <article class="value reveal"><h3>Curiosity first</h3><p>Encourage visitors to ask questions, compare evidence, and continue learning beyond a single page.</p></article>
+      <article class="value reveal"><h3>Continuous improvement</h3><p>Science changes as new observations arrive. Educational content should be reviewed and updated when reliable new information becomes available.</p></article>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="feature reveal">
+      <div class="eyebrow">A note on science</div>
+      <h2>Explore. Question. Discover.</h2>
+      <p>Space science is an ongoing process. Some facts are well established, while other ideas remain under investigation. COSMOS encourages readers to look at the evidence, check original sources, and stay open to new discoveries.</p>
+      <p>Unless a page explicitly states otherwise, COSMOS is an independent educational project and is not an official NASA or ESA website. Mission names and agency resources belong to their respective organizations.</p>
+      <div class="actions"><a class="btn primary" href="https://science.nasa.gov/" target="_blank" rel="noopener noreferrer">Visit NASA Science ↗</a><a class="btn" href="https://www.esa.int/Science_Exploration" target="_blank" rel="noopener noreferrer">Visit ESA ↗</a></div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="section-head reveal"><div class="eyebrow">Trusted resources</div><h2>Continue your journey</h2><p>Use these scientific organizations for mission updates, images, research explainers, and verified discoveries.</p></div>
+    <div class="sources reveal">
+      <a class="source" href="https://science.nasa.gov/" target="_blank" rel="noopener noreferrer">NASA Science <span>↗</span></a>
+      <a class="source" href="https://www.esa.int/Science_Exploration" target="_blank" rel="noopener noreferrer">European Space Agency <span>↗</span></a>
+      <a class="source" href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener noreferrer">Solar System Exploration <span>↗</span></a>
+      <a class="source" href="https://science.nasa.gov/universe/" target="_blank" rel="noopener noreferrer">Universe Exploration <span>↗</span></a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="container foot"><a class="logo" href="index.html">COS<span>M</span>OS</a><span>Explore beyond what we know.</span><div class="footlinks"><a href="index.html">Home</a><a href="planets.html">Planets</a><a href="missions.html">Missions</a><a href="research.html">Research</a></div></div></footer>
+<script>
+(() => {
+  const items = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) {
+    items.forEach(item => item.classList.add("visible"));
+    return;
+  }
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.12});
+  items.forEach(item => observer.observe(item));
+})();
+</script>
+</body>
+</html>
