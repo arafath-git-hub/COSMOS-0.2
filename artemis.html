@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore NASA's Artemis Program and its plans for human exploration of the Moon and future missions to Mars.">
+  <title>Artemis Program | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .mission-detail {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+      padding: 45px 0 80px;
+    }
+
+    .mission-back {
+      display: inline-block;
+      margin-bottom: 28px;
+      color: #9ecbff;
+      text-decoration: none;
+    }
+
+    .mission-back:hover { text-decoration: underline; }
+
+    .mission-hero {
+      padding: 45px 35px;
+      border: 1px solid rgba(150,190,255,.22);
+      border-radius: 22px;
+      background: linear-gradient(135deg,#17263a,#293c58 55%,#111827);
+      margin-bottom: 30px;
+    }
+
+    .mission-label {
+      display: inline-block;
+      color: #b9d5ff;
+      font-size: .82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .mission-hero h1 {
+      font-size: clamp(2.2rem,6vw,4.3rem);
+      line-height: 1.1;
+      margin: 0 0 18px;
+    }
+
+    .mission-hero p {
+      max-width: 760px;
+      line-height: 1.8;
+      color: #d0d9e8;
+    }
+
+    .mission-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap: 16px;
+      margin: 25px 0 35px;
+    }
+
+    .mission-fact,.mission-section {
+      padding: 23px;
+      border: 1px solid rgba(150,190,255,.17);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .mission-fact span {
+      display: block;
+      color: #b9d5ff;
+      font-size: .82rem;
+      margin-bottom: 9px;
+    }
+
+    .mission-fact strong { font-size: 1.05rem; }
+    .mission-section { margin-top: 20px; }
+    .mission-section h2 { margin-top: 0; margin-bottom: 14px; }
+
+    .mission-section p,.mission-section li {
+      color: #cbd5e1;
+      line-height: 1.85;
+    }
+
+    .mission-section ul { padding-left: 22px; }
+
+    .mission-highlight {
+      border-left: 3px solid #8ebcff;
+      padding: 12px 18px;
+      margin-top: 18px;
+      background: rgba(142,188,255,.07);
+      color: #e2edff;
+      line-height: 1.8;
+    }
+
+    .mission-navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .mission-navigation a {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid rgba(150,190,255,.3);
+      border-radius: 10px;
+      color: #e5efff;
+      text-decoration: none;
+    }
+
+    .mission-navigation a:hover {
+      background: rgba(117,182,255,.12);
+    }
+
+    @media(max-width:600px) {
+      .mission-detail {
+        width: calc(100% - 28px);
+        padding-top: 25px;
+      }
+      .mission-hero { padding: 30px 22px; }
+      .mission-section,.mission-fact { padding: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="mission-detail">
+    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+
+    <header class="mission-hero">
+      <span class="mission-label">Human Lunar Exploration</span>
+      <h1>Artemis Program</h1>
+      <p>
+        NASA's Artemis Program is designed to return astronauts to the lunar
+        surface, expand scientific exploration of the Moon, and develop
+        capabilities for future human missions to Mars. It combines new
+        spacecraft, launch systems, spacesuits, lunar technologies, and
+        international partnerships.
+      </p>
+    </header>
+
+    <section class="mission-facts" aria-label="Mission facts">
+      <div class="mission-fact">
+        <span>Lead Agency</span>
+        <strong>NASA</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Key Launch System</span>
+        <strong>Space Launch System</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Crew Spacecraft</span>
+        <strong>Orion</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Main Destination</span>
+        <strong>The Moon</strong>
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>What Is the Artemis Program?</h2>
+      <p>
+        Artemis is a series of missions intended to build a sustainable
+        approach to human exploration of the Moon. The program focuses on
+        scientific research, testing exploration technologies, and learning
+        how people can live and work for longer periods away from Earth.
+      </p>
+      <p>
+        NASA is working with commercial partners and international space
+        agencies on different elements of the program. The exact schedule and
+        objectives of individual missions can evolve as hardware, testing,
+        and operational plans develop.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Important Artemis Missions</h2>
+      <ul>
+        <li><strong>Artemis I (2022):</strong> An uncrewed test flight of the Space Launch System rocket and Orion spacecraft around the Moon and back to Earth.</li>
+        <li><strong>Artemis II:</strong> A planned crewed flight around the Moon to test Orion's systems with astronauts aboard.</li>
+        <li><strong>Artemis III:</strong> Planned lunar surface exploration intended to advance human operations on the Moon. Its timing and architecture depend on program readiness.</li>
+        <li><strong>Future Artemis missions:</strong> Intended to expand lunar science, test new technologies, and develop a longer-term human presence around and on the Moon.</li>
+      </ul>
+    </section>
+
+    <section class="mission-section">
+      <h2>Key Technologies</h2>
+      <ul>
+        <li><strong>Space Launch System (SLS):</strong> A powerful rocket designed to launch Orion and its crew toward the Moon.</li>
+        <li><strong>Orion spacecraft:</strong> Carries astronauts on deep-space journeys and supports their return to Earth.</li>
+        <li><strong>Lunar landers:</strong> Commercially developed systems intended to transport astronauts between lunar orbit and the surface.</li>
+        <li><strong>Spacesuits:</strong> Systems designed to support astronauts during lunar surface activities.</li>
+        <li><strong>Lunar surface systems:</strong> Technologies intended to support mobility, communication, scientific work, and longer missions.</li>
+      </ul>
+    </section>
+
+    <section class="mission-section">
+      <h2>Why Return to the Moon?</h2>
+      <p>
+        The Moon preserves a record of Solar System history and provides a
+        nearby environment for testing exploration systems. Studying lunar
+        rocks, craters, and polar regions can improve our understanding of
+        planetary formation and the history of Earth and the Moon.
+      </p>
+      <p>
+        Artemis also aims to develop experience in operating farther from
+        Earth, where communication delays, radiation, limited supplies, and
+        difficult surface conditions create additional challenges.
+      </p>
+
+      <div class="mission-highlight">
+        The Moon is both a scientific destination and a testing ground for
+        technologies that may help enable future human exploration of Mars.
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>What Will Astronauts Study?</h2>
+      <ul>
+        <li>Lunar geology and the history of impacts across the Solar System.</li>
+        <li>Materials found in permanently shadowed polar regions, including possible water ice.</li>
+        <li>How lunar dust, radiation, and reduced gravity affect people and equipment.</li>
+        <li>Methods for conducting longer scientific expeditions on another world.</li>
+      </ul>
+    </section>
+
+    <section class="mission-section">
+      <h2>Mission Status and Schedule</h2>
+      <p>
+        Artemis is an ongoing exploration program. Mission schedules, crew
+        assignments, landing plans, and technical designs may change as NASA
+        and its partners complete testing and prepare flight systems.
+        Consult NASA's official Artemis website for the latest confirmed
+        schedule and mission information.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Explore More</h2>
+      <div class="mission-navigation">
+        <a href="https://www.nasa.gov/humans-in-space/artemis/" target="_blank" rel="noopener noreferrer">NASA Artemis Program</a>
+        <a href="https://www.nasa.gov/missions/artemis/" target="_blank" rel="noopener noreferrer">NASA Artemis Missions</a>
+        <a href="missions.html">All Space Missions</a>
+        <a href="index.html">COSMOS Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
