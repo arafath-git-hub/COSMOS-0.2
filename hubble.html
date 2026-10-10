@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore NASA's Hubble Space Telescope, its discoveries, and its contribution to astronomy.">
+  <title>Hubble Space Telescope | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .mission-detail {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+      padding: 45px 0 80px;
+    }
+
+    .mission-back {
+      display: inline-block;
+      margin-bottom: 28px;
+      color: #9ecbff;
+      text-decoration: none;
+    }
+
+    .mission-back:hover { text-decoration: underline; }
+
+    .mission-hero {
+      padding: 45px 35px;
+      border: 1px solid rgba(150,190,255,.22);
+      border-radius: 22px;
+      background: linear-gradient(135deg,#152039,#26385b 55%,#111827);
+      margin-bottom: 30px;
+    }
+
+    .mission-label {
+      display: inline-block;
+      color: #b9d5ff;
+      font-size: .82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .mission-hero h1 {
+      font-size: clamp(2.2rem,6vw,4.3rem);
+      line-height: 1.1;
+      margin: 0 0 18px;
+    }
+
+    .mission-hero p {
+      max-width: 760px;
+      line-height: 1.8;
+      color: #d0d9e8;
+    }
+
+    .mission-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap: 16px;
+      margin: 25px 0 35px;
+    }
+
+    .mission-fact,.mission-section {
+      padding: 23px;
+      border: 1px solid rgba(150,190,255,.17);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .mission-fact span {
+      display: block;
+      color: #b9d5ff;
+      font-size: .82rem;
+      margin-bottom: 9px;
+    }
+
+    .mission-fact strong { font-size: 1.05rem; }
+    .mission-section { margin-top: 20px; }
+    .mission-section h2 { margin-top: 0; margin-bottom: 14px; }
+
+    .mission-section p,.mission-section li {
+      color: #cbd5e1;
+      line-height: 1.85;
+    }
+
+    .mission-section ul { padding-left: 22px; }
+
+    .mission-highlight {
+      border-left: 3px solid #8ebcff;
+      padding: 12px 18px;
+      margin-top: 18px;
+      background: rgba(142,188,255,.07);
+      color: #e2edff;
+      line-height: 1.8;
+    }
+
+    .mission-navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .mission-navigation a {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid rgba(150,190,255,.3);
+      border-radius: 10px;
+      color: #e5efff;
+      text-decoration: none;
+    }
+
+    .mission-navigation a:hover {
+      background: rgba(117,182,255,.12);
+    }
+
+    @media(max-width:600px) {
+      .mission-detail {
+        width: calc(100% - 28px);
+        padding-top: 25px;
+      }
+      .mission-hero { padding: 30px 22px; }
+      .mission-section,.mission-fact { padding: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="mission-detail">
+    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+
+    <header class="mission-hero">
+      <span class="mission-label">Space Astronomy Observatory</span>
+      <h1>Hubble Space Telescope</h1>
+      <p>
+        The Hubble Space Telescope is one of the most influential astronomical
+        observatories ever built. Operating above Earth's atmosphere, Hubble
+        captures sharp images and measurements of galaxies, nebulae, stars,
+        planets, and other cosmic objects.
+      </p>
+    </header>
+
+    <section class="mission-facts" aria-label="Mission facts">
+      <div class="mission-fact">
+        <span>Space Agencies</span>
+        <strong>NASA and ESA</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Launch Date</span>
+        <strong>April 24, 1990</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Orbit</span>
+        <strong>Low Earth orbit</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Primary Role</span>
+        <strong>Observing the universe</strong>
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>What Is Hubble?</h2>
+      <p>
+        Hubble is a space telescope that observes the universe primarily in
+        ultraviolet, visible, and near-infrared light. Because it operates
+        above Earth's atmosphere, it avoids much of the atmospheric blurring
+        and absorption that affect ground-based observations.
+      </p>
+      <p>
+        The observatory has a primary mirror about 2.4 metres across. Its
+        scientific instruments collect light and turn it into images and
+        measurements that astronomers use to investigate cosmic objects.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>How Does Hubble Work?</h2>
+      <p>
+        Hubble points toward selected astronomical targets and collects light
+        with its mirror. Its instruments record this light at different
+        wavelengths, allowing scientists to study an object's brightness,
+        shape, temperature, motion, and chemical properties.
+      </p>
+      <p>
+        Hubble travels around Earth in low Earth orbit. Astronomers and
+        engineers plan observations, monitor the observatory, and analyze
+        the data returned to the ground.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Major Discoveries and Contributions</h2>
+      <ul>
+        <li>Helped improve measurements of the universe's expansion rate.</li>
+        <li>Observed galaxies at great distances, allowing scientists to study earlier stages of cosmic history.</li>
+        <li>Captured detailed views of star-forming nebulae and the evolution of stars.</li>
+        <li>Contributed to research on black holes and the structure of galaxies.</li>
+        <li>Observed planets and other objects within our Solar System.</li>
+        <li>Produced deep-field images revealing thousands of galaxies in small regions of the sky.</li>
+      </ul>
+
+      <div class="mission-highlight">
+        Hubble's deep-field observations show that even a tiny patch of dark
+        sky can contain thousands of distant galaxies.
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>Why Is Hubble Important?</h2>
+      <p>
+        Hubble has helped transform astronomy by providing detailed
+        observations over decades. Its long operating lifetime allows
+        researchers to compare observations across time and investigate how
+        stars, galaxies, and other objects change.
+      </p>
+      <p>
+        Hubble also works alongside other observatories, including the James
+        Webb Space Telescope. Their different instruments and wavelength
+        ranges provide complementary views of the universe.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Is Hubble Still Active?</h2>
+      <p>
+        Hubble remains a scientific space observatory, although its aging
+        systems and instruments require careful management. Its current
+        operating condition and observing plans may change, so consult NASA's
+        official mission page for the latest updates.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Explore More</h2>
+      <div class="mission-navigation">
+        <a href="https://science.nasa.gov/mission/hubble/" target="_blank" rel="noopener noreferrer">NASA Hubble Mission</a>
+        <a href="https://esahubble.org/" target="_blank" rel="noopener noreferrer">ESA/Hubble</a>
+        <a href="missions.html">All Space Missions</a>
+        <a href="index.html">COSMOS Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
