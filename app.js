@@ -1,7 +1,7 @@
 
 /* ==========================================
    COSMOS — Global JavaScript
-   Space Science Website
+   Compatible with index.html and other pages
    ========================================== */
 
 "use strict";
@@ -13,6 +13,9 @@ const $ = (selector, parent = document) =>
 
 const $$ = (selector, parent = document) =>
   Array.from(parent.querySelectorAll(selector));
+
+const prefersReducedMotion = () =>
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function onReady(callback) {
   if (document.readyState === "loading") {
@@ -29,12 +32,48 @@ function onReady(callback) {
 function updateCurrentYear() {
   const year = new Date().getFullYear();
 
-  $$("[data-current-year], #currentYear, .current-year").forEach((element) => {
-    element.textContent = year;
+  $$("[data-current-year], #currentYear, .current-year")
+    .forEach((element) => {
+      element.textContent = year;
+    });
+}
+
+/* ---------- 3. Active Navigation ---------- */
+
+function initActiveNavigation() {
+  const links = $$(".nav a, .nav-links a, .nav-menu a, nav ul a");
+
+  if (!links.length) return;
+
+  const currentFile =
+    window.location.pathname.split("/").pop() || "index.html";
+
+  links.forEach((link) => {
+    const href = link.getAttribute("href");
+
+    if (!href || href.startsWith("#")) return;
+
+    try {
+      const url = new URL(href, window.location.href);
+      const linkFile = url.pathname.split("/").pop() || "index.html";
+
+      if (url.origin === window.location.origin && linkFile === currentFile) {
+        link.classList.add("active");
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.classList.remove("active");
+
+        if (link.getAttribute("aria-current") === "page") {
+          link.removeAttribute("aria-current");
+        }
+      }
+    } catch {
+      // Ignore invalid URLs.
+    }
   });
 }
 
-/* ---------- 3. Mobile Navigation ---------- */
+/* ---------- 4. Mobile Navigation ---------- */
 
 function initMobileNavigation() {
   const toggle =
@@ -53,11 +92,11 @@ function initMobileNavigation() {
 
   if (!toggle || !navigation) return;
 
-  function closeMenu() {
+  const closeMenu = () => {
     navigation.classList.remove("open", "active", "show");
     toggle.classList.remove("open", "active");
     toggle.setAttribute("aria-expanded", "false");
-  }
+  };
 
   toggle.setAttribute("aria-expanded", "false");
 
@@ -94,16 +133,18 @@ function initMobileNavigation() {
   });
 }
 
-/* ---------- 4. Search and Card Filtering ---------- */
+/* ---------- 5. Search ---------- */
 
 function initCardSearch() {
-  const searchInputs = [
+  const inputs = [
     ...$$("[data-search-input]"),
-    ...$$("#searchInput"),
-    ...$$("#planetSearch"),
-    ...$$("#missionSearch"),
-    ...$$("#researchSearch")
+    ...$("#searchInput") ? [$("#searchInput")] : [],
+    ...$("#planetSearch") ? [$("#planetSearch")] : [],
+    ...$("#missionSearch") ? [$("#missionSearch")] : [],
+    ...$("#researchSearch") ? [$("#researchSearch")] : []
   ];
+
+  const searchInputs = [...new Set(inputs)];
 
   const cards = [
     ...new Set([
@@ -124,49 +165,54 @@ function initCardSearch() {
       let visibleCount = 0;
 
       cards.forEach((card) => {
-        const searchableText = (
+        const text = (
           (card.dataset.search || "") +
           " " +
           card.textContent
         ).toLowerCase();
 
-        const matches = searchableText.includes(query);
+        const matches = text.includes(query);
 
         card.hidden = !matches;
 
         if (matches) visibleCount++;
       });
 
-      const counter =
-        $("[data-results-count]") ||
-        $("#resultsCount") ||
-        $(".results-count");
-
-      if (counter) {
-        counter.textContent =
-          `Showing ${visibleCount} ${visibleCount === 1 ? "result" : "results"}`;
-      }
-
-      const emptyState =
-        $("[data-empty-state]") ||
-        $("#emptyState") ||
-        $(".empty-state");
-
-      if (emptyState) {
-        emptyState.classList.toggle("visible", visibleCount === 0);
-      }
+      updateSearchStatus(visibleCount);
     });
   });
 }
 
-/* ---------- 5. Category Filters ---------- */
+function updateSearchStatus(count) {
+  const counter =
+    $("[data-results-count]") ||
+    $("#resultsCount") ||
+    $(".results-count");
+
+  if (counter) {
+    counter.textContent =
+      `Showing ${count} ${count === 1 ? "result" : "results"}`;
+  }
+
+  const emptyState =
+    $("[data-empty-state]") ||
+    $("#emptyState") ||
+    $(".empty-state");
+
+  if (emptyState) {
+    emptyState.classList.toggle("visible", count === 0);
+    emptyState.hidden = count !== 0;
+  }
+}
+
+/* ---------- 6. Category Filters ---------- */
 
 function initCategoryFilters() {
-  const filterButtons = $$(
+  const buttons = $$(
     "[data-filter], .filter-btn, .filter-button, .category-btn"
   );
 
-  if (!filterButtons.length) return;
+  if (!buttons.length) return;
 
   const cards = [
     ...new Set([
@@ -183,14 +229,14 @@ function initCategoryFilters() {
 
   let activeFilter = "all";
 
-  function applyFilters() {
-    const searchInput =
-      $("#searchInput") ||
-      $("#planetSearch") ||
-      $("#missionSearch") ||
-      $("#researchSearch") ||
-      $("[data-search-input]");
+  const searchInput =
+    $("#searchInput") ||
+    $("#planetSearch") ||
+    $("#missionSearch") ||
+    $("#researchSearch") ||
+    $("[data-search-input]");
 
+  function applyFilters() {
     const query = searchInput
       ? searchInput.value.trim().toLowerCase()
       : "";
@@ -204,7 +250,7 @@ function initCategoryFilters() {
         "all"
       ).toLowerCase();
 
-      const searchableText = (
+      const text = (
         (card.dataset.search || "") +
         " " +
         card.textContent
@@ -215,9 +261,7 @@ function initCategoryFilters() {
         category === activeFilter ||
         category.split(/\s+/).includes(activeFilter);
 
-      const matchesSearch =
-        !query || searchableText.includes(query);
-
+      const matchesSearch = text.includes(query);
       const visible = matchesCategory && matchesSearch;
 
       card.hidden = !visible;
@@ -225,34 +269,18 @@ function initCategoryFilters() {
       if (visible) visibleCount++;
     });
 
-    const counter =
-      $("[data-results-count]") ||
-      $("#resultsCount") ||
-      $(".results-count");
-
-    if (counter) {
-      counter.textContent =
-        `Showing ${visibleCount} ${visibleCount === 1 ? "result" : "results"}`;
-    }
-
-    const emptyState =
-      $("[data-empty-state]") ||
-      $("#emptyState") ||
-      $(".empty-state");
-
-    if (emptyState) {
-      emptyState.classList.toggle("visible", visibleCount === 0);
-    }
+    updateSearchStatus(visibleCount);
   }
 
-  filterButtons.forEach((button) => {
+  buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      activeFilter =
+      activeFilter = (
         button.dataset.filter ||
         button.dataset.category ||
-        "all";
+        "all"
+      ).toLowerCase();
 
-      filterButtons.forEach((item) => {
+      buttons.forEach((item) => {
         const active = item === button;
 
         item.classList.toggle("active", active);
@@ -266,13 +294,6 @@ function initCategoryFilters() {
     });
   });
 
-  const searchInput =
-    $("#searchInput") ||
-    $("#planetSearch") ||
-    $("#missionSearch") ||
-    $("#researchSearch") ||
-    $("[data-search-input]");
-
   if (searchInput) {
     searchInput.addEventListener("input", applyFilters);
   }
@@ -280,7 +301,7 @@ function initCategoryFilters() {
   applyFilters();
 }
 
-/* ---------- 6. Scroll Reveal Animation ---------- */
+/* ---------- 7. Scroll Reveal ---------- */
 
 function initScrollReveal() {
   const elements = $$(
@@ -291,7 +312,7 @@ function initScrollReveal() {
 
   if (
     !("IntersectionObserver" in window) ||
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    prefersReducedMotion()
   ) {
     elements.forEach((element) => {
       element.classList.add("visible", "revealed");
@@ -315,12 +336,10 @@ function initScrollReveal() {
     }
   );
 
-  elements.forEach((element) => {
-    observer.observe(element);
-  });
+  elements.forEach((element) => observer.observe(element));
 }
 
-/* ---------- 7. Back to Top ---------- */
+/* ---------- 8. Back to Top ---------- */
 
 function initBackToTop() {
   let button =
@@ -350,6 +369,7 @@ function initBackToTop() {
       background: "#17243d",
       color: "#f3f6ff",
       fontSize: "24px",
+      cursor: "pointer",
       boxShadow: "0 8px 25px rgba(0,0,0,.25)"
     });
 
@@ -359,11 +379,7 @@ function initBackToTop() {
   button.addEventListener("click", () => {
     window.scrollTo({
       top: 0,
-      behavior: window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches
-        ? "auto"
-        : "smooth"
+      behavior: prefersReducedMotion() ? "auto" : "smooth"
     });
   });
 
@@ -371,6 +387,7 @@ function initBackToTop() {
     const visible = window.scrollY > 400;
 
     button.style.display = visible ? "flex" : "none";
+    button.setAttribute("aria-hidden", String(!visible));
   }
 
   window.addEventListener("scroll", updateButton, {
@@ -380,57 +397,24 @@ function initBackToTop() {
   updateButton();
 }
 
-/* ---------- 8. Active Navigation Link ---------- */
-
-function initActiveNavigation() {
-  const links = $$(
-    ".nav-links a, .nav-menu a, nav ul a"
-  );
-
-  if (!links.length) return;
-
-  const currentFile =
-    window.location.pathname.split("/").pop() || "index.html";
-
-  links.forEach((link) => {
-    const href = link.getAttribute("href");
-
-    if (!href || href.startsWith("#")) return;
-
-    try {
-      const linkFile = new URL(href, window.location.href)
-        .pathname.split("/")
-        .pop();
-
-      if (linkFile === currentFile) {
-        link.classList.add("active");
-        link.setAttribute("aria-current", "page");
-      } else {
-        link.classList.remove("active");
-        link.removeAttribute("aria-current");
-      }
-    } catch {
-      // Ignore invalid navigation URLs.
-    }
-  });
-}
-
-/* ---------- 9. Card Click Support ---------- */
+/* ---------- 9. Clickable Cards ---------- */
 
 function initClickableCards() {
-  const cards = $$("[data-card-link]");
-
-  cards.forEach((card) => {
-    card.addEventListener("click", (event) => {
-      if (event.target.closest("a, button, input, select")) {
-        return;
-      }
-
+  $$("[data-card-link]").forEach((card) => {
+    const navigate = () => {
       const destination = card.dataset.cardLink;
 
       if (destination) {
         window.location.href = destination;
       }
+    };
+
+    card.addEventListener("click", (event) => {
+      if (event.target.closest("a, button, input, select, textarea")) {
+        return;
+      }
+
+      navigate();
     });
 
     if (!card.hasAttribute("tabindex")) {
@@ -447,12 +431,7 @@ function initClickableCards() {
         event.target === card
       ) {
         event.preventDefault();
-
-        const destination = card.dataset.cardLink;
-
-        if (destination) {
-          window.location.href = destination;
-        }
+        navigate();
       }
     });
   });
@@ -461,15 +440,11 @@ function initClickableCards() {
 /* ---------- 10. FAQ Accordion ---------- */
 
 function initFAQ() {
-  const faqButtons = $$(
-    ".faq-question, [data-faq-toggle]"
-  );
-
-  faqButtons.forEach((button) => {
+  $$(".faq-question, [data-faq-toggle]").forEach((button) => {
     button.addEventListener("click", () => {
       const answerId = button.getAttribute("aria-controls");
 
-      let answer = answerId
+      const answer = answerId
         ? document.getElementById(answerId)
         : button.nextElementSibling;
 
@@ -480,13 +455,12 @@ function initFAQ() {
 
       button.setAttribute("aria-expanded", String(!isOpen));
       answer.hidden = isOpen;
-
       button.classList.toggle("active", !isOpen);
     });
   });
 }
 
-/* ---------- 11. Copy Text ---------- */
+/* ---------- 11. Copy Buttons ---------- */
 
 function initCopyButtons() {
   $$("[data-copy]").forEach((button) => {
@@ -505,7 +479,7 @@ function initCopyButtons() {
           button.textContent = originalText;
         }, 1500);
       } catch (error) {
-        console.error("Could not copy text:", error);
+        console.error("COSMOS: Could not copy text.", error);
       }
     });
   });
@@ -519,6 +493,11 @@ function initImageFallbacks() {
       image.classList.add("image-unavailable");
       image.setAttribute("data-image-error", "true");
     }, { once: true });
+
+    if (image.complete && image.naturalWidth === 0 && image.src) {
+      image.classList.add("image-unavailable");
+      image.setAttribute("data-image-error", "true");
+    }
   });
 }
 
@@ -538,11 +517,7 @@ function initSmoothAnchors() {
       event.preventDefault();
 
       target.scrollIntoView({
-        behavior: window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches
-          ? "auto"
-          : "smooth",
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
         block: "start"
       });
 
@@ -553,7 +528,7 @@ function initSmoothAnchors() {
   });
 }
 
-/* ---------- 14. Loading State ---------- */
+/* ---------- 14. Page Loading State ---------- */
 
 function initPageLoadedState() {
   document.documentElement.classList.add("js-enabled");
@@ -572,22 +547,45 @@ function initPageLoadedState() {
   }
 }
 
-/* ---------- 15. Initialize Everything ---------- */
+/* ---------- 15. Global Error Reporting ---------- */
+
+window.addEventListener("error", (event) => {
+  console.error("COSMOS JavaScript error:", event.message);
+});
+
+window.addEventListener("unhandledrejection", (event) => {
+  console.error("COSMOS asynchronous error:", event.reason);
+});
+
+/* ---------- 16. Initialize ---------- */
 
 onReady(() => {
-  updateCurrentYear();
-  initMobileNavigation();
-  initCardSearch();
-  initCategoryFilters();
-  initScrollReveal();
-  initBackToTop();
-  initActiveNavigation();
-  initClickableCards();
-  initFAQ();
-  initCopyButtons();
-  initImageFallbacks();
-  initSmoothAnchors();
-  initPageLoadedState();
+  const initializers = [
+    updateCurrentYear,
+    initActiveNavigation,
+    initMobileNavigation,
+    initCardSearch,
+    initCategoryFilters,
+    initScrollReveal,
+    initBackToTop,
+    initClickableCards,
+    initFAQ,
+    initCopyButtons,
+    initImageFallbacks,
+    initSmoothAnchors,
+    initPageLoadedState
+  ];
 
-  console.info("COSMOS JavaScript initialized.");
+  initializers.forEach((initialize) => {
+    try {
+      initialize();
+    } catch (error) {
+      console.error(
+        `COSMOS: ${initialize.name} failed.`,
+        error
+      );
+    }
+  });
+
+  console.info("COSMOS JavaScript initialized successfully.");
 });
