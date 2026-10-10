@@ -4,52 +4,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore historic and future space missions with COSMOS, from Apollo and Voyager to Artemis and the James Webb Space Telescope.">
+  <meta name="theme-color" content="#070b16">
+
+  <meta
+    name="description"
+    content="Explore historic and future space missions with COSMOS, from Apollo and Voyager to Artemis and the James Webb Space Telescope."
+  >
+
   <title>Space Missions | COSMOS</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
   <link rel="stylesheet" href="styles.css">
 
   <style>
+    /* ==============================
+       MISSIONS PAGE
+    ============================== */
+
     .missions-page {
-      width: min(1200px, 92%);
-      margin: auto;
-      padding: 35px 0 80px;
+      width: min(1200px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 38px 0 80px;
       color: #edf4ff;
-    }
-
-    .missions-topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 28px;
-    }
-
-    .missions-topbar a {
-      color: #a9cfff;
-      text-decoration: none;
-    }
-
-    .missions-topbar a:hover {
-      text-decoration: underline;
     }
 
     .missions-hero {
       position: relative;
       overflow: hidden;
+      isolation: isolate;
       padding: clamp(30px, 6vw, 70px);
-      border: 1px solid rgba(151, 190, 255, .22);
-      border-radius: 26px;
-      background:
-        radial-gradient(ellipse at 85% 15%, rgba(75, 113, 190, .30), transparent 42%),
-        radial-gradient(ellipse at 10% 100%, rgba(80, 70, 170, .18), transparent 45%),
-        linear-gradient(135deg, #111b30, #172943 55%, #101522);
       margin-bottom: 35px;
+      border: 1px solid rgba(151, 190, 255, .22);
+      border-radius: 24px;
+      background:
+        radial-gradient(
+          ellipse at 85% 15%,
+          rgba(75, 113, 190, .30),
+          transparent 42%
+        ),
+        radial-gradient(
+          ellipse at 10% 100%,
+          rgba(80, 70, 170, .18),
+          transparent 45%
+        ),
+        linear-gradient(135deg, #111b30, #172943 55%, #101522);
     }
 
     .missions-hero::after {
       content: "";
       position: absolute;
+      z-index: -1;
       width: 230px;
       height: 230px;
       right: -75px;
@@ -71,20 +81,23 @@
     }
 
     .missions-hero h1 {
+      max-width: 800px;
+      margin: 18px 0;
+      font-family: "Space Grotesk", sans-serif;
       font-size: clamp(2.4rem, 7vw, 5rem);
       line-height: 1.05;
       letter-spacing: -1.5px;
-      margin: 18px 0;
-      max-width: 800px;
     }
 
     .missions-hero p {
       max-width: 720px;
+      margin-bottom: 0;
       color: #c3cee0;
       font-size: 1.05rem;
       line-height: 1.9;
-      margin-bottom: 0;
     }
+
+    /* Mission statistics */
 
     .missions-stats {
       display: grid;
@@ -98,19 +111,28 @@
       border: 1px solid rgba(151, 190, 255, .17);
       border-radius: 16px;
       background: rgba(255, 255, 255, .035);
+      transition: border-color .25s ease, transform .25s ease;
+    }
+
+    .missions-stat:hover {
+      transform: translateY(-3px);
+      border-color: rgba(151, 190, 255, .45);
     }
 
     .missions-stat strong {
       display: block;
-      font-size: 1.7rem;
-      color: #d5e5ff;
       margin-bottom: 7px;
+      color: #d5e5ff;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.7rem;
     }
 
     .missions-stat span {
-      font-size: .88rem;
       color: #aebbd0;
+      font-size: .88rem;
     }
+
+    /* Search and category filters */
 
     .missions-controls {
       display: flex;
@@ -120,15 +142,17 @@
     }
 
     .missions-search {
-      width: 100%;
       box-sizing: border-box;
+      width: 100%;
       padding: 15px 18px;
       border: 1px solid rgba(151, 190, 255, .25);
       border-radius: 13px;
       background: #111a2a;
       color: #edf4ff;
+      font: inherit;
       font-size: 1rem;
       outline: none;
+      transition: border-color .2s ease, box-shadow .2s ease;
     }
 
     .missions-search:focus {
@@ -152,28 +176,39 @@
       border-radius: 30px;
       background: rgba(255, 255, 255, .035);
       color: #c7d5eb;
-      cursor: pointer;
+      font: inherit;
       font-size: .9rem;
-      transition: background .2s, border-color .2s, color .2s;
+      cursor: pointer;
+      transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease;
     }
 
     .missions-filter:hover,
     .missions-filter.active {
-      background: #d9e8ff;
       border-color: #d9e8ff;
+      background: #d9e8ff;
       color: #101827;
+    }
+
+    .missions-filter:focus-visible {
+      outline: 2px solid #8ebaff;
+      outline-offset: 3px;
     }
 
     .missions-results {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
-      flex-wrap: wrap;
-      margin: 0 0 18px;
+      margin-bottom: 18px;
       color: #aebbd0;
       font-size: .9rem;
     }
+
+    /* Mission cards */
 
     .missions-grid {
       display: grid;
@@ -182,14 +217,21 @@
     }
 
     .mission-card {
-      min-width: 0;
       display: flex;
       flex-direction: column;
+      min-width: 0;
       overflow: hidden;
       border: 1px solid rgba(151, 190, 255, .17);
       border-radius: 18px;
-      background: linear-gradient(160deg, rgba(28, 42, 65, .95), rgba(15, 22, 36, .98));
-      transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+      background: linear-gradient(
+        160deg,
+        rgba(28, 42, 65, .95),
+        rgba(15, 22, 36, .98)
+      );
+      transition:
+        transform .22s ease,
+        border-color .22s ease,
+        box-shadow .22s ease;
     }
 
     .mission-card:hover {
@@ -204,25 +246,30 @@
 
     .mission-card-art {
       position: relative;
-      min-height: 150px;
       display: flex;
+      min-height: 150px;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      background:
-        radial-gradient(ellipse at 50% 115%, rgba(82, 125, 202, .35), transparent 55%),
-        linear-gradient(145deg, #182c49, #101827);
       border-bottom: 1px solid rgba(151, 190, 255, .12);
+      background:
+        radial-gradient(
+          ellipse at 50% 115%,
+          rgba(82, 125, 202, .35),
+          transparent 55%
+        ),
+        linear-gradient(145deg, #182c49, #101827);
     }
 
     .mission-card-art::before,
     .mission-card-art::after {
       content: "";
       position: absolute;
-      border: 1px solid rgba(185, 209, 255, .15);
-      border-radius: 50%;
       width: 130px;
       height: 130px;
+      border: 1px solid rgba(185, 209, 255, .15);
+      border-radius: 50%;
+      pointer-events: none;
     }
 
     .mission-card-art::after {
@@ -234,6 +281,7 @@
       position: relative;
       z-index: 1;
       color: rgba(222, 236, 255, .92);
+      font-family: "Space Grotesk", sans-serif;
       font-size: 2.5rem;
       font-weight: 800;
       letter-spacing: 2px;
@@ -247,8 +295,9 @@
     }
 
     .mission-category {
-      align-self: flex-start;
       display: inline-block;
+      align-self: flex-start;
+      margin-bottom: 13px;
       padding: 6px 10px;
       border-radius: 30px;
       background: rgba(137, 179, 255, .10);
@@ -257,29 +306,29 @@
       font-weight: 700;
       letter-spacing: .7px;
       text-transform: uppercase;
-      margin-bottom: 13px;
     }
 
     .mission-card h2 {
-      font-size: 1.28rem;
-      line-height: 1.4;
       margin: 0 0 10px;
       color: #edf4ff;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.28rem;
+      line-height: 1.4;
     }
 
     .mission-card p {
-      color: #aebbd0;
-      line-height: 1.75;
-      font-size: .92rem;
       margin: 0 0 20px;
+      color: #aebbd0;
+      font-size: .92rem;
+      line-height: 1.75;
     }
 
     .mission-card-footer {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      flex-wrap: wrap;
       margin-top: auto;
       padding-top: 15px;
       border-top: 1px solid rgba(151, 190, 255, .12);
@@ -292,9 +341,9 @@
 
     .mission-details-link {
       color: #b8d5ff;
-      text-decoration: none;
-      font-weight: 700;
       font-size: .9rem;
+      font-weight: 700;
+      text-decoration: none;
     }
 
     .mission-details-link:hover {
@@ -302,18 +351,32 @@
       text-decoration: underline;
     }
 
+    .mission-details-link:focus-visible {
+      outline: 2px solid #8ebaff;
+      outline-offset: 4px;
+      border-radius: 3px;
+    }
+
+    /* Empty search result */
+
     .missions-empty {
       display: none;
       padding: 40px 20px;
-      text-align: center;
       border: 1px dashed rgba(151, 190, 255, .25);
       border-radius: 16px;
       color: #b8c5d9;
+      text-align: center;
     }
 
     .missions-empty.visible {
       display: block;
     }
+
+    .missions-empty h2 {
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    /* Notes and bottom navigation */
 
     .missions-note {
       margin-top: 35px;
@@ -322,8 +385,8 @@
       border-radius: 0 12px 12px 0;
       background: rgba(142, 186, 255, .06);
       color: #b9c7dc;
-      line-height: 1.8;
       font-size: .9rem;
+      line-height: 1.8;
     }
 
     .missions-bottom {
@@ -340,11 +403,15 @@
       border-radius: 10px;
       color: #d5e5ff;
       text-decoration: none;
+      transition: background .2s ease, border-color .2s ease;
     }
 
     .missions-bottom a:hover {
+      border-color: rgba(151, 190, 255, .5);
       background: rgba(142, 186, 255, .10);
     }
+
+    /* Responsive layout */
 
     @media (max-width: 900px) {
       .missions-grid {
@@ -355,7 +422,7 @@
     @media (max-width: 580px) {
       .missions-page {
         width: calc(100% - 28px);
-        padding-top: 22px;
+        padding-top: 25px;
       }
 
       .missions-stats {
@@ -370,18 +437,30 @@
         min-height: 125px;
       }
 
+      .missions-hero {
+        border-radius: 17px;
+      }
+
       .missions-hero h1 {
-        letter-spacing: -0.7px;
+        letter-spacing: -.7px;
+      }
+
+      .missions-bottom a {
+        flex: 1 1 auto;
+        text-align: center;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .mission-card,
-      .missions-filter {
+      .missions-filter,
+      .missions-stat,
+      .missions-bottom a {
         transition: none;
       }
 
-      .mission-card:hover {
+      .mission-card:hover,
+      .missions-stat:hover {
         transform: none;
       }
     }
@@ -389,261 +468,363 @@
 </head>
 
 <body>
-  <main class="missions-page">
+  <div class="cosmos-shell">
 
-    <nav class="missions-topbar" aria-label="Main navigation">
-      <a href="index.html">&larr; COSMOS Home</a>
-      <a href="research.html">Explore Research &rarr;</a>
-    </nav>
+    <!-- Shared COSMOS header -->
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="COSMOS home">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span>COSMOS</span>
+      </a>
 
-    <header class="missions-hero">
-      <span class="missions-eyebrow">Humanity Beyond Earth</span>
-      <h1>Explore Space Missions</h1>
-      <p>
-        Discover the spacecraft, telescopes, robotic explorers, and human
-        missions that have expanded our understanding of the Solar System
-        and the universe. Explore their goals, discoveries, technologies,
-        and continuing legacy.
-      </p>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="planets.html">Planets</a>
+        <a href="missions.html" aria-current="page">Missions</a>
+        <a href="research.html">Research</a>
+        <a href="about.html">About</a>
+      </nav>
     </header>
 
-    <section class="missions-stats" aria-label="Mission collection overview">
-      <div class="missions-stat">
-        <strong>09</strong>
-        <span>Featured Missions</span>
-      </div>
-      <div class="missions-stat">
-        <strong>1960s–Today</strong>
-        <span>Decades of Exploration</span>
-      </div>
-      <div class="missions-stat">
-        <strong>Moon to Deep Space</strong>
-        <span>Destinations and Discoveries</span>
-      </div>
-    </section>
+    <main class="missions-page">
 
-    <section aria-label="Find a space mission">
-      <div class="missions-controls">
-        <input
-          id="missionSearch"
-          class="missions-search"
-          type="search"
-          placeholder="Search missions, destinations, or technologies..."
-          aria-label="Search space missions"
-          autocomplete="off"
-        >
+      <section class="missions-hero">
+        <span class="missions-eyebrow">Humanity Beyond Earth</span>
 
-        <div class="missions-filters" role="group" aria-label="Filter missions by category">
-          <button class="missions-filter active" type="button" data-filter="all" aria-pressed="true">All Missions</button>
-          <button class="missions-filter" type="button" data-filter="human" aria-pressed="false">Human Exploration</button>
-          <button class="missions-filter" type="button" data-filter="planetary" aria-pressed="false">Planetary Science</button>
-          <button class="missions-filter" type="button" data-filter="deep-space" aria-pressed="false">Deep Space</button>
-          <button class="missions-filter" type="button" data-filter="telescopes" aria-pressed="false">Space Telescopes</button>
-          <button class="missions-filter" type="button" data-filter="sample" aria-pressed="false">Sample Return</button>
+        <h1>Explore Space Missions</h1>
+
+        <p>
+          Discover the spacecraft, telescopes, robotic explorers, and human
+          missions that have expanded our understanding of the Solar System
+          and the universe. Explore their goals, discoveries, technologies,
+          and continuing legacy.
+        </p>
+      </section>
+
+      <section class="missions-stats" aria-label="Mission collection overview">
+        <div class="missions-stat">
+          <strong>09</strong>
+          <span>Featured Missions</span>
         </div>
-      </div>
 
-      <div class="missions-results">
-        <span id="missionCount" aria-live="polite">Showing 9 missions</span>
-        <span>Choose a mission to explore its details.</span>
-      </div>
+        <div class="missions-stat">
+          <strong>1960s–Today</strong>
+          <span>Decades of Exploration</span>
+        </div>
 
-      <div class="missions-grid" id="missionsGrid">
+        <div class="missions-stat">
+          <strong>Moon to Deep Space</strong>
+          <span>Destinations and Discoveries</span>
+        </div>
+      </section>
 
-        <article class="mission-card" data-category="human" data-search="apollo program moon astronauts lunar landing saturn v history">
-          <div class="mission-card-art">
-            <span class="mission-art-number">01</span>
+      <section aria-label="Find a space mission">
+
+        <div class="missions-controls">
+          <input
+            id="missionSearch"
+            class="missions-search"
+            type="search"
+            placeholder="Search missions, destinations, or technologies..."
+            aria-label="Search space missions"
+            autocomplete="off"
+          >
+
+          <div
+            class="missions-filters"
+            role="group"
+            aria-label="Filter missions by category"
+          >
+            <button
+              class="missions-filter active"
+              type="button"
+              data-filter="all"
+              aria-pressed="true"
+            >All Missions</button>
+
+            <button
+              class="missions-filter"
+              type="button"
+              data-filter="human"
+              aria-pressed="false"
+            >Human Exploration</button>
+
+            <button
+              class="missions-filter"
+              type="button"
+              data-filter="planetary"
+              aria-pressed="false"
+            >Planetary Science</button>
+
+            <button
+              class="missions-filter"
+              type="button"
+              data-filter="deep-space"
+              aria-pressed="false"
+            >Deep Space</button>
+
+            <button
+              class="missions-filter"
+              type="button"
+              data-filter="telescopes"
+              aria-pressed="false"
+            >Space Telescopes</button>
+
+            <button
+              class="missions-filter"
+              type="button"
+              data-filter="sample"
+              aria-pressed="false"
+            >Sample Return</button>
           </div>
-          <div class="mission-card-content">
-            <span class="mission-category">Human Exploration</span>
-            <h2>Apollo Program</h2>
-            <p>
-              Explore the historic missions that carried astronauts to the
-              Moon and changed the course of human space exploration.
-            </p>
-            <div class="mission-card-footer">
-              <span class="mission-year">1960s–1970s</span>
-              <a class="mission-details-link" href="apollo.html">Explore Mission &rarr;</a>
+        </div>
+
+        <div class="missions-results">
+          <span id="missionCount" aria-live="polite">Showing 9 missions</span>
+          <span>Choose a mission to explore its details.</span>
+        </div>
+
+        <div class="missions-grid" id="missionsGrid">
+
+          <article
+            class="mission-card"
+            data-category="human"
+            data-search="apollo program moon astronauts lunar landing saturn v history"
+          >
+            <div class="mission-card-art">
+              <span class="mission-art-number">01</span>
             </div>
-          </div>
-        </article>
-
-        <article class="mission-card" data-category="deep-space" data-search="voyager 1 voyager 2 interstellar space jupiter saturn uranus neptune probes">
-          <div class="mission-card-art">
-            <span class="mission-art-number">02</span>
-          </div>
-          <div class="mission-card-content">
-            <span class="mission-category">Deep Space</span>
-            <h2>Voyager Mission</h2>
-            <p>
-              Follow the twin spacecraft that explored the outer planets
-              and continued their journeys into interstellar space.
-            </p>
-            <div class="mission-card-footer">
-              <span class="mission-year">Launched in 1977</span>
-              <a class="mission-details-link" href="voyager.html">Explore Mission &rarr;</a>
+            <div class="mission-card-content">
+              <span class="mission-category">Human Exploration</span>
+              <h2>Apollo Program</h2>
+              <p>
+                Explore the historic missions that carried astronauts to
+                the Moon and changed the course of human space exploration.
+              </p>
+              <div class="mission-card-footer">
+                <span class="mission-year">1960s–1970s</span>
+                <a class="mission-details-link" href="apollo.html">Explore Mission →</a>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="mission-card" data-category="planetary" data-search="mars rovers curiosity perseverance spirit opportunity red planet geology water">
-          <div class="mission-card-art">
-            <span class="mission-art-number">03</span>
-          </div>
-          <div class="mission-card-content">
-            <span class="mission-category">Planetary Science</span>
-            <h2>Mars Rovers</h2>
-            <p>
-              Discover how robotic explorers investigate Martian rocks,
-              climate, ancient environments, and signs of past habitability.
-            </p>
-            <div class="mission-card-footer">
-              <span class="mission-year">2000s–Today</span>
-              <a class="mission-details-link" href="mars-rovers.html">Explore Mission &rarr;</a>
+          <article
+            class="mission-card"
+            data-category="deep-space"
+            data-search="voyager 1 voyager 2 interstellar space jupiter saturn uranus neptune probes"
+          >
+            <div class="mission-card-art">
+              <span class="mission-art-number">02</span>
             </div>
-          </div>
-        </article>
-
-        <article class="mission-card" data-category="planetary" data-search="juno jupiter atmosphere magnetic field gravity gas giant nasa spacecraft">
-          <div class="mission-card-art">
-            <span class="mission-art-number">04</span>
-          </div>
-          <div class="mission-card-content">
-            <span class="mission-category">Planetary Science</span>
-            <h2>Juno Mission</h2>
-            <p>
-              Investigate Jupiter's atmosphere, magnetic field, gravity,
-              and internal structure to learn how the giant planet formed.
-            </p>
-            <div class="mission-card-footer">
-              <span class="mission-year">Launched in 2011</span>
-              <a class="mission-details-link" href="juno.html">Explore Mission &rarr;</a>
+            <div class="mission-card-content">
+              <span class="mission-category">Deep Space</span>
+              <h2>Voyager Mission</h2>
+              <p>
+                Follow the twin spacecraft that explored the outer planets
+                and continued their journeys into interstellar space.
+              </p>
+              <div class="mission-card-footer">
+                <span class="mission-year">Launched in 1977</span>
+                <a class="mission-details-link" href="voyager.html">Explore Mission →</a>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="mission-card" data-category="telescopes" data-search="james webb space telescope jwst infrared universe galaxies stars exoplanets early universe">
-          <div class="mission-card-art">
-            <span class="mission-art-number">05</span>
-          </div>
-          <div class="mission-card-content">
-            <span class="mission-category">Space Telescope</span>
-            <h2>James Webb Space Telescope</h2>
-            <p>
-              See how a powerful infrared observatory studies distant
-              galaxies, star formation, and the atmospheres of exoplanets.
-            </p>
-            <div class="mission-card-footer">
-              <span class="mission-year">Launched in 2021</span>
-              <a class="mission-details-link" href="james-webb.html">Explore Mission &rarr;</a>
+          <article
+            class="mission-card"
+            data-category="planetary"
+            data-search="mars rovers curiosity perseverance spirit opportunity red planet geology water"
+          >
+            <div class="mission-card-art">
+              <span class="mission-art-number">03</span>
             </div>
-          </div>
-        </article>
-
-        <article class="mission-card" data-category="planetary" data-search="europa clipper jupiter moon europa ocean habitability icy world spacecraft">
-          <div class="mission-card-art">
-            <span class="mission-art-number">06</span>
-          </div>
-          <div class="mission-card-content">
-            <span class="mission-category">Planetary Science</span>
-            <h2>Europa Clipper</h2>
-            <p>
-              Explore Jupiter's icy moon Europa and investigate whether
-              conditions beneath its ice could support life.
-            </p>
-            <div class="mission-card-footer">
-              <span class="mission-year">Launched in 2024</span>
-              <a class="mission-details-link" href="europa-clipper.html">Explore Mission &rarr;</a>
+            <div class="mission-card-content">
+              <span class="mission-category">Planetary Science</span>
+              <h2>Mars Rovers</h2>
+              <p>
+                Discover how robotic explorers investigate Martian rocks,
+                climate, ancient environments, and signs of past habitability.
+              </p>
+              <div class="mission-card-footer">
+                <span class="mission-year">2000s–Today</span>
+                <a class="mission-details-link" href="mars-rovers.html">Explore Mission →</a>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="mission-card" data-category="sample" data-search="osiris rex bennu asteroid sample return regolith asteroid science origins">
-          <div class="mission-card-art">
-            <span class="mission-art-number">07</span>
-          </div>
-          <div class="mission-card-content">
-            <span class="mission-category">Sample Return</span>
-            <h2>OSIRIS-REx</h2>
-            <p>
-              Learn how NASA collected material from asteroid Bennu and
-              returned a sample to Earth for scientific analysis.
-            </p>
-            <div class="mission-card-footer">
-              <span class="mission-year">Launched in 2016</span>
-              <a class="mission-details-link" href="osiris-rex.html">Explore Mission &rarr;</a>
+          <article
+            class="mission-card"
+            data-category="planetary"
+            data-search="juno jupiter atmosphere magnetic field gravity gas giant nasa spacecraft"
+          >
+            <div class="mission-card-art">
+              <span class="mission-art-number">04</span>
             </div>
-          </div>
-        </article>
-
-        <article class="mission-card" data-category="telescopes" data-search="hubble space telescope galaxies nebulae stars universe astronomy observations">
-          <div class="mission-card-art">
-            <span class="mission-art-number">08</span>
-          </div>
-          <div class="mission-card-content">
-            <span class="mission-category">Space Telescope</span>
-            <h2>Hubble Space Telescope</h2>
-            <p>
-              Explore the observatory whose detailed images and measurements
-              have transformed modern astronomy for decades.
-            </p>
-            <div class="mission-card-footer">
-              <span class="mission-year">Launched in 1990</span>
-              <a class="mission-details-link" href="hubble.html">Explore Mission &rarr;</a>
+            <div class="mission-card-content">
+              <span class="mission-category">Planetary Science</span>
+              <h2>Juno Mission</h2>
+              <p>
+                Investigate Jupiter's atmosphere, magnetic field, gravity,
+                and internal structure to learn how the giant planet formed.
+              </p>
+              <div class="mission-card-footer">
+                <span class="mission-year">Launched in 2011</span>
+                <a class="mission-details-link" href="juno.html">Explore Mission →</a>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="mission-card" data-category="human" data-search="artemis program moon astronauts orion space launch system lunar exploration mars">
-          <div class="mission-card-art">
-            <span class="mission-art-number">09</span>
-          </div>
-          <div class="mission-card-content">
-            <span class="mission-category">Human Exploration</span>
-            <h2>Artemis Program</h2>
-            <p>
-              Discover NASA's plans for returning astronauts to the Moon,
-              expanding lunar science, and preparing for future Mars missions.
-            </p>
-            <div class="mission-card-footer">
-              <span class="mission-year">Program ongoing</span>
-              <a class="mission-details-link" href="artemis.html">Explore Mission &rarr;</a>
+          <article
+            class="mission-card"
+            data-category="telescopes"
+            data-search="james webb space telescope jwst infrared universe galaxies stars exoplanets early universe"
+          >
+            <div class="mission-card-art">
+              <span class="mission-art-number">05</span>
             </div>
-          </div>
-        </article>
+            <div class="mission-card-content">
+              <span class="mission-category">Space Telescope</span>
+              <h2>James Webb Space Telescope</h2>
+              <p>
+                See how a powerful infrared observatory studies distant
+                galaxies, star formation, and the atmospheres of exoplanets.
+              </p>
+              <div class="mission-card-footer">
+                <span class="mission-year">Launched in 2021</span>
+                <a class="mission-details-link" href="james-webb.html">Explore Mission →</a>
+              </div>
+            </div>
+          </article>
 
-      </div>
+          <article
+            class="mission-card"
+            data-category="planetary"
+            data-search="europa clipper jupiter moon europa ocean habitability icy world spacecraft"
+          >
+            <div class="mission-card-art">
+              <span class="mission-art-number">06</span>
+            </div>
+            <div class="mission-card-content">
+              <span class="mission-category">Planetary Science</span>
+              <h2>Europa Clipper</h2>
+              <p>
+                Explore Jupiter's icy moon Europa and investigate whether
+                conditions beneath its ice could support life.
+              </p>
+              <div class="mission-card-footer">
+                <span class="mission-year">Launched in 2024</span>
+                <a class="mission-details-link" href="europa-clipper.html">Explore Mission →</a>
+              </div>
+            </div>
+          </article>
 
-      <div class="missions-empty" id="missionsEmpty">
-        <h2>No missions found</h2>
-        <p>Try another search term or choose a different category.</p>
-      </div>
-    </section>
+          <article
+            class="mission-card"
+            data-category="sample"
+            data-search="osiris rex bennu asteroid sample return regolith asteroid science origins"
+          >
+            <div class="mission-card-art">
+              <span class="mission-art-number">07</span>
+            </div>
+            <div class="mission-card-content">
+              <span class="mission-category">Sample Return</span>
+              <h2>OSIRIS-REx</h2>
+              <p>
+                Learn how NASA collected material from asteroid Bennu and
+                returned a sample to Earth for scientific analysis.
+              </p>
+              <div class="mission-card-footer">
+                <span class="mission-year">Launched in 2016</span>
+                <a class="mission-details-link" href="osiris-rex.html">Explore Mission →</a>
+              </div>
+            </div>
+          </article>
 
-    <aside class="missions-note">
-      <strong>About this collection:</strong>
-      This page highlights nine selected space missions. Dates describe
-      launch periods or broad mission eras; they do not necessarily indicate
-      that every mission is still active. For the latest status and scientific
-      results, consult the official mission pages from NASA.
-    </aside>
+          <article
+            class="mission-card"
+            data-category="telescopes"
+            data-search="hubble space telescope galaxies nebulae stars universe astronomy observations"
+          >
+            <div class="mission-card-art">
+              <span class="mission-art-number">08</span>
+            </div>
+            <div class="mission-card-content">
+              <span class="mission-category">Space Telescope</span>
+              <h2>Hubble Space Telescope</h2>
+              <p>
+                Explore the observatory whose detailed images and measurements
+                have transformed modern astronomy for decades.
+              </p>
+              <div class="mission-card-footer">
+                <span class="mission-year">Launched in 1990</span>
+                <a class="mission-details-link" href="hubble.html">Explore Mission →</a>
+              </div>
+            </div>
+          </article>
 
-    <nav class="missions-bottom" aria-label="Explore more COSMOS pages">
-      <a href="index.html">COSMOS Home</a>
-      <a href="planets.html">Explore the Planets</a>
-      <a href="research.html">Research Topics</a>
-      <a href="about.html">About COSMOS</a>
-    </nav>
+          <article
+            class="mission-card"
+            data-category="human"
+            data-search="artemis program moon astronauts orion space launch system lunar exploration mars"
+          >
+            <div class="mission-card-art">
+              <span class="mission-art-number">09</span>
+            </div>
+            <div class="mission-card-content">
+              <span class="mission-category">Human Exploration</span>
+              <h2>Artemis Program</h2>
+              <p>
+                Discover NASA's plans for returning astronauts to the Moon,
+                expanding lunar science, and preparing for future Mars missions.
+              </p>
+              <div class="mission-card-footer">
+                <span class="mission-year">Program ongoing</span>
+                <a class="mission-details-link" href="artemis.html">Explore Mission →</a>
+              </div>
+            </div>
+          </article>
 
-  </main>
+        </div>
 
+        <div class="missions-empty" id="missionsEmpty">
+          <h2>No missions found</h2>
+          <p>Try another search term or choose a different category.</p>
+        </div>
+
+      </section>
+
+      <aside class="missions-note">
+        <strong>About this collection:</strong>
+        This page highlights nine selected space missions. Dates describe
+        launch periods or broad mission eras; they do not necessarily indicate
+        that every mission is still active. For the latest status and scientific
+        results, consult the official mission pages from NASA.
+      </aside>
+
+      <nav class="missions-bottom" aria-label="Explore more COSMOS pages">
+        <a href="index.html">COSMOS Home</a>
+        <a href="planets.html">Explore the Planets</a>
+        <a href="research.html">Research Topics</a>
+        <a href="about.html">About COSMOS</a>
+      </nav>
+
+    </main>
+
+  </div>
+
+  <!-- Shared site JavaScript -->
+  <script src="app.js" defer></script>
+
+  <!-- Mission search and category filters -->
   <script>
-    (function () {
+    document.addEventListener("DOMContentLoaded", function () {
       const searchInput = document.getElementById("missionSearch");
       const filterButtons = document.querySelectorAll(".missions-filter");
       const cards = Array.from(document.querySelectorAll(".mission-card"));
       const countLabel = document.getElementById("missionCount");
       const emptyMessage = document.getElementById("missionsEmpty");
+
+      if (!searchInput || !countLabel || !emptyMessage) return;
 
       let activeFilter = "all";
 
@@ -654,7 +835,7 @@
         cards.forEach(function (card) {
           const category = card.dataset.category || "";
           const searchableText = (
-            card.dataset.search + " " + card.textContent
+            (card.dataset.search || "") + " " + card.textContent
           ).toLowerCase();
 
           const matchesCategory =
@@ -665,9 +846,7 @@
 
           card.hidden = !isVisible;
 
-          if (isVisible) {
-            visibleCount++;
-          }
+          if (isVisible) visibleCount++;
         });
 
         countLabel.textContent =
@@ -681,10 +860,11 @@
 
       filterButtons.forEach(function (button) {
         button.addEventListener("click", function () {
-          activeFilter = button.dataset.filter;
+          activeFilter = button.dataset.filter || "all";
 
           filterButtons.forEach(function (item) {
             const isActive = item === button;
+
             item.classList.toggle("active", isActive);
             item.setAttribute("aria-pressed", String(isActive));
           });
@@ -694,7 +874,7 @@
       });
 
       updateMissions();
-    })();
+    });
   </script>
 </body>
 </html>
