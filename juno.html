@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore NASA's Juno mission to Jupiter, its scientific instruments, and discoveries about the giant planet.">
+  <title>Juno Mission | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .mission-detail {
+      width: min(1100px, 90%);
+      margin: 0 auto;
+      padding: 45px 0 80px;
+    }
+
+    .mission-back {
+      display: inline-block;
+      margin-bottom: 28px;
+      color: #9ecbff;
+      text-decoration: none;
+    }
+
+    .mission-back:hover { text-decoration: underline; }
+
+    .mission-hero {
+      padding: 45px 35px;
+      border: 1px solid rgba(150,190,255,.22);
+      border-radius: 22px;
+      background: linear-gradient(135deg,#17202c,#26394b 55%,#111827);
+      margin-bottom: 30px;
+    }
+
+    .mission-label {
+      display: inline-block;
+      color: #b9d9ff;
+      font-size: .82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .mission-hero h1 {
+      font-size: clamp(2.2rem,6vw,4.3rem);
+      line-height: 1.1;
+      margin: 0 0 18px;
+    }
+
+    .mission-hero p {
+      max-width: 760px;
+      line-height: 1.8;
+      color: #d0d9e8;
+    }
+
+    .mission-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+      gap: 16px;
+      margin: 25px 0 35px;
+    }
+
+    .mission-fact,.mission-section {
+      padding: 23px;
+      border: 1px solid rgba(150,190,255,.17);
+      border-radius: 16px;
+      background: rgba(255,255,255,.035);
+    }
+
+    .mission-fact span {
+      display: block;
+      color: #9ecbff;
+      font-size: .82rem;
+      margin-bottom: 9px;
+    }
+
+    .mission-fact strong { font-size: 1.05rem; }
+    .mission-section { margin-top: 20px; }
+    .mission-section h2 { margin-top: 0; margin-bottom: 14px; }
+
+    .mission-section p,.mission-section li {
+      color: #cbd5e1;
+      line-height: 1.85;
+    }
+
+    .mission-section ul { padding-left: 22px; }
+
+    .mission-highlight {
+      border-left: 3px solid #82c4ff;
+      padding: 12px 18px;
+      margin-top: 18px;
+      background: rgba(130,196,255,.07);
+      color: #e2edff;
+      line-height: 1.8;
+    }
+
+    .mission-navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .mission-navigation a {
+      display: inline-block;
+      padding: 12px 18px;
+      border: 1px solid rgba(150,190,255,.3);
+      border-radius: 10px;
+      color: #e5efff;
+      text-decoration: none;
+    }
+
+    .mission-navigation a:hover {
+      background: rgba(117,182,255,.12);
+    }
+
+    @media(max-width:600px) {
+      .mission-detail {
+        width: calc(100% - 28px);
+        padding-top: 25px;
+      }
+      .mission-hero { padding: 30px 22px; }
+      .mission-section,.mission-fact { padding: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="mission-detail">
+    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+
+    <header class="mission-hero">
+      <span class="mission-label">Outer Planet Exploration</span>
+      <h1>Juno Mission</h1>
+      <p>
+        NASA's Juno spacecraft was designed to investigate Jupiter, the largest
+        planet in our Solar System. By studying its atmosphere, gravity,
+        magnetic field, and interior, Juno helps scientists understand how
+        Jupiter formed and how the Solar System evolved.
+      </p>
+    </header>
+
+    <section class="mission-facts" aria-label="Mission facts">
+      <div class="mission-fact">
+        <span>Space Agency</span>
+        <strong>NASA</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Launch Date</span>
+        <strong>August 5, 2011</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Arrival at Jupiter</span>
+        <strong>July 4, 2016</strong>
+      </div>
+      <div class="mission-fact">
+        <span>Destination</span>
+        <strong>Jupiter and its moons</strong>
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>What Is the Juno Spacecraft?</h2>
+      <p>
+        Juno is a robotic spacecraft powered by large solar arrays. It follows
+        a highly elliptical orbit around Jupiter, allowing it to make close
+        scientific passes while reducing the time spent in some of the
+        planet's most intense radiation regions.
+      </p>
+      <p>
+        The spacecraft carries instruments that measure Jupiter's atmosphere,
+        magnetic field, gravity, energetic particles, and auroras. Its camera,
+        JunoCam, also provides detailed images for scientific study and public
+        engagement.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Mission Objectives</h2>
+      <ul>
+        <li>Determine how much water and other heavy elements are present in Jupiter's atmosphere.</li>
+        <li>Investigate the planet's deep structure and possible core.</li>
+        <li>Map Jupiter's powerful magnetic field and investigate its auroras.</li>
+        <li>Study atmospheric circulation, storms, clouds, and the famous Great Red Spot.</li>
+        <li>Improve understanding of how giant planets form and evolve.</li>
+      </ul>
+    </section>
+
+    <section class="mission-section">
+      <h2>Important Discoveries</h2>
+      <ul>
+        <li>Revealed that Jupiter's atmosphere has complex structures extending deep below its visible clouds.</li>
+        <li>Provided new measurements of Jupiter's gravity and magnetic field.</li>
+        <li>Improved scientists' understanding of the Great Red Spot and powerful polar cyclones.</li>
+        <li>Collected close-up observations of Jupiter's large moons, including Ganymede, Europa, and Io.</li>
+        <li>Returned detailed images that show Jupiter's atmosphere in remarkable complexity.</li>
+      </ul>
+
+      <div class="mission-highlight">
+        Jupiter's enormous size and powerful gravity make it an important
+        natural laboratory for studying how giant planets develop.
+      </div>
+    </section>
+
+    <section class="mission-section">
+      <h2>Why Study Jupiter?</h2>
+      <p>
+        Jupiter preserves clues about the early Solar System. Understanding
+        its composition and internal structure helps researchers test theories
+        about how planets formed from the disk of gas and dust around the young
+        Sun.
+      </p>
+      <p>
+        Studying Jupiter's magnetic environment and its moons also helps
+        scientists understand a wide range of planetary processes.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Mission Status</h2>
+      <p>
+        Juno's mission has been extended beyond its original prime mission.
+        Its operational status and planned activities can change, so check
+        NASA's official mission page for the latest confirmed information.
+      </p>
+    </section>
+
+    <section class="mission-section">
+      <h2>Explore More</h2>
+      <div class="mission-navigation">
+        <a href="https://science.nasa.gov/mission/juno/" target="_blank" rel="noopener noreferrer">NASA Juno Mission</a>
+        <a href="missions.html">All Space Missions</a>
+        <a href="index.html">COSMOS Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
