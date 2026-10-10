@@ -4,129 +4,297 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore planetary science, exoplanets, black holes, astrobiology, cosmology, and the biggest unanswered questions in space science.">
-  <meta name="theme-color" content="#050914">
-  <title>Space Research | COSMOS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Explore astronomy, planetary science, black holes, galaxies, exoplanets, and space technology with COSMOS.">
+  <title>Research | COSMOS</title>
   <link rel="stylesheet" href="styles.css">
+
   <style>
-    :root{--bg:#050914;--surface:#0b1324;--surface2:#101d33;--text:#edf5ff;--muted:#9cacc4;--accent:#50d8cb;--border:rgba(112,226,215,.15)}
-    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}
-    body{margin:0;background:radial-gradient(ellipse at 78% 5%,rgba(37,155,150,.14),transparent 38%),var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;line-height:1.7}
-    a{color:inherit;text-decoration:none}.container{width:min(1160px,calc(100% - 40px));margin:auto}
-    .navbar{position:sticky;top:0;z-index:10;background:rgba(5,9,20,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
-    .nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .logo,h1,h2,h3{font-family:"Space Grotesk",sans-serif}.logo{font-size:1.4rem;font-weight:700;letter-spacing:3px}.logo span{color:var(--accent)}
-    .links{display:flex;gap:23px;flex-wrap:wrap;font-size:.88rem;color:var(--muted)}.links a:hover,.links .active{color:var(--text)}
-    .hero{padding:95px 0 75px;display:grid;grid-template-columns:1.1fr .9fr;gap:35px;align-items:center}
-    .eyebrow{color:#82e9de;text-transform:uppercase;letter-spacing:2.5px;font-size:.75rem;font-weight:700}
-    h1{font-size:clamp(3rem,7vw,5.8rem);letter-spacing:-4px;line-height:1.04;margin:20px 0}h1 span{display:block;color:#82e9de}
-    .lead,.section-head p{color:var(--muted);font-size:1.04rem;max-width:700px}
-    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}.btn{padding:12px 18px;border:1px solid var(--border);border-radius:7px;display:inline-block;font-size:.9rem;font-weight:600}.primary{background:#147e78;border-color:#147e78}
-    .visual{min-height:340px;display:grid;place-items:center;position:relative}
-    .ring{position:absolute;width:300px;height:300px;border:1px solid rgba(80,216,203,.32);border-radius:50%;transform:rotate(-35deg) scaleY(.45)}
-    .ring.two{width:380px;height:380px;transform:rotate(45deg) scaleY(.4);border-color:rgba(80,216,203,.15)}
-    .core{width:185px;height:185px;border-radius:50%;background:radial-gradient(circle at 32% 25%,#d3fff9,#50d8cb 20%,#167b91 55%,#07152a 78%);box-shadow:inset -35px -22px 50px #050914,0 0 70px rgba(80,216,203,.22);animation:float 7s ease-in-out infinite}
-    .section{padding:68px 0}.section-head{margin-bottom:30px}.section-head h2{font-size:clamp(2rem,4vw,3rem);letter-spacing:-1.5px;margin:12px 0}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.card{padding:25px;background:linear-gradient(145deg,var(--surface2),var(--surface));border:1px solid var(--border);border-radius:13px;transition:.25s}
-    .card:hover{transform:translateY(-4px);border-color:rgba(80,216,203,.5)}.num{font-size:.75rem;color:var(--accent);letter-spacing:2px}
-    .card h3{font-size:1.25rem;margin:12px 0}.card p{font-size:.94rem;color:var(--muted)}
-    .tag{display:inline-block;color:#9df1e8;border:1px solid var(--border);border-radius:30px;padding:5px 9px;font-size:.75rem}
-    .feature{padding:34px;border:1px solid var(--border);border-radius:15px;background:radial-gradient(ellipse at 100% 0%,rgba(80,216,203,.14),transparent 55%),var(--surface)}
-    .feature p{color:var(--muted);max-width:850px}.questions{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}
-    .question{padding:22px;border-left:2px solid var(--accent);background:var(--surface)}.question h3{margin:0 0 9px;font-size:1.1rem}.question p{color:var(--muted);margin:0}
-    .source-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.source{padding:16px 18px;background:var(--surface);border:1px solid var(--border);border-radius:9px;display:flex;justify-content:space-between;gap:12px}.source:hover{border-color:var(--accent)}.source span{color:var(--accent)}
-    footer{padding:30px 0;border-top:1px solid var(--border);color:var(--muted);font-size:.86rem}.foot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.footlinks{display:flex;gap:17px;flex-wrap:wrap}
-    .reveal{opacity:0;transform:translateY(18px);transition:.65s}.reveal.visible{opacity:1;transform:none}@keyframes float{50%{transform:translateY(-12px)}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
-    @media(max-width:850px){.hero{grid-template-columns:1fr;padding-top:60px}.grid{grid-template-columns:repeat(2,1fr)}.nav{align-items:flex-start;flex-direction:column;padding:15px 0}.links{gap:15px}}
-    @media(max-width:560px){.container{width:calc(100% - 30px)}h1{letter-spacing:-2px}.grid,.questions,.source-list{grid-template-columns:1fr}.section{padding:48px 0}.visual{min-height:250px}.core{width:155px;height:155px}.feature{padding:24px}.links{font-size:.8rem;gap:11px}}
+    .research-page {
+      width: min(1150px, calc(100% - 40px));
+      margin: auto;
+      padding: 45px 0 75px;
+      color: #edf4ff;
+    }
+
+    .research-hero {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(26px, 5vw, 55px);
+      margin-bottom: 35px;
+      border: 1px solid #263d56;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(91, 77, 214, .25), transparent 35%),
+        linear-gradient(135deg, #101b30, #0a1323);
+    }
+
+    .research-eyebrow {
+      color: #55dcd7;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .research-hero h1 {
+      margin: 12px 0;
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      letter-spacing: -1.5px;
+    }
+
+    .research-hero p {
+      max-width: 720px;
+      color: #aab8ce;
+      line-height: 1.85;
+      font-size: 1rem;
+    }
+
+    .research-section-heading {
+      margin: 34px 0 18px;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .research-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 245px;
+      padding: 24px;
+      color: inherit;
+      text-decoration: none;
+      border: 1px solid #263d56;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #101b2d, #0b1424);
+      transition: transform .2s ease, border-color .2s ease,
+                  background .2s ease;
+    }
+
+    .research-card:hover {
+      transform: translateY(-5px);
+      border-color: #55dcd7;
+      background: linear-gradient(145deg, #14243a, #0d192b);
+    }
+
+    .research-card:focus-visible {
+      outline: 2px solid #65e4df;
+      outline-offset: 4px;
+    }
+
+    .research-icon {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      margin-bottom: 18px;
+      border: 1px solid #2b5263;
+      border-radius: 12px;
+      background: rgba(85, 220, 215, .08);
+      font-size: 1.65rem;
+    }
+
+    .research-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.12rem;
+    }
+
+    .research-card p {
+      margin: 0 0 20px;
+      color: #aab8ce;
+      font-size: .9rem;
+      line-height: 1.8;
+    }
+
+    .research-card-cta {
+      display: inline-block;
+      margin-top: auto;
+      color: #65e4df;
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .research-note {
+      margin-top: 35px;
+      padding: 23px;
+      border-left: 3px solid #55dcd7;
+      border-radius: 0 10px 10px 0;
+      background: rgba(85, 220, 215, .05);
+    }
+
+    .research-note p {
+      margin-bottom: 0;
+      color: #aab8ce;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 850px) {
+      .research-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 540px) {
+      .research-page {
+        width: calc(100% - 28px);
+        padding-top: 25px;
+      }
+
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .research-card {
+        min-height: auto;
+        padding: 21px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
   </style>
 </head>
+
 <body>
-<header class="navbar"><div class="container nav">
-  <a class="logo" href="index.html">COS<span>M</span>OS</a>
-  <nav class="links" aria-label="Main navigation">
-    <a href="index.html">Home</a><a href="planets.html">Planets</a>
-    <a href="missions.html">Missions</a><a class="active" aria-current="page" href="research.html">Research</a><a href="about.html">About</a>
-  </nav>
-</div></header>
+  <header>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="planets.html">Planets</a>
+      <a href="missions.html">Missions</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
 
-<main>
-  <section class="container hero">
-    <div class="reveal">
-      <div class="eyebrow">Questions that expand our universe</div>
-      <h1>Space <span>Research</span></h1>
-      <p class="lead">The universe is full of unanswered questions. Explore the science behind planets, distant worlds, black holes, cosmic evolution, and the search for life beyond Earth.</p>
-      <div class="actions"><a class="btn primary" href="#fields">Explore research fields ↓</a><a class="btn" href="#questions">Big questions</a></div>
-    </div>
-    <div class="visual reveal" role="img" aria-label="Abstract glowing planet representing scientific discovery"><div class="ring"></div><div class="ring two"></div><div class="core"></div></div>
-  </section>
+  <main class="research-page">
+    <section class="research-hero">
+      <div class="research-eyebrow">Explore the Unknown</div>
+      <h1>Space Research</h1>
+      <p>
+        Discover the science behind planets, stars, galaxies, black holes,
+        and the search for life beyond Earth. Explore each research field
+        to learn about its key questions, discoveries, and technologies.
+      </p>
+    </section>
 
-  <section class="container section" id="fields">
-    <div class="section-head reveal"><div class="eyebrow">Fields of discovery</div><h2>How scientists investigate space</h2><p>Researchers combine observations, experiments, mathematical models, and spacecraft data to test ideas about how the cosmos works.</p></div>
-    <div class="grid">
-      <article class="card reveal"><span class="num">FIELD 01</span><h3>Planetary Science</h3><span class="tag">Worlds & geology</span><p>Studies the formation, composition, surfaces, atmospheres, interiors, and evolution of planets, moons, asteroids, and comets.</p></article>
-      <article class="card reveal"><span class="num">FIELD 02</span><h3>Astrobiology</h3><span class="tag">Life beyond Earth</span><p>Investigates life's origins, the limits of life on Earth, and whether other worlds could have environments suitable for life.</p></article>
-      <article class="card reveal"><span class="num">FIELD 03</span><h3>Exoplanets</h3><span class="tag">Other star systems</span><p>Studies planets beyond our Solar System, including their sizes, orbits, atmospheres, and potential habitability.</p></article>
-      <article class="card reveal"><span class="num">FIELD 04</span><h3>Cosmology</h3><span class="tag">The universe</span><p>Investigates the universe's origin, expansion, large-scale structure, history, and possible future using observations and physical models.</p></article>
-      <article class="card reveal"><span class="num">FIELD 05</span><h3>Black Holes</h3><span class="tag">Extreme gravity</span><p>Explores regions where gravity is so strong that beyond the event horizon, light cannot escape, and tests physics under extreme conditions.</p></article>
-      <article class="card reveal"><span class="num">FIELD 06</span><h3>Solar Physics</h3><span class="tag">Our star</span><p>Studies the Sun's magnetic field, flares, solar wind, and space weather that can affect satellites, astronauts, and technology on Earth.</p></article>
-      <article class="card reveal"><span class="num">FIELD 07</span><h3>Galaxies & Stars</h3><span class="tag">Cosmic evolution</span><p>Examines how stars form and evolve, how galaxies grow, and how stellar processes create and distribute many chemical elements.</p></article>
-      <article class="card reveal"><span class="num">FIELD 08</span><h3>Asteroids & Comets</h3><span class="tag">Ancient material</span><p>Studies primitive bodies that preserve clues about the early Solar System and the ingredients from which planets formed.</p></article>
-      <article class="card reveal"><span class="num">FIELD 09</span><h3>Space Technology</h3><span class="tag">Tools for discovery</span><p>Develops instruments, sensors, spacecraft, and data systems that allow scientists to investigate places too distant or dangerous for people.</p></article>
-    </div>
-  </section>
+    <h2 class="research-section-heading">Explore Research Topics</h2>
 
-  <section class="container section">
-    <div class="feature reveal"><div class="eyebrow">From evidence to discovery</div><h2>How does space research work?</h2><p>Science is a process, not just a collection of facts. Researchers ask a clear question, gather observations, develop a testable explanation, compare predictions with evidence, and revise their explanation when new results demand it.</p><p>Space scientists use telescopes, spacecraft, laboratory experiments, computer simulations, and measurements from Earth. Every method has limits, so independent evidence and careful uncertainty estimates matter.</p><div class="actions"><a class="btn primary" href="https://science.nasa.gov/" target="_blank" rel="noopener noreferrer">Explore NASA Science ↗</a></div></div>
-  </section>
+    <section class="research-grid" aria-label="Research topics">
 
-  <section class="container section" id="questions">
-    <div class="section-head reveal"><div class="eyebrow">Open questions</div><h2>What do we still not know?</h2><p>These are active scientific questions. Some have promising hypotheses, but none should be treated as settled without strong evidence.</p></div>
-    <div class="questions">
-      <article class="question reveal"><h3>Is there life beyond Earth?</h3><p>No confirmed evidence of extraterrestrial life has been found. Mars, icy moons, and exoplanets are among the places researchers investigate.</p></article>
-      <article class="question reveal"><h3>What are dark matter and dark energy?</h3><p>Observations indicate that ordinary matter alone cannot explain the universe's structure and expansion. The underlying nature of dark matter and dark energy remains unknown.</p></article>
-      <article class="question reveal"><h3>How did the universe begin?</h3><p>The Big Bang model describes the universe's evolution from an early hot, dense state. What, if anything, preceded that state is still an open question.</p></article>
-      <article class="question reveal"><h3>Are we alone in the universe?</h3><p>Scientists search for possible biosignatures and investigate how common potentially habitable planets may be. Habitability does not itself prove that life exists.</p></article>
-      <article class="question reveal"><h3>How do planets become habitable?</h3><p>Atmospheres, chemistry, energy sources, geology, and a star's behavior can all influence whether a world might support life.</p></article>
-      <article class="question reveal"><h3>What happens inside black holes?</h3><p>Observations test our theories of gravity, but the deepest interior physics of black holes remains beyond direct experimental access.</p></article>
-    </div>
-  </section>
+      <a class="research-card" href="planetary-science.html">
+        <div class="research-icon" aria-hidden="true">🪐</div>
+        <h3>Planetary Science</h3>
+        <p>
+          Explore planets, moons, atmospheres, planetary surfaces, and
+          the processes that shape worlds throughout our Solar System.
+        </p>
+        <span class="research-card-cta">Explore Topic →</span>
+      </a>
 
-  <section class="container section">
-    <div class="section-head reveal"><div class="eyebrow">Continue learning</div><h2>Explore trusted science resources</h2><p>Read research explainers and mission updates from scientific organizations.</p></div>
-    <div class="source-list reveal">
-      <a class="source" href="https://science.nasa.gov/" target="_blank" rel="noopener noreferrer">NASA Science <span>↗</span></a>
-      <a class="source" href="https://science.nasa.gov/exoplanets/" target="_blank" rel="noopener noreferrer">NASA Exoplanet Exploration <span>↗</span></a>
-      <a class="source" href="https://science.nasa.gov/universe/" target="_blank" rel="noopener noreferrer">NASA Universe <span>↗</span></a>
-      <a class="source" href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener noreferrer">NASA Solar System <span>↗</span></a>
-      <a class="source" href="https://www.esa.int/Science_Exploration/Space_Science" target="_blank" rel="noopener noreferrer">ESA Space Science <span>↗</span></a>
-      <a class="source" href="https://science.nasa.gov/astrophysics/" target="_blank" rel="noopener noreferrer">NASA Astrophysics <span>↗</span></a>
-    </div>
-  </section>
-</main>
+      <a class="research-card" href="astrobiology.html">
+        <div class="research-icon" aria-hidden="true">🧬</div>
+        <h3>Astrobiology</h3>
+        <p>
+          Investigate the origin of life, the conditions that make life
+          possible, and the search for signs of life beyond Earth.
+        </p>
+        <span class="research-card-cta">Explore Topic →</span>
+      </a>
 
-<footer><div class="container" style="display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap"><a class="logo" href="index.html">COS<span>M</span>OS</a><span>Stay curious. Follow the evidence.</span><div class="footlinks"><a href="index.html">Home</a><a href="planets.html">Planets</a><a href="missions.html">Missions</a><a href="about.html">About</a></div></div></footer>
-<script>
-(() => {
-  const items = document.querySelectorAll(".reveal");
-  if (!("IntersectionObserver" in window)) {
-    items.forEach(item => item.classList.add("visible"));
-    return;
-  }
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        obs.unobserve(entry.target);
-      }
-    });
-  }, {threshold: 0.12});
-  items.forEach(item => observer.observe(item));
-})();
-</script>
+      <a class="research-card" href="exoplanets.html">
+        <div class="research-icon" aria-hidden="true">🌎</div>
+        <h3>Exoplanets</h3>
+        <p>
+          Learn about planets orbiting other stars and how astronomers
+          investigate their atmospheres, sizes, and possible habitability.
+        </p>
+        <span class="research-card-cta">Explore Topic →</span>
+      </a>
+
+      <a class="research-card" href="cosmology.html">
+        <div class="research-icon" aria-hidden="true">🌌</div>
+        <h3>Cosmology</h3>
+        <p>
+          Study the origin, evolution, structure, and possible future of
+          the universe, including dark matter and dark energy.
+        </p>
+        <span class="research-card-cta">Explore Topic →</span>
+      </a>
+
+      <a class="research-card" href="black-holes.html">
+        <div class="research-icon" aria-hidden="true">🕳️</div>
+        <h3>Black Holes</h3>
+        <p>
+          Discover how black holes form, how gravity behaves near them,
+          and how scientists observe their effects on surrounding matter.
+        </p>
+        <span class="research-card-cta">Explore Topic →</span>
+      </a>
+
+      <a class="research-card" href="solar-physics.html">
+        <div class="research-icon" aria-hidden="true">☀️</div>
+        <h3>Solar Physics</h3>
+        <p>
+          Explore the Sun's magnetic field, solar flares, sunspots,
+          solar wind, and their effects on the space environment.
+        </p>
+        <span class="research-card-cta">Explore Topic →</span>
+      </a>
+
+      <a class="research-card" href="galaxies-stars.html">
+        <div class="research-icon" aria-hidden="true">✨</div>
+        <h3>Galaxies &amp; Stars</h3>
+        <p>
+          Learn how stars are born, evolve, and die, and how galaxies
+          form and change across cosmic time.
+        </p>
+        <span class="research-card-cta">Explore Topic →</span>
+      </a>
+
+      <a class="research-card" href="asteroids-comets.html">
+        <div class="research-icon" aria-hidden="true">☄️</div>
+        <h3>Asteroids &amp; Comets</h3>
+        <p>
+          Explore small Solar System bodies, their origins, their role
+          in planetary history, and how missions study them.
+        </p>
+        <span class="research-card-cta">Explore Topic →</span>
+      </a>
+
+      <a class="research-card" href="space-technology.html">
+        <div class="research-icon" aria-hidden="true">🛰️</div>
+        <h3>Space Technology</h3>
+        <p>
+          Discover spacecraft, satellites, space telescopes, robotics,
+          and the engineering systems that make exploration possible.
+        </p>
+        <span class="research-card-cta">Explore Topic →</span>
+      </a>
+
+    </section>
+
+    <aside class="research-note">
+      <h2>Curiosity Leads to Discovery</h2>
+      <p>
+        Space research combines observation, mathematics, physics,
+        engineering, and scientific evidence to help us understand our
+        place in the universe. Choose a topic above to begin exploring.
+      </p>
+    </aside>
+  </main>
+
+  <footer>
+    <p>© COSMOS | Explore. Discover. Understand.</p>
+  </footer>
+
+  <script src="app.js" defer></script>
 </body>
 </html>
