@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore astrobiology, the origin of life, habitable environments, and the search for life beyond Earth.">
+  <title>Astrobiology | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .research-detail{width:min(1100px,calc(100% - 40px));margin:auto;padding:38px 0 70px;color:#edf4ff}
+    .research-detail a{color:#65e4df}
+    .detail-back{display:inline-block;margin-bottom:26px;text-decoration:none}
+    .detail-hero{padding:clamp(24px,5vw,48px);border:1px solid #263d56;border-radius:16px;background:radial-gradient(ellipse at 90% 10%,rgba(50,170,145,.17),transparent 45%),linear-gradient(135deg,#101b30,#0a1323)}
+    .detail-eyebrow{color:#55dcd7;font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+    .detail-hero h1{margin:12px 0;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-1.5px}
+    .detail-hero p,.detail-section p,.detail-section li{color:#aab8ce;font-size:.97rem;line-height:1.85}
+    .detail-hero p{max-width:720px;margin-bottom:0}
+    .detail-section{margin-top:36px}
+    .detail-section h2{margin-bottom:14px;font-size:clamp(1.4rem,3vw,1.9rem)}
+    .detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+    .detail-card{padding:22px;border:1px solid #263d56;border-radius:12px;background:linear-gradient(145deg,#101b2d,#0b1424)}
+    .detail-card h3{margin-top:0;font-size:1.05rem}
+    .detail-card p{margin-bottom:0;font-size:.88rem}
+    .detail-list{padding-left:22px}
+    .detail-links{display:flex;flex-wrap:wrap;gap:12px}
+    .detail-link{display:inline-block;padding:10px 14px;border:1px solid #2a5263;border-radius:8px;text-decoration:none}
+    .detail-link:hover{border-color:#55dcd7;background:#122239}
+    @media(max-width:760px){.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:520px){.research-detail{width:calc(100% - 28px);padding-top:25px}.detail-grid{grid-template-columns:1fr}.detail-card{padding:18px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="planets.html">Planets</a>
+      <a href="missions.html">Missions</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="research-detail">
+    <a class="detail-back" href="research.html">← Back to Research</a>
+
+    <section class="detail-hero">
+      <span class="detail-eyebrow">Research Field 02</span>
+      <h1>Astrobiology</h1>
+      <p>
+        Investigate life's origins, the conditions that allow organisms to
+        survive, and the possibility of life beyond Earth.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>What Is Astrobiology?</h2>
+      <p>
+        Astrobiology is an interdisciplinary field that studies the origin,
+        evolution, distribution, and future of life in the universe.
+        It combines biology, chemistry, geology, planetary science, and
+        astronomy to investigate whether life could exist beyond Earth.
+      </p>
+      <p>
+        Earth is currently the only world known to support life. By studying
+        organisms in extreme environments and examining other planetary
+        environments, scientists can better understand what life may require.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Major Research Areas</h2>
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Origins of Life</h3>
+          <p>
+            Explore how simple chemical substances may have developed into
+            increasingly complex systems capable of supporting life.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Habitability</h3>
+          <p>
+            Investigate liquid water, chemical ingredients, energy sources,
+            and environmental stability on planets and moons.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Biosignatures</h3>
+          <p>
+            Search for possible signs of biological activity while checking
+            whether non-biological processes could explain the same evidence.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Extreme Life on Earth</h3>
+          <p>
+            Study microorganisms that survive in hot springs, acidic waters,
+            deep rocks, deserts, and other extreme environments.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Ocean Worlds</h3>
+          <p>
+            Examine icy moons that may contain liquid oceans beneath their
+            surfaces and investigate their potential habitability.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Life Beyond the Solar System</h3>
+          <p>
+            Study exoplanets and their atmospheres to understand whether
+            distant worlds may have conditions compatible with life.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Where Do Scientists Search?</h2>
+      <ul class="detail-list">
+        <li>
+          <strong>Mars:</strong> Ancient environments may have been suitable
+          for microbial life, making preserved rocks important research targets.
+        </li>
+        <li>
+          <strong>Europa:</strong> Jupiter's icy moon is believed to have a
+          subsurface ocean beneath its frozen crust.
+        </li>
+        <li>
+          <strong>Enceladus:</strong> Saturn's moon releases plumes of material
+          from an underground ocean into space.
+        </li>
+        <li>
+          <strong>Exoplanets:</strong> Scientists study distant planetary
+          atmospheres for clues about their environments.
+        </li>
+        <li>
+          <strong>Earth:</strong> Microorganisms and ancient rocks help
+          researchers understand the limits and history of life.
+        </li>
+      </ul>
+    </section>
+
+    <section class="detail-section">
+      <h2>How Is the Research Conducted?</h2>
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Robotic Exploration</h3>
+          <p>
+            Rovers, orbiters, and spacecraft examine environments and collect
+            measurements that cannot easily be obtained from Earth.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Laboratory Experiments</h3>
+          <p>
+            Researchers test how organic molecules behave under different
+            temperatures, pressures, radiation levels, and chemical conditions.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Telescope Observations</h3>
+          <p>
+            Astronomers analyze the light passing through or emitted by
+            exoplanet atmospheres to investigate their composition.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Important Scientific Questions</h2>
+      <ul class="detail-list">
+        <li>How did life first emerge on Earth?</li>
+        <li>Could microbial life have existed on ancient Mars?</li>
+        <li>Could subsurface oceans on icy moons support living organisms?</li>
+        <li>What evidence would be convincing proof of life beyond Earth?</li>
+        <li>How can scientists distinguish a real biosignature from a false positive?</li>
+      </ul>
+    </section>
+
+    <section class="detail-section">
+      <h2>Explore Related Research</h2>
+      <div class="detail-links">
+        <a class="detail-link" href="planetary-science.html">Planetary Science</a>
+        <a class="detail-link" href="exoplanets.html">Exoplanets</a>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Official Resources</h2>
+      <p>
+        <a href="https://science.nasa.gov/astrobiology/"
+           target="_blank" rel="noopener noreferrer">
+          NASA Astrobiology ↗
+        </a>
+      </p>
+      <p>
+        <a href="https://science.nasa.gov/solar-system/mars/"
+           target="_blank" rel="noopener noreferrer">
+          NASA Mars Science ↗
+        </a>
+      </p>
+    </section>
+
+    <a class="detail-back" href="research.html">← Back to All Research Fields</a>
+  </main>
+
+  <footer>
+    <p>© COSMOS — Exploring the Universe</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
