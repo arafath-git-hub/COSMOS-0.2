@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore galaxies, nebulae, star formation, stellar evolution, supernovae, neutron stars, and the life cycles of stars.">
+  <title>Galaxies &amp; Stars | COSMOS</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .research-detail{width:min(1100px,calc(100% - 40px));margin:auto;padding:38px 0 70px;color:#edf4ff}
+    .research-detail a{color:#65e4df}
+    .detail-back{display:inline-block;margin-bottom:26px;text-decoration:none}
+    .detail-hero{padding:clamp(24px,5vw,48px);border:1px solid #263d56;border-radius:16px;background:radial-gradient(ellipse at 85% 15%,rgba(113,77,220,.23),transparent 45%),linear-gradient(135deg,#101b30,#0a1323)}
+    .detail-eyebrow{color:#65e4df;font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+    .detail-hero h1{margin:12px 0;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-1.5px}
+    .detail-hero p,.detail-section p,.detail-section li{color:#aab8ce;font-size:.97rem;line-height:1.85}
+    .detail-hero p{max-width:740px;margin-bottom:0}
+    .detail-section{margin-top:36px}
+    .detail-section h2{margin-bottom:14px;font-size:clamp(1.4rem,3vw,1.9rem)}
+    .detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+    .detail-card{padding:22px;border:1px solid #263d56;border-radius:12px;background:linear-gradient(145deg,#101b2d,#0b1424)}
+    .detail-card h3{margin-top:0;font-size:1.05rem}
+    .detail-card p{margin-bottom:0;font-size:.88rem}
+    .detail-list{padding-left:22px}
+    .detail-links{display:flex;flex-wrap:wrap;gap:12px}
+    .detail-link{display:inline-block;padding:10px 14px;border:1px solid #2a5263;border-radius:8px;text-decoration:none}
+    .detail-link:hover{border-color:#65e4df;background:#122239}
+    .fact-panel{margin-top:18px;padding:20px;border-left:3px solid #65e4df;border-radius:0 10px 10px 0;background:#0e1b2b}
+    .fact-panel p{margin:0}
+    @media(max-width:760px){.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:520px){.research-detail{width:calc(100% - 28px);padding-top:25px}.detail-grid{grid-template-columns:1fr}.detail-card{padding:18px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="planets.html">Planets</a>
+      <a href="missions.html">Missions</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="research-detail">
+    <a class="detail-back" href="research.html">← Back to Research</a>
+
+    <section class="detail-hero">
+      <span class="detail-eyebrow">Research Field 07</span>
+      <h1>Galaxies &amp; Stars</h1>
+      <p>
+        Journey through vast collections of stars, glowing clouds of gas,
+        and the life cycles of the objects that illuminate the Universe.
+        Discover how stars form, evolve, and sometimes end in spectacular events.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>What Is a Galaxy?</h2>
+      <p>
+        A galaxy is a gravitationally bound system containing stars, gas,
+        dust, stellar remnants, and dark matter. Galaxies can contain
+        millions to trillions of stars and vary greatly in size and shape.
+      </p>
+      <p>
+        Our Solar System belongs to the Milky Way, a barred spiral galaxy.
+        The Sun is only one star among the enormous population of stars
+        in our galaxy.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>Types of Galaxies</h2>
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Spiral Galaxies</h3>
+          <p>
+            These galaxies have a central region and spiral arms containing
+            stars, gas, and dust. The Milky Way is a barred spiral galaxy.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Elliptical Galaxies</h3>
+          <p>
+            These range from nearly spherical to elongated shapes and often
+            contain older stellar populations with relatively little cold gas.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Irregular Galaxies</h3>
+          <p>
+            These lack a clear spiral or elliptical structure and can be
+            shaped by interactions, collisions, and ongoing star formation.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Lenticular Galaxies</h3>
+          <p>
+            These galaxies have a central bulge and disk but generally lack
+            prominent spiral arms.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Dwarf Galaxies</h3>
+          <p>
+            Smaller galaxies that may orbit larger galaxies or exist on
+            their own, with varied histories and stellar populations.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Galaxy Groups &amp; Clusters</h3>
+          <p>
+            Galaxies are often found in groups and massive clusters connected
+            by gravity and embedded within larger cosmic structures.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>What Is a Star?</h2>
+      <p>
+        A star is a massive, luminous object made mostly of hot plasma.
+        During most of its life, it releases energy through nuclear fusion
+        in its core. Its mass strongly influences its temperature, brightness,
+        lifetime, and final stage.
+      </p>
+    </section>
+
+    <section class="detail-section">
+      <h2>How Do Stars Form?</h2>
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>1. Molecular Cloud</h3>
+          <p>
+            Stars begin in cold, dense regions of gas and dust where gravity
+            can cause material to collapse.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>2. Protostar</h3>
+          <p>
+            As the collapsing material gathers, its centre heats up and
+            develops into a young protostar.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>3. Main Sequence</h3>
+          <p>
+            When stable hydrogen fusion begins in the core, the star enters
+            the main-sequence stage of its life.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>The Life Cycle of Stars</h2>
+      <p>
+        Stars do not all follow the same ending. Their later evolution
+        depends strongly on their initial mass and on whether they interact
+        with a companion star.
+      </p>
+
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Low- and Intermediate-Mass Stars</h3>
+          <p>
+            After the main sequence, these stars expand into giants.
+            Many eventually shed their outer layers, leaving a white dwarf.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Massive Stars</h3>
+          <p>
+            Massive stars can develop heavier elements in their interiors
+            and may end their lives in a core-collapse supernova.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>White Dwarfs</h3>
+          <p>
+            Dense stellar remnants that no longer sustain normal core
+            fusion and gradually cool over time.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Neutron Stars</h3>
+          <p>
+            Extremely dense remnants formed from the collapsed cores of
+            certain massive stars.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Supernovae</h3>
+          <p>
+            Powerful stellar explosions that can disperse newly formed
+            elements into surrounding space.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Black Holes</h3>
+          <p>
+            Under suitable conditions, the collapsed core of a massive
+            star can form a black hole.
+          </p>
+        </article>
+      </div>
+
+      <div class="fact-panel">
+        <p>
+          <strong>Key idea:</strong> A star's mass is one of the main factors
+          that determines its evolution. Not every massive star produces
+          the same remnant, and not every supernova creates a black hole.
+        </p>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Nebulae: Stellar Nurseries and Remnants</h2>
+      <p>
+        A nebula is a cloud of gas and dust in space. Some nebulae are places
+        where stars form, while others are material expelled by dying stars
+        or debris left by stellar explosions.
+      </p>
+
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h3>Emission Nebulae</h3>
+          <p>
+            Gas glows after being energised by nearby hot stars or other
+            energetic sources.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Reflection Nebulae</h3>
+          <p>
+            Dust scatters and reflects light from nearby stars rather than
+            producing most of its own visible light.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Dark Nebulae</h3>
+          <p>
+            Dense clouds of dust block visible light from objects behind
+            them and may contain star-forming regions.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Planetary Nebulae</h3>
+          <p>
+            Glowing shells of gas expelled by certain dying stars.
+            Despite the name, they are unrelated to planets forming.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Supernova Remnants</h3>
+          <p>
+            Expanding debris and shocked gas left behind by a supernova
+            explosion.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <h3>Star-Forming Regions</h3>
+          <p>
+            Dense areas inside molecular clouds where gravity can gather
+            gas into new stars and planetary systems.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>How Do Astronomers Study Galaxies and Stars?</h2>
+      <ul class="detail-list">
+        <li><strong>Optical telescopes:</strong> Capture visible light from stars, nebulae, and galaxies.</li>
+        <li><strong>Infrared astronomy:</strong> Reveals cooler objects and can observe through some dusty regions.</li>
+        <li><strong>Spectroscopy:</strong> Helps identify chemical elements, temperatures, and motion.</li>
+        <li><strong>Radio astronomy:</strong> Studies gas, magnetic activity, pulsars, and other radio-emitting sources.</li>
+        <li><strong>Space telescopes:</strong> Observe wavelengths that Earth's atmosphere absorbs or distorts.</li>
+        <li><strong>Stellar surveys:</strong> Measure the positions, distances, and properties of large numbers of stars.</li>
+      </ul>
+    </section>
+
+    <section class="detail-section">
+      <h2>Questions Scientists Are Investigating</h2>
+      <ul class="detail-list">
+        <li>How did the first stars and galaxies form?</li>
+        <li>How do galaxies grow through mergers and star formation?</li>
+        <li>How are elements created and distributed by stars?</li>
+        <li>What controls the formation and evolution of planetary systems?</li>
+        <li>How do central black holes influence their host galaxies?</li>
+      </ul>
+    </section>
+
+    <section class="detail-section">
+      <h2>Explore Related Research</h2>
+      <div class="detail-links">
+        <a class="detail-link" href="black-holes.html">Black Holes</a>
+        <a class="detail-link" href="cosmology.html">Cosmology</a>
+        <a class="detail-link" href="solar-physics.html">Solar Physics</a>
+        <a class="detail-link" href="exoplanets.html">Exoplanets</a>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2>Official Resources</h2>
+      <p>
+        <a href="https://science.nasa.gov/universe/galaxies/"
+           target="_blank" rel="noopener noreferrer">
+          NASA — Galaxies ↗
+        </a>
+      </p>
+      <p>
+        <a href="https://science.nasa.gov/universe/stars/"
+           target="_blank" rel="noopener noreferrer">
+          NASA — Stars ↗
+        </a>
+      </p>
+      <p>
+        <a href="https://science.nasa.gov/mission/hubble/"
+           target="_blank" rel="noopener noreferrer">
+          NASA — Hubble Space Telescope ↗
+        </a>
+      </p>
+    </section>
+
+    <a class="detail-back" href="research.html">← Back to All Research Fields</a>
+  </main>
+
+  <footer>
+    <p>© COSMOS — Exploring the Universe</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
