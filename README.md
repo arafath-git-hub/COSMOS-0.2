@@ -1,1 +1,1 @@
-# COSMOS-0.2
+# COSMOS
