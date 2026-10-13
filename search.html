@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050816">
+  <meta name="description" content="Search the COSMOS universe and save your favorite space discoveries.">
+  <title>Explore the Universe | COSMOS</title>
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <link rel="stylesheet" href="./search.css">
+  <script src="./search.js" defer></script>
+</head>
+<body>
+  <div class="space-background" aria-hidden="true">
+    <div class="nebula nebula-one"></div>
+    <div class="nebula nebula-two"></div>
+    <div class="stars"></div>
+  </div>
+
+  <header class="topbar">
+    <a class="brand" href="./index.html" aria-label="COSMOS home">
+      <span class="brand-symbol">✦</span>
+      <span>COSMOS<span class="brand-dot">.</span></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="./index.html">Home</a>
+      <a href="./planets.html">Planets</a>
+      <a href="./missions.html">Missions</a>
+      <a href="./research.html">Research</a>
+      <a href="./about.html">About</a>
+    </nav>
+
+    <a class="nav-action" href="./index.html">
+      <span>←</span> Main site
+    </a>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <div class="eyebrow"><span class="live-dot"></span> COSMOS EXPLORER</div>
+      <h1>Explore the <span>unknown.</span></h1>
+      <p class="hero-description">
+        Search the universe of COSMOS. Discover planets, explore missions,
+        investigate science and save the discoveries that inspire you.
+      </p>
+
+      <div class="search-panel">
+        <div class="search-input-wrap">
+          <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="10.8" cy="10.8" r="6.8"></circle>
+            <path d="m16 16 5 5"></path>
+          </svg>
+
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search planets, missions, research..."
+            autocomplete="off"
+            aria-label="Search COSMOS"
+            aria-describedby="searchHint"
+          >
+
+          <button id="clearSearch" class="clear-search" type="button"
+            aria-label="Clear search" hidden>×</button>
+          <kbd class="shortcut">/</kbd>
+        </div>
+
+        <p id="searchHint" class="search-hint">
+          Try “Mars”, “Jupiter”, “space mission” or “research”
+        </p>
+      </div>
+
+      <div class="quick-tags" aria-label="Popular searches">
+        <span>QUICK SEARCH</span>
+        <button type="button" class="tag" data-query="Mars">Mars</button>
+        <button type="button" class="tag" data-query="Jupiter">Jupiter</button>
+        <button type="button" class="tag" data-query="NASA">NASA</button>
+        <button type="button" class="tag" data-query="Galaxy">Galaxy</button>
+        <button type="button" class="tag" data-query="Research">Research</button>
+      </div>
+    </section>
+
+    <section class="explorer-section">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">YOUR UNIVERSE</div>
+          <h2>Discovery console</h2>
+          <p class="section-subtitle">Find your next cosmic destination.</p>
+        </div>
+        <div class="result-counter" id="resultCounter" aria-live="polite">
+          0 discoveries
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="filter-list" role="group" aria-label="Filter results">
+          <button class="filter-btn active" type="button" data-filter="all">All</button>
+          <button class="filter-btn" type="button" data-filter="planets">Planets</button>
+          <button class="filter-btn" type="button" data-filter="missions">Missions</button>
+          <button class="filter-btn" type="button" data-filter="research">Research</button>
+          <button class="filter-btn" type="button" data-filter="site">COSMOS</button>
+        </div>
+
+        <button id="favoritesToggle" class="favorites-toggle" type="button"
+          aria-pressed="false">
+          <span aria-hidden="true">♡</span>
+          Favorites <span id="favoriteCount" class="count-badge">0</span>
+        </button>
+      </div>
+
+      <div id="activeStatus" class="active-status" hidden></div>
+
+      <div id="resultsGrid" class="results-grid" aria-live="polite"></div>
+
+      <div id="emptyState" class="empty-state" hidden>
+        <div class="empty-orbit" aria-hidden="true">⌕</div>
+        <h3 id="emptyTitle">No discoveries found</h3>
+        <p id="emptyMessage">Try another search term or select a different category.</p>
+        <button id="resetSearch" class="secondary-btn" type="button">
+          Reset explorer
+        </button>
+      </div>
+    </section>
+
+    <section class="bottom-banner">
+      <div class="banner-icon" aria-hidden="true">✧</div>
+      <div>
+        <p class="eyebrow">THE UNIVERSE IS WAITING</p>
+        <h2>Keep looking up.</h2>
+        <p>Every discovery starts with a question.</p>
+      </div>
+      <a href="./planets.html" class="banner-link">Explore planets <span>↗</span></a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a href="./index.html" class="footer-brand">✦ COSMOS</a>
+    <span>Made for curious minds · Explore beyond the ordinary.</span>
+    <a href="./about.html">About COSMOS ↗</a>
+  </footer>
+</body>
+</html>
