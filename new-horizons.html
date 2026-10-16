@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#080b16">
 
   <title>New Horizons Mission | COSMOS</title>
-  <meta name="description" content="Explore NASA's New Horizons mission to Pluto and the Kuiper Belt through discoveries, mission facts and its journey into the outer Solar System.">
+  <meta name="description" content="Explore NASA's New Horizons mission to Pluto and Arrokoth through cinematic visuals, scientific discoveries, mission milestones and deep-space exploration.">
 
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
@@ -16,621 +16,1148 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css">
-
   <style>
-    .nh-page {
-      padding-bottom: 60px;
+    :root {
+      color-scheme: dark;
+      --bg: #080b16;
+      --panel: #101626;
+      --panel-light: #141e33;
+      --text: #f4f6ff;
+      --muted: #9aa6c2;
+      --cyan: #69e0ff;
+      --blue: #a9c4ff;
+      --violet: #9b83ff;
+      --border: rgba(144, 174, 230, .15);
+      --border-hover: rgba(105, 224, 255, .48);
+      --font-body: "DM Sans", sans-serif;
+      --font-heading: "Space Grotesk", sans-serif;
+      --shadow: 0 24px 80px rgba(0, 0, 0, .3);
+      --glow: 0 0 45px rgba(105, 224, 255, .07);
     }
 
-    /* Back navigation */
-    .nh-back-wrap {
-      margin: 24px 0 0;
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
     }
 
-    .nh-back-button {
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 28px;
+    }
+
+    body {
+      position: relative;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 15% 5%, rgba(44, 72, 142, .13), transparent 35%),
+        radial-gradient(ellipse at 90% 42%, rgba(81, 50, 142, .10), transparent 35%),
+        var(--bg);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 5px;
+    }
+
+    ::selection {
+      color: #050b16;
+      background: var(--cyan);
+    }
+
+    /* Animated background */
+
+    .space-background {
+      position: fixed;
+      z-index: -3;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(1px 1px at 12% 24%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 72% 13%, #d7eaff 50%, transparent 100%),
+        radial-gradient(2px 2px at 84% 68%, #b7d9ff 50%, transparent 100%),
+        radial-gradient(1px 1px at 35% 82%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 57% 47%, #c3d5ff 50%, transparent 100%),
+        radial-gradient(1px 1px at 20% 70%, #fff 50%, transparent 100%);
+      background-size: 290px 260px, 370px 320px, 420px 360px, 330px 280px, 250px 230px, 390px 340px;
+      animation: starDrift 100s linear infinite;
+    }
+
+    .space-background::before,
+    .space-background::after {
+      position: absolute;
+      inset: -30%;
+      content: "";
+      border-radius: 50%;
+      filter: blur(75px);
+      opacity: .2;
+    }
+
+    .space-background::before {
+      background: radial-gradient(ellipse, rgba(48, 105, 200, .24), transparent 65%);
+      animation: nebulaDrift 24s ease-in-out infinite alternate;
+    }
+
+    .space-background::after {
+      background: radial-gradient(ellipse, rgba(114, 73, 204, .19), transparent 60%);
+      animation: nebulaDrift 31s ease-in-out infinite alternate-reverse;
+    }
+
+    .ambient-glow {
+      position: fixed;
+      z-index: -2;
+      top: 25%;
+      left: -190px;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: rgba(60, 118, 255, .09);
+      filter: blur(100px);
+      pointer-events: none;
+    }
+
+    @keyframes starDrift {
+      from { background-position: 0 0; }
+      to { background-position: 0 1200px; }
+    }
+
+    @keyframes nebulaDrift {
+      from { transform: translate3d(-3%, -2%, 0) rotate(0deg) scale(1); }
+      to { transform: translate3d(4%, 3%, 0) rotate(15deg) scale(1.13); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes orbitFloat {
+      from { transform: translate(-50%, -50%) rotate(-25deg) scale(1); }
+      to { transform: translate(-50%, -50%) rotate(-12deg) scale(1.04); }
+    }
+
+    @keyframes orbitFloatTwo {
+      from { transform: translate(-50%, -50%) rotate(34deg) scale(1); }
+      to { transform: translate(-50%, -50%) rotate(20deg) scale(1.06); }
+    }
+
+    @keyframes plutoPulse {
+      0%, 100% {
+        box-shadow:
+          inset -22px -14px 30px rgba(5, 7, 20, .65),
+          0 0 35px rgba(160, 159, 255, .16);
+      }
+      50% {
+        box-shadow:
+          inset -22px -14px 30px rgba(5, 7, 20, .65),
+          0 0 65px rgba(160, 159, 255, .30);
+      }
+    }
+
+    @keyframes probeFloat {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-9px) rotate(2deg); }
+    }
+
+    @keyframes signalPulse {
+      0%, 100% { opacity: .4; transform: scaleX(.85); }
+      50% { opacity: 1; transform: scaleX(1); }
+    }
+
+    /* Page layout */
+
+    .page-shell {
+      width: min(1160px, calc(100% - 44px));
+      margin-inline: auto;
+      padding-bottom: 70px;
+    }
+
+    .back-row {
+      padding-top: 27px;
+      animation: fadeUp .65s ease both;
+    }
+
+    .back-button {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      min-height: 44px;
-      padding: 11px 17px;
-      border: 1px solid rgba(105, 224, 255, .25);
+      gap: 11px;
+      min-height: 45px;
+      padding: 10px 17px;
+      border: 1px solid rgba(105, 224, 255, .24);
       border-radius: 12px;
-      color: #c8dcff;
+      color: #d1e5ff;
       background: rgba(105, 224, 255, .055);
       text-decoration: none;
       font-size: .9rem;
       font-weight: 600;
-      transition: background .25s ease, border-color .25s ease,
-                  transform .25s ease, color .25s ease;
+      transition: transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
     }
 
-    .nh-back-button:hover {
-      color: #69e0ff;
+    .back-arrow {
+      font-size: 1.15rem;
+      transition: transform .25s ease;
+    }
+
+    .back-button:hover {
+      color: var(--cyan);
       border-color: rgba(105, 224, 255, .65);
-      background: rgba(105, 224, 255, .11);
+      background: rgba(105, 224, 255, .10);
+      transform: translateX(-3px);
+    }
+
+    .back-button:hover .back-arrow {
       transform: translateX(-3px);
     }
 
     /* Hero */
-    .nh-hero {
+
+    .hero {
       position: relative;
-      isolation: isolate;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr);
+      align-items: center;
+      gap: 28px;
+      min-height: 490px;
+      margin-top: 23px;
+      padding: clamp(27px, 5vw, 62px);
       overflow: hidden;
-      margin-top: 22px;
-      padding: clamp(28px, 6vw, 68px);
+      isolation: isolate;
       border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
+      border-radius: 27px;
       background:
-        radial-gradient(ellipse at 80% 15%, rgba(105, 224, 255, .15), transparent 38%),
-        radial-gradient(ellipse at 95% 90%, rgba(139, 92, 246, .17), transparent 42%),
-        linear-gradient(135deg, #111d37, #080b18 75%);
+        radial-gradient(ellipse at 82% 42%, rgba(105, 224, 255, .13), transparent 37%),
+        radial-gradient(ellipse at 100% 100%, rgba(139, 92, 246, .14), transparent 43%),
+        linear-gradient(135deg, rgba(18, 29, 54, .97), rgba(8, 11, 24, .97) 76%);
       box-shadow: var(--shadow), var(--glow);
+      animation: fadeUp .8s ease both;
     }
 
-    .nh-hero::before {
+    .hero::before {
       position: absolute;
       z-index: -1;
       inset: 0;
       content: "";
       pointer-events: none;
-      opacity: .6;
+      opacity: .45;
       background-image:
-        radial-gradient(1px 1px at 15% 25%, #fff 50%, transparent 100%),
-        radial-gradient(2px 2px at 65% 20%, #c5eaff 50%, transparent 100%),
-        radial-gradient(1px 1px at 42% 75%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 13% 24%, #fff 50%, transparent 100%),
+        radial-gradient(2px 2px at 67% 19%, #c5eaff 50%, transparent 100%),
+        radial-gradient(1px 1px at 42% 76%, #fff 50%, transparent 100%),
         radial-gradient(1px 1px at 90% 62%, #c5eaff 50%, transparent 100%);
       background-size: 170px 150px, 240px 190px, 200px 170px, 260px 220px;
     }
 
-    .nh-kicker {
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 18px;
-      color: var(--accent-cyan);
-      font-size: .76rem;
-      font-weight: 750;
-      letter-spacing: .16em;
+      margin-bottom: 15px;
+      color: var(--cyan);
+      font-size: .73rem;
+      font-weight: 700;
+      letter-spacing: .17em;
       text-transform: uppercase;
     }
 
-    .nh-kicker::before {
-      width: 25px;
+    .eyebrow::before {
+      width: 24px;
       height: 2px;
-      background: var(--accent-cyan);
-      box-shadow: 0 0 12px rgba(105, 224, 255, .6);
       content: "";
+      background: var(--cyan);
+      box-shadow: 0 0 12px rgba(105, 224, 255, .6);
     }
 
-    .nh-hero h1 {
-      max-width: 850px;
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-heading);
+    }
+
+    .hero h1 {
+      max-width: 680px;
       margin-bottom: 20px;
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      line-height: 1.08;
+      font-size: clamp(2.55rem, 5.5vw, 4.8rem);
+      line-height: 1.06;
+      letter-spacing: -.055em;
     }
 
-    .nh-gradient {
+    .gradient-text {
       color: transparent;
-      background: linear-gradient(105deg, #f4f7ff, #a9c4ff 45%, #69e0ff);
+      background: linear-gradient(105deg, #f4f7ff 5%, #a9c4ff 47%, #69e0ff 92%);
       background-clip: text;
       -webkit-background-clip: text;
     }
 
-    .nh-hero p {
-      max-width: 700px;
+    .hero-description {
+      max-width: 600px;
       margin-bottom: 25px;
-      font-size: 1.02rem;
+      color: #b1bfd9;
+      font-size: 1rem;
       line-height: 1.9;
     }
 
-    .nh-hero-actions {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 11px;
     }
 
-    /* Decorative Pluto illustration */
-    .nh-visual {
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 45px;
+      padding: 11px 17px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      text-decoration: none;
+      font-size: .87rem;
+      font-weight: 700;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-primary {
+      color: #06101c;
+      background: linear-gradient(110deg, #a9eaff, #69e0ff);
+      box-shadow: 0 0 22px rgba(105, 224, 255, .15);
+    }
+
+    .button-primary:hover {
+      box-shadow: 0 0 30px rgba(105, 224, 255, .32);
+    }
+
+    .button-secondary {
+      color: #d7e5ff;
+      border-color: var(--border);
+      background: rgba(255, 255, 255, .035);
+    }
+
+    .button-secondary:hover {
+      border-color: var(--border-hover);
+    }
+
+    /* Animated Pluto illustration */
+
+    .hero-visual {
       position: relative;
-      width: min(100%, 530px);
-      height: 260px;
-      margin: 35px auto 0;
       display: grid;
       place-items: center;
+      min-width: 0;
+      min-height: 340px;
       isolation: isolate;
     }
 
-    .nh-visual-orbit {
+    .visual-aura {
       position: absolute;
-      width: 250px;
-      height: 125px;
+      width: 235px;
+      height: 235px;
+      border-radius: 50%;
+      background: rgba(139, 115, 255, .13);
+      filter: blur(45px);
+      animation: plutoPulse 6s ease-in-out infinite;
+    }
+
+    .orbit {
+      position: absolute;
+      top: 49%;
+      left: 50%;
+      width: 290px;
+      height: 135px;
       border: 1px solid rgba(105, 224, 255, .35);
       border-radius: 50%;
-      transform: rotate(-28deg);
-      animation: nh-orbit 9s ease-in-out infinite alternate;
+      transform: translate(-50%, -50%) rotate(-25deg);
+      animation: orbitFloat 10s ease-in-out infinite alternate;
     }
 
-    .nh-visual-orbit.orbit-two {
-      width: 330px;
-      height: 175px;
-      border-color: rgba(164, 139, 255, .3);
-      transform: rotate(32deg);
-      animation-delay: -3s;
+    .orbit-two {
+      width: 350px;
+      height: 190px;
+      border-color: rgba(164, 139, 255, .28);
+      animation: orbitFloatTwo 13s ease-in-out infinite alternate;
     }
 
-    .nh-pluto {
+    .orbit-three {
+      width: 230px;
+      height: 270px;
+      border-color: rgba(105, 224, 255, .14);
+      transform: translate(-50%, -50%) rotate(62deg);
+    }
+
+    .pluto {
       position: relative;
-      width: 115px;
-      height: 115px;
+      z-index: 2;
+      width: clamp(115px, 14vw, 155px);
+      aspect-ratio: 1;
       border-radius: 50%;
       background:
-        radial-gradient(ellipse at 32% 28%, rgba(255, 235, 215, .9) 0 8%, transparent 24%),
-        radial-gradient(ellipse at 68% 65%, rgba(103, 74, 94, .8), transparent 36%),
-        radial-gradient(ellipse at 28% 72%, rgba(197, 151, 135, .8), transparent 30%),
-        linear-gradient(135deg, #ead4c3, #a88c99 48%, #554b68);
+        radial-gradient(ellipse at 30% 25%, rgba(255, 241, 221, .96) 0 5%, transparent 20%),
+        radial-gradient(ellipse at 38% 35%, rgba(228, 196, 174, .8), transparent 37%),
+        radial-gradient(ellipse at 70% 68%, rgba(91, 67, 92, .85), transparent 36%),
+        radial-gradient(ellipse at 25% 76%, rgba(198, 147, 132, .85), transparent 28%),
+        linear-gradient(135deg, #ead7c8, #a58a9a 48%, #51465f);
       box-shadow:
-        inset -16px -10px 24px rgba(7, 10, 25, .6),
-        0 0 40px rgba(155, 157, 255, .24);
-      z-index: 1;
+        inset -23px -15px 31px rgba(5, 7, 20, .67),
+        inset 8px 7px 17px rgba(255, 242, 221, .15),
+        0 0 45px rgba(155, 157, 255, .22);
+      animation: plutoPulse 5s ease-in-out infinite;
     }
 
-    .nh-probe {
+    .pluto::after {
       position: absolute;
+      inset: 0;
+      content: "";
+      border-radius: inherit;
+      background:
+        radial-gradient(ellipse at 65% 23%, transparent 0 12%, rgba(37, 35, 55, .16) 13% 15%, transparent 27%),
+        radial-gradient(ellipse at 38% 58%, rgba(91, 66, 76, .25) 0 7%, transparent 20%);
+      mix-blend-mode: multiply;
+    }
+
+    .spacecraft-tag {
+      position: absolute;
+      z-index: 4;
       top: 18%;
-      right: 15%;
+      right: 0;
       padding: 8px 11px;
-      border: 1px solid rgba(105, 224, 255, .4);
+      border: 1px solid rgba(105, 224, 255, .36);
       border-radius: 9px;
-      color: #9eeaff;
+      color: #a6ecff;
       background: rgba(8, 14, 30, .88);
-      font-size: .75rem;
+      font-size: .67rem;
       font-weight: 700;
-      letter-spacing: .08em;
-      box-shadow: 0 0 22px rgba(105, 224, 255, .1);
+      letter-spacing: .1em;
+      box-shadow: 0 0 25px rgba(105, 224, 255, .1);
+      animation: probeFloat 5s ease-in-out infinite;
     }
 
-    .nh-visual-label {
+    .spacecraft-tag::before {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      margin-right: 7px;
+      border-radius: 50%;
+      content: "";
+      background: var(--cyan);
+      box-shadow: 0 0 9px var(--cyan);
+      vertical-align: middle;
+    }
+
+    .visual-label {
       position: absolute;
-      bottom: 2%;
+      bottom: 0;
       color: #9eb6e3;
-      font-size: .68rem;
-      letter-spacing: .3em;
+      font-size: .64rem;
+      letter-spacing: .29em;
+      text-align: center;
     }
 
-    @keyframes nh-orbit {
-      from { opacity: .45; }
-      to {
-        opacity: 1;
-        filter: drop-shadow(0 0 8px rgba(105, 224, 255, .25));
-      }
+    .signal-line {
+      position: absolute;
+      bottom: 18%;
+      left: 12%;
+      width: 28%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      transform-origin: left;
+      animation: signalPulse 3s ease-in-out infinite;
     }
 
-    /* Mission facts */
-    .nh-facts {
+    /* Facts */
+
+    .facts-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
-      margin-block: 24px 55px;
+      margin: 24px 0 62px;
     }
 
-    .nh-fact {
+    .fact-card {
+      position: relative;
       min-width: 0;
-      padding: 20px;
+      padding: 21px;
+      overflow: hidden;
       border: 1px solid var(--border);
-      border-radius: var(--radius-md);
+      border-radius: 15px;
       background:
-        radial-gradient(circle at 100% 0%, rgba(105, 224, 255, .07), transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(105, 224, 255, .075), transparent 55%),
         rgba(255, 255, 255, .025);
+      transition: transform .3s ease, border-color .3s ease, background .3s ease;
     }
 
-    .nh-fact span {
+    .fact-card::after {
+      position: absolute;
+      right: -30px;
+      bottom: -45px;
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      content: "";
+      background: rgba(105, 224, 255, .055);
+      filter: blur(25px);
+      transition: background .3s ease;
+    }
+
+    .fact-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-hover);
+      background-color: rgba(105, 224, 255, .035);
+    }
+
+    .fact-card:hover::after {
+      background: rgba(105, 224, 255, .15);
+    }
+
+    .fact-label {
       display: block;
       margin-bottom: 8px;
       color: var(--muted);
-      font-size: .8rem;
+      font-size: .79rem;
     }
 
-    .nh-fact strong {
+    .fact-card strong {
       display: block;
-      color: var(--text);
       font-family: var(--font-heading);
-      font-size: clamp(1.05rem, 2vw, 1.5rem);
+      font-size: clamp(1rem, 1.8vw, 1.35rem);
       line-height: 1.4;
       overflow-wrap: anywhere;
     }
 
     /* Sections */
-    .nh-section {
-      margin-top: 60px;
-      scroll-margin-top: 100px;
+
+    .section {
+      margin-top: 65px;
+      scroll-margin-top: 25px;
     }
 
-    .nh-section-heading {
+    .section-heading {
       max-width: 780px;
-      margin-bottom: 25px;
+      margin-bottom: 26px;
     }
 
-    .nh-section-heading .eyebrow {
+    .section-number {
       display: block;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      color: var(--cyan);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
     }
 
-    .nh-section-heading h2 {
+    .section-heading h2 {
       margin-bottom: 12px;
+      font-size: clamp(1.85rem, 4vw, 2.8rem);
+      line-height: 1.17;
+      letter-spacing: -.04em;
     }
 
-    .nh-section-heading p {
+    .section-heading p {
+      margin-bottom: 0;
+      color: var(--muted);
       line-height: 1.9;
     }
 
-    .nh-overview {
+    .overview-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
-      gap: 22px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+      gap: 20px;
       align-items: stretch;
     }
 
-    .nh-panel {
+    .panel {
       min-width: 0;
-      padding: clamp(22px, 4vw, 32px);
+      padding: clamp(22px, 3.7vw, 32px);
       border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      background: linear-gradient(145deg, rgba(19, 28, 47, .95), rgba(8, 13, 26, .96));
+      border-radius: 18px;
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(105, 224, 255, .035), transparent 48%),
+        linear-gradient(145deg, rgba(19, 28, 47, .96), rgba(8, 13, 26, .97));
+      box-shadow: 0 15px 50px rgba(0, 0, 0, .09);
+      transition: border-color .3s ease, transform .3s ease;
     }
 
-    .nh-panel h3 {
-      margin-bottom: 15px;
+    .panel:hover {
+      border-color: rgba(144, 174, 230, .25);
     }
 
-    .nh-panel p {
+    .panel h3 {
+      margin-bottom: 14px;
+      font-size: 1.2rem;
+    }
+
+    .panel p {
+      color: #b3bfd6;
+      font-size: .93rem;
       line-height: 1.9;
     }
 
-    .nh-panel p:last-child {
+    .panel p:last-child {
       margin-bottom: 0;
     }
 
-    .nh-objectives {
+    .objectives {
       display: grid;
-      gap: 14px;
+      gap: 18px;
       margin-top: 20px;
     }
 
-    .nh-objective {
+    .objective {
       display: flex;
       align-items: flex-start;
       gap: 13px;
     }
 
-    .nh-objective-mark {
+    .objective-number {
       display: grid;
-      flex: 0 0 30px;
+      flex: 0 0 33px;
       place-items: center;
-      width: 30px;
-      height: 30px;
-      border: 1px solid rgba(105, 224, 255, .24);
+      width: 33px;
+      height: 33px;
+      border: 1px solid rgba(105, 224, 255, .25);
       border-radius: 9px;
-      color: var(--accent-cyan);
-      background: rgba(105, 224, 255, .07);
-      font-size: .78rem;
+      color: var(--cyan);
+      background: rgba(105, 224, 255, .065);
+      font-family: var(--font-heading);
+      font-size: .72rem;
       font-weight: 700;
     }
 
-    .nh-objective strong {
+    .objective strong {
       display: block;
-      margin-bottom: 3px;
+      margin: 2px 0 4px;
+      font-size: .92rem;
     }
 
-    .nh-objective p {
-      margin-bottom: 0;
-      font-size: .87rem;
+    .objective p {
+      margin: 0;
+      font-size: .84rem;
+      line-height: 1.7;
     }
 
     /* Timeline */
-    .nh-timeline {
+
+    .timeline {
       position: relative;
       display: grid;
       gap: 0;
-      margin-top: 25px;
     }
 
-    .nh-timeline-item {
-      position: relative;
+    .timeline-item {
       display: grid;
-      grid-template-columns: 105px minmax(0, 1fr);
-      gap: 20px;
-      padding: 0 0 30px;
+      grid-template-columns: 112px minmax(0, 1fr);
+      gap: 19px;
+      padding-bottom: 31px;
     }
 
-    .nh-timeline-item:last-child {
+    .timeline-item:last-child {
       padding-bottom: 0;
     }
 
-    .nh-timeline-year {
-      color: var(--accent-cyan);
+    .timeline-year {
+      padding-top: 1px;
+      color: var(--cyan);
       font-family: var(--font-heading);
-      font-size: .95rem;
+      font-size: .9rem;
       font-weight: 700;
     }
 
-    .nh-timeline-content {
+    .timeline-content {
       position: relative;
       min-width: 0;
-      padding: 0 0 0 24px;
+      padding: 0 0 0 23px;
       border-left: 1px solid rgba(105, 224, 255, .23);
     }
 
-    .nh-timeline-content::before {
+    .timeline-content::before {
       position: absolute;
       top: 6px;
       left: -5px;
       width: 9px;
       height: 9px;
-      border: 2px solid #080b16;
+      border: 2px solid #0d1424;
       border-radius: 50%;
-      background: var(--accent-cyan);
-      box-shadow: 0 0 12px rgba(105, 224, 255, .55);
       content: "";
+      background: var(--cyan);
+      box-shadow: 0 0 13px rgba(105, 224, 255, .6);
     }
 
-    .nh-timeline-content h3 {
+    .timeline-content h3 {
       margin-bottom: 7px;
-      font-size: 1.05rem;
+      font-size: 1.04rem;
     }
 
-    .nh-timeline-content p {
+    .timeline-content p {
       margin-bottom: 0;
+      color: var(--muted);
       font-size: .9rem;
       line-height: 1.85;
     }
 
     /* Discoveries */
-    .nh-discoveries {
+
+    .discoveries-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      gap: 17px;
     }
 
-    .nh-discovery {
+    .discovery-card {
+      position: relative;
       min-width: 0;
-      padding: 23px;
+      padding: 24px;
+      overflow: hidden;
       border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
+      border-radius: 17px;
       background:
-        radial-gradient(circle at 100% 0%, rgba(139, 92, 246, .10), transparent 48%),
-        linear-gradient(145deg, rgba(19, 28, 47, .94), rgba(8, 13, 26, .96));
-      transition: transform var(--transition), border-color var(--transition);
+        radial-gradient(circle at 100% 0%, rgba(139, 92, 246, .09), transparent 48%),
+        linear-gradient(145deg, rgba(19, 28, 47, .94), rgba(8, 13, 26, .97));
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
     }
 
-    .nh-discovery:hover {
-      transform: translateY(-4px);
+    .discovery-card::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      content: "";
+      background: linear-gradient(90deg, var(--cyan), var(--violet));
+      transition: width .35s ease;
+    }
+
+    .discovery-card:hover {
+      transform: translateY(-6px);
       border-color: var(--border-hover);
+      box-shadow: 0 15px 38px rgba(0, 0, 0, .18);
     }
 
-    .nh-discovery-number {
+    .discovery-card:hover::before {
+      width: 100%;
+    }
+
+    .discovery-number {
       display: block;
-      margin-bottom: 18px;
-      color: var(--accent-cyan);
+      margin-bottom: 16px;
+      color: var(--cyan);
       font-family: var(--font-heading);
-      font-size: .8rem;
+      font-size: .73rem;
       font-weight: 700;
       letter-spacing: .1em;
     }
 
-    .nh-discovery h3 {
+    .discovery-card h3 {
       margin-bottom: 10px;
-      font-size: 1.08rem;
+      font-size: 1.05rem;
+      line-height: 1.45;
     }
 
-    .nh-discovery p {
+    .discovery-card p {
       margin-bottom: 0;
-      font-size: .89rem;
+      color: var(--muted);
+      font-size: .88rem;
       line-height: 1.85;
     }
 
-    .nh-callout {
-      margin-top: 28px;
-      padding: 24px;
-      border: 1px solid rgba(105, 224, 255, .2);
-      border-left: 3px solid var(--accent-cyan);
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    .callout {
+      position: relative;
+      margin-top: 24px;
+      padding: 25px 26px;
+      border: 1px solid rgba(105, 224, 255, .19);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 14px 14px 0;
       background: rgba(105, 224, 255, .035);
     }
 
-    .nh-callout h3 {
-      margin-bottom: 10px;
+    .callout h3 {
+      margin-bottom: 9px;
+      font-size: 1.08rem;
     }
 
-    .nh-callout p {
+    .callout p {
       margin-bottom: 0;
+      color: #b3bfd6;
+      font-size: .92rem;
       line-height: 1.9;
     }
 
-    /* Page navigation */
-    .nh-navigation {
+    /* Bottom navigation */
+
+    .bottom-navigation {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 50px;
-      padding-top: 25px;
+      gap: 11px;
+      margin-top: 56px;
+      padding-top: 27px;
       border-top: 1px solid var(--border);
     }
 
-    .nh-navigation a {
+    .bottom-navigation a {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       min-height: 42px;
       padding: 9px 14px;
       border: 1px solid var(--border);
       border-radius: 11px;
-      color: var(--muted-light);
+      color: #bdc9e1;
       background: rgba(255, 255, 255, .025);
-      font-size: .86rem;
+      font-size: .84rem;
       text-decoration: none;
-      transition: color .2s ease, border-color .2s ease;
+      transition: color .22s ease, border-color .22s ease, background .22s ease;
     }
 
-    .nh-navigation a:hover {
+    .bottom-navigation a:hover {
+      color: var(--cyan);
       border-color: var(--border-hover);
-      color: var(--accent-cyan);
+      background: rgba(105, 224, 255, .045);
     }
+
+    /* Footer */
+
+    .site-footer {
+      width: min(1160px, calc(100% - 44px));
+      margin: 0 auto;
+      padding: 25px 0 32px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .83rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .footer-inner p {
+      margin: 0;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--cyan);
+    }
+
+    /* Scroll reveal */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: .08s; }
+    .reveal-delay-2 { transition-delay: .16s; }
+    .reveal-delay-3 { transition-delay: .24s; }
+
+    /* Responsive */
 
     @media (max-width: 900px) {
-      .nh-facts {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
       }
 
-      .nh-overview {
+      .hero-copy {
+        max-width: 750px;
+      }
+
+      .hero-visual {
+        min-height: 310px;
+      }
+
+      .spacecraft-tag {
+        right: 10%;
+      }
+
+      .overview-grid {
         grid-template-columns: minmax(0, 1fr);
       }
 
-      .nh-discoveries {
+      .discoveries-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 580px) {
-      .nh-hero {
-        padding: 23px;
+    @media (max-width: 620px) {
+      .page-shell,
+      .site-footer {
+        width: min(100% - 28px, 1160px);
       }
 
-      .nh-facts,
-      .nh-discoveries {
+      .back-row {
+        padding-top: 18px;
+      }
+
+      .hero {
+        min-height: auto;
+        margin-top: 17px;
+        padding: 25px 21px;
+        border-radius: 21px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.35rem, 11vw, 3.5rem);
+      }
+
+      .hero-description {
+        font-size: .94rem;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+      }
+
+      .hero-actions .button {
+        flex: 1 1 150px;
+      }
+
+      .hero-visual {
+        min-height: 270px;
+        margin-top: 8px;
+      }
+
+      .orbit {
+        width: 245px;
+        height: 118px;
+      }
+
+      .orbit-two {
+        width: 290px;
+        height: 155px;
+      }
+
+      .orbit-three {
+        width: 200px;
+        height: 235px;
+      }
+
+      .spacecraft-tag {
+        top: 12%;
+        right: 0;
+        font-size: .61rem;
+      }
+
+      .facts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-bottom: 48px;
+      }
+
+      .fact-card {
+        padding: 17px;
+      }
+
+      .section {
+        margin-top: 49px;
+      }
+
+      .section-heading h2 {
+        font-size: 1.9rem;
+      }
+
+      .discoveries-grid {
         grid-template-columns: minmax(0, 1fr);
       }
 
-      .nh-timeline-item {
-        grid-template-columns: 75px minmax(0, 1fr);
-        gap: 12px;
+      .discovery-card {
+        padding: 22px;
       }
 
-      .nh-timeline-content {
+      .timeline-item {
+        grid-template-columns: 76px minmax(0, 1fr);
+        gap: 10px;
+      }
+
+      .timeline-content {
         padding-left: 17px;
       }
 
-      .nh-navigation {
+      .callout {
+        padding: 21px;
+      }
+
+      .bottom-navigation {
         flex-direction: column;
       }
 
-      .nh-navigation a {
-        justify-content: center;
+      .bottom-navigation a {
+        width: 100%;
       }
 
-      .nh-visual {
-        height: 225px;
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
-      .nh-visual-orbit {
-        width: 210px;
-        height: 110px;
+      .footer-links {
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 370px) {
+      .facts-grid {
+        grid-template-columns: minmax(0, 1fr);
       }
 
-      .nh-visual-orbit.orbit-two {
-        width: 270px;
-        height: 150px;
+      .hero-actions {
+        flex-direction: column;
       }
 
-      .nh-pluto {
-        width: 95px;
-        height: 95px;
-      }
-
-      .nh-probe {
-        right: 3%;
+      .timeline-item {
+        grid-template-columns: 68px minmax(0, 1fr);
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .nh-discovery,
-      .nh-back-button {
-        transition: none;
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
       }
 
-      .nh-discovery:hover,
-      .nh-back-button:hover {
+      .reveal {
+        opacity: 1;
         transform: none;
-      }
-
-      .nh-visual-orbit {
-        animation: none;
       }
     }
   </style>
 </head>
 
 <body>
+  <div class="space-background" aria-hidden="true"></div>
+  <div class="ambient-glow" aria-hidden="true"></div>
 
-  <main class="nh-page cosmos-shell">
+  <main class="page-shell">
 
     <!-- BACK TO SPACE MISSIONS -->
-    <div class="nh-back-wrap">
-      <a class="nh-back-button" href="missions.html">
-        <span aria-hidden="true">&larr;</span>
+    <div class="back-row">
+      <a class="back-button" href="missions.html">
+        <span class="back-arrow" aria-hidden="true">&larr;</span>
         <span>Back to Space Missions</span>
       </a>
     </div>
 
     <!-- HERO -->
-    <section class="nh-hero">
-      <span class="nh-kicker">NASA DEEP SPACE EXPLORATION</span>
+    <section class="hero" aria-labelledby="mission-title">
+      <div class="hero-copy">
+        <span class="eyebrow">NASA DEEP SPACE EXPLORATION</span>
 
-      <h1>
-        New Horizons:
-        <span class="nh-gradient">Worlds Beyond</span>
-      </h1>
+        <h1 id="mission-title">
+          New Horizons:
+          <span class="gradient-text">Worlds Beyond</span>
+        </h1>
 
-      <p>
-        Travel to the distant frontier of the Solar System. NASA's New Horizons
-        mission transformed Pluto from a distant point of light into a complex
-        world and continued onward to explore an object in the Kuiper Belt.
-      </p>
+        <p class="hero-description">
+          Travel to the distant frontier of the Solar System. NASA's New Horizons
+          mission transformed Pluto from a distant point of light into a complex
+          world and continued onward to explore an object in the Kuiper Belt.
+        </p>
 
-      <div class="nh-hero-actions">
-        <a class="button button-primary" href="#mission-overview">
-          Discover the Mission
-        </a>
-        <a class="button button-secondary" href="#mission-timeline">
-          Mission Timeline
-        </a>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#mission-overview">
+            Discover the Mission <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="button button-secondary" href="#mission-timeline">
+            Mission Timeline
+          </a>
+        </div>
       </div>
 
-      <div class="nh-visual" role="img" aria-label="Stylized illustration of Pluto and the New Horizons spacecraft">
-        <div class="nh-visual-orbit orbit-one"></div>
-        <div class="nh-visual-orbit orbit-two"></div>
-        <div class="nh-pluto"></div>
-        <div class="nh-probe">NEW HORIZONS</div>
-        <span class="nh-visual-label">PLUTO SYSTEM</span>
+      <div class="hero-visual" role="img" aria-label="Stylized animated illustration of Pluto and the New Horizons spacecraft">
+        <div class="visual-aura"></div>
+        <div class="orbit"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="orbit orbit-three"></div>
+        <div class="pluto"></div>
+        <div class="spacecraft-tag">NEW HORIZONS</div>
+        <div class="signal-line"></div>
+        <span class="visual-label">PLUTO SYSTEM / DEEP SPACE</span>
       </div>
     </section>
 
-    <!-- FACTS -->
-    <section class="nh-facts" aria-label="Mission facts">
-      <article class="nh-fact">
-        <span>Launch date</span>
+    <!-- MISSION FACTS -->
+    <section class="facts-grid" aria-label="Mission facts">
+      <article class="fact-card reveal">
+        <span class="fact-label">Launch Date</span>
         <strong>19 Jan 2006</strong>
       </article>
 
-      <article class="nh-fact">
-        <span>Mission agency</span>
+      <article class="fact-card reveal reveal-delay-1">
+        <span class="fact-label">Mission Agency</span>
         <strong>NASA</strong>
       </article>
 
-      <article class="nh-fact">
-        <span>Primary flyby</span>
-        <strong>Pluto · 2015</strong>
+      <article class="fact-card reveal reveal-delay-2">
+        <span class="fact-label">Pluto Flyby</span>
+        <strong>14 Jul 2015</strong>
       </article>
 
-      <article class="nh-fact">
-        <span>Kuiper Belt flyby</span>
-        <strong>Arrokoth · 2019</strong>
+      <article class="fact-card reveal reveal-delay-3">
+        <span class="fact-label">Arrokoth Flyby</span>
+        <strong>1 Jan 2019</strong>
       </article>
     </section>
 
     <!-- OVERVIEW -->
-    <section class="nh-section" id="mission-overview">
-      <div class="nh-section-heading">
-        <span class="eyebrow">01 / Mission Overview</span>
+    <section class="section reveal" id="mission-overview">
+      <div class="section-heading">
+        <span class="section-number">01 / Mission Overview</span>
         <h2>A Journey to the Solar System's Frontier</h2>
         <p>
           New Horizons was designed to investigate Pluto and its moons, then
@@ -639,15 +1166,14 @@
         </p>
       </div>
 
-      <div class="nh-overview">
-        <article class="nh-panel">
+      <div class="overview-grid">
+        <article class="panel">
           <h3>Why This Mission Matters</h3>
 
           <p>
             Before New Horizons arrived, Pluto had only been observed from
             great distances. The spacecraft's 2015 flyby provided the first
-            close-up observations of its surface, atmosphere and surrounding
-            system.
+            close-up observations of its surface, atmosphere and surrounding system.
           </p>
 
           <p>
@@ -658,41 +1184,40 @@
 
           <p>
             The mission later visited Arrokoth, a small Kuiper Belt object,
-            offering a closer look at a primitive body from the early Solar
-            System.
+            offering a closer look at a primitive body from the early Solar System.
           </p>
         </article>
 
-        <aside class="nh-panel">
+        <aside class="panel">
           <h3>Primary Scientific Goals</h3>
 
-          <div class="nh-objectives">
-            <div class="nh-objective">
-              <span class="nh-objective-mark">01</span>
+          <div class="objectives">
+            <div class="objective">
+              <span class="objective-number">01</span>
               <div>
                 <strong>Explore Pluto</strong>
                 <p>Map its surface and study its geology and composition.</p>
               </div>
             </div>
 
-            <div class="nh-objective">
-              <span class="nh-objective-mark">02</span>
+            <div class="objective">
+              <span class="objective-number">02</span>
               <div>
                 <strong>Study the Atmosphere</strong>
                 <p>Investigate Pluto's thin atmosphere and its interaction with space.</p>
               </div>
             </div>
 
-            <div class="nh-objective">
-              <span class="nh-objective-mark">03</span>
+            <div class="objective">
+              <span class="objective-number">03</span>
               <div>
                 <strong>Investigate the Kuiper Belt</strong>
                 <p>Study primitive objects beyond Neptune.</p>
               </div>
             </div>
 
-            <div class="nh-objective">
-              <span class="nh-objective-mark">04</span>
+            <div class="objective">
+              <span class="objective-number">04</span>
               <div>
                 <strong>Understand Planetary Origins</strong>
                 <p>Collect clues about the early Solar System.</p>
@@ -704,9 +1229,9 @@
     </section>
 
     <!-- TIMELINE -->
-    <section class="nh-section" id="mission-timeline">
-      <div class="nh-section-heading">
-        <span class="eyebrow">02 / Mission Timeline</span>
+    <section class="section reveal" id="mission-timeline">
+      <div class="section-heading">
+        <span class="section-number">02 / Mission Timeline</span>
         <h2>Milestones Across Deep Space</h2>
         <p>
           From launch to the outer Solar System, each milestone expanded
@@ -714,12 +1239,12 @@
         </p>
       </div>
 
-      <div class="nh-panel">
-        <div class="nh-timeline">
+      <div class="panel">
+        <div class="timeline">
 
-          <article class="nh-timeline-item">
-            <div class="nh-timeline-year">2006</div>
-            <div class="nh-timeline-content">
+          <article class="timeline-item">
+            <div class="timeline-year">2006</div>
+            <div class="timeline-content">
               <h3>Launch from Earth</h3>
               <p>
                 New Horizons launched on 19 January 2006, beginning its
@@ -728,9 +1253,9 @@
             </div>
           </article>
 
-          <article class="nh-timeline-item">
-            <div class="nh-timeline-year">2007</div>
-            <div class="nh-timeline-content">
+          <article class="timeline-item">
+            <div class="timeline-year">2007</div>
+            <div class="timeline-content">
               <h3>Jupiter Flyby</h3>
               <p>
                 The spacecraft passed Jupiter and used its gravity to gain
@@ -739,9 +1264,9 @@
             </div>
           </article>
 
-          <article class="nh-timeline-item">
-            <div class="nh-timeline-year">2015</div>
-            <div class="nh-timeline-content">
+          <article class="timeline-item">
+            <div class="timeline-year">2015</div>
+            <div class="timeline-content">
               <h3>Historic Pluto Encounter</h3>
               <p>
                 On 14 July 2015, New Horizons made its closest approach to
@@ -751,9 +1276,9 @@
             </div>
           </article>
 
-          <article class="nh-timeline-item">
-            <div class="nh-timeline-year">2019</div>
-            <div class="nh-timeline-content">
+          <article class="timeline-item">
+            <div class="timeline-year">2019</div>
+            <div class="timeline-content">
               <h3>Arrokoth Flyby</h3>
               <p>
                 The spacecraft flew past Arrokoth on 1 January 2019.
@@ -763,9 +1288,9 @@
             </div>
           </article>
 
-          <article class="nh-timeline-item">
-            <div class="nh-timeline-year">Beyond 2019</div>
-            <div class="nh-timeline-content">
+          <article class="timeline-item">
+            <div class="timeline-year">Beyond 2019</div>
+            <div class="timeline-content">
               <h3>Continuing Through the Kuiper Belt</h3>
               <p>
                 After the Arrokoth encounter, New Horizons continued studying
@@ -780,9 +1305,9 @@
     </section>
 
     <!-- DISCOVERIES -->
-    <section class="nh-section" id="discoveries">
-      <div class="nh-section-heading">
-        <span class="eyebrow">03 / Scientific Discoveries</span>
+    <section class="section reveal" id="discoveries">
+      <div class="section-heading">
+        <span class="section-number">03 / Scientific Discoveries</span>
         <h2>What New Horizons Revealed</h2>
         <p>
           Its observations showed that the outer Solar System is more diverse
@@ -790,10 +1315,10 @@
         </p>
       </div>
 
-      <div class="nh-discoveries">
+      <div class="discoveries-grid">
 
-        <article class="nh-discovery">
-          <span class="nh-discovery-number">DISCOVERY 01</span>
+        <article class="discovery-card">
+          <span class="discovery-number">DISCOVERY 01</span>
           <h3>Pluto's Complex Surface</h3>
           <p>
             Pluto contains mountains, craters, icy plains and varied surface
@@ -801,8 +1326,8 @@
           </p>
         </article>
 
-        <article class="nh-discovery">
-          <span class="nh-discovery-number">DISCOVERY 02</span>
+        <article class="discovery-card">
+          <span class="discovery-number">DISCOVERY 02</span>
           <h3>The Heart-Shaped Region</h3>
           <p>
             The bright region informally known as Tombaugh Regio includes
@@ -810,8 +1335,8 @@
           </p>
         </article>
 
-        <article class="nh-discovery">
-          <span class="nh-discovery-number">DISCOVERY 03</span>
+        <article class="discovery-card">
+          <span class="discovery-number">DISCOVERY 03</span>
           <h3>Pluto's Thin Atmosphere</h3>
           <p>
             Observations revealed atmospheric hazes and helped researchers
@@ -819,8 +1344,8 @@
           </p>
         </article>
 
-        <article class="nh-discovery">
-          <span class="nh-discovery-number">DISCOVERY 04</span>
+        <article class="discovery-card">
+          <span class="discovery-number">DISCOVERY 04</span>
           <h3>Charon and Pluto's Moons</h3>
           <p>
             Images and measurements provided new views of Charon, Pluto's
@@ -828,8 +1353,8 @@
           </p>
         </article>
 
-        <article class="nh-discovery">
-          <span class="nh-discovery-number">DISCOVERY 05</span>
+        <article class="discovery-card">
+          <span class="discovery-number">DISCOVERY 05</span>
           <h3>Arrokoth's Primitive Structure</h3>
           <p>
             Arrokoth's two connected lobes provided evidence about how some
@@ -837,8 +1362,8 @@
           </p>
         </article>
 
-        <article class="nh-discovery">
-          <span class="nh-discovery-number">DISCOVERY 06</span>
+        <article class="discovery-card">
+          <span class="discovery-number">DISCOVERY 06</span>
           <h3>The Distant Solar System</h3>
           <p>
             The mission expanded knowledge of icy bodies beyond Neptune and
@@ -848,7 +1373,7 @@
 
       </div>
 
-      <aside class="nh-callout">
+      <aside class="callout">
         <h3>Why the Kuiper Belt Is Important</h3>
         <p>
           The Kuiper Belt contains many small icy bodies beyond Neptune.
@@ -859,10 +1384,10 @@
       </aside>
     </section>
 
-    <!-- SPACECRAFT -->
-    <section class="nh-section">
-      <div class="nh-section-heading">
-        <span class="eyebrow">04 / Spacecraft Technology</span>
+    <!-- SPACECRAFT TECHNOLOGY -->
+    <section class="section reveal" id="spacecraft-technology">
+      <div class="section-heading">
+        <span class="section-number">04 / Spacecraft Technology</span>
         <h2>A Robotic Explorer Built for the Distance</h2>
         <p>
           New Horizons carries scientific instruments designed to collect
@@ -870,8 +1395,8 @@
         </p>
       </div>
 
-      <div class="nh-overview">
-        <article class="nh-panel">
+      <div class="overview-grid">
+        <article class="panel">
           <h3>Scientific Instruments</h3>
           <p>
             The spacecraft's instrument suite includes imaging systems,
@@ -885,7 +1410,7 @@
           </p>
         </article>
 
-        <article class="nh-panel">
+        <article class="panel">
           <h3>How It Communicates</h3>
           <p>
             New Horizons uses a high-gain antenna to communicate with Earth
@@ -902,13 +1427,13 @@
     </section>
 
     <!-- LEGACY -->
-    <section class="nh-section">
-      <div class="nh-section-heading">
-        <span class="eyebrow">05 / Mission Legacy</span>
+    <section class="section reveal" id="mission-legacy">
+      <div class="section-heading">
+        <span class="section-number">05 / Mission Legacy</span>
         <h2>Changing Our View of Distant Worlds</h2>
       </div>
 
-      <article class="nh-panel">
+      <article class="panel">
         <p>
           New Horizons showed that Pluto is a scientifically rich world rather
           than simply a distant dot in a telescope. Its exploration of Arrokoth
@@ -930,7 +1455,7 @@
     </section>
 
     <!-- BOTTOM NAVIGATION -->
-    <nav class="nh-navigation" aria-label="Mission navigation">
+    <nav class="bottom-navigation reveal" aria-label="Mission navigation">
       <a href="missions.html">&larr; Back to Space Missions</a>
       <a href="voyager.html">Explore Voyager &rarr;</a>
       <a href="research.html">Explore Research &rarr;</a>
@@ -940,18 +1465,76 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="footer cosmos-shell">
-    <p>&copy; <span data-current-year id="currentYear">2026</span> COSMOS. Explore beyond the known.</p>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; <span id="currentYear">2026</span> COSMOS. Explore beyond the known.</p>
 
-    <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="missions.html">Missions</a>
-      <a href="research.html">Research</a>
-      <a href="about.html">About</a>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="missions.html">Missions</a>
+        <a href="research.html">Research</a>
+        <a href="about.html">About</a>
+      </nav>
     </div>
   </footer>
 
-  <script src="app.js"></script>
+  <script>
+    (() => {
+      "use strict";
 
+      // Keep the footer year current.
+      const yearElement = document.getElementById("currentYear");
+
+      if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+      }
+
+      // Reveal sections and cards as they enter the viewport.
+      const revealElements = document.querySelectorAll(
+        ".reveal, .fact-card, .discovery-card"
+      );
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries, currentObserver) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              currentObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: "0px 0px -35px 0px"
+        });
+
+        revealElements.forEach((element) => {
+          element.classList.add("reveal");
+          observer.observe(element);
+        });
+      } else {
+        revealElements.forEach((element) => {
+          element.classList.add("is-visible");
+        });
+      }
+
+      // Ensure internal links scroll to their matching sections.
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const targetId = link.getAttribute("href");
+          const target = targetId && document.querySelector(targetId);
+
+          if (target) {
+            event.preventDefault();
+            target.scrollIntoView({
+              behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                ? "auto"
+                : "smooth",
+              block: "start"
+            });
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
