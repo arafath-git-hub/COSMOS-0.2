@@ -1,165 +1,739 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050816">
   <meta name="description" content="Explore NASA's Mars rovers, their discoveries, and the search for evidence of ancient life on Mars.">
   <title>Mars Rovers | COSMOS</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    .mission-detail {
-      width: min(1100px, 90%);
-      margin: 0 auto;
-      padding: 45px 0 80px;
+    :root {
+      --bg: #050816;
+      --panel: rgba(22, 23, 43, 0.78);
+      --border: rgba(255, 166, 119, 0.19);
+      --orange: #ffad85;
+      --orange-bright: #ff875f;
+      --gold: #ffd7a0;
+      --cyan: #8bdcff;
+      --text: #f6f4ff;
+      --muted: #b8bfd2;
+      --font-main: "Inter", sans-serif;
+      --font-display: "Orbitron", sans-serif;
     }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 24px;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 80% 10%, rgba(139, 61, 42, 0.15), transparent 34%),
+        radial-gradient(ellipse at 5% 45%, rgba(74, 55, 137, 0.13), transparent 32%),
+        #050816;
+      font-family: var(--font-main);
+      line-height: 1.7;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    body::before {
+      opacity: 0.62;
+      background-image:
+        radial-gradient(1px 1px at 8% 14%, #fff 50%, transparent 100%),
+        radial-gradient(2px 2px at 25% 72%, #ffc7a6 50%, transparent 100%),
+        radial-gradient(1px 1px at 46% 31%, #fff 50%, transparent 100%),
+        radial-gradient(2px 2px at 65% 16%, #c9d8ff 50%, transparent 100%),
+        radial-gradient(1px 1px at 82% 63%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 94% 28%, #ffad85 50%, transparent 100%),
+        radial-gradient(1px 1px at 15% 89%, #fff 50%, transparent 100%),
+        radial-gradient(2px 2px at 73% 87%, #d7b6ff 50%, transparent 100%);
+      background-size: 370px 320px;
+      animation: starDrift 100s linear infinite;
+    }
+
+    body::after {
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(5, 8, 22, 0.08) 65%,
+        rgba(5, 8, 22, 0.58) 100%
+      );
+    }
+
+    .mission-detail {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 35px 0 90px;
+      position: relative;
+    }
+
+    /* Back navigation */
 
     .mission-back {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
       margin-bottom: 28px;
-      color: #9ecbff;
+      padding: 11px 17px;
+      border: 1px solid rgba(255, 173, 133, 0.3);
+      border-radius: 12px;
+      background: rgba(27, 22, 39, 0.78);
+      color: #ffcfb5;
+      font-size: 0.9rem;
+      font-weight: 600;
       text-decoration: none;
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s ease, border-color 0.3s ease,
+        background 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .mission-back:hover { text-decoration: underline; }
+    .mission-back .arrow {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .mission-back:hover {
+      transform: translateY(-3px);
+      border-color: var(--orange);
+      background: rgba(78, 39, 36, 0.65);
+      box-shadow: 0 0 25px rgba(255, 135, 95, 0.13);
+    }
+
+    .mission-back:hover .arrow {
+      transform: translateX(-4px);
+    }
+
+    /* Hero */
 
     .mission-hero {
-      padding: 45px 35px;
-      border: 1px solid rgba(150,190,255,.22);
-      border-radius: 22px;
-      background: linear-gradient(135deg,#281b19,#47302a 55%,#151b29);
-      margin-bottom: 30px;
+      min-height: 420px;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: clamp(30px, 6vw, 72px);
+      margin-bottom: 28px;
+      border: 1px solid rgba(255, 173, 133, 0.25);
+      border-radius: 28px;
+      background:
+        radial-gradient(ellipse at 83% 45%, rgba(255, 107, 63, 0.17), transparent 33%),
+        linear-gradient(125deg, #20151b, #291b28 52%, #11182c);
+      box-shadow:
+        0 20px 80px rgba(0, 0, 0, 0.25),
+        inset 0 0 55px rgba(255, 134, 94, 0.035);
+    }
+
+    .mission-hero::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 310px;
+      height: 310px;
+      top: 50%;
+      right: -42px;
+      border: 1px solid rgba(255, 173, 133, 0.25);
+      border-radius: 50%;
+      transform: translateY(-50%);
+      box-shadow:
+        0 0 0 30px rgba(255, 173, 133, 0.035),
+        0 0 0 62px rgba(255, 173, 133, 0.025),
+        0 0 55px rgba(255, 135, 95, 0.12);
+      animation: orbitPulse 7s ease-in-out infinite;
+    }
+
+    /* CSS-drawn Mars */
+
+    .mars-planet {
+      position: absolute;
+      z-index: -1;
+      width: 205px;
+      height: 205px;
+      top: 50%;
+      right: 15px;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      background:
+        radial-gradient(ellipse at 25% 32%, rgba(255, 212, 164, 0.85) 0 3%, transparent 4%),
+        radial-gradient(ellipse at 62% 25%, rgba(106, 42, 31, 0.6) 0 9%, transparent 10%),
+        radial-gradient(ellipse at 45% 55%, rgba(96, 39, 34, 0.65) 0 8%, transparent 9%),
+        radial-gradient(ellipse at 72% 62%, rgba(255, 187, 132, 0.45) 0 6%, transparent 7%),
+        radial-gradient(ellipse at 32% 75%, rgba(104, 45, 35, 0.6) 0 7%, transparent 8%),
+        radial-gradient(circle at 32% 25%, #ffbd88, #c65d3f 38%, #83372e 67%, #321d2a 83%);
+      box-shadow:
+        inset -25px -14px 34px rgba(0, 0, 0, 0.55),
+        inset 9px 6px 18px rgba(255, 208, 163, 0.16),
+        0 0 55px rgba(255, 111, 69, 0.24);
+      animation: planetFloat 8s ease-in-out infinite;
+    }
+
+    .mars-planet::after {
+      content: "";
+      position: absolute;
+      inset: -10px;
+      border: 1px solid rgba(255, 178, 131, 0.25);
+      border-radius: 50%;
+      box-shadow: 0 0 25px rgba(255, 126, 78, 0.1);
+    }
+
+    .hero-content {
+      max-width: 700px;
+      position: relative;
+      z-index: 1;
     }
 
     .mission-label {
-      display: inline-block;
-      color: #ffc5a8;
-      font-size: .82rem;
-      letter-spacing: 2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--orange);
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      margin-bottom: 14px;
+    }
+
+    .mission-label::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: var(--orange);
+      box-shadow: 0 0 12px var(--orange);
     }
 
     .mission-hero h1 {
-      font-size: clamp(2.2rem,6vw,4.3rem);
+      margin-bottom: 20px;
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 7vw, 5.2rem);
+      font-weight: 700;
       line-height: 1.1;
-      margin: 0 0 18px;
+      letter-spacing: -2px;
+      background: linear-gradient(100deg, #fff 5%, #ffd6bc 50%, #ff977c 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 25px rgba(255, 135, 95, 0.12));
     }
 
-    .mission-hero p {
-      max-width: 760px;
-      line-height: 1.8;
-      color: #eadbd6;
+    .hero-description {
+      max-width: 690px;
+      color: #e0ced0;
+      font-size: 1.02rem;
+      line-height: 1.95;
     }
+
+    .hero-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 25px;
+      color: #d0b6b4;
+      font-size: 0.82rem;
+      letter-spacing: 0.4px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 8px;
+      border-radius: 50%;
+      background: #ffb98c;
+      box-shadow: 0 0 14px rgba(255, 173, 133, 0.8);
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    /* Mission facts */
 
     .mission-facts {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
-      gap: 16px;
-      margin: 25px 0 35px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 15px;
+      margin: 24px 0 38px;
     }
 
-    .mission-fact,.mission-section {
-      padding: 23px;
-      border: 1px solid rgba(150,190,255,.17);
-      border-radius: 16px;
-      background: rgba(255,255,255,.035);
+    .mission-fact {
+      min-width: 0;
+      position: relative;
+      overflow: hidden;
+      padding: 24px 20px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: linear-gradient(145deg, rgba(49, 35, 48, 0.73), rgba(13, 17, 35, 0.82));
+      backdrop-filter: blur(14px);
+      transition: transform 0.35s ease, border-color 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .mission-fact::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 15%;
+      width: 70%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+      opacity: 0.75;
+    }
+
+    .mission-fact:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 173, 133, 0.48);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.2), 0 0 25px rgba(255, 135, 95, 0.07);
     }
 
     .mission-fact span {
       display: block;
-      color: #ffc5a8;
-      font-size: .82rem;
       margin-bottom: 9px;
+      color: #d3a998;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
-    .mission-fact strong { font-size: 1.05rem; }
-    .mission-section { margin-top: 20px; }
-    .mission-section h2 { margin-top: 0; margin-bottom: 14px; }
-
-    .mission-section p,.mission-section li {
-      color: #cbd5e1;
-      line-height: 1.85;
+    .mission-fact strong {
+      display: block;
+      color: #fff0e9;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
     }
 
-    .mission-section ul { padding-left: 22px; }
+    /* Content sections */
+
+    .mission-section {
+      position: relative;
+      overflow: hidden;
+      margin-top: 20px;
+      padding: clamp(24px, 4vw, 36px);
+      border: 1px solid rgba(255, 173, 133, 0.15);
+      border-radius: 20px;
+      background: linear-gradient(140deg, rgba(34, 26, 43, 0.83), rgba(9, 15, 32, 0.8));
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(12px);
+      transition: border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .mission-section::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 28px;
+      bottom: 28px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--orange), rgba(255, 135, 95, 0.06));
+      box-shadow: 0 0 12px rgba(255, 135, 95, 0.3);
+    }
+
+    .mission-section:hover {
+      border-color: rgba(255, 173, 133, 0.28);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.16);
+    }
+
+    .mission-section h2 {
+      margin-bottom: 17px;
+      color: #fff0e8;
+      font-family: var(--font-display);
+      font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .mission-section h2::after {
+      content: "";
+      display: block;
+      width: 48px;
+      height: 2px;
+      margin-top: 13px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+    }
+
+    .mission-section p,
+    .mission-section li {
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.95;
+    }
+
+    .mission-section p + p {
+      margin-top: 15px;
+    }
+
+    .mission-section ul {
+      display: grid;
+      gap: 14px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .mission-section li {
+      position: relative;
+      padding-left: 27px;
+    }
+
+    .mission-section li::before {
+      content: "";
+      position: absolute;
+      top: 11px;
+      left: 1px;
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--orange);
+      border-radius: 2px;
+      transform: rotate(45deg);
+      box-shadow: 0 0 9px rgba(255, 173, 133, 0.25);
+    }
+
+    .mission-section li strong {
+      color: #ffe0ce;
+      font-weight: 600;
+    }
 
     .mission-highlight {
-      border-left: 3px solid #ffad85;
-      padding: 12px 18px;
-      margin-top: 18px;
-      background: rgba(255,173,133,.07);
-      color: #f9e6dc;
-      line-height: 1.8;
+      position: relative;
+      margin-top: 22px;
+      padding: 19px 22px;
+      border: 1px solid rgba(255, 173, 133, 0.18);
+      border-left: 3px solid var(--orange);
+      border-radius: 0 12px 12px 0;
+      background: linear-gradient(90deg, rgba(183, 91, 58, 0.12), rgba(183, 91, 58, 0.015));
+      color: #f8e4da;
+      font-size: 0.95rem;
+      line-height: 1.9;
     }
+
+    .mission-highlight strong {
+      color: var(--orange);
+    }
+
+    /* Explore links */
 
     .mission-navigation {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
+      gap: 13px;
+      margin-top: 22px;
     }
 
     .mission-navigation a {
-      display: inline-block;
-      padding: 12px 18px;
-      border: 1px solid rgba(150,190,255,.3);
-      border-radius: 10px;
-      color: #e5efff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 12px 19px;
+      border: 1px solid rgba(255, 173, 133, 0.28);
+      border-radius: 11px;
+      background: rgba(65, 37, 43, 0.38);
+      color: #ffe9dd;
+      font-size: 0.88rem;
+      font-weight: 600;
       text-decoration: none;
+      transition: transform 0.3s ease, border-color 0.3s ease,
+        background 0.3s ease, box-shadow 0.3s ease;
     }
 
     .mission-navigation a:hover {
-      background: rgba(117,182,255,.12);
+      transform: translateY(-3px);
+      border-color: var(--orange);
+      background: rgba(104, 55, 46, 0.35);
+      box-shadow: 0 8px 25px rgba(255, 135, 95, 0.09);
     }
 
-    @media(max-width:600px) {
+    .mission-navigation a.primary-link {
+      border-color: rgba(255, 173, 133, 0.5);
+      background: linear-gradient(110deg, rgba(151, 73, 49, 0.34), rgba(99, 55, 85, 0.25));
+    }
+
+    .external-arrow {
+      color: var(--orange);
+      font-size: 1.05rem;
+    }
+
+    /* Scroll reveal */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mission-fact:nth-child(2) {
+      transition-delay: 80ms;
+    }
+
+    .mission-fact:nth-child(3) {
+      transition-delay: 160ms;
+    }
+
+    .mission-fact:nth-child(4) {
+      transition-delay: 240ms;
+    }
+
+    /* Animations */
+
+    @keyframes starDrift {
+      from { background-position: 0 0; }
+      to { background-position: 370px 320px; }
+    }
+
+    @keyframes orbitPulse {
+      0%, 100% {
+        opacity: 0.55;
+        transform: translateY(-50%) scale(0.96);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.04);
+      }
+    }
+
+    @keyframes planetFloat {
+      0%, 100% { transform: translateY(-50%) translateX(0); }
+      50% { transform: translateY(calc(-50% - 12px)) translateX(-5px); }
+    }
+
+    @keyframes statusPulse {
+      0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 14px rgba(255, 173, 133, 0.8);
+      }
+      50% {
+        opacity: 0.55;
+        box-shadow: 0 0 5px rgba(255, 173, 133, 0.4);
+      }
+    }
+
+    /* Responsive */
+
+    @media (max-width: 850px) {
+      .mission-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .mission-hero::before {
+        right: -135px;
+      }
+
+      .mars-planet {
+        right: -70px;
+        opacity: 0.5;
+      }
+
+      .hero-content {
+        max-width: 100%;
+      }
+
+      .hero-description {
+        max-width: 620px;
+      }
+    }
+
+    @media (max-width: 600px) {
       .mission-detail {
         width: calc(100% - 28px);
-        padding-top: 25px;
+        padding-top: 20px;
+        padding-bottom: 55px;
       }
-      .mission-hero { padding: 30px 22px; }
-      .mission-section,.mission-fact { padding: 18px; }
+
+      .mission-back {
+        margin-bottom: 20px;
+        padding: 10px 13px;
+        font-size: 0.82rem;
+      }
+
+      .mission-hero {
+        min-height: auto;
+        padding: 34px 23px;
+        border-radius: 21px;
+      }
+
+      .mission-hero::before {
+        width: 210px;
+        height: 210px;
+        right: -125px;
+        top: 27%;
+      }
+
+      .mars-planet {
+        width: 125px;
+        height: 125px;
+        right: -62px;
+        top: 27%;
+        opacity: 0.45;
+      }
+
+      .mission-label {
+        font-size: 0.62rem;
+        letter-spacing: 2px;
+      }
+
+      .mission-hero h1 {
+        max-width: 100%;
+        font-size: clamp(2rem, 10vw, 3.2rem);
+        letter-spacing: -1px;
+      }
+
+      .hero-description {
+        font-size: 0.91rem;
+        line-height: 1.85;
+      }
+
+      .hero-status {
+        align-items: flex-start;
+        font-size: 0.76rem;
+      }
+
+      .mission-facts {
+        gap: 11px;
+        margin: 18px 0 27px;
+      }
+
+      .mission-fact {
+        padding: 18px 15px;
+        border-radius: 14px;
+      }
+
+      .mission-fact span {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+      }
+
+      .mission-fact strong {
+        font-size: 0.9rem;
+      }
+
+      .mission-section {
+        margin-top: 15px;
+        padding: 24px 20px;
+        border-radius: 16px;
+      }
+
+      .mission-section::before {
+        top: 22px;
+        bottom: 22px;
+      }
+
+      .mission-section h2 {
+        font-size: 1.1rem;
+      }
+
+      .mission-section p,
+      .mission-section li {
+        font-size: 0.89rem;
+        line-height: 1.85;
+      }
+
+      .mission-highlight {
+        padding: 15px 16px;
+        font-size: 0.88rem;
+      }
+
+      .mission-navigation {
+        flex-direction: column;
+      }
+
+      .mission-navigation a {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
 
 <body>
   <main class="mission-detail">
-    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+    <a class="mission-back" href="missions.html">
+      <span class="arrow" aria-hidden="true">&larr;</span>
+      <span>Back to Space Missions</span>
+    </a>
 
     <header class="mission-hero">
-      <span class="mission-label">Robotic Planetary Exploration</span>
-      <h1>Mars Rovers</h1>
-      <p>
-        NASA's Mars rovers are robotic explorers designed to study the Red
-        Planet. They examine rocks, soil, landscapes, and the Martian
-        environment to help scientists understand how Mars changed over time
-        and whether it once had conditions suitable for life.
-      </p>
+      <div class="hero-content">
+        <span class="mission-label">Robotic Planetary Exploration</span>
+        <h1>Mars Rovers</h1>
+        <p class="hero-description">
+          NASA's robotic explorers investigate the Red Planet's rocks, soil,
+          landscapes, and climate. Their discoveries help scientists reconstruct
+          Mars's ancient environments and investigate whether conditions once
+          existed that could have supported microbial life.
+        </p>
+        <div class="hero-status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>Robotic exploration of the Red Planet</span>
+        </div>
+      </div>
+      <div class="mars-planet" aria-hidden="true"></div>
     </header>
 
     <section class="mission-facts" aria-label="Mission facts">
-      <div class="mission-fact">
+      <div class="mission-fact reveal">
         <span>Organization</span>
         <strong>NASA</strong>
       </div>
-      <div class="mission-fact">
+      <div class="mission-fact reveal">
         <span>Exploration Begins</span>
         <strong>1997</strong>
       </div>
-      <div class="mission-fact">
+      <div class="mission-fact reveal">
         <span>Notable Rovers</span>
         <strong>Sojourner, Spirit, Opportunity, Curiosity, Perseverance</strong>
       </div>
-      <div class="mission-fact">
+      <div class="mission-fact reveal">
         <span>Destination</span>
         <strong>Mars</strong>
       </div>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
       <h2>Why Use Rovers?</h2>
       <p>
         Mars is too distant for scientists to examine every location directly.
@@ -168,68 +742,155 @@
         locations that would otherwise be difficult to study.
       </p>
       <p>
-        Engineers on Earth plan rover activities using data sent back from
-        Mars. Because radio signals take time to travel between Earth and
-        Mars, the rovers must carry out many tasks with onboard systems.
+        Engineers and scientists on Earth plan rover activities using data sent
+        back from Mars. Because radio signals take time to travel between Earth
+        and Mars, the rovers must perform many operations with onboard systems
+        and carefully planned instructions.
       </p>
+      <div class="mission-highlight">
+        Each rover is a mobile science laboratory, built to operate in a cold,
+        dusty environment far beyond the reach of direct human control.
+      </div>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
       <h2>Important Mars Rovers</h2>
       <ul>
-        <li><strong>Sojourner (1997):</strong> The first successful NASA rover on Mars. It demonstrated that a small robotic vehicle could explore the Martian surface.</li>
-        <li><strong>Spirit (2004):</strong> Explored Gusev Crater and found evidence that water had altered Martian rocks.</li>
-        <li><strong>Opportunity (2004):</strong> Studied rocks and minerals that showed Mars had a wetter past. Its mission lasted far beyond its original planned duration.</li>
-        <li><strong>Curiosity (2012):</strong> Investigates Gale Crater and Mount Sharp, studying ancient environments and whether they could have supported microbial life.</li>
-        <li><strong>Perseverance (2021):</strong> Explores Jezero Crater, studies ancient environments, and collects rock samples for a possible future return to Earth.</li>
+        <li>
+          <strong>Sojourner (1997):</strong>
+          The first successful NASA rover on Mars. It demonstrated that a small
+          robotic vehicle could investigate the Martian surface.
+        </li>
+        <li>
+          <strong>Spirit (2004):</strong>
+          Explored Gusev Crater and found evidence that water had altered
+          Martian rocks. Its mission ended in 2010.
+        </li>
+        <li>
+          <strong>Opportunity (2004):</strong>
+          Studied rocks and minerals that revealed a wetter ancient Mars.
+          It operated until 2018, far beyond its original planned mission.
+        </li>
+        <li>
+          <strong>Curiosity (2012):</strong>
+          Investigates Gale Crater and Mount Sharp, studying ancient
+          environments and whether they could have supported microbial life.
+        </li>
+        <li>
+          <strong>Perseverance (2021):</strong>
+          Explores Jezero Crater, investigates ancient environments, and
+          collects rock and regolith samples for possible future return to Earth.
+        </li>
       </ul>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
       <h2>What Have Rovers Discovered?</h2>
       <ul>
         <li>Evidence that liquid water once shaped parts of the Martian surface.</li>
-        <li>Minerals that formed in the presence of water.</li>
+        <li>Minerals that formed or changed in the presence of water.</li>
         <li>Ancient lake and river environments that may have been suitable for microbial life.</li>
         <li>Changes in Martian weather, radiation, dust, and surface conditions.</li>
-        <li>Detailed images and measurements that help scientists choose future exploration sites.</li>
+        <li>Detailed images and measurements that help scientists select future exploration sites.</li>
+        <li>Organic molecules and chemical clues that help investigate Mars's past habitability.</li>
       </ul>
 
       <div class="mission-highlight">
         Finding evidence of an ancient habitable environment does not mean
-        scientists have confirmed that life ever existed on Mars.
+        scientists have confirmed that life ever existed on Mars. Habitability
+        and the actual presence of life are different scientific questions.
       </div>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
       <h2>Are the Rovers Still Active?</h2>
       <p>
         Rover status differs by mission. Sojourner, Spirit, and Opportunity
         completed their operations years ago. Curiosity and Perseverance have
-        continued scientific exploration, but their current operating status
-        can change. Consult NASA's mission pages for the latest updates.
+        continued scientific exploration, but operational status can change
+        over time.
+      </p>
+      <p>
+        For the latest confirmed status, instrument availability, and mission
+        updates, consult NASA's official mission pages.
       </p>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
       <h2>Why These Missions Matter</h2>
       <p>
         Mars rovers help scientists reconstruct the planet's environmental
         history, test technologies for robotic exploration, and prepare for
-        future human missions. Their findings also guide the search for signs
-        of ancient microbial life beyond Earth.
+        future human missions. Their findings guide the search for signs of
+        ancient microbial life beyond Earth.
+      </p>
+      <p>
+        Each mission builds on lessons from earlier spacecraft, improving the
+        tools, autonomy, and scientific techniques used to explore other worlds.
       </p>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
       <h2>Explore More</h2>
+      <p>
+        Continue exploring NASA's Mars program, learn about the Perseverance
+        mission, or return to the COSMOS mission directory.
+      </p>
+
       <div class="mission-navigation">
-        <a href="https://science.nasa.gov/mars/" target="_blank" rel="noopener noreferrer">NASA Mars Exploration</a>
-        <a href="https://science.nasa.gov/mission/mars-2020-perseverance/" target="_blank" rel="noopener noreferrer">Perseverance Rover</a>
-        <a href="missions.html">All Space Missions</a>
-        <a href="index.html">COSMOS Home</a>
+        <a class="primary-link"
+           href="https://science.nasa.gov/mars/"
+           target="_blank"
+           rel="noopener noreferrer">
+          NASA Mars Exploration
+          <span class="external-arrow" aria-hidden="true">&nearr;</span>
+        </a>
+
+        <a href="https://science.nasa.gov/mission/mars-2020-perseverance/"
+           target="_blank"
+           rel="noopener noreferrer">
+          Perseverance Rover
+          <span class="external-arrow" aria-hidden="true">&nearr;</span>
+        </a>
+
+        <a href="missions.html">
+          All Space Missions
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+
+        <a href="index.html">
+          COSMOS Home
+          <span aria-hidden="true">&rarr;</span>
+        </a>
       </div>
     </section>
   </main>
+
+  <script>
+    (() => {
+      const elements = document.querySelectorAll(".reveal");
+
+      if (!("IntersectionObserver" in window)) {
+        elements.forEach((element) => {
+          element.classList.add("is-visible");
+        });
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            currentObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -35px 0px"
+      });
+
+      elements.forEach((element) => observer.observe(element));
+    })();
+  </script>
 </body>
 </html>
