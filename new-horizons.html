@@ -1,0 +1,817 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b16">
+
+  <title>New Horizons Mission | COSMOS</title>
+  <meta name="description" content="Explore NASA's New Horizons mission to Pluto and the Kuiper Belt through discoveries, mission facts and its journey into the outer Solar System.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .nh-page {
+      padding-bottom: 60px;
+    }
+
+    .nh-hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      margin-top: 35px;
+      padding: clamp(28px, 6vw, 68px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(ellipse at 80% 15%, rgba(105, 224, 255, .15), transparent 38%),
+        radial-gradient(ellipse at 95% 90%, rgba(139, 92, 246, .17), transparent 42%),
+        linear-gradient(135deg, #111d37, #080b18 75%);
+      box-shadow: var(--shadow), var(--glow);
+    }
+
+    .nh-hero::before {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      opacity: .6;
+      background-image:
+        radial-gradient(1px 1px at 15% 25%, #fff 50%, transparent 100%),
+        radial-gradient(2px 2px at 65% 20%, #c5eaff 50%, transparent 100%),
+        radial-gradient(1px 1px at 42% 75%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 90% 62%, #c5eaff 50%, transparent 100%);
+      background-size: 170px 150px, 240px 190px, 200px 170px, 260px 220px;
+    }
+
+    .nh-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: var(--accent-cyan);
+      font-size: .76rem;
+      font-weight: 750;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .nh-kicker::before {
+      width: 25px;
+      height: 2px;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(105, 224, 255, .6);
+      content: "";
+    }
+
+    .nh-hero h1 {
+      max-width: 850px;
+      margin-bottom: 20px;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1.08;
+    }
+
+    .nh-gradient {
+      color: transparent;
+      background: linear-gradient(105deg, #f4f7ff, #a9c4ff 45%, #69e0ff);
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .nh-hero p {
+      max-width: 700px;
+      margin-bottom: 25px;
+      font-size: 1.02rem;
+      line-height: 1.9;
+    }
+
+    .nh-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .nh-facts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-block: 24px 55px;
+    }
+
+    .nh-fact {
+      min-width: 0;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(105, 224, 255, .07), transparent 55%),
+        rgba(255, 255, 255, .025);
+    }
+
+    .nh-fact span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .nh-fact strong {
+      display: block;
+      color: var(--text);
+      font-family: var(--font-heading);
+      font-size: clamp(1.05rem, 2vw, 1.5rem);
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .nh-section {
+      margin-top: 60px;
+    }
+
+    .nh-section-heading {
+      max-width: 780px;
+      margin-bottom: 25px;
+    }
+
+    .nh-section-heading .eyebrow {
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .nh-section-heading h2 {
+      margin-bottom: 12px;
+    }
+
+    .nh-section-heading p {
+      line-height: 1.9;
+    }
+
+    .nh-overview {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .nh-panel {
+      min-width: 0;
+      padding: clamp(22px, 4vw, 32px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(145deg, rgba(19, 28, 47, .95), rgba(8, 13, 26, .96));
+    }
+
+    .nh-panel h3 {
+      margin-bottom: 15px;
+    }
+
+    .nh-panel p {
+      line-height: 1.9;
+    }
+
+    .nh-panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .nh-objectives {
+      display: grid;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .nh-objective {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+    }
+
+    .nh-objective-mark {
+      display: grid;
+      flex: 0 0 30px;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(105, 224, 255, .24);
+      border-radius: 9px;
+      color: var(--accent-cyan);
+      background: rgba(105, 224, 255, .07);
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .nh-objective strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .nh-objective p {
+      margin-bottom: 0;
+      font-size: .87rem;
+    }
+
+    .nh-timeline {
+      position: relative;
+      display: grid;
+      gap: 0;
+      margin-top: 25px;
+    }
+
+    .nh-timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 105px minmax(0, 1fr);
+      gap: 20px;
+      padding: 0 0 30px;
+    }
+
+    .nh-timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .nh-timeline-year {
+      color: var(--accent-cyan);
+      font-family: var(--font-heading);
+      font-size: .95rem;
+      font-weight: 700;
+    }
+
+    .nh-timeline-content {
+      position: relative;
+      min-width: 0;
+      padding: 0 0 0 24px;
+      border-left: 1px solid rgba(105, 224, 255, .23);
+    }
+
+    .nh-timeline-content::before {
+      position: absolute;
+      top: 6px;
+      left: -5px;
+      width: 9px;
+      height: 9px;
+      border: 2px solid #080b16;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(105, 224, 255, .55);
+      content: "";
+    }
+
+    .nh-timeline-content h3 {
+      margin-bottom: 7px;
+      font-size: 1.05rem;
+    }
+
+    .nh-timeline-content p {
+      margin-bottom: 0;
+      font-size: .9rem;
+      line-height: 1.85;
+    }
+
+    .nh-discoveries {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .nh-discovery {
+      min-width: 0;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(139, 92, 246, .10), transparent 48%),
+        linear-gradient(145deg, rgba(19, 28, 47, .94), rgba(8, 13, 26, .96));
+      transition: transform var(--transition), border-color var(--transition);
+    }
+
+    .nh-discovery:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+    }
+
+    .nh-discovery-number {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--accent-cyan);
+      font-family: var(--font-heading);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+    }
+
+    .nh-discovery h3 {
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+    }
+
+    .nh-discovery p {
+      margin-bottom: 0;
+      font-size: .89rem;
+      line-height: 1.85;
+    }
+
+    .nh-callout {
+      margin-top: 28px;
+      padding: 24px;
+      border: 1px solid rgba(105, 224, 255, .2);
+      border-left: 3px solid var(--accent-cyan);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      background: rgba(105, 224, 255, .035);
+    }
+
+    .nh-callout h3 {
+      margin-bottom: 10px;
+    }
+
+    .nh-callout p {
+      margin-bottom: 0;
+      line-height: 1.9;
+    }
+
+    .nh-navigation {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 50px;
+      padding-top: 25px;
+      border-top: 1px solid var(--border);
+    }
+
+    .nh-navigation a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      color: var(--muted-light);
+      background: rgba(255, 255, 255, .025);
+      font-size: .86rem;
+    }
+
+    .nh-navigation a:hover {
+      border-color: var(--border-hover);
+      color: var(--accent-cyan);
+    }
+
+    @media (max-width: 900px) {
+      .nh-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nh-overview {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .nh-discoveries {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 580px) {
+      .nh-hero {
+        padding: 23px;
+      }
+
+      .nh-facts,
+      .nh-discoveries {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .nh-timeline-item {
+        grid-template-columns: 75px minmax(0, 1fr);
+        gap: 12px;
+      }
+
+      .nh-timeline-content {
+        padding-left: 17px;
+      }
+
+      .nh-navigation {
+        flex-direction: column;
+      }
+
+      .nh-navigation a {
+        justify-content: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .nh-discovery {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="COSMOS Home">
+      <span class="brand-mark" aria-hidden="true">C</span>
+      <span>COSMOS</span>
+    </a>
+
+    <nav class="nav-menu" id="navMenu" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="missions.html" class="active">Missions</a>
+      <a href="research.html">Research</a>
+      <a href="jupiter.html">Jupiter</a>
+      <a href="saturn.html">Saturn</a>
+      <a href="about.html">About</a>
+    </nav>
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      type="button"
+      aria-label="Toggle navigation"
+      aria-controls="navMenu"
+      aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main class="nh-page cosmos-shell">
+
+    <!-- HERO -->
+    <section class="nh-hero">
+      <span class="nh-kicker">NASA DEEP SPACE EXPLORATION</span>
+
+      <h1>
+        New Horizons:
+        <span class="nh-gradient">Worlds Beyond</span>
+      </h1>
+
+      <p>
+        Travel to the distant frontier of the Solar System. NASA's New Horizons
+        mission transformed Pluto from a distant point of light into a complex
+        world and continued onward to explore an object in the Kuiper Belt.
+      </p>
+
+      <div class="nh-hero-actions">
+        <a class="button button-primary" href="#mission-overview">
+          Discover the Mission
+        </a>
+        <a class="button button-secondary" href="#mission-timeline">
+          Mission Timeline
+        </a>
+      </div>
+    </section>
+
+    <!-- FACTS -->
+    <section class="nh-facts" aria-label="Mission facts">
+      <article class="nh-fact">
+        <span>Launch date</span>
+        <strong>19 Jan 2006</strong>
+      </article>
+
+      <article class="nh-fact">
+        <span>Mission agency</span>
+        <strong>NASA</strong>
+      </article>
+
+      <article class="nh-fact">
+        <span>Primary flyby</span>
+        <strong>Pluto · 2015</strong>
+      </article>
+
+      <article class="nh-fact">
+        <span>Kuiper Belt flyby</span>
+        <strong>Arrokoth · 2019</strong>
+      </article>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="nh-section" id="mission-overview">
+      <div class="nh-section-heading">
+        <span class="eyebrow">01 / Mission Overview</span>
+        <h2>A Journey to the Solar System's Frontier</h2>
+        <p>
+          New Horizons was designed to investigate Pluto and its moons, then
+          continue into the Kuiper Belt, a distant region containing primitive
+          icy bodies left over from the formation of the Solar System.
+        </p>
+      </div>
+
+      <div class="nh-overview">
+        <article class="nh-panel">
+          <h3>Why This Mission Matters</h3>
+
+          <p>
+            Before New Horizons arrived, Pluto had only been observed from
+            great distances. The spacecraft's 2015 flyby provided the first
+            close-up observations of its surface, atmosphere and surrounding
+            system.
+          </p>
+
+          <p>
+            These observations revealed a world with mountains of water ice,
+            broad plains of nitrogen ice, complex geological features and a
+            surprisingly varied landscape.
+          </p>
+
+          <p>
+            The mission later visited Arrokoth, a small Kuiper Belt object,
+            offering a closer look at a primitive body from the early Solar
+            System.
+          </p>
+        </article>
+
+        <aside class="nh-panel">
+          <h3>Primary Scientific Goals</h3>
+
+          <div class="nh-objectives">
+            <div class="nh-objective">
+              <span class="nh-objective-mark">01</span>
+              <div>
+                <strong>Explore Pluto</strong>
+                <p>Map its surface and study its geology and composition.</p>
+              </div>
+            </div>
+
+            <div class="nh-objective">
+              <span class="nh-objective-mark">02</span>
+              <div>
+                <strong>Study the Atmosphere</strong>
+                <p>Investigate Pluto's thin atmosphere and its interaction with space.</p>
+              </div>
+            </div>
+
+            <div class="nh-objective">
+              <span class="nh-objective-mark">03</span>
+              <div>
+                <strong>Investigate the Kuiper Belt</strong>
+                <p>Study primitive objects beyond Neptune.</p>
+              </div>
+            </div>
+
+            <div class="nh-objective">
+              <span class="nh-objective-mark">04</span>
+              <div>
+                <strong>Understand Planetary Origins</strong>
+                <p>Collect clues about the early Solar System.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="nh-section" id="mission-timeline">
+      <div class="nh-section-heading">
+        <span class="eyebrow">02 / Mission Timeline</span>
+        <h2>Milestones Across Deep Space</h2>
+        <p>
+          From launch to the outer Solar System, each milestone expanded
+          humanity's view of distant worlds.
+        </p>
+      </div>
+
+      <div class="nh-panel">
+        <div class="nh-timeline">
+
+          <article class="nh-timeline-item">
+            <div class="nh-timeline-year">2006</div>
+            <div class="nh-timeline-content">
+              <h3>Launch from Earth</h3>
+              <p>
+                New Horizons launched on 19 January 2006, beginning its
+                journey toward Pluto and the Kuiper Belt.
+              </p>
+            </div>
+          </article>
+
+          <article class="nh-timeline-item">
+            <div class="nh-timeline-year">2007</div>
+            <div class="nh-timeline-content">
+              <h3>Jupiter Flyby</h3>
+              <p>
+                The spacecraft passed Jupiter and used its gravity to gain
+                speed while making scientific observations of the giant planet.
+              </p>
+            </div>
+          </article>
+
+          <article class="nh-timeline-item">
+            <div class="nh-timeline-year">2015</div>
+            <div class="nh-timeline-content">
+              <h3>Historic Pluto Encounter</h3>
+              <p>
+                On 14 July 2015, New Horizons made its closest approach to
+                Pluto, returning detailed images and measurements of Pluto
+                and its moons.
+              </p>
+            </div>
+          </article>
+
+          <article class="nh-timeline-item">
+            <div class="nh-timeline-year">2019</div>
+            <div class="nh-timeline-content">
+              <h3>Arrokoth Flyby</h3>
+              <p>
+                The spacecraft flew past Arrokoth on 1 January 2019.
+                The encounter provided close-up information about a small,
+                primitive object in the Kuiper Belt.
+              </p>
+            </div>
+          </article>
+
+          <article class="nh-timeline-item">
+            <div class="nh-timeline-year">Beyond 2019</div>
+            <div class="nh-timeline-content">
+              <h3>Continuing Through the Kuiper Belt</h3>
+              <p>
+                After the Arrokoth encounter, New Horizons continued studying
+                the distant environment and other objects observable from its
+                trajectory, subject to mission resources and operational plans.
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- DISCOVERIES -->
+    <section class="nh-section" id="discoveries">
+      <div class="nh-section-heading">
+        <span class="eyebrow">03 / Scientific Discoveries</span>
+        <h2>What New Horizons Revealed</h2>
+        <p>
+          Its observations showed that the outer Solar System is more diverse
+          and geologically interesting than scientists once expected.
+        </p>
+      </div>
+
+      <div class="nh-discoveries">
+
+        <article class="nh-discovery">
+          <span class="nh-discovery-number">DISCOVERY 01</span>
+          <h3>Pluto's Complex Surface</h3>
+          <p>
+            Pluto contains mountains, craters, icy plains and varied surface
+            regions, demonstrating a complex geological history.
+          </p>
+        </article>
+
+        <article class="nh-discovery">
+          <span class="nh-discovery-number">DISCOVERY 02</span>
+          <h3>The Heart-Shaped Region</h3>
+          <p>
+            The bright region informally known as Tombaugh Regio includes
+            Sputnik Planitia, a large plain dominated by nitrogen ice.
+          </p>
+        </article>
+
+        <article class="nh-discovery">
+          <span class="nh-discovery-number">DISCOVERY 03</span>
+          <h3>Pluto's Thin Atmosphere</h3>
+          <p>
+            Observations revealed atmospheric hazes and helped researchers
+            investigate the structure and behavior of Pluto's atmosphere.
+          </p>
+        </article>
+
+        <article class="nh-discovery">
+          <span class="nh-discovery-number">DISCOVERY 04</span>
+          <h3>Charon and Pluto's Moons</h3>
+          <p>
+            Images and measurements provided new views of Charon, Pluto's
+            largest moon, along with its smaller moons.
+          </p>
+        </article>
+
+        <article class="nh-discovery">
+          <span class="nh-discovery-number">DISCOVERY 05</span>
+          <h3>Arrokoth's Primitive Structure</h3>
+          <p>
+            Arrokoth's two connected lobes provided evidence about how some
+            small bodies may have gently assembled in the early Solar System.
+          </p>
+        </article>
+
+        <article class="nh-discovery">
+          <span class="nh-discovery-number">DISCOVERY 06</span>
+          <h3>The Distant Solar System</h3>
+          <p>
+            The mission expanded knowledge of icy bodies beyond Neptune and
+            offered a rare close-up study of the Kuiper Belt.
+          </p>
+        </article>
+
+      </div>
+
+      <aside class="nh-callout">
+        <h3>Why the Kuiper Belt Is Important</h3>
+        <p>
+          The Kuiper Belt contains many small icy bodies beyond Neptune.
+          Because some of these objects preserve material from the Solar
+          System's early history, studying them helps scientists investigate
+          how planets and smaller bodies formed and evolved.
+        </p>
+      </aside>
+    </section>
+
+    <!-- SPACECRAFT -->
+    <section class="nh-section">
+      <div class="nh-section-heading">
+        <span class="eyebrow">04 / Spacecraft Technology</span>
+        <h2>A Robotic Explorer Built for the Distance</h2>
+        <p>
+          New Horizons carries scientific instruments designed to collect
+          images, analyze particles and measure the environment far from the Sun.
+        </p>
+      </div>
+
+      <div class="nh-overview">
+        <article class="nh-panel">
+          <h3>Scientific Instruments</h3>
+          <p>
+            The spacecraft's instrument suite includes imaging systems,
+            spectrometers and particle and dust detectors. Together, these
+            instruments help scientists study surface features, atmospheric
+            properties, energetic particles and the distant space environment.
+          </p>
+          <p>
+            Its long-distance operations depend on careful spacecraft
+            management and communication with Earth.
+          </p>
+        </article>
+
+        <article class="nh-panel">
+          <h3>How It Communicates</h3>
+          <p>
+            New Horizons uses a high-gain antenna to communicate with Earth
+            across enormous distances. Signals take hours to travel one way
+            between the spacecraft and Earth, depending on their separation.
+          </p>
+          <p>
+            Because of this delay, mission operations cannot rely on
+            instantaneous control. The spacecraft must execute carefully
+            planned commands and onboard procedures.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- LEGACY -->
+    <section class="nh-section">
+      <div class="nh-section-heading">
+        <span class="eyebrow">05 / Mission Legacy</span>
+        <h2>Changing Our View of Distant Worlds</h2>
+      </div>
+
+      <article class="nh-panel">
+        <p>
+          New Horizons showed that Pluto is a scientifically rich world rather
+          than simply a distant dot in a telescope. Its exploration of Arrokoth
+          also provided a rare look at a small object that has remained in the
+          cold outer Solar System for billions of years.
+        </p>
+
+        <p>
+          These discoveries continue to help researchers understand planetary
+          geology, the evolution of atmospheres and the processes that shaped
+          the early Solar System.
+        </p>
+
+        <p>
+          The mission represents an important step in humanity's continuing
+          exploration of the distant planetary frontier.
+        </p>
+      </article>
+    </section>
+
+    <!-- NAVIGATION -->
+    <nav class="nh-navigation" aria-label="Mission navigation">
+      <a href="missions.html">&larr; All Space Missions</a>
+      <a href="voyager.html">Explore Voyager &rarr;</a>
+      <a href="research.html">Explore Research &rarr;</a>
+      <a href="index.html">COSMOS Home</a>
+    </nav>
+
+  </main>
+
+  <footer class="footer cosmos-shell">
+    <p>&copy; <span data-current-year id="currentYear">2026</span> COSMOS. Explore beyond the known.</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="missions.html">Missions</a>
+      <a href="research.html">Research</a>
+      <a href="about.html">About</a>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+
+</body>
+</html>
