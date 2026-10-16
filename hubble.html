@@ -1,245 +1,1244 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore NASA's Hubble Space Telescope, its discoveries, and its contribution to astronomy.">
+  <meta name="theme-color" content="#050713">
+
+  <meta name="description"
+    content="Explore the Hubble Space Telescope, its technology, discoveries, and its extraordinary contribution to astronomy.">
+
   <title>Hubble Space Telescope | COSMOS</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <style>
+    :root {
+      --bg: #050713;
+      --panel: rgba(15, 22, 43, 0.76);
+      --panel-strong: rgba(17, 26, 51, 0.94);
+      --text: #f2f5ff;
+      --muted: #a6b1ce;
+      --blue: #77aaff;
+      --cyan: #6cecff;
+      --purple: #a58aff;
+      --border: rgba(135, 173, 255, 0.19);
+      --glow: rgba(83, 143, 255, 0.18);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 25px;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(37, 65, 135, 0.22), transparent 44%),
+        radial-gradient(ellipse at 100% 45%, rgba(78, 47, 139, 0.12), transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 5px;
+    }
+
+    ::selection {
+      background: rgba(108, 236, 255, 0.3);
+      color: white;
+    }
+
+    /* Animated cosmic background */
+
+    .space-background {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      overflow: hidden;
+      pointer-events: none;
+      background:
+        radial-gradient(1px 1px at 8% 18%, #fff, transparent 2px),
+        radial-gradient(1px 1px at 27% 75%, #9bdcff, transparent 2px),
+        radial-gradient(1px 1px at 47% 28%, #fff, transparent 2px),
+        radial-gradient(2px 2px at 69% 13%, #c6d9ff, transparent 3px),
+        radial-gradient(1px 1px at 83% 61%, #fff, transparent 2px),
+        radial-gradient(1px 1px at 92% 32%, #a5c8ff, transparent 2px),
+        radial-gradient(1px 1px at 17% 48%, #fff, transparent 2px),
+        radial-gradient(2px 2px at 57% 84%, #b8d6ff, transparent 3px);
+      background-size: 310px 290px;
+      animation: starDrift 90s linear infinite;
+    }
+
+    .space-background::before,
+    .space-background::after {
+      content: "";
+      position: absolute;
+      width: 70vw;
+      height: 70vw;
+      min-width: 480px;
+      min-height: 480px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.13;
+    }
+
+    .space-background::before {
+      top: -30%;
+      left: -25%;
+      background: #2459ff;
+      animation: nebulaFloat 18s ease-in-out infinite alternate;
+    }
+
+    .space-background::after {
+      right: -30%;
+      bottom: -35%;
+      background: #792fff;
+      animation: nebulaFloat 22s ease-in-out infinite alternate-reverse;
+    }
+
+    .background-grid {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.13;
+      background-image:
+        linear-gradient(rgba(104, 153, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(104, 153, 255, 0.07) 1px, transparent 1px);
+      background-size: 75px 75px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+
+    .cosmic-orb {
+      position: fixed;
+      z-index: -1;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 15px 4px rgba(108, 236, 255, 0.4);
+      pointer-events: none;
+      animation: orbFloat 12s ease-in-out infinite;
+    }
+
+    .orb-one {
+      top: 23%;
+      left: 8%;
+    }
+
+    .orb-two {
+      top: 67%;
+      right: 9%;
+      animation-delay: -5s;
+    }
+
+    @keyframes starDrift {
+      from { background-position: 0 0; }
+      to { background-position: 310px 580px; }
+    }
+
+    @keyframes nebulaFloat {
+      from { transform: translate3d(-3%, -2%, 0) scale(0.9); }
+      to { transform: translate3d(5%, 4%, 0) scale(1.1); }
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translateY(0); opacity: 0.35; }
+      50% { transform: translateY(-45px); opacity: 1; }
+    }
+
+    @keyframes heroGlow {
+      0%, 100% {
+        box-shadow: 0 0 40px rgba(75, 113, 255, 0.09),
+                    inset 0 0 40px rgba(74, 114, 255, 0.025);
+      }
+      50% {
+        box-shadow: 0 0 65px rgba(75, 113, 255, 0.18),
+                    inset 0 0 55px rgba(74, 114, 255, 0.06);
+      }
+    }
+
+    @keyframes telescopeFloat {
+      0%, 100% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-12px) rotate(-1deg); }
+    }
+
+    @keyframes orbitRotate {
+      from { transform: translate(-50%, -50%) rotate(-28deg); }
+      to { transform: translate(-50%, -50%) rotate(332deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.45; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.06); }
+    }
+
+    @keyframes revealUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Main layout */
+
     .mission-detail {
-      width: min(1100px, 90%);
+      position: relative;
+      width: min(1160px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 45px 0 80px;
+      padding: 35px 0 75px;
     }
 
     .mission-back {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
       margin-bottom: 28px;
-      color: #9ecbff;
+      padding: 10px 15px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(12, 19, 39, 0.72);
+      color: #c6d8ff;
       text-decoration: none;
+      font-size: 0.9rem;
+      transition: border-color 0.25s ease,
+                  background 0.25s ease,
+                  transform 0.25s ease;
     }
 
-    .mission-back:hover { text-decoration: underline; }
+    .mission-back:hover {
+      border-color: rgba(108, 236, 255, 0.5);
+      background: rgba(44, 77, 137, 0.22);
+      transform: translateX(-4px);
+    }
+
+    /* Hero */
 
     .mission-hero {
-      padding: 45px 35px;
-      border: 1px solid rgba(150,190,255,.22);
-      border-radius: 22px;
-      background: linear-gradient(135deg,#152039,#26385b 55%,#111827);
-      margin-bottom: 30px;
+      position: relative;
+      isolation: isolate;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 25px;
+      min-height: 460px;
+      padding: clamp(28px, 5vw, 58px);
+      overflow: hidden;
+      border: 1px solid rgba(123, 166, 255, 0.26);
+      border-radius: 27px;
+      background:
+        radial-gradient(ellipse at 83% 45%, rgba(75, 105, 208, 0.22), transparent 38%),
+        linear-gradient(125deg, rgba(14, 22, 47, 0.97), rgba(12, 17, 36, 0.91) 65%, rgba(25, 21, 55, 0.88));
+      animation: heroGlow 7s ease-in-out infinite;
+    }
+
+    .mission-hero::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 350px;
+      height: 350px;
+      top: -210px;
+      left: 36%;
+      border: 1px solid rgba(108, 236, 255, 0.13);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 30px rgba(108, 236, 255, 0.018),
+        0 0 0 70px rgba(108, 236, 255, 0.018);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
     }
 
     .mission-label {
-      display: inline-block;
-      color: #b9d5ff;
-      font-size: .82rem;
-      letter-spacing: 2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 19px;
+      color: var(--cyan);
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.69rem;
+      font-weight: 600;
+      letter-spacing: 2.3px;
       text-transform: uppercase;
-      margin-bottom: 14px;
+    }
+
+    .mission-label::before {
+      content: "";
+      width: 23px;
+      height: 1px;
+      background: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
     }
 
     .mission-hero h1 {
-      font-size: clamp(2.2rem,6vw,4.3rem);
-      line-height: 1.1;
+      max-width: 680px;
+      margin: 0 0 20px;
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(2.2rem, 5.3vw, 4.25rem);
+      font-weight: 700;
+      line-height: 1.17;
+      letter-spacing: -1.7px;
+      overflow-wrap: anywhere;
+      background: linear-gradient(105deg, #ffffff 8%, #c4d9ff 53%, #7beaff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
       margin: 0 0 18px;
+      color: #9bb5ff;
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.76rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
     .mission-hero p {
-      max-width: 760px;
-      line-height: 1.8;
-      color: #d0d9e8;
+      max-width: 650px;
+      margin: 0;
+      color: #c0cce5;
+      font-size: 0.98rem;
+      line-height: 1.95;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 27px;
+    }
+
+    .hero-meta span {
+      padding: 8px 12px;
+      border: 1px solid rgba(139, 173, 255, 0.2);
+      border-radius: 8px;
+      background: rgba(113, 150, 255, 0.07);
+      color: #d5e3ff;
+      font-size: 0.77rem;
+    }
+
+    /* CSS telescope illustration */
+
+    .telescope-visual {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 310px;
+      isolation: isolate;
+    }
+
+    .visual-glow {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(65, 115, 255, 0.16);
+      filter: blur(36px);
+      animation: pulse 5s ease-in-out infinite;
+    }
+
+    .visual-orbit {
+      position: absolute;
+      width: 300px;
+      height: 145px;
+      border: 1px solid rgba(108, 236, 255, 0.36);
+      border-radius: 50%;
+      transform: rotate(-28deg);
+      box-shadow: 0 0 15px rgba(108, 236, 255, 0.06);
+    }
+
+    .visual-orbit.orbit-two {
+      width: 250px;
+      height: 190px;
+      border-color: rgba(165, 138, 255, 0.25);
+      transform: rotate(45deg);
+    }
+
+    .orbit-dot {
+      position: absolute;
+      top: 50%;
+      left: -4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 16px 4px rgba(108, 236, 255, 0.65);
+      animation: orbitRotate 16s linear infinite;
+    }
+
+    .telescope {
+      position: relative;
+      width: 205px;
+      height: 112px;
+      transform: rotate(-28deg);
+      animation: telescopeFloat 6s ease-in-out infinite;
+      filter: drop-shadow(0 0 15px rgba(89, 146, 255, 0.3));
+    }
+
+    .telescope-body {
+      position: absolute;
+      top: 25px;
+      left: 45px;
+      width: 125px;
+      height: 62px;
+      border: 1px solid #a3c4ff;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #d9e6ff, #6c82b1 40%, #263a64 72%, #111c36);
+      box-shadow: inset 0 0 13px rgba(255, 255, 255, 0.22);
+    }
+
+    .telescope-body::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 17px;
+      width: 90px;
+      height: 40px;
+      border: 1px solid rgba(202, 223, 255, 0.3);
+      border-radius: 5px;
+      background: linear-gradient(120deg, rgba(255,255,255,0.2), transparent 65%);
+    }
+
+    .telescope-front {
+      position: absolute;
+      top: 18px;
+      left: 19px;
+      width: 34px;
+      height: 76px;
+      border: 2px solid #d7e5ff;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at 38% 35%, #d9fbff, #588bd5 27%, #172849 72%);
+      box-shadow: 0 0 17px rgba(108, 236, 255, 0.25);
+    }
+
+    .telescope-front::after {
+      content: "";
+      position: absolute;
+      top: -7px;
+      left: 4px;
+      width: 21px;
+      height: 88px;
+      border-left: 2px solid rgba(220, 238, 255, 0.65);
+      border-right: 2px solid rgba(220, 238, 255, 0.45);
+      border-radius: 50%;
+    }
+
+    .telescope-back {
+      position: absolute;
+      top: 27px;
+      right: 8px;
+      width: 28px;
+      height: 58px;
+      border: 2px solid #91a9d4;
+      border-radius: 7px;
+      background: linear-gradient(90deg, #263959, #8198c2, #25334f);
+    }
+
+    .telescope-panel {
+      position: absolute;
+      top: 40px;
+      left: -22px;
+      width: 41px;
+      height: 39px;
+      border: 1px solid #77aaff;
+      background:
+        repeating-linear-gradient(90deg, transparent 0 8px, rgba(108,236,255,.7) 8px 9px),
+        repeating-linear-gradient(0deg, #152e66 0 9px, #3d5ca1 9px 10px);
+      box-shadow: 0 0 14px rgba(70, 126, 255, 0.22);
+    }
+
+    .telescope-panel.panel-right {
+      left: auto;
+      right: -25px;
+      width: 35px;
+      background:
+        repeating-linear-gradient(90deg, transparent 0 7px, rgba(108,236,255,.7) 7px 8px),
+        repeating-linear-gradient(0deg, #152e66 0 9px, #3d5ca1 9px 10px);
+    }
+
+    .visual-caption {
+      position: absolute;
+      bottom: 2px;
+      color: #7f9bcf;
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 2px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    /* Fact cards */
+
+    .section-eyebrow {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--cyan);
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .facts-heading {
+      margin: 38px 0 17px;
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
     }
 
     .mission-facts {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
-      gap: 16px;
-      margin: 25px 0 35px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 15px;
+      margin: 0 0 35px;
     }
 
-    .mission-fact,.mission-section {
-      padding: 23px;
-      border: 1px solid rgba(150,190,255,.17);
-      border-radius: 16px;
-      background: rgba(255,255,255,.035);
+    .mission-fact {
+      position: relative;
+      min-width: 0;
+      padding: 23px 19px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: linear-gradient(145deg, rgba(18, 28, 54, 0.83), rgba(9, 15, 32, 0.76));
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .mission-fact::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 16px;
+      width: 42px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      box-shadow: 0 0 12px rgba(108, 236, 255, 0.4);
+    }
+
+    .mission-fact:hover {
+      transform: translateY(-5px);
+      border-color: rgba(108, 236, 255, 0.42);
+      background: rgba(25, 39, 76, 0.85);
     }
 
     .mission-fact span {
       display: block;
-      color: #b9d5ff;
-      font-size: .82rem;
-      margin-bottom: 9px;
+      margin-bottom: 10px;
+      color: #94a9d1;
+      font-size: 0.76rem;
     }
 
-    .mission-fact strong { font-size: 1.05rem; }
-    .mission-section { margin-top: 20px; }
-    .mission-section h2 { margin-top: 0; margin-bottom: 14px; }
-
-    .mission-section p,.mission-section li {
-      color: #cbd5e1;
-      line-height: 1.85;
+    .mission-fact strong {
+      display: block;
+      color: #f0f5ff;
+      font-size: 0.98rem;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
     }
 
-    .mission-section ul { padding-left: 22px; }
+    /* Content sections */
+
+    .mission-section {
+      position: relative;
+      margin-top: 19px;
+      padding: clamp(23px, 4vw, 35px);
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      background:
+        linear-gradient(145deg, rgba(16, 24, 47, 0.85), rgba(8, 13, 29, 0.83));
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .mission-section:hover {
+      border-color: rgba(117, 164, 255, 0.36);
+    }
+
+    .mission-section h2 {
+      position: relative;
+      margin: 0 0 20px;
+      padding-left: 17px;
+      color: #f0f4ff;
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(1.1rem, 2.4vw, 1.48rem);
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .mission-section h2::before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      bottom: 5px;
+      left: 0;
+      width: 3px;
+      border-radius: 3px;
+      background: linear-gradient(var(--cyan), var(--purple));
+      box-shadow: 0 0 12px rgba(108, 236, 255, 0.25);
+    }
+
+    .mission-section p,
+    .mission-section li {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.95;
+    }
+
+    .mission-section p {
+      margin: 0 0 15px;
+    }
+
+    .mission-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .mission-section ul {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .mission-section li {
+      padding-left: 5px;
+    }
+
+    .mission-section li::marker {
+      color: var(--cyan);
+    }
 
     .mission-highlight {
-      border-left: 3px solid #8ebcff;
-      padding: 12px 18px;
-      margin-top: 18px;
-      background: rgba(142,188,255,.07);
-      color: #e2edff;
+      position: relative;
+      margin-top: 24px;
+      padding: 19px 22px;
+      border: 1px solid rgba(108, 236, 255, 0.15);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 12px 12px 0;
+      background: linear-gradient(90deg, rgba(70, 135, 255, 0.1), rgba(70, 135, 255, 0.015));
+      color: #dce9ff;
+      font-size: 0.93rem;
+      line-height: 1.9;
+    }
+
+    /* Discovery cards */
+
+    .discovery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .discovery-card {
+      padding: 19px;
+      border: 1px solid rgba(135, 173, 255, 0.15);
+      border-radius: 13px;
+      background: rgba(7, 13, 30, 0.52);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .discovery-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(108, 236, 255, 0.38);
+    }
+
+    .discovery-card h3 {
+      margin: 0 0 8px;
+      color: #dce8ff;
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    .discovery-card p {
+      margin: 0;
+      font-size: 0.86rem;
       line-height: 1.8;
     }
+
+    /* Navigation links */
 
     .mission-navigation {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 30px;
+      margin-top: 23px;
     }
 
     .mission-navigation a {
-      display: inline-block;
-      padding: 12px 18px;
-      border: 1px solid rgba(150,190,255,.3);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 12px 17px;
+      border: 1px solid rgba(132, 172, 255, 0.28);
       border-radius: 10px;
-      color: #e5efff;
+      background: rgba(31, 49, 90, 0.28);
+      color: #e3edff;
       text-decoration: none;
+      font-size: 0.87rem;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
     }
 
     .mission-navigation a:hover {
-      background: rgba(117,182,255,.12);
+      transform: translateY(-3px);
+      border-color: rgba(108, 236, 255, 0.55);
+      background: rgba(57, 91, 160, 0.28);
     }
 
-    @media(max-width:600px) {
+    .mission-navigation a.primary-link {
+      border-color: rgba(108, 236, 255, 0.43);
+      background: linear-gradient(110deg, rgba(53, 111, 213, 0.25), rgba(88, 73, 171, 0.2));
+    }
+
+    .page-footer {
+      margin-top: 35px;
+      padding-top: 23px;
+      border-top: 1px solid rgba(135, 173, 255, 0.13);
+      color: #7182a7;
+      font-size: 0.77rem;
+      text-align: center;
+    }
+
+    /* Scroll reveal */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-content {
+      animation: revealUp 0.8s ease both;
+    }
+
+    .telescope-visual {
+      animation: revealUp 1s 0.15s ease both;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 900px) {
+      .mission-hero {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .telescope-visual {
+        min-height: 300px;
+      }
+
+      .mission-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 600px) {
       .mission-detail {
         width: calc(100% - 28px);
-        padding-top: 25px;
+        padding-top: 23px;
+        padding-bottom: 45px;
       }
-      .mission-hero { padding: 30px 22px; }
-      .mission-section,.mission-fact { padding: 18px; }
+
+      .mission-back {
+        margin-bottom: 19px;
+        font-size: 0.82rem;
+      }
+
+      .mission-hero {
+        min-height: auto;
+        padding: 28px 22px 22px;
+        border-radius: 19px;
+      }
+
+      .mission-hero h1 {
+        font-size: clamp(2rem, 9vw, 3rem);
+        letter-spacing: -1px;
+      }
+
+      .mission-hero p {
+        font-size: 0.9rem;
+        line-height: 1.85;
+      }
+
+      .mission-label {
+        font-size: 0.61rem;
+        letter-spacing: 1.5px;
+      }
+
+      .hero-subtitle {
+        font-size: 0.67rem;
+      }
+
+      .hero-meta span {
+        font-size: 0.71rem;
+      }
+
+      .telescope-visual {
+        min-height: 265px;
+        transform: scale(0.88);
+        margin: -5px 0;
+      }
+
+      .facts-heading {
+        margin-top: 29px;
+        font-size: 0.95rem;
+      }
+
+      .mission-facts {
+        gap: 10px;
+        margin-bottom: 25px;
+      }
+
+      .mission-fact {
+        padding: 18px 14px;
+        border-radius: 12px;
+      }
+
+      .mission-fact strong {
+        font-size: 0.88rem;
+      }
+
+      .mission-section {
+        margin-top: 14px;
+        padding: 22px 18px;
+        border-radius: 15px;
+      }
+
+      .mission-section h2 {
+        font-size: 1.08rem;
+        margin-bottom: 15px;
+      }
+
+      .mission-section p,
+      .mission-section li {
+        font-size: 0.88rem;
+        line-height: 1.85;
+      }
+
+      .discovery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mission-navigation {
+        flex-direction: column;
+      }
+
+      .mission-navigation a {
+        width: 100%;
+      }
+
+      .mission-highlight {
+        padding: 16px;
+        font-size: 0.87rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
 
 <body>
+  <div class="space-background" aria-hidden="true"></div>
+  <div class="background-grid" aria-hidden="true"></div>
+  <div class="cosmic-orb orb-one" aria-hidden="true"></div>
+  <div class="cosmic-orb orb-two" aria-hidden="true"></div>
+
   <main class="mission-detail">
-    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+
+    <a class="mission-back" href="missions.html">
+      <span aria-hidden="true">&larr;</span>
+      Back to Space Missions
+    </a>
 
     <header class="mission-hero">
-      <span class="mission-label">Space Astronomy Observatory</span>
-      <h1>Hubble Space Telescope</h1>
-      <p>
-        The Hubble Space Telescope is one of the most influential astronomical
-        observatories ever built. Operating above Earth's atmosphere, Hubble
-        captures sharp images and measurements of galaxies, nebulae, stars,
-        planets, and other cosmic objects.
-      </p>
+
+      <div class="hero-content">
+        <span class="mission-label">Space Astronomy Observatory</span>
+
+        <h1>Hubble Space Telescope</h1>
+
+        <div class="hero-subtitle">A Window Into The Universe</div>
+
+        <p>
+          Operating above Earth's atmosphere, the Hubble Space Telescope
+          captures extraordinary views of galaxies, nebulae, stars, and
+          planets. For decades, its observations have helped astronomers
+          investigate the universe's history, structure, and evolution.
+        </p>
+
+        <div class="hero-meta">
+          <span>Launched in 1990</span>
+          <span>NASA / ESA</span>
+          <span>Low Earth Orbit</span>
+        </div>
+      </div>
+
+      <div class="telescope-visual" role="img"
+        aria-label="Stylized illustration of a space telescope surrounded by glowing orbital rings">
+
+        <div class="visual-glow"></div>
+        <div class="visual-orbit">
+          <span class="orbit-dot"></span>
+        </div>
+        <div class="visual-orbit orbit-two"></div>
+
+        <div class="telescope">
+          <div class="telescope-panel"></div>
+          <div class="telescope-panel panel-right"></div>
+          <div class="telescope-front"></div>
+          <div class="telescope-body"></div>
+          <div class="telescope-back"></div>
+        </div>
+
+        <div class="visual-caption">Orbital Observatory // HST</div>
+      </div>
+
     </header>
 
-    <section class="mission-facts" aria-label="Mission facts">
-      <div class="mission-fact">
+    <div class="facts-heading">
+      <span class="section-eyebrow">Mission Overview</span>
+      Observatory Specifications
+    </div>
+
+    <section class="mission-facts" aria-label="Hubble mission facts">
+
+      <article class="mission-fact reveal">
         <span>Space Agencies</span>
         <strong>NASA and ESA</strong>
-      </div>
-      <div class="mission-fact">
+      </article>
+
+      <article class="mission-fact reveal">
         <span>Launch Date</span>
         <strong>April 24, 1990</strong>
-      </div>
-      <div class="mission-fact">
+      </article>
+
+      <article class="mission-fact reveal">
         <span>Orbit</span>
-        <strong>Low Earth orbit</strong>
-      </div>
-      <div class="mission-fact">
-        <span>Primary Role</span>
-        <strong>Observing the universe</strong>
-      </div>
+        <strong>Low Earth Orbit</strong>
+      </article>
+
+      <article class="mission-fact reveal">
+        <span>Primary Mirror</span>
+        <strong>2.4 metres</strong>
+      </article>
+
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
+      <span class="section-eyebrow">01 / Introduction</span>
       <h2>What Is Hubble?</h2>
+
       <p>
-        Hubble is a space telescope that observes the universe primarily in
-        ultraviolet, visible, and near-infrared light. Because it operates
-        above Earth's atmosphere, it avoids much of the atmospheric blurring
-        and absorption that affect ground-based observations.
+        The Hubble Space Telescope is a space-based astronomical observatory
+        developed through a collaboration between NASA and the European
+        Space Agency. It was launched aboard the Space Shuttle Discovery
+        on April 24, 1990, and deployed into orbit the following day.
       </p>
+
       <p>
-        The observatory has a primary mirror about 2.4 metres across. Its
-        scientific instruments collect light and turn it into images and
-        measurements that astronomers use to investigate cosmic objects.
+        Hubble observes the universe primarily in ultraviolet, visible,
+        and near-infrared light. Above most of Earth's atmosphere, it can
+        obtain sharp observations without much of the blurring and
+        absorption that affect ground-based telescopes.
       </p>
+
+      <p>
+        Its 2.4-metre primary mirror gathers light from distant cosmic
+        objects. Sensitive scientific instruments then record that light
+        to produce images and measurements used in astronomical research.
+      </p>
+
+      <div class="mission-highlight">
+        Hubble is not simply a camera in space. It is a scientific
+        observatory that turns light from the universe into evidence
+        about how cosmic objects form, change, and evolve.
+      </div>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
+      <span class="section-eyebrow">02 / Technology</span>
       <h2>How Does Hubble Work?</h2>
+
       <p>
-        Hubble points toward selected astronomical targets and collects light
-        with its mirror. Its instruments record this light at different
-        wavelengths, allowing scientists to study an object's brightness,
-        shape, temperature, motion, and chemical properties.
+        Hubble points toward astronomical targets selected by scientists.
+        Its mirror collects incoming light and directs it toward scientific
+        instruments designed for different kinds of observations.
       </p>
-      <p>
-        Hubble travels around Earth in low Earth orbit. Astronomers and
-        engineers plan observations, monitor the observatory, and analyze
-        the data returned to the ground.
-      </p>
+
+      <div class="discovery-grid">
+
+        <article class="discovery-card">
+          <h3>Light Collection</h3>
+          <p>
+            The primary mirror gathers light from stars, galaxies, nebulae,
+            and other objects, allowing the telescope to study faint
+            sources far beyond our Solar System.
+          </p>
+        </article>
+
+        <article class="discovery-card">
+          <h3>Scientific Instruments</h3>
+          <p>
+            Cameras and spectrographs measure light, revealing information
+            about an object's brightness, structure, composition, and
+            physical conditions.
+          </p>
+        </article>
+
+        <article class="discovery-card">
+          <h3>Orbital Observations</h3>
+          <p>
+            Hubble circles Earth in low Earth orbit, allowing it to observe
+            astronomical targets from above most atmospheric interference.
+          </p>
+        </article>
+
+        <article class="discovery-card">
+          <h3>Data on Earth</h3>
+          <p>
+            Observations are transmitted to the ground, where researchers
+            process the data, analyze the results, and share scientific
+            findings with the world.
+          </p>
+        </article>
+
+      </div>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
+      <span class="section-eyebrow">03 / Scientific Impact</span>
       <h2>Major Discoveries and Contributions</h2>
+
+      <p>
+        Hubble has contributed to thousands of scientific investigations.
+        Its long operating history has made it especially valuable for
+        studying objects across different distances and stages of cosmic
+        evolution.
+      </p>
+
       <ul>
-        <li>Helped improve measurements of the universe's expansion rate.</li>
-        <li>Observed galaxies at great distances, allowing scientists to study earlier stages of cosmic history.</li>
-        <li>Captured detailed views of star-forming nebulae and the evolution of stars.</li>
-        <li>Contributed to research on black holes and the structure of galaxies.</li>
-        <li>Observed planets and other objects within our Solar System.</li>
-        <li>Produced deep-field images revealing thousands of galaxies in small regions of the sky.</li>
+        <li>
+          <strong>Expansion of the universe:</strong>
+          Helped refine measurements of the universe's expansion rate,
+          contributing to research into its history and evolution.
+        </li>
+
+        <li>
+          <strong>Distant galaxies:</strong>
+          Observed galaxies across enormous distances, helping scientists
+          investigate how galaxies looked in the early universe.
+        </li>
+
+        <li>
+          <strong>Star formation:</strong>
+          Captured detailed views of nebulae and regions where stars form,
+          evolve, and influence their surroundings.
+        </li>
+
+        <li>
+          <strong>Black holes and galaxies:</strong>
+          Provided important observations of galactic centres and the
+          relationships between galaxies and their central black holes.
+        </li>
+
+        <li>
+          <strong>Exoplanets and planetary science:</strong>
+          Contributed observations of planets beyond our Solar System and
+          studied atmospheric and weather phenomena on Solar System planets.
+        </li>
+
+        <li>
+          <strong>Deep-field observations:</strong>
+          Revealed thousands of galaxies in tiny regions of the sky,
+          showing how much the universe contains beyond what is visible
+          to the unaided eye.
+        </li>
       </ul>
 
       <div class="mission-highlight">
-        Hubble's deep-field observations show that even a tiny patch of dark
-        sky can contain thousands of distant galaxies.
+        Hubble's deep-field images demonstrate that a seemingly empty
+        patch of dark sky can contain thousands of galaxies, each with
+        its own stars and cosmic history.
       </div>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
+      <span class="section-eyebrow">04 / Cosmic Exploration</span>
       <h2>Why Is Hubble Important?</h2>
+
       <p>
-        Hubble has helped transform astronomy by providing detailed
-        observations over decades. Its long operating lifetime allows
-        researchers to compare observations across time and investigate how
-        stars, galaxies, and other objects change.
+        Hubble transformed astronomy by delivering detailed observations
+        over several decades. Because researchers can revisit objects
+        and compare observations taken years apart, they can investigate
+        changes in stars, planetary atmospheres, nebulae, and other
+        astronomical systems.
       </p>
+
       <p>
-        Hubble also works alongside other observatories, including the James
-        Webb Space Telescope. Their different instruments and wavelength
-        ranges provide complementary views of the universe.
+        Its discoveries have influenced research across cosmology,
+        stellar evolution, galaxy formation, and planetary science.
+        Hubble has also helped make astronomy more accessible through
+        its widely shared images of the universe.
+      </p>
+
+      <p>
+        Its observations complement those of other observatories,
+        including the James Webb Space Telescope. Hubble's ultraviolet
+        and visible-light capabilities provide a different perspective
+        from Webb's powerful infrared observations.
       </p>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
+      <span class="section-eyebrow">05 / Mission Status</span>
       <h2>Is Hubble Still Active?</h2>
-      <p>
-        Hubble remains a scientific space observatory, although its aging
-        systems and instruments require careful management. Its current
-        operating condition and observing plans may change, so consult NASA's
-        official mission page for the latest updates.
-      </p>
-    </section>
 
-    <section class="mission-section">
-      <h2>Explore More</h2>
-      <div class="mission-navigation">
-        <a href="https://science.nasa.gov/mission/hubble/" target="_blank" rel="noopener noreferrer">NASA Hubble Mission</a>
-        <a href="https://esahubble.org/" target="_blank" rel="noopener noreferrer">ESA/Hubble</a>
-        <a href="missions.html">All Space Missions</a>
-        <a href="index.html">COSMOS Home</a>
+      <p>
+        Hubble remains an operating scientific observatory. However,
+        the telescope and its supporting systems have aged, so engineers
+        carefully manage its equipment and operating conditions.
+      </p>
+
+      <p>
+        Its observing schedule and technical status can change. For
+        the latest operational updates, new discoveries, and mission
+        announcements, consult NASA's official Hubble mission website.
+      </p>
+
+      <div class="mission-highlight">
+        Mission status is time-sensitive. Always check official mission
+        updates for the latest information about Hubble's operations.
       </div>
     </section>
+
+    <section class="mission-section reveal">
+      <span class="section-eyebrow">06 / Continue Exploring</span>
+      <h2>Explore More</h2>
+
+      <p>
+        Continue your journey through space astronomy using these
+        official resources and the COSMOS mission collection.
+      </p>
+
+      <div class="mission-navigation">
+        <a class="primary-link"
+          href="https://science.nasa.gov/mission/hubble/"
+          target="_blank"
+          rel="noopener noreferrer">
+          NASA Hubble Mission
+          <span aria-hidden="true">&nearr;</span>
+        </a>
+
+        <a href="https://esahubble.org/"
+          target="_blank"
+          rel="noopener noreferrer">
+          ESA / Hubble
+          <span aria-hidden="true">&nearr;</span>
+        </a>
+
+        <a href="missions.html">
+          <span aria-hidden="true">&larr;</span>
+          All Space Missions
+        </a>
+
+        <a href="index.html">
+          COSMOS Home
+          <span aria-hidden="true">&nearr;</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <p>COSMOS — Explore the Universe Beyond the Ordinary.</p>
+    </footer>
+
   </main>
+
+  <script>
+    (() => {
+      const revealElements = document.querySelectorAll(".reveal");
+
+      // Display content immediately if reduced motion is preferred
+      // or IntersectionObserver is unavailable.
+      const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      if (reducedMotion || !("IntersectionObserver" in window)) {
+        revealElements.forEach((element) => {
+          element.classList.add("is-visible");
+        });
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries, currentObserver) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              currentObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: "0px 0px -35px 0px"
+        }
+      );
+
+      revealElements.forEach((element) => {
+        observer.observe(element);
+      });
+    })();
+  </script>
+
 </body>
 </html>
