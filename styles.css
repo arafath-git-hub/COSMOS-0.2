@@ -1796,3 +1796,126 @@ select option {
     transition-duration: .01ms !important;
   }
 }
+/* =========================================
+   COSMOS — HOME PAGE HAMBURGER MENU FIX
+========================================= */
+
+.topbar {
+  position: relative;
+}
+
+.menu-toggle,
+#menuToggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  padding: 9px;
+  margin-left: auto;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid rgba(120, 180, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(15, 25, 48, 0.85);
+  cursor: pointer;
+  z-index: 10001;
+}
+
+.menu-toggle span,
+#menuToggle span {
+  display: block;
+  width: 21px;
+  height: 2px;
+  flex: 0 0 2px;
+  background: #f4f6ff;
+  border-radius: 3px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.menu-toggle:hover,
+#menuToggle:hover {
+  border-color: #62d8ff;
+  box-shadow: 0 0 16px rgba(98, 216, 255, 0.18);
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .menu-toggle,
+  #menuToggle {
+    display: flex !important;
+  }
+
+  .topbar > #cosmosNav,
+  .topbar > .nav {
+    display: none !important;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 16px;
+    margin: 0;
+    background: rgba(7, 12, 28, 0.97);
+    border: 1px solid rgba(100, 180, 255, 0.25);
+    border-radius: 14px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 10000;
+  }
+
+  .topbar > #cosmosNav.is-open,
+  .topbar > .nav.is-open {
+    display: flex !important;
+  }
+
+  #cosmosNav a,
+  .topbar > .nav a {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    color: #f4f6ff;
+    text-decoration: none;
+  }
+
+  #cosmosNav a:hover,
+  #cosmosNav a:focus-visible,
+  .topbar > .nav a:hover,
+  .topbar > .nav a:focus-visible {
+    background: rgba(98, 216, 255, 0.1);
+    outline: none;
+  }
+
+  #cosmosNav .nav-cta {
+    margin-top: 5px;
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 761px) {
+  .menu-toggle,
+  #menuToggle {
+    display: none !important;
+  }
+
+  .topbar > #cosmosNav,
+  .topbar > .nav {
+    display: flex;
+  }
+}
