@@ -4,253 +4,1074 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore NASA's OSIRIS-REx mission, which collected a sample from asteroid Bennu and returned it to Earth.">
-  <title>OSIRIS-REx | COSMOS</title>
+  <meta name="theme-color" content="#080b16">
+
+  <title>OSIRIS-REx Mission | COSMOS</title>
+  <meta name="description" content="Explore NASA's OSIRIS-REx mission, its historic sample collection from asteroid Bennu, and the discoveries helping scientists understand the early Solar System.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css">
 
   <style>
-    .mission-detail {
-      width: min(1100px, 90%);
-      margin: 0 auto;
-      padding: 45px 0 80px;
+    :root {
+      --rex-bg: #080b16;
+      --rex-panel: rgba(17, 25, 45, 0.76);
+      --rex-border: rgba(126, 164, 255, 0.19);
+      --rex-text: #f3f6ff;
+      --rex-muted: #a5b1ca;
+      --rex-cyan: #61e7ff;
+      --rex-purple: #9c8cff;
     }
 
-    .mission-back {
-      display: inline-block;
-      margin-bottom: 28px;
-      color: #9ecbff;
+    .rex-page {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      isolation: isolate;
+      color: var(--rex-text);
+      background:
+        radial-gradient(ellipse at 82% 12%, rgba(74, 89, 185, .19), transparent 35%),
+        radial-gradient(ellipse at 8% 48%, rgba(28, 174, 213, .10), transparent 33%),
+        var(--rex-bg);
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .rex-page *,
+    .rex-page *::before,
+    .rex-page *::after {
+      box-sizing: border-box;
+    }
+
+    .rex-page a {
+      color: inherit;
+    }
+
+    .rex-page .rex-container {
+      width: min(1120px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .rex-page .rex-stars {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .52;
+      background-image:
+        radial-gradient(1px 1px at 12% 18%, #fff 98%, transparent),
+        radial-gradient(2px 2px at 79% 13%, #b8dfff 98%, transparent),
+        radial-gradient(1px 1px at 38% 37%, #fff 98%, transparent),
+        radial-gradient(1px 1px at 88% 55%, #fff 98%, transparent),
+        radial-gradient(2px 2px at 19% 72%, #9bbcff 98%, transparent),
+        radial-gradient(1px 1px at 67% 82%, #fff 98%, transparent),
+        radial-gradient(1px 1px at 52% 10%, #fff 98%, transparent);
+      background-size: 360px 300px;
+      animation: rex-star-drift 45s linear infinite;
+    }
+
+    .rex-page .rex-breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      padding-top: 30px;
+      color: var(--rex-muted);
+      font-size: .84rem;
+    }
+
+    .rex-page .rex-breadcrumb a {
       text-decoration: none;
+      transition: color .2s ease;
     }
 
-    .mission-back:hover { text-decoration: underline; }
-
-    .mission-hero {
-      padding: 45px 35px;
-      border: 1px solid rgba(150,190,255,.22);
-      border-radius: 22px;
-      background: linear-gradient(135deg,#29231b,#403a2b 55%,#111827);
-      margin-bottom: 30px;
+    .rex-page .rex-breadcrumb a:hover {
+      color: var(--rex-cyan);
     }
 
-    .mission-label {
-      display: inline-block;
-      color: #e9d5a6;
-      font-size: .82rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 14px;
+    .rex-page .rex-separator {
+      color: #647293;
     }
 
-    .mission-hero h1 {
-      font-size: clamp(2.2rem,6vw,4.3rem);
-      line-height: 1.1;
-      margin: 0 0 18px;
-    }
-
-    .mission-hero p {
-      max-width: 760px;
-      line-height: 1.8;
-      color: #e3ddd0;
-    }
-
-    .mission-facts {
+    .rex-page .rex-hero {
+      position: relative;
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
-      gap: 16px;
-      margin: 25px 0 35px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(270px, .85fr);
+      align-items: center;
+      gap: 38px;
+      min-height: 490px;
+      padding-block: 58px 68px;
     }
 
-    .mission-fact,.mission-section {
-      padding: 23px;
-      border: 1px solid rgba(150,190,255,.17);
-      border-radius: 16px;
-      background: rgba(255,255,255,.035);
+    .rex-page .rex-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--rex-cyan);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .19em;
+      text-transform: uppercase;
     }
 
-    .mission-fact span {
+    .rex-page .rex-eyebrow::before {
+      width: 27px;
+      height: 1px;
+      background: var(--rex-cyan);
+      content: "";
+      box-shadow: 0 0 12px var(--rex-cyan);
+    }
+
+    .rex-page .rex-hero h1 {
+      max-width: 750px;
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.7rem, 7vw, 5.7rem);
+      font-weight: 700;
+      line-height: .99;
+      letter-spacing: -.065em;
+    }
+
+    .rex-page .rex-hero h1 span {
       display: block;
-      color: #e9d5a6;
-      font-size: .82rem;
-      margin-bottom: 9px;
+      margin-top: 12px;
+      color: transparent;
+      background: linear-gradient(100deg, #70edff, #a3a1ff 60%, #e1d8ff);
+      -webkit-background-clip: text;
+      background-clip: text;
     }
 
-    .mission-fact strong { font-size: 1.05rem; }
-    .mission-section { margin-top: 20px; }
-    .mission-section h2 { margin-top: 0; margin-bottom: 14px; }
-
-    .mission-section p,.mission-section li {
-      color: #cbd5e1;
+    .rex-page .rex-intro {
+      max-width: 610px;
+      margin: 25px 0 0;
+      color: var(--rex-muted);
+      font-size: 1.02rem;
       line-height: 1.85;
     }
 
-    .mission-section ul { padding-left: 22px; }
-
-    .mission-highlight {
-      border-left: 3px solid #e5c77e;
-      padding: 12px 18px;
-      margin-top: 18px;
-      background: rgba(229,199,126,.07);
-      color: #f5ebcf;
-      line-height: 1.8;
-    }
-
-    .mission-navigation {
+    .rex-page .rex-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 30px;
     }
 
-    .mission-navigation a {
-      display: inline-block;
-      padding: 12px 18px;
-      border: 1px solid rgba(150,190,255,.3);
-      border-radius: 10px;
-      color: #e5efff;
+    .rex-page .rex-button {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 19px;
+      border: 1px solid var(--rex-border);
+      border-radius: 12px;
+      font-size: .88rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
+    }
+
+    .rex-page .rex-button:hover {
+      transform: translateY(-3px);
+      border-color: rgba(97, 231, 255, .55);
+      box-shadow: 0 10px 35px rgba(55, 190, 255, .12);
+    }
+
+    .rex-page .rex-button-primary {
+      color: #06101b;
+      border-color: transparent;
+      background: linear-gradient(110deg, var(--rex-cyan), #a6a2ff);
+    }
+
+    .rex-page .rex-button-secondary {
+      background: rgba(255, 255, 255, .035);
+    }
+
+    .rex-page .rex-visual {
+      position: relative;
+      display: grid;
+      min-height: 340px;
+      place-items: center;
+    }
+
+    .rex-page .rex-orbit {
+      position: absolute;
+      width: min(100%, 340px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(119, 166, 255, .22);
+      border-radius: 50%;
+      box-shadow: 0 0 45px rgba(98, 113, 255, .07), inset 0 0 35px rgba(98, 113, 255, .05);
+      animation: rex-orbit-glow 5s ease-in-out infinite alternate;
+    }
+
+    .rex-page .rex-orbit::before,
+    .rex-page .rex-orbit::after {
+      position: absolute;
+      inset: 12%;
+      border: 1px dashed rgba(97, 231, 255, .19);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .rex-page .rex-orbit::after {
+      inset: -10%;
+      border-style: solid;
+      border-color: rgba(156, 140, 255, .12);
+      transform: rotateX(68deg) rotateZ(-22deg);
+    }
+
+    .rex-page .rex-asteroid {
+      position: relative;
+      display: grid;
+      width: 175px;
+      aspect-ratio: 1;
+      place-items: center;
+      border-radius: 43% 57% 61% 39% / 47% 39% 61% 53%;
+      background:
+        radial-gradient(circle at 27% 24%, rgba(255, 226, 184, .78) 0 2px, transparent 3px),
+        radial-gradient(circle at 66% 35%, rgba(25, 21, 31, .65) 0 8px, transparent 10px),
+        radial-gradient(circle at 38% 70%, rgba(26, 24, 33, .8) 0 12px, transparent 14px),
+        radial-gradient(circle at 35% 30%, #a99a87, #6f6570 38%, #3a3b4b 70%, #252c3d);
+      box-shadow:
+        inset -24px -23px 38px rgba(0, 0, 0, .55),
+        inset 9px 8px 20px rgba(255, 228, 190, .2),
+        0 0 42px rgba(116, 137, 255, .22);
+      animation: rex-asteroid-float 7s ease-in-out infinite;
+    }
+
+    .rex-page .rex-asteroid::before,
+    .rex-page .rex-asteroid::after {
+      position: absolute;
+      width: 24px;
+      height: 17px;
+      border-radius: 50%;
+      background: rgba(30, 31, 43, .42);
+      content: "";
+      transform: rotate(-24deg);
+    }
+
+    .rex-page .rex-asteroid::before {
+      top: 34%;
+      left: 24%;
+    }
+
+    .rex-page .rex-asteroid::after {
+      right: 19%;
+      bottom: 27%;
+      width: 32px;
+      height: 22px;
+    }
+
+    .rex-page .rex-visual-label {
+      position: absolute;
+      right: 0;
+      bottom: 15px;
+      padding: 12px 15px;
+      border: 1px solid var(--rex-border);
+      border-radius: 12px;
+      background: rgba(9, 14, 29, .8);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, .2);
+      backdrop-filter: blur(14px);
+    }
+
+    .rex-page .rex-visual-label strong,
+    .rex-page .rex-visual-label span {
+      display: block;
+    }
+
+    .rex-page .rex-visual-label strong {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .9rem;
+    }
+
+    .rex-page .rex-visual-label span {
+      margin-top: 4px;
+      color: var(--rex-muted);
+      font-size: .74rem;
+    }
+
+    .rex-page .rex-facts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      padding-bottom: 55px;
+    }
+
+    .rex-page .rex-fact {
+      min-width: 0;
+      padding: 22px 20px;
+      border: 1px solid var(--rex-border);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(22, 32, 57, .77), rgba(12, 18, 34, .75));
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .rex-page .rex-fact:hover {
+      transform: translateY(-4px);
+      border-color: rgba(97, 231, 255, .42);
+    }
+
+    .rex-page .rex-fact span {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--rex-muted);
+      font-size: .77rem;
+    }
+
+    .rex-page .rex-fact strong {
+      display: block;
+      overflow-wrap: anywhere;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1rem;
+    }
+
+    .rex-page .rex-section {
+      padding-block: 37px 28px;
+      scroll-margin-top: 30px;
+    }
+
+    .rex-page .rex-section-heading {
+      max-width: 760px;
+      margin-bottom: 25px;
+    }
+
+    .rex-page .rex-kicker {
+      margin-bottom: 10px;
+      color: var(--rex-cyan);
+      font-size: .73rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .rex-page .rex-section h2 {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.7rem, 4vw, 2.7rem);
+      letter-spacing: -.04em;
+      line-height: 1.15;
+    }
+
+    .rex-page .rex-section-heading p,
+    .rex-page .rex-panel p,
+    .rex-page .rex-panel li {
+      color: var(--rex-muted);
+      font-size: .94rem;
+      line-height: 1.85;
+    }
+
+    .rex-page .rex-section-heading p {
+      margin: 13px 0 0;
+    }
+
+    .rex-page .rex-panel-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .rex-page .rex-panel {
+      min-width: 0;
+      padding: 25px;
+      border: 1px solid var(--rex-border);
+      border-radius: 18px;
+      background: var(--rex-panel);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .12);
+      backdrop-filter: blur(12px);
+      transition: border-color .25s ease, transform .25s ease;
+    }
+
+    .rex-page .rex-panel:hover {
+      transform: translateY(-3px);
+      border-color: rgba(156, 140, 255, .4);
+    }
+
+    .rex-page .rex-panel h3 {
+      margin: 0 0 12px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.18rem;
+    }
+
+    .rex-page .rex-panel p {
+      margin: 0;
+    }
+
+    .rex-page .rex-panel p + p {
+      margin-top: 12px;
+    }
+
+    .rex-page .rex-timeline {
+      position: relative;
+      display: grid;
+      gap: 0;
+      margin-top: 10px;
+    }
+
+    .rex-page .rex-timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 22px;
+      padding: 0 0 28px 25px;
+      border-left: 1px solid rgba(97, 231, 255, .27);
+    }
+
+    .rex-page .rex-timeline-item:last-child {
+      padding-bottom: 0;
+      border-left-color: transparent;
+    }
+
+    .rex-page .rex-timeline-item::before {
+      position: absolute;
+      top: 5px;
+      left: -5px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--rex-cyan);
+      box-shadow: 0 0 14px rgba(97, 231, 255, .8);
+      content: "";
+    }
+
+    .rex-page .rex-timeline-date {
+      color: var(--rex-cyan);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .88rem;
+      font-weight: 700;
+    }
+
+    .rex-page .rex-timeline-item h3 {
+      margin: 0 0 7px;
+      font-size: 1rem;
+    }
+
+    .rex-page .rex-timeline-item p {
+      margin: 0;
+      color: var(--rex-muted);
+      font-size: .9rem;
+      line-height: 1.75;
+    }
+
+    .rex-page .rex-highlight {
+      margin-top: 18px;
+      padding: 23px 25px;
+      border: 1px solid rgba(97, 231, 255, .24);
+      border-radius: 16px;
+      background: linear-gradient(110deg, rgba(39, 111, 147, .13), rgba(104, 81, 181, .12));
+    }
+
+    .rex-page .rex-highlight strong {
+      display: block;
+      margin-bottom: 8px;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .rex-page .rex-highlight p {
+      margin: 0;
+      color: var(--rex-muted);
+      font-size: .92rem;
+      line-height: 1.8;
+    }
+
+    .rex-page .rex-status {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .rex-page .rex-status-indicator {
+      flex: 0 0 10px;
+      width: 10px;
+      height: 10px;
+      margin-top: 7px;
+      border-radius: 50%;
+      background: #6ee7b7;
+      box-shadow: 0 0 14px rgba(110, 231, 183, .65);
+    }
+
+    .rex-page .rex-navigation {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      padding-block: 40px 65px;
+    }
+
+    .rex-page .rex-nav-card {
+      display: block;
+      padding: 20px;
+      border: 1px solid var(--rex-border);
+      border-radius: 15px;
+      background: rgba(16, 24, 43, .65);
+      text-decoration: none;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .rex-page .rex-nav-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(97, 231, 255, .5);
+    }
+
+    .rex-page .rex-nav-card span {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--rex-cyan);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .rex-page .rex-nav-card strong {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .98rem;
+    }
+
+    .rex-page .rex-footer {
+      padding: 24px 0;
+      border-top: 1px solid rgba(126, 164, 255, .13);
+      color: var(--rex-muted);
+      font-size: .8rem;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .rex-page .rex-footer a {
+      color: var(--rex-cyan);
       text-decoration: none;
     }
 
-    .mission-navigation a:hover {
-      background: rgba(117,182,255,.12);
+    .rex-page .rex-reveal {
+      animation: rex-enter .8s both;
     }
 
-    @media(max-width:600px) {
-      .mission-detail {
-        width: calc(100% - 28px);
-        padding-top: 25px;
+    .rex-page .rex-delay-1 {
+      animation-delay: .12s;
+    }
+
+    .rex-page .rex-delay-2 {
+      animation-delay: .24s;
+    }
+
+    @keyframes rex-enter {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes rex-asteroid-float {
+      0%, 100% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-12px) rotate(5deg); }
+    }
+
+    @keyframes rex-orbit-glow {
+      from { opacity: .65; transform: scale(.97) rotate(-5deg); }
+      to { opacity: 1; transform: scale(1.03) rotate(5deg); }
+    }
+
+    @keyframes rex-star-drift {
+      from { background-position: 0 0; }
+      to { background-position: 360px 300px; }
+    }
+
+    @media (max-width: 800px) {
+      .rex-page .rex-hero {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding-top: 48px;
       }
-      .mission-hero { padding: 30px 22px; }
-      .mission-section,.mission-fact { padding: 18px; }
+
+      .rex-page .rex-visual {
+        min-height: 300px;
+      }
+
+      .rex-page .rex-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .rex-page .rex-navigation {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .rex-page .rex-container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .rex-page .rex-hero {
+        min-height: auto;
+        padding-block: 42px 45px;
+      }
+
+      .rex-page .rex-hero h1 {
+        font-size: clamp(2.65rem, 13vw, 4rem);
+      }
+
+      .rex-page .rex-intro {
+        font-size: .94rem;
+      }
+
+      .rex-page .rex-visual {
+        min-height: 260px;
+      }
+
+      .rex-page .rex-orbit {
+        width: 225px;
+      }
+
+      .rex-page .rex-asteroid {
+        width: 125px;
+      }
+
+      .rex-page .rex-visual-label {
+        right: 0;
+        bottom: 0;
+      }
+
+      .rex-page .rex-facts {
+        gap: 10px;
+        padding-bottom: 30px;
+      }
+
+      .rex-page .rex-fact {
+        padding: 17px 14px;
+      }
+
+      .rex-page .rex-fact strong {
+        font-size: .91rem;
+      }
+
+      .rex-page .rex-panel-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .rex-page .rex-panel {
+        padding: 21px;
+      }
+
+      .rex-page .rex-timeline-item {
+        grid-template-columns: 1fr;
+        gap: 7px;
+        padding-left: 20px;
+      }
+
+      .rex-page .rex-section {
+        padding-top: 28px;
+      }
+
+      .rex-page .rex-actions {
+        align-items: stretch;
+      }
+
+      .rex-page .rex-button {
+        flex: 1 1 auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rex-page *,
+      .rex-page *::before,
+      .rex-page *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
     }
   </style>
 </head>
 
 <body>
-  <main class="mission-detail">
-    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+  <main class="rex-page">
+    <div class="rex-stars" aria-hidden="true"></div>
 
-    <header class="mission-hero">
-      <span class="mission-label">Asteroid Sample Return</span>
-      <h1>OSIRIS-REx</h1>
-      <p>
-        NASA's OSIRIS-REx mission traveled to asteroid Bennu, collected a
-        sample of its surface material, and delivered that sample to Earth.
-        By studying the material in laboratories, scientists can investigate
-        the early Solar System and the ingredients that helped form planets.
-      </p>
-    </header>
+    <div class="rex-container">
+      <nav class="rex-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">COSMOS</a>
+        <span class="rex-separator">/</span>
+        <a href="missions.html">Space Missions</a>
+        <span class="rex-separator">/</span>
+        <span aria-current="page">OSIRIS-REx</span>
+      </nav>
 
-    <section class="mission-facts" aria-label="Mission facts">
-      <div class="mission-fact">
-        <span>Space Agency</span>
-        <strong>NASA</strong>
-      </div>
-      <div class="mission-fact">
-        <span>Launch Date</span>
-        <strong>September 8, 2016</strong>
-      </div>
-      <div class="mission-fact">
-        <span>Target Asteroid</span>
-        <strong>101955 Bennu</strong>
-      </div>
-      <div class="mission-fact">
-        <span>Sample Returned</span>
-        <strong>September 24, 2023</strong>
-      </div>
-    </section>
+      <section class="rex-hero">
+        <div class="rex-reveal">
+          <div class="rex-eyebrow">Deep Space Mission File</div>
 
-    <section class="mission-section">
-      <h2>What Was OSIRIS-REx?</h2>
-      <p>
-        OSIRIS-REx stands for Origins, Spectral Interpretation, Resource
-        Identification, and Security–Regolith Explorer. It was a robotic
-        spacecraft developed to map asteroid Bennu, investigate its properties,
-        collect surface material, and return the sample to Earth.
-      </p>
-      <p>
-        Bennu is a small, carbon-rich near-Earth asteroid. Its material
-        preserves clues about the substances present when the Solar System
-        formed billions of years ago.
-      </p>
-    </section>
+          <h1>
+            OSIRIS-REx
+            <span>Return From Bennu</span>
+          </h1>
 
-    <section class="mission-section">
-      <h2>Mission Timeline</h2>
-      <ul>
-        <li><strong>2016:</strong> OSIRIS-REx launched from Earth.</li>
-        <li><strong>2018:</strong> The spacecraft arrived at Bennu and began detailed mapping.</li>
-        <li><strong>2020:</strong> It touched the asteroid's surface with its sampling mechanism and collected material.</li>
-        <li><strong>2021:</strong> The spacecraft departed Bennu and began its return journey.</li>
-        <li><strong>2023:</strong> The sample capsule landed in Utah, USA, delivering asteroid material to Earth.</li>
-        <li><strong>After sample delivery:</strong> The spacecraft continued into an extended mission called OSIRIS-APEX to study asteroid Apophis.</li>
-      </ul>
-    </section>
+          <p class="rex-intro">
+            A landmark NASA mission that travelled to a near-Earth asteroid,
+            collected a sample from its surface, and delivered ancient material
+            to Earth for scientists to study.
+          </p>
 
-    <section class="mission-section">
-      <h2>How Did It Collect the Sample?</h2>
-      <p>
-        OSIRIS-REx used a system called Touch-And-Go Sample Acquisition
-        Mechanism, or TAGSAM. The spacecraft briefly contacted Bennu's
-        surface and released a burst of nitrogen gas to stir up surface
-        material. The collection head captured some of this material.
-      </p>
-      <p>
-        The sample was stored in a return capsule, which separated from the
-        spacecraft and descended to Earth by parachute in September 2023.
-      </p>
+          <div class="rex-actions">
+            <a class="rex-button rex-button-primary" href="#mission-overview">
+              Explore Mission
+            </a>
+            <a class="rex-button rex-button-secondary"
+               href="https://science.nasa.gov/mission/osiris-rex/"
+               target="_blank"
+               rel="noopener noreferrer">
+              NASA Mission Details
+            </a>
+          </div>
+        </div>
 
-      <div class="mission-highlight">
-        Unlike missions that only send images and measurements, OSIRIS-REx
-        returned physical asteroid material for scientists to examine
-        directly in laboratories.
-      </div>
-    </section>
+        <div class="rex-visual rex-reveal rex-delay-1" role="img"
+             aria-label="Stylized illustration of asteroid Bennu surrounded by orbital rings">
+          <div class="rex-orbit" aria-hidden="true"></div>
+          <div class="rex-asteroid" aria-hidden="true"></div>
+          <div class="rex-visual-label">
+            <strong>101955 Bennu</strong>
+            <span>Near-Earth asteroid</span>
+          </div>
+        </div>
+      </section>
 
-    <section class="mission-section">
-      <h2>What Can Scientists Learn?</h2>
-      <ul>
-        <li>Which minerals and chemical compounds occur in Bennu's material.</li>
-        <li>How carbon-rich asteroids formed and changed over time.</li>
-        <li>Whether the sample contains organic molecules and water-related minerals.</li>
-        <li>What small bodies may have delivered to the early Earth.</li>
-        <li>How scientists can better characterize near-Earth asteroids.</li>
-      </ul>
-      <p>
-        Finding organic molecules does not by itself prove that life existed
-        on Bennu. These substances can also form through non-biological
-        chemical processes.
-      </p>
-    </section>
+      <section class="rex-facts rex-reveal rex-delay-2" aria-label="Mission facts">
+        <div class="rex-fact">
+          <span>Space Agency</span>
+          <strong>NASA</strong>
+        </div>
+        <div class="rex-fact">
+          <span>Launch Date</span>
+          <strong>September 8, 2016</strong>
+        </div>
+        <div class="rex-fact">
+          <span>Sample Collection</span>
+          <strong>October 20, 2020</strong>
+        </div>
+        <div class="rex-fact">
+          <span>Earth Return</span>
+          <strong>September 24, 2023</strong>
+        </div>
+      </section>
 
-    <section class="mission-section">
-      <h2>Why Is Bennu Important?</h2>
-      <p>
-        Bennu's orbit brings it relatively close to Earth, making it important
-        for asteroid research. Studying its physical structure and composition
-        helps scientists improve their understanding of asteroid evolution
-        and assess the properties of potentially hazardous near-Earth objects.
-      </p>
-    </section>
+      <section class="rex-section" id="mission-overview">
+        <div class="rex-section-heading">
+          <div class="rex-kicker">01 / Mission Overview</div>
+          <h2>A Journey Into the Early Solar System</h2>
+          <p>
+            OSIRIS-REx stands for Origins, Spectral Interpretation, Resource
+            Identification, and Security–Regolith Explorer. Its main objective
+            was to study asteroid Bennu and bring a sample back to Earth.
+          </p>
+        </div>
 
-    <section class="mission-section">
-      <h2>Mission Status</h2>
-      <p>
-        The original OSIRIS-REx sample-return mission has been completed.
-        Its spacecraft continues as OSIRIS-APEX, a separate extended mission
-        that is planned to investigate asteroid Apophis after its close
-        approach to Earth in 2029. Check NASA's official page for current
-        mission updates.
-      </p>
-    </section>
+        <div class="rex-panel-grid">
+          <article class="rex-panel">
+            <h3>Why Bennu?</h3>
+            <p>
+              Bennu is a carbon-rich asteroid that preserves material from the
+              Solar System's early history. Studying it helps scientists
+              investigate the ingredients that existed when planets formed.
+            </p>
+          </article>
 
-    <section class="mission-section">
-      <h2>Explore More</h2>
-      <div class="mission-navigation">
-        <a href="https://science.nasa.gov/mission/osiris-rex/" target="_blank" rel="noopener noreferrer">NASA OSIRIS-REx</a>
-        <a href="missions.html">All Space Missions</a>
-        <a href="index.html">COSMOS Home</a>
-      </div>
-    </section>
+          <article class="rex-panel">
+            <h3>A Historic Achievement</h3>
+            <p>
+              The mission collected material from Bennu and delivered it to
+              Earth in 2023. It was NASA's first mission to return a sample
+              from an asteroid.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="rex-section" id="mission-timeline">
+        <div class="rex-section-heading">
+          <div class="rex-kicker">02 / Mission Timeline</div>
+          <h2>From Launch to Sample Return</h2>
+          <p>
+            Years of navigation, asteroid mapping, surface operations and
+            sample analysis made this mission possible.
+          </p>
+        </div>
+
+        <div class="rex-panel">
+          <div class="rex-timeline">
+            <div class="rex-timeline-item">
+              <div class="rex-timeline-date">2016</div>
+              <div>
+                <h3>Launch</h3>
+                <p>
+                  OSIRIS-REx launched on September 8, beginning its journey
+                  toward asteroid Bennu.
+                </p>
+              </div>
+            </div>
+
+            <div class="rex-timeline-item">
+              <div class="rex-timeline-date">2018</div>
+              <div>
+                <h3>Arrival at Bennu</h3>
+                <p>
+                  The spacecraft arrived in December and began detailed
+                  observations and mapping of the asteroid.
+                </p>
+              </div>
+            </div>
+
+            <div class="rex-timeline-item">
+              <div class="rex-timeline-date">2020</div>
+              <div>
+                <h3>Sample Collection</h3>
+                <p>
+                  On October 20, the spacecraft used its TAGSAM mechanism to
+                  collect surface material from Bennu.
+                </p>
+              </div>
+            </div>
+
+            <div class="rex-timeline-item">
+              <div class="rex-timeline-date">2021</div>
+              <div>
+                <h3>Journey Back Begins</h3>
+                <p>
+                  The spacecraft departed Bennu in May, carrying the sealed
+                  sample capsule toward Earth.
+                </p>
+              </div>
+            </div>
+
+            <div class="rex-timeline-item">
+              <div class="rex-timeline-date">2023</div>
+              <div>
+                <h3>Sample Delivered</h3>
+                <p>
+                  The sample capsule landed in Utah on September 24. The main
+                  spacecraft continued its journey under the OSIRIS-APEX
+                  mission name.
+                </p>
+              </div>
+            </div>
+
+            <div class="rex-timeline-item">
+              <div class="rex-timeline-date">2029</div>
+              <div>
+                <h3>Planned Apophis Encounter</h3>
+                <p>
+                  OSIRIS-APEX is scheduled to reach asteroid Apophis in 2029
+                  and study how its close approach to Earth affects the
+                  asteroid's surface.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="rex-section" id="sample-collection">
+        <div class="rex-section-heading">
+          <div class="rex-kicker">03 / Sample Technology</div>
+          <h2>How Did It Collect the Sample?</h2>
+          <p>
+            Rather than landing like a conventional spacecraft, OSIRIS-REx
+            briefly touched Bennu's surface and collected loose material.
+          </p>
+        </div>
+
+        <div class="rex-panel-grid">
+          <article class="rex-panel">
+            <h3>Touch-and-Go System</h3>
+            <p>
+              The spacecraft used a robotic sampling arm called TAGSAM.
+              It contacted the surface for a short period and released a burst
+              of nitrogen gas to stir up and capture regolith.
+            </p>
+          </article>
+
+          <article class="rex-panel">
+            <h3>Sealed for the Journey</h3>
+            <p>
+              The collected material was secured inside a sample return
+              capsule. That capsule separated from the spacecraft and returned
+              to Earth in September 2023.
+            </p>
+          </article>
+        </div>
+
+        <div class="rex-highlight">
+          <strong>The result</strong>
+          <p>
+            NASA reported approximately 121.6 grams of Bennu material recovered
+            from the sample return capsule—more than the mission's 60-gram
+            minimum requirement.
+          </p>
+        </div>
+      </section>
+
+      <section class="rex-section" id="scientific-discoveries">
+        <div class="rex-section-heading">
+          <div class="rex-kicker">04 / Scientific Value</div>
+          <h2>What Can Scientists Learn?</h2>
+          <p>
+            Samples can be examined with laboratory instruments far more
+            powerful than those that can be carried aboard a spacecraft.
+          </p>
+        </div>
+
+        <div class="rex-panel-grid">
+          <article class="rex-panel">
+            <h3>Origins of the Solar System</h3>
+            <p>
+              Minerals and chemical compounds in Bennu can reveal conditions
+              that existed billions of years ago, before the planets reached
+              their present form.
+            </p>
+          </article>
+
+          <article class="rex-panel">
+            <h3>Water and Organic Chemistry</h3>
+            <p>
+              Bennu samples contain water-bearing minerals and carbon-rich
+              material. Their analysis helps researchers investigate chemical
+              processes that may have contributed to the ingredients for life.
+            </p>
+          </article>
+
+          <article class="rex-panel">
+            <h3>Asteroid Structure</h3>
+            <p>
+              Combining the sample with spacecraft observations helps
+              researchers understand how Bennu formed and how its surface
+              material is distributed.
+            </p>
+          </article>
+
+          <article class="rex-panel">
+            <h3>Planetary Defense</h3>
+            <p>
+              Studying Bennu's composition, orbit and physical properties
+              improves our understanding of near-Earth asteroids and the
+              challenges involved in assessing their future trajectories.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="rex-section" id="why-bennu">
+        <div class="rex-section-heading">
+          <div class="rex-kicker">05 / The Target</div>
+          <h2>Why Is Bennu Important?</h2>
+        </div>
+
+        <div class="rex-panel">
+          <p>
+            Bennu is a small near-Earth asteroid whose orbit brings it relatively
+            close to our planet. Scientists study its trajectory to improve
+            long-term risk assessments, while its ancient carbon-rich material
+            offers a window into the chemistry of the early Solar System.
+          </p>
+          <p>
+            Bennu is not predicted to collide with Earth during the mission's
+            operational period. Its long-term orbital evolution is monitored
+            because small changes in an asteroid's motion can matter over
+            extended timescales.
+          </p>
+        </div>
+      </section>
+
+      <section class="rex-section" id="mission-status">
+        <div class="rex-section-heading">
+          <div class="rex-kicker">06 / Current Mission</div>
+          <h2>OSIRIS-REx Has Evolved Into OSIRIS-APEX</h2>
+        </div>
+
+        <div class="rex-panel">
+          <div class="rex-status">
+            <span class="rex-status-indicator" aria-hidden="true"></span>
+            <div>
+              <h3>Sample Returned; Extended Mission Underway</h3>
+              <p>
+                The original OSIRIS-REx sample-return objective is complete.
+                The spacecraft was redirected to study asteroid Apophis and
+                continues as OSIRIS-APEX. Its planned arrival at Apophis is
+                in 2029.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="rex-section" id="explore-more">
+        <div class="rex-section-heading">
+          <div class="rex-kicker">07 / Continue Exploring</div>
+          <h2>Your Next Destination</h2>
+          <p>
+            Continue exploring the COSMOS mission archive or return to the
+            main dashboard.
+          </p>
+        </div>
+
+        <div class="rex-navigation">
+          <a class="rex-nav-card"
+             href="missions.html">
+            <span>Mission Archive</span>
+            <strong>Explore Space Missions</strong>
+          </a>
+
+          <a class="rex-nav-card"
+             href="research.html">
+            <span>Scientific Topics</span>
+            <strong>Explore Space Research</strong>
+          </a>
+
+          <a class="rex-nav-card"
+             href="index.html">
+            <span>Main Dashboard</span>
+            <strong>Return to COSMOS</strong>
+          </a>
+        </div>
+      </section>
+
+      <footer class="rex-footer">
+        <p>
+          COSMOS — Explore the Universe
+        </p>
+        <p>
+          Mission information:
+          <a href="https://science.nasa.gov/mission/osiris-rex/"
+             target="_blank"
+             rel="noopener noreferrer">NASA OSIRIS-REx</a>
+        </p>
+        <p>Educational project. Mission facts are provided for general learning.</p>
+      </footer>
+    </div>
   </main>
+
+  <script src="app.js"></script>
+  <script>
+    (() => {
+      const page = document.querySelector(".rex-page");
+      if (!page) return;
+
+      const internalLinks = page.querySelectorAll('a[href^="#"]');
+
+      internalLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const targetId = link.getAttribute("href");
+          const target = targetId ? document.querySelector(targetId) : null;
+
+          if (target) {
+            event.preventDefault();
+            target.scrollIntoView({
+              behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                ? "auto"
+                : "smooth",
+              block: "start"
+            });
+          }
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
