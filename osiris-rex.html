@@ -18,31 +18,34 @@
   <style>
     :root {
       --rex-bg: #080b16;
-      --rex-panel: rgba(17, 25, 45, 0.76);
-      --rex-border: rgba(126, 164, 255, 0.19);
+      --rex-panel: rgba(17, 25, 45, .76);
+      --rex-border: rgba(126, 164, 255, .19);
       --rex-text: #f3f6ff;
       --rex-muted: #a5b1ca;
-      --rex-cyan: #61e7ff;
+      --rex-cyan: #69e0ff;
       --rex-purple: #9c8cff;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .rex-page,
+    .rex-page * {
+      box-sizing: border-box;
     }
 
     .rex-page {
       position: relative;
+      isolation: isolate;
       min-height: 100vh;
       overflow: hidden;
-      isolation: isolate;
       color: var(--rex-text);
       background:
         radial-gradient(ellipse at 82% 12%, rgba(74, 89, 185, .19), transparent 35%),
         radial-gradient(ellipse at 8% 48%, rgba(28, 174, 213, .10), transparent 33%),
         var(--rex-bg);
       font-family: "DM Sans", sans-serif;
-    }
-
-    .rex-page *,
-    .rex-page *::before,
-    .rex-page *::after {
-      box-sizing: border-box;
     }
 
     .rex-page a {
@@ -72,37 +75,63 @@
       animation: rex-star-drift 45s linear infinite;
     }
 
-    .rex-page .rex-breadcrumb {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+    /* Back button — matches the Apollo mission page */
+
+    .rex-page .back-row {
+      padding-top: 27px;
+      animation: rex-enter .65s ease both;
+    }
+
+    .rex-page .back-button {
+      display: inline-flex;
       align-items: center;
-      padding-top: 30px;
-      color: var(--rex-muted);
-      font-size: .84rem;
-    }
-
-    .rex-page .rex-breadcrumb a {
+      gap: 11px;
+      min-height: 45px;
+      padding: 10px 17px;
+      border: 1px solid rgba(105, 224, 255, .24);
+      border-radius: 12px;
+      color: #d1e5ff;
+      background: rgba(105, 224, 255, .055);
       text-decoration: none;
-      transition: color .2s ease;
+      font-size: .9rem;
+      font-weight: 600;
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        color .25s ease;
     }
 
-    .rex-page .rex-breadcrumb a:hover {
+    .rex-page .back-arrow {
+      font-size: 1.15rem;
+      transition: transform .25s ease;
+    }
+
+    .rex-page .back-button:hover {
       color: var(--rex-cyan);
+      border-color: rgba(105, 224, 255, .65);
+      background: rgba(105, 224, 255, .10);
+      transform: translateX(-3px);
     }
 
-    .rex-page .rex-separator {
-      color: #647293;
+    .rex-page .back-button:hover .back-arrow {
+      transform: translateX(-3px);
     }
+
+    /* Hero */
 
     .rex-page .rex-hero {
-      position: relative;
       display: grid;
       grid-template-columns: minmax(0, 1.15fr) minmax(270px, .85fr);
       align-items: center;
       gap: 38px;
       min-height: 490px;
-      padding-block: 58px 68px;
+      padding-block: 52px 68px;
+    }
+
+    .rex-page .rex-hero-copy {
+      min-width: 0;
+      animation: rex-enter .8s ease both;
     }
 
     .rex-page .rex-eyebrow {
@@ -170,7 +199,11 @@
       font-size: .88rem;
       font-weight: 700;
       text-decoration: none;
-      transition: transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
+      transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
     }
 
     .rex-page .rex-button:hover {
@@ -189,11 +222,15 @@
       background: rgba(255, 255, 255, .035);
     }
 
+    /* Asteroid visual */
+
     .rex-page .rex-visual {
       position: relative;
       display: grid;
+      min-width: 0;
       min-height: 340px;
       place-items: center;
+      animation: rex-enter .9s .15s both;
     }
 
     .rex-page .rex-orbit {
@@ -202,7 +239,9 @@
       aspect-ratio: 1;
       border: 1px solid rgba(119, 166, 255, .22);
       border-radius: 50%;
-      box-shadow: 0 0 45px rgba(98, 113, 255, .07), inset 0 0 35px rgba(98, 113, 255, .05);
+      box-shadow:
+        0 0 45px rgba(98, 113, 255, .07),
+        inset 0 0 35px rgba(98, 113, 255, .05);
       animation: rex-orbit-glow 5s ease-in-out infinite alternate;
     }
 
@@ -224,10 +263,9 @@
 
     .rex-page .rex-asteroid {
       position: relative;
-      display: grid;
+      z-index: 1;
       width: 175px;
       aspect-ratio: 1;
-      place-items: center;
       border-radius: 43% 57% 61% 39% / 47% 39% 61% 53%;
       background:
         radial-gradient(circle at 27% 24%, rgba(255, 226, 184, .78) 0 2px, transparent 3px),
@@ -268,10 +306,11 @@
       position: absolute;
       right: 0;
       bottom: 15px;
+      z-index: 2;
       padding: 12px 15px;
       border: 1px solid var(--rex-border);
       border-radius: 12px;
-      background: rgba(9, 14, 29, .8);
+      background: rgba(9, 14, 29, .85);
       box-shadow: 0 8px 30px rgba(0, 0, 0, .2);
       backdrop-filter: blur(14px);
     }
@@ -291,6 +330,8 @@
       color: var(--rex-muted);
       font-size: .74rem;
     }
+
+    /* Mission facts */
 
     .rex-page .rex-facts {
       display: grid;
@@ -326,6 +367,8 @@
       font-family: "Space Grotesk", sans-serif;
       font-size: 1rem;
     }
+
+    /* Content sections */
 
     .rex-page .rex-section {
       padding-block: 37px 28px;
@@ -402,6 +445,8 @@
       margin-top: 12px;
     }
 
+    /* Timeline */
+
     .rex-page .rex-timeline {
       position: relative;
       display: grid;
@@ -412,7 +457,7 @@
     .rex-page .rex-timeline-item {
       position: relative;
       display: grid;
-      grid-template-columns: 130px 1fr;
+      grid-template-columns: 130px minmax(0, 1fr);
       gap: 22px;
       padding: 0 0 28px 25px;
       border-left: 1px solid rgba(97, 231, 255, .27);
@@ -454,6 +499,8 @@
       line-height: 1.75;
     }
 
+    /* Highlight and status */
+
     .rex-page .rex-highlight {
       margin-top: 18px;
       padding: 23px 25px;
@@ -491,15 +538,18 @@
       box-shadow: 0 0 14px rgba(110, 231, 183, .65);
     }
 
+    /* Explore more */
+
     .rex-page .rex-navigation {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
-      padding-block: 40px 65px;
+      padding-block: 10px 65px;
     }
 
     .rex-page .rex-nav-card {
       display: block;
+      min-width: 0;
       padding: 20px;
       border: 1px solid var(--rex-border);
       border-radius: 15px;
@@ -528,6 +578,8 @@
       font-size: .98rem;
     }
 
+    /* Footer */
+
     .rex-page .rex-footer {
       padding: 24px 0;
       border-top: 1px solid rgba(126, 164, 255, .13);
@@ -537,10 +589,20 @@
       text-align: center;
     }
 
+    .rex-page .rex-footer p {
+      margin: 6px 0;
+    }
+
     .rex-page .rex-footer a {
       color: var(--rex-cyan);
       text-decoration: none;
     }
+
+    .rex-page .rex-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Animations */
 
     .rex-page .rex-reveal {
       animation: rex-enter .8s both;
@@ -555,30 +617,53 @@
     }
 
     @keyframes rex-enter {
-      from { opacity: 0; transform: translateY(18px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @keyframes rex-asteroid-float {
-      0%, 100% { transform: translateY(0) rotate(-4deg); }
-      50% { transform: translateY(-12px) rotate(5deg); }
+      0%, 100% {
+        transform: translateY(0) rotate(-4deg);
+      }
+      50% {
+        transform: translateY(-12px) rotate(5deg);
+      }
     }
 
     @keyframes rex-orbit-glow {
-      from { opacity: .65; transform: scale(.97) rotate(-5deg); }
-      to { opacity: 1; transform: scale(1.03) rotate(5deg); }
+      from {
+        opacity: .65;
+        transform: scale(.97) rotate(-5deg);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1.03) rotate(5deg);
+      }
     }
 
     @keyframes rex-star-drift {
-      from { background-position: 0 0; }
-      to { background-position: 360px 300px; }
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: 360px 300px;
+      }
     }
+
+    /* Responsive layout */
 
     @media (max-width: 800px) {
       .rex-page .rex-hero {
         grid-template-columns: 1fr;
         gap: 20px;
-        padding-top: 48px;
+        min-height: auto;
+        padding-top: 45px;
       }
 
       .rex-page .rex-visual {
@@ -596,11 +681,14 @@
 
     @media (max-width: 560px) {
       .rex-page .rex-container {
-        width: min(100% - 28px, 1120px);
+        width: calc(100% - 28px);
+      }
+
+      .rex-page .back-row {
+        padding-top: 20px;
       }
 
       .rex-page .rex-hero {
-        min-height: auto;
         padding-block: 42px 45px;
       }
 
@@ -684,17 +772,24 @@
 
 <body>
   <main class="rex-page">
-   
-<!-- BACK TO SPACE MISSIONS -->
-<div class="back-row">
-  <a class="back-button" href="missions.html">
-    <span class="back-arrow" aria-hidden="true">&larr;</span>
-    <span>Back to Space Missions</span>
-  </a>
-</div>
+    <div class="rex-stars" aria-hidden="true"></div>
 
+    <div class="rex-container">
 
-          <h1>
+      <!-- Back to Space Missions -->
+      <div class="back-row">
+        <a class="back-button" href="missions.html">
+          <span class="back-arrow" aria-hidden="true">&larr;</span>
+          <span>Back to Space Missions</span>
+        </a>
+      </div>
+
+      <!-- Hero -->
+      <section class="rex-hero" aria-labelledby="rex-title">
+        <div class="rex-hero-copy">
+          <div class="rex-eyebrow">NASA Asteroid Sample Mission</div>
+
+          <h1 id="rex-title">
             OSIRIS-REx
             <span>Return From Bennu</span>
           </h1>
@@ -709,19 +804,24 @@
             <a class="rex-button rex-button-primary" href="#mission-overview">
               Explore Mission
             </a>
-            <a class="rex-button rex-button-secondary"
-               href="https://science.nasa.gov/mission/osiris-rex/"
-               target="_blank"
-               rel="noopener noreferrer">
+
+            <a
+              class="rex-button rex-button-secondary"
+              href="https://science.nasa.gov/mission/osiris-rex/"
+              target="_blank"
+              rel="noopener noreferrer">
               NASA Mission Details
             </a>
           </div>
         </div>
 
-        <div class="rex-visual rex-reveal rex-delay-1" role="img"
-             aria-label="Stylized illustration of asteroid Bennu surrounded by orbital rings">
+        <div
+          class="rex-visual rex-reveal rex-delay-1"
+          role="img"
+          aria-label="Stylized illustration of asteroid Bennu surrounded by orbital rings">
           <div class="rex-orbit" aria-hidden="true"></div>
           <div class="rex-asteroid" aria-hidden="true"></div>
+
           <div class="rex-visual-label">
             <strong>101955 Bennu</strong>
             <span>Near-Earth asteroid</span>
@@ -729,33 +829,40 @@
         </div>
       </section>
 
+      <!-- Mission Facts -->
       <section class="rex-facts rex-reveal rex-delay-2" aria-label="Mission facts">
         <div class="rex-fact">
           <span>Space Agency</span>
           <strong>NASA</strong>
         </div>
+
         <div class="rex-fact">
           <span>Launch Date</span>
           <strong>September 8, 2016</strong>
         </div>
+
         <div class="rex-fact">
           <span>Sample Collection</span>
           <strong>October 20, 2020</strong>
         </div>
+
         <div class="rex-fact">
           <span>Earth Return</span>
           <strong>September 24, 2023</strong>
         </div>
       </section>
 
+      <!-- 01: Overview -->
       <section class="rex-section" id="mission-overview">
         <div class="rex-section-heading">
           <div class="rex-kicker">01 / Mission Overview</div>
           <h2>A Journey Into the Early Solar System</h2>
+
           <p>
             OSIRIS-REx stands for Origins, Spectral Interpretation, Resource
-            Identification, and Security–Regolith Explorer. Its main objective
-            was to study asteroid Bennu and bring a sample back to Earth.
+            Identification, and Security–Regolith Explorer. Its primary
+            objective was to study asteroid Bennu and bring a sample back
+            to Earth.
           </p>
         </div>
 
@@ -780,10 +887,12 @@
         </div>
       </section>
 
+      <!-- 02: Timeline -->
       <section class="rex-section" id="mission-timeline">
         <div class="rex-section-heading">
           <div class="rex-kicker">02 / Mission Timeline</div>
           <h2>From Launch to Sample Return</h2>
+
           <p>
             Years of navigation, asteroid mapping, surface operations and
             sample analysis made this mission possible.
@@ -863,10 +972,12 @@
         </div>
       </section>
 
+      <!-- 03: Sample Collection -->
       <section class="rex-section" id="sample-collection">
         <div class="rex-section-heading">
           <div class="rex-kicker">03 / Sample Technology</div>
           <h2>How Did It Collect the Sample?</h2>
+
           <p>
             Rather than landing like a conventional spacecraft, OSIRIS-REx
             briefly touched Bennu's surface and collected loose material.
@@ -903,10 +1014,12 @@
         </div>
       </section>
 
+      <!-- 04: Discoveries -->
       <section class="rex-section" id="scientific-discoveries">
         <div class="rex-section-heading">
           <div class="rex-kicker">04 / Scientific Value</div>
           <h2>What Can Scientists Learn?</h2>
+
           <p>
             Samples can be examined with laboratory instruments far more
             powerful than those that can be carried aboard a spacecraft.
@@ -952,6 +1065,7 @@
         </div>
       </section>
 
+      <!-- 05: Bennu -->
       <section class="rex-section" id="why-bennu">
         <div class="rex-section-heading">
           <div class="rex-kicker">05 / The Target</div>
@@ -960,11 +1074,13 @@
 
         <div class="rex-panel">
           <p>
-            Bennu is a small near-Earth asteroid whose orbit brings it relatively
-            close to our planet. Scientists study its trajectory to improve
-            long-term risk assessments, while its ancient carbon-rich material
-            offers a window into the chemistry of the early Solar System.
+            Bennu is a small near-Earth asteroid whose orbit brings it
+            relatively close to our planet. Scientists study its trajectory
+            to improve long-term risk assessments, while its ancient
+            carbon-rich material offers a window into the chemistry of the
+            early Solar System.
           </p>
+
           <p>
             Bennu is not predicted to collide with Earth during the mission's
             operational period. Its long-term orbital evolution is monitored
@@ -974,6 +1090,7 @@
         </div>
       </section>
 
+      <!-- 06: Current Status -->
       <section class="rex-section" id="mission-status">
         <div class="rex-section-heading">
           <div class="rex-kicker">06 / Current Mission</div>
@@ -983,6 +1100,7 @@
         <div class="rex-panel">
           <div class="rex-status">
             <span class="rex-status-indicator" aria-hidden="true"></span>
+
             <div>
               <h3>Sample Returned; Extended Mission Underway</h3>
               <p>
@@ -996,10 +1114,12 @@
         </div>
       </section>
 
+      <!-- 07: Explore More -->
       <section class="rex-section" id="explore-more">
         <div class="rex-section-heading">
           <div class="rex-kicker">07 / Continue Exploring</div>
           <h2>Your Next Destination</h2>
+
           <p>
             Continue exploring the COSMOS mission archive or return to the
             main dashboard.
@@ -1007,62 +1127,73 @@
         </div>
 
         <div class="rex-navigation">
-          <a class="rex-nav-card"
-             href="missions.html">
+          <a class="rex-nav-card" href="missions.html">
             <span>Mission Archive</span>
             <strong>Explore Space Missions</strong>
           </a>
 
-          <a class="rex-nav-card"
-             href="research.html">
+          <a class="rex-nav-card" href="research.html">
             <span>Scientific Topics</span>
             <strong>Explore Space Research</strong>
           </a>
 
-          <a class="rex-nav-card"
-             href="index.html">
+          <a class="rex-nav-card" href="index.html">
             <span>Main Dashboard</span>
             <strong>Return to COSMOS</strong>
           </a>
         </div>
       </section>
 
+      <!-- Footer -->
       <footer class="rex-footer">
-        <p>
-          COSMOS — Explore the Universe
-        </p>
+        <p>COSMOS — Explore the Universe</p>
+
         <p>
           Mission information:
-          <a href="https://science.nasa.gov/mission/osiris-rex/"
-             target="_blank"
-             rel="noopener noreferrer">NASA OSIRIS-REx</a>
+          <a
+            href="https://science.nasa.gov/mission/osiris-rex/"
+            target="_blank"
+            rel="noopener noreferrer">NASA OSIRIS-REx</a>
         </p>
-        <p>Educational project. Mission facts are provided for general learning.</p>
+
+        <p>
+          Educational project. Mission facts are provided for general learning.
+        </p>
       </footer>
+
     </div>
   </main>
 
   <script src="app.js"></script>
+
   <script>
     (() => {
       const page = document.querySelector(".rex-page");
       if (!page) return;
 
       const internalLinks = page.querySelectorAll('a[href^="#"]');
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      );
 
       internalLinks.forEach((link) => {
         link.addEventListener("click", (event) => {
           const targetId = link.getAttribute("href");
-          const target = targetId ? document.querySelector(targetId) : null;
+          const target = targetId
+            ? document.querySelector(targetId)
+            : null;
 
-          if (target) {
-            event.preventDefault();
-            target.scrollIntoView({
-              behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-                ? "auto"
-                : "smooth",
-              block: "start"
-            });
+          if (!target) return;
+
+          event.preventDefault();
+
+          target.scrollIntoView({
+            behavior: reduceMotion.matches ? "auto" : "smooth",
+            block: "start"
+          });
+
+          if (targetId) {
+            history.replaceState(null, "", targetId);
           }
         });
       });
