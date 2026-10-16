@@ -8,11 +8,9 @@
 
   <title>COSMOS — Explore the Universe</title>
 
-  <!-- COSMOS Browser Tab Logo -->
   <link rel="icon" type="image/png" href="./favicon.png">
 
-  <meta name="description"
-    content="Explore planets, space missions and discoveries across our universe with COSMOS.">
+  <meta name="description" content="Explore planets, space missions, scientific research and black holes across our universe with COSMOS.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +19,6 @@
   <link rel="stylesheet" href="styles.css">
 
   <style>
-    /* Homepage-specific styles */
     :root {
       color-scheme: dark;
       --bg: #080b16;
@@ -32,9 +29,7 @@
       --line: rgba(255,255,255,.09);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html {
       min-height: 100%;
@@ -57,9 +52,7 @@
       text-decoration: none;
     }
 
-    button {
-      font: inherit;
-    }
+    button { font: inherit; }
 
     .cosmos-shell {
       width: min(1440px, 100%);
@@ -87,6 +80,7 @@
       font-size: 23px;
       font-weight: 700;
       letter-spacing: 2px;
+      flex-shrink: 0;
     }
 
     .brand-mark {
@@ -104,7 +98,7 @@
     .nav {
       display: flex;
       align-items: center;
-      gap: clamp(12px, 2.5vw, 32px);
+      gap: clamp(10px, 2vw, 25px);
       flex-wrap: wrap;
     }
 
@@ -206,9 +200,7 @@
       transition: transform .2s ease, background .2s ease;
     }
 
-    .button:hover {
-      transform: translateY(-2px);
-    }
+    .button:hover { transform: translateY(-2px); }
 
     .button-primary {
       background: #dce8ff;
@@ -216,9 +208,7 @@
       border-color: #dce8ff;
     }
 
-    .button-secondary {
-      background: #ffffff06;
-    }
+    .button-secondary { background: #ffffff06; }
 
     .space-art {
       position: relative;
@@ -316,14 +306,16 @@
       font-size: 13px;
     }
 
+    /* Five homepage cards */
     .dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 13px;
       margin-top: clamp(35px, 6vh, 65px);
     }
 
     .dash-card {
+      min-width: 0;
       min-height: 142px;
       padding: 20px;
       display: flex;
@@ -337,10 +329,12 @@
         background .22s ease;
     }
 
-    .dash-card:hover {
+    .dash-card:hover,
+    .dash-card:focus-visible {
       transform: translateY(-4px);
       border-color: #a8c7ff70;
       background: #ffffff0b;
+      outline: none;
     }
 
     .card-top {
@@ -357,7 +351,10 @@
     .card-arrow {
       color: #71819d;
       font-size: 17px;
+      transition: transform .2s ease;
     }
+
+    .dash-card:hover .card-arrow { transform: translate(2px, -2px); }
 
     .dash-card h2 {
       margin: 0 0 6px;
@@ -387,12 +384,11 @@
 
     .footer-links {
       display: flex;
+      flex-wrap: wrap;
       gap: 18px;
     }
 
-    .footer a:hover {
-      color: white;
-    }
+    .footer a:hover { color: white; }
 
     @keyframes enter {
       from { opacity: 0; transform: translateY(12px); }
@@ -413,11 +409,15 @@
       .cosmos-shell { min-height: 100svh; }
     }
 
-    @media (max-width: 760px) {
-      .cosmos-shell { padding: 18px; }
+    @media (max-width: 900px) {
       .topbar { align-items: flex-start; }
       .nav { justify-content: flex-end; gap: 12px; }
       .nav a { font-size: 12px; }
+      .dashboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .cosmos-shell { padding: 18px; }
 
       .hero {
         grid-template-columns: 1fr;
@@ -429,7 +429,6 @@
       .planet-art { width: 155px; }
       .orbit { width: 270px; }
       .orbit-two { width: 225px; }
-      .dashboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .dash-card { min-height: 130px; padding: 16px; }
     }
 
@@ -467,9 +466,10 @@
       <nav class="nav" aria-label="Main navigation">
         <a href="index.html" aria-current="page">Home</a>
         <a href="planets.html">Planets</a>
-        <a href="./search.html">Search</a>
+        <a href="search.html">Search</a>
         <a href="missions.html">Missions</a>
         <a href="research.html">Research</a>
+        <a href="black-hole.html">Black Hole Observatory</a>
         <a class="nav-cta" href="about.html">About COSMOS ↗</a>
       </nav>
     </header>
@@ -504,7 +504,7 @@
           </div>
         </div>
 
-        <div class="space-art" aria-label="Decorative illustration of a ringed planet">
+        <div class="space-art" role="img" aria-label="Decorative illustration of a ringed planet">
           <span class="star star-one"></span>
           <span class="star star-two"></span>
           <span class="star star-three"></span>
@@ -523,6 +523,7 @@
       </section>
 
       <section class="dashboard-grid" aria-label="Explore COSMOS">
+
         <a class="dash-card" href="planets.html">
           <div class="card-top">
             <span class="card-icon" aria-hidden="true">◎</span>
@@ -556,6 +557,17 @@
           </div>
         </a>
 
+        <a class="dash-card" href="black-hole.html">
+          <div class="card-top">
+            <span class="card-icon" aria-hidden="true">◉</span>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </div>
+          <div>
+            <h2>Black Hole Observatory</h2>
+            <p>Explore event horizons, extreme gravity and black hole science.</p>
+          </div>
+        </a>
+
         <a class="dash-card" href="about.html">
           <div class="card-top">
             <span class="card-icon" aria-hidden="true">✧</span>
@@ -566,6 +578,7 @@
             <p>Learn about our universe exploration project.</p>
           </div>
         </a>
+
       </section>
     </main>
 
@@ -575,6 +588,7 @@
         <a href="planets.html">Planets</a>
         <a href="missions.html">Missions</a>
         <a href="research.html">Research</a>
+        <a href="black-hole.html">Black Holes</a>
       </div>
     </footer>
 
