@@ -1,49 +1,55 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#070b16">
-
-  <meta
-    name="description"
-    content="Explore historic and future space missions with COSMOS, from Apollo and Voyager to Artemis and the James Webb Space Telescope."
-  >
+  <meta name="description" content="Explore historic and future space missions with COSMOS, from Apollo and Voyager to Artemis and the James Webb Space Telescope.">
 
   <title>Space Missions | COSMOS</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css">
-
-  
+  <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
   <div class="cosmos-shell">
 
-    <!-- Shared COSMOS header -->
+    <!-- COSMOS HEADER -->
     <header class="topbar">
-      <a class="brand" href="index.html" aria-label="COSMOS home">
+      <a class="brand" href="./index.html" aria-label="COSMOS home">
         <span class="brand-mark" aria-hidden="true">✦</span>
         <span>COSMOS</span>
       </a>
 
-      <nav class="nav" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="planets.html">Planets</a>
-        <a href="missions.html" aria-current="page">Missions</a>
-        <a href="research.html">Research</a>
-        <a href="about.html">About</a>
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="cosmosNav"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav" id="cosmosNav" aria-label="Main navigation">
+        <a href="./index.html">Home</a>
+        <a href="./planets.html">Planets</a>
+        <a href="./search.html">Global Search</a>
+        <a href="./missions.html" aria-current="page">Missions</a>
+        <a href="./research.html">Research</a>
+        <a href="./black-hole.html">Black Hole Observatory</a>
+        <a href="./about.html">About</a>
       </nav>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="missions-page">
 
       <section class="missions-hero">
@@ -59,6 +65,7 @@
         </p>
       </section>
 
+      <!-- MISSION STATISTICS -->
       <section class="missions-stats" aria-label="Mission collection overview">
         <div class="missions-stat">
           <strong>09</strong>
@@ -76,6 +83,7 @@
         </div>
       </section>
 
+      <!-- SEARCH AND FILTERS -->
       <section aria-label="Find a space mission">
 
         <div class="missions-controls">
@@ -142,6 +150,7 @@
           <span>Choose a mission to explore its details.</span>
         </div>
 
+        <!-- MISSION CARDS -->
         <div class="missions-grid" id="missionsGrid">
 
           <article
@@ -152,6 +161,7 @@
             <div class="mission-card-art">
               <span class="mission-art-number">01</span>
             </div>
+
             <div class="mission-card-content">
               <span class="mission-category">Human Exploration</span>
               <h2>Apollo Program</h2>
@@ -159,9 +169,10 @@
                 Explore the historic missions that carried astronauts to
                 the Moon and changed the course of human space exploration.
               </p>
+
               <div class="mission-card-footer">
                 <span class="mission-year">1960s–1970s</span>
-                <a class="mission-details-link" href="apollo.html">Explore Mission →</a>
+                <a class="mission-details-link" href="./apollo.html">Explore Mission →</a>
               </div>
             </div>
           </article>
@@ -174,6 +185,7 @@
             <div class="mission-card-art">
               <span class="mission-art-number">02</span>
             </div>
+
             <div class="mission-card-content">
               <span class="mission-category">Deep Space</span>
               <h2>Voyager Mission</h2>
@@ -181,9 +193,10 @@
                 Follow the twin spacecraft that explored the outer planets
                 and continued their journeys into interstellar space.
               </p>
+
               <div class="mission-card-footer">
                 <span class="mission-year">Launched in 1977</span>
-                <a class="mission-details-link" href="voyager.html">Explore Mission →</a>
+                <a class="mission-details-link" href="./voyager.html">Explore Mission →</a>
               </div>
             </div>
           </article>
@@ -196,6 +209,7 @@
             <div class="mission-card-art">
               <span class="mission-art-number">03</span>
             </div>
+
             <div class="mission-card-content">
               <span class="mission-category">Planetary Science</span>
               <h2>Mars Rovers</h2>
@@ -203,9 +217,10 @@
                 Discover how robotic explorers investigate Martian rocks,
                 climate, ancient environments, and signs of past habitability.
               </p>
+
               <div class="mission-card-footer">
                 <span class="mission-year">2000s–Today</span>
-                <a class="mission-details-link" href="mars-rovers.html">Explore Mission →</a>
+                <a class="mission-details-link" href="./mars-rovers.html">Explore Mission →</a>
               </div>
             </div>
           </article>
@@ -218,6 +233,7 @@
             <div class="mission-card-art">
               <span class="mission-art-number">04</span>
             </div>
+
             <div class="mission-card-content">
               <span class="mission-category">Planetary Science</span>
               <h2>Juno Mission</h2>
@@ -225,9 +241,10 @@
                 Investigate Jupiter's atmosphere, magnetic field, gravity,
                 and internal structure to learn how the giant planet formed.
               </p>
+
               <div class="mission-card-footer">
                 <span class="mission-year">Launched in 2011</span>
-                <a class="mission-details-link" href="juno.html">Explore Mission →</a>
+                <a class="mission-details-link" href="./juno.html">Explore Mission →</a>
               </div>
             </div>
           </article>
@@ -240,6 +257,7 @@
             <div class="mission-card-art">
               <span class="mission-art-number">05</span>
             </div>
+
             <div class="mission-card-content">
               <span class="mission-category">Space Telescope</span>
               <h2>James Webb Space Telescope</h2>
@@ -247,9 +265,10 @@
                 See how a powerful infrared observatory studies distant
                 galaxies, star formation, and the atmospheres of exoplanets.
               </p>
+
               <div class="mission-card-footer">
                 <span class="mission-year">Launched in 2021</span>
-                <a class="mission-details-link" href="james-webb.html">Explore Mission →</a>
+                <a class="mission-details-link" href="./james-webb.html">Explore Mission →</a>
               </div>
             </div>
           </article>
@@ -262,6 +281,7 @@
             <div class="mission-card-art">
               <span class="mission-art-number">06</span>
             </div>
+
             <div class="mission-card-content">
               <span class="mission-category">Planetary Science</span>
               <h2>Europa Clipper</h2>
@@ -269,9 +289,10 @@
                 Explore Jupiter's icy moon Europa and investigate whether
                 conditions beneath its ice could support life.
               </p>
+
               <div class="mission-card-footer">
                 <span class="mission-year">Launched in 2024</span>
-                <a class="mission-details-link" href="europa-clipper.html">Explore Mission →</a>
+                <a class="mission-details-link" href="./europa-clipper.html">Explore Mission →</a>
               </div>
             </div>
           </article>
@@ -284,6 +305,7 @@
             <div class="mission-card-art">
               <span class="mission-art-number">07</span>
             </div>
+
             <div class="mission-card-content">
               <span class="mission-category">Sample Return</span>
               <h2>OSIRIS-REx</h2>
@@ -291,9 +313,10 @@
                 Learn how NASA collected material from asteroid Bennu and
                 returned a sample to Earth for scientific analysis.
               </p>
+
               <div class="mission-card-footer">
                 <span class="mission-year">Launched in 2016</span>
-                <a class="mission-details-link" href="osiris-rex.html">Explore Mission →</a>
+                <a class="mission-details-link" href="./osiris-rex.html">Explore Mission →</a>
               </div>
             </div>
           </article>
@@ -306,6 +329,7 @@
             <div class="mission-card-art">
               <span class="mission-art-number">08</span>
             </div>
+
             <div class="mission-card-content">
               <span class="mission-category">Space Telescope</span>
               <h2>Hubble Space Telescope</h2>
@@ -313,9 +337,10 @@
                 Explore the observatory whose detailed images and measurements
                 have transformed modern astronomy for decades.
               </p>
+
               <div class="mission-card-footer">
                 <span class="mission-year">Launched in 1990</span>
-                <a class="mission-details-link" href="hubble.html">Explore Mission →</a>
+                <a class="mission-details-link" href="./hubble.html">Explore Mission →</a>
               </div>
             </div>
           </article>
@@ -328,6 +353,7 @@
             <div class="mission-card-art">
               <span class="mission-art-number">09</span>
             </div>
+
             <div class="mission-card-content">
               <span class="mission-category">Human Exploration</span>
               <h2>Artemis Program</h2>
@@ -335,22 +361,25 @@
                 Discover NASA's plans for returning astronauts to the Moon,
                 expanding lunar science, and preparing for future Mars missions.
               </p>
+
               <div class="mission-card-footer">
                 <span class="mission-year">Program ongoing</span>
-                <a class="mission-details-link" href="artemis.html">Explore Mission →</a>
+                <a class="mission-details-link" href="./artemis.html">Explore Mission →</a>
               </div>
             </div>
           </article>
 
         </div>
 
-        <div class="missions-empty" id="missionsEmpty">
+        <!-- EMPTY SEARCH STATE -->
+        <div class="missions-empty" id="missionsEmpty" hidden>
           <h2>No missions found</h2>
           <p>Try another search term or choose a different category.</p>
         </div>
 
       </section>
 
+      <!-- INFORMATION NOTE -->
       <aside class="missions-note">
         <strong>About this collection:</strong>
         This page highlights nine selected space missions. Dates describe
@@ -359,26 +388,31 @@
         results, consult the official mission pages from NASA.
       </aside>
 
+      <!-- MORE COSMOS PAGES -->
       <nav class="missions-bottom" aria-label="Explore more COSMOS pages">
-        <a href="index.html">COSMOS Home</a>
-        <a href="planets.html">Explore the Planets</a>
-        <a href="research.html">Research Topics</a>
-        <a href="about.html">About COSMOS</a>
+        <a href="./index.html">COSMOS Home</a>
+        <a href="./planets.html">Explore the Planets</a>
+        <a href="./search.html">Global Search + Favorites</a>
+        <a href="./research.html">Research Topics</a>
+        <a href="./about.html">About COSMOS</a>
       </nav>
 
     </main>
-
   </div>
 
-  <!-- Shared site JavaScript -->
-  <script src="app.js" defer></script>
+  <!-- SHARED SITE JAVASCRIPT -->
+  <script src="./app.js" defer></script>
 
-  <!-- Mission search and category filters -->
+  <!-- MISSION SEARCH AND CATEGORY FILTERS -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const searchInput = document.getElementById("missionSearch");
-      const filterButtons = document.querySelectorAll(".missions-filter");
-      const cards = Array.from(document.querySelectorAll(".mission-card"));
+      const filterButtons = Array.from(
+        document.querySelectorAll(".missions-filter")
+      );
+      const cards = Array.from(
+        document.querySelectorAll(".mission-card")
+      );
       const countLabel = document.getElementById("missionCount");
       const emptyMessage = document.getElementById("missionsEmpty");
 
@@ -392,6 +426,7 @@
 
         cards.forEach(function (card) {
           const category = card.dataset.category || "";
+
           const searchableText = (
             (card.dataset.search || "") + " " + card.textContent
           ).toLowerCase();
@@ -404,13 +439,16 @@
 
           card.hidden = !isVisible;
 
-          if (isVisible) visibleCount++;
+          if (isVisible) {
+            visibleCount++;
+          }
         });
 
         countLabel.textContent =
           "Showing " + visibleCount +
           (visibleCount === 1 ? " mission" : " missions");
 
+        emptyMessage.hidden = visibleCount !== 0;
         emptyMessage.classList.toggle("visible", visibleCount === 0);
       }
 
