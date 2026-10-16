@@ -589,3 +589,60 @@ onReady(() => {
 
   console.info("COSMOS JavaScript initialized successfully.");
 });
+
+/* COSMOS — EMERGENCY HAMBURGER VISIBILITY FIX */
+
+@media (max-width: 760px) {
+  header.topbar,
+  .topbar {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: sticky !important;
+    top: 0;
+    z-index: 9999 !important;
+  }
+
+  header.topbar button.menu-toggle,
+  header.topbar #menuToggle,
+  header.topbar #navToggle,
+  .topbar .menu-toggle,
+  .topbar .nav-toggle,
+  .topbar #menuToggle,
+  .topbar #navToggle {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 10001 !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    padding: 10px !important;
+    margin-left: auto !important;
+    border: 1px solid #526a9f !important;
+    border-radius: 12px !important;
+    color: #f4f6ff !important;
+    background: #101626 !important;
+    cursor: pointer !important;
+  }
+
+  header.topbar button.menu-toggle span,
+  header.topbar #menuToggle span,
+  header.topbar #navToggle span,
+  .topbar .menu-toggle span,
+  .topbar .nav-toggle span {
+    display: block !important;
+    width: 20px !important;
+    height: 2px !important;
+    min-height: 2px !important;
+    background: #69e0ff !important;
+    border-radius: 3px !important;
+    opacity: 1 !important;
+  }
+}
