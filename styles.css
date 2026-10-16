@@ -1,1340 +1,265 @@
-
 /* =========================================================
-   COSMOS MASTER DESIGN
-   Shared visual system for every COSMOS page
-   Theme: Futuristic • Deep Space • Soft Blue Glow
-========================================================= */
+   COSMOS — RESPONSIVE & VISUAL COMPATIBILITY FIX
+   Add this block at the END of styles.css
+   Compatible with existing index.html and app.js
+   ========================================================= */
 
-/* ---------- 1. DESIGN TOKENS ---------- */
+/* ---------- Dashboard: five cards ---------- */
 
-:root {
-  color-scheme: dark;
-
-  --bg: #080b16;
-  --bg-soft: #0d1222;
-  --panel: #101626;
-  --panel-light: #151e32;
-
-  --text: #f4f6ff;
-  --muted: #9aa6bd;
-  --muted-light: #c0cbe0;
-
-  --accent: #a8c7ff;
-  --accent-bright: #dce8ff;
-  --accent-glow: rgba(108, 142, 234, 0.22);
-
-  --line: rgba(255, 255, 255, 0.09);
-  --line-blue: rgba(168, 199, 255, 0.22);
-
-  --radius-sm: 9px;
-  --radius-md: 13px;
-  --radius-lg: 20px;
-  --radius-xl: 26px;
-
-  --page-width: 1440px;
-  --page-padding: clamp(18px, 4vw, 54px);
-
-  --transition: 220ms ease;
+.dashboard-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
 }
 
-/* ---------- 2. RESET ---------- */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  min-height: 100%;
-  scroll-behavior: smooth;
-  scroll-padding-top: 25px;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-
+.dash-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-width: 0;
+  min-height: 150px;
+  border-color: rgba(168, 199, 255, 0.13);
   background:
     radial-gradient(
-      ellipse at 75% 12%,
-      rgba(24, 38, 75, 0.78),
-      transparent 38%
+      circle at 100% 0%,
+      rgba(110, 145, 235, 0.09),
+      transparent 48%
     ),
-    radial-gradient(
-      ellipse at 5% 90%,
-      rgba(21, 19, 45, 0.75),
-      transparent 35%
-    ),
-    var(--bg);
-
-  color: var(--text);
-  font-family: "DM Sans", sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.008)
+    );
 }
 
-body::before {
+.dash-card::before {
   content: "";
-  position: fixed;
-  inset: 0;
+  position: absolute;
   z-index: -1;
-  pointer-events: none;
-
-  background-image:
-    radial-gradient(1px 1px at 12% 22%, #ffffff70 50%, transparent 100%),
-    radial-gradient(1px 1px at 75% 18%, #a8c7ff80 50%, transparent 100%),
-    radial-gradient(1px 1px at 48% 73%, #ffffff50 50%, transparent 100%),
-    radial-gradient(2px 2px at 88% 66%, #ffffff45 50%, transparent 100%),
-    radial-gradient(1px 1px at 25% 84%, #a8c7ff60 50%, transparent 100%);
-
-  opacity: 0.65;
+  top: 0;
+  left: 15%;
+  width: 70%;
+  height: 1px;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(168, 199, 255, 0.8),
+    transparent
+  );
+  transition: opacity 250ms ease;
 }
 
-img,
-svg,
-video {
-  display: block;
-  max-width: 100%;
+.dash-card:hover::before,
+.dash-card:focus-visible::before {
+  opacity: 1;
 }
 
-button,
-input,
-textarea,
-select {
-  font: inherit;
+.dash-card:hover {
+  border-color: rgba(168, 199, 255, 0.42);
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.2),
+    0 0 24px rgba(108, 142, 234, 0.07);
 }
 
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
+.dash-card h2 {
+  overflow-wrap: anywhere;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.dash-card p {
+  overflow-wrap: anywhere;
 }
 
-button {
-  color: inherit;
+/* ---------- Navigation stability ---------- */
+
+.topbar {
+  min-width: 0;
 }
 
-::selection {
-  color: #080b16;
-  background: var(--accent-bright);
+.brand {
+  white-space: nowrap;
 }
 
-:focus-visible {
+.nav {
+  min-width: 0;
+}
+
+.nav a {
+  overflow-wrap: anywhere;
+}
+
+.nav a:focus-visible,
+.dash-card:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 
-/* ---------- 3. SHARED PAGE SHELL ---------- */
-
-.cosmos-shell {
-  width: min(var(--page-width), 100%);
-  min-height: 100vh;
-  margin-inline: auto;
-  padding: 24px var(--page-padding);
-
-  display: flex;
-  flex-direction: column;
-}
-
-/* ---------- 4. SHARED HEADER ---------- */
-
-.topbar {
-  position: relative;
-  z-index: 10;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-
-  padding-bottom: 25px;
-  border-bottom: 1px solid var(--line);
-}
-
-.brand {
-  flex-shrink: 0;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-
-  color: var(--text);
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 23px;
-  font-weight: 700;
-  letter-spacing: 2px;
-}
-
-.brand-mark {
-  width: 39px;
-  height: 39px;
-  flex-shrink: 0;
-
-  display: grid;
-  place-items: center;
-
-  border: 1px solid #7796d9;
-  border-radius: 50%;
-
-  color: var(--accent);
-  font-size: 21px;
-
-  box-shadow:
-    0 0 18px rgba(108, 142, 234, 0.13),
-    inset 0 0 12px rgba(108, 142, 234, 0.06);
-
-  transition:
-    transform 400ms ease,
-    box-shadow 400ms ease;
-}
-
-.brand:hover .brand-mark {
-  transform: rotate(35deg);
-  box-shadow: 0 0 25px rgba(108, 142, 234, 0.3);
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: clamp(12px, 2.5vw, 32px);
-}
-
-.nav a {
-  position: relative;
-
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 500;
-
-  transition: color var(--transition);
-}
-
-.nav a:not(.nav-cta)::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 100%;
-  bottom: -7px;
-
-  height: 1px;
-  background: var(--accent);
-
-  transition: right var(--transition);
-}
-
-.nav a:hover,
-.nav a:focus-visible,
-.nav a[aria-current="page"] {
-  color: #fff;
-}
-
-.nav a:not(.nav-cta):hover::after,
-.nav a:not(.nav-cta)[aria-current="page"]::after {
-  right: 0;
-}
-
-.nav .nav-cta {
-  padding: 10px 15px;
-  border: 1px solid rgba(168, 199, 255, 0.4);
-  border-radius: 8px;
-  color: var(--text);
-
-  transition:
-    background var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
-}
-
-.nav .nav-cta:hover {
-  border-color: var(--accent);
-  background: rgba(168, 199, 255, 0.08);
-  box-shadow: 0 0 20px rgba(108, 142, 234, 0.1);
-}
-
-/* ---------- 5. SHARED TYPOGRAPHY ---------- */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--text);
-  font-family: "Space Grotesk", sans-serif;
-  line-height: 1.2;
-  overflow-wrap: anywhere;
-}
-
-h1 {
-  margin: 0;
-  font-size: clamp(42px, 7vw, 92px);
-  font-weight: 600;
-  letter-spacing: -3px;
-}
-
-h1 span {
-  color: var(--accent);
-}
-
-h2 {
-  font-size: clamp(22px, 3vw, 34px);
-  letter-spacing: -0.7px;
-}
-
-h3 {
-  font-size: 21px;
-}
-
-p {
-  color: var(--muted);
-}
-
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  color: var(--accent);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2.7px;
-  text-transform: uppercase;
-}
-
-.status-dot {
-  width: 7px;
-  height: 7px;
-  flex: 0 0 7px;
-
-  border-radius: 50%;
-  background: #7ce5c2;
-  box-shadow: 0 0 12px rgba(124, 229, 194, 0.8);
-
-  animation: cosmos-pulse 2.5s ease-in-out infinite;
-}
-
-/* ---------- 6. SHARED BUTTONS ---------- */
-
-.button,
-.btn,
-.button-primary,
-.button-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  min-height: 46px;
-  padding: 11px 19px;
-
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-
-  font-size: 13px;
-  font-weight: 700;
-  text-align: center;
-
-  transition:
-    transform var(--transition),
-    background var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
-}
-
-.button:hover,
-.btn:hover,
-.button-primary:hover,
-.button-secondary:hover {
-  transform: translateY(-2px);
-}
-
-.button-primary,
-.btn-primary {
-  border-color: var(--accent-bright);
-  background: var(--accent-bright);
-  color: #0a1020;
-}
-
-.button-primary:hover,
-.btn-primary:hover {
-  background: #fff;
-  box-shadow: 0 7px 25px rgba(168, 199, 255, 0.15);
-}
-
-.button-secondary,
-.btn-secondary {
-  border-color: var(--line);
-  background: rgba(255, 255, 255, 0.025);
-  color: var(--text);
-}
-
-.button-secondary:hover,
-.btn-secondary:hover {
-  border-color: var(--line-blue);
-  background: rgba(168, 199, 255, 0.07);
-}
-
-/* ---------- 7. HOMEPAGE DASHBOARD ---------- */
-
-.dashboard {
-  flex: 1;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  padding: clamp(35px, 7vh, 75px) 0 24px;
-
-  animation: cosmos-enter 700ms ease both;
-}
-
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
-  align-items: center;
-  gap: clamp(20px, 5vw, 70px);
-
-  margin-top: 25px;
-}
-
-.hero-copy {
-  max-width: 500px;
-  margin: 25px 0 0;
-
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.9;
-}
-
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
-}
-
-/* ---------- 8. ANIMATED SPACE ILLUSTRATION ---------- */
-
-.space-art {
-  position: relative;
-  isolation: isolate;
-
-  min-width: 0;
-  min-height: 300px;
-
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-}
-
-.space-art::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-
-  width: 270px;
-  height: 270px;
-
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(94, 130, 209, 0.18),
-    transparent 70%
-  );
-
-  filter: blur(12px);
-}
-
-.orbit {
-  position: absolute;
-
-  width: min(100%, 370px);
-  aspect-ratio: 1;
-
-  border: 1px solid rgba(183, 204, 255, 0.13);
-  border-radius: 50%;
-
-  transform: rotate(-22deg) scaleY(0.68);
-  animation: cosmos-orbit-glow 7s ease-in-out infinite;
-}
-
-.orbit-two {
-  width: min(85%, 310px);
-
-  border-color: rgba(183, 204, 255, 0.22);
-  transform: rotate(43deg) scaleY(0.68);
-  animation-delay: -3s;
-}
-
-.planet-art {
-  position: relative;
-
-  width: clamp(145px, 20vw, 220px);
-  aspect-ratio: 1;
-
-  border-radius: 50%;
-
+/* ---------- Black Hole Observatory accent ---------- */
+
+/* Works when the card uses the black-hole-card class. */
+.black-hole-card {
+  border-color: rgba(177, 133, 255, 0.24);
   background:
     radial-gradient(
-      ellipse at 32% 28%,
-      #d7e1ff 0%,
-      #8ea7df 12%,
-      #4a609a 34%,
-      #222d54 66%,
-      #0c1125 82%
+      circle at 85% 15%,
+      rgba(139, 92, 246, 0.17),
+      transparent 48%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(255, 255, 255, 0.008)
     );
+}
 
+.black-hole-card:hover {
+  border-color: rgba(190, 155, 255, 0.62);
   box-shadow:
-    inset -24px -15px 40px #02040d,
-    inset 8px 8px 25px rgba(226, 234, 255, 0.21),
-    0 0 70px rgba(107, 142, 234, 0.12);
-
-  animation: cosmos-float 7s ease-in-out infinite;
+    0 12px 35px rgba(0, 0, 0, 0.24),
+    0 0 28px rgba(139, 92, 246, 0.12);
 }
 
-.planet-art::after {
-  content: "";
-  position: absolute;
-  inset: 17% -15%;
-
-  border: 9px solid rgba(168, 199, 255, 0.5);
-  border-left-color: rgba(168, 199, 255, 0.15);
-  border-right-color: rgba(220, 232, 255, 0.27);
-  border-radius: 50%;
-
-  transform: rotate(-22deg) scaleY(0.34);
-}
-
-.star {
-  position: absolute;
-
-  width: 3px;
-  height: 3px;
-
-  border-radius: 50%;
-  background: #e3ecff;
-  box-shadow: 0 0 10px #dbe7ff;
-
-  animation: cosmos-twinkle 3s ease-in-out infinite;
-}
-
-.star-one {
-  top: 14%;
-  left: 18%;
-}
-
-.star-two {
-  top: 24%;
-  right: 12%;
-  animation-delay: 1s;
-}
-
-.star-three {
-  bottom: 18%;
-  left: 19%;
-  animation-delay: 1.8s;
-}
-
-.star-four {
-  right: 17%;
-  bottom: 24%;
-  animation-delay: 0.6s;
-}
-
-.star-five {
-  top: 48%;
-  left: 7%;
-  animation-delay: 1.3s;
-}
-
-.art-label {
-  position: absolute;
-  right: 0;
-  bottom: 15px;
-
-  padding: 11px 14px;
-
-  border: 1px solid var(--line);
-  border-radius: 9px;
-
-  background: rgba(16, 22, 38, 0.81);
-  backdrop-filter: blur(12px);
-
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.art-label strong {
-  display: block;
-  margin-bottom: 4px;
-
-  color: #fff;
-  font-size: 13px;
-}
-
-/* ---------- 9. HOMEPAGE DASHBOARD CARDS ---------- */
-
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 13px;
-
-  margin-top: clamp(35px, 6vh, 65px);
-}
-
-.dash-card {
-  min-width: 0;
-  min-height: 142px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 20px;
-
-  padding: 20px;
-
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.035),
-    rgba(255, 255, 255, 0.008)
-  );
-
-  transition:
-    transform var(--transition),
-    border-color var(--transition),
-    background var(--transition),
-    box-shadow var(--transition);
-}
-
-.dash-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(168, 199, 255, 0.44);
-
-  background: rgba(255, 255, 255, 0.045);
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
-}
-
-.card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.card-icon {
-  color: var(--accent);
-  font-size: 22px;
-}
-
-.card-arrow {
-  color: #71819d;
-  font-size: 17px;
-  transition: transform var(--transition);
-}
-
-.dash-card:hover .card-arrow {
-  transform: translate(3px, -3px);
-  color: var(--accent);
-}
-
-.dash-card h2 {
-  margin: 0 0 6px;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0;
-}
-
-.dash-card p {
-  margin: 0;
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-/* ---------- 10. SHARED CONTENT SECTIONS ---------- */
-
-.page-content,
-.content-section,
-.section {
-  margin-top: 36px;
-}
-
-.section-heading {
-  margin-bottom: 22px;
-}
-
-.section-heading p {
-  max-width: 680px;
-}
+/* ---------- Content grids ---------- */
 
 .content-grid,
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+.card-grid,
+.missions-grid {
+  align-items: stretch;
 }
 
 .content-card,
 .info-card,
 .research-card,
-.planet-card {
-  min-width: 0;
-  padding: 23px;
-
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-
-  background: linear-gradient(
-    150deg,
-    rgba(255, 255, 255, 0.045),
-    rgba(255, 255, 255, 0.012)
-  );
-
-  transition:
-    transform var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
-}
-
-.content-card:hover,
-.info-card:hover,
-.research-card:hover,
-.planet-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(168, 199, 255, 0.35);
-  box-shadow: 0 15px 38px rgba(0, 0, 0, 0.16);
-}
-
-.content-card h2,
-.content-card h3,
-.info-card h2,
-.info-card h3 {
-  margin-top: 0;
-}
-
-.content-card p,
-.info-card p {
-  line-height: 1.8;
-}
-
-/* ---------- 11. MISSIONS PAGE ---------- */
-
-.missions-page {
-  width: 100%;
-  max-width: 1200px;
-  margin-inline: auto;
-  padding: 38px 0 60px;
-  animation: cosmos-enter 700ms ease both;
-}
-
-.missions-hero {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-
-  margin-bottom: 35px;
-  padding: clamp(30px, 6vw, 70px);
-
-  border: 1px solid var(--line-blue);
-  border-radius: var(--radius-xl);
-
-  background:
-    radial-gradient(
-      ellipse at 85% 15%,
-      rgba(75, 113, 190, 0.2),
-      transparent 42%
-    ),
-    radial-gradient(
-      ellipse at 10% 100%,
-      rgba(80, 70, 170, 0.13),
-      transparent 45%
-    ),
-    linear-gradient(
-      135deg,
-      rgba(17, 27, 48, 0.92),
-      rgba(16, 21, 34, 0.92)
-    );
-}
-
-.missions-hero::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-
-  width: 230px;
-  height: 230px;
-  right: -75px;
-  bottom: -105px;
-
-  border: 1px solid rgba(177, 204, 255, 0.2);
-  border-radius: 50%;
-
-  box-shadow:
-    0 0 0 25px rgba(177, 204, 255, 0.025),
-    0 0 0 55px rgba(177, 204, 255, 0.025);
-
-  pointer-events: none;
-}
-
-.missions-eyebrow {
-  color: var(--accent);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2.7px;
-  text-transform: uppercase;
-}
-
-.missions-hero h1 {
-  max-width: 800px;
-  margin: 18px 0;
-
-  font-size: clamp(40px, 6vw, 68px);
-  line-height: 1.08;
-  letter-spacing: -2px;
-}
-
-.missions-hero p {
-  max-width: 720px;
-  margin-bottom: 0;
-
-  font-size: 15px;
-  line-height: 1.9;
-}
-
-/* Mission statistics */
-
-.missions-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-
-  margin: 26px 0 40px;
-}
-
-.missions-stat {
-  padding: 22px;
-
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.04),
-    rgba(255, 255, 255, 0.01)
-  );
-
-  transition:
-    transform var(--transition),
-    border-color var(--transition);
-}
-
-.missions-stat:hover {
-  transform: translateY(-3px);
-  border-color: rgba(168, 199, 255, 0.4);
-}
-
-.missions-stat strong {
-  display: block;
-  margin-bottom: 7px;
-
-  color: #d5e5ff;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: clamp(18px, 2.3vw, 27px);
-  line-height: 1.4;
-}
-
-.missions-stat span {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-/* Search and filters */
-
-.missions-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  margin-bottom: 28px;
-}
-
-.missions-search {
-  width: 100%;
-  min-height: 51px;
-  padding: 14px 18px;
-
-  border: 1px solid var(--line-blue);
-  border-radius: var(--radius-md);
-
-  background: rgba(16, 22, 38, 0.88);
-  color: var(--text);
-
-  outline: none;
-
-  transition:
-    border-color var(--transition),
-    box-shadow var(--transition);
-}
-
-.missions-search:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(142, 186, 255, 0.1);
-}
-
-.missions-search::placeholder {
-  color: #8795ac;
-}
-
-.missions-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.missions-filter {
-  padding: 9px 15px;
-
-  border: 1px solid var(--line-blue);
-  border-radius: 30px;
-
-  background: rgba(255, 255, 255, 0.025);
-  color: var(--muted-light);
-
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-
-  transition:
-    background var(--transition),
-    border-color var(--transition),
-    color var(--transition),
-    transform var(--transition);
-}
-
-.missions-filter:hover {
-  transform: translateY(-1px);
-  border-color: var(--accent);
-  color: #fff;
-}
-
-.missions-filter.active,
-.missions-filter[aria-pressed="true"] {
-  border-color: var(--accent-bright);
-  background: var(--accent-bright);
-  color: #101827;
-}
-
-.missions-results {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-
-  margin-bottom: 18px;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-/* Mission grid and cards */
-
-.missions-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-
+.planet-card,
 .mission-card {
   min-width: 0;
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
-
-  border: 1px solid var(--line);
-  border-radius: 17px;
-
-  background: linear-gradient(
-    160deg,
-    rgba(21, 30, 50, 0.96),
-    rgba(12, 18, 31, 0.98)
-  );
-
-  transition:
-    transform var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
+  overflow-wrap: anywhere;
 }
 
-.mission-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(168, 199, 255, 0.45);
-  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2);
+.content-card img,
+.info-card img,
+.research-card img,
+.planet-card img,
+.mission-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
-.mission-card[hidden] {
-  display: none !important;
-}
-
-.mission-card-art {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-
-  min-height: 150px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-bottom: 1px solid var(--line);
-
-  background:
-    radial-gradient(
-      ellipse at 50% 115%,
-      rgba(82, 125, 202, 0.3),
-      transparent 55%
-    ),
-    linear-gradient(145deg, #182c49, #101827);
-}
-
-.mission-card-art::before,
-.mission-card-art::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-
-  width: 130px;
-  height: 130px;
-
-  border: 1px solid rgba(185, 209, 255, 0.15);
-  border-radius: 50%;
-
-  pointer-events: none;
-}
-
-.mission-card-art::after {
-  width: 190px;
-  height: 190px;
-}
-
-.mission-art-number {
-  color: rgba(222, 236, 255, 0.92);
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 40px;
-  font-weight: 700;
-  letter-spacing: 2px;
-
-  text-shadow: 0 0 28px rgba(168, 199, 255, 0.18);
-}
-
-.mission-card-content {
-  flex: 1;
-
-  display: flex;
-  flex-direction: column;
-
-  padding: 22px;
-}
-
-.mission-category {
-  align-self: flex-start;
-
-  display: inline-block;
-  margin-bottom: 13px;
-  padding: 5px 10px;
-
-  border: 1px solid rgba(137, 179, 255, 0.12);
-  border-radius: 30px;
-
-  background: rgba(137, 179, 255, 0.08);
-  color: #b7d3ff;
-
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.7px;
-  text-transform: uppercase;
-}
-
-.mission-card h2 {
-  margin: 0 0 10px;
-  font-size: 20px;
-  line-height: 1.4;
-  letter-spacing: -0.4px;
-}
-
-.mission-card p {
-  margin: 0 0 20px;
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-.mission-card-footer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-
-  margin-top: auto;
-  padding-top: 15px;
-
-  border-top: 1px solid var(--line);
-}
-
-.mission-year {
-  color: #8799b4;
-  font-size: 11px;
-}
-
-.mission-details-link {
-  color: #b8d5ff;
-  font-size: 12px;
-  font-weight: 700;
-
-  transition: color var(--transition);
-}
-
-.mission-details-link:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-/* Empty search result */
-
-.missions-empty {
-  display: none;
-  padding: 40px 20px;
-
-  border: 1px dashed var(--line-blue);
-  border-radius: var(--radius-lg);
-
-  color: var(--muted);
-  text-align: center;
-}
-
-.missions-empty.visible {
-  display: block;
-}
-
-.missions-empty h2 {
-  font-size: 25px;
-}
-
-/* Mission information note and links */
-
-.missions-note {
-  margin-top: 35px;
-  padding: 22px;
-
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 12px 12px 0;
-
-  background: rgba(142, 186, 255, 0.035);
-  color: var(--muted);
-
-  font-size: 12px;
-  line-height: 1.9;
-}
-
-.missions-note strong {
-  color: var(--text);
-}
-
-.missions-bottom {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 30px;
-}
-
-.missions-bottom a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 10px 15px;
-
-  border: 1px solid var(--line-blue);
-  border-radius: 9px;
-
-  color: #d5e5ff;
-  font-size: 12px;
-
-  transition:
-    background var(--transition),
-    border-color var(--transition),
-    transform var(--transition);
-}
-
-.missions-bottom a:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-  background: rgba(142, 186, 255, 0.07);
-}
-
-/* ---------- 12. SHARED FOOTER ---------- */
-
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 15px;
-
-  margin-top: 30px;
-  padding-top: 19px;
-
-  border-top: 1px solid var(--line);
-  color: #7d8aa2;
-  font-size: 11px;
-}
-
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-}
-
-.footer a {
-  transition: color var(--transition);
-}
-
-.footer a:hover {
-  color: #fff;
-}
-
-/* ---------- 13. SHARED FORM ELEMENTS ---------- */
+/* ---------- Form controls ---------- */
 
 input,
 textarea,
-select {
+select,
+button {
   max-width: 100%;
-}
-
-textarea {
-  min-height: 130px;
-  resize: vertical;
 }
 
 input:not([type="checkbox"]):not([type="radio"]),
 textarea,
-select {
-  accent-color: var(--accent);
+select,
+.missions-search {
+  color: var(--text);
+  background-color: rgba(16, 22, 38, 0.92);
 }
 
-input[type="checkbox"],
-input[type="radio"] {
-  accent-color: var(--accent);
+input::placeholder,
+textarea::placeholder {
+  color: #8795ac;
+  opacity: 1;
 }
 
-/* ---------- 14. ANIMATIONS ---------- */
-
-@keyframes cosmos-enter {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+button,
+.missions-filter {
+  touch-action: manipulation;
 }
 
-@keyframes cosmos-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
+.missions-filter:focus-visible,
+.button:focus-visible,
+.btn:focus-visible,
+.button-primary:focus-visible,
+.button-secondary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
-@keyframes cosmos-twinkle {
-  0%,
-  100% {
-    opacity: 0.35;
-    transform: scale(0.8);
-  }
+/* ---------- Footer ---------- */
 
-  50% {
-    opacity: 1;
-    transform: scale(1.35);
-  }
+.footer,
+.footer-links {
+  min-width: 0;
 }
 
-@keyframes cosmos-pulse {
-  0%,
-  100% {
-    opacity: 0.7;
-    box-shadow: 0 0 7px rgba(124, 229, 194, 0.55);
-  }
-
-  50% {
-    opacity: 1;
-    box-shadow: 0 0 15px rgba(124, 229, 194, 0.95);
-  }
+.footer-links a {
+  overflow-wrap: anywhere;
 }
 
-@keyframes cosmos-orbit-glow {
-  0%,
-  100% {
-    border-color: rgba(183, 204, 255, 0.12);
-  }
-
-  50% {
-    border-color: rgba(183, 204, 255, 0.28);
-  }
-}
-
-/* ---------- 15. RESPONSIVE: TABLETS ---------- */
+/* ---------- Tablet ---------- */
 
 @media (max-width: 900px) {
-  .missions-grid,
-  .content-grid,
-  .card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .dashboard-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .hero {
-    grid-template-columns: minmax(0, 1fr) minmax(220px, 0.8fr);
-    gap: 22px;
-  }
-
-  .missions-stat strong {
-    font-size: 21px;
-  }
-}
-
-@media (max-width: 760px) {
-  .cosmos-shell {
-    padding: 18px;
+  .content-grid,
+  .card-grid,
+  .missions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .topbar {
-    align-items: flex-start;
-    gap: 20px;
+    flex-wrap: wrap;
   }
 
   .nav {
-    justify-content: flex-end;
+    gap: 12px 18px;
+  }
+}
+
+/* ---------- Small tablets and large phones ---------- */
+
+@media (max-width: 760px) {
+  .cosmos-shell {
+    padding-inline: clamp(16px, 4vw, 24px);
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero > * {
+    min-width: 0;
+  }
+
+  .space-art {
+    width: 100%;
+  }
+
+  .actions {
+    align-items: stretch;
+  }
+
+  .actions .button,
+  .actions .btn,
+  .actions .button-primary,
+  .actions .button-secondary {
+    flex: 0 1 auto;
+  }
+
+  .missions-hero {
+    padding: clamp(24px, 5vw, 40px);
+  }
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 580px) {
+  .topbar {
+    align-items: flex-start;
+  }
+
+  .nav {
+    width: 100%;
+    justify-content: flex-start;
     gap: 12px 16px;
   }
 
@@ -1342,142 +267,83 @@ input[type="radio"] {
     font-size: 12px;
   }
 
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 5px;
-  }
-
-  h1 {
-    letter-spacing: -2.5px;
-  }
-
-  .space-art {
-    min-height: 250px;
-  }
-
-  .planet-art {
-    width: 155px;
-  }
-
-  .orbit {
-    width: 270px;
-  }
-
-  .orbit-two {
-    width: 225px;
-  }
-
-  .missions-page {
-    padding-top: 28px;
-  }
-}
-
-/* ---------- 16. RESPONSIVE: MOBILE ---------- */
-
-@media (max-width: 580px) {
-  .topbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-  }
-
-  .brand {
-    font-size: 21px;
-  }
-
-  .nav {
-    justify-content: flex-start;
-    gap: 12px 18px;
-  }
-
-  .dashboard {
-    padding-top: 36px;
-  }
-
-  h1 {
-    font-size: clamp(43px, 12vw, 55px);
-    letter-spacing: -2px;
-  }
-
-  .hero-copy {
-    font-size: 14px;
-  }
-
   .dashboard-grid {
-    gap: 9px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .dash-card {
-    min-height: 130px;
-    padding: 16px;
+    min-height: 135px;
+    padding: 15px;
   }
 
   .dash-card h2 {
     font-size: 14px;
   }
 
-  .missions-page {
-    padding-top: 25px;
+  .dash-card p {
+    font-size: 12px;
   }
 
-  .missions-hero {
-    padding: 27px 22px;
-    border-radius: 17px;
+  .card-icon {
+    font-size: 20px;
   }
 
-  .missions-hero h1 {
-    font-size: clamp(36px, 10vw, 48px);
-    letter-spacing: -1.4px;
-  }
-
-  .missions-hero p {
-    font-size: 13px;
+  .content-grid,
+  .card-grid,
+  .missions-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .missions-stats {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .missions-stat {
-    padding: 17px;
-  }
-
-  .missions-stat strong {
-    font-size: 22px;
-  }
-
-  .missions-grid,
-  .content-grid,
-  .card-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .mission-card-art {
-    min-height: 130px;
-  }
-
-  .mission-card-content {
-    padding: 19px;
-  }
-
-  .missions-results {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .missions-bottom a {
-    flex: 1 1 auto;
-    text-align: center;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .footer {
     align-items: flex-start;
-    flex-direction: column;
+  }
+
+  .footer-links {
+    gap: 12px 16px;
   }
 }
 
-/* ---------- 17. ACCESSIBILITY ---------- */
+/* ---------- Very narrow screens ---------- */
+
+@media (max-width: 360px) {
+  .cosmos-shell {
+    padding-inline: 13px;
+  }
+
+  .brand {
+    font-size: 19px;
+    letter-spacing: 1.5px;
+  }
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .dash-card {
+    min-height: 120px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .actions > a,
+  .actions > button {
+    width: 100%;
+  }
+}
+
+/* ---------- Reduced motion accessibility ---------- */
 
 @media (prefers-reduced-motion: reduce) {
   *,
