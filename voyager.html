@@ -1,249 +1,864 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Discover NASA's Voyager 1 and Voyager 2 missions and their journey into interstellar space.">
+  <meta name="theme-color" content="#050816">
+  <meta name="description" content="Discover NASA's Voyager 1 and Voyager 2 missions, their exploration of the outer planets, and their journey into interstellar space.">
   <title>Voyager Missions | COSMOS</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    .mission-detail {
-      width: min(1100px, 90%);
-      margin: 0 auto;
-      padding: 45px 0 80px;
+    :root {
+      --bg: #050816;
+      --panel: rgba(13, 23, 48, 0.76);
+      --panel-border: rgba(99, 179, 255, 0.2);
+      --blue: #64c7ff;
+      --cyan: #78f1ff;
+      --purple: #a68aff;
+      --text: #f1f6ff;
+      --muted: #a4b5d0;
+      --gold: #ffd58a;
+      --font-main: "Inter", sans-serif;
+      --font-display: "Orbitron", sans-serif;
     }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 24px;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 50% -15%, rgba(35, 91, 178, 0.23), transparent 48%),
+        radial-gradient(ellipse at 100% 48%, rgba(65, 44, 155, 0.12), transparent 35%),
+        var(--bg);
+      font-family: var(--font-main);
+      line-height: 1.7;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::before {
+      opacity: 0.6;
+      background-image:
+        radial-gradient(1px 1px at 8% 14%, #ffffff 50%, transparent 100%),
+        radial-gradient(2px 2px at 25% 72%, #7ddcff 50%, transparent 100%),
+        radial-gradient(1px 1px at 46% 31%, #ffffff 50%, transparent 100%),
+        radial-gradient(2px 2px at 65% 16%, #b6caff 50%, transparent 100%),
+        radial-gradient(1px 1px at 82% 63%, #ffffff 50%, transparent 100%),
+        radial-gradient(1px 1px at 94% 28%, #83eaff 50%, transparent 100%),
+        radial-gradient(1px 1px at 15% 89%, #ffffff 50%, transparent 100%),
+        radial-gradient(2px 2px at 73% 87%, #b9a5ff 50%, transparent 100%);
+      background-size: 370px 320px;
+      animation: starDrift 100s linear infinite;
+    }
+
+    body::after {
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(5, 8, 22, 0.06) 65%,
+        rgba(5, 8, 22, 0.65) 100%
+      );
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .mission-detail {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 35px 0 90px;
+      position: relative;
+    }
+
+    /* Back navigation */
 
     .mission-back {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
       margin-bottom: 28px;
-      color: #9ecbff;
+      padding: 11px 17px;
+      border: 1px solid rgba(100, 199, 255, 0.3);
+      border-radius: 12px;
+      background: rgba(12, 25, 49, 0.72);
+      color: #c4e9ff;
+      font-size: 0.9rem;
+      font-weight: 600;
       text-decoration: none;
+      transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+      backdrop-filter: blur(12px);
     }
 
-    .mission-back:hover { text-decoration: underline; }
+    .mission-back .arrow {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .mission-back:hover {
+      transform: translateY(-3px);
+      border-color: var(--cyan);
+      background: rgba(23, 62, 96, 0.6);
+      box-shadow: 0 0 25px rgba(100, 199, 255, 0.15);
+    }
+
+    .mission-back:hover .arrow {
+      transform: translateX(-4px);
+    }
+
+    /* Hero */
 
     .mission-hero {
-      padding: 45px 35px;
-      border: 1px solid rgba(150, 190, 255, .22);
-      border-radius: 22px;
-      background: linear-gradient(135deg, #101d37, #172b49 55%, #111827);
-      margin-bottom: 30px;
+      min-height: 410px;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(30px, 6vw, 72px);
+      border: 1px solid rgba(112, 184, 255, 0.25);
+      border-radius: 28px;
+      background:
+        radial-gradient(ellipse at 82% 45%, rgba(74, 103, 205, 0.19), transparent 35%),
+        linear-gradient(125deg, rgba(12, 25, 53, 0.98), rgba(9, 16, 36, 0.95) 60%, rgba(22, 17, 54, 0.96));
+      box-shadow:
+        0 20px 80px rgba(0, 0, 0, 0.22),
+        inset 0 0 50px rgba(88, 151, 255, 0.035);
+      margin-bottom: 28px;
+    }
+
+    .mission-hero::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 310px;
+      height: 310px;
+      top: 50%;
+      right: -45px;
+      border: 1px solid rgba(104, 192, 255, 0.18);
+      border-radius: 50%;
+      transform: translateY(-50%);
+      box-shadow:
+        0 0 0 32px rgba(104, 192, 255, 0.025),
+        0 0 0 65px rgba(104, 192, 255, 0.02),
+        0 0 60px rgba(92, 157, 255, 0.08);
+      animation: orbitPulse 7s ease-in-out infinite;
+    }
+
+    .mission-hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 190px;
+      height: 190px;
+      top: 50%;
+      right: 15px;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      background:
+        radial-gradient(circle at 32% 28%, rgba(192, 231, 255, 0.95), transparent 4%),
+        radial-gradient(circle at 38% 34%, #6484d4 0%, #263d82 25%, #111d48 60%, #080e25 75%);
+      box-shadow:
+        inset -20px -15px 35px rgba(0, 0, 0, 0.5),
+        0 0 55px rgba(92, 141, 255, 0.18);
+      opacity: 0.85;
+      animation: planetFloat 8s ease-in-out infinite;
+    }
+
+    .hero-content {
+      max-width: 690px;
+      position: relative;
+      z-index: 1;
     }
 
     .mission-label {
-      display: inline-block;
-      color: #a9ceff;
-      font-size: .82rem;
-      letter-spacing: 2px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--cyan);
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      margin-bottom: 14px;
+    }
+
+    .mission-label::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: var(--cyan);
+      box-shadow: 0 0 12px var(--cyan);
     }
 
     .mission-hero h1 {
-      font-size: clamp(2.2rem, 6vw, 4.3rem);
-      line-height: 1.1;
-      margin: 0 0 18px;
+      max-width: 800px;
+      margin-bottom: 20px;
+      font-family: var(--font-display);
+      font-size: clamp(2.3rem, 6.5vw, 5rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -2px;
+      background: linear-gradient(100deg, #ffffff 5%, #b6e7ff 47%, #a9a0ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 25px rgba(100, 199, 255, 0.12));
     }
 
-    .mission-hero p {
-      max-width: 760px;
-      line-height: 1.8;
-      color: #d0d9e8;
+    .hero-description {
+      max-width: 690px;
+      color: #c0cee5;
+      font-size: 1.02rem;
+      line-height: 1.95;
     }
+
+    .hero-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 26px;
+      color: #a9bad4;
+      font-size: 0.82rem;
+      letter-spacing: 0.5px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 8px;
+      border-radius: 50%;
+      background: #78f1c6;
+      box-shadow: 0 0 14px rgba(120, 241, 198, 0.8);
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    /* Facts */
 
     .mission-facts {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin: 25px 0 35px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 15px;
+      margin: 24px 0 38px;
     }
 
-    .mission-fact, .mission-section {
-      padding: 23px;
-      border: 1px solid rgba(150, 190, 255, .17);
-      border-radius: 16px;
-      background: rgba(255, 255, 255, .035);
+    .mission-fact {
+      min-width: 0;
+      position: relative;
+      overflow: hidden;
+      padding: 24px 20px;
+      border: 1px solid var(--panel-border);
+      border-radius: 17px;
+      background: linear-gradient(145deg, rgba(20, 36, 68, 0.72), rgba(9, 16, 35, 0.78));
+      backdrop-filter: blur(14px);
+      transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .mission-fact::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 15%;
+      width: 70%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      opacity: 0.65;
+    }
+
+    .mission-fact:hover {
+      transform: translateY(-6px);
+      border-color: rgba(120, 241, 255, 0.5);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18), 0 0 25px rgba(100, 199, 255, 0.07);
     }
 
     .mission-fact span {
       display: block;
-      color: #9ecbff;
-      font-size: .82rem;
       margin-bottom: 9px;
+      color: #8da9d1;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
-    .mission-fact strong { font-size: 1.05rem; }
-
-    .mission-section { margin-top: 20px; }
-    .mission-section h2 { margin-top: 0; margin-bottom: 14px; }
-
-    .mission-section p, .mission-section li {
-      color: #cbd5e1;
-      line-height: 1.85;
+    .mission-fact strong {
+      display: block;
+      color: #eaf5ff;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
     }
 
-    .mission-section ul { padding-left: 22px; }
+    /* Content sections */
+
+    .mission-section {
+      position: relative;
+      overflow: hidden;
+      margin-top: 20px;
+      padding: clamp(24px, 4vw, 36px);
+      border: 1px solid rgba(119, 162, 230, 0.16);
+      border-radius: 20px;
+      background:
+        linear-gradient(140deg, rgba(16, 29, 56, 0.79), rgba(8, 15, 32, 0.78));
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(12px);
+      transition:
+        border-color 0.35s ease,
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .mission-section::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 28px;
+      bottom: 28px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--cyan), rgba(166, 138, 255, 0.08));
+      box-shadow: 0 0 12px rgba(120, 241, 255, 0.35);
+    }
+
+    .mission-section:hover {
+      border-color: rgba(100, 199, 255, 0.3);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.16);
+    }
+
+    .mission-section h2 {
+      margin-bottom: 17px;
+      color: #e9f5ff;
+      font-family: var(--font-display);
+      font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .mission-section h2::after {
+      content: "";
+      display: block;
+      width: 48px;
+      height: 2px;
+      margin-top: 13px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+    }
+
+    .mission-section p,
+    .mission-section li {
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.95;
+    }
+
+    .mission-section p + p {
+      margin-top: 15px;
+    }
+
+    .mission-section ul {
+      display: grid;
+      gap: 13px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .mission-section li {
+      position: relative;
+      padding-left: 27px;
+    }
+
+    .mission-section li::before {
+      content: "";
+      position: absolute;
+      top: 11px;
+      left: 1px;
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--cyan);
+      border-radius: 2px;
+      transform: rotate(45deg);
+      box-shadow: 0 0 9px rgba(120, 241, 255, 0.25);
+    }
 
     .mission-highlight {
-      border-left: 3px solid #75b6ff;
-      padding: 12px 18px;
-      margin-top: 18px;
-      background: rgba(117, 182, 255, .07);
-      color: #e2edff;
-      line-height: 1.8;
+      position: relative;
+      margin-top: 22px;
+      padding: 19px 22px;
+      border: 1px solid rgba(100, 199, 255, 0.18);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 12px 12px 0;
+      background: linear-gradient(90deg, rgba(67, 157, 219, 0.1), rgba(67, 157, 219, 0.015));
+      color: #d6edff;
+      font-size: 0.95rem;
+      line-height: 1.9;
     }
+
+    .mission-highlight strong {
+      color: var(--cyan);
+    }
+
+    /* Explore buttons */
 
     .mission-navigation {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 30px;
+      gap: 13px;
+      margin-top: 22px;
     }
 
     .mission-navigation a {
-      display: inline-block;
-      padding: 12px 18px;
-      border: 1px solid rgba(150, 190, 255, .3);
-      border-radius: 10px;
-      color: #e5efff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 12px 19px;
+      border: 1px solid rgba(112, 184, 255, 0.3);
+      border-radius: 11px;
+      background: rgba(24, 48, 83, 0.42);
+      color: #dff2ff;
+      font-size: 0.88rem;
+      font-weight: 600;
       text-decoration: none;
+      transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
     }
 
     .mission-navigation a:hover {
-      background: rgba(117, 182, 255, .12);
+      transform: translateY(-3px);
+      border-color: var(--cyan);
+      background: rgba(47, 99, 142, 0.25);
+      box-shadow: 0 8px 25px rgba(100, 199, 255, 0.1);
+    }
+
+    .mission-navigation a.primary-link {
+      border-color: rgba(120, 241, 255, 0.55);
+      background: linear-gradient(110deg, rgba(37, 118, 163, 0.35), rgba(92, 77, 165, 0.27));
+    }
+
+    .external-arrow {
+      color: var(--cyan);
+      font-size: 1.05rem;
+    }
+
+    /* Scroll reveal */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mission-fact:nth-child(2) {
+      transition-delay: 80ms;
+    }
+
+    .mission-fact:nth-child(3) {
+      transition-delay: 160ms;
+    }
+
+    .mission-fact:nth-child(4) {
+      transition-delay: 240ms;
+    }
+
+    /* Animations */
+
+    @keyframes starDrift {
+      from { background-position: 0 0; }
+      to { background-position: 370px 320px; }
+    }
+
+    @keyframes orbitPulse {
+      0%, 100% { opacity: 0.55; transform: translateY(-50%) scale(0.96); }
+      50% { opacity: 1; transform: translateY(-50%) scale(1.04); }
+    }
+
+    @keyframes planetFloat {
+      0%, 100% { transform: translateY(-50%) translateX(0); }
+      50% { transform: translateY(calc(-50% - 12px)) translateX(-5px); }
+    }
+
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 14px rgba(120, 241, 198, 0.8); }
+      50% { opacity: 0.55; box-shadow: 0 0 5px rgba(120, 241, 198, 0.4); }
+    }
+
+    /* Responsive */
+
+    @media (max-width: 850px) {
+      .mission-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .mission-hero::before {
+        right: -135px;
+      }
+
+      .mission-hero::after {
+        right: -70px;
+        opacity: 0.5;
+      }
+
+      .hero-content {
+        max-width: 100%;
+      }
+
+      .hero-description {
+        max-width: 620px;
+      }
     }
 
     @media (max-width: 600px) {
       .mission-detail {
         width: calc(100% - 28px);
-        padding-top: 25px;
+        padding-top: 20px;
+        padding-bottom: 55px;
       }
 
-      .mission-hero { padding: 30px 22px; }
-      .mission-section, .mission-fact { padding: 18px; }
+      .mission-back {
+        margin-bottom: 20px;
+        padding: 10px 13px;
+        font-size: 0.82rem;
+      }
+
+      .mission-hero {
+        min-height: auto;
+        padding: 34px 23px;
+        border-radius: 21px;
+      }
+
+      .mission-hero::before {
+        width: 210px;
+        height: 210px;
+        right: -125px;
+        top: 27%;
+      }
+
+      .mission-hero::after {
+        width: 125px;
+        height: 125px;
+        right: -62px;
+        top: 27%;
+      }
+
+      .mission-label {
+        font-size: 0.62rem;
+        letter-spacing: 2px;
+      }
+
+      .mission-hero h1 {
+        max-width: 100%;
+        font-size: clamp(2rem, 10vw, 3.2rem);
+        letter-spacing: -1px;
+      }
+
+      .hero-description {
+        font-size: 0.91rem;
+        line-height: 1.85;
+      }
+
+      .hero-status {
+        align-items: flex-start;
+        font-size: 0.76rem;
+      }
+
+      .mission-facts {
+        gap: 11px;
+        margin: 18px 0 27px;
+      }
+
+      .mission-fact {
+        padding: 18px 15px;
+        border-radius: 14px;
+      }
+
+      .mission-fact span {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+      }
+
+      .mission-fact strong {
+        font-size: 0.9rem;
+      }
+
+      .mission-section {
+        margin-top: 15px;
+        padding: 24px 20px;
+        border-radius: 16px;
+      }
+
+      .mission-section::before {
+        top: 22px;
+        bottom: 22px;
+      }
+
+      .mission-section h2 {
+        font-size: 1.1rem;
+      }
+
+      .mission-section p,
+      .mission-section li {
+        font-size: 0.89rem;
+        line-height: 1.85;
+      }
+
+      .mission-highlight {
+        padding: 15px 16px;
+        font-size: 0.88rem;
+      }
+
+      .mission-navigation {
+        flex-direction: column;
+      }
+
+      .mission-navigation a {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
 
 <body>
   <main class="mission-detail">
-    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+    <a class="mission-back" href="missions.html">
+      <span class="arrow" aria-hidden="true">&larr;</span>
+      <span>Back to Space Missions</span>
+    </a>
 
     <header class="mission-hero">
-      <span class="mission-label">Deep Space Exploration</span>
-      <h1>Voyager Missions</h1>
-      <p>
-        Voyager 1 and Voyager 2 are NASA spacecraft launched in 1977 to explore
-        the outer Solar System. Their remarkable journeys transformed our
-        understanding of the giant planets and eventually carried both
-        spacecraft into interstellar space.
-      </p>
+      <div class="hero-content">
+        <span class="mission-label">Deep Space Exploration</span>
+        <h1>Voyager Missions</h1>
+        <p class="hero-description">
+          Launched in 1977, Voyager 1 and Voyager 2 transformed our understanding
+          of the outer Solar System. After exploring the giant planets, both
+          spacecraft journeyed beyond the heliosphere into interstellar space.
+        </p>
+        <div class="hero-status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>Humanity's farthest-reaching robotic explorers</span>
+        </div>
+      </div>
     </header>
 
     <section class="mission-facts" aria-label="Mission facts">
-      <div class="mission-fact">
+      <div class="mission-fact reveal">
         <span>Organization</span>
         <strong>NASA</strong>
       </div>
-      <div class="mission-fact">
+      <div class="mission-fact reveal">
         <span>Launch Year</span>
         <strong>1977</strong>
       </div>
-      <div class="mission-fact">
+      <div class="mission-fact reveal">
         <span>Spacecraft</span>
         <strong>Voyager 1 and 2</strong>
       </div>
-      <div class="mission-fact">
+      <div class="mission-fact reveal">
         <span>Mission Region</span>
-        <strong>Outer Solar System and beyond</strong>
+        <strong>Interstellar Space</strong>
       </div>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
       <h2>What Are the Voyager Spacecraft?</h2>
       <p>
         Voyager 1 launched on September 5, 1977, and Voyager 2 launched on
-        August 20, 1977. Each spacecraft carries scientific instruments to
-        measure magnetic fields, charged particles, plasma waves, and other
-        features of space.
+        August 20, 1977. Both spacecraft carry scientific instruments designed
+        to measure magnetic fields, charged particles, plasma waves, and other
+        properties of their space environment.
       </p>
       <p>
-        The spacecraft also carry a Golden Record: a message from Earth
-        containing sounds, music, greetings, and images intended to represent
-        life and culture on our planet.
-      </p>
-    </section>
-
-    <section class="mission-section">
-      <h2>Voyager 1</h2>
-      <p>
-        Voyager 1 flew past Jupiter in 1979 and Saturn in 1980. Its observations
-        revealed details about the planets, their moons, rings, and magnetic
-        environments. It later traveled outward and entered interstellar space
-        in 2012, becoming the first spacecraft to do so.
+        Each spacecraft also carries a Golden Record containing selected sounds,
+        music, greetings, and images from Earth. It was designed as a symbolic
+        message representing life and culture on our planet.
       </p>
       <div class="mission-highlight">
-        Voyager 1 studies the environment beyond the heliosphere, the vast
-        region influenced by the Sun's solar wind.
+        The Voyager missions were originally designed to investigate the outer
+        planets. Their extraordinary longevity has extended that exploration
+        into the space between stars.
       </div>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
+      <h2>Voyager 1</h2>
+      <p>
+        Voyager 1 flew past Jupiter in 1979 and Saturn in 1980. Its observations
+        revealed new details about the planets, their moons, rings, and magnetic
+        environments. It later continued outward and crossed the heliopause in
+        August 2012, becoming the first spacecraft to enter interstellar space.
+      </p>
+      <div class="mission-highlight">
+        <strong>Mission milestone:</strong> Voyager 1 became the first human-made
+        spacecraft confirmed to enter interstellar space, beyond the region
+        dominated by the Sun's solar wind.
+      </div>
+    </section>
+
+    <section class="mission-section reveal">
       <h2>Voyager 2</h2>
       <p>
         Voyager 2 visited Jupiter and Saturn before continuing to Uranus in
-        1986 and Neptune in 1989. It remains the only spacecraft to have
-        visited both of these ice giant planets up close. Voyager 2 entered
-        interstellar space in 2018.
+        1986 and Neptune in 1989. It remains the only spacecraft to have visited
+        both ice giant planets up close. Voyager 2 crossed the heliopause in
+        November 2018 and entered interstellar space.
+      </p>
+      <p>
+        Its unusual planetary route provided scientists with close-up views of
+        worlds that have not been revisited by another spacecraft on the same
+        scale.
       </p>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
       <h2>Major Discoveries</h2>
       <ul>
         <li>Observed active volcanoes on Jupiter's moon Io.</li>
         <li>Investigated the complex rings and moons of Saturn.</li>
         <li>Revealed unexpected atmospheric and magnetic features at Uranus.</li>
-        <li>Studied Neptune's powerful winds and its moon Triton.</li>
-        <li>Provided the first direct measurements of the interstellar environment beyond the heliosphere.</li>
+        <li>Studied Neptune's powerful winds and its unusual moon Triton.</li>
+        <li>Measured the interstellar environment beyond the heliosphere.</li>
+        <li>Expanded our understanding of how the Sun interacts with the space between stars.</li>
       </ul>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
       <h2>Are the Voyagers Still Working?</h2>
       <p>
-        Both spacecraft have operated far longer than their original planetary
-        exploration missions. Their electrical power decreases over time, so
-        NASA has had to turn off some instruments and systems to conserve
-        energy. Their operational status can change as engineers manage the
-        aging spacecraft.
+        Both spacecraft have operated far beyond their original planetary
+        exploration missions. Their radioisotope power sources gradually
+        produce less electricity, so engineers have switched off selected
+        instruments and systems to conserve the remaining power.
       </p>
       <p>
-        They communicate with Earth across enormous distances, where radio
-        signals take many hours to travel one way.
+        Their operational status and available instruments can change as NASA
+        engineers manage the aging spacecraft. Because they are now extremely
+        far from Earth, radio signals take many hours to travel one way.
       </p>
+      <div class="mission-highlight">
+        The spacecraft are not receiving regular physical maintenance. Engineers
+        must operate them remotely, using limited power and commands sent across
+        immense distances.
+      </div>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
       <h2>Why Do These Missions Matter?</h2>
       <p>
-        The Voyager missions expanded humanity's view of the outer planets and
-        opened a new chapter in the exploration of interstellar space. They
-        continue to help scientists understand how the Sun interacts with the
-        space between stars.
+        The Voyager missions reshaped humanity's view of the outer planets and
+        opened a new chapter in the exploration of interstellar space. Their
+        observations continue to help scientists investigate the boundary
+        between the Sun's influence and the broader environment of our galaxy.
+      </p>
+      <p>
+        Voyager also demonstrates how carefully designed spacecraft can keep
+        delivering scientific discoveries decades after launch.
       </p>
     </section>
 
-    <section class="mission-section">
+    <section class="mission-section reveal">
       <h2>Explore More</h2>
+      <p>
+        Continue exploring NASA's Voyager mission, discover other spacecraft,
+        or return to the COSMOS homepage.
+      </p>
       <div class="mission-navigation">
-        <a href="https://science.nasa.gov/mission/voyager/" target="_blank" rel="noopener noreferrer">NASA Voyager Mission</a>
-        <a href="missions.html">All Space Missions</a>
-        <a href="index.html">COSMOS Home</a>
+        <a class="primary-link"
+           href="https://science.nasa.gov/mission/voyager/"
+           target="_blank"
+           rel="noopener noreferrer">
+          NASA Voyager Mission
+          <span class="external-arrow" aria-hidden="true">&nearr;</span>
+        </a>
+        <a href="missions.html">All Space Missions <span aria-hidden="true">&rarr;</span></a>
+        <a href="index.html">COSMOS Home <span aria-hidden="true">&rarr;</span></a>
       </div>
     </section>
   </main>
+
+  <script>
+    (() => {
+      const revealElements = document.querySelectorAll(".reveal");
+
+      if (!("IntersectionObserver" in window)) {
+        revealElements.forEach((element) => {
+          element.classList.add("is-visible");
+        });
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            currentObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -35px 0px"
+      });
+
+      revealElements.forEach((element) => observer.observe(element));
+    })();
+  </script>
 </body>
 </html>
