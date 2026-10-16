@@ -4,256 +4,1360 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Discover the James Webb Space Telescope and how it studies the early universe, galaxies, stars, and exoplanets.">
+  <meta name="theme-color" content="#070611">
+  <meta name="description" content="Explore the James Webb Space Telescope, its golden mirror, infrared instruments, discoveries and mission to study the universe.">
   <title>James Webb Space Telescope | COSMOS</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    .mission-detail {
-      width: min(1100px, 90%);
-      margin: 0 auto;
-      padding: 45px 0 80px;
+    :root {
+      --bg: #070611;
+      --panel: rgba(22, 19, 42, 0.78);
+      --panel-light: rgba(38, 30, 60, 0.68);
+      --border: rgba(207, 178, 255, 0.19);
+      --gold: #ffd98b;
+      --gold-light: #fff0c5;
+      --purple: #c5a4ff;
+      --pink: #ffb5e8;
+      --cyan: #9beaff;
+      --text: #f6f2ff;
+      --muted: #b8b1cc;
+      --max-width: 1120px;
+      --radius: 22px;
     }
 
-    .mission-back {
-      display: inline-block;
-      margin-bottom: 28px;
-      color: #9ecbff;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 25px;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 78% 10%, rgba(114, 61, 152, 0.19), transparent 36%),
+        radial-gradient(ellipse at 10% 43%, rgba(62, 61, 128, 0.15), transparent 34%),
+        radial-gradient(ellipse at 70% 80%, rgba(160, 90, 133, 0.10), transparent 38%),
+        var(--bg);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.75;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.68;
+      background-image:
+        radial-gradient(1px 1px at 7% 18%, #ffffff 98%, transparent),
+        radial-gradient(2px 2px at 18% 78%, #d5c7ff 98%, transparent),
+        radial-gradient(1px 1px at 29% 38%, #ffffff 98%, transparent),
+        radial-gradient(2px 2px at 42% 12%, #ffdfa0 98%, transparent),
+        radial-gradient(1px 1px at 55% 65%, #ffffff 98%, transparent),
+        radial-gradient(2px 2px at 72% 27%, #e5c7ff 98%, transparent),
+        radial-gradient(1px 1px at 88% 73%, #ffffff 98%, transparent),
+        radial-gradient(2px 2px at 96% 12%, #b4eaff 98%, transparent);
+      background-size: 320px 300px;
+      animation: starDrift 100s linear infinite;
+    }
+
+    a {
+      color: inherit;
       text-decoration: none;
     }
 
-    .mission-back:hover { text-decoration: underline; }
-
-    .mission-hero {
-      padding: 45px 35px;
-      border: 1px solid rgba(150,190,255,.22);
-      border-radius: 22px;
-      background: linear-gradient(135deg,#19172d,#30264a 55%,#111827);
-      margin-bottom: 30px;
+    a:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 5px;
     }
 
-    .mission-label {
-      display: inline-block;
-      color: #d1c4ff;
-      font-size: .82rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 14px;
+    .page {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin-inline: auto;
     }
 
-    .mission-hero h1 {
-      font-size: clamp(2.2rem,6vw,4.3rem);
-      line-height: 1.1;
-      margin: 0 0 18px;
+    .back-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding-top: 28px;
     }
 
-    .mission-hero p {
-      max-width: 760px;
-      line-height: 1.8;
-      color: #d8d5e8;
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--gold);
+      background: rgba(21, 17, 39, 0.84);
+      font-size: 0.87rem;
+      font-weight: 700;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
     }
 
-    .mission-facts {
+    .back-link:hover {
+      transform: translateX(-4px);
+      border-color: rgba(255, 217, 139, 0.6);
+      background: rgba(56, 39, 66, 0.85);
+    }
+
+    .breadcrumb {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--gold);
+    }
+
+    .hero {
+      position: relative;
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
-      gap: 16px;
-      margin: 25px 0 35px;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 24px;
+      min-height: 550px;
+      padding: 60px 0 48px;
     }
 
-    .mission-fact,.mission-section {
-      padding: 23px;
-      border: 1px solid rgba(150,190,255,.17);
-      border-radius: 16px;
-      background: rgba(255,255,255,.035);
+    .hero-copy {
+      position: relative;
+      z-index: 2;
     }
 
-    .mission-fact span {
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--gold);
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 25px;
+      height: 1px;
+      background: var(--gold);
+      box-shadow: 0 0 12px var(--gold);
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.22;
+    }
+
+    h1 {
+      max-width: 700px;
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(2.35rem, 5.5vw, 4.55rem);
+      font-weight: 800;
+      letter-spacing: -0.065em;
+    }
+
+    .gradient-text {
       display: block;
-      color: #c7b6ff;
-      font-size: .82rem;
-      margin-bottom: 9px;
+      color: transparent;
+      background: linear-gradient(
+        105deg,
+        #fff3d0 0%,
+        #ffd98b 36%,
+        #ffb5e8 72%,
+        #bdaaff 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
     }
 
-    .mission-fact strong { font-size: 1.05rem; }
-    .mission-section { margin-top: 20px; }
-    .mission-section h2 { margin-top: 0; margin-bottom: 14px; }
-
-    .mission-section p,.mission-section li {
-      color: #cbd5e1;
-      line-height: 1.85;
+    .hero-description {
+      max-width: 570px;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 0.97rem;
+      line-height: 1.95;
     }
 
-    .mission-section ul { padding-left: 22px; }
-
-    .mission-highlight {
-      border-left: 3px solid #b8a4ff;
-      padding: 12px 18px;
-      margin-top: 18px;
-      background: rgba(184,164,255,.07);
-      color: #e9e3ff;
-      line-height: 1.8;
-    }
-
-    .mission-navigation {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
-      margin-top: 30px;
+      margin-top: 28px;
     }
 
-    .mission-navigation a {
-      display: inline-block;
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      min-height: 46px;
       padding: 12px 18px;
-      border: 1px solid rgba(150,190,255,.3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-primary {
+      color: #211409;
+      border-color: transparent;
+      background: linear-gradient(110deg, var(--gold-light), var(--gold));
+      box-shadow: 0 0 25px rgba(255, 217, 139, 0.13);
+    }
+
+    .button-primary:hover {
+      box-shadow: 0 0 35px rgba(255, 217, 139, 0.27);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      background: rgba(30, 23, 49, 0.72);
+    }
+
+    .button-secondary:hover {
+      background: rgba(61, 43, 77, 0.85);
+    }
+
+    /* Telescope illustration */
+
+    .telescope-stage {
+      position: relative;
+      display: grid;
+      min-width: 0;
+      min-height: 410px;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .telescope-stage::before {
+      content: "";
+      position: absolute;
+      width: 290px;
+      height: 290px;
+      border-radius: 50%;
+      background: rgba(181, 115, 255, 0.16);
+      filter: blur(65px);
+      animation: glowPulse 6s ease-in-out infinite;
+    }
+
+    .stage-orbit {
+      position: absolute;
+      width: 360px;
+      max-width: 100%;
+      height: 135px;
+      border: 1px solid rgba(197, 164, 255, 0.34);
+      border-radius: 50%;
+      transform: rotate(-32deg);
+      animation: orbitPulse 6s ease-in-out infinite;
+    }
+
+    .stage-orbit.orbit-two {
+      width: 390px;
+      height: 175px;
+      border-color: rgba(255, 217, 139, 0.22);
+      transform: rotate(34deg);
+      animation-delay: -3s;
+    }
+
+    .telescope {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: min(100%, 340px);
+      transform-origin: center;
+      animation: telescopeFloat 7s ease-in-out infinite;
+    }
+
+    .mirror-assembly {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 4px;
+      width: 226px;
+      padding: 9px;
+      border: 1px solid rgba(255, 217, 139, 0.4);
+      border-radius: 48% 48% 15% 15%;
+      background: rgba(21, 15, 35, 0.9);
+      box-shadow:
+        0 0 22px rgba(255, 217, 139, 0.16),
+        inset 0 0 15px rgba(255, 217, 139, 0.08);
+    }
+
+    .mirror {
+      display: block;
+      aspect-ratio: 1;
+      clip-path: polygon(
+        25% 3%, 75% 3%, 98% 50%,
+        75% 97%, 25% 97%, 2% 50%
+      );
+      border: 1px solid #ffe7a8;
+      background: linear-gradient(
+        135deg,
+        #fff6c9 0%,
+        #f4ca62 28%,
+        #b47b2f 58%,
+        #ffe8a0 78%,
+        #d59a40 100%
+      );
+      box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.7);
+    }
+
+    .mirror:nth-child(2n) {
+      background: linear-gradient(
+        135deg,
+        #fff0b3 0%,
+        #dba849 40%,
+        #ffde86 65%,
+        #99642c 100%
+      );
+    }
+
+    .mirror:nth-child(3n) {
+      background: linear-gradient(
+        135deg,
+        #ffe9a1 0%,
+        #bc8536 40%,
+        #fff0bc 70%,
+        #c58b34 100%
+      );
+    }
+
+    .mirror:nth-child(4),
+    .mirror:nth-child(9),
+    .mirror:nth-child(14) {
+      background: linear-gradient(140deg, #fff8d9, #e5ba5c, #a16a2d);
+    }
+
+    .mirror-support {
+      position: relative;
+      width: 15px;
+      height: 25px;
+      margin-top: -2px;
+      background: linear-gradient(90deg, #65577c, #e7d9ff, #55486c);
+      clip-path: polygon(25% 0, 75% 0, 100% 100%, 0 100%);
+    }
+
+    .spacecraft-body {
+      position: relative;
+      z-index: 3;
+      width: 102px;
+      height: 29px;
+      margin-top: -1px;
+      border: 1px solid rgba(218, 201, 255, 0.5);
+      border-radius: 6px 6px 11px 11px;
+      background: linear-gradient(90deg, #635a80, #d7c8ee, #615476);
+      box-shadow: 0 0 16px rgba(197, 164, 255, 0.2);
+    }
+
+    .spacecraft-body::before {
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #e8dcff;
+      border-radius: 50%;
+      transform: translateX(-50%);
+      background: #5b4778;
+    }
+
+    .spacecraft-body::after {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: -12px;
+      width: 11px;
+      height: 3px;
+      background: var(--gold);
+      box-shadow: 115px 0 var(--gold);
+    }
+
+    .sunshield {
+      position: relative;
+      width: 286px;
+      height: 140px;
+      margin-top: 8px;
+      overflow: hidden;
+      clip-path: polygon(0 0, 100% 0, 83% 73%, 50% 100%, 17% 73%);
+      background: linear-gradient(
+        170deg,
+        #f4e5ff 0%,
+        #d4a9f2 13%,
+        #8152b2 27%,
+        #e7b2ed 39%,
+        #7752a8 54%,
+        #dca2de 68%,
+        #66438d 84%,
+        #c4a1eb 100%
+      );
+      box-shadow: 0 0 25px rgba(197, 164, 255, 0.25);
+    }
+
+    .sunshield::before,
+    .sunshield::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        170deg,
+        transparent 0 17%,
+        rgba(255, 255, 255, 0.4) 18%,
+        transparent 20% 37%,
+        rgba(255, 255, 255, 0.28) 38%,
+        transparent 40% 58%,
+        rgba(255, 255, 255, 0.22) 59%,
+        transparent 61% 79%,
+        rgba(255, 255, 255, 0.2) 80%,
+        transparent 82%
+      );
+    }
+
+    .sunshield::after {
+      inset: 0;
+      background: linear-gradient(90deg, rgba(28, 13, 58, 0.25), transparent 50%, rgba(28, 13, 58, 0.2));
+    }
+
+    .telescope-label {
+      position: absolute;
+      right: -3px;
+      bottom: 3px;
+      z-index: 4;
+      padding: 9px 12px;
+      border: 1px solid var(--border);
       border-radius: 10px;
-      color: #e5efff;
-      text-decoration: none;
+      color: var(--gold);
+      background: rgba(16, 12, 31, 0.92);
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      backdrop-filter: blur(12px);
     }
 
-    .mission-navigation a:hover {
-      background: rgba(117,182,255,.12);
+    .section {
+      padding: 38px 0;
     }
 
-    @media(max-width:600px) {
-      .mission-detail {
-        width: calc(100% - 28px);
-        padding-top: 25px;
+    .section-heading {
+      max-width: 730px;
+      margin-bottom: 26px;
+    }
+
+    .section-kicker {
+      margin-bottom: 10px;
+      color: var(--gold);
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.67rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(1.55rem, 3.2vw, 2.3rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-heading p {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .fact-card,
+    .content-card,
+    .instrument-card,
+    .mission-highlight {
+      min-width: 0;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: linear-gradient(
+        145deg,
+        var(--panel-light),
+        rgba(12, 10, 28, 0.83)
+      );
+      box-shadow: 0 15px 42px rgba(0, 0, 0, 0.13);
+      transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease;
+    }
+
+    .fact-card:hover,
+    .content-card:hover,
+    .instrument-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 217, 139, 0.45);
+      background: linear-gradient(
+        145deg,
+        rgba(59, 43, 77, 0.8),
+        rgba(12, 10, 28, 0.87)
+      );
+    }
+
+    .fact-label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--muted);
+      font-size: 0.77rem;
+    }
+
+    .fact-value {
+      display: block;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .fact-value.accent {
+      color: var(--gold);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .content-card h3,
+    .instrument-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.12rem;
+    }
+
+    .content-card p,
+    .instrument-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.9;
+    }
+
+    .content-card p + p {
+      margin-top: 12px;
+    }
+
+    .instrument-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .instrument-number {
+      display: inline-block;
+      margin-bottom: 13px;
+      color: var(--gold);
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+    }
+
+    .instrument-tag {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 5px 9px;
+      border: 1px solid rgba(197, 164, 255, 0.25);
+      border-radius: 7px;
+      color: var(--purple);
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .mission-highlight {
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(197, 164, 255, 0.11), transparent 55%),
+        var(--panel);
+    }
+
+    .mission-highlight h3 {
+      margin-bottom: 12px;
+      font-size: 1.15rem;
+    }
+
+    .mission-highlight p {
+      color: var(--muted);
+      font-size: 0.91rem;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 18px;
+      margin-top: 8px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 145px 1fr;
+      gap: 18px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(21, 17, 39, 0.7);
+    }
+
+    .timeline-date {
+      color: var(--gold);
+      font-family: "Orbitron", sans-serif;
+      font-size: 0.79rem;
+      font-weight: 700;
+    }
+
+    .timeline-copy h3 {
+      margin-bottom: 5px;
+      font-size: 1rem;
+    }
+
+    .timeline-copy p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .closing-panel {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(25px, 5vw, 44px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(255, 217, 139, 0.12), transparent 48%),
+        radial-gradient(ellipse at 0% 100%, rgba(197, 164, 255, 0.1), transparent 50%),
+        var(--panel);
+    }
+
+    .closing-panel h2 {
+      max-width: 750px;
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(1.45rem, 3vw, 2.15rem);
+    }
+
+    .closing-panel > p {
+      max-width: 750px;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .resource-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .resource-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      color: var(--gold);
+      background: rgba(8, 6, 22, 0.56);
+      font-size: 0.83rem;
+      font-weight: 700;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .resource-link:hover {
+      border-color: var(--gold);
+      background: rgba(59, 42, 66, 0.8);
+    }
+
+    .bottom-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 35px;
+      padding: 27px 0 36px;
+      border-top: 1px solid var(--border);
+    }
+
+    .bottom-navigation p {
+      color: var(--muted);
+      font-size: 0.81rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 17px;
+      font-size: 0.82rem;
+    }
+
+    .footer-links a {
+      color: var(--gold);
+    }
+
+    .footer-links a:hover {
+      color: var(--gold-light);
+    }
+
+    /* Content remains visible even when JavaScript is unavailable. */
+    .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .js-motion .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .js-motion .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes starDrift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-300px); }
+    }
+
+    @keyframes telescopeFloat {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50% { transform: translateY(-10px) rotate(1deg); }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.65; transform: scale(0.94); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+
+    @keyframes orbitPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.9; }
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding-top: 48px;
       }
-      .mission-hero { padding: 30px 22px; }
-      .mission-section,.mission-fact { padding: 18px; }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-description {
+        margin-inline: auto;
+      }
+
+      .eyebrow,
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .telescope-stage {
+        min-height: 390px;
+      }
+
+      .facts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .instrument-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 580px) {
+      .page {
+        width: calc(100% - 28px);
+      }
+
+      .back-row {
+        padding-top: 19px;
+      }
+
+      .breadcrumb {
+        width: 100%;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 42px;
+        padding-bottom: 20px;
+      }
+
+      h1 {
+        font-size: clamp(2.25rem, 10vw, 3.3rem);
+      }
+
+      .hero-description {
+        font-size: 0.9rem;
+      }
+
+      .telescope-stage {
+        min-height: 335px;
+      }
+
+      .telescope {
+        transform-origin: center;
+        scale: 0.88;
+      }
+
+      .stage-orbit {
+        width: 300px;
+        height: 105px;
+      }
+
+      .stage-orbit.orbit-two {
+        width: 320px;
+        height: 135px;
+      }
+
+      .telescope-label {
+        right: 0;
+        bottom: 0;
+      }
+
+      .section {
+        padding: 28px 0;
+      }
+
+      .facts-grid,
+      .content-grid,
+      .instrument-grid,
+      .highlight-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .fact-card,
+      .content-card,
+      .instrument-card,
+      .mission-highlight {
+        padding: 20px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .bottom-navigation {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .js-motion .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
     }
   </style>
 </head>
 
 <body>
-  <main class="mission-detail">
-    <a class="mission-back" href="missions.html">&larr; Back to Space Missions</a>
+  <main class="page">
 
-    <header class="mission-hero">
-      <span class="mission-label">Infrared Space Observatory</span>
-      <h1>James Webb Space Telescope</h1>
-      <p>
-        The James Webb Space Telescope, known as JWST, is a powerful space
-        observatory designed to study the universe primarily in infrared light.
-        It helps scientists investigate the earliest galaxies, the formation
-        of stars and planetary systems, and the atmospheres of planets beyond
-        our Solar System.
-      </p>
-    </header>
+    <div class="back-row">
+      <a class="back-link" href="missions.html">
+        <span aria-hidden="true">←</span>
+        <span>Back to Space Missions</span>
+      </a>
 
-    <section class="mission-facts" aria-label="Mission facts">
-      <div class="mission-fact">
-        <span>Space Agencies</span>
-        <strong>NASA, ESA, CSA</strong>
+      <div class="breadcrumb">
+        <a href="index.html">COSMOS</a>
+        <span aria-hidden="true"> / </span>
+        <a href="missions.html">Missions</a>
+        <span aria-hidden="true"> / James Webb</span>
       </div>
-      <div class="mission-fact">
-        <span>Launch Date</span>
-        <strong>December 25, 2021</strong>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Exploring the Infrared Universe</div>
+
+        <h1>
+          JAMES WEBB
+          <span class="gradient-text">Space Telescope</span>
+        </h1>
+
+        <p class="hero-description">
+          Look deeper into the universe with humanity's powerful infrared
+          space observatory. The James Webb Space Telescope investigates
+          the earliest galaxies, the birth of stars, distant exoplanets and
+          the chemistry of worlds beyond our Solar System.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#mission-facts">
+            Explore the Mission ↓
+          </a>
+
+          <a
+            class="button button-secondary"
+            href="https://science.nasa.gov/mission/webb/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Official NASA Page ↗
+          </a>
+        </div>
       </div>
-      <div class="mission-fact">
-        <span>Location</span>
-        <strong>Near Sun–Earth L2</strong>
-      </div>
-      <div class="mission-fact">
-        <span>Main Observing Range</span>
-        <strong>Infrared light</strong>
-      </div>
-    </section>
 
-    <section class="mission-section">
-      <h2>What Is JWST?</h2>
-      <p>
-        Webb is a space telescope with a segmented primary mirror about
-        6.5 metres across. Its large mirror collects faint light from distant
-        cosmic objects. A five-layer sunshield protects the telescope from
-        heat and helps keep its infrared instruments cold enough to operate.
-      </p>
-      <p>
-        Unlike a conventional visible-light telescope, Webb is optimized for
-        infrared observations. Infrared light can reveal objects hidden by
-        dust and can help scientists study light stretched by the expansion
-        of the universe.
-      </p>
-    </section>
+      <div
+        class="telescope-stage"
+        role="img"
+        aria-label="Stylized James Webb Space Telescope illustration with golden mirror segments and layered sunshield"
+      >
+        <div class="stage-orbit"></div>
+        <div class="stage-orbit orbit-two"></div>
 
-    <section class="mission-section">
-      <h2>Mission Objectives</h2>
-      <ul>
-        <li>Observe some of the earliest galaxies that formed after the Big Bang.</li>
-        <li>Study how galaxies grow and change over cosmic time.</li>
-        <li>Investigate how stars and planetary systems form inside clouds of gas and dust.</li>
-        <li>Analyze the atmospheres of exoplanets to learn about their chemical composition.</li>
-        <li>Study objects within our Solar System, including planets, moons, comets, and asteroids.</li>
-      </ul>
-    </section>
+        <div class="telescope">
+          <div class="mirror-assembly" aria-hidden="true">
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+            <span class="mirror"></span>
+          </div>
 
-    <section class="mission-section">
-      <h2>How Does Webb Work?</h2>
-      <p>
-        Webb gathers infrared light using its primary mirror and directs it
-        toward specialized scientific instruments. These instruments capture
-        images and spectra that reveal details about the temperature,
-        composition, and physical properties of astronomical objects.
-      </p>
-      <p>
-        Webb orbits the Sun near the second Sun–Earth Lagrange point, called
-        L2, approximately 1.5 million kilometres from Earth. This location
-        allows the telescope to remain aligned with Earth and its sunshield
-        to help block heat and light from the Sun and Earth.
-      </p>
-    </section>
+          <div class="mirror-support" aria-hidden="true"></div>
+          <div class="spacecraft-body" aria-hidden="true"></div>
+          <div class="sunshield" aria-hidden="true"></div>
+        </div>
 
-    <section class="mission-section">
-      <h2>Major Scientific Contributions</h2>
-      <ul>
-        <li>Observed very distant galaxies whose light has traveled for billions of years.</li>
-        <li>Revealed detailed structures in star-forming regions and dusty cosmic environments.</li>
-        <li>Measured atmospheric signatures in selected exoplanets.</li>
-        <li>Studied the chemistry of planets, moons, and small Solar System bodies.</li>
-        <li>Provided new evidence to help researchers test theories of galaxy formation and planetary evolution.</li>
-      </ul>
-
-      <div class="mission-highlight">
-        Looking farther into space can mean looking further back in time,
-        because light takes time to travel from distant objects to our
-        telescopes.
+        <div class="telescope-label">INFRARED OBSERVATORY</div>
       </div>
     </section>
 
-    <section class="mission-section">
-      <h2>Why Is Webb Important?</h2>
-      <p>
-        Webb allows scientists to investigate questions that could not be
-        studied in the same detail with previous observatories. Its observations
-        help researchers understand how the universe developed, how stars and
-        planets form, and how planetary atmospheres differ from one another.
-      </p>
-      <p>
-        Although Webb can study exoplanet atmospheres, a possible chemical
-        signature alone is not enough to confirm that life exists on another
-        world.
-      </p>
+    <!-- FACTS -->
+    <section class="section reveal" id="mission-facts">
+      <div class="section-heading">
+        <div class="section-kicker">Mission Overview</div>
+        <h2>Beyond the Limits of Visible Light</h2>
+        <p>
+          Key facts about the observatory designed to investigate the
+          universe in infrared wavelengths.
+        </p>
+      </div>
+
+      <div class="facts-grid">
+        <article class="fact-card">
+          <span class="fact-label">Launch Date</span>
+          <span class="fact-value accent">December 25, 2021</span>
+        </article>
+
+        <article class="fact-card">
+          <span class="fact-label">Arrival at L2</span>
+          <span class="fact-value accent">January 24, 2022</span>
+        </article>
+
+        <article class="fact-card">
+          <span class="fact-label">Primary Mirror</span>
+          <span class="fact-value">6.5 metres</span>
+        </article>
+
+        <article class="fact-card">
+          <span class="fact-label">Mirror Segments</span>
+          <span class="fact-value">18 Gold-Coated Segments</span>
+        </article>
+
+        <article class="fact-card">
+          <span class="fact-label">Mission Partners</span>
+          <span class="fact-value">NASA, ESA, CSA</span>
+        </article>
+
+        <article class="fact-card">
+          <span class="fact-label">Orbit Location</span>
+          <span class="fact-value">Sun–Earth L2 Region</span>
+        </article>
+
+        <article class="fact-card">
+          <span class="fact-label">Main Observing Range</span>
+          <span class="fact-value">Infrared Light</span>
+        </article>
+
+        <article class="fact-card">
+          <span class="fact-label">Mission Type</span>
+          <span class="fact-value">Space Observatory</span>
+        </article>
+      </div>
     </section>
 
-    <section class="mission-section">
-      <h2>Mission Status</h2>
-      <p>
-        Webb is an active scientific observatory. Its observations and
-        discoveries continue to be released through scientific publications
-        and official mission updates. Check NASA's website for current
-        operations and the latest results.
-      </p>
+    <!-- ABOUT -->
+    <section class="section reveal">
+      <div class="section-heading">
+        <div class="section-kicker">The Observatory</div>
+        <h2>Why James Webb Matters</h2>
+        <p>
+          Webb extends our view beyond what visible-light observations
+          alone can reveal.
+        </p>
+      </div>
+
+      <div class="content-grid">
+        <article class="content-card">
+          <h3>Looking Back Through Cosmic History</h3>
+          <p>
+            Light takes time to travel across space. When Webb observes
+            extremely distant galaxies, it detects light that began its
+            journey billions of years ago.
+          </p>
+          <p>
+            The expansion of the universe stretches much of this ancient
+            light into infrared wavelengths. Webb is designed to detect
+            that faint infrared radiation and study early galaxies and
+            cosmic evolution.
+          </p>
+        </article>
+
+        <article class="content-card">
+          <h3>Seeing Through Cosmic Dust</h3>
+          <p>
+            Dense clouds of dust can hide regions where stars and planetary
+            systems form. Infrared observations can reveal structures that
+            visible-light telescopes may struggle to see.
+          </p>
+          <p>
+            Webb also examines exoplanet atmospheres, searching for
+            signatures of molecules and learning about the conditions
+            on worlds orbiting other stars.
+          </p>
+        </article>
+      </div>
     </section>
 
-    <section class="mission-section">
-      <h2>Explore More</h2>
-      <div class="mission-navigation">
-        <a href="https://science.nasa.gov/mission/webb/" target="_blank" rel="noopener noreferrer">NASA Webb Mission</a>
-        <a href="https://webbtelescope.org/" target="_blank" rel="noopener noreferrer">Webb Telescope Images and News</a>
-        <a href="missions.html">All Space Missions</a>
+    <!-- INSTRUMENTS -->
+    <section class="section reveal">
+      <div class="section-heading">
+        <div class="section-kicker">Scientific Instruments</div>
+        <h2>Four Tools for a New View of Space</h2>
+        <p>
+          Each instrument is designed for a different observing task.
+          Together, they help Webb study distant objects in remarkable detail.
+        </p>
+      </div>
+
+      <div class="instrument-grid">
+        <article class="instrument-card">
+          <span class="instrument-number">01 / NIRCAM</span>
+          <h3>Near-Infrared Camera</h3>
+          <p>
+            NIRCam captures near-infrared images of galaxies, stars,
+            nebulae and other celestial objects. It also helps scientists
+            align Webb's primary mirror segments.
+          </p>
+          <span class="instrument-tag">Imaging</span>
+        </article>
+
+        <article class="instrument-card">
+          <span class="instrument-number">02 / NIRSPEC</span>
+          <h3>Near-Infrared Spectrograph</h3>
+          <p>
+            NIRSpec separates light into spectra so researchers can study
+            the composition, temperature, motion and other properties of
+            distant astronomical objects.
+          </p>
+          <span class="instrument-tag">Spectroscopy</span>
+        </article>
+
+        <article class="instrument-card">
+          <span class="instrument-number">03 / MIRI</span>
+          <h3>Mid-Infrared Instrument</h3>
+          <p>
+            MIRI observes longer infrared wavelengths, helping reveal cool
+            objects, dusty environments, star-forming regions and distant
+            galaxies.
+          </p>
+          <span class="instrument-tag">Mid-Infrared Science</span>
+        </article>
+
+        <article class="instrument-card">
+          <span class="instrument-number">04 / FGS-NIRISS</span>
+          <h3>Guidance Sensor and Near-Infrared Imager</h3>
+          <p>
+            The Fine Guidance Sensor helps Webb maintain precise pointing.
+            NIRISS supports specialised imaging and spectroscopic studies,
+            including investigations of exoplanets.
+          </p>
+          <span class="instrument-tag">Guidance and Imaging</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- DESIGN -->
+    <section class="section reveal">
+      <div class="section-heading">
+        <div class="section-kicker">Engineering</div>
+        <h2>Technology Built for Deep Space</h2>
+        <p>
+          Webb's design combines precision optics, thermal protection
+          and a carefully planned deployment sequence.
+        </p>
+      </div>
+
+      <div class="highlight-grid">
+        <article class="mission-highlight">
+          <h3>The Golden Primary Mirror</h3>
+          <p>
+            Webb's 6.5-metre primary mirror is made of 18 hexagonal
+            beryllium segments coated with gold. The segmented design
+            allows a large mirror to fit inside the launch vehicle and
+            unfold after launch.
+          </p>
+        </article>
+
+        <article class="mission-highlight">
+          <h3>The Five-Layer Sunshield</h3>
+          <p>
+            A tennis-court-sized, five-layer sunshield helps block heat
+            from the Sun, Earth and Moon. Keeping the telescope cold is
+            essential for detecting faint infrared signals from distant
+            astronomical objects.
+          </p>
+        </article>
+
+        <article class="mission-highlight">
+          <h3>Operating Near L2</h3>
+          <p>
+            Webb operates around the Sun–Earth second Lagrange point,
+            approximately 1.5 million kilometres from Earth. This location
+            helps the observatory maintain a stable observing environment
+            while keeping the Sun, Earth and Moon on the sunshield side.
+          </p>
+        </article>
+
+        <article class="mission-highlight">
+          <h3>A Carefully Unfolded Observatory</h3>
+          <p>
+            Webb launched in a folded configuration. Its mirror wings and
+            sunshield were deployed in space after launch, a complex sequence
+            that enabled the observatory to reach its operational form.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="section reveal">
+      <div class="section-heading">
+        <div class="section-kicker">Mission Timeline</div>
+        <h2>From Earth to the Infrared Universe</h2>
+        <p>
+          Major milestones in Webb's journey from launch to scientific
+          operations.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-date">25 DEC 2021</div>
+          <div class="timeline-copy">
+            <h3>Launch</h3>
+            <p>
+              Webb launched aboard an Ariane 5 rocket from Europe's
+              Spaceport in French Guiana.
+            </p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-date">JAN 2022</div>
+          <div class="timeline-copy">
+            <h3>Arrival at L2</h3>
+            <p>
+              The observatory reached its operating region near the
+              Sun–Earth second Lagrange point.
+            </p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-date">2022</div>
+          <div class="timeline-copy">
+            <h3>Commissioning and First Images</h3>
+            <p>
+              Engineers aligned the mirrors, prepared the instruments
+              and released Webb's first full-colour scientific images
+              and data in July 2022.
+            </p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-date">ONGOING SCIENCE</div>
+          <div class="timeline-copy">
+            <h3>Investigating the Universe</h3>
+            <p>
+              Webb observations support research into galaxies, star
+              formation, exoplanets, planetary systems and the evolution
+              of the universe.
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CLOSING -->
+    <section class="section reveal">
+      <div class="closing-panel">
+        <div class="section-kicker">Continue Exploring</div>
+        <h2>A Deeper Look at the Universe Is Only the Beginning.</h2>
+
+        <p>
+          Explore Webb's official mission information, scientific
+          instruments and observations through the NASA resources below.
+          Then return to COSMOS to discover more space missions.
+        </p>
+
+        <div class="resource-links">
+          <a
+            class="resource-link"
+            href="https://science.nasa.gov/mission/webb/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            NASA Webb Mission ↗
+          </a>
+
+          <a
+            class="resource-link"
+            href="https://science.nasa.gov/mission/webb/fact-sheet/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Mission Fact Sheet ↗
+          </a>
+
+          <a
+            class="resource-link"
+            href="https://science.nasa.gov/mission/webb/spacecraftoverview/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Spacecraft Overview ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bottom-navigation">
+      <p>
+        © <span id="currentYear">2026</span> COSMOS · Explore the Universe
+      </p>
+
+      <nav class="footer-links" aria-label="Footer navigation">
         <a href="index.html">COSMOS Home</a>
-      </div>
-    </section>
+        <a href="missions.html">All Space Missions</a>
+        <a href="#mission-facts">Back to Top ↑</a>
+      </nav>
+    </footer>
+
   </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var yearElement = document.getElementById("currentYear");
+
+      if (yearElement) {
+        yearElement.textContent = String(new Date().getFullYear());
+      }
+
+      /*
+       * The page content is visible by default.
+       * Scroll animations are enabled only when the browser supports
+       * IntersectionObserver, so a JavaScript issue won't hide the page.
+       */
+      if (!("IntersectionObserver" in window)) {
+        return;
+      }
+
+      var revealElements = document.querySelectorAll(".reveal");
+
+      if (!revealElements.length) {
+        return;
+      }
+
+      document.documentElement.classList.add("js-motion");
+
+      var observer = new IntersectionObserver(function (entries, activeObserver) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            activeObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.08
+      });
+
+      revealElements.forEach(function (element) {
+        observer.observe(element);
+      });
+    })();
+  </script>
 </body>
 </html>
