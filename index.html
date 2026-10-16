@@ -527,22 +527,37 @@
 <body>
   <div class="cosmos-shell">
 
-    <header class="topbar">
-      <a class="brand" href="index.html" aria-label="COSMOS Home">
-        <span class="brand-mark" aria-hidden="true">✳</span>
-        <span>COSMOS</span>
-      </a>
+  
+<header class="topbar">
+  <a class="brand" href="index.html" aria-label="COSMOS Home">
+    <span class="brand-mark" aria-hidden="true">✳</span>
+    <span>COSMOS</span>
+  </a>
 
-      <nav class="nav" aria-label="Main navigation">
-        <a href="index.html" aria-current="page">Home</a>
-        <a href="planets.html">Planets</a>
-        <a href="search.html">Search</a>
-        <a href="missions.html">Missions</a>
-        <a href="research.html">Research</a>
-        <a href="black-hole.html">Black Hole Observatory</a>
-        <a class="nav-cta" href="about.html">About COSMOS ↗</a>
-      </nav>
-    </header>
+  <button
+    class="menu-toggle"
+    id="menuToggle"
+    type="button"
+    aria-label="Open navigation menu"
+    aria-expanded="false"
+    aria-controls="cosmosNav"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <nav class="nav" id="cosmosNav" aria-label="Main navigation">
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="planets.html">Planets</a>
+    <a href="search.html">Search</a>
+    <a href="missions.html">Missions</a>
+    <a href="research.html">Research</a>
+    <a href="black-hole.html">Black Hole Observatory</a>
+    <a class="nav-cta" href="about.html">About COSMOS ↗</a>
+  </nav>
+</header>
+
 
     <main class="dashboard">
       <div class="eyebrow">
