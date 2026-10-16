@@ -1,7 +1,11 @@
+
 /* =========================================================
    COSMOS — FUTURISTIC SPACE DESIGN SYSTEM
-   Fixed: Hamburger menu visible on desktop, tablet and mobile
-   GitHub Pages Compatible
+   Complete stylesheet
+   Fixed: Mission card text, spacing, card heights and footer
+   Fixed: Responsive grid and universal hamburger navigation
+   Compatible with existing COSMOS HTML and app.js
+   GitHub Pages compatible
    ========================================================= */
 
 /* 01 — ROOT */
@@ -54,7 +58,7 @@ body {
   position: relative;
   min-height: 100vh;
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   color: var(--text);
   background:
     radial-gradient(ellipse at 10% 0%, rgba(65, 91, 190, .15), transparent 38%),
@@ -250,7 +254,7 @@ section {
 
 .section-heading {
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 24px;
   margin-bottom: 26px;
@@ -317,7 +321,9 @@ section {
   border: 1px solid rgba(139, 170, 255, .38);
   border-radius: 13px;
   color: var(--accent-cyan);
-  background: radial-gradient(circle at 30% 20%, rgba(139, 170, 255, .25), transparent 65%), #111b31;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(139, 170, 255, .25), transparent 65%),
+    #111b31;
   box-shadow: inset 0 0 18px rgba(139, 170, 255, .08), 0 0 24px rgba(139, 170, 255, .08);
 }
 
@@ -417,7 +423,7 @@ section {
   background: rgba(105, 224, 255, .07);
 }
 
-/* 08 — HAMBURGER: THREE LINES ON EVERY SCREEN */
+/* 08 — HAMBURGER MENU */
 .topbar > .menu-toggle,
 .topbar > .nav-toggle,
 .topbar > #menuToggle,
@@ -485,7 +491,6 @@ section {
   transition: transform var(--transition), opacity var(--transition);
 }
 
-/* Animate the three lines into an X */
 .topbar > .menu-toggle[aria-expanded="true"] span:first-child,
 .topbar > .nav-toggle[aria-expanded="true"] span:first-child,
 .topbar > #menuToggle[aria-expanded="true"] span:first-child,
@@ -843,6 +848,7 @@ section {
   flex: 1;
   flex-direction: column;
   align-items: flex-start;
+  min-width: 0;
   padding: 22px;
 }
 
@@ -956,36 +962,117 @@ section {
   box-shadow: 0 0 22px rgba(105, 224, 255, .06);
 }
 
-/* 15 — MISSIONS */
+/* 15 — MISSIONS PAGE */
 .missions-page {
+  width: 100%;
+  min-width: 0;
   padding-bottom: 70px;
 }
 
 .missions-hero {
+  position: relative;
   margin-block: 32px;
   padding: clamp(28px, 5vw, 56px);
+  overflow: hidden;
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  background: radial-gradient(circle at 90% 10%, rgba(103, 137, 255, .14), transparent 45%), var(--panel);
+  background:
+    radial-gradient(circle at 90% 10%, rgba(103, 137, 255, .14), transparent 45%),
+    var(--panel);
+}
+
+.missions-eyebrow {
+  display: inline-block;
+  margin-bottom: 15px;
+  color: var(--accent-cyan);
+  font-size: .76rem;
+  font-weight: 750;
+  letter-spacing: .15em;
+  text-transform: uppercase;
 }
 
 .missions-hero h1 {
+  max-width: 900px;
   margin-bottom: 16px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
 }
 
 .missions-hero p {
   max-width: 760px;
+  margin-bottom: 0;
+  line-height: 1.9;
+}
+
+/* Mission statistics */
+.missions-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 16px;
+  margin-block: 28px;
+}
+
+.missions-stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  min-height: 105px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(105, 224, 255, .07), transparent 55%),
+    rgba(255, 255, 255, .025);
+}
+
+.missions-stat strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 2vw, 1.65rem);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.missions-stat span {
+  color: var(--muted);
+  font-size: .85rem;
+  line-height: 1.6;
+}
+
+/* Mission search and filters */
+.missions-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  margin-top: 32px;
 }
 
 .missions-search,
 #missionSearch {
+  display: block;
   width: 100%;
-  min-height: 48px;
-  padding: 12px 16px;
+  min-width: 0;
+  min-height: 50px;
+  margin: 0;
+  padding: 13px 16px;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 13px;
   color: var(--text);
   background: rgba(16, 22, 38, .92);
+  font-size: .92rem;
+  line-height: 1.5;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .02);
+}
+
+.missions-search::placeholder,
+#missionSearch::placeholder {
+  color: #8795ac;
+  opacity: 1;
 }
 
 .missions-search:focus,
@@ -1000,19 +1087,28 @@ section {
 .filter-list {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 10px;
-  margin-block: 22px;
+  margin-block: 18px 12px;
 }
 
 .missions-filter,
 .mission-filter,
 .filter-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 39px;
+  max-width: 100%;
   padding: 9px 15px;
   border: 1px solid var(--border);
   border-radius: 999px;
   color: var(--muted);
   background: rgba(255, 255, 255, .025);
-  font-size: .83rem;
+  font-size: .82rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
   cursor: pointer;
   transition: color var(--transition), background var(--transition), border-color var(--transition);
 }
@@ -1027,28 +1123,15 @@ section {
   background: rgba(139, 170, 255, .12);
 }
 
-.missions-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-block: 28px;
-}
-
-.mission-stat,
-.stat-card {
-  padding: 20px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, .025);
-}
-
-.mission-stat strong,
-.stat-card strong {
-  display: block;
-  margin-bottom: 4px;
-  color: var(--text);
-  font-family: var(--font-heading);
-  font-size: 1.65rem;
+.missions-results {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: .85rem;
 }
 
 #missionCount {
@@ -1056,8 +1139,287 @@ section {
   font-weight: 700;
 }
 
-.missions-grid {
-  margin-top: 28px;
+/* Mission grid: explicit, isolated layout */
+.missions-page .missions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 22px;
+  width: 100%;
+  min-width: 0;
+  margin-top: 24px;
+}
+
+/* Mission card base */
+.missions-page .mission-card {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(105, 150, 255, .09), transparent 52%),
+    linear-gradient(145deg, rgba(19, 28, 47, .96), rgba(8, 13, 26, .98));
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.missions-page .mission-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .28), 0 0 28px rgba(105, 224, 255, .07);
+}
+
+/* Decorative artwork area */
+.missions-page .mission-card-art {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: flex-start;
+  justify-content: flex-end;
+  width: 100%;
+  min-width: 0;
+  min-height: 155px;
+  padding: 16px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(168, 190, 255, .12);
+  background:
+    radial-gradient(ellipse at 25% 25%, rgba(105, 224, 255, .18), transparent 42%),
+    radial-gradient(ellipse at 80% 75%, rgba(139, 92, 246, .18), transparent 45%),
+    linear-gradient(135deg, #111d36, #0a1021 70%);
+}
+
+.missions-page .mission-card-art::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  opacity: .6;
+  background-image:
+    radial-gradient(1px 1px at 12% 22%, #e5edff 50%, transparent 100%),
+    radial-gradient(2px 2px at 72% 31%, #b5d9ff 50%, transparent 100%),
+    radial-gradient(1px 1px at 38% 78%, #e5edff 50%, transparent 100%),
+    radial-gradient(1px 1px at 86% 84%, #b5d9ff 50%, transparent 100%);
+  background-size: 180px 130px, 230px 170px, 160px 140px, 210px 160px;
+}
+
+.missions-page .mission-card-art::after {
+  position: absolute;
+  right: -35px;
+  bottom: -75px;
+  width: 190px;
+  height: 190px;
+  border: 1px solid rgba(105, 224, 255, .16);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  box-shadow:
+    0 0 0 18px rgba(105, 224, 255, .025),
+    0 0 0 38px rgba(105, 224, 255, .02);
+}
+
+.missions-page .mission-art-number {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 30px;
+  padding: 5px 9px;
+  border: 1px solid rgba(168, 190, 255, .22);
+  border-radius: 9px;
+  color: #dbe8ff;
+  background: rgba(5, 10, 24, .7);
+  font-family: var(--font-heading);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+/* Mission content: prevents overlapping and clipping */
+.missions-page .mission-card-content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  margin: 0;
+  padding: 22px;
+}
+
+.missions-page .mission-category {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0 0 13px;
+  padding: 5px 10px;
+  border: 1px solid rgba(105, 224, 255, .19);
+  border-radius: 999px;
+  color: var(--accent-cyan);
+  background: rgba(105, 224, 255, .055);
+  font-size: .7rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: .035em;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.missions-page .mission-card-content h2 {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 12px;
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-size: clamp(1.12rem, 1.4vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.38;
+  letter-spacing: -.025em;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  hyphens: auto;
+}
+
+.missions-page .mission-card-content p {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.8;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  hyphens: auto;
+}
+
+/* Footer stays at the bottom of each card */
+.missions-page .mission-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 12px;
+  width: 100%;
+  min-width: 0;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(150, 175, 255, .16);
+}
+
+.missions-page .mission-year {
+  display: block;
+  flex: 1 1 95px;
+  min-width: 0;
+  margin: 0;
+  color: var(--muted-light);
+  font-size: .78rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.missions-page .mission-details-link {
+  display: inline-flex;
+  flex: 0 1 auto;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  max-width: 100%;
+  padding: 4px 0;
+  color: var(--accent);
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1.6;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  transition: color var(--transition), transform var(--transition);
+}
+
+.missions-page .mission-details-link:hover {
+  transform: translateX(2px);
+  color: var(--accent-cyan);
+}
+
+/* Search and filter states */
+.missions-page .mission-card[hidden],
+.missions-page .missions-empty[hidden] {
+  display: none !important;
+}
+
+.missions-page .missions-empty {
+  margin-top: 24px;
+  padding: 32px 22px;
+  border: 1px dashed var(--border-hover);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  background: rgba(255, 255, 255, .02);
+}
+
+.missions-page .missions-empty h2 {
+  margin-bottom: 10px;
+  font-size: 1.35rem;
+}
+
+.missions-page .missions-empty p {
+  margin-bottom: 0;
+}
+
+.missions-note {
+  margin-top: 34px;
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-cyan);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  color: var(--muted);
+  background: rgba(105, 224, 255, .035);
+  font-size: .88rem;
+  line-height: 1.85;
+}
+
+.missions-note strong {
+  color: var(--text);
+}
+
+.missions-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.missions-bottom a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 9px 13px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--muted-light);
+  background: rgba(255, 255, 255, .025);
+  font-size: .82rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.missions-bottom a:hover {
+  border-color: var(--border-hover);
+  color: var(--accent-cyan);
+  background: rgba(105, 224, 255, .06);
 }
 
 /* 16 — PLANET AND DETAIL PAGES */
@@ -1377,7 +1739,7 @@ select option {
 .gap-2 { gap: 16px; }
 .gap-3 { gap: 24px; }
 
-/* 23 — TABLET */
+/* 23 — TABLET HEADER */
 @media (max-width: 1000px) and (min-width: 761px) {
   .topbar {
     gap: 12px;
@@ -1392,28 +1754,25 @@ select option {
     width: 35px;
     height: 35px;
   }
-
-  .topbar > .menu-toggle,
-  .topbar > .nav-toggle,
-  .topbar > #menuToggle,
-  .topbar > #navToggle {
-    display: flex !important;
-  }
 }
 
-/* 24 — RESPONSIVE GRID TABLET */
+/* 24 — TABLET GRIDS */
 @media (max-width: 1000px) {
   .dashboard-grid,
   .content-grid,
   .card-grid,
   .research-grid,
   .planet-grid,
-  .missions-grid,
   .mission-grid,
   .info-grid,
   .feature-grid,
   .stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .missions-page .missions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
   }
 
   .hero {
@@ -1554,7 +1913,6 @@ select option {
   .card-grid,
   .research-grid,
   .planet-grid,
-  .missions-grid,
   .mission-grid,
   .info-grid,
   .feature-grid,
@@ -1638,6 +1996,57 @@ select option {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .missions-page .missions-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .missions-page .mission-card {
+    min-height: 0;
+  }
+
+  .missions-page .mission-card-art {
+    min-height: 135px;
+  }
+
+  .missions-page .mission-card-content {
+    padding: 20px;
+  }
+
+  .missions-page .mission-card-content h2 {
+    font-size: 1.22rem;
+  }
+
+  .missions-page .mission-card-content p {
+    font-size: .9rem;
+    line-height: 1.75;
+  }
+
+  .missions-page .mission-card-footer {
+    justify-content: flex-start;
+    gap: 10px 16px;
+  }
+
+  .missions-page .mission-year {
+    flex-basis: 100%;
+  }
+
+  .missions-page .mission-details-link {
+    flex-basis: auto;
+  }
+
+  .missions-note {
+    padding: 17px;
+  }
+
+  .missions-bottom {
+    gap: 9px;
+  }
+
+  .missions-bottom a {
+    font-size: .78rem;
+  }
+
   .planet-facts,
   .facts-grid,
   .specifications-grid {
@@ -1667,7 +2076,7 @@ select option {
 }
 
 /* 27 — VERY SMALL SCREENS */
-@media (max-width: 360px) {
+@media (max-width: 380px) {
   .cosmos-shell,
   .container,
   .page-container,
@@ -1685,11 +2094,14 @@ select option {
   .card-grid,
   .research-grid,
   .planet-grid,
-  .missions-grid,
   .mission-grid,
   .info-grid,
   .feature-grid,
   .stats-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .missions-page .missions-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -1711,6 +2123,19 @@ select option {
   .button-group > a,
   .button-group > button {
     width: 100%;
+  }
+
+  .missions-page .mission-card-content {
+    padding: 17px;
+  }
+
+  .missions-page .mission-card-content h2 {
+    font-size: 1.13rem;
+  }
+
+  .missions-page .mission-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .planet-facts,
