@@ -9,6 +9,9 @@
   <title>New Horizons Mission | COSMOS</title>
   <meta name="description" content="Explore NASA's New Horizons mission to Pluto and the Kuiper Belt through discoveries, mission facts and its journey into the outer Solar System.">
 
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,11 +23,41 @@
       padding-bottom: 60px;
     }
 
+    /* Back navigation */
+    .nh-back-wrap {
+      margin: 24px 0 0;
+    }
+
+    .nh-back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 11px 17px;
+      border: 1px solid rgba(105, 224, 255, .25);
+      border-radius: 12px;
+      color: #c8dcff;
+      background: rgba(105, 224, 255, .055);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 600;
+      transition: background .25s ease, border-color .25s ease,
+                  transform .25s ease, color .25s ease;
+    }
+
+    .nh-back-button:hover {
+      color: #69e0ff;
+      border-color: rgba(105, 224, 255, .65);
+      background: rgba(105, 224, 255, .11);
+      transform: translateX(-3px);
+    }
+
+    /* Hero */
     .nh-hero {
       position: relative;
       isolation: isolate;
       overflow: hidden;
-      margin-top: 35px;
+      margin-top: 22px;
       padding: clamp(28px, 6vw, 68px);
       border: 1px solid var(--border);
       border-radius: var(--radius-xl);
@@ -97,6 +130,83 @@
       gap: 12px;
     }
 
+    /* Decorative Pluto illustration */
+    .nh-visual {
+      position: relative;
+      width: min(100%, 530px);
+      height: 260px;
+      margin: 35px auto 0;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .nh-visual-orbit {
+      position: absolute;
+      width: 250px;
+      height: 125px;
+      border: 1px solid rgba(105, 224, 255, .35);
+      border-radius: 50%;
+      transform: rotate(-28deg);
+      animation: nh-orbit 9s ease-in-out infinite alternate;
+    }
+
+    .nh-visual-orbit.orbit-two {
+      width: 330px;
+      height: 175px;
+      border-color: rgba(164, 139, 255, .3);
+      transform: rotate(32deg);
+      animation-delay: -3s;
+    }
+
+    .nh-pluto {
+      position: relative;
+      width: 115px;
+      height: 115px;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at 32% 28%, rgba(255, 235, 215, .9) 0 8%, transparent 24%),
+        radial-gradient(ellipse at 68% 65%, rgba(103, 74, 94, .8), transparent 36%),
+        radial-gradient(ellipse at 28% 72%, rgba(197, 151, 135, .8), transparent 30%),
+        linear-gradient(135deg, #ead4c3, #a88c99 48%, #554b68);
+      box-shadow:
+        inset -16px -10px 24px rgba(7, 10, 25, .6),
+        0 0 40px rgba(155, 157, 255, .24);
+      z-index: 1;
+    }
+
+    .nh-probe {
+      position: absolute;
+      top: 18%;
+      right: 15%;
+      padding: 8px 11px;
+      border: 1px solid rgba(105, 224, 255, .4);
+      border-radius: 9px;
+      color: #9eeaff;
+      background: rgba(8, 14, 30, .88);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      box-shadow: 0 0 22px rgba(105, 224, 255, .1);
+    }
+
+    .nh-visual-label {
+      position: absolute;
+      bottom: 2%;
+      color: #9eb6e3;
+      font-size: .68rem;
+      letter-spacing: .3em;
+    }
+
+    @keyframes nh-orbit {
+      from { opacity: .45; }
+      to {
+        opacity: 1;
+        filter: drop-shadow(0 0 8px rgba(105, 224, 255, .25));
+      }
+    }
+
+    /* Mission facts */
     .nh-facts {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -130,8 +240,10 @@
       overflow-wrap: anywhere;
     }
 
+    /* Sections */
     .nh-section {
       margin-top: 60px;
+      scroll-margin-top: 100px;
     }
 
     .nh-section-heading {
@@ -215,6 +327,7 @@
       font-size: .87rem;
     }
 
+    /* Timeline */
     .nh-timeline {
       position: relative;
       display: grid;
@@ -272,6 +385,7 @@
       line-height: 1.85;
     }
 
+    /* Discoveries */
     .nh-discoveries {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -333,6 +447,7 @@
       line-height: 1.9;
     }
 
+    /* Page navigation */
     .nh-navigation {
       display: flex;
       flex-wrap: wrap;
@@ -352,6 +467,8 @@
       color: var(--muted-light);
       background: rgba(255, 255, 255, .025);
       font-size: .86rem;
+      text-decoration: none;
+      transition: color .2s ease, border-color .2s ease;
     }
 
     .nh-navigation a:hover {
@@ -399,11 +516,44 @@
       .nh-navigation a {
         justify-content: center;
       }
+
+      .nh-visual {
+        height: 225px;
+      }
+
+      .nh-visual-orbit {
+        width: 210px;
+        height: 110px;
+      }
+
+      .nh-visual-orbit.orbit-two {
+        width: 270px;
+        height: 150px;
+      }
+
+      .nh-pluto {
+        width: 95px;
+        height: 95px;
+      }
+
+      .nh-probe {
+        right: 3%;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .nh-discovery {
+      .nh-discovery,
+      .nh-back-button {
         transition: none;
+      }
+
+      .nh-discovery:hover,
+      .nh-back-button:hover {
+        transform: none;
+      }
+
+      .nh-visual-orbit {
+        animation: none;
       }
     }
   </style>
@@ -411,15 +561,22 @@
 
 <body>
 
+  <!-- HEADER -->
   <header class="topbar">
     <a class="brand" href="index.html" aria-label="COSMOS Home">
-      <span class="brand-mark" aria-hidden="true">C</span>
+      <img
+        src="favicon.png"
+        alt="COSMOS Logo"
+        class="brand-mark"
+        width="38"
+        height="38"
+      >
       <span>COSMOS</span>
     </a>
 
     <nav class="nav-menu" id="navMenu" aria-label="Main navigation">
       <a href="index.html">Home</a>
-      <a href="missions.html" class="active">Missions</a>
+      <a href="missions.html" class="active" aria-current="page">Missions</a>
       <a href="research.html">Research</a>
       <a href="jupiter.html">Jupiter</a>
       <a href="saturn.html">Saturn</a>
@@ -440,6 +597,14 @@
   </header>
 
   <main class="nh-page cosmos-shell">
+
+    <!-- BACK TO SPACE MISSIONS -->
+    <div class="nh-back-wrap">
+      <a class="nh-back-button" href="missions.html">
+        <span aria-hidden="true">&larr;</span>
+        <span>Back to Space Missions</span>
+      </a>
+    </div>
 
     <!-- HERO -->
     <section class="nh-hero">
@@ -463,6 +628,14 @@
         <a class="button button-secondary" href="#mission-timeline">
           Mission Timeline
         </a>
+      </div>
+
+      <div class="nh-visual" role="img" aria-label="Stylized illustration of Pluto and the New Horizons spacecraft">
+        <div class="nh-visual-orbit orbit-one"></div>
+        <div class="nh-visual-orbit orbit-two"></div>
+        <div class="nh-pluto"></div>
+        <div class="nh-probe">NEW HORIZONS</div>
+        <span class="nh-visual-label">PLUTO SYSTEM</span>
       </div>
     </section>
 
@@ -791,9 +964,9 @@
       </article>
     </section>
 
-    <!-- NAVIGATION -->
+    <!-- BOTTOM NAVIGATION -->
     <nav class="nh-navigation" aria-label="Mission navigation">
-      <a href="missions.html">&larr; All Space Missions</a>
+      <a href="missions.html">&larr; Back to Space Missions</a>
       <a href="voyager.html">Explore Voyager &rarr;</a>
       <a href="research.html">Explore Research &rarr;</a>
       <a href="index.html">COSMOS Home</a>
@@ -801,8 +974,10 @@
 
   </main>
 
+  <!-- FOOTER -->
   <footer class="footer cosmos-shell">
     <p>&copy; <span data-current-year id="currentYear">2026</span> COSMOS. Explore beyond the known.</p>
+
     <div class="footer-links">
       <a href="index.html">Home</a>
       <a href="missions.html">Missions</a>
