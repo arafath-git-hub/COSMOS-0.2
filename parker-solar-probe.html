@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b16">
+
+  <title>Parker Solar Probe Mission | COSMOS</title>
+  <meta name="description" content="Explore NASA's Parker Solar Probe mission, its journey through the Sun's corona, scientific discoveries, instruments and mission timeline.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #080b16;
+      --panel: #101626;
+      --panel-light: #151d30;
+      --text: #f4f6ff;
+      --muted: #9aa6c2;
+      --accent: #ff9f43;
+      --accent-light: #ffd18b;
+      --border: rgba(255, 177, 91, 0.19);
+      --glow: rgba(255, 139, 38, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 25px;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at 85% 5%, rgba(255, 115, 25, 0.12), transparent 32%),
+        radial-gradient(ellipse at 0% 45%, rgba(85, 68, 160, 0.1), transparent 36%),
+        var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.42;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, white 99%, transparent),
+        radial-gradient(1px 1px at 30% 70%, white 99%, transparent),
+        radial-gradient(2px 2px at 60% 30%, white 99%, transparent),
+        radial-gradient(1px 1px at 80% 80%, white 99%, transparent),
+        radial-gradient(1px 1px at 90% 15%, white 99%, transparent),
+        radial-gradient(1px 1px at 45% 45%, white 99%, transparent),
+        radial-gradient(2px 2px at 20% 90%, white 99%, transparent);
+      background-size: 350px 350px;
+      animation: starDrift 65s linear infinite;
+    }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .back-row {
+      padding-top: 30px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 18px;
+      border: 1px solid rgba(255, 177, 91, 0.28);
+      border-radius: 12px;
+      color: var(--text);
+      background: rgba(16, 22, 38, 0.8);
+      backdrop-filter: blur(12px);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    .back-button:hover {
+      border-color: var(--accent);
+      background: rgba(255, 159, 67, 0.12);
+      transform: translateX(-4px);
+      box-shadow: 0 0 24px var(--glow);
+    }
+
+    .back-arrow {
+      color: var(--accent-light);
+      font-size: 1.15rem;
+    }
+
+    .hero {
+      min-height: 590px;
+      padding: 55px 0 75px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--accent-light);
+      background: rgba(255, 159, 67, 0.06);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    h1, h2, h3 {
+      font-family: "Space Grotesk", sans-serif;
+      line-height: 1.15;
+    }
+
+    h1 {
+      margin-top: 24px;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      letter-spacing: -3px;
+      font-weight: 700;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--accent-light);
+      text-shadow: 0 0 35px rgba(255, 159, 67, 0.17);
+    }
+
+    .hero-description {
+      max-width: 590px;
+      margin-top: 23px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 47px;
+      padding: 12px 20px;
+      border-radius: 11px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+
+    .button-primary {
+      color: #1b1006;
+      background: linear-gradient(135deg, #ffd18b, #ff9f43);
+      box-shadow: 0 8px 30px rgba(255, 159, 67, 0.15);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(255, 159, 67, 0.28);
+    }
+
+    .button-secondary {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .button-secondary:hover {
+      border-color: var(--accent);
+      background: rgba(255, 159, 67, 0.08);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 390px;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .sun-halo {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(255, 125, 24, 0.12);
+      filter: blur(48px);
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+
+    .sun {
+      position: relative;
+      width: clamp(175px, 23vw, 255px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%, #fff5b0 0%, #ffd36b 12%, #ff9b36 35%, #f04d17 68%, #8b200f 100%);
+      box-shadow:
+        0 0 35px rgba(255, 145, 40, 0.75),
+        0 0 85px rgba(255, 97, 24, 0.42),
+        0 0 145px rgba(255, 86, 20, 0.17);
+      animation: sunPulse 5s ease-in-out infinite;
+    }
+
+    .sun::before {
+      content: "";
+      position: absolute;
+      inset: -22px;
+      border: 1px solid rgba(255, 187, 92, 0.22);
+      border-radius: 50%;
+      animation: orbitRotate 24s linear infinite;
+    }
+
+    .sun::after {
+      content: "";
+      position: absolute;
+      inset: -44px;
+      border: 1px dashed rgba(255, 177, 91, 0.23);
+      border-radius: 50%;
+      animation: orbitRotate 36s linear infinite reverse;
+    }
+
+    .orbit {
+      position: absolute;
+      width: 370px;
+      height: 175px;
+      border: 1px solid rgba(255, 192, 119, 0.32);
+      border-radius: 50%;
+      transform: rotate(-30deg);
+    }
+
+    .probe {
+      position: absolute;
+      z-index: 3;
+      top: 23%;
+      right: 11%;
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f8e8b5, #b6c7e5);
+      border: 3px solid #fff2d0;
+      box-shadow: 0 0 25px rgba(255, 203, 122, 0.65);
+      animation: probeFloat 5s ease-in-out infinite;
+    }
+
+    .probe::before,
+    .probe::after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 12px;
+      background: #4278b7;
+      border: 1px solid #8ebdf5;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .probe::before {
+      right: 100%;
+      margin-right: 2px;
+    }
+
+    .probe::after {
+      left: 100%;
+      margin-left: 2px;
+    }
+
+    .probe-core {
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: #ffe4a0;
+      border: 2px solid #9e7944;
+    }
+
+    .visual-label {
+      position: absolute;
+      left: 0;
+      bottom: 12px;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(8, 11, 22, 0.78);
+      backdrop-filter: blur(12px);
+    }
+
+    .visual-label strong {
+      display: block;
+      color: var(--accent-light);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.05rem;
+    }
+
+    .visual-label span {
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .section {
+      padding: 65px 0;
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 30px;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2.4px;
+    }
+
+    .section-heading h2 {
+      margin-top: 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -1px;
+    }
+
+    .section-heading p {
+      margin-top: 13px;
+      color: var(--muted);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .stat-card,
+    .info-card,
+    .instrument-card,
+    .timeline-card {
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: linear-gradient(145deg, rgba(21, 29, 48, 0.88), rgba(12, 17, 31, 0.92));
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .stat-card {
+      padding: 23px 20px;
+    }
+
+    .stat-card:hover,
+    .info-card:hover,
+    .instrument-card:hover,
+    .timeline-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 177, 91, 0.5);
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .stat-value {
+      margin-top: 8px;
+      color: var(--accent-light);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.4rem, 2.7vw, 2rem);
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .stat-note {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .info-card {
+      padding: 28px;
+    }
+
+    .card-index {
+      display: inline-block;
+      color: var(--accent);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    .info-card h3,
+    .instrument-card h3,
+    .timeline-card h3 {
+      margin-top: 12px;
+      font-size: 1.25rem;
+    }
+
+    .info-card p,
+    .instrument-card p,
+    .timeline-card p {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .fact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+      list-style: none;
+    }
+
+    .fact-list li {
+      display: flex;
+      gap: 12px;
+      color: #dce3f5;
+      font-size: 0.91rem;
+    }
+
+    .fact-list li::before {
+      content: "";
+      flex: 0 0 7px;
+      width: 7px;
+      height: 7px;
+      margin-top: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 9px var(--accent);
+    }
+
+    .highlight {
+      margin-top: 25px;
+      padding: 21px 23px;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      background: rgba(255, 159, 67, 0.06);
+      color: #e4e9f8;
+    }
+
+    .highlight strong {
+      color: var(--accent-light);
+    }
+
+    .instruments-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 17px;
+    }
+
+    .instrument-card {
+      padding: 25px;
+    }
+
+    .instrument-number {
+      color: var(--accent);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 17px;
+    }
+
+    .timeline-card {
+      position: relative;
+      padding: 24px;
+    }
+
+    .timeline-date {
+      display: inline-block;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      color: var(--accent-light);
+      background: rgba(255, 159, 67, 0.06);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .discovery-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .discovery {
+      display: grid;
+      grid-template-columns: 45px 1fr;
+      gap: 17px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(16, 22, 38, 0.65);
+    }
+
+    .discovery-number {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      color: var(--accent-light);
+      background: rgba(255, 159, 67, 0.11);
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+    }
+
+    .discovery h3 {
+      font-size: 1.05rem;
+    }
+
+    .discovery p {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .mission-status {
+      padding: 35px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(255, 133, 38, 0.13), transparent 50%),
+        var(--panel);
+    }
+
+    .mission-status h2 {
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+    }
+
+    .mission-status p {
+      max-width: 800px;
+      margin-top: 15px;
+      color: var(--muted);
+    }
+
+    .status-tag {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 177, 91, 0.3);
+      border-radius: 8px;
+      color: var(--accent-light);
+      background: rgba(255, 159, 67, 0.08);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .sources {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .source-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 13px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      color: var(--accent-light);
+      font-size: 0.85rem;
+      transition: 0.2s ease;
+    }
+
+    .source-link:hover {
+      background: rgba(255, 159, 67, 0.1);
+      border-color: var(--accent);
+    }
+
+    footer {
+      margin-top: 35px;
+      padding: 27px 0 35px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.82rem;
+    }
+
+    footer a {
+      color: var(--accent-light);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(0.92); opacity: 0.65; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
+
+    @keyframes sunPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.035); }
+    }
+
+    @keyframes orbitRotate {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes probeFloat {
+      0%, 100% { transform: translate(0, 0) rotate(-10deg); }
+      50% { transform: translate(-10px, 9px) rotate(8deg); }
+    }
+
+    @keyframes starDrift {
+      from { transform: translateY(0); }
+      to { transform: translateY(-350px); }
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 45px;
+        gap: 15px;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        min-height: 360px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .back-row {
+        padding-top: 20px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 48px 0 35px;
+      }
+
+      h1 {
+        font-size: clamp(2.65rem, 12vw, 4rem);
+        letter-spacing: -1.8px;
+      }
+
+      .hero-description {
+        font-size: 0.96rem;
+      }
+
+      .hero-visual {
+        min-height: 315px;
+      }
+
+      .sun {
+        width: 175px;
+      }
+
+      .orbit {
+        width: 290px;
+        height: 135px;
+      }
+
+      .probe {
+        right: 7%;
+        width: 43px;
+        height: 43px;
+      }
+
+      .section {
+        padding: 45px 0;
+      }
+
+      .stats-grid,
+      .instruments-grid,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-card,
+      .info-card,
+      .instrument-card,
+      .timeline-card {
+        padding: 21px;
+      }
+
+      .mission-status {
+        padding: 24px;
+      }
+
+      .visual-label {
+        left: 0;
+        bottom: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="back-row">
+      <a class="back-button" href="missions.html">
+        <span class="back-arrow" aria-hidden="true">←</span>
+        Back to Space Missions
+      </a>
+    </div>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            NASA Solar Exploration
+          </div>
+
+          <h1>
+            Parker
+            <span>Solar Probe</span>
+          </h1>
+
+          <p class="hero-description">
+            Humanity's closest journey to a star. NASA's Parker Solar Probe
+            travels through the Sun's outer atmosphere to investigate the
+            mysteries of the solar corona, solar wind and space weather.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#mission-overview">
+              Explore Mission <span aria-hidden="true">↓</span>
+            </a>
+            <a class="button button-secondary"
+               href="https://science.nasa.gov/mission/parker-solar-probe/"
+               target="_blank" rel="noopener noreferrer">
+              NASA Mission Page ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Stylized illustration of the Sun and a spacecraft">
+          <div class="sun-halo"></div>
+          <div class="orbit"></div>
+          <div class="sun"></div>
+          <div class="probe" title="Parker Solar Probe">
+            <div class="probe-core"></div>
+          </div>
+
+          <div class="visual-label">
+            <strong>Solar Corona</strong>
+            <span>Exploring the Sun's outer atmosphere</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="mission-overview">
+        <div class="section-heading">
+          <span class="section-kicker">Mission Snapshot</span>
+          <h2>A Mission That Touches the Sun</h2>
+          <p>
+            Launched in 2018, Parker Solar Probe was designed to study the
+            environment around the Sun from closer than any previous spacecraft.
+          </p>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <div class="stat-label">Launch Date</div>
+            <div class="stat-value">Aug 12, 2018</div>
+            <div class="stat-note">Launched from Florida, USA</div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-label">Closest Solar Approach</div>
+            <div class="stat-value">~6.2 million km</div>
+            <div class="stat-note">From the Sun's visible surface</div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-label">Maximum Speed</div>
+            <div class="stat-value">~692,000 km/h</div>
+            <div class="stat-note">Approximate record speed</div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-label">Mission Agency</div>
+            <div class="stat-value">NASA</div>
+            <div class="stat-note">With Johns Hopkins APL</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <span class="section-kicker">Mission Overview</span>
+          <h2>Why Study the Sun?</h2>
+          <p>
+            The Sun powers our solar system, but many processes in its outer
+            atmosphere remain difficult to explain.
+          </p>
+        </div>
+
+        <div class="two-column">
+          <article class="info-card">
+            <span class="card-index">01 / OBJECTIVES</span>
+            <h3>The Science Behind the Mission</h3>
+            <p>
+              Parker Solar Probe investigates how the solar corona becomes
+              extremely hot and how the solar wind accelerates away from the Sun.
+            </p>
+
+            <ul class="fact-list">
+              <li>Study the structure and dynamics of the solar magnetic field.</li>
+              <li>Investigate how energy heats the corona.</li>
+              <li>Trace the origins and acceleration of the solar wind.</li>
+              <li>Study energetic particles released by solar activity.</li>
+            </ul>
+          </article>
+
+          <article class="info-card">
+            <span class="card-index">02 / ENGINEERING</span>
+            <h3>Built to Survive Extreme Heat</h3>
+            <p>
+              The spacecraft uses a specially designed thermal protection system
+              to shield its instruments while it passes through the Sun's
+              extraordinarily hot outer atmosphere.
+            </p>
+
+            <ul class="fact-list">
+              <li>A carbon-composite heat shield protects the spacecraft.</li>
+              <li>The shield's front surface can reach roughly 1,370°C.</li>
+              <li>Autonomous systems help maintain the correct orientation.</li>
+              <li>Solar panels provide electrical power during the mission.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="highlight">
+          <strong>Important distinction:</strong>
+          The solar corona has a very high temperature, but it is extremely
+          sparse. The spacecraft's heat shield protects it from the intense
+          sunlight and thermal environment during close approaches.
+        </div>
+      </section>
+
+      <section class="section reveal" id="instruments">
+        <div class="section-heading">
+          <span class="section-kicker">Scientific Instruments</span>
+          <h2>Inside the Mission</h2>
+          <p>
+            Four instrument suites measure particles, magnetic fields,
+            electric fields and the Sun's surrounding environment.
+          </p>
+        </div>
+
+        <div class="instruments-grid">
+          <article class="instrument-card">
+            <div class="instrument-number">01</div>
+            <h3>FIELDS</h3>
+            <p>
+              Measures electric and magnetic fields, radio waves and plasma
+              waves to investigate the electromagnetic environment near the Sun.
+            </p>
+          </article>
+
+          <article class="instrument-card">
+            <div class="instrument-number">02</div>
+            <h3>ISʘIS</h3>
+            <p>
+              Measures energetic electrons, protons and heavier ions associated
+              with solar activity and energetic-particle events.
+            </p>
+          </article>
+
+          <article class="instrument-card">
+            <div class="instrument-number">03</div>
+            <h3>WISPR</h3>
+            <p>
+              The Wide-field Imager for Solar Probe captures images of the
+              corona and inner heliosphere, revealing structures in the solar wind.
+            </p>
+          </article>
+
+          <article class="instrument-card">
+            <div class="instrument-number">04</div>
+            <h3>SWEAP</h3>
+            <p>
+              Measures properties of electrons, protons and helium ions in the
+              solar wind, including their speeds, densities and temperatures.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="timeline">
+        <div class="section-heading">
+          <span class="section-kicker">Mission Timeline</span>
+          <h2>A Journey Toward the Sun</h2>
+          <p>
+            Venus gravity assists gradually changed the spacecraft's orbit,
+            allowing it to approach the Sun more closely.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-card">
+            <span class="timeline-date">August 2018</span>
+            <h3>Launch</h3>
+            <p>
+              Parker Solar Probe launched aboard a Delta IV Heavy rocket,
+              beginning its journey to study the Sun.
+            </p>
+          </article>
+
+          <article class="timeline-card">
+            <span class="timeline-date">October 2018</span>
+            <h3>First Venus Flyby</h3>
+            <p>
+              The spacecraft used Venus's gravity to adjust its orbit and
+              begin moving closer to the Sun.
+            </p>
+          </article>
+
+          <article class="timeline-card">
+            <span class="timeline-date">December 2021</span>
+            <h3>First Corona Passage</h3>
+            <p>
+              NASA announced that Parker had flown through the Sun's corona,
+              sampling the solar atmosphere directly.
+            </p>
+          </article>
+
+          <article class="timeline-card">
+            <span class="timeline-date">December 2024</span>
+            <h3>Record-Breaking Approach</h3>
+            <p>
+              On December 24, Parker reached approximately 6.1 million
+              kilometres from the Sun's visible surface at a record-setting speed.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="discoveries">
+        <div class="section-heading">
+          <span class="section-kicker">Scientific Discoveries</span>
+          <h2>What Parker Is Teaching Us</h2>
+          <p>
+            Close-up measurements are revealing processes that cannot be
+            understood fully from distant observations alone.
+          </p>
+        </div>
+
+        <div class="discovery-list">
+          <article class="discovery">
+            <div class="discovery-number">01</div>
+            <div>
+              <h3>Direct Sampling of the Solar Corona</h3>
+              <p>
+                Parker became the first spacecraft to fly through the corona,
+                providing direct measurements of plasma and magnetic fields
+                in this extreme environment.
+              </p>
+            </div>
+          </article>
+
+          <article class="discovery">
+            <div class="discovery-number">02</div>
+            <div>
+              <h3>Magnetic Switchbacks</h3>
+              <p>
+                The spacecraft has studied sudden reversals in the direction
+                of the solar magnetic field, known as switchbacks, which may
+                help explain how energy moves through the solar wind.
+              </p>
+            </div>
+          </article>
+
+          <article class="discovery">
+            <div class="discovery-number">03</div>
+            <div>
+              <h3>Dust and the Inner Solar Environment</h3>
+              <p>
+                Measurements and images help scientists investigate dust,
+                solar-wind structures and other material close to the Sun.
+              </p>
+            </div>
+          </article>
+
+          <article class="discovery">
+            <div class="discovery-number">04</div>
+            <div>
+              <h3>Understanding Space Weather</h3>
+              <p>
+                Studying how the solar wind and energetic particles originate
+                can improve scientific understanding of solar storms that
+                affect spacecraft, communications and power systems near Earth.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="mission-status">
+        <div class="mission-status">
+          <span class="section-kicker">Mission Status</span>
+          <h2>Continuing to Explore the Solar Environment</h2>
+          <p>
+            Parker Solar Probe was designed for repeated close encounters
+            with the Sun. Its observations help researchers understand the
+            corona, solar wind and energetic processes throughout the inner
+            heliosphere. For the latest spacecraft status and mission updates,
+            consult NASA's official mission website.
+          </p>
+
+          <span class="status-tag">NASA Solar Science Mission</span>
+
+          <div class="sources">
+            <a class="source-link"
+               href="https://science.nasa.gov/mission/parker-solar-probe/"
+               target="_blank" rel="noopener noreferrer">
+              NASA Mission Overview ↗
+            </a>
+
+            <a class="source-link"
+               href="https://parkersolarprobe.jhuapl.edu/"
+               target="_blank" rel="noopener noreferrer">
+              Johns Hopkins APL ↗
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        COSMOS | Exploring the Universe
+      </p>
+      <p>
+        Scientific mission information:
+        <a href="https://science.nasa.gov/"
+           target="_blank" rel="noopener noreferrer">NASA Science</a>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const revealElements = document.querySelectorAll(".reveal");
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries, currentObserver) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              currentObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12
+        });
+
+        revealElements.forEach((element) => observer.observe(element));
+      } else {
+        revealElements.forEach((element) => {
+          element.classList.add("visible");
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
