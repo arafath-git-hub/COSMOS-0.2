@@ -10,11 +10,12 @@
     content="Explore astronomy, planetary science, black holes, galaxies, exoplanets, and space technology with COSMOS."
   >
 
-  <meta name="theme-color" content="#070b16">
-  <title>Research | COSMOS</title>
+  <meta name="theme-color" content="#080b16">
+  <title>Space Research | COSMOS</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
     rel="stylesheet"
@@ -23,99 +24,253 @@
   <link rel="stylesheet" href="styles.css">
 
   <style>
-    /* Research page layout */
+    /* ========================================
+       RESEARCH PAGE — COSMOS
+    ======================================== */
+
     .research-page {
-      width: min(1150px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 45px 0 75px;
-      color: #edf4ff;
+      width: min(1150px, 100%);
+      margin-inline: auto;
+      padding: 48px 0 70px;
+      animation: researchEnter 700ms ease both;
+    }
+
+    .research-page,
+    .research-page * {
+      box-sizing: border-box;
     }
 
     .research-hero {
       position: relative;
+      isolation: isolate;
       overflow: hidden;
-      padding: clamp(26px, 5vw, 55px);
-      margin-bottom: 35px;
-      border: 1px solid rgba(100, 150, 210, 0.24);
-      border-radius: 20px;
+
+      padding: clamp(28px, 5vw, 58px);
+      margin-bottom: 42px;
+
+      border: 1px solid rgba(125, 169, 235, 0.25);
+      border-radius: 24px;
+
       background:
         radial-gradient(
-          circle at 85% 20%,
-          rgba(91, 77, 214, 0.25),
-          transparent 35%
+          circle at 85% 18%,
+          rgba(89, 94, 218, 0.23),
+          transparent 38%
         ),
         radial-gradient(
-          circle at 10% 100%,
-          rgba(42, 196, 205, 0.10),
-          transparent 40%
+          circle at 8% 100%,
+          rgba(37, 209, 210, 0.12),
+          transparent 42%
         ),
-        linear-gradient(135deg, #101b30, #0a1323);
-      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.15);
+        linear-gradient(
+          135deg,
+          #111d32 0%,
+          #0d1427 55%,
+          #10152b 100%
+        );
+
+      box-shadow:
+        0 25px 75px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    }
+
+    .research-hero::before,
+    .research-hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
+      border-radius: 50%;
+    }
+
+    .research-hero::before {
+      width: 260px;
+      height: 260px;
+      right: -80px;
+      top: -135px;
+
+      border: 1px solid rgba(149, 185, 255, 0.22);
+
+      box-shadow:
+        0 0 0 25px rgba(149, 185, 255, 0.025),
+        0 0 0 55px rgba(149, 185, 255, 0.025);
+
+      animation: researchOrbit 18s linear infinite;
+    }
+
+    .research-hero::after {
+      width: 7px;
+      height: 7px;
+      top: 25%;
+      right: 19%;
+
+      background: #75f4ef;
+      box-shadow: 0 0 18px #45d9e0;
+
+      animation: researchPulse 3s ease-in-out infinite;
     }
 
     .research-eyebrow {
-      color: #55dcd7;
-      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      margin-bottom: 14px;
+
+      color: #69e8e2;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 2.8px;
       text-transform: uppercase;
     }
 
+    .research-eyebrow::before {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: #69e8e2;
+      box-shadow: 0 0 10px rgba(105, 232, 226, 0.6);
+    }
+
     .research-hero h1 {
-      margin: 12px 0;
+      max-width: 850px;
+      margin: 0 0 18px;
+
+      color: #f4f6ff;
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2.4rem, 6vw, 4.4rem);
-      line-height: 1.1;
-      letter-spacing: -1.5px;
+      font-size: clamp(43px, 7vw, 76px);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -2.8px;
+    }
+
+    .research-hero h1 span {
+      color: #8bdff0;
+      background: linear-gradient(90deg, #8bdff0, #b5c4ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .research-hero p {
       max-width: 720px;
       margin: 0;
-      color: #aab8ce;
-      line-height: 1.85;
-      font-size: 1rem;
+
+      color: #aebbd2;
+      font-size: 15px;
+      line-height: 1.9;
     }
 
+    /* Section heading */
+
     .research-section-heading {
-      margin: 34px 0 18px;
+      margin: 0 0 8px;
+
+      color: #f4f6ff;
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-size: clamp(25px, 3.5vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.8px;
     }
+
+    .research-section-description {
+      max-width: 700px;
+      margin: 0 0 26px;
+
+      color: #9aa6bd;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    /* Research cards grid */
 
     .research-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      gap: 19px;
     }
 
     .research-card {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
+
       min-width: 0;
-      min-height: 245px;
+      min-height: 270px;
       padding: 24px;
+
+      border: 1px solid rgba(130, 167, 225, 0.2);
+      border-radius: 18px;
+
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(92, 115, 190, 0.09),
+          transparent 48%
+        ),
+        linear-gradient(
+          150deg,
+          rgba(18, 29, 49, 0.98),
+          rgba(10, 17, 31, 0.98)
+        );
+
       color: inherit;
       text-decoration: none;
-      border: 1px solid rgba(100, 150, 210, 0.24);
-      border-radius: 16px;
-      background: linear-gradient(145deg, #101b2d, #0b1424);
+
       transition:
-        transform 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease;
+        transform 250ms ease,
+        border-color 250ms ease,
+        box-shadow 250ms ease,
+        background 250ms ease;
+    }
+
+    .research-card::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+
+      width: 150px;
+      height: 150px;
+      top: -95px;
+      right: -85px;
+
+      border: 1px solid rgba(116, 203, 244, 0.12);
+      border-radius: 50%;
+
+      transition:
+        transform 350ms ease,
+        border-color 350ms ease;
     }
 
     .research-card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(85, 220, 215, 0.75);
-      background: linear-gradient(145deg, #14243a, #0d192b);
-      box-shadow: 0 12px 35px rgba(36, 195, 202, 0.08);
+      transform: translateY(-6px);
+
+      border-color: rgba(94, 224, 226, 0.62);
+
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(61, 151, 187, 0.14),
+          transparent 50%
+        ),
+        linear-gradient(150deg, #14243b, #0d1729);
+
+      box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.22),
+        0 0 28px rgba(61, 207, 215, 0.055);
+    }
+
+    .research-card:hover::before {
+      transform: scale(1.25);
+      border-color: rgba(116, 203, 244, 0.28);
     }
 
     .research-card:focus-visible {
-      outline: 2px solid #65e4df;
+      outline: 2px solid #69e8e2;
       outline-offset: 4px;
     }
 
@@ -123,102 +278,245 @@
       display: grid;
       place-items: center;
       flex-shrink: 0;
-      width: 52px;
-      height: 52px;
-      margin-bottom: 18px;
-      border: 1px solid #2b5263;
-      border-radius: 12px;
-      background: rgba(85, 220, 215, 0.08);
-      font-size: 1.65rem;
+
+      width: 54px;
+      height: 54px;
+      margin-bottom: 21px;
+
+      border: 1px solid rgba(100, 199, 218, 0.3);
+      border-radius: 14px;
+
+      background: rgba(69, 177, 202, 0.09);
+
+      color: #8fe9f2;
+      font-size: 25px;
+
+      box-shadow: inset 0 0 18px rgba(80, 200, 224, 0.025);
+
+      transition:
+        transform 250ms ease,
+        box-shadow 250ms ease;
+    }
+
+    .research-card:hover .research-icon {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 0 22px rgba(80, 200, 224, 0.1);
     }
 
     .research-card h3 {
-      margin: 0 0 10px;
+      margin: 0 0 11px;
+
+      color: #f0f4ff;
       font-family: "Space Grotesk", sans-serif;
-      font-size: 1.12rem;
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.35px;
     }
 
     .research-card p {
-      margin: 0 0 20px;
-      color: #aab8ce;
-      font-size: 0.9rem;
-      line-height: 1.8;
+      margin: 0 0 22px;
+
+      color: #a3b1c9;
+      font-size: 13px;
+      line-height: 1.85;
     }
 
     .research-card-cta {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
       margin-top: auto;
-      color: #65e4df;
-      font-size: 0.88rem;
+      padding-top: 5px;
+
+      color: #70e6e2;
+      font-size: 12px;
       font-weight: 700;
+      letter-spacing: 0.2px;
+
+      transition: gap 250ms ease, color 250ms ease;
     }
 
+    .research-card:hover .research-card-cta {
+      gap: 13px;
+      color: #b2ffff;
+    }
+
+    /* Research note */
+
     .research-note {
-      margin-top: 35px;
-      padding: 23px;
-      border: 1px solid rgba(85, 220, 215, 0.13);
+      position: relative;
+      overflow: hidden;
+
+      margin-top: 36px;
+      padding: clamp(22px, 4vw, 30px);
+
+      border: 1px solid rgba(100, 199, 218, 0.17);
       border-left: 3px solid #55dcd7;
-      border-radius: 0 12px 12px 0;
-      background: rgba(85, 220, 215, 0.05);
+      border-radius: 0 15px 15px 0;
+
+      background:
+        linear-gradient(
+          100deg,
+          rgba(53, 174, 191, 0.075),
+          rgba(16, 24, 42, 0.35)
+        );
     }
 
     .research-note h2 {
-      margin-top: 0;
+      margin: 0 0 10px;
+
+      color: #f0f4ff;
       font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
     }
 
     .research-note p {
-      margin-bottom: 0;
+      max-width: 850px;
+      margin: 0;
+
       color: #aab8ce;
-      line-height: 1.8;
+      font-size: 14px;
+      line-height: 1.9;
     }
 
-    /* Research page footer */
+    /* Footer */
+
     .research-footer {
-      width: min(1150px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 24px 0 30px;
-      border-top: 1px solid rgba(100, 150, 210, 0.18);
-      color: #aab8ce;
-      font-size: 0.88rem;
+      width: 100%;
+      margin-top: 15px;
+      padding: 24px 0 8px;
+
+      border-top: 1px solid rgba(130, 167, 225, 0.15);
+
+      color: #7f8ca6;
+      font-size: 12px;
       text-align: center;
     }
 
-    /* Responsive research layout */
-    @media (max-width: 850px) {
-      .research-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    .research-footer p {
+      margin: 0;
+    }
+
+    /* Animations */
+
+    @keyframes researchEnter {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    @media (max-width: 540px) {
+    @keyframes researchOrbit {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes researchPulse {
+      0%, 100% {
+        opacity: 0.55;
+        box-shadow: 0 0 8px #45d9e0;
+      }
+
+      50% {
+        opacity: 1;
+        box-shadow: 0 0 20px #45d9e0;
+      }
+    }
+
+    /* Tablet */
+
+    @media (max-width: 900px) {
       .research-page {
-        width: calc(100% - 28px);
+        padding-top: 35px;
+      }
+
+      .research-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .research-card {
+        min-height: 250px;
+      }
+    }
+
+    /* Mobile */
+
+    @media (max-width: 600px) {
+      .research-page {
         padding-top: 25px;
+        padding-bottom: 45px;
+      }
+
+      .research-hero {
+        padding: 28px 22px;
+        margin-bottom: 32px;
+        border-radius: 17px;
+      }
+
+      .research-hero h1 {
+        font-size: clamp(38px, 11vw, 52px);
+        letter-spacing: -1.8px;
+      }
+
+      .research-hero p {
+        font-size: 13px;
+      }
+
+      .research-section-heading {
+        font-size: 25px;
+      }
+
+      .research-section-description {
+        font-size: 13px;
       }
 
       .research-grid {
         grid-template-columns: 1fr;
+        gap: 14px;
       }
 
       .research-card {
         min-height: auto;
-        padding: 21px;
+        padding: 22px;
       }
 
-      .research-hero {
-        border-radius: 15px;
+      .research-icon {
+        margin-bottom: 17px;
       }
 
-      .research-footer {
-        width: calc(100% - 28px);
+      .research-note {
+        margin-top: 25px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
+      .research-page,
+      .research-hero::before,
+      .research-hero::after {
+        animation: none !important;
+      }
+
       .research-card,
+      .research-card::before,
+      .research-icon,
+      .research-card-cta {
+        transition: none !important;
+      }
+
       .research-card:hover {
-        transition: none;
         transform: none;
       }
     }
@@ -228,7 +526,7 @@
 <body>
   <div class="cosmos-shell">
 
-    <!-- COSMOS shared navigation header -->
+    <!-- Shared COSMOS header -->
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="COSMOS home">
         <span class="brand-mark" aria-hidden="true">✦</span>
@@ -249,7 +547,7 @@
       <section class="research-hero">
         <div class="research-eyebrow">Explore the Unknown</div>
 
-        <h1>Space Research</h1>
+        <h1>Space <span>Research</span></h1>
 
         <p>
           Discover the science behind planets, stars, galaxies, black holes,
@@ -258,100 +556,112 @@
         </p>
       </section>
 
-      <h2 class="research-section-heading">Explore Research Topics</h2>
+      <section aria-labelledby="researchTopicsHeading">
+        <h2
+          class="research-section-heading"
+          id="researchTopicsHeading"
+        >
+          Explore Research Topics
+        </h2>
 
-      <section class="research-grid" aria-label="Research topics">
+        <p class="research-section-description">
+          Choose a scientific field to explore its discoveries, fundamental
+          questions, and the research helping us understand the universe.
+        </p>
 
-        <a class="research-card" href="planetary-science.html">
-          <div class="research-icon" aria-hidden="true">🪐</div>
-          <h3>Planetary Science</h3>
-          <p>
-            Explore planets, moons, atmospheres, planetary surfaces, and
-            the processes that shape worlds throughout our Solar System.
-          </p>
-          <span class="research-card-cta">Explore Topic →</span>
-        </a>
+        <div class="research-grid">
 
-        <a class="research-card" href="astrobiology.html">
-          <div class="research-icon" aria-hidden="true">🧬</div>
-          <h3>Astrobiology</h3>
-          <p>
-            Investigate the origin of life, the conditions that make life
-            possible, and the search for signs of life beyond Earth.
-          </p>
-          <span class="research-card-cta">Explore Topic →</span>
-        </a>
+          <a class="research-card" href="planetary-science.html">
+            <div class="research-icon" aria-hidden="true">◉</div>
+            <h3>Planetary Science</h3>
+            <p>
+              Explore planets, moons, atmospheres, planetary surfaces, and
+              the processes that shape worlds throughout our Solar System.
+            </p>
+            <span class="research-card-cta">Explore Topic <span aria-hidden="true">→</span></span>
+          </a>
 
-        <a class="research-card" href="exoplanets.html">
-          <div class="research-icon" aria-hidden="true">🌎</div>
-          <h3>Exoplanets</h3>
-          <p>
-            Learn about planets orbiting other stars and how astronomers
-            investigate their atmospheres, sizes, and possible habitability.
-          </p>
-          <span class="research-card-cta">Explore Topic →</span>
-        </a>
+          <a class="research-card" href="astrobiology.html">
+            <div class="research-icon" aria-hidden="true">DNA</div>
+            <h3>Astrobiology</h3>
+            <p>
+              Investigate the origin of life, the conditions that make life
+              possible, and the search for signs of life beyond Earth.
+            </p>
+            <span class="research-card-cta">Explore Topic <span aria-hidden="true">→</span></span>
+          </a>
 
-        <a class="research-card" href="cosmology.html">
-          <div class="research-icon" aria-hidden="true">🌌</div>
-          <h3>Cosmology</h3>
-          <p>
-            Study the origin, evolution, structure, and possible future of
-            the universe, including dark matter and dark energy.
-          </p>
-          <span class="research-card-cta">Explore Topic →</span>
-        </a>
+          <a class="research-card" href="exoplanets.html">
+            <div class="research-icon" aria-hidden="true">EXO</div>
+            <h3>Exoplanets</h3>
+            <p>
+              Learn about planets orbiting other stars and how astronomers
+              investigate their atmospheres, sizes, and possible habitability.
+            </p>
+            <span class="research-card-cta">Explore Topic <span aria-hidden="true">→</span></span>
+          </a>
 
-        <a class="research-card" href="black-holes.html">
-          <div class="research-icon" aria-hidden="true">🕳️</div>
-          <h3>Black Holes</h3>
-          <p>
-            Discover how black holes form, how gravity behaves near them,
-            and how scientists observe their effects on surrounding matter.
-          </p>
-          <span class="research-card-cta">Explore Topic →</span>
-        </a>
+          <a class="research-card" href="cosmology.html">
+            <div class="research-icon" aria-hidden="true">∞</div>
+            <h3>Cosmology</h3>
+            <p>
+              Study the origin, evolution, structure, and possible future of
+              the universe, including dark matter and dark energy.
+            </p>
+            <span class="research-card-cta">Explore Topic <span aria-hidden="true">→</span></span>
+          </a>
 
-        <a class="research-card" href="solar-physics.html">
-          <div class="research-icon" aria-hidden="true">☀️</div>
-          <h3>Solar Physics</h3>
-          <p>
-            Explore the Sun's magnetic field, solar flares, sunspots,
-            solar wind, and their effects on the space environment.
-          </p>
-          <span class="research-card-cta">Explore Topic →</span>
-        </a>
+          <a class="research-card" href="black-hole.html">
+            <div class="research-icon" aria-hidden="true">BH</div>
+            <h3>Black Holes</h3>
+            <p>
+              Discover how black holes form, how gravity behaves near them,
+              and how scientists observe their effects on surrounding matter.
+            </p>
+            <span class="research-card-cta">Explore Topic <span aria-hidden="true">→</span></span>
+          </a>
 
-        <a class="research-card" href="galaxies-stars.html">
-          <div class="research-icon" aria-hidden="true">✨</div>
-          <h3>Galaxies &amp; Stars</h3>
-          <p>
-            Learn how stars are born, evolve, and die, and how galaxies
-            form and change across cosmic time.
-          </p>
-          <span class="research-card-cta">Explore Topic →</span>
-        </a>
+          <a class="research-card" href="solar-physics.html">
+            <div class="research-icon" aria-hidden="true">SOL</div>
+            <h3>Solar Physics</h3>
+            <p>
+              Explore the Sun's magnetic field, solar flares, sunspots,
+              solar wind, and their effects on the space environment.
+            </p>
+            <span class="research-card-cta">Explore Topic <span aria-hidden="true">→</span></span>
+          </a>
 
-        <a class="research-card" href="asteroids-comets.html">
-          <div class="research-icon" aria-hidden="true">☄️</div>
-          <h3>Asteroids &amp; Comets</h3>
-          <p>
-            Explore small Solar System bodies, their origins, their role
-            in planetary history, and how missions study them.
-          </p>
-          <span class="research-card-cta">Explore Topic →</span>
-        </a>
+          <a class="research-card" href="galaxies-stars.html">
+            <div class="research-icon" aria-hidden="true">STAR</div>
+            <h3>Galaxies &amp; Stars</h3>
+            <p>
+              Learn how stars are born, evolve, and die, and how galaxies
+              form and change across cosmic time.
+            </p>
+            <span class="research-card-cta">Explore Topic <span aria-hidden="true">→</span></span>
+          </a>
 
-        <a class="research-card" href="space-technology.html">
-          <div class="research-icon" aria-hidden="true">🛰️</div>
-          <h3>Space Technology</h3>
-          <p>
-            Discover spacecraft, satellites, space telescopes, robotics,
-            and the engineering systems that make exploration possible.
-          </p>
-          <span class="research-card-cta">Explore Topic →</span>
-        </a>
+          <a class="research-card" href="asteroids-comets.html">
+            <div class="research-icon" aria-hidden="true">AST</div>
+            <h3>Asteroids &amp; Comets</h3>
+            <p>
+              Explore small Solar System bodies, their origins, their role
+              in planetary history, and how missions study them.
+            </p>
+            <span class="research-card-cta">Explore Topic <span aria-hidden="true">→</span></span>
+          </a>
 
+          <a class="research-card" href="space-technology.html">
+            <div class="research-icon" aria-hidden="true">TECH</div>
+            <h3>Space Technology</h3>
+            <p>
+              Discover spacecraft, satellites, space telescopes, robotics,
+              and the engineering systems that make exploration possible.
+            </p>
+            <span class="research-card-cta">Explore Topic <span aria-hidden="true">→</span></span>
+          </a>
+
+        </div>
       </section>
 
       <aside class="research-note">
@@ -366,7 +676,7 @@
     </main>
 
     <footer class="research-footer">
-      <p>© COSMOS | Explore. Discover. Understand.</p>
+      <p>© <span data-current-year>2026</span> COSMOS. Explore. Discover. Understand.</p>
     </footer>
 
   </div>
