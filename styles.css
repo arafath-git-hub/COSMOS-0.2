@@ -351,10 +351,7 @@ section {
   font-size: .84rem;
   font-weight: 550;
   white-space: nowrap;
-  transition:
-    color var(--transition),
-    background var(--transition),
-    border-color var(--transition);
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
 }
 
 .nav a:hover,
@@ -409,10 +406,7 @@ section {
   color: var(--text);
   background: rgba(16, 22, 38, .96);
   cursor: pointer;
-  transition:
-    border-color var(--transition),
-    background var(--transition),
-    box-shadow var(--transition);
+  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
 }
 
 .menu-toggle:hover,
@@ -429,8 +423,8 @@ section {
 #menuToggle span,
 #navToggle span {
   display: block;
-  flex-shrink: 0;
-  width: 20px;
+  flex: 0 0 2px;
+  width: 22px;
   height: 2px;
   min-height: 2px;
   border-radius: 4px;
@@ -483,11 +477,7 @@ section {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition:
-    transform var(--transition),
-    background var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
+  transition: transform var(--transition), background var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
 .button:hover,
@@ -647,15 +637,9 @@ section {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   color: var(--text);
-  background:
-    radial-gradient(circle at 100% 0%, rgba(110, 145, 235, .09), transparent 48%),
-    linear-gradient(145deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .008));
+  background: radial-gradient(circle at 100% 0%, rgba(110, 145, 235, .09), transparent 48%), linear-gradient(145deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .008));
   box-shadow: 0 10px 35px rgba(0, 0, 0, .09);
-  transition:
-    transform var(--transition),
-    border-color var(--transition),
-    background var(--transition),
-    box-shadow var(--transition);
+  transition: transform var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
 }
 
 .dash-card::before {
@@ -771,10 +755,7 @@ section {
   color: var(--text);
   background: linear-gradient(145deg, rgba(19, 28, 47, .94), rgba(12, 18, 32, .94));
   box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
-  transition:
-    transform var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
 .content-card:hover,
@@ -843,9 +824,7 @@ section {
 
 .black-hole-card {
   border-color: rgba(177, 133, 255, .24);
-  background:
-    radial-gradient(circle at 85% 15%, rgba(139, 92, 246, .17), transparent 48%),
-    linear-gradient(145deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .008));
+  background: radial-gradient(circle at 85% 15%, rgba(139, 92, 246, .17), transparent 48%), linear-gradient(145deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .008));
 }
 
 .black-hole-card:hover {
@@ -881,9 +860,7 @@ section {
   padding: clamp(28px, 6vw, 66px);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  background:
-    radial-gradient(ellipse at 90% 10%, rgba(98, 131, 236, .18), transparent 44%),
-    linear-gradient(135deg, rgba(20, 31, 54, .96), rgba(10, 16, 29, .96));
+  background: radial-gradient(ellipse at 90% 10%, rgba(98, 131, 236, .18), transparent 44%), linear-gradient(135deg, rgba(20, 31, 54, .96), rgba(10, 16, 29, .96));
   box-shadow: var(--glow);
 }
 
@@ -935,9 +912,7 @@ section {
   padding: clamp(28px, 5vw, 56px);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  background:
-    radial-gradient(circle at 90% 10%, rgba(103, 137, 255, .14), transparent 45%),
-    var(--panel);
+  background: radial-gradient(circle at 90% 10%, rgba(103, 137, 255, .14), transparent 45%), var(--panel);
 }
 
 .missions-hero h1 {
@@ -985,10 +960,7 @@ section {
   background: rgba(255, 255, 255, .025);
   font-size: .83rem;
   cursor: pointer;
-  transition:
-    color var(--transition),
-    background var(--transition),
-    border-color var(--transition);
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
 }
 
 .missions-filter:hover,
@@ -1405,11 +1377,7 @@ select option {
   }
 }
 
-/* 25 — MOBILE NAVIGATION
-   Compatible with .nav, #cosmosNav, #mainNav,
-   .nav-menu and .nav-links.
-   Open classes supported: .is-open and .open.
-*/
+/* 25 — MOBILE NAVIGATION */
 @media (max-width: 760px) {
   html {
     scroll-padding-top: 80px;
@@ -1434,11 +1402,15 @@ select option {
     padding: 12px 18px;
   }
 
+  .topbar > .brand {
+    margin-right: auto;
+    flex-shrink: 0;
+  }
+
   .brand {
     font-size: 1.12rem;
   }
 
-  /* Force existing hamburger buttons to appear on mobile */
   .topbar > .menu-toggle,
   .topbar > .nav-toggle,
   .topbar > #menuToggle,
@@ -1448,14 +1420,41 @@ select option {
   #menuToggle,
   #navToggle {
     display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+    flex: 0 0 44px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    margin-left: auto;
+    padding: 10px;
     position: relative;
     z-index: 1002;
-    margin-left: auto;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
-  /* Collapsed navigation by default */
+  .topbar > .menu-toggle span,
+  .topbar > .nav-toggle span,
+  .topbar > #menuToggle span,
+  .topbar > #navToggle span,
+  .menu-toggle span,
+  .nav-toggle span,
+  #menuToggle span,
+  #navToggle span {
+    display: block !important;
+    flex: 0 0 2px;
+    width: 22px;
+    height: 2px;
+    min-height: 2px;
+    border-radius: 4px;
+    background: var(--accent-cyan);
+    opacity: 1;
+  }
+
   .topbar > .nav,
   .topbar > #cosmosNav,
   .topbar > #mainNav,
@@ -1486,7 +1485,6 @@ select option {
     pointer-events: auto;
   }
 
-  /* Open menu when JavaScript toggles either class */
   .topbar > .nav.is-open,
   .topbar > .nav.open,
   .topbar > #cosmosNav.is-open,
@@ -1527,7 +1525,6 @@ select option {
     overflow: hidden;
   }
 
-  /* Home and content layout */
   .hero {
     grid-template-columns: minmax(0, 1fr);
     padding-block: 48px;
@@ -1794,35 +1791,5 @@ select option {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
-  }
-}
-/* COSMOS 3-Line Hamburger Menu */
-@media (max-width: 760px) {
-  #menuToggle,
-  .menu-toggle {
-    display: flex !important;
-    width: 42px;
-    height: 42px;
-    padding: 9px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    background: transparent;
-    border: 1px solid rgba(120, 180, 255, 0.3);
-    border-radius: 9px;
-    cursor: pointer;
-    flex-shrink: 0;
-  }
-
-  #menuToggle span,
-  .menu-toggle span {
-    display: block !important;
-    width: 22px;
-    height: 2px;
-    min-height: 2px;
-    background: #ffffff;
-    border-radius: 3px;
-    opacity: 1;
   }
 }
