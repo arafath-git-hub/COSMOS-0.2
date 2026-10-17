@@ -693,33 +693,37 @@
 <body>
 
   <!-- HEADER -->
-  <header class="topbar">
-    <a class="brand" href="./index.html" aria-label="COSMOS Home">
-      <span class="brand-mark" aria-hidden="true">C</span>
-      <span>COSMOS</span>
-    </a>
+ 
+<!-- COSMOS MAIN NAVIGATION -->
+<header class="topbar">
+  <a class="brand" href="./index.html" aria-label="COSMOS Home">
+    <span class="brand-mark" aria-hidden="true">C</span>
+    <span>COSMOS</span>
+  </a>
 
-    <nav class="nav-menu" id="navMenu" aria-label="Main navigation">
-      <a href="./index.html">Home</a>
-      <a href="./missions.html" class="active" aria-current="page">Missions</a>
-      <a href="./research.html">Research</a>
-      <a href="./jupiter.html">Jupiter</a>
-      <a href="./saturn.html">Saturn</a>
-      <a href="./about.html">About</a>
-    </nav>
+  <button
+    class="menu-toggle"
+    id="menuToggle"
+    type="button"
+    aria-label="Toggle navigation"
+    aria-controls="cosmosNav"
+    aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 
-    <button
-      class="menu-toggle"
-      id="menuToggle"
-      type="button"
-      aria-label="Toggle navigation"
-      aria-controls="navMenu"
-      aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </header>
+  <nav class="nav-menu" id="cosmosNav" aria-label="Main navigation">
+    <a href="./index.html">Home</a>
+    <a href="./planets.html">Planets</a>
+    <a href="./search.html">Search</a>
+    <a href="./missions.html" class="active" aria-current="page">Missions</a>
+    <a href="./research.html">Research</a>
+    <a href="./black-hole.html">Black Hole Observatory</a>
+    <a href="./about.html">About COSMOS</a>
+  </nav>
+</header>
+
 
   <main class="missions-page cosmos-shell">
 
