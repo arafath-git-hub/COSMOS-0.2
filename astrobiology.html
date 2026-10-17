@@ -4,9 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#090613">
-  <title>Astrology | COSMOS</title>
-  <meta name="description" content="Explore the history, zodiac signs, celestial symbolism, and cultural traditions of astrology.">
+  <meta name="theme-color" content="#080b16">
+
+  <title>Astrology | COSMOS Research</title>
+  <meta name="description" content="Explore the history, traditions, zodiac systems, birth charts, scientific evidence, research methods and cultural influence of astrology through COSMOS Research.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,26 +15,43 @@
 
   <style>
     :root {
-      --bg: #090613;
-      --panel: rgba(22, 15, 39, .84);
-      --gold: #ffd58a;
-      --violet: #b69aff;
-      --pink: #ed9bff;
-      --text: #faf5ff;
-      --muted: #b2a5c8;
-      --border: rgba(191, 155, 255, .2);
-      --max: 1160px;
+      --bg: #080b16;
+      --bg-soft: #0d1222;
+      --panel: rgba(17, 24, 44, 0.76);
+      --panel-solid: #11182c;
+      --text: #f2f5ff;
+      --muted: #a4aec7;
+      --cyan: #72f2ff;
+      --blue: #748bff;
+      --purple: #b58cff;
+      --pink: #ff8cd7;
+      --gold: #ffd991;
+      --border: rgba(151, 175, 255, 0.17);
+      --glow: rgba(114, 242, 255, 0.12);
+      --radius: 22px;
+      --content: 1180px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    html { scroll-behavior: smooth; scroll-padding-top: 25px; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
 
     body {
       min-height: 100vh;
       overflow-x: hidden;
-      background: var(--bg);
       color: var(--text);
+      background:
+        radial-gradient(ellipse at 15% 8%, rgba(94, 66, 173, 0.17), transparent 38%),
+        radial-gradient(ellipse at 85% 28%, rgba(36, 133, 179, 0.12), transparent 36%),
+        radial-gradient(ellipse at 50% 75%, rgba(112, 68, 180, 0.09), transparent 40%),
+        var(--bg);
       font-family: "DM Sans", sans-serif;
       line-height: 1.75;
     }
@@ -44,121 +62,183 @@
       inset: 0;
       z-index: -2;
       pointer-events: none;
-      background:
-        radial-gradient(ellipse at 15% 15%, rgba(114, 54, 166, .22), transparent 40%),
-        radial-gradient(ellipse at 85% 35%, rgba(174, 97, 143, .12), transparent 38%),
-        radial-gradient(ellipse at 50% 100%, rgba(55, 47, 128, .18), transparent 45%),
-        #090613;
-      animation: nebula 14s ease-in-out infinite alternate;
+      opacity: 0.35;
+      background-image:
+        radial-gradient(1px 1px at 8% 18%, #ffffff 98%, transparent),
+        radial-gradient(1.5px 1.5px at 31% 42%, #9deeff 98%, transparent),
+        radial-gradient(1px 1px at 76% 14%, #ffffff 98%, transparent),
+        radial-gradient(1px 1px at 90% 62%, #d4b6ff 98%, transparent),
+        radial-gradient(1.5px 1.5px at 47% 87%, #ffffff 98%, transparent),
+        radial-gradient(1px 1px at 18% 73%, #9deeff 98%, transparent),
+        radial-gradient(1px 1px at 66% 54%, #ffffff 98%, transparent);
+      background-size: 310px 280px;
+      animation: starDrift 100s linear infinite;
     }
 
-    #stars {
+    body::after {
+      content: "";
       position: fixed;
-      inset: 0;
+      width: 520px;
+      height: 520px;
+      top: 25%;
+      left: -260px;
       z-index: -1;
-      width: 100%;
-      height: 100%;
+      border-radius: 50%;
       pointer-events: none;
+      background: rgba(116, 139, 255, 0.045);
+      filter: blur(100px);
+      animation: ambientGlow 13s ease-in-out infinite alternate;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-    .shell {
-      width: min(var(--max), calc(100% - 40px));
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      color: inherit;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+    ::selection {
+      color: #080b16;
+      background: var(--cyan);
+    }
+
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--pink));
+      box-shadow: 0 0 18px rgba(114, 242, 255, 0.65);
+    }
+
+    .page-shell {
+      width: min(var(--content), calc(100% - 40px));
       margin: 0 auto;
     }
 
     .back-row {
-      padding-top: 26px;
-      animation: fadeDown .8s both;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 25px 0 8px;
     }
 
-    .back {
+    .back-link {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       padding: 10px 16px;
+      color: #dbe8ff;
       border: 1px solid var(--border);
-      border-radius: 100px;
-      background: rgba(19, 12, 33, .78);
-      color: #f4eaff;
-      font-size: .9rem;
-      transition: .3s ease;
-      backdrop-filter: blur(12px);
+      border-radius: 999px;
+      background: rgba(17, 24, 44, 0.66);
+      transition: 0.3s ease;
     }
 
-    .back span { color: var(--gold); }
-
-    .back:hover {
-      transform: translateX(-5px);
-      border-color: var(--gold);
-      box-shadow: 0 0 25px rgba(255, 213, 138, .12);
+    .back-link:hover {
+      color: var(--cyan);
+      border-color: rgba(114, 242, 255, 0.55);
+      box-shadow: 0 0 25px rgba(114, 242, 255, 0.1);
+      transform: translateX(-3px);
     }
 
-    .hero {
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      align-items: center;
-      gap: 35px;
-      min-height: 610px;
-      padding: 65px 0 75px;
-    }
-
-    .hero-copy { animation: fadeUp .9s .1s both; }
-
-    .eyebrow, .kicker {
-      color: var(--gold);
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .19em;
+    .page-label {
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 2px;
       text-transform: uppercase;
     }
 
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      align-items: center;
+      gap: 50px;
+      min-height: 570px;
+      padding: 58px 0 76px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+    }
+
     .eyebrow {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 23px;
+      padding: 7px 13px;
+      margin-bottom: 22px;
+      color: var(--cyan);
+      border: 1px solid rgba(114, 242, 255, 0.22);
+      border-radius: 999px;
+      background: rgba(114, 242, 255, 0.055);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
     .eyebrow::before {
       content: "";
-      width: 28px;
-      height: 1px;
-      background: var(--gold);
-      box-shadow: 0 0 12px var(--gold);
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 13px var(--cyan);
     }
 
-    h1, h2, h3 { font-family: "Space Grotesk", sans-serif; line-height: 1.15; }
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Space Grotesk", sans-serif;
+      line-height: 1.2;
+    }
 
     h1 {
-      font-size: clamp(3.4rem, 7vw, 6.4rem);
-      font-weight: 600;
-      letter-spacing: -.065em;
+      max-width: 720px;
+      font-size: clamp(3rem, 6.7vw, 6.1rem);
+      letter-spacing: -4px;
+      line-height: 1.02;
     }
 
-    h1 span {
-      display: block;
+    .gradient-text {
       color: transparent;
-      background: linear-gradient(100deg, #fff6dd, #ffd58a 35%, #c4a4ff 75%, #f4aaff);
-      background-size: 200% auto;
+      background: linear-gradient(105deg, #ffffff 5%, var(--cyan) 43%, var(--purple) 75%, var(--pink));
       background-clip: text;
       -webkit-background-clip: text;
-      animation: textFlow 7s linear infinite;
     }
 
-    .description {
-      max-width: 560px;
+    .hero-description {
+      max-width: 650px;
       margin-top: 24px;
       color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.95;
+      font-size: 1.04rem;
     }
 
-    .actions {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 13px;
       margin-top: 30px;
     }
 
@@ -166,612 +246,2022 @@
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      gap: 8px;
-      min-height: 46px;
-      padding: 11px 18px;
+      gap: 9px;
+      padding: 12px 19px;
       border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: .9rem;
-      font-weight: 700;
-      transition: .3s ease;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.035);
+      transition: 0.3s ease;
+      cursor: pointer;
     }
 
-    .primary {
+    .button-primary {
+      color: #07121b;
       border-color: transparent;
-      background: linear-gradient(110deg, #8d63d5, #b27ad7);
-      box-shadow: 0 8px 28px rgba(156, 98, 220, .2);
-      color: white;
+      background: linear-gradient(110deg, var(--cyan), #a7d4ff);
+      font-weight: 700;
     }
-
-    .secondary { background: rgba(24, 16, 42, .75); }
 
     .button:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(181, 130, 255, .2);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 35px rgba(114, 242, 255, 0.12);
     }
-
-    .secondary:hover { border-color: var(--gold); }
 
     .hero-art {
       position: relative;
       display: grid;
-      min-height: 430px;
       place-items: center;
-      animation: fadeUp 1s .3s both;
+      min-height: 390px;
+      isolation: isolate;
     }
 
-    .aura {
+    .hero-art::before,
+    .hero-art::after {
+      content: "";
       position: absolute;
-      width: 82%;
-      aspect-ratio: 1;
+      width: 310px;
+      height: 310px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(155, 98, 231, .2), rgba(104, 66, 171, .06) 45%, transparent 70%);
-      filter: blur(12px);
-      animation: auraPulse 5s ease-in-out infinite alternate;
+      border: 1px solid rgba(181, 140, 255, 0.17);
+      animation: orbitSpin 35s linear infinite;
     }
 
-    .celestial {
+    .hero-art::after {
+      width: 385px;
+      height: 385px;
+      border-color: rgba(114, 242, 255, 0.13);
+      animation-direction: reverse;
+      animation-duration: 50s;
+    }
+
+    .orbital {
+      position: absolute;
+      width: 440px;
+      height: 190px;
+      border: 1px solid rgba(181, 140, 255, 0.23);
+      border-radius: 50%;
+      transform: rotate(-32deg);
+    }
+
+    .orbital.two {
+      width: 460px;
+      height: 250px;
+      transform: rotate(44deg);
+      border-color: rgba(114, 242, 255, 0.17);
+    }
+
+    .central-orb {
       position: relative;
+      z-index: 2;
       display: grid;
-      width: min(100%, 410px);
-      aspect-ratio: 1;
       place-items: center;
-      animation: float 7s ease-in-out infinite;
-    }
-
-    .ring {
-      position: absolute;
-      width: 100%;
-      height: 39%;
-      border: 1px solid rgba(220, 183, 255, .35);
-      border-radius: 50%;
-      transform: rotate(-35deg);
-      box-shadow: 0 0 20px rgba(186, 136, 255, .06);
-    }
-
-    .ring.two {
-      width: 116%;
-      height: 52%;
-      border-color: rgba(255, 213, 138, .24);
-      transform: rotate(45deg);
-      animation: ringSpin 24s linear infinite;
-    }
-
-    .ring.three {
-      width: 75%;
-      height: 108%;
-      border-color: rgba(178, 148, 255, .18);
-      transform: rotate(55deg);
-    }
-
-    .orb {
-      position: relative;
-      width: 48%;
-      aspect-ratio: 1;
+      width: 190px;
+      height: 190px;
       overflow: hidden;
+      border: 1px solid rgba(255, 222, 173, 0.65);
       border-radius: 50%;
       background:
-        radial-gradient(ellipse at 28% 25%, rgba(255,255,255,.85), transparent 4%),
-        radial-gradient(ellipse at 32% 30%, #ffdbb4, #c78bdc 27%, transparent 45%),
-        radial-gradient(ellipse at 72% 70%, #6335a0, transparent 42%),
-        linear-gradient(135deg, #e7bbff, #8b55c8 52%, #25133f);
+        radial-gradient(circle at 32% 25%, rgba(255, 239, 204, 0.95), transparent 8%),
+        radial-gradient(circle at 38% 35%, #f5c57b 0%, #ad69ad 28%, #4e4e91 58%, #11182f 78%);
       box-shadow:
-        inset -30px -18px 42px rgba(13, 5, 30, .85),
-        inset 10px 8px 24px rgba(255, 255, 255, .2),
-        0 0 38px rgba(186, 128, 255, .32),
-        0 0 100px rgba(159, 93, 239, .13);
+        0 0 30px rgba(255, 196, 119, 0.26),
+        0 0 95px rgba(181, 140, 255, 0.19),
+        inset -18px -20px 35px rgba(5, 9, 26, 0.65);
+      animation: orbFloat 7s ease-in-out infinite;
     }
 
-    .orb::before {
+    .central-orb::before {
       content: "";
       position: absolute;
-      inset: -30%;
+      width: 260px;
+      height: 45px;
+      border: 2px solid rgba(255, 227, 182, 0.66);
       border-radius: 50%;
-      background: repeating-linear-gradient(
-        25deg,
-        transparent 0 18px,
-        rgba(255, 221, 172, .12) 19px 22px,
-        transparent 23px 38px
-      );
-      filter: blur(2px);
-      animation: surface 20s linear infinite;
+      transform: rotate(-25deg);
+      box-shadow: 0 0 16px rgba(255, 217, 145, 0.16);
     }
 
-    .orb::after {
+    .central-orb::after {
       content: "";
       position: absolute;
-      inset: 0;
+      inset: 13px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 50%;
-      background: linear-gradient(110deg, rgba(255,255,255,.22), transparent 36%, rgba(10,0,25,.72) 85%);
+      background:
+        radial-gradient(ellipse at 25% 48%, rgba(255,255,255,0.14), transparent 25%),
+        radial-gradient(ellipse at 73% 64%, rgba(10,12,30,0.38), transparent 30%);
     }
 
-    .orbiting-moon {
+    .orb-label {
       position: absolute;
-      top: 15%;
-      right: 10%;
-      width: 9%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 25%, #fff2d5, #c3a1e8 55%, #503a76);
-      box-shadow: 0 0 18px rgba(255, 220, 167, .4);
-      animation: moonFloat 6s ease-in-out infinite alternate;
-    }
-
-    .orbiting-star {
-      position: absolute;
-      left: 9%;
-      bottom: 19%;
-      width: 10px;
-      height: 10px;
-      background: var(--gold);
-      transform: rotate(45deg);
-      box-shadow: 0 0 16px var(--gold);
-      animation: twinkle 2.4s ease-in-out infinite alternate;
-    }
-
-    .art-label {
-      position: absolute;
-      right: 0;
-      bottom: 17px;
-      padding: 12px 15px;
+      z-index: 4;
+      padding: 7px 12px;
+      color: #e5eaff;
       border: 1px solid var(--border);
-      border-radius: 9px;
-      background: rgba(15, 9, 28, .82);
-      backdrop-filter: blur(12px);
+      border-radius: 8px;
+      background: rgba(8, 11, 22, 0.84);
+      backdrop-filter: blur(10px);
+      font-size: 0.72rem;
+      letter-spacing: 1px;
     }
 
-    .art-label strong {
-      display: block;
-      color: #fff1d1;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: .9rem;
+    .label-top {
+      top: 8%;
+      right: 3%;
     }
 
-    .art-label small { color: var(--muted); font-size: .75rem; }
+    .label-bottom {
+      bottom: 10%;
+      left: 1%;
+    }
+
+    .orbit-dot {
+      position: absolute;
+      top: 22%;
+      left: 19%;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 20px var(--cyan);
+      animation: dotPulse 3s ease-in-out infinite;
+    }
+
+    .orbit-dot.purple {
+      top: 76%;
+      left: 76%;
+      width: 8px;
+      height: 8px;
+      background: var(--pink);
+      box-shadow: 0 0 18px var(--pink);
+      animation-delay: 1s;
+    }
+
+    .hero-note {
+      margin-top: -26px;
+      margin-bottom: 40px;
+      color: #8996b6;
+      font-size: 0.82rem;
+      text-align: center;
+    }
 
     .section {
-      padding: 76px 0;
-      border-top: 1px solid rgba(185, 147, 255, .1);
+      padding: 66px 0;
+      border-top: 1px solid rgba(151, 175, 255, 0.1);
     }
 
-    .section-head {
-      max-width: 700px;
-      margin-bottom: 33px;
+    .section-heading {
+      max-width: 780px;
+      margin-bottom: 32px;
     }
 
-    .section-head h2 {
-      margin-top: 12px;
-      font-size: clamp(2rem, 4.5vw, 3.35rem);
-      letter-spacing: -.045em;
+    .section-kicker {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--cyan);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2.3px;
+      text-transform: uppercase;
     }
 
-    .section-head p {
-      margin-top: 15px;
+    .section-heading h2 {
+      margin-bottom: 13px;
+      font-size: clamp(1.9rem, 4vw, 3.1rem);
+      letter-spacing: -1.4px;
+    }
+
+    .section-heading p {
       color: var(--muted);
     }
 
-    .grid {
+    .notice {
+      display: grid;
+      grid-template-columns: 6px 1fr;
+      gap: 17px;
+      padding: 24px;
+      border: 1px solid rgba(255, 217, 145, 0.2);
+      border-radius: var(--radius);
+      background: linear-gradient(120deg, rgba(255, 217, 145, 0.07), rgba(181, 140, 255, 0.045));
+    }
+
+    .notice-bar {
+      border-radius: 99px;
+      background: linear-gradient(var(--gold), var(--purple));
+    }
+
+    .notice h3 {
+      margin-bottom: 8px;
+      color: var(--gold);
+      font-size: 1.05rem;
+    }
+
+    .notice p {
+      color: #c1c9dd;
+    }
+
+    .notice strong {
+      color: #fff;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-top: 24px;
+    }
+
+    .stat-card {
+      padding: 21px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .stat-value {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--cyan);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .stat-card p {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .topic-tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 24px;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      max-width: 480px;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      padding: 14px 16px 14px 43px;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(14, 20, 37, 0.85);
+      outline: none;
+    }
+
+    .search-wrap input:focus {
+      border-color: rgba(114, 242, 255, 0.55);
+      box-shadow: 0 0 25px rgba(114, 242, 255, 0.08);
+    }
+
+    .search-symbol {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      color: var(--cyan);
+      transform: translateY(-50%);
+    }
+
+    .topic-count {
+      color: var(--muted);
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    .topic-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 17px;
     }
 
-    .card {
-      --accent: #c5a2ff;
+    .topic-card {
       position: relative;
-      min-height: 220px;
       overflow: hidden;
       padding: 25px;
       border: 1px solid var(--border);
-      border-radius: 15px;
-      background:
-        radial-gradient(ellipse at 100% 0, rgba(153, 104, 225, .12), transparent 58%),
-        linear-gradient(145deg, rgba(27, 17, 45, .9), rgba(12, 8, 24, .95));
-      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(21, 29, 52, 0.87), rgba(11, 15, 29, 0.8));
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
     }
 
-    .card::before {
+    .topic-card::before {
       content: "";
       position: absolute;
-      top: -60px;
-      right: -50px;
-      width: 150px;
-      height: 150px;
+      top: -100px;
+      right: -100px;
+      width: 190px;
+      height: 190px;
       border-radius: 50%;
-      background: var(--accent);
-      opacity: .08;
-      filter: blur(35px);
-      transition: .4s ease;
+      background: var(--card-glow, rgba(114, 242, 255, 0.1));
+      filter: blur(65px);
+      pointer-events: none;
+      transition: opacity 0.3s ease;
     }
 
-    .card:hover {
-      transform: translateY(-7px);
-      border-color: color-mix(in srgb, var(--accent), transparent 30%);
-      box-shadow: 0 20px 45px rgba(0,0,0,.25), 0 0 25px rgba(180,130,255,.07);
+    .topic-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(114, 242, 255, 0.4);
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.2), 0 0 25px rgba(114, 242, 255, 0.045);
     }
 
-    .card:hover::before { opacity: .22; transform: scale(1.35); }
+    .topic-card:nth-child(3n + 2) {
+      --card-glow: rgba(181, 140, 255, 0.14);
+    }
 
-    .number {
-      display: block;
-      margin-bottom: 24px;
-      color: var(--accent);
+    .topic-card:nth-child(3n) {
+      --card-glow: rgba(255, 140, 215, 0.11);
+    }
+
+    .topic-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 39px;
+      height: 39px;
+      margin-bottom: 18px;
+      color: var(--cyan);
+      border: 1px solid rgba(114, 242, 255, 0.24);
+      border-radius: 12px;
+      background: rgba(114, 242, 255, 0.06);
       font-family: "Space Grotesk", sans-serif;
-      font-size: .78rem;
-      letter-spacing: .13em;
+      font-size: 0.83rem;
+      font-weight: 700;
     }
 
-    .card h3 { margin-bottom: 11px; font-size: 1.17rem; }
-    .card p { color: var(--muted); font-size: .9rem; line-height: 1.85; }
-
-    .line {
-      width: 35px;
-      height: 2px;
-      margin-top: 20px;
-      background: var(--accent);
-      box-shadow: 0 0 12px var(--accent);
-      transition: width .4s;
+    .topic-card h3 {
+      position: relative;
+      margin-bottom: 11px;
+      font-size: 1.16rem;
     }
 
-    .card:hover .line { width: 72px; }
+    .topic-card p {
+      position: relative;
+      color: var(--muted);
+      font-size: 0.91rem;
+    }
 
-    .note-panel {
+    .topic-tag {
+      display: inline-block;
+      margin-top: 17px;
+      padding: 4px 9px;
+      color: #b8c8f4;
+      border: 1px solid rgba(151, 175, 255, 0.16);
+      border-radius: 6px;
+      font-size: 0.7rem;
+      letter-spacing: 0.4px;
+    }
+
+    .empty-state {
+      display: none;
+      padding: 35px;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    .two-column {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 35px;
-      padding: clamp(24px, 5vw, 48px);
+      gap: 19px;
+    }
+
+    .info-panel {
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--panel);
+    }
+
+    .info-panel h3 {
+      margin-bottom: 16px;
+      font-size: 1.3rem;
+    }
+
+    .info-panel p {
+      margin-bottom: 13px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .info-panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-panel strong {
+      color: #eaf0ff;
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+      list-style: none;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .bullet-list li::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 12px rgba(114, 242, 255, 0.45);
+    }
+
+    .comparison-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 620px;
+      background: rgba(12, 17, 32, 0.76);
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 17px 20px;
+      border-bottom: 1px solid rgba(151, 175, 255, 0.12);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .comparison-table th {
+      color: var(--cyan);
+      background: rgba(114, 242, 255, 0.045);
+      font-size: 0.82rem;
+      letter-spacing: 0.7px;
+    }
+
+    .comparison-table td {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .comparison-table td:first-child {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .method-card {
+      padding: 23px;
       border: 1px solid var(--border);
       border-radius: 18px;
-      background:
-        radial-gradient(ellipse at 0 0, rgba(132, 81, 195, .15), transparent 58%),
-        rgba(17, 10, 30, .8);
+      background: rgba(255, 255, 255, 0.025);
     }
 
-    .note-panel h2 {
-      margin: 12px 0 18px;
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    .method-card h3 {
+      margin-bottom: 9px;
+      color: #dbe6ff;
+      font-size: 1.05rem;
     }
 
-    .note-panel p { color: var(--muted); }
-
-    .note-list { display: grid; gap: 15px; align-content: center; }
-
-    .note-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 13px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid rgba(192, 157, 255, .12);
+    .method-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
     }
 
-    .note-item:last-child { border-bottom: 0; padding-bottom: 0; }
+    .mission-timeline {
+      position: relative;
+      display: grid;
+      gap: 0;
+      margin-top: 10px;
+    }
 
-    .dot {
-      flex: 0 0 8px;
-      width: 8px;
-      height: 8px;
-      margin-top: 9px;
+    .mission-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 24px;
+      padding: 0 0 30px;
+    }
+
+    .mission-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .mission-year {
+      color: var(--cyan);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.03rem;
+      font-weight: 700;
+    }
+
+    .mission-content {
+      position: relative;
+      padding: 0 0 0 25px;
+      border-left: 1px solid rgba(114, 242, 255, 0.27);
+    }
+
+    .mission-content::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: -5px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 12px var(--gold);
+      background: var(--cyan);
+      box-shadow: 0 0 13px rgba(114, 242, 255, 0.7);
     }
 
-    .note-item strong { display: block; margin-bottom: 3px; font-size: .94rem; }
-    .note-item span:last-child { color: var(--muted); font-size: .86rem; }
+    .mission-content h3 {
+      margin-bottom: 6px;
+      font-size: 1.08rem;
+    }
 
-    .banner {
+    .mission-content p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .mission-status {
+      display: inline-block;
+      margin-top: 9px;
+      padding: 3px 8px;
+      color: #d8c8ff;
+      border: 1px solid rgba(181, 140, 255, 0.25);
+      border-radius: 6px;
+      font-size: 0.7rem;
+    }
+
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .fact-card {
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(150deg, rgba(181, 140, 255, 0.07), rgba(255, 255, 255, 0.02));
+    }
+
+    .fact-card h3 {
+      margin-bottom: 9px;
+      font-size: 1.03rem;
+    }
+
+    .fact-card p {
+      color: var(--muted);
+      font-size: 0.89rem;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .faq-item {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: rgba(17, 24, 44, 0.7);
+    }
+
+    .faq-question {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 25px;
-      margin: 70px 0;
-      padding: 34px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: linear-gradient(110deg, rgba(86, 47, 130, .26), rgba(38, 24, 69, .3));
+      gap: 20px;
+      width: 100%;
+      padding: 19px 22px;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      font-weight: 700;
+      cursor: pointer;
     }
 
-    .banner h2 { margin-top: 9px; font-size: clamp(1.5rem, 3vw, 2.2rem); }
-    .banner p { max-width: 640px; margin-top: 9px; color: var(--muted); font-size: .92rem; }
+    .faq-question:hover {
+      color: var(--cyan);
+    }
+
+    .faq-symbol {
+      flex-shrink: 0;
+      color: var(--cyan);
+      font-size: 1.3rem;
+      transition: transform 0.25s ease;
+    }
+
+    .faq-answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s ease;
+    }
+
+    .faq-answer-inner {
+      overflow: hidden;
+    }
+
+    .faq-answer p {
+      padding: 0 22px 20px;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .faq-item.open .faq-answer {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-item.open .faq-symbol {
+      transform: rotate(45deg);
+    }
+
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .source-link {
+      display: block;
+      padding: 17px 19px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.025);
+      transition: 0.25s ease;
+    }
+
+    .source-link:hover {
+      border-color: rgba(114, 242, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .source-link strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #e7eeff;
+      font-size: 0.92rem;
+    }
+
+    .source-link span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.81rem;
+      overflow-wrap: anywhere;
+    }
+
+    .source-note {
+      margin-top: 18px;
+      color: #8490ad;
+      font-size: 0.82rem;
+    }
+
+    .closing-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 42px;
+      border: 1px solid rgba(114, 242, 255, 0.2);
+      border-radius: 26px;
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(181, 140, 255, 0.14), transparent 50%),
+        linear-gradient(130deg, rgba(114, 242, 255, 0.07), rgba(17, 24, 44, 0.7));
+    }
+
+    .closing-panel h2 {
+      margin-bottom: 14px;
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+    }
+
+    .closing-panel p {
+      max-width: 780px;
+      margin-bottom: 22px;
+      color: var(--muted);
+    }
 
     footer {
-      padding: 25px 0 35px;
-      border-top: 1px solid rgba(185, 147, 255, .1);
-      color: #857899;
-      font-size: .82rem;
+      padding: 30px 0 38px;
+      margin-top: 45px;
+      border-top: 1px solid rgba(151, 175, 255, 0.1);
+      color: #8995b1;
+      font-size: 0.83rem;
       text-align: center;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 23px;
+      bottom: 23px;
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      width: 45px;
+      height: 45px;
+      border: 1px solid rgba(114, 242, 255, 0.3);
+      border-radius: 14px;
+      background: rgba(13, 18, 34, 0.9);
+      color: var(--cyan);
+      box-shadow: 0 0 22px rgba(114, 242, 255, 0.09);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
 
     .reveal {
       opacity: 0;
-      transform: translateY(23px);
-      transition: opacity .7s ease, transform .7s ease;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
     }
 
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-    @keyframes nebula { from { filter: hue-rotate(0); } to { filter: hue-rotate(16deg); } }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes textFlow { to { background-position: 200% center; } }
-    @keyframes auraPulse { from { transform: scale(.9); opacity: .65; } to { transform: scale(1.1); opacity: 1; } }
-    @keyframes float { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-13px) rotate(2deg); } }
-    @keyframes surface { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-    @keyframes ringSpin { from { transform: rotate(45deg); } to { transform: rotate(405deg); } }
-    @keyframes moonFloat { from { transform: translate(-10px, 10px); } to { transform: translate(15px, -9px); } }
-    @keyframes twinkle { from { opacity: .4; scale: .75; } to { opacity: 1; scale: 1.2; } }
+    @keyframes starDrift {
+      from { background-position: 0 0; }
+      to { background-position: 310px 280px; }
+    }
 
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr .8fr; gap: 10px; }
-      .hero-art { min-height: 330px; }
-      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @keyframes orbitSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-13px) rotate(4deg); }
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { opacity: 0.65; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.25); }
+    }
+
+    @keyframes ambientGlow {
+      from { transform: translate(0, 0) scale(0.9); }
+      to { transform: translate(150px, 70px) scale(1.2); }
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding-top: 50px;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-art {
+        min-height: 390px;
+      }
+
+      .hero-note {
+        margin-top: -10px;
+      }
+
+      .topic-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stats-grid,
+      .fact-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 650px) {
-      .shell { width: calc(100% - 30px); }
-      .back-row { padding-top: 18px; }
-      .hero { grid-template-columns: 1fr; padding: 60px 0 42px; }
-      h1 { font-size: clamp(3.2rem, 15vw, 5rem); }
-      .hero-art { min-height: 330px; margin-top: 12px; }
-      .celestial { width: min(83vw, 340px); }
-      .art-label { right: 0; bottom: 0; }
-      .section { padding: 57px 0; }
-      .grid { grid-template-columns: 1fr; }
-      .card { min-height: 185px; }
-      .number { margin-bottom: 17px; }
-      .note-panel { grid-template-columns: 1fr; gap: 25px; }
-      .banner { align-items: flex-start; flex-direction: column; margin: 52px 0; padding: 25px; }
+      .page-shell {
+        width: min(100% - 28px, var(--content));
+      }
+
+      .back-row {
+        align-items: flex-start;
+        flex-direction: column;
+        padding-top: 18px;
+      }
+
+      .page-label {
+        padding-left: 3px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 50px 0 45px;
+      }
+
+      h1 {
+        font-size: clamp(2.75rem, 12vw, 4.3rem);
+        letter-spacing: -2.6px;
+      }
+
+      .hero-description {
+        font-size: 0.96rem;
+      }
+
+      .hero-art {
+        min-height: 315px;
+        transform: scale(0.83);
+        margin: -10px 0;
+      }
+
+      .hero-art::before {
+        width: 265px;
+        height: 265px;
+      }
+
+      .hero-art::after {
+        width: 320px;
+        height: 320px;
+      }
+
+      .orbital {
+        width: 350px;
+        height: 150px;
+      }
+
+      .orbital.two {
+        width: 370px;
+        height: 190px;
+      }
+
+      .section {
+        padding: 48px 0;
+      }
+
+      .topic-grid,
+      .two-column,
+      .method-grid,
+      .fact-grid,
+      .sources-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .stat-card {
+        padding: 16px;
+      }
+
+      .topic-tools {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .search-wrap {
+        max-width: none;
+      }
+
+      .topic-card,
+      .info-panel {
+        padding: 22px;
+      }
+
+      .mission-item {
+        grid-template-columns: 66px 1fr;
+        gap: 12px;
+      }
+
+      .mission-content {
+        padding-left: 18px;
+      }
+
+      .closing-panel {
+        padding: 27px 22px;
+      }
+
+      .faq-question {
+        padding: 17px;
+      }
+
+      .faq-answer p {
+        padding: 0 17px 18px;
+      }
+
+      .back-to-top {
+        right: 15px;
+        bottom: 15px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
+      *,
+      *::before,
+      *::after {
         scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
-      .reveal { opacity: 1; transform: none; }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
     }
   </style>
 </head>
 
 <body>
-  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
 
-  <div class="shell">
+  <main class="page-shell">
     <div class="back-row">
-      <a class="back" href="./research.html"><span aria-hidden="true">←</span> Back to Research</a>
+      <a class="back-link" href="./research.html" aria-label="Return to Research page">
+        <span aria-hidden="true">←</span>
+        <span>Back to Research</span>
+      </a>
+      <span class="page-label">COSMOS / Research Archive</span>
     </div>
 
-    <main>
-      <section class="hero">
-        <div class="hero-copy">
-          <div class="eyebrow">COSMOS Research Division</div>
-          <h1><span>Astrology</span><span>&amp; The Zodiac</span></h1>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">History, Culture & Evidence</span>
+        <h1>
+          The World of
+          <span class="gradient-text">Astrology</span>
+        </h1>
+        <p class="hero-description">
+          Explore how humanity connected the sky with life on Earth, how astrological traditions developed across civilizations, and what scientific research reveals about their claims.
+        </p>
 
-          <p class="description">
-            Explore the history of astrology, the twelve zodiac signs, celestial symbolism,
-            and the traditions different cultures developed to interpret the sky.
-            Discover how these ideas influenced art, calendars, mythology, and human history.
-          </p>
-
-          <div class="actions">
-            <a class="button primary" href="#topics">Explore Topics <span aria-hidden="true">↗</span></a>
-            <a class="button secondary" href="#history">Discover Its History</a>
-          </div>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#explore">Explore 18 Topics <span aria-hidden="true">↓</span></a>
+          <a class="button" href="#scientific-evidence">Scientific Evidence</a>
         </div>
+      </div>
 
-        <div class="hero-art" aria-label="Stylized celestial artwork">
-          <div class="aura"></div>
-          <div class="celestial">
-            <div class="ring two"></div>
-            <div class="ring three"></div>
-            <div class="ring"></div>
-            <div class="orb"></div>
-            <div class="orbiting-moon"></div>
-            <div class="orbiting-star"></div>
-          </div>
-          <div class="art-label">
-            <strong>Celestial Traditions</strong>
-            <small>History · Symbolism · Culture</small>
-          </div>
-        </div>
-      </section>
+      <div class="hero-art" role="img" aria-label="An abstract glowing celestial sphere surrounded by orbital rings">
+        <div class="orbital"></div>
+        <div class="orbital two"></div>
+        <div class="orbit-dot"></div>
+        <div class="orbit-dot purple"></div>
+        <div class="central-orb"></div>
+        <span class="orb-label label-top">CELESTIAL SYMBOLS</span>
+        <span class="orb-label label-bottom">HISTORY MEETS EVIDENCE</span>
+      </div>
+    </section>
 
-      <section class="section" id="topics">
-        <div class="section-head reveal">
-          <div class="kicker">Explore The Subject</div>
-          <h2>A tradition written in the stars</h2>
-          <p>
-            Astrology has taken many forms across history. These topics explore its
-            symbols, cultural roots, and place in human society—not scientifically
-            established predictions about personality or future events.
-          </p>
-        </div>
+    <p class="hero-note">
+      A cultural and historical exploration of astrology, evaluated separately from astronomy.
+    </p>
 
-        <div class="grid">
-          <article class="card reveal" style="--accent:#ffd58a">
-            <span class="number">TOPIC / 01</span>
-            <h3>The Twelve Zodiac Signs</h3>
-            <p>Explore Aries through Pisces and learn how the twelve signs developed within zodiac traditions.</p>
-            <div class="line"></div>
-          </article>
+    <section class="section reveal" id="overview">
+      <div class="section-heading">
+        <span class="section-kicker">Start Here</span>
+        <h2>What Is Astrology?</h2>
+        <p>
+          Astrology is a family of traditions that interprets the positions and apparent movements of celestial bodies as meaningful for human personality, relationships, events or life circumstances.
+        </p>
+      </div>
 
-          <article class="card reveal" style="--accent:#c1a1ff">
-            <span class="number">TOPIC / 02</span>
-            <h3>History of Astrology</h3>
-            <p>Trace astrological traditions through ancient Mesopotamia, the Hellenistic world, and later cultures.</p>
-            <div class="line"></div>
-          </article>
-
-          <article class="card reveal" style="--accent:#ff9ccf">
-            <span class="number">TOPIC / 03</span>
-            <h3>Birth Charts</h3>
-            <p>Understand how traditional birth charts map celestial positions at a particular time and place.</p>
-            <div class="line"></div>
-          </article>
-
-          <article class="card reveal" style="--accent:#8be8ff">
-            <span class="number">TOPIC / 04</span>
-            <h3>Planets in Astrology</h3>
-            <p>Learn the symbolic meanings assigned to planets within different astrological systems.</p>
-            <div class="line"></div>
-          </article>
-
-          <article class="card reveal" style="--accent:#b4f2a4">
-            <span class="number">TOPIC / 05</span>
-            <h3>Astrology Across Cultures</h3>
-            <p>Compare traditions such as Western, Indian, and Chinese astrology and their distinct frameworks.</p>
-            <div class="line"></div>
-          </article>
-
-          <article class="card reveal" style="--accent:#e2aaff">
-            <span class="number">TOPIC / 06</span>
-            <h3>Astronomy vs Astrology</h3>
-            <p>Understand the difference between astronomy as a scientific discipline and astrology as a cultural belief system.</p>
-            <div class="line"></div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="history">
-        <div class="note-panel reveal">
-          <div>
-            <div class="kicker">Context Matters</div>
-            <h2>Sky observation and human belief.</h2>
-            <p>
-              For much of history, observing celestial movements was closely connected
-              with calendars, religion, navigation, and interpretations of earthly events.
-              Over time, astronomy and astrology developed into different disciplines.
-            </p>
-          </div>
-
-          <div class="note-list">
-            <div class="note-item">
-              <span class="dot"></span>
-              <div>
-                <strong>Historical Importance</strong>
-                <span>Astrological systems influenced literature, royal courts, calendars, and cultural traditions.</span>
-              </div>
-            </div>
-
-            <div class="note-item">
-              <span class="dot"></span>
-              <div>
-                <strong>Symbolic Interpretations</strong>
-                <span>Zodiac signs and planetary placements carry meanings within particular traditions.</span>
-              </div>
-            </div>
-
-            <div class="note-item">
-              <span class="dot"></span>
-              <div>
-                <strong>Scientific Evidence</strong>
-                <span>Astrology's claims about predicting personality or life events have not been reliably demonstrated by scientific testing.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="banner reveal">
+      <div class="notice">
+        <div class="notice-bar"></div>
         <div>
-          <div class="kicker">Explore The Universe</div>
-          <h2>Study the sky from another perspective.</h2>
+          <h3>Important Scientific Distinction</h3>
           <p>
-            Discover planets, moons, and real celestial phenomena through the
-            scientific study of astronomy.
+            Astrology is culturally and historically significant, but its central predictive claims have not been reliably demonstrated under controlled scientific testing. <strong>Astronomy</strong>, by contrast, is the scientific study of celestial objects and the universe using observation, physics, mathematics and testable models. Studying astrology's history does not mean accepting its predictions as scientific facts.
           </p>
         </div>
-        <a class="button primary" href="./planets.html">Explore Planets <span aria-hidden="true">↗</span></a>
-      </section>
-    </main>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-value">Ancient</span>
+          <p>Astrological practices developed over centuries in multiple societies.</p>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">12 Signs</span>
+          <p>The familiar Western zodiac divides the ecliptic into twelve symbolic signs.</p>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">Many Traditions</span>
+          <p>Western, Indian, Chinese and other systems differ in their methods.</p>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">Evidence Matters</span>
+          <p>Predictions should be evaluated with controlled, reproducible methods.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="explore">
+      <div class="section-heading">
+        <span class="section-kicker">Knowledge Database</span>
+        <h2>Explore 18 Detailed Topics</h2>
+        <p>
+          Discover the major ideas, systems, historical developments and scientific questions associated with astrology.
+        </p>
+      </div>
+
+      <div class="topic-tools">
+        <div class="search-wrap">
+          <span class="search-symbol" aria-hidden="true">⌕</span>
+          <input
+            id="topicSearch"
+            type="search"
+            placeholder="Search topics, signs, history, evidence..."
+            aria-label="Search astrology topics"
+          >
+        </div>
+        <span class="topic-count" id="topicCount" aria-live="polite">18 topics</span>
+      </div>
+
+      <div class="topic-grid" id="topicGrid">
+        <article class="topic-card reveal" data-search="definition introduction astrology meaning celestial planets">
+          <span class="topic-number">01</span>
+          <h3>Definition and Core Ideas</h3>
+          <p>
+            Astrology interprets celestial arrangements through symbolic systems. Practitioners may associate planets, signs and chart positions with personal traits or events. These interpretations are cultural frameworks rather than established physical mechanisms.
+          </p>
+          <span class="topic-tag">Foundations</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="history mesopotamia babylon ancient origins">
+          <span class="topic-number">02</span>
+          <h3>Ancient Origins</h3>
+          <p>
+            In ancient Mesopotamia, systematic sky observation helped record celestial patterns and interpret omens for rulers and states. Over time, Babylonian zodiac traditions influenced later Hellenistic astrology, which combined astronomical calculations with philosophical interpretations.
+          </p>
+          <span class="topic-tag">History</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="western zodiac twelve signs aries taurus gemini cancer leo virgo libra scorpio sagittarius capricorn aquarius pisces">
+          <span class="topic-number">03</span>
+          <h3>The Twelve Zodiac Signs</h3>
+          <p>
+            Western tropical astrology uses Aries, Taurus, Gemini, Cancer, Leo, Virgo, Libra, Scorpio, Sagittarius, Capricorn, Aquarius and Pisces. Each sign is assigned symbolic qualities. These descriptions are not scientifically validated personality measurements.
+          </p>
+          <span class="topic-tag">Zodiac</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="birth natal chart horoscope date time place ascendant houses">
+          <span class="topic-number">04</span>
+          <h3>Birth Charts and Horoscopes</h3>
+          <p>
+            A natal chart maps calculated celestial positions for a particular time and location. Depending on the tradition, it includes signs, planets, houses and angular relationships. Horoscope readings interpret these placements, but chart complexity alone does not establish predictive accuracy.
+          </p>
+          <span class="topic-tag">Chart Interpretation</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="planets sun moon mercury venus mars jupiter saturn uranus neptune astrological meanings">
+          <span class="topic-number">05</span>
+          <h3>Planets in Astrology</h3>
+          <p>
+            Astrological systems assign symbolic meanings to celestial bodies. For example, Venus is often associated with relationships, while Mars is linked with action or conflict. These meanings belong to astrological traditions and are not demonstrated causal effects of the planets on personality.
+          </p>
+          <span class="topic-tag">Celestial Symbols</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="houses twelve houses first second career relationships family astrology">
+          <span class="topic-number">06</span>
+          <h3>The Twelve Houses</h3>
+          <p>
+            Many natal-chart systems divide the chart into twelve houses associated with themes such as identity, possessions, communication, home, creativity, work, partnerships, shared resources, education, career, friends and private life. House calculations can differ between systems.
+          </p>
+          <span class="topic-tag">Chart Structure</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="aspects conjunction opposition trine square sextile angles">
+          <span class="topic-number">07</span>
+          <h3>Aspects and Planetary Angles</h3>
+          <p>
+            Astrological aspects describe angular relationships between chart positions. Conjunctions, oppositions, squares, trines and sextiles receive different symbolic interpretations. They are geometric relationships within a chart, not proof that celestial bodies influence an individual's life.
+          </p>
+          <span class="topic-tag">Geometry</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="tropical sidereal zodiac precession equinox constellations">
+          <span class="topic-number">08</span>
+          <h3>Tropical and Sidereal Zodiacs</h3>
+          <p>
+            Tropical astrology anchors its zodiac to the seasonal cycle and equinoxes. Sidereal systems relate signs to a stellar reference frame, using particular conventions for the offset. Axial precession gradually changes the relationship between the equinoxes and background stars, so the systems can assign different sign positions.
+          </p>
+          <span class="topic-tag">Astronomical Coordinates</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="vedic jyotisha indian astrology nakshatra dasha kundli">
+          <span class="topic-number">09</span>
+          <h3>Indian Astrology and Jyotisha</h3>
+          <p>
+            Jyotisha includes historical Indian traditions of calendrics, astronomical calculation and astrology. Some systems use sidereal zodiac conventions, lunar mansions called nakshatras and timing frameworks such as dashas. Traditions vary, and their predictive claims require independent evidence.
+          </p>
+          <span class="topic-tag">Cultural Traditions</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="chinese astrology zodiac animals rat ox tiger rabbit dragon snake horse goat monkey rooster dog pig">
+          <span class="topic-number">10</span>
+          <h3>Chinese Zodiac Traditions</h3>
+          <p>
+            Chinese zodiac traditions associate years with a repeating cycle of twelve animals, commonly combined with other calendrical elements. They differ from the Western zodiac, which divides the ecliptic into twelve signs. Popular zodiac systems have diverse regional and historical interpretations.
+          </p>
+          <span class="topic-tag">World Cultures</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="eclipses retrograde apparent motion Mercury retrograde astronomy">
+          <span class="topic-number">11</span>
+          <h3>Retrograde Motion and Eclipses</h3>
+          <p>
+            Retrograde motion is the apparent backward movement of a planet against the background stars, usually caused by changing viewing geometry as Earth and other planets orbit the Sun. Eclipses occur through specific alignments of the Sun, Earth and Moon. Astrological meanings attached to these events are interpretations, not established physical effects.
+          </p>
+          <span class="topic-tag">Sky Phenomena</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="compatibility synastry relationship matching love personality">
+          <span class="topic-number">12</span>
+          <h3>Compatibility and Relationships</h3>
+          <p>
+            Compatibility readings compare charts or zodiac signs to interpret relationship dynamics. People may use them as conversation prompts or cultural practices. However, reliable evidence has not established zodiac compatibility as a dependable method for predicting relationship success.
+          </p>
+          <span class="topic-tag">Relationships</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="prediction fortune telling transits planetary returns timing">
+          <span class="topic-number">13</span>
+          <h3>Predictions and Transits</h3>
+          <p>
+            Some astrologers interpret current planetary positions relative to a birth chart to forecast periods of change. Techniques include transits, progressions and planetary returns. A meaningful evaluation must define predictions in advance, use clear scoring rules and compare outcomes against suitable chance-based baselines.
+          </p>
+          <span class="topic-tag">Prediction</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="psychology Barnum Forer effect confirmation bias selective memory">
+          <span class="topic-number">14</span>
+          <h3>Psychology and Belief</h3>
+          <p>
+            Broad statements can feel personally accurate because of the Forer or Barnum effect. Confirmation bias encourages people to notice supporting examples while overlooking failures. Selective memory, vague wording and retrospective interpretation can also make predictions appear more successful than they are.
+          </p>
+          <span class="topic-tag">Cognitive Psychology</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="scientific evidence controlled studies double blind experiments">
+          <span class="topic-number">15</span>
+          <h3>Astrology and Scientific Evidence</h3>
+          <p>
+            Scientific evaluation asks whether astrological predictions perform better than chance under controlled conditions. Influential tests have not established reliable predictive power for central astrological claims. Individual studies have limitations, so conclusions should consider replication, methods, sample sizes and the full body of evidence.
+          </p>
+          <span class="topic-tag">Evidence Review</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="culture religion art literature history society media">
+          <span class="topic-number">16</span>
+          <h3>Cultural and Historical Influence</h3>
+          <p>
+            Astrology has influenced calendars, courtly traditions, manuscripts, visual art, literature and popular culture. Its history helps researchers understand how societies interpreted uncertainty and organized time. Cultural importance can be studied seriously without assuming supernatural or predictive claims are true.
+          </p>
+          <span class="topic-tag">Human History</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="ethics health finance decision making critical thinking">
+          <span class="topic-number">17</span>
+          <h3>Ethics and Responsible Use</h3>
+          <p>
+            Astrology should not replace evidence-based medical care, financial analysis, legal advice or other professional support. Predictions that create fear, encourage dependency or exploit vulnerable people can cause harm. Respectful discussion distinguishes personal meaning from verified facts.
+          </p>
+          <span class="topic-tag">Ethics</span>
+        </article>
+
+        <article class="topic-card reveal" data-search="astronomy astrology difference scientific method physics telescopes">
+          <span class="topic-number">18</span>
+          <h3>Astrology vs Astronomy</h3>
+          <p>
+            Astronomy investigates celestial objects through observation, mathematics and physical theory. Astrology interprets celestial patterns through symbolic traditions. Astronomical calculations can accurately determine planetary positions; that accuracy does not validate the separate claim that those positions predict human personality or destiny.
+          </p>
+          <span class="topic-tag">Science Literacy</span>
+        </article>
+      </div>
+
+      <div class="empty-state" id="emptyState">
+        No matching topics found. Try another search term.
+      </div>
+    </section>
+
+    <section class="section reveal" id="scientific-evidence">
+      <div class="section-heading">
+        <span class="section-kicker">Critical Evaluation</span>
+        <h2>What Does Science Say?</h2>
+        <p>
+          Scientific claims must be testable, measurable and open to correction. Historical popularity, personal testimony and accurate planetary calculations are not sufficient by themselves to prove astrological predictions.
+        </p>
+      </div>
+
+      <div class="two-column">
+        <article class="info-panel">
+          <h3>What Research Can Establish</h3>
+          <p>
+            Researchers can investigate whether birth-chart interpretations are consistent between readers, whether personality descriptions match independently measured traits, and whether predictions outperform chance.
+          </p>
+          <ul class="bullet-list">
+            <li>Define the prediction before the outcome is known.</li>
+            <li>Use validated personality or outcome measures.</li>
+            <li>Blind participants and assessors when practical.</li>
+            <li>Compare results with appropriate control groups.</li>
+            <li>Publish methods and replicate results independently.</li>
+          </ul>
+        </article>
+
+        <article class="info-panel">
+          <h3>What the Evidence Does Not Establish</h3>
+          <p>
+            No robust, widely accepted scientific mechanism has demonstrated that the usual astrological chart factors reliably determine personality, romantic compatibility or future events.
+          </p>
+          <ul class="bullet-list">
+            <li>Anecdotes cannot separate coincidence from causation.</li>
+            <li>Flexible readings can fit many different outcomes.</li>
+            <li>Finding a pattern after examining data can produce false positives.</li>
+            <li>Astronomical precision does not prove astrological validity.</li>
+            <li>Claims should change when reproducible evidence contradicts them.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="research-methods">
+      <div class="section-heading">
+        <span class="section-kicker">How to Investigate Claims</span>
+        <h2>Research Methods</h2>
+        <p>
+          Astrology can be studied scientifically as a set of testable claims and as a cultural practice. The appropriate method depends on the question being asked.
+        </p>
+      </div>
+
+      <div class="method-grid">
+        <article class="method-card">
+          <h3>01. Controlled Experiments</h3>
+          <p>
+            Participants receive chart readings or interpretations under predefined conditions. Researchers compare results with control conditions to determine whether the information improves accuracy beyond chance.
+          </p>
+        </article>
+
+        <article class="method-card">
+          <h3>02. Blinding and Randomization</h3>
+          <p>
+            Blind procedures reduce the chance that readers or participants influence results through expectations. Random assignment can help prevent systematic differences between comparison groups.
+          </p>
+        </article>
+
+        <article class="method-card">
+          <h3>03. Statistical Analysis</h3>
+          <p>
+            Researchers define measurable outcomes, select appropriate tests and report uncertainty, effect sizes and confidence intervals. They should account for multiple comparisons and avoid changing success criteria after seeing the data.
+          </p>
+        </article>
+
+        <article class="method-card">
+          <h3>04. Replication</h3>
+          <p>
+            Independent teams repeat a study using the same protocol or a carefully justified alternative. A result that appears only once may reflect chance, bias or an unrecognized methodological problem.
+          </p>
+        </article>
+
+        <article class="method-card">
+          <h3>05. Historical Document Analysis</h3>
+          <p>
+            Historians examine manuscripts, inscriptions, calendars and translations to reconstruct how astrological systems developed. They compare dates, terminology, cultural settings and the movement of ideas between civilizations.
+          </p>
+        </article>
+
+        <article class="method-card">
+          <h3>06. Surveys and Interviews</h3>
+          <p>
+            Social scientists investigate why people use astrology, how they interpret readings and what roles it plays in identity, community and decision-making. These methods study human beliefs, not whether celestial predictions are objectively accurate.
+          </p>
+        </article>
+
+        <article class="method-card">
+          <h3>07. Comparative and Meta-Analytic Review</h3>
+          <p>
+            Researchers compare findings across studies, assess differences in quality and estimate overall patterns when the studies are sufficiently comparable. Publication bias and inconsistent measures must be considered.
+          </p>
+        </article>
+
+        <article class="method-card">
+          <h3>08. Falsifiable Prediction Testing</h3>
+          <p>
+            A prediction should specify what outcome would count as success or failure. Researchers preregister criteria, test them on data not used to develop the claim, and compare performance with simple baselines.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="comparison">
+      <div class="section-heading">
+        <span class="section-kicker">Two Different Fields</span>
+        <h2>Astrology vs Astronomy</h2>
+        <p>
+          These fields share a historical connection with observing the sky, but their goals and standards of evidence are different.
+        </p>
+      </div>
+
+      <div class="comparison-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Astrology</th>
+              <th>Astronomy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Main purpose</td>
+              <td>Interprets celestial patterns symbolically in relation to human life.</td>
+              <td>Studies celestial objects, physical processes and the universe.</td>
+            </tr>
+            <tr>
+              <td>Methods</td>
+              <td>Traditions, chart interpretation and symbolic rules.</td>
+              <td>Observation, mathematics, physics, simulations and experiments.</td>
+            </tr>
+            <tr>
+              <td>Predictions</td>
+              <td>Often makes personal or event-related predictions that require testing.</td>
+              <td>Produces testable forecasts, such as planetary positions or eclipse timing.</td>
+            </tr>
+            <tr>
+              <td>Evidence standard</td>
+              <td>Central predictive claims have not shown robust, reproducible validity.</td>
+              <td>Claims are assessed against observations, measurements and reproducibility.</td>
+            </tr>
+            <tr>
+              <td>Typical tools</td>
+              <td>Birth charts, zodiac tables and interpretive traditions.</td>
+              <td>Telescopes, spacecraft, detectors, spectroscopy and scientific models.</td>
+            </tr>
+            <tr>
+              <td>Scientific status</td>
+              <td>Not considered an established scientific method for predicting human outcomes.</td>
+              <td>A natural science supported by extensive empirical evidence.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section reveal" id="missions">
+      <div class="section-heading">
+        <span class="section-kicker">The Scientific Context</span>
+        <h2>Important Space Missions and Discoveries</h2>
+        <p>
+          There are no space missions designed to validate astrology's personal predictions. However, astronomical missions have transformed our understanding of the celestial bodies that many astrological traditions reference.
+        </p>
+      </div>
+
+      <div class="mission-timeline">
+        <article class="mission-item">
+          <div class="mission-year">1962</div>
+          <div class="mission-content">
+            <h3>Mariner 2 — Venus</h3>
+            <p>
+              Mariner 2 completed the first successful planetary flyby mission, returning important measurements of Venus and its environment. Its findings helped establish spacecraft exploration as a powerful way to study other planets.
+            </p>
+            <span class="mission-status">Historic mission</span>
+          </div>
+        </article>
+
+        <article class="mission-item">
+          <div class="mission-year">1970s</div>
+          <div class="mission-content">
+            <h3>Pioneer 10 and Pioneer 11</h3>
+            <p>
+              These missions made landmark explorations of Jupiter and, for Pioneer 11, Saturn. They collected direct measurements and images that improved scientific knowledge of the outer Solar System.
+            </p>
+            <span class="mission-status">Historic missions</span>
+          </div>
+        </article>
+
+        <article class="mission-item">
+          <div class="mission-year">1977</div>
+          <div class="mission-content">
+            <h3>Voyager 1 and Voyager 2</h3>
+            <p>
+              The Voyager spacecraft revealed remarkable details about the giant planets and their moons. Their observations showed that the Solar System contains diverse and dynamic worlds far more complex than simple symbolic descriptions can capture.
+            </p>
+            <span class="mission-status">Historic launches / extended missions</span>
+          </div>
+        </article>
+
+        <article class="mission-item">
+          <div class="mission-year">1990</div>
+          <div class="mission-content">
+            <h3>Hubble Space Telescope</h3>
+            <p>
+              Hubble has enabled decades of observations of planets, stars, galaxies and distant cosmic phenomena. It illustrates how scientific conclusions develop through measurements, instrument calibration and repeated observations.
+            </p>
+            <span class="mission-status">Space observatory</span>
+          </div>
+        </article>
+
+        <article class="mission-item">
+          <div class="mission-year">1995</div>
+          <div class="mission-content">
+            <h3>51 Pegasi b and the Exoplanet Era</h3>
+            <p>
+              The announcement of a planet orbiting a Sun-like star beyond our Solar System helped establish the modern era of exoplanet discovery. Thousands of exoplanets have since been confirmed through methods such as transits and radial velocity.
+            </p>
+            <span class="mission-status">Major discovery</span>
+          </div>
+        </article>
+
+        <article class="mission-item">
+          <div class="mission-year">2006</div>
+          <div class="mission-content">
+            <h3>MESSENGER — Mercury</h3>
+            <p>
+              MESSENGER studied Mercury's surface, composition, magnetic field and geological history. Its observations showed that even the innermost planet has a complex physical history that must be investigated through evidence.
+            </p>
+            <span class="mission-status">Historic mission</span>
+          </div>
+        </article>
+
+        <article class="mission-item">
+          <div class="mission-year">2015</div>
+          <div class="mission-content">
+            <h3>New Horizons — Pluto</h3>
+            <p>
+              New Horizons conducted the first close flyby of Pluto in July 2015, revealing mountains, glaciers, atmospheric haze and varied surface features. Pluto became a much more detailed scientific world through direct observation.
+            </p>
+            <span class="mission-status">Historic flyby / extended exploration</span>
+          </div>
+        </article>
+
+        <article class="mission-item">
+          <div class="mission-year">2018</div>
+          <div class="mission-content">
+            <h3>TESS — Exoplanet Survey</h3>
+            <p>
+              NASA's Transiting Exoplanet Survey Satellite searches for planets around nearby bright stars by detecting small, repeated dips in stellar brightness. This is an example of a measurable and independently checkable discovery method.
+            </p>
+            <span class="mission-status">Space observatory</span>
+          </div>
+        </article>
+
+        <article class="mission-item">
+          <div class="mission-year">2021</div>
+          <div class="mission-content">
+            <h3>James Webb Space Telescope</h3>
+            <p>
+              JWST observes the universe in infrared wavelengths, studying early galaxies, star formation and the atmospheres of some exoplanets. Its findings are assessed using calibrated data, physical models and uncertainty analysis.
+            </p>
+            <span class="mission-status">Space observatory</span>
+          </div>
+        </article>
+
+        <article class="mission-item">
+          <div class="mission-year">2024</div>
+          <div class="mission-content">
+            <h3>Europa Clipper — Journey to Jupiter</h3>
+            <p>
+              Launched in October 2024, Europa Clipper is designed to investigate whether Jupiter's moon Europa has environments that could support life. Its scientific goal is to assess habitability, not to search directly for evidence of life.
+            </p>
+            <span class="mission-status">En route; arrival planned for 2030</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="notice" style="margin-top: 28px;">
+        <div class="notice-bar"></div>
+        <div>
+          <h3>Why These Missions Matter Here</h3>
+          <p>
+            They demonstrate the difference between symbolic interpretation and scientific investigation. Spacecraft measure fields, particles, temperatures, compositions and motion. Scientists then test explanations against the collected data. None of these achievements independently establishes the validity of astrological predictions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="facts">
+      <div class="section-heading">
+        <span class="section-kicker">Quick Knowledge</span>
+        <h2>Scientific Facts Worth Knowing</h2>
+        <p>
+          These facts help separate the physical sky from the symbolic systems people have built around it.
+        </p>
+      </div>
+
+      <div class="fact-grid">
+        <article class="fact-card">
+          <h3>01. Constellations Are Unequal</h3>
+          <p>
+            The official astronomical constellations occupy different areas of the sky. The twelve equal divisions of the familiar zodiac are not the same thing as twelve equal-sized constellations.
+          </p>
+        </article>
+
+        <article class="fact-card">
+          <h3>02. The Sky Changes Slowly</h3>
+          <p>
+            Earth's rotational axis slowly changes direction through axial precession, altering the relationship between the equinoxes and distant stars over long periods.
+          </p>
+        </article>
+
+        <article class="fact-card">
+          <h3>03. Planetary Positions Are Calculable</h3>
+          <p>
+            Astronomers can calculate and predict planetary positions using gravitational physics and measured orbital parameters. Accurate positions do not automatically validate interpretations attached to them.
+          </p>
+        </article>
+
+        <article class="fact-card">
+          <h3>04. Distant Stars Are Extremely Far Away</h3>
+          <p>
+            Stars are separated from Earth by enormous distances. Their apparent positions and brightness can be measured, while their actual physical properties are studied through methods such as spectroscopy and parallax.
+          </p>
+        </article>
+
+        <article class="fact-card">
+          <h3>05. Gravity Depends on Mass and Distance</h3>
+          <p>
+            Gravitational influence depends on the masses and separation of objects. A planet's astrological interpretation is not a quantity in Newtonian gravity or general relativity.
+          </p>
+        </article>
+
+        <article class="fact-card">
+          <h3>06. Correlation Is Not Causation</h3>
+          <p>
+            Even if two measurements appear related, researchers must investigate confounding variables, chance, measurement quality and possible mechanisms before drawing causal conclusions.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="myths">
+      <div class="section-heading">
+        <span class="section-kicker">Common Misunderstandings</span>
+        <h2>Claims vs Evidence</h2>
+        <p>
+          Popularity and personal experience can make an idea feel convincing. Clear definitions and independent testing help evaluate it more carefully.
+        </p>
+      </div>
+
+      <div class="two-column">
+        <article class="info-panel">
+          <h3>Common Claim</h3>
+          <ul class="bullet-list">
+            <li>"My horoscope was accurate, so astrology must work."</li>
+            <li>"Mercury retrograde explains every communication problem."</li>
+            <li>"People with compatible signs always have better relationships."</li>
+            <li>"A precise birth chart must provide precise predictions."</li>
+          </ul>
+        </article>
+
+        <article class="info-panel">
+          <h3>Evidence-Based Response</h3>
+          <ul class="bullet-list">
+            <li>Specific, prospective testing is needed to separate accuracy from coincidence.</li>
+            <li>Everyday problems have many possible causes that should be examined directly.</li>
+            <li>Relationship outcomes depend on many individual and social factors.</li>
+            <li>Calculation precision does not establish that an interpretation is valid.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="faq">
+      <div class="section-heading">
+        <span class="section-kicker">Questions and Answers</span>
+        <h2>Frequently Asked Questions</h2>
+        <p>
+          Concise answers to common questions about astrology, astronomy and scientific evidence.
+        </p>
+      </div>
+
+      <div class="faq-list">
+        <article class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>1. Is astrology a science?</span>
+            <span class="faq-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                Astrology is not considered an established science for predicting personality or future events. Its claims can be studied using scientific methods, but central predictive claims have not demonstrated robust, reproducible performance under controlled conditions.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>2. What is the difference between astrology and astronomy?</span>
+            <span class="faq-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                Astronomy is the scientific study of celestial objects and the universe. Astrology interprets celestial patterns as symbols associated with human affairs. The two have historical connections, but they use different methods and standards of evidence.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>3. Are zodiac signs scientifically proven to determine personality?</span>
+            <span class="faq-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                No reliable body of evidence has established zodiac signs as dependable predictors of personality. A scientific test would require clear predictions, validated personality measures, appropriate controls and independent replication.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>4. Why do horoscopes sometimes feel accurate?</span>
+            <span class="faq-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                Broad descriptions can apply to many people. The Forer effect, confirmation bias, selective memory and flexible interpretations can make statements feel unusually personal. Feeling accurate is not the same as performing better than chance in a controlled test.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>5. Can astrology predict the future?</span>
+            <span class="faq-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                Astrologers make future-oriented claims, but dependable predictive accuracy has not been established scientifically. Predictions should be specific, recorded before events occur and tested against chance-based baselines.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>6. Does Mercury retrograde physically reverse a planet's orbit?</span>
+            <span class="faq-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                No. Retrograde motion is an apparent change in a planet's direction against the background stars as observed from Earth. It does not mean the planet has physically reversed its orbit around the Sun.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>7. Why do Western and Indian astrology sometimes give different signs?</span>
+            <span class="faq-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                Many Western systems use a tropical zodiac tied to the equinoxes, while many Indian systems use a sidereal zodiac with a stellar reference and an offset convention. This difference, alongside variations between traditions, can lead to different sign assignments.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>8. Are the twelve zodiac signs the same as the twelve constellations?</span>
+            <span class="faq-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                Not exactly. The familiar Western tropical zodiac divides the ecliptic into twelve equal 30-degree signs. Astronomical constellations have unequal boundaries and sizes. The Sun's apparent path also passes through Ophiuchus, one of the officially recognized constellations along the ecliptic.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>9. Have space missions tested astrological predictions?</span>
+            <span class="faq-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                Space missions investigate physical questions about planets, moons, stars and the universe. They are not designed to validate personal astrological predictions. Scientific tests of astrology instead use carefully designed studies of people, chart interpretations and predefined outcomes.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>10. Can astrology be studied without believing in it?</span>
+            <span class="faq-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                Yes. Historians study its development, anthropologists examine its cultural role, psychologists investigate belief and decision-making, and statisticians test predictive claims. Studying a belief system does not require accepting its claims as facts.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>11. Is astrology safe to use for major life decisions?</span>
+            <span class="faq-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                Astrology should not replace medical advice, financial planning, legal guidance or careful assessment of a relationship. For important decisions, rely on relevant evidence, qualified professionals and your own informed judgment.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <article class="faq-item">
+          <button class="faq-question" type="button" aria-expanded="false">
+            <span>12. What is the best way to evaluate an astrological claim?</span>
+            <span class="faq-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>
+                State the claim precisely, decide in advance what counts as success, use reliable measurements, blind participants where possible, compare results with suitable controls, publish the methods and seek independent replication. Do not judge accuracy only after the event has occurred.
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="sources">
+      <div class="section-heading">
+        <span class="section-kicker">Continue Learning</span>
+        <h2>Scientific Sources and Further Reading</h2>
+        <p>
+          Use primary scientific institutions and peer-reviewed research to explore astronomy, space missions, the history of astrology and the evaluation of astrological claims.
+        </p>
+      </div>
+
+      <div class="sources-grid">
+        <a class="source-link" href="https://science.nasa.gov/" target="_blank" rel="noopener noreferrer">
+          <strong>NASA Science</strong>
+          <span>Research on planets, stars, the Solar System and the wider universe.</span>
+        </a>
+
+        <a class="source-link" href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener noreferrer">
+          <strong>NASA Solar System Exploration</strong>
+          <span>Scientific information about planets, moons and small Solar System bodies.</span>
+        </a>
+
+        <a class="source-link" href="https://science.nasa.gov/universe/exoplanets/" target="_blank" rel="noopener noreferrer">
+          <strong>NASA Exoplanet Exploration</strong>
+          <span>How scientists discover and investigate planets beyond our Solar System.</span>
+        </a>
+
+        <a class="source-link" href="https://www.iau.org/public/themes/constellations/" target="_blank" rel="noopener noreferrer">
+          <strong>International Astronomical Union</strong>
+          <span>Official astronomical constellation information and scientific conventions.</span>
+        </a>
+
+        <a class="source-link" href="https://www.britannica.com/topic/astrology" target="_blank" rel="noopener noreferrer">
+          <strong>Encyclopaedia Britannica: Astrology</strong>
+          <span>Historical overview of astrological systems, ideas and cultural development.</span>
+        </a>
+
+        <a class="source-link" href="https://www.britannica.com/science/astronomy" target="_blank" rel="noopener noreferrer">
+          <strong>Encyclopaedia Britannica: Astronomy</strong>
+          <span>Background on astronomy as the scientific study of celestial objects.</span>
+        </a>
+
+        <a class="source-link" href="https://www.nature.com/" target="_blank" rel="noopener noreferrer">
+          <strong>Nature Research</strong>
+          <span>Peer-reviewed scientific research and discussions of research methods.</span>
+        </a>
+
+        <a class="source-link" href="https://www.scientificamerican.com/" target="_blank" rel="noopener noreferrer">
+          <strong>Scientific American</strong>
+          <span>Accessible reporting and explanations of science and scientific evidence.</span>
+        </a>
+      </div>
+
+      <p class="source-note">
+        These links are starting points for further reading, not endorsements of astrology. For a specific claim, consult the original study and assess its methods, sample size, limitations and replication history.
+      </p>
+    </section>
+
+    <section class="section reveal">
+      <div class="closing-panel">
+        <span class="section-kicker">Keep Exploring</span>
+        <h2>The Universe Is Bigger Than Any One Interpretation</h2>
+        <p>
+          Astrology offers a window into the history of human beliefs about the sky. Astronomy reveals the physical universe through observation, measurement and scientific reasoning. Exploring both the history of ideas and the evidence behind them helps us ask better questions about our place in the cosmos.
+        </p>
+        <a class="button button-primary" href="./research.html">← Return to Research</a>
+      </div>
+    </section>
 
     <footer>
-      <p>Astrology &amp; The Zodiac · COSMOS Research</p>
+      <p>© <span id="currentYear"></span> COSMOS Research. Explore the universe. Question every claim. Follow the evidence.</p>
+      <p style="margin-top: 6px;">Astrology is presented for educational, historical and cultural exploration.</p>
     </footer>
-  </div>
+  </main>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" title="Back to top">
+    ↑
+  </button>
 
   <script>
     (() => {
-      const canvas = document.getElementById("stars");
-      const ctx = canvas.getContext("2d");
-      if (!ctx) return;
+      "use strict";
 
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      let stars = [];
-      let width = 0;
-      let height = 0;
-      let frame = null;
+      const $ = (selector, parent = document) =>
+        parent.querySelector(selector);
 
-      function resize() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = Math.floor(width * dpr);
-        canvas.height = Math.floor(height * dpr);
-        canvas.style.width = width + "px";
-        canvas.style.height = height + "px";
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const $$ = (selector, parent = document) =>
+        Array.from(parent.querySelectorAll(selector));
 
-        const count = Math.min(145, Math.floor(width * height / 8500));
-        stars = Array.from({ length: count }, () => ({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          r: Math.random() * 1.2 + .25,
-          a: Math.random() * .55 + .2,
-          speed: Math.random() * .16 + .025,
-          phase: Math.random() * Math.PI * 2
-        }));
-
-        draw(0);
+      // Automatically update the footer year.
+      const yearElement = $("#currentYear");
+      if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
       }
 
-      function draw(time) {
-        ctx.clearRect(0, 0, width, height);
+      // Search and filter the 18 research topics.
+      const searchInput = $("#topicSearch");
+      const topicCards = $$(".topic-card");
+      const topicCount = $("#topicCount");
+      const emptyState = $("#emptyState");
 
-        stars.forEach(star => {
-          const pulse = reducedMotion ? 1 : .72 + Math.sin(time * .001 + star.phase) * .28;
-          ctx.beginPath();
-          ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(231, 213, 255, ${star.a * pulse})`;
-          ctx.fill();
+      function filterTopics() {
+        const query = (searchInput?.value || "")
+          .trim()
+          .toLowerCase();
 
-          if (!reducedMotion) {
-            star.y -= star.speed;
-            if (star.y < -2) {
-              star.y = height + 2;
-              star.x = Math.random() * width;
-            }
+        let visibleCount = 0;
+
+        topicCards.forEach((card) => {
+          const searchableText = (
+            card.innerText + " " + (card.dataset.search || "")
+          ).toLowerCase();
+
+          const matches = searchableText.includes(query);
+
+          card.hidden = !matches;
+
+          if (matches) {
+            visibleCount++;
           }
         });
 
-        if (!reducedMotion) frame = requestAnimationFrame(draw);
+        if (topicCount) {
+          topicCount.textContent =
+            `${visibleCount} of ${topicCards.length} topics`;
+        }
+
+        if (emptyState) {
+          emptyState.style.display =
+            visibleCount === 0 ? "block" : "none";
+        }
       }
 
-      window.addEventListener("resize", resize, { passive: true });
-      resize();
+      if (searchInput) {
+        searchInput.addEventListener("input", filterTopics);
+      }
 
-      const revealItems = document.querySelectorAll(".reveal");
+      // Accessible FAQ accordions.
+      const faqItems = $$(".faq-item");
 
-      if ("IntersectionObserver" in window && !reducedMotion) {
-        const observer = new IntersectionObserver((entries, obs) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              obs.unobserve(entry.target);
-            }
-          });
-        }, { threshold: .12 });
+      faqItems.forEach((item) => {
+        const question = $(".faq-question", item);
 
-        revealItems.forEach(item => observer.observe(item));
+        if (!question) return;
+
+        question.addEventListener("click", () => {
+          const willOpen = !item.classList.contains("open");
+
+          item.classList.toggle("open", willOpen);
+          question.setAttribute("aria-expanded", String(willOpen));
+        });
+      });
+
+      // Reveal elements as they enter the viewport.
+      const revealElements = $$(".reveal");
+
+      if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("revealed");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.08,
+            rootMargin: "0px 0px -25px 0px"
+          }
+        );
+
+        revealElements.forEach((element) => {
+          revealObserver.observe(element);
+        });
       } else {
-        revealItems.forEach(item => item.classList.add("visible"));
+        revealElements.forEach((element) => {
+          element.classList.add("revealed");
+        });
       }
 
-      window.addEventListener("pagehide", () => {
-        if (frame !== null) cancelAnimationFrame(frame);
-      }, { once: true });
+      // Reading progress and back-to-top control.
+      const progressBar = $("#readingProgress");
+      const backToTop = $("#backToTop");
+
+      function updateScrollUI() {
+        const scrollableHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+
+        const progress = scrollableHeight > 0
+          ? (window.scrollY / scrollableHeight) * 100
+          : 0;
+
+        if (progressBar) {
+          progressBar.style.width =
+            `${Math.min(100, Math.max(0, progress))}%`;
+        }
+
+        if (backToTop) {
+          backToTop.classList.toggle(
+            "visible",
+            window.scrollY > 500
+          );
+        }
+      }
+
+      window.addEventListener("scroll", updateScrollUI, {
+        passive: true
+      });
+
+      window.addEventListener("resize", updateScrollUI);
+
+      updateScrollUI();
+
+      if (backToTop) {
+        backToTop.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: window.matchMedia(
+              "(prefers-reduced-motion: reduce)"
+            ).matches ? "auto" : "smooth"
+          });
+        });
+      }
     })();
   </script>
 </body>
