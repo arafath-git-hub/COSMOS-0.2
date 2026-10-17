@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050914">
-
-  <title>Planetary Science | COSMOS</title>
-  <meta name="description" content="Explore planetary science, planetary geology, atmospheres, planetary systems, and the science of worlds beyond Earth.">
+  <meta name="theme-color" content="#070916">
+  <meta name="description" content="Explore planetary science through geology, atmospheres, interiors, oceans, moons, asteroids, planetary formation, robotic missions and the search for habitable environments.">
+  <title>Planetary Science | COSMOS Research</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,1035 +14,1493 @@
 
   <style>
     :root {
-      --bg: #050914;
-      --panel: rgba(12, 24, 43, 0.76);
-      --cyan: #55e7ff;
-      --blue: #5289ff;
-      --purple: #a18aff;
-      --text: #f1f7ff;
-      --muted: #9aadc7;
-      --border: rgba(100, 199, 255, 0.18);
-      --max: 1160px;
+      --bg: #070916;
+      --panel: rgba(17, 24, 49, .82);
+      --panel2: #111831;
+      --text: #f4f6ff;
+      --muted: #a1adcd;
+      --cyan: #68edff;
+      --blue: #6e91ff;
+      --violet: #b39aff;
+      --pink: #ff91db;
+      --line: rgba(139, 163, 255, .19);
+      --max: 1180px;
+      --radius: 21px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 30px;
+      scroll-padding-top: 24px;
     }
 
     body {
-      min-height: 100vh;
-      overflow-x: hidden;
-      background: var(--bg);
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 10% 8%, rgba(66, 79, 177, .18), transparent 35%),
+        radial-gradient(ellipse at 92% 32%, rgba(22, 131, 176, .12), transparent 31%),
+        radial-gradient(ellipse at 50% 78%, rgba(119, 65, 170, .10), transparent 36%),
+        var(--bg);
       color: var(--text);
       font-family: "DM Sans", sans-serif;
-      line-height: 1.7;
+      line-height: 1.75;
+      overflow-x: hidden;
     }
 
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      z-index: -3;
+      z-index: -1;
       pointer-events: none;
-      background:
-        radial-gradient(ellipse at 15% 12%, rgba(22, 90, 171, .19), transparent 36%),
-        radial-gradient(ellipse at 88% 30%, rgba(68, 54, 174, .16), transparent 35%),
-        radial-gradient(ellipse at 50% 90%, rgba(0, 173, 203, .10), transparent 42%),
-        #050914;
-      animation: nebulaBreath 12s ease-in-out infinite alternate;
+      opacity: .28;
+      background-image:
+        radial-gradient(1px 1px at 15% 25%, white 99%, transparent),
+        radial-gradient(2px 2px at 60% 75%, #b8c9ff 99%, transparent),
+        radial-gradient(1px 1px at 80% 15%, #68edff 99%, transparent),
+        radial-gradient(1px 1px at 35% 85%, white 99%, transparent);
+      background-size: 240px 240px, 320px 320px, 280px 280px, 390px 390px;
+      animation: starMove 85s linear infinite;
     }
 
-    #starfield {
+    a { color: inherit; }
+    button, input, select { font: inherit; }
+
+    a:focus-visible, button:focus-visible,
+    input:focus-visible, select:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+    .progress {
       position: fixed;
-      inset: 0;
-      z-index: -2;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
+      inset: 0 auto auto 0;
+      width: 0;
+      height: 3px;
+      z-index: 1000;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--pink));
+      box-shadow: 0 0 15px rgba(104, 237, 255, .6);
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    .back-wrap {
+      max-width: var(--max);
+      width: calc(100% - 40px);
+      margin: 22px auto 0;
     }
 
-    button {
-      font: inherit;
-    }
-
-    .page-shell {
-      width: min(var(--max), calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    .back-row {
-      padding-top: 28px;
-      animation: fadeDown .8s ease both;
-    }
-
-    .back-link {
+    .back {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       padding: 10px 16px;
-      border: 1px solid var(--border);
+      text-decoration: none;
+      font-size: .88rem;
+      border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(9, 19, 35, .78);
-      color: #d8efff;
-      font-size: .9rem;
-      transition: .3s ease;
-      backdrop-filter: blur(12px);
+      background: rgba(12, 18, 42, .8);
+      color: #e1eaff;
+      transition: .25s;
     }
 
-    .back-link:hover {
-      transform: translateX(-5px);
+    .back:hover {
+      transform: translateX(-3px);
       border-color: var(--cyan);
-      box-shadow: 0 0 24px rgba(85, 231, 255, .13);
-      color: white;
-    }
-
-    .back-arrow {
       color: var(--cyan);
-      font-size: 1.15rem;
     }
 
     .hero {
+      padding: 76px 20px 85px;
       position: relative;
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      align-items: center;
-      gap: 38px;
-      min-height: 610px;
-      padding: 64px 0 72px;
+      overflow: hidden;
     }
 
-    .hero-copy {
-      position: relative;
-      z-index: 2;
-      animation: fadeUp 1s .1s both;
+    .hero-inner {
+      max-width: var(--max);
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 38px;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 22px;
       color: var(--cyan);
-      font-size: .76rem;
-      font-weight: 700;
-      letter-spacing: .2em;
       text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: .72rem;
+      font-weight: 700;
     }
 
     .eyebrow::before {
       content: "";
-      width: 27px;
       height: 1px;
-      background: var(--cyan);
-      box-shadow: 0 0 12px var(--cyan);
+      width: 25px;
+      background: currentColor;
+      box-shadow: 0 0 10px currentColor;
     }
 
-    h1, h2, h3 {
+    h1, h2, h3, h4 {
       font-family: "Space Grotesk", sans-serif;
-      line-height: 1.12;
+      line-height: 1.2;
+      letter-spacing: -.035em;
     }
 
     h1 {
-      max-width: 680px;
-      font-size: clamp(3rem, 6.7vw, 6.1rem);
-      font-weight: 600;
-      letter-spacing: -.065em;
+      font-size: clamp(3.2rem, 7.5vw, 6.3rem);
+      margin: 23px 0;
+      line-height: .99;
     }
 
-    h1 span {
+    .gradient {
       display: block;
-      background: linear-gradient(100deg, #ffffff 5%, #80efff 40%, #7e9cff 72%, #c0a4ff);
-      background-size: 200% auto;
       color: transparent;
-      background-clip: text;
+      background: linear-gradient(100deg, #fff, var(--cyan) 40%, var(--violet) 77%, var(--pink));
       -webkit-background-clip: text;
-      animation: textFlow 7s linear infinite;
+      background-clip: text;
     }
 
-    .hero-description {
-      max-width: 550px;
-      margin-top: 24px;
+    .hero p {
+      max-width: 680px;
       color: var(--muted);
-      font-size: 1.04rem;
-      line-height: 1.9;
+      font-size: 1.02rem;
     }
 
-    .hero-actions {
+    .hero p strong { color: #f0f4ff; }
+
+    .actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 13px;
-      margin-top: 31px;
+      gap: 12px;
+      margin-top: 27px;
     }
 
-    .button {
+    .btn {
       display: inline-flex;
-      justify-content: center;
       align-items: center;
-      gap: 9px;
-      min-height: 47px;
-      padding: 12px 19px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: .9rem;
-      font-weight: 700;
-      transition: transform .3s, box-shadow .3s, border-color .3s;
+      justify-content: center;
+      padding: 12px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text);
+      background: rgba(18, 27, 57, .8);
+      cursor: pointer;
+      transition: .25s;
     }
 
-    .button-primary {
-      border-color: transparent;
-      background: linear-gradient(110deg, #3a9de9, #6569e8);
-      color: white;
-      box-shadow: 0 8px 30px rgba(56, 133, 255, .2);
-    }
-
-    .button-secondary {
-      background: rgba(15, 28, 49, .6);
-      color: #dceaff;
-    }
-
-    .button:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 35px rgba(65, 174, 255, .19);
-    }
-
-    .button-secondary:hover {
+    .btn:hover {
+      transform: translateY(-3px);
       border-color: var(--cyan);
     }
 
-    .hero-visual {
+    .primary {
+      background: linear-gradient(110deg, var(--cyan), #b7c3ff);
+      color: #07111b;
+      border-color: transparent;
+      font-weight: 700;
+    }
+
+    .primary:hover {
+      background: linear-gradient(110deg, #b8f8ff, #ddd8ff);
+    }
+
+    .hero-note {
+      font-size: .8rem !important;
+      color: #7f8bad !important;
+      margin-top: 18px;
+    }
+
+    .planet-scene {
+      min-height: 390px;
       position: relative;
       display: grid;
-      min-width: 0;
-      min-height: 430px;
       place-items: center;
       isolation: isolate;
-      animation: fadeUp 1s .3s both;
     }
 
-    .visual-glow {
+    .halo {
       position: absolute;
-      width: 75%;
+      width: 85%;
       aspect-ratio: 1;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(45, 133, 255, .18), rgba(45, 133, 255, .04) 42%, transparent 70%);
+      background: radial-gradient(circle, rgba(83, 95, 230, .27), rgba(26, 151, 204, .08) 45%, transparent 70%);
       filter: blur(10px);
-      animation: glowPulse 5s ease-in-out infinite alternate;
-    }
-
-    .planet-system {
-      position: relative;
-      display: grid;
-      width: min(100%, 420px);
-      aspect-ratio: 1;
-      place-items: center;
-      animation: planetFloat 7s ease-in-out infinite;
-    }
-
-    .orbit {
-      position: absolute;
-      width: 94%;
-      height: 36%;
-      border: 1px solid rgba(95, 209, 255, .3);
-      border-radius: 50%;
-      transform: rotate(-27deg);
-      box-shadow: 0 0 15px rgba(85, 231, 255, .05);
-    }
-
-    .orbit.orbit-two {
-      width: 110%;
-      height: 50%;
-      transform: rotate(40deg);
-      border-color: rgba(142, 128, 255, .24);
-      animation: orbitTilt 18s linear infinite;
-    }
-
-    .orbit.orbit-three {
-      width: 78%;
-      height: 102%;
-      transform: rotate(55deg);
-      border-color: rgba(75, 164, 255, .18);
+      animation: haloPulse 5s ease-in-out infinite;
     }
 
     .planet {
-      position: relative;
-      width: 48%;
+      width: 190px;
       aspect-ratio: 1;
-      overflow: hidden;
       border-radius: 50%;
+      position: relative;
+      z-index: 2;
       background:
-        radial-gradient(ellipse at 26% 24%, rgba(255,255,255,.92), transparent 4%),
-        radial-gradient(ellipse at 30% 28%, #8cf1ff 0%, #3daed9 16%, transparent 38%),
-        radial-gradient(ellipse at 72% 32%, #4a66d2, transparent 35%),
-        radial-gradient(ellipse at 35% 75%, #1856a3, transparent 46%),
-        linear-gradient(140deg, #8cefff, #2365c8 52%, #111d53);
+        radial-gradient(ellipse at 28% 23%, rgba(255,255,255,.7), transparent 5%),
+        repeating-linear-gradient(158deg, transparent 0 19px, rgba(136, 230, 255, .16) 21px 25px, transparent 29px 42px),
+        radial-gradient(circle at 32% 27%, #9cdeff, #507fdf 29%, #4544a2 58%, #15163e 88%);
       box-shadow:
-        inset -27px -17px 40px rgba(0, 0, 25, .85),
-        inset 10px 8px 23px rgba(255, 255, 255, .23),
-        0 0 40px rgba(60, 168, 255, .28),
-        0 0 100px rgba(60, 168, 255, .12);
-      animation: planetTurn 24s linear infinite;
-    }
-
-    .planet::before {
-      content: "";
-      position: absolute;
-      inset: -30%;
-      border-radius: 50%;
-      background: repeating-linear-gradient(
-        14deg,
-        transparent 0 15px,
-        rgba(115, 228, 255, .12) 16px 20px,
-        transparent 21px 34px
-      );
-      filter: blur(2px);
-      animation: surfaceDrift 14s linear infinite;
+        inset -28px -20px 42px rgba(0,0,0,.65),
+        inset 8px 7px 20px rgba(255,255,255,.13),
+        0 0 35px rgba(93, 141, 255, .42),
+        0 0 90px rgba(119, 93, 255, .23);
+      animation: floatPlanet 7s ease-in-out infinite;
     }
 
     .planet::after {
       content: "";
       position: absolute;
-      inset: 0;
+      inset: -13px;
+      border: 2px solid rgba(104, 237, 255, .4);
       border-radius: 50%;
-      background: linear-gradient(110deg, rgba(255,255,255,.22), transparent 35%, rgba(0,0,30,.7) 83%);
+      transform: rotateX(67deg) rotate(-25deg);
+      box-shadow: 0 0 22px rgba(104, 237, 255, .2);
     }
 
-    .moon {
+    .orbit {
       position: absolute;
-      z-index: 2;
-      top: 18%;
-      right: 9%;
-      width: 9%;
-      aspect-ratio: 1;
+      width: 350px;
+      height: 145px;
+      border: 1px solid rgba(111, 157, 255, .42);
       border-radius: 50%;
-      background: radial-gradient(circle at 28% 25%, #fff, #a9c5dc 35%, #4c6682 80%);
-      box-shadow: 0 0 17px rgba(179, 224, 255, .4);
-      animation: moonOrbit 9s ease-in-out infinite alternate;
+      transform: rotate(-28deg);
     }
 
-    .mini-planet {
-      position: absolute;
-      bottom: 17%;
-      left: 12%;
-      width: 10%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      background: radial-gradient(circle at 28% 24%, #ffd8a0, #d7834d 50%, #5d2945);
-      box-shadow: 0 0 23px rgba(244, 147, 94, .25);
-      animation: miniFloat 5s ease-in-out infinite alternate;
+    .orbit.two {
+      width: 415px;
+      height: 195px;
+      transform: rotate(34deg);
+      border-color: rgba(179, 154, 255, .27);
     }
 
-    .visual-label {
+    .orbit.three {
+      width: 270px;
+      height: 100px;
+      transform: rotate(68deg);
+      border-color: rgba(104, 237, 255, .24);
+    }
+
+    .scene-label {
       position: absolute;
-      right: 0;
-      bottom: 18px;
-      padding: 12px 15px;
-      border: 1px solid rgba(107, 204, 255, .22);
-      border-radius: 9px;
-      background: rgba(5, 14, 28, .78);
+      z-index: 4;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(8, 13, 32, .88);
       backdrop-filter: blur(12px);
-      box-shadow: 0 10px 35px rgba(0,0,0,.2);
+      font-size: .75rem;
     }
 
-    .visual-label strong {
+    .scene-label small {
       display: block;
-      color: #dffaff;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: .9rem;
+      color: var(--muted);
+      font-size: .68rem;
     }
 
-    .visual-label small {
-      color: var(--muted);
-      font-size: .74rem;
-    }
+    .label-a { top: 24px; right: 0; }
+    .label-b { bottom: 26px; left: 0; }
 
     .section {
-      padding: 78px 0;
-      border-top: 1px solid rgba(118, 182, 255, .1);
+      width: min(var(--max), calc(100% - 40px));
+      margin: auto;
+      padding: 65px 0;
     }
 
-    .section-heading {
-      max-width: 700px;
-      margin-bottom: 34px;
+    .section-head {
+      max-width: 790px;
+      margin-bottom: 30px;
     }
 
-    .section-kicker {
-      margin-bottom: 12px;
+    .section-no {
+      display: block;
+      font: 700 .75rem "Space Grotesk", sans-serif;
       color: var(--cyan);
-      font-size: .74rem;
-      font-weight: 700;
-      letter-spacing: .18em;
-      text-transform: uppercase;
+      letter-spacing: .15em;
+      margin-bottom: 10px;
     }
 
-    h2 {
-      font-size: clamp(2rem, 4.2vw, 3.4rem);
-      letter-spacing: -.045em;
+    .section-head h2 {
+      font-size: clamp(2rem, 4.5vw, 3.25rem);
+      margin: 0 0 14px;
     }
 
-    .section-heading p {
-      margin-top: 15px;
-      color: var(--muted);
-      line-height: 1.85;
-    }
+    .section-head p { color: var(--muted); margin: 0; }
 
-    .topic-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 17px;
-    }
-
-    .topic-card {
-      --accent: #55e7ff;
-      position: relative;
-      min-height: 230px;
-      overflow: hidden;
-      padding: 25px;
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      background:
-        radial-gradient(ellipse at 100% 0%, rgba(56, 128, 214, .12), transparent 55%),
-        linear-gradient(145deg, rgba(15, 29, 51, .88), rgba(7, 14, 28, .93));
-      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
-      transform-style: preserve-3d;
-    }
-
-    .topic-card::before {
-      content: "";
-      position: absolute;
-      top: -60px;
-      right: -50px;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background: var(--accent);
-      opacity: .08;
-      filter: blur(35px);
-      transition: opacity .35s, transform .5s;
-    }
-
-    .topic-card:hover {
-      transform: translateY(-7px);
-      border-color: color-mix(in srgb, var(--accent), transparent 35%);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, .24), 0 0 25px color-mix(in srgb, var(--accent), transparent 92%);
-    }
-
-    .topic-card:hover::before {
-      opacity: .2;
-      transform: scale(1.4);
-    }
-
-    .topic-number {
-      display: inline-block;
-      margin-bottom: 25px;
-      color: var(--accent);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: .8rem;
-      letter-spacing: .12em;
-    }
-
-    .topic-card h3 {
-      margin-bottom: 11px;
-      font-size: 1.18rem;
-    }
-
-    .topic-card p {
-      color: var(--muted);
-      font-size: .9rem;
-      line-height: 1.8;
-    }
-
-    .topic-line {
-      width: 35px;
-      height: 2px;
-      margin-top: 20px;
-      background: var(--accent);
-      box-shadow: 0 0 12px var(--accent);
-      transition: width .4s;
-    }
-
-    .topic-card:hover .topic-line {
-      width: 75px;
-    }
-
-    .fact-panel {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 35px;
-      padding: clamp(24px, 5vw, 52px);
-      overflow: hidden;
-      border: 1px solid rgba(88, 184, 255, .2);
-      border-radius: 18px;
-      background:
-        radial-gradient(ellipse at 0 0, rgba(35, 130, 219, .14), transparent 55%),
-        rgba(8, 18, 34, .78);
-    }
-
-    .fact-panel::after {
-      content: "";
-      position: absolute;
-      top: -100px;
-      right: -80px;
-      width: 280px;
-      height: 280px;
-      border: 1px solid rgba(85, 231, 255, .13);
-      border-radius: 50%;
-      box-shadow: 0 0 0 25px rgba(85, 231, 255, .025), 0 0 0 55px rgba(85, 231, 255, .02);
-      pointer-events: none;
-    }
-
-    .fact-panel h2 {
-      margin-bottom: 18px;
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-    }
-
-    .fact-panel p {
-      color: var(--muted);
-      line-height: 1.9;
-    }
-
-    .fact-list {
-      position: relative;
-      z-index: 1;
+    .stats, .grid-3, .grid-2, .mission-grid, .facts {
       display: grid;
       gap: 15px;
-      align-content: center;
     }
 
-    .fact-item {
-      display: flex;
-      gap: 13px;
-      align-items: flex-start;
-      padding-bottom: 15px;
-      border-bottom: 1px solid rgba(128, 184, 255, .12);
+    .stats { grid-template-columns: repeat(4, 1fr); }
+    .grid-3, .mission-grid { grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .facts { grid-template-columns: repeat(3, 1fr); }
+
+    .stat, .card, .panel, .mission, .fact, .faq-item, .resource {
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(19, 28, 58, .85), rgba(9, 14, 34, .82));
+      border-radius: var(--radius);
+      box-shadow: 0 0 30px rgba(85, 121, 255, .055);
     }
 
-    .fact-item:last-child {
-      padding-bottom: 0;
-      border-bottom: 0;
+    .stat {
+      padding: 21px;
+      min-height: 140px;
     }
 
-    .fact-dot {
-      flex: 0 0 8px;
-      width: 8px;
-      height: 8px;
-      margin-top: 9px;
-      border-radius: 50%;
-      background: var(--cyan);
-      box-shadow: 0 0 12px var(--cyan);
-    }
-
-    .fact-item strong {
+    .stat strong {
       display: block;
-      margin-bottom: 3px;
-      font-size: .94rem;
+      font: 700 clamp(1.7rem, 3vw, 2.4rem) "Space Grotesk", sans-serif;
+      color: var(--cyan);
+      line-height: 1.25;
     }
 
-    .fact-item span:last-child {
+    .stat span {
+      display: block;
+      margin-top: 9px;
       color: var(--muted);
-      font-size: .86rem;
+      font-size: .87rem;
     }
 
-    .exploration-banner {
+    .card, .mission {
+      padding: 23px;
+      transition: transform .28s, border-color .28s, background .28s;
+      overflow: hidden;
+    }
+
+    .card:hover, .mission:hover, .resource:hover {
+      transform: translateY(-5px);
+      border-color: rgba(104, 237, 255, .46);
+      background: linear-gradient(145deg, rgba(25, 39, 77, .94), rgba(12, 17, 41, .9));
+    }
+
+    .card-number {
+      color: var(--cyan);
+      font: 700 .72rem "Space Grotesk", sans-serif;
+      letter-spacing: .13em;
+    }
+
+    .card h3, .mission h3 {
+      font-size: 1.18rem;
+      margin: 12px 0 9px;
+    }
+
+    .card p, .mission p, .panel p, .fact span {
+      color: var(--muted);
+      font-size: .91rem;
+      margin: 0;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 15px;
+    }
+
+    .tag {
+      font-size: .71rem;
+      color: #d4defd;
+      border: 1px solid rgba(139, 163, 255, .2);
+      background: rgba(104, 137, 255, .08);
+      padding: 4px 9px;
+      border-radius: 999px;
+    }
+
+    .notice {
+      margin-top: 16px;
+      padding: 14px 17px;
+      border-left: 2px solid var(--cyan);
+      border-radius: 0 12px 12px 0;
+      background: rgba(70, 125, 177, .08);
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .notice a { color: var(--cyan); }
+
+    .panel {
+      padding: clamp(21px, 4vw, 34px);
+    }
+
+    .panel h3 {
+      font-size: 1.5rem;
+      margin-top: 0;
+    }
+
+    .panel ul, .panel ol { color: var(--muted); padding-left: 21px; }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(10, 15, 36, .82);
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 670px;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--cyan);
+      font: 600 .83rem "Space Grotesk", sans-serif;
+      background: rgba(80, 102, 185, .1);
+    }
+
+    td { color: var(--muted); font-size: .89rem; }
+    td:first-child { color: #e8edff; font-weight: 600; }
+    tr:last-child td { border-bottom: 0; }
+
+    .step-list {
+      display: grid;
+      gap: 12px;
+      counter-reset: step;
+    }
+
+    .step {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 15px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(17, 24, 49, .66);
+    }
+
+    .step::before {
+      content: counter(step, decimal-leading-zero);
+      height: 42px;
+      display: grid;
+      place-items: center;
+      color: var(--cyan);
+      background: rgba(104, 237, 255, .08);
+      border-radius: 12px;
+      font: 700 .85rem "Space Grotesk", sans-serif;
+    }
+
+    .step h3 { font-size: 1.05rem; margin: 1px 0 5px; }
+    .step p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+    .mission-date {
+      color: var(--cyan);
+      font: 700 .79rem "Space Grotesk", sans-serif;
+      letter-spacing: .08em;
+    }
+
+    .mission-status {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 4px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: .7rem;
+      color: #cbd8ff;
+    }
+
+    .fact { padding: 21px; }
+    .fact strong {
+      display: block;
+      color: var(--cyan);
+      font-family: "Space Grotesk", sans-serif;
+      margin-bottom: 7px;
+    }
+
+    .selector-lab {
+      padding: clamp(20px, 4vw, 32px);
+      border: 1px solid var(--line);
+      border-radius: 25px;
+      background: radial-gradient(ellipse at 50% 0, rgba(84, 105, 220, .15), transparent 70%), rgba(10, 15, 36, .84);
+    }
+
+    .selector-lab select {
+      width: 100%;
+      padding: 13px;
+      color: var(--text);
+      background: #101831;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-top: 8px;
+    }
+
+    .selector-lab option { background: #101831; }
+
+    .lab-grid {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .lab-orb {
+      min-height: 270px;
+      display: grid;
+      place-items: center;
       position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background: radial-gradient(circle, rgba(83, 103, 221, .16), transparent 68%);
+    }
+
+    .lab-orb::before {
+      content: "";
+      width: 135px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--orb-color, radial-gradient(circle at 30% 25%, #fff, #65a4ff 30%, #25236f 80%));
+      box-shadow: 0 0 35px rgba(101, 139, 255, .36), inset -20px -18px 35px rgba(0,0,0,.48);
+      animation: floatPlanet 6s ease-in-out infinite;
+    }
+
+    .lab-orbit {
+      position: absolute;
+      width: 260px;
+      height: 115px;
+      border: 1px solid rgba(104, 237, 255, .33);
+      border-radius: 50%;
+      transform: rotate(-20deg);
+    }
+
+    .lab-copy h3 { font-size: 1.65rem; margin: 0 0 10px; }
+    .lab-copy p { color: var(--muted); }
+    .lab-copy strong { color: var(--cyan); }
+
+    .faq-list { display: grid; gap: 10px; }
+
+    .faq-item { overflow: hidden; }
+
+    .faq-item summary {
+      list-style: none;
+      padding: 18px 21px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 25px;
-      margin: 75px 0;
-      padding: 35px;
-      overflow: hidden;
-      border: 1px solid rgba(107, 177, 255, .23);
-      border-radius: 16px;
-      background: linear-gradient(110deg, rgba(21, 62, 111, .35), rgba(37, 28, 94, .26));
+      gap: 15px;
+      cursor: pointer;
+      font-weight: 600;
     }
 
-    .exploration-banner::before {
-      content: "";
-      position: absolute;
-      top: -90px;
-      right: 20%;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: rgba(60, 174, 255, .13);
-      filter: blur(50px);
-    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: "+"; color: var(--cyan); font-size: 1.3rem; }
+    .faq-item[open] summary::after { content: "−"; }
 
-    .exploration-banner h2 {
-      position: relative;
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-    }
-
-    .exploration-banner p {
-      position: relative;
-      max-width: 620px;
-      margin-top: 10px;
+    .faq-answer {
+      padding: 0 21px 20px;
       color: var(--muted);
-      font-size: .92rem;
+      font-size: .91rem;
     }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .resource {
+      display: block;
+      padding: 17px 19px;
+      text-decoration: none;
+      transition: .25s;
+    }
+
+    .resource strong { display: block; color: #e9edff; }
+    .resource span { color: var(--muted); font-size: .83rem; }
+
+    .cta {
+      text-align: center;
+      padding: 56px 23px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: radial-gradient(ellipse at 50% 0, rgba(91, 116, 236, .19), transparent 65%), rgba(12, 17, 40, .84);
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 4.5vw, 3.3rem);
+      margin: 12px 0;
+    }
+
+    .cta p { max-width: 690px; color: var(--muted); margin: 0 auto 22px; }
+    .cta .actions { justify-content: center; }
 
     footer {
-      padding: 25px 0 35px;
-      border-top: 1px solid rgba(118, 182, 255, .1);
-      color: #71849f;
-      font-size: .82rem;
       text-align: center;
+      padding: 28px 20px 42px;
+      font-size: .82rem;
+      color: #7d89aa;
     }
+
+    footer a { color: #b8caff; }
 
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity .75s ease, transform .75s ease;
+      transform: translateY(20px);
+      transition: opacity .65s ease, transform .65s ease;
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .no-js .reveal { opacity: 1; transform: none; }
+
+    @keyframes starMove {
+      from { background-position: 0 0, 0 0, 0 0, 0 0; }
+      to { background-position: 240px 480px, -320px 320px, 280px -280px, -390px 390px; }
     }
 
-    @keyframes nebulaBreath {
-      from { filter: hue-rotate(0deg); opacity: .8; }
-      to { filter: hue-rotate(18deg); opacity: 1; }
+    @keyframes haloPulse {
+      0%, 100% { transform: scale(.94); opacity: .7; }
+      50% { transform: scale(1.07); opacity: 1; }
     }
 
-    @keyframes textFlow {
-      to { background-position: 200% center; }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(25px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes glowPulse {
-      from { transform: scale(.9); opacity: .6; }
-      to { transform: scale(1.1); opacity: 1; }
-    }
-
-    @keyframes planetFloat {
-      0%, 100% { transform: translateY(0) rotate(-2deg); }
-      50% { transform: translateY(-13px) rotate(2deg); }
-    }
-
-    @keyframes planetTurn {
-      from { filter: hue-rotate(0deg); }
-      to { filter: hue-rotate(18deg); }
-    }
-
-    @keyframes surfaceDrift {
-      from { transform: rotate(0deg) translateX(0); }
-      to { transform: rotate(360deg) translateX(4px); }
-    }
-
-    @keyframes orbitTilt {
-      from { transform: rotate(40deg) scale(1); }
-      50% { transform: rotate(220deg) scale(1.04); }
-      to { transform: rotate(400deg) scale(1); }
-    }
-
-    @keyframes moonOrbit {
-      from { transform: translate(-12px, 12px); }
-      to { transform: translate(16px, -9px); }
-    }
-
-    @keyframes miniFloat {
-      from { transform: translateY(8px); }
-      to { transform: translateY(-12px); }
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr 0.8fr;
-        gap: 10px;
-        min-height: 540px;
-      }
-
-      .hero-visual {
-        min-height: 330px;
-      }
-
-      .topic-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .visual-label {
-        right: -5px;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .page-shell {
-        width: min(100% - 30px, var(--max));
-      }
-
-      .back-row {
-        padding-top: 18px;
-      }
-
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 0;
-        padding: 65px 0 45px;
-      }
-
-      h1 {
-        font-size: clamp(3.1rem, 15vw, 5rem);
-      }
-
-      .hero-description {
-        font-size: .96rem;
-      }
-
-      .hero-visual {
-        min-height: 340px;
-        margin-top: 8px;
-      }
-
-      .planet-system {
-        width: min(83vw, 340px);
-      }
-
-      .visual-label {
-        right: 0;
-        bottom: 0;
-      }
-
-      .section {
-        padding: 58px 0;
-      }
-
-      .topic-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .topic-card {
-        min-height: 190px;
-      }
-
-      .topic-number {
-        margin-bottom: 17px;
-      }
-
-      .fact-panel {
-        grid-template-columns: 1fr;
-        gap: 25px;
-      }
-
-      .exploration-banner {
-        align-items: flex-start;
-        flex-direction: column;
-        margin: 55px 0;
-        padding: 25px;
-      }
+    @keyframes floatPlanet {
+      0%, 100% { transform: translateY(0) rotate(-4deg); }
+      50% { transform: translateY(-12px) rotate(4deg); }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
-        scroll-behavior: auto !important;
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
         transition-duration: .01ms !important;
       }
+      .reveal { opacity: 1; transform: none; }
+    }
 
-      .reveal {
-        opacity: 1;
-        transform: none;
-      }
+    @media (max-width: 950px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 12px; }
+      .hero { padding-top: 60px; }
+      .planet-scene { min-height: 340px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .grid-3, .mission-grid { grid-template-columns: repeat(2, 1fr); }
+      .lab-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 650px) {
+      .back-wrap, .section { width: calc(100% - 28px); }
+      .back-wrap { margin-top: 15px; }
+      .hero { padding: 47px 14px 50px; }
+      h1 { font-size: clamp(3rem, 14vw, 4.7rem); }
+      .planet-scene { min-height: 285px; }
+      .planet { width: 145px; }
+      .orbit { width: 270px; height: 110px; }
+      .orbit.two { width: 315px; height: 155px; }
+      .orbit.three { width: 220px; height: 82px; }
+      .label-a { top: 5px; right: 0; }
+      .label-b { bottom: 5px; left: 0; }
+      .section { padding: 48px 0; }
+      .stats { gap: 9px; }
+      .stat { padding: 15px; min-height: 122px; }
+      .grid-3, .grid-2, .mission-grid, .facts, .resource-grid { grid-template-columns: 1fr; }
+      .card, .mission { padding: 20px; }
+      .actions { align-items: stretch; }
+      .btn { width: 100%; }
+      .cta { padding: 39px 17px; }
     }
   </style>
 </head>
 
-<body>
-  <canvas id="starfield" aria-hidden="true"></canvas>
+<body class="no-js">
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
-  <div class="page-shell">
-    <div class="back-row">
-      <a class="back-link" href="./research.html">
-        <span class="back-arrow" aria-hidden="true">←</span>
-        Back to Research
-      </a>
-    </div>
-
-    <main>
-      <section class="hero" aria-labelledby="page-title">
-        <div class="hero-copy">
-          <div class="eyebrow">COSMOS Research Division</div>
-
-          <h1 id="page-title">
-            <span>Planetary</span>
-            <span>Science</span>
-          </h1>
-
-          <p class="hero-description">
-            Discover the science of planets, moons, atmospheres, and planetary systems.
-            Explore how worlds form, evolve, and reveal the history of our Solar System
-            and the universe beyond it.
-          </p>
-
-          <div class="hero-actions">
-            <a class="button button-primary" href="#research-topics">
-              Explore Research <span aria-hidden="true">↗</span>
-            </a>
-            <a class="button button-secondary" href="#planetary-science">
-              Understand the Science
-            </a>
-          </div>
-        </div>
-
-        <div class="hero-visual" aria-label="Stylized animated planetary system">
-          <div class="visual-glow"></div>
-
-          <div class="planet-system">
-            <div class="orbit orbit-two"></div>
-            <div class="orbit orbit-three"></div>
-            <div class="orbit"></div>
-            <div class="planet"></div>
-            <div class="moon"></div>
-            <div class="mini-planet"></div>
-          </div>
-
-          <div class="visual-label">
-            <strong>Worlds Beyond</strong>
-            <small>One universe. Countless environments.</small>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="research-topics">
-        <div class="section-heading reveal">
-          <div class="section-kicker">Research Fields</div>
-          <h2>Explore the science of worlds</h2>
-          <p>
-            Planetary science brings together astronomy, geology, physics, chemistry,
-            and atmospheric science to understand the worlds around us.
-          </p>
-        </div>
-
-        <div class="topic-grid">
-          <article class="topic-card reveal" style="--accent:#55e7ff">
-            <span class="topic-number">FIELD / 01</span>
-            <h3>Planetary Geology</h3>
-            <p>Study planetary surfaces, impact craters, volcanoes, mountains, and the geological processes that shape other worlds.</p>
-            <div class="topic-line"></div>
-          </article>
-
-          <article class="topic-card reveal" style="--accent:#9b9bff">
-            <span class="topic-number">FIELD / 02</span>
-            <h3>Planetary Atmospheres</h3>
-            <p>Investigate clouds, winds, atmospheric chemistry, weather systems, and climate across different planets.</p>
-            <div class="topic-line"></div>
-          </article>
-
-          <article class="topic-card reveal" style="--accent:#ffb77b">
-            <span class="topic-number">FIELD / 03</span>
-            <h3>Moons and Natural Satellites</h3>
-            <p>Explore icy moons, subsurface oceans, tidal heating, and the complex relationships between moons and their planets.</p>
-            <div class="topic-line"></div>
-          </article>
-
-          <article class="topic-card reveal" style="--accent:#72ffa9">
-            <span class="topic-number">FIELD / 04</span>
-            <h3>Exoplanet Science</h3>
-            <p>Study planets orbiting other stars and investigate their sizes, orbits, atmospheres, and possible environments.</p>
-            <div class="topic-line"></div>
-          </article>
-
-          <article class="topic-card reveal" style="--accent:#ff8bd5">
-            <span class="topic-number">FIELD / 05</span>
-            <h3>Planet Formation</h3>
-            <p>Examine how dust, gas, and small rocky bodies develop into planets within disks around young stars.</p>
-            <div class="topic-line"></div>
-          </article>
-
-          <article class="topic-card reveal" style="--accent:#83aaff">
-            <span class="topic-number">FIELD / 06</span>
-            <h3>Planetary Habitability</h3>
-            <p>Investigate water, energy sources, chemical ingredients, and environmental conditions relevant to life beyond Earth.</p>
-            <div class="topic-line"></div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="planetary-science">
-        <div class="fact-panel reveal">
-          <div>
-            <div class="section-kicker">The Big Picture</div>
-            <h2>Every world tells a story.</h2>
-            <p>
-              A planet's surface, atmosphere, magnetic field, and moons preserve
-              clues about how it formed and changed over time. By comparing worlds,
-              scientists can better understand Earth and the processes that shape
-              planetary systems throughout the galaxy.
-            </p>
-          </div>
-
-          <div class="fact-list">
-            <div class="fact-item">
-              <span class="fact-dot"></span>
-              <div>
-                <strong>Comparative Planetology</strong>
-                <span>Compare worlds to discover the physical processes they share and the ways they differ.</span>
-              </div>
-            </div>
-
-            <div class="fact-item">
-              <span class="fact-dot"></span>
-              <div>
-                <strong>Robotic Exploration</strong>
-                <span>Use orbiters, landers, rovers, and spacecraft to investigate distant environments.</span>
-              </div>
-            </div>
-
-            <div class="fact-item">
-              <span class="fact-dot"></span>
-              <div>
-                <strong>Remote Observation</strong>
-                <span>Analyze light, spectra, radar measurements, and images to study worlds from afar.</span>
-              </div>
-            </div>
-
-            <div class="fact-item">
-              <span class="fact-dot"></span>
-              <div>
-                <strong>Worlds Beyond Our Solar System</strong>
-                <span>Use observations of exoplanets to expand our understanding of planetary diversity.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="exploration-banner reveal">
-        <div>
-          <div class="section-kicker">Continue Exploring</div>
-          <h2>The universe is full of different worlds.</h2>
-          <p>
-            From the rocky surface of Mercury to the icy moons of the outer Solar System
-            and distant exoplanets, planetary science continues to expand our perspective.
-          </p>
-        </div>
-
-        <a class="button button-primary" href="./planets.html">
-          Explore Planets <span aria-hidden="true">↗</span>
-        </a>
-      </section>
-    </main>
-
-    <footer>
-      <p>Planetary Science · COSMOS Research</p>
-    </footer>
+  <div class="back-wrap">
+    <a class="back" href="./research.html"><span aria-hidden="true">←</span> Back to Research</a>
   </div>
 
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <span class="eyebrow">COSMOS / PLANETARY RESEARCH</span>
+        <h1>Worlds <span class="gradient">Under Investigation</span></h1>
+        <p>
+          Planetary science explores how planets, moons, dwarf planets, asteroids and comets
+          form, evolve and interact. By combining geology, physics, chemistry, atmospheric
+          science and robotic exploration, researchers reconstruct the histories of worlds
+          across our Solar System and investigate environments that may be suitable for life.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="#overview">Start Exploring ↓</a>
+          <a class="btn" href="#missions">Explore Space Missions</a>
+        </div>
+        <p class="hero-note">20 research topics · Scientific methods · Mission discoveries · Interactive world explorer</p>
+      </div>
+
+      <div class="planet-scene" role="img" aria-label="Stylized blue planet surrounded by glowing orbital paths">
+        <div class="halo"></div>
+        <div class="orbit"></div>
+        <div class="orbit two"></div>
+        <div class="orbit three"></div>
+        <div class="planet"></div>
+        <div class="scene-label label-a">PLANETARY SYSTEMS<small>Origins, structure and evolution</small></div>
+        <div class="scene-label label-b">ROBOTIC EXPLORATION<small>Observe · Measure · Discover</small></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 01 -->
+    <section class="section reveal" id="overview">
+      <div class="section-head">
+        <span class="section-no">01 / THE BIG PICTURE</span>
+        <h2>What is planetary science?</h2>
+        <p>
+          Planetary science is the interdisciplinary study of planets and other planetary
+          bodies. It investigates their physical properties, composition, surface features,
+          atmospheres, interiors, origins and potential habitability.
+        </p>
+      </div>
+
+      <div class="stats">
+        <article class="stat"><strong>8</strong><span>Recognised planets in our Solar System.</span></article>
+        <article class="stat"><strong>5</strong><span>Officially recognised dwarf planets currently named by the IAU.</span></article>
+        <article class="stat"><strong>4.6B</strong><span>Approximately the age of the Solar System in years.</span></article>
+        <article class="stat"><strong>Multiple</strong><span>Ways to investigate worlds: orbiters, landers, rovers, radar and laboratory samples.</span></article>
+      </div>
+
+      <div class="notice">
+        These figures are educational summaries. The number of known small bodies and planetary discoveries changes as observations improve.
+        Explore the
+        <a href="https://science.nasa.gov/planetary-science/" target="_blank" rel="noopener noreferrer">NASA Planetary Science programme</a>
+        for official research information.
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">02 / PLANETARY CLASSIFICATION</span>
+        <h2>Rocky planets, giant planets and small worlds</h2>
+        <p>Different kinds of planetary bodies preserve different clues about how the Solar System formed.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Body type</th><th>General properties</th><th>Scientific importance</th></tr></thead>
+          <tbody>
+            <tr><td>Terrestrial planets</td><td>Mercury, Venus, Earth and Mars; relatively dense worlds with rocky surfaces.</td><td>Surface geology, atmospheric evolution and the history of habitability.</td></tr>
+            <tr><td>Gas giants</td><td>Jupiter and Saturn; dominated by hydrogen and helium.</td><td>Giant-planet formation, deep atmospheres and powerful magnetic environments.</td></tr>
+            <tr><td>Ice giants</td><td>Uranus and Neptune; contain substantial heavier volatile materials in their interiors.</td><td>Interior structure, unusual heat flow, atmospheric chemistry and magnetic fields.</td></tr>
+            <tr><td>Dwarf planets</td><td>Round bodies orbiting the Sun that have not cleared their orbital neighbourhood.</td><td>Preserve information about planetary formation and early Solar System dynamics.</td></tr>
+            <tr><td>Natural satellites</td><td>Moons with widely different sizes, surfaces and internal activity.</td><td>Ocean worlds, tidal heating, impact history and complex geological processes.</td></tr>
+            <tr><td>Small bodies</td><td>Asteroids, comets and trans-Neptunian objects.</td><td>Primitive material, impact hazards and the delivery of volatile substances.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">03 / PLANETARY GEOLOGY</span>
+        <h2>Reading a world through its surface</h2>
+        <p>Planetary geology uses landscapes, rock types, craters, faults and volcanic structures to reconstruct the history of planets and moons.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card"><span class="card-number">GEOLOGY 01</span><h3>Impact craters</h3><p>Asteroids and comets collide with planetary surfaces, excavating craters and exposing material from below. Crater size, shape and distribution help researchers estimate impact conditions and relative surface ages.</p></article>
+        <article class="card"><span class="card-number">GEOLOGY 02</span><h3>Volcanism</h3><p>Volcanoes and lava flows reveal how heat escapes from planetary interiors. Earth and Venus show silicate volcanism, while Jupiter's moon Io is famous for extreme volcanic activity.</p></article>
+        <article class="card"><span class="card-number">GEOLOGY 03</span><h3>Tectonics and fractures</h3><p>Faults, ridges, cracks and folded terrain can indicate stresses caused by internal cooling, tidal forces, crustal movement or changes in the volume of subsurface materials.</p></article>
+        <article class="card"><span class="card-number">GEOLOGY 04</span><h3>Erosion and sediment</h3><p>Wind, flowing liquids, ice and gravity reshape landscapes. Dunes, channels and layered deposits help reveal environmental changes over geological time.</p></article>
+        <article class="card"><span class="card-number">GEOLOGY 05</span><h3>Mineralogy</h3><p>Minerals preserve chemical and thermal information. Spectrometers and laboratory analyses can help identify hydrated minerals, volcanic rocks, salts and products of water-rock interactions.</p></article>
+        <article class="card"><span class="card-number">GEOLOGY 06</span><h3>Surface chronology</h3><p>Scientists compare crater populations, stratigraphic relationships and radiometric ages of returned samples to build timelines of geological events.</p></article>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">04 / PLANETARY INTERIORS</span>
+        <h2>What lies beneath a planet's surface?</h2>
+        <p>Internal structure determines how worlds release heat, generate magnetic fields, reshape their crusts and evolve over billions of years.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card"><h3>Core</h3><p>Dense material occupies the central region of many planets. Core size, composition and physical state influence planetary density and, in some cases, magnetic-field generation.</p></article>
+        <article class="card"><h3>Mantle</h3><p>The mantle transfers internal heat through processes that may include convection. Its mineralogy and temperature affect melting, volcanism and the movement of a planet's outer layers.</p></article>
+        <article class="card"><h3>Crust and lithosphere</h3><p>The outer rocky layers record impacts, tectonics, volcanic resurfacing and interactions with atmospheres. Their strength and thickness vary widely between worlds.</p></article>
+      </div>
+
+      <div class="notice">
+        Interior models are often indirect. Scientists combine mass, radius, gravity, magnetic fields, seismic measurements and laboratory mineral physics to constrain structures that cannot be observed directly.
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">05 / ATMOSPHERES</span>
+        <h2>Air, clouds and planetary weather</h2>
+        <p>Atmospheric science examines gases, aerosols, clouds, winds, storms, energy transport and how atmospheres change over time.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card"><h3>Atmospheric composition</h3><p>Spectrometers measure how gases absorb or emit light. Composition reveals chemical processes, atmospheric origins and interactions with a planet's surface.</p></article>
+        <article class="card"><h3>Weather systems</h3><p>Cloud bands, storms, jets and circulation patterns reflect atmospheric heating and rotation. Jupiter's Great Red Spot is a famous example of a long-lived giant-planet storm.</p></article>
+        <article class="card"><h3>Greenhouse warming</h3><p>Atmospheric gases absorb and emit infrared radiation. Differences in atmospheric composition and pressure help explain why Venus is extremely hot while Mars is cold today.</p></article>
+        <article class="card"><h3>Atmospheric escape</h3><p>Gas can escape through thermal motion, solar-wind interactions and other processes. Atmospheric loss can change a planet's climate and long-term surface conditions.</p></article>
+        <article class="card"><h3>Clouds and hazes</h3><p>Cloud particles and photochemical hazes affect how sunlight enters and infrared radiation leaves an atmosphere. They can obscure the surface and alter climate.</p></article>
+        <article class="card"><h3>Comparative climates</h3><p>Comparing Earth, Mars, Venus and giant planets helps researchers distinguish universal atmospheric physics from the effects of each world's unique environment.</p></article>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">06 / MAGNETIC FIELDS</span>
+        <h2>Planetary magnetism and space weather</h2>
+        <p>Magnetic fields reveal information about planetary interiors and influence how solar wind and charged particles interact with planets.</p>
+      </div>
+
+      <div class="grid-2">
+        <article class="panel">
+          <h3>How a planetary dynamo works</h3>
+          <p>In a conducting, moving fluid, electrical currents can generate a magnetic field under suitable conditions. Earth's liquid outer core helps maintain its global magnetic field.</p>
+          <ul>
+            <li>Internal heat and fluid motion can power a dynamo.</li>
+            <li>Rotation influences the organisation of magnetic structures.</li>
+            <li>Different planets can have weak, strong, tilted or unusual magnetic fields.</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Why magnetic fields matter</h3>
+          <p>Magnetic fields shape magnetospheres, trap charged particles and create auroras. They also influence how stellar wind interacts with a planet's upper atmosphere.</p>
+          <ul>
+            <li>Spacecraft magnetometers map fields and particle environments.</li>
+            <li>Magnetic data can help constrain subsurface conductive layers.</li>
+            <li>A magnetic field alone does not guarantee atmospheric retention or habitability.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">07 / MOONS AND SATELLITES</span>
+        <h2>Moons are worlds of their own</h2>
+        <p>Natural satellites can possess atmospheres, volcanoes, ice shells, internal oceans and geological histories as complex as those of planets.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card"><h3>Earth's Moon</h3><p>Lunar samples and orbital observations reveal the history of impacts, volcanism and the early Earth-Moon system. The Moon is also an important record of ancient Solar System conditions.</p></article>
+        <article class="card"><h3>Io</h3><p>Jupiter's moon Io is the most volcanically active world known. Strong tidal forces from Jupiter and interactions with neighbouring moons contribute to its internal heating.</p></article>
+        <article class="card"><h3>Europa</h3><p>Europa's fractured icy surface and magnetic evidence support the existence of a subsurface saltwater ocean. Its chemistry, ice shell and energy sources are important targets for habitability research.</p></article>
+        <article class="card"><h3>Enceladus</h3><p>Saturn's moon Enceladus ejects water-rich material from fractures near its south pole. Cassini measurements found salts and organic compounds in sampled plume material.</p></article>
+        <article class="card"><h3>Titan</h3><p>Titan has a thick nitrogen-rich atmosphere, methane weather and lakes of liquid hydrocarbons at its surface. Its chemistry provides a natural laboratory for studying complex organic processes.</p></article>
+        <article class="card"><h3>Ganymede</h3><p>Jupiter's largest moon has its own magnetic field. Multiple lines of evidence suggest it may contain a deep subsurface ocean beneath its icy crust.</p></article>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">08 / OCEAN WORLDS</span>
+        <h2>Hidden oceans beneath ice</h2>
+        <p>Some icy moons may contain liquid water beneath frozen surfaces, even where sunlight is weak and surface temperatures are extremely low.</p>
+      </div>
+
+      <div class="grid-2">
+        <article class="panel">
+          <h3>Where does the energy come from?</h3>
+          <p>Gravitational interactions between a moon and its planet, or between neighbouring moons, can flex a moon's interior and generate tidal heat. Radioactive decay may also contribute internal energy.</p>
+          <p>Ocean-world research examines whether water, chemical nutrients and usable energy could coexist in the same environment.</p>
+        </article>
+        <article class="panel">
+          <h3>How can an ocean be detected?</h3>
+          <ul>
+            <li>Magnetic-field measurements can reveal an induced response from electrically conductive salty water.</li>
+            <li>Gravity and spacecraft tracking constrain internal mass distribution.</li>
+            <li>Surface fractures and geological features can reveal activity in an ice shell.</li>
+            <li>Radar can investigate the structure of ice and shallow subsurface layers.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="notice">
+        A subsurface ocean is not proof of life. Scientists must also investigate chemistry, energy sources, environmental stability and whether potentially habitable conditions actually exist.
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">09 / PLANETARY HABITABILITY</span>
+        <h2>What makes an environment potentially habitable?</h2>
+        <p>Habitability research asks whether a world could provide conditions suitable for life as we understand it. It does not assume that life is present.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card"><h3>Liquid solvents</h3><p>Liquid water is central to life as known on Earth. Scientists investigate temperature, pressure, chemistry and possible environments where liquid water could persist.</p></article>
+        <article class="card"><h3>Chemical building blocks</h3><p>Carbon-containing molecules, nitrogen, phosphorus, sulfur and other elements participate in terrestrial biology. Their presence alone does not demonstrate biological activity.</p></article>
+        <article class="card"><h3>Usable energy</h3><p>Sunlight, chemical reactions, tidal heating and internal heat can power planetary processes. Researchers ask whether an environment can sustain chemical disequilibrium and potential metabolism.</p></article>
+      </div>
+
+      <div class="notice">
+        Planetary habitability depends on many interacting factors. A location inside a conventional habitable zone does not automatically have liquid water, a stable climate or life.
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">10 / FORMATION AND EVOLUTION</span>
+        <h2>How the Solar System formed</h2>
+        <p>Planetary formation models are tested against meteorites, young stars with disks, observed planetary systems and the chemical and dynamical properties of Solar System bodies.</p>
+      </div>
+
+      <div class="step-list">
+        <article class="step"><div><h3>A molecular cloud collapses</h3><p>Gravity causes part of a cloud of gas and dust to collapse, forming the young Sun and a rotating protoplanetary disk.</p></div></article>
+        <article class="step"><div><h3>Dust grains collide and grow</h3><p>Solid particles accumulate into larger aggregates. Their growth depends on collision speeds, material properties and disk conditions.</p></div></article>
+        <article class="step"><div><h3>Planetesimals and embryos develop</h3><p>Gravitational interactions help some bodies grow into larger planetary building blocks.</p></div></article>
+        <article class="step"><div><h3>Planets accrete material</h3><p>Growing bodies gather solids, while some sufficiently massive cores capture substantial gas from the disk.</p></div></article>
+        <article class="step"><div><h3>The system evolves</h3><p>Migration, collisions, orbital resonances and gravitational scattering reshape the arrangement of planets and smaller bodies.</p></div></article>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">11 / SMALL BODIES</span>
+        <h2>Asteroids, comets and dwarf planets</h2>
+        <p>Small Solar System bodies preserve material and dynamical clues from the era when planets were assembling.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card"><h3>Asteroids</h3><p>Many asteroids are rocky or metal-rich bodies, especially common in the region between Mars and Jupiter. Their compositions and orbits provide clues about the early Solar System and impact hazards.</p></article>
+        <article class="card"><h3>Comets</h3><p>Comets contain ice, dust and rocky material. As some approach the Sun, heating releases gas and dust, creating a coma and sometimes long tails shaped by sunlight and the solar wind.</p></article>
+        <article class="card"><h3>Kuiper Belt objects</h3><p>These distant bodies beyond Neptune include icy objects and dwarf planets such as Pluto. Their orbits and surfaces help researchers study the outer Solar System's formation and migration history.</p></article>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">12 / WATER AND PLANETARY CLIMATES</span>
+        <h2>Following water through planetary history</h2>
+        <p>Water can occur as ice, vapour, liquid, minerals bound to water or material trapped underground. Its distribution records temperature, pressure and geological history.</p>
+      </div>
+
+      <div class="grid-2">
+        <article class="panel">
+          <h3>Ancient Mars</h3>
+          <p>Martian valleys, deltas, sedimentary rocks and water-altered minerals provide evidence that liquid water once played an important role at the surface. The timing, duration and nature of those environments remain active research questions.</p>
+        </article>
+        <article class="panel">
+          <h3>Earth and Venus</h3>
+          <p>Earth retains abundant surface liquid water, while Venus has a dense, hot atmosphere and an extremely dry surface today. Comparing their histories helps scientists investigate how atmospheres, solar energy and geological processes influence climate evolution.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">13 / IMPACT SCIENCE</span>
+        <h2>Collisions that shape planetary worlds</h2>
+        <p>Impacts influence planetary surfaces, contribute to the delivery of material and help reconstruct the early history of the Solar System.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card"><h3>Crater formation</h3><p>The size and structure of an impact crater depend on impact speed, impact angle, gravity, target material and the energy released during collision.</p></article>
+        <article class="card"><h3>Planetary defence</h3><p>Tracking near-Earth objects helps assess impact risk. NASA's DART mission demonstrated that a kinetic impactor can change the orbit of a small asteroid moonlet around its companion.</p></article>
+        <article class="card"><h3>Impact history</h3><p>Comparing craters on different bodies helps scientists reconstruct collision rates and understand how resurfacing can erase evidence of older impacts.</p></article>
+      </div>
+    </section>
+
+    <!-- 14 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">14 / PLANETARY SCIENCE METHODS</span>
+        <h2>How scientists investigate other worlds</h2>
+        <p>No single instrument can answer every planetary question. Scientists combine complementary observations and models.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card"><h3>Visible-light imaging</h3><p>Images reveal surface morphology, clouds, geological boundaries, craters and changes over time.</p></article>
+        <article class="card"><h3>Infrared spectroscopy</h3><p>Infrared measurements help identify minerals, gases, temperature patterns and thermal emission.</p></article>
+        <article class="card"><h3>Radar mapping</h3><p>Radar can map surfaces through some clouds and investigate roughness, topography and selected subsurface structures.</p></article>
+        <article class="card"><h3>Gravity science</h3><p>Tracking a spacecraft's motion helps reveal the gravity field and constrain the internal mass distribution of a planet or moon.</p></article>
+        <article class="card"><h3>Magnetometry</h3><p>Magnetometers measure magnetic fields and help investigate planetary dynamos, plasma environments and possible subsurface conductive layers.</p></article>
+        <article class="card"><h3>Sample analysis</h3><p>Laboratories can measure minerals, isotopes and organic compounds in returned material with techniques unavailable on many spacecraft.</p></article>
+      </div>
+    </section>
+
+    <!-- 15 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">15 / FROM DATA TO DISCOVERY</span>
+        <h2>The scientific investigation process</h2>
+        <p>Planetary discoveries are built through observation, testing, uncertainty analysis and comparison with independent evidence.</p>
+      </div>
+
+      <div class="step-list">
+        <article class="step"><div><h3>Define the scientific question</h3><p>Researchers identify the problem: for example, whether a moon has an internal ocean or how a crater formed.</p></div></article>
+        <article class="step"><div><h3>Select the right observations</h3><p>Imaging, spectroscopy, radar, gravity, magnetic-field measurements or laboratory work are chosen to match the question.</p></div></article>
+        <article class="step"><div><h3>Calibrate the instruments</h3><p>Engineers and scientists account for instrument response, noise, geometry, temperature and spacecraft conditions.</p></div></article>
+        <article class="step"><div><h3>Compare data with models</h3><p>Researchers test whether proposed physical processes can explain the observations and whether alternative explanations remain plausible.</p></div></article>
+        <article class="step"><div><h3>Publish and verify</h3><p>Results are reviewed, shared with the research community and compared with future or independent measurements.</p></div></article>
+      </div>
+    </section>
+
+    <!-- 16 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">16 / LANDMARK MISSIONS</span>
+        <h2>Spacecraft that transformed planetary science</h2>
+        <p>Robotic explorers have changed our understanding of planetary geology, atmospheres, small bodies and the potential habitability of other worlds.</p>
+      </div>
+
+      <div class="mission-grid">
+        <article class="mission">
+          <span class="mission-date">1970s</span>
+          <h3>Viking</h3>
+          <p>NASA's Viking missions orbited Mars and landed on its surface. They returned major geological and atmospheric observations and conducted early experiments related to the search for life.</p>
+          <span class="mission-status">Historical mission</span>
+        </article>
+        <article class="mission">
+          <span class="mission-date">1977–PRESENT</span>
+          <h3>Voyager</h3>
+          <p>Voyager 1 and 2 transformed our knowledge of the outer planets and their moons. Voyager 2 remains the only spacecraft to have visited Uranus and Neptune during close flybys.</p>
+          <span class="mission-status">Deep-space exploration</span>
+        </article>
+        <article class="mission">
+          <span class="mission-date">1997–2017</span>
+          <h3>Cassini–Huygens</h3>
+          <p>Cassini investigated Saturn, its rings and moons. The Huygens probe descended through Titan's atmosphere and reached its surface in 2005.</p>
+          <span class="mission-status">Mission completed</span>
+        </article>
+        <article class="mission">
+          <span class="mission-date">2004–2017</span>
+          <h3>MESSENGER</h3>
+          <p>MESSENGER orbited Mercury, revealing details of its crust, magnetic field, exosphere and polar regions, including evidence for water ice in permanently shadowed areas.</p>
+          <span class="mission-status">Mission completed</span>
+        </article>
+        <article class="mission">
+          <span class="mission-date">2011–PRESENT</span>
+          <h3>Juno</h3>
+          <p>NASA's Juno mission investigates Jupiter's gravity, magnetic field, atmosphere and interior, improving our understanding of how giant planets form and evolve.</p>
+          <span class="mission-status">Check official mission status</span>
+        </article>
+        <article class="mission">
+          <span class="mission-date">2012–PRESENT</span>
+          <h3>Curiosity</h3>
+          <p>Curiosity studies Martian geology and ancient environmental conditions in Gale Crater. Its measurements help scientists investigate how habitable environments may have existed on early Mars.</p>
+          <span class="mission-status">Mars surface science</span>
+        </article>
+        <article class="mission">
+          <span class="mission-date">2015–2016</span>
+          <h3>New Horizons</h3>
+          <p>New Horizons flew past Pluto in 2015 and later explored the Kuiper Belt object Arrokoth, revealing complex landscapes on distant icy bodies.</p>
+          <span class="mission-status">Extended exploration</span>
+        </article>
+        <article class="mission">
+          <span class="mission-date">2018–2022</span>
+          <h3>InSight</h3>
+          <p>InSight measured Mars' seismic activity and investigated its internal structure, providing new constraints on the planet's crust, mantle and core.</p>
+          <span class="mission-status">Mission completed</span>
+        </article>
+        <article class="mission">
+          <span class="mission-date">2021–PRESENT</span>
+          <h3>Perseverance</h3>
+          <p>Perseverance explores Jezero Crater, investigates ancient environmental conditions and collects carefully selected rock and regolith samples for possible future return to Earth.</p>
+          <span class="mission-status">Mars surface science</span>
+        </article>
+      </div>
+
+      <div class="notice">
+        Mission status and schedules may change. The cards above distinguish completed missions from ongoing or extended missions; consult official mission pages for current operational updates.
+      </div>
+    </section>
+
+    <!-- 17 -->
+    <section class="section reveal" id="missions">
+      <div class="section-head">
+        <span class="section-no">17 / CURRENT AND FUTURE EXPLORATION</span>
+        <h2>The next frontier of planetary research</h2>
+        <p>Ongoing and planned missions are designed to investigate ocean worlds, small bodies, planetary atmospheres and the conditions that make worlds evolve differently.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <span class="card-number">JUPITER SYSTEM</span>
+          <h3>Europa Clipper</h3>
+          <p>Launched in 2024, this NASA mission is travelling to Jupiter to perform repeated close flybys of Europa. It will study the icy shell, ocean-related evidence, composition and geology to evaluate habitability.</p>
+          <div class="tags"><span class="tag">Ocean world</span><span class="tag">Habitability</span></div>
+          <p style="margin-top:15px"><a href="https://science.nasa.gov/mission/europa-clipper/" target="_blank" rel="noopener noreferrer">Official mission information ↗</a></p>
+        </article>
+        <article class="card">
+          <span class="card-number">JUPITER SYSTEM</span>
+          <h3>JUICE</h3>
+          <p>ESA's Jupiter Icy Moons Explorer is travelling to the Jupiter system to investigate Ganymede and study Europa, Callisto and their environments.</p>
+          <div class="tags"><span class="tag">Icy moons</span><span class="tag">Planetary systems</span></div>
+          <p style="margin-top:15px"><a href="https://www.esa.int/Science_Exploration/Space_Science/Juice" target="_blank" rel="noopener noreferrer">Official mission information ↗</a></p>
+        </article>
+        <article class="card">
+          <span class="card-number">SATURN SYSTEM</span>
+          <h3>Dragonfly</h3>
+          <p>NASA's planned rotorcraft mission will explore multiple sites on Titan to investigate surface materials, prebiotic chemistry and environments relevant to the chemistry that preceded life on Earth.</p>
+          <div class="tags"><span class="tag">Titan</span><span class="tag">Organic chemistry</span></div>
+          <p style="margin-top:15px"><a href="https://science.nasa.gov/mission/dragonfly/" target="_blank" rel="noopener noreferrer">Official mission information ↗</a></p>
+        </article>
+        <article class="card">
+          <span class="card-number">METAL-RICH ASTEROID</span>
+          <h3>Psyche</h3>
+          <p>NASA's Psyche spacecraft is travelling to a metal-rich asteroid of the same name. Its measurements will help test ideas about planetary building blocks and the formation of differentiated bodies.</p>
+          <div class="tags"><span class="tag">Asteroid science</span><span class="tag">Planet formation</span></div>
+          <p style="margin-top:15px"><a href="https://science.nasa.gov/mission/psyche/" target="_blank" rel="noopener noreferrer">Official mission information ↗</a></p>
+        </article>
+        <article class="card">
+          <span class="card-number">VENUS</span>
+          <h3>DAVINCI and VERITAS</h3>
+          <p>These planned NASA missions are designed to investigate Venus' atmosphere and geological history using complementary approaches. Mission dates and implementation details should be checked against official updates.</p>
+          <div class="tags"><span class="tag">Atmosphere</span><span class="tag">Geology</span></div>
+          <p style="margin-top:15px"><a href="https://science.nasa.gov/venus/" target="_blank" rel="noopener noreferrer">NASA Venus research ↗</a></p>
+        </article>
+        <article class="card">
+          <span class="card-number">PLANETARY DEFENCE</span>
+          <h3>NEO Surveyor</h3>
+          <p>NASA's planned space telescope is designed to discover and characterise near-Earth objects, improving the search for asteroids and comets that could pose an impact hazard.</p>
+          <div class="tags"><span class="tag">Asteroids</span><span class="tag">Impact risk</span></div>
+          <p style="margin-top:15px"><a href="https://science.nasa.gov/planetary-defense/" target="_blank" rel="noopener noreferrer">NASA planetary defence ↗</a></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 18 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">18 / INTERACTIVE PLANET LAB</span>
+        <h2>Compare different worlds</h2>
+        <p>Select a world to explore a few key properties. These short profiles are educational summaries, not complete planetary models.</p>
+      </div>
+
+      <div class="selector-lab">
+        <div class="lab-grid">
+          <div>
+            <label for="worldSelect"><strong>Select a world</strong></label>
+            <select id="worldSelect">
+              <option value="earth">Earth</option>
+              <option value="mars">Mars</option>
+              <option value="venus">Venus</option>
+              <option value="mercury">Mercury</option>
+              <option value="jupiter">Jupiter</option>
+              <option value="europa">Europa</option>
+              <option value="titan">Titan</option>
+              <option value="enceladus">Enceladus</option>
+            </select>
+            <p style="color:var(--muted);font-size:.86rem">Change the selection to update the research profile and planetary illustration.</p>
+          </div>
+          <div class="lab-orb" id="labOrb" aria-hidden="true">
+            <div class="lab-orbit"></div>
+          </div>
+        </div>
+        <div class="lab-copy" aria-live="polite">
+          <h3 id="worldName">Earth</h3>
+          <p id="worldDescription">Earth has stable surface liquid water, a nitrogen-rich atmosphere and an active global biosphere. It is the only world currently known to support life.</p>
+          <p><strong>Research focus:</strong> <span id="worldFocus">Climate, oceans, geology and the evolution of life.</span></p>
+          <p><strong>Scientific perspective:</strong> <span id="worldPerspective">Earth provides the reference point for comparing planetary habitability and climate systems.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 19 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">19 / LIMITATIONS AND OPEN QUESTIONS</span>
+        <h2>What scientists still do not know</h2>
+        <p>Planetary science often works with incomplete observations. A strong explanation must account for uncertainty and remain open to revision.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card"><h3>Hidden interiors</h3><p>Most planetary cores and deep mantles cannot be directly sampled. Researchers use gravity, magnetic fields, seismic waves and laboratory experiments to constrain possible structures.</p></article>
+        <article class="card"><h3>Ancient environments</h3><p>Geological records are incomplete. Erosion, impacts and volcanic resurfacing can erase evidence, leaving several possible explanations for the same landscape.</p></article>
+        <article class="card"><h3>Life beyond Earth</h3><p>Habitability research identifies environments worth investigating, but no confirmed extraterrestrial life has been discovered. Future measurements must distinguish biological possibilities from non-biological processes.</p></article>
+      </div>
+
+      <div class="facts">
+        <div class="fact"><strong>Measurement uncertainty</strong><span>Every instrument has limits, calibration requirements and a finite ability to resolve small features.</span></div>
+        <div class="fact"><strong>Competing hypotheses</strong><span>Scientists compare alternative models rather than assuming that the first plausible explanation is correct.</span></div>
+        <div class="fact"><strong>Independent evidence</strong><span>Conclusions become more robust when different instruments or methods support the same interpretation.</span></div>
+      </div>
+    </section>
+
+    <!-- 20 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-no">20 / PLANETARY SCIENCE FAQ</span>
+        <h2>Frequently asked questions</h2>
+        <p>Answers to common questions about planetary science, exploration and the search for habitable environments.</p>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>What is the difference between astronomy and planetary science?</summary>
+          <div class="faq-answer">Astronomy broadly studies celestial objects and the universe. Planetary science focuses on the origin, composition, structure, atmospheres, geology and evolution of planets, moons and smaller planetary bodies. The fields overlap extensively.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How do scientists study a planet without landing on it?</summary>
+          <div class="faq-answer">Orbiters and flyby spacecraft use cameras, spectrometers, radar, radio tracking and other instruments. Earth-based telescopes can also measure reflected light, thermal emission, atmospheric properties and orbital behaviour.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Why are there four rocky planets close to the Sun?</summary>
+          <div class="faq-answer">The inner Solar System was generally too hot for abundant water ice and many volatile materials to remain solid during planet formation. Rocky and metallic materials could accumulate there. The complete formation history also involved collisions, migration and material transport.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Why is Venus hotter than Mercury?</summary>
+          <div class="faq-answer">Venus has an extremely dense carbon-dioxide atmosphere that produces a powerful greenhouse effect. Mercury is closer to the Sun, but it has almost no substantial atmosphere to retain heat in the same way.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Is Mars still geologically active?</summary>
+          <div class="faq-answer">Mars is much less volcanically and tectonically active than Earth today, but it is not simply a completely unchanged world. Scientists investigate recent geological features, marsquakes, dust activity and evidence of past and possible present processes.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Could Europa or Enceladus support life?</summary>
+          <div class="faq-answer">Both are important targets because evidence suggests that they have subsurface oceans. Their potential habitability depends on chemistry, available energy, water-rock interactions and the persistence of suitable conditions. Life has not been confirmed on either moon.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What did the DART mission demonstrate?</summary>
+          <div class="faq-answer">NASA's Double Asteroid Redirection Test deliberately struck Dimorphos, a small moonlet orbiting the asteroid Didymos. The impact changed Dimorphos' orbital period, demonstrating the kinetic-impact technique under the tested conditions.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Why do planetary scientists study asteroids?</summary>
+          <div class="faq-answer">Asteroids preserve information about the material from which planets formed. Studying their composition, structure and orbits also supports planetary-defence research and helps identify potentially hazardous objects.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Can a planet have a magnetic field without Earth-like life?</summary>
+          <div class="faq-answer">Yes. A magnetic field is a physical phenomenon that can arise from processes in a planet's interior or from other magnetic interactions. It is not evidence that a planet contains life.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How do scientists determine a planet's age?</summary>
+          <div class="faq-answer">Scientists combine radiometric dating of suitable samples, crater counts, stratigraphy, geological relationships and models of planetary evolution. Different methods have different uncertainties and work best in different settings.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What is a planetary rover?</summary>
+          <div class="faq-answer">A rover is a robotic vehicle designed to move across another world's surface. It can carry cameras, spectrometers, environmental sensors and instruments that examine rocks and soil at close range.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Does finding water mean finding life?</summary>
+          <div class="faq-answer">No. Water can be present without life. Scientists also investigate chemical ingredients, energy sources, environmental stability and direct evidence before considering a biological explanation.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Where can I find real planetary science data?</summary>
+          <div class="faq-answer">NASA, ESA, JPL and research institutions publish mission data, instrument descriptions, scientific articles and educational resources. Links below lead to official agency websites.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Official resources -->
+    <section class="section reveal" id="resources">
+      <div class="section-head">
+        <span class="section-no">RESEARCH LIBRARY</span>
+        <h2>Continue your investigation</h2>
+        <p>Explore official science resources for mission updates, scientific findings, datasets and educational material.</p>
+      </div>
+
+      <div class="resource-grid">
+        <a class="resource" href="https://science.nasa.gov/planetary-science/" target="_blank" rel="noopener noreferrer">
+          <strong>NASA Planetary Science ↗</strong>
+          <span>Research areas, discoveries and planetary missions.</span>
+        </a>
+        <a class="resource" href="https://science.jpl.nasa.gov/division/planetary-science/" target="_blank" rel="noopener noreferrer">
+          <strong>JPL Planetary Science ↗</strong>
+          <span>Planetary geology, interiors, atmospheres and laboratory science.</span>
+        </a>
+        <a class="resource" href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener noreferrer">
+          <strong>NASA Solar System ↗</strong>
+          <span>Planets, moons, dwarf planets and small bodies.</span>
+        </a>
+        <a class="resource" href="https://science.nasa.gov/mission/europa-clipper/" target="_blank" rel="noopener noreferrer">
+          <strong>Europa Clipper ↗</strong>
+          <span>Investigating the icy moon's potential habitability.</span>
+        </a>
+        <a class="resource" href="https://science.nasa.gov/mission/dragonfly/" target="_blank" rel="noopener noreferrer">
+          <strong>Dragonfly ↗</strong>
+          <span>Titan's surface chemistry and planetary environments.</span>
+        </a>
+        <a class="resource" href="https://science.nasa.gov/mission/dart/" target="_blank" rel="noopener noreferrer">
+          <strong>DART Mission ↗</strong>
+          <span>Asteroid deflection and planetary defence.</span>
+        </a>
+        <a class="resource" href="https://science.nasa.gov/mars/" target="_blank" rel="noopener noreferrer">
+          <strong>NASA Mars Research ↗</strong>
+          <span>Martian geology, climate and robotic exploration.</span>
+        </a>
+        <a class="resource" href="https://www.esa.int/Science_Exploration/Space_Science" target="_blank" rel="noopener noreferrer">
+          <strong>ESA Space Science ↗</strong>
+          <span>European planetary and space science missions.</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="cta">
+        <span class="eyebrow">THE SCIENCE OF OTHER WORLDS</span>
+        <h2>Every world tells a different story.</h2>
+        <p>From ancient Martian river systems to hidden oceans and metal-rich asteroids, planetary science helps explain how worlds form, change and sometimes develop conditions suitable for life.</p>
+        <div class="actions">
+          <a class="btn primary" href="./planets.html">Explore the Planets</a>
+          <a class="btn" href="./research.html">Return to Research</a>
+          <a class="btn" href="#top">Back to Top ↑</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>COSMOS · Planetary Science Research</p>
+    <p>Educational content informed by official planetary science and space-agency resources.</p>
+    <p><a href="./research.html">Research</a> · <a href="./index.html">COSMOS Home</a></p>
+    <p>Page revision: <span id="year"></span></p>
+  </footer>
+
   <script>
-    (() => {
-      const canvas = document.getElementById("starfield");
-      const ctx = canvas.getContext("2d");
+    document.body.classList.remove("no-js");
 
-      if (!ctx) return;
+    // Footer year
+    const yearElement = document.getElementById("year");
+    if (yearElement) yearElement.textContent = new Date().getFullYear();
 
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      let stars = [];
-      let width = 0;
-      let height = 0;
-      let animationFrame = null;
+    // Reading progress indicator
+    const progressElement = document.getElementById("progress");
 
-      function resizeCanvas() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
-        width = window.innerWidth;
-        height = window.innerHeight;
-
-        canvas.width = Math.floor(width * dpr);
-        canvas.height = Math.floor(height * dpr);
-        canvas.style.width = width + "px";
-        canvas.style.height = height + "px";
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-        const count = Math.min(150, Math.floor((width * height) / 8500));
-
-        stars = Array.from({ length: count }, () => ({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          radius: Math.random() * 1.25 + 0.25,
-          alpha: Math.random() * 0.55 + 0.2,
-          speed: Math.random() * 0.18 + 0.025,
-          phase: Math.random() * Math.PI * 2
-        }));
-
-        drawStars(0);
+    function updateProgress() {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const value = height > 0 ? (window.scrollY / height) * 100 : 0;
+      if (progressElement) {
+        progressElement.style.width = Math.max(0, Math.min(100, value)) + "%";
       }
+    }
 
-      function drawStars(time) {
-        ctx.clearRect(0, 0, width, height);
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    updateProgress();
 
-        for (const star of stars) {
-          const pulse = reducedMotion
-            ? 1
-            : 0.72 + Math.sin(time * 0.001 + star.phase) * 0.28;
+    // Scroll reveal, with a fallback for older browsers
+    const revealElements = document.querySelectorAll(".reveal");
 
-          ctx.beginPath();
-          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(184, 224, 255, ${star.alpha * pulse})`;
-          ctx.fill();
-
-          if (!reducedMotion) {
-            star.y -= star.speed;
-
-            if (star.y < -2) {
-              star.y = height + 2;
-              star.x = Math.random() * width;
-            }
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries, activeObserver) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            activeObserver.unobserve(entry.target);
           }
-        }
+        });
+      }, { threshold: 0.07 });
 
-        if (!reducedMotion) {
-          animationFrame = requestAnimationFrame(drawStars);
-        }
+      revealElements.forEach(element => observer.observe(element));
+    } else {
+      revealElements.forEach(element => element.classList.add("visible"));
+    }
+
+    // Interactive planetary comparison lab
+    const worlds = {
+      earth: {
+        name: "Earth",
+        description: "Earth has stable surface liquid water, a nitrogen-rich atmosphere and an active global biosphere. It is the only world currently known to support life.",
+        focus: "Climate, oceans, geology and the evolution of life.",
+        perspective: "Earth provides the reference point for comparing planetary habitability and climate systems.",
+        color: "radial-gradient(circle at 30% 25%, #d7ffff, #43a8e8 30%, #2350a4 57%, #15303e 82%)"
+      },
+      mars: {
+        name: "Mars",
+        description: "Mars is a cold, rocky world with a thin carbon-dioxide atmosphere, ancient river valleys and evidence of past liquid-water environments.",
+        focus: "Ancient water, climate evolution, geology and potential past habitable environments.",
+        perspective: "Mars preserves geological records that can help reconstruct how a planet changes as its atmosphere and climate evolve.",
+        color: "radial-gradient(circle at 30% 25%, #ffd5a4, #e77d51 32%, #9c3d2c 66%, #441f28 90%)"
+      },
+      venus: {
+        name: "Venus",
+        description: "Venus has a thick carbon-dioxide atmosphere, sulfuric-acid cloud layers and an extremely hot surface caused by a powerful greenhouse effect.",
+        focus: "Atmospheric evolution, volcanism, surface chemistry and climate.",
+        perspective: "Venus helps researchers understand how atmospheric composition and energy balance can lead to very different planetary climates.",
+        color: "radial-gradient(circle at 30% 25%, #fff0bd, #f1b35f 33%, #b76c36 65%, #5c342b 90%)"
+      },
+      mercury: {
+        name: "Mercury",
+        description: "Mercury is a small, heavily cratered rocky planet with a large metallic core and extreme temperature differences between day and night.",
+        focus: "Interior structure, magnetic fields, impact history and polar volatiles.",
+        perspective: "Mercury reveals how a small planet close to its star can evolve differently from Earth.",
+        color: "radial-gradient(circle at 30% 25%, #dedede, #9297a7 33%, #555a70 68%, #25283d 90%)"
+      },
+      jupiter: {
+        name: "Jupiter",
+        description: "Jupiter is the Solar System's largest planet. Its atmosphere contains powerful storms, while its gravity and internal structure provide clues about giant-planet formation.",
+        focus: "Atmospheric dynamics, deep interior, magnetic fields and the Galilean moons.",
+        perspective: "Giant planets influence the architecture of planetary systems and host environments where moons can develop.",
+        color: "repeating-linear-gradient(0deg, #bb7b55 0 12px, #f1d4a8 13px 23px, #8e5948 24px 34px, #e9c39a 35px 46px)"
+      },
+      europa: {
+        name: "Europa",
+        description: "Europa is an icy moon of Jupiter with a fractured surface and strong evidence for a global saltwater ocean beneath its ice shell.",
+        focus: "Ice-shell structure, ocean chemistry, geological activity and potential habitability.",
+        perspective: "Europa offers a way to investigate a potentially habitable environment far from the Sun.",
+        color: "repeating-linear-gradient(135deg, #f5e8d7 0 8px, #b8c7d7 9px 12px, #7f91ad 13px 15px, #dce6ee 16px 25px)"
+      },
+      titan: {
+        name: "Titan",
+        description: "Titan is Saturn's largest moon. It has a dense nitrogen-rich atmosphere, methane weather and lakes and seas of liquid hydrocarbons.",
+        focus: "Organic chemistry, atmospheric cycles, surface processes and prebiotic chemistry.",
+        perspective: "Titan provides a natural laboratory for studying complex chemistry under conditions very different from Earth.",
+        color: "radial-gradient(circle at 30% 25%, #ffe2a1, #d49a4f 32%, #925d36 67%, #4c342c 90%)"
+      },
+      enceladus: {
+        name: "Enceladus",
+        description: "Enceladus is a small icy moon of Saturn. Water-rich plumes emerging from its south-polar region reveal material from a subsurface ocean environment.",
+        focus: "Ocean composition, plume chemistry, tidal heating and habitability.",
+        perspective: "Sampling plume material provides a way to study an ocean world without drilling through its ice shell.",
+        color: "radial-gradient(circle at 30% 25%, #ffffff, #dcecff 38%, #a0bbd7 67%, #43536f 90%)"
       }
+    };
 
-      window.addEventListener("resize", resizeCanvas, { passive: true });
-      resizeCanvas();
+    const worldSelect = document.getElementById("worldSelect");
+    const worldName = document.getElementById("worldName");
+    const worldDescription = document.getElementById("worldDescription");
+    const worldFocus = document.getElementById("worldFocus");
+    const worldPerspective = document.getElementById("worldPerspective");
+    const labOrb = document.getElementById("labOrb");
 
-      const revealElements = document.querySelectorAll(".reveal");
+    function updateWorld() {
+      if (!worldSelect) return;
 
-      if ("IntersectionObserver" in window && !reducedMotion) {
-        const observer = new IntersectionObserver((entries, obs) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              obs.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.12 });
+      const selected = worlds[worldSelect.value];
+      if (!selected) return;
 
-        revealElements.forEach(element => observer.observe(element));
-      } else {
-        revealElements.forEach(element => element.classList.add("visible"));
-      }
+      worldName.textContent = selected.name;
+      worldDescription.textContent = selected.description;
+      worldFocus.textContent = selected.focus;
+      worldPerspective.textContent = selected.perspective;
+      labOrb.style.setProperty("--orb-color", selected.color);
+    }
 
-      window.addEventListener("pagehide", () => {
-        if (animationFrame !== null) {
-          cancelAnimationFrame(animationFrame);
-        }
-      }, { once: true });
-    })();
+    if (worldSelect) {
+      worldSelect.addEventListener("change", updateWorld);
+      updateWorld();
+    }
+
+    // Keep one FAQ open at a time
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    faqItems.forEach(item => {
+      item.addEventListener("toggle", () => {
+        if (!item.open) return;
+
+        faqItems.forEach(other => {
+          if (other !== item) other.open = false;
+        });
+      });
+    });
   </script>
 </body>
 </html>
