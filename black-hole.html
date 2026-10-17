@@ -607,83 +607,665 @@
       font: 600 14px "Space Grotesk", sans-serif;
     }
 
+        /* Complete the card title styles */
     .card-title p {
       margin: 4px 0 0;
       font-size: 10px;
-      color: var(--muted);/* Force the COSMOS hamburger button to show on desktop */
-#menuToggle,
-.menu-toggle {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+      color: var(--muted);
+      line-height: 1.5;
+    }
 
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px;
+    /* Hamburger button: always visible on desktop and mobile */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      overflow: visible;
+    }
 
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 5px !important;
+    #menuToggle.menu-toggle {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      position: relative;
+      z-index: 1002;
+      flex: 0 0 44px;
+      flex-direction: column !important;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      border: 1px solid rgba(82, 229, 255, .45);
+      border-radius: 10px;
+      background: #101b35;
+      cursor: pointer;
+    }
 
-  position: relative;
-  z-index: 10001;
-  flex-shrink: 0;
-  cursor: pointer;
+    #menuToggle.menu-toggle span {
+      display: block !important;
+      width: 20px;
+      height: 2px;
+      min-height: 2px;
+      flex: 0 0 2px;
+      background: var(--cyan);
+      border-radius: 2px;
+      transition: transform .2s ease, opacity .2s ease;
+    }
 
-  background: #101626 !important;
-  border: 1px solid rgba(84, 246, 255, 0.5) !important;
-  border-radius: 10px;
-}
+    #menuToggle[aria-expanded="true"] span:first-child {
+      transform: translateY(7px) rotate(45deg);
+    }
 
-#menuToggle span,
-.menu-toggle span {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1;
-  width: 20px !important;
-  height: 2px !important;
-  min-height: 2px;
-  flex-shrink: 0;
+    #menuToggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
 
-  background: #54f6ff !important;
-  border-radius: 2px;
-}
+    #menuToggle[aria-expanded="true"] span:last-child {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Dropdown navigation works at every screen size */
+    #cosmosNav.nav {
+      display: none !important;
+      position: absolute;
+      top: calc(100% + 1px);
+      right: 4%;
+      left: auto;
+      z-index: 1001;
+      width: min(350px, calc(100vw - 24px));
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 5px;
+      padding: 12px;
+      margin: 0;
+      border: 1px solid var(--border);
+      border-radius: 0 0 14px 14px;
+      background: rgba(4, 8, 22, .98);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, .45);
+    }
+
+    #cosmosNav.nav.open {
+      display: flex !important;
+    }
+
+    #cosmosNav.nav a {
+      display: block;
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      font-size: 13px;
+      white-space: normal;
+    }
+
+    #cosmosNav.nav a:hover,
+    #cosmosNav.nav a.current {
+      color: var(--cyan);
+      border-color: rgba(82, 229, 255, .25);
+      background: rgba(47, 112, 255, .13);
+    }
+
+    /* Gravity Lab */
+    .card-body {
+      padding: 16px;
+    }
+
+    .label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 13px;
+      color: #c5d5f1;
+      font-size: 12px;
+    }
+
+    .value-pill {
+      padding: 5px 10px;
+      color: var(--cyan);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(35, 95, 180, .15);
+      font-weight: 700;
+    }
+
+    input[type="range"] {
+      display: block;
+      width: 100%;
+      accent-color: var(--cyan);
+      cursor: pointer;
+    }
+
+    .range-scale {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .metrics {
+      display: grid;
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    .metric {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px;
+      border: 1px solid rgba(99, 151, 255, .13);
+      border-radius: 9px;
+      background: rgba(4, 10, 25, .42);
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .metric strong {
+      color: var(--cyan);
+      font-size: 12px;
+      text-align: right;
+    }
+
+    .formula-note,
+    .explain-text {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    .formula-note {
+      margin: 16px 0 0;
+    }
+
+    /* Gravitational lensing visualizer */
+    .lens-visual {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 155px;
+      overflow: hidden;
+      border: 1px solid rgba(99, 151, 255, .15);
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at center, rgba(76, 111, 210, .18), transparent 45%),
+        #070d20;
+    }
+
+    .lens-visual::before,
+    .lens-visual::after {
+      content: "";
+      position: absolute;
+      width: 130px;
+      height: 55px;
+      border: 1px solid rgba(82, 229, 255, .5);
+      border-radius: 50%;
+      transform: rotate(-28deg);
+      box-shadow: 0 0 18px rgba(82, 229, 255, .12);
+    }
+
+    .lens-visual::after {
+      width: 100px;
+      height: 75px;
+      border-color: rgba(161, 108, 255, .5);
+      transform: rotate(35deg);
+    }
+
+    .lens-ring {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border: 2px solid rgba(255, 174, 91, .8);
+      border-radius: 50%;
+      box-shadow: 0 0 22px rgba(255, 154, 71, .28);
+      animation: lensPulse 4s ease-in-out infinite;
+    }
+
+    .lens-center {
+      position: relative;
+      z-index: 1;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: #000;
+      box-shadow: 0 0 18px rgba(82, 229, 255, .55);
+    }
+
+    @keyframes lensPulse {
+      0%, 100% { transform: scale(.94); opacity: .75; }
+      50% { transform: scale(1.06); opacity: 1; }
+    }
+
+    .segmented {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 15px;
+    }
+
+    .segmented button {
+      flex: 1 1 auto;
+      padding: 9px 10px;
+      color: #c5d5f1;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(5, 12, 29, .75);
+      font-size: 10px;
+      cursor: pointer;
+    }
+
+    .segmented button.active {
+      color: var(--cyan);
+      border-color: rgba(82, 229, 255, .45);
+      background: rgba(47, 112, 255, .15);
+    }
+
+    .explain-text {
+      margin: 14px 0 0;
+    }
+
+    /* Black hole types */
+    .type-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .type-button {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr) 12px;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 12px;
+      color: var(--text);
+      text-align: left;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(4, 10, 25, .4);
+      cursor: pointer;
+    }
+
+    .type-button.active,
+    .type-button:hover {
+      border-color: rgba(82, 229, 255, .5);
+      background: rgba(35, 95, 180, .14);
+    }
+
+    .type-orb {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--purple);
+      border-radius: 50%;
+      box-shadow: inset 0 0 8px rgba(161, 108, 255, .5);
+    }
+
+    .type-button:nth-child(2) .type-orb {
+      border-color: var(--blue);
+    }
+
+    .type-button:nth-child(3) .type-orb {
+      border-color: var(--orange);
+    }
+
+    .type-button strong,
+    .type-button small {
+      display: block;
+    }
+
+    .type-button strong {
+      font-size: 11px;
+    }
+
+    .type-button small {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .type-button .arrow {
+      color: var(--cyan);
+      font-size: 19px;
+    }
+
+    /* Discoveries */
+    .discovery-list {
+      display: grid;
+      gap: 15px;
+      padding: 16px;
+    }
+
+    .discovery {
+      display: grid;
+      grid-template-columns: 35px minmax(0, 1fr);
+      gap: 11px;
+      align-items: start;
+    }
+
+    .discovery-icon {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      color: var(--cyan);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(35, 95, 180, .15);
+    }
+
+    .discovery strong {
+      font-size: 12px;
+    }
+
+    .discovery p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+    /* Extended science sections */
+    .wide-section {
+      margin-top: 18px;
+      padding: clamp(17px, 2.5vw, 28px);
+    }
+
+    .wide-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .wide-heading h2 {
+      margin: 8px 0;
+      font: 600 clamp(20px, 2.3vw, 28px) "Space Grotesk", sans-serif;
+    }
+
+    .wide-heading p {
+      max-width: 750px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .type-details,
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .type-detail,
+    .fact-card {
+      min-width: 0;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(4, 10, 25, .45);
+    }
+
+    .type-label {
+      color: var(--cyan);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .type-detail h3,
+    .fact-card h3 {
+      margin: 12px 0 9px;
+      font: 600 15px "Space Grotesk", sans-serif;
+    }
+
+    .type-detail p,
+    .fact-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .number {
+      color: var(--blue);
+      font: 700 25px "Space Grotesk", sans-serif;
+    }
+
+    .notice {
+      margin-top: 20px;
+      padding: 14px 16px;
+      color: #b8c9e8;
+      border: 1px solid rgba(82, 229, 255, .2);
+      border-radius: 10px;
+      background: rgba(30, 73, 133, .12);
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    /* Footer and notification */
+    .footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 23px 4%;
+      margin-top: 25px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+    }
+
+    .footer strong {
+      color: var(--cyan);
+      letter-spacing: 1px;
+    }
+
+    .footer a:hover {
+      color: var(--cyan);
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 2000;
+      max-width: calc(100vw - 40px);
+      padding: 12px 16px;
+      color: var(--text);
+      border: 1px solid rgba(82, 229, 255, .35);
+      border-radius: 10px;
+      background: #101b35;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .4);
+      font-size: 12px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive layout */
+    @media (max-width: 1100px) {
+      .layout {
+        grid-template-columns: 190px minmax(0, 1fr);
+      }
+
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .right-stack {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto;
+      }
+
+      .content-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar {
+        gap: 12px;
+        padding: 10px 4%;
+      }
+
+      .brand-name {
+        font-size: 22px;
+      }
+
+      .brand-sub {
+        font-size: 8px;
+        letter-spacing: 1.3px;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      main {
+        padding: 20px 14px 35px;
+      }
+
+      .blackhole-stage {
+        min-height: 360px;
+      }
+
+      .right-stack {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .content-grid,
+      .type-details,
+      .fact-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .stage-tools {
+        top: 12px;
+        right: 10px;
+      }
+
+      .stage-tools button {
+        padding: 7px;
+        font-size: 10px;
+      }
+
+      .stage-title {
+        top: 13px;
+        left: 13px;
+        max-width: 48%;
+      }
+
+      .stage-title strong {
+        font-size: 12px;
+      }
+
+      .stage-title span {
+        font-size: 9px;
+        line-height: 1.5;
+      }
+
+      .stage-bottom {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+      }
+
+      .drag-hint {
+        padding: 7px;
+        font-size: 9px;
+      }
+
+      .wide-section {
+        padding: 16px;
+      }
+
+      .footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .brand {
+        gap: 8px;
+      }
+
+      .brand-symbol {
+        width: 36px;
+        height: 36px;
+        font-size: 21px;
+      }
+
+      .brand-name {
+        font-size: 19px;
+      }
+
+      .brand-sub {
+        font-size: 7px;
+        letter-spacing: 1px;
+      }
+
+      #menuToggle.menu-toggle {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+      }
+
+      .blackhole-stage {
+        min-height: 330px;
+      }
+
+      .stage-tools button {
+        gap: 4px;
+        padding: 6px;
+        font-size: 9px;
+      }
+
+      .stage-tools .dot {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
-
-<body>
-  <header class="topbar">
-    <a class="brand" href="./index.html" aria-label="COSMOS home">
-      <div class="brand-symbol" aria-hidden="true">◉</div>
-      <div>
-        <div class="brand-name">COSMOS</div>
-        <div class="brand-sub">EXPLORE · LEARN · DISCOVER</div>
-      </div>
-    </a>
-
-    <button
-      class="menu-toggle"
-      id="menuToggle"
-      type="button"
-      aria-label="Open navigation menu"
-      aria-expanded="false"
-      aria-controls="cosmosNav"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <nav class="nav" id="cosmosNav" aria-label="Main navigation">
-      <a href="./index.html">Home</a>
-      <a href="./planets.html">Planets</a>
-      <a href="./search.html">Global Search</a>
-      <a href="./missions.html">Missions</a>
-      <a href="./research.html">Research</a>
-      <a class="current" href="./black-hole.html" aria-current="page">Black Hole Observatory</a>
-      <a href="./about.html">About</a>
-    </nav>
-  </header>
 
   <div class="layout">
     <aside class="sidebar">
