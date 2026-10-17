@@ -4,496 +4,777 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore Neptune, the distant ice giant. Discover its atmosphere, powerful winds, rings, moons, Triton, and the Voyager 2 mission.">
-  <meta name="theme-color" content="#050914">
-  <title>Neptune — The Distant Ice Giant | COSMOS</title>
+  <meta name="theme-color" content="#061326">
+  <meta name="description" content="Explore Neptune, the distant ice giant. Discover its powerful winds, dark storms, mysterious atmosphere and fascinating moons.">
+  <title>Neptune | COSMOS — Explore the Universe</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
 
   <style>
     :root {
-      --bg: #050914;
-      --surface: #0b1324;
-      --surface-light: #101d33;
-      --text: #edf5ff;
-      --muted: #9cacc4;
-      --accent: #638cff;
-      --accent-light: #a7c3ff;
-      --border: rgba(153, 184, 255, 0.15);
-      --glow: rgba(56, 106, 255, 0.2);
+      --bg: #061326;
+      --bg-deep: #020813;
+      --panel: rgba(10, 31, 60, 0.72);
+      --border: rgba(91, 183, 255, 0.19);
+      --text: #f0f8ff;
+      --muted: #9ab6d3;
+      --accent: #50b8ff;
+      --accent-bright: #b6e8ff;
+      --accent-dark: #1768d1;
+      --glow: rgba(40, 140, 255, 0.24);
+      --display: "Space Grotesk", sans-serif;
+      --body: "DM Sans", sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 100px;
+      scroll-padding-top: 30px;
     }
 
     body {
-      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
       background:
-        radial-gradient(ellipse at 78% 9%, rgba(25, 63, 157, 0.15), transparent 35%),
+        radial-gradient(ellipse at 78% 10%, rgba(14, 77, 160, .19), transparent 35%),
+        radial-gradient(ellipse at 10% 48%, rgba(20, 79, 151, .11), transparent 35%),
         var(--bg);
       color: var(--text);
-      font-family: "DM Sans", sans-serif;
+      font-family: var(--body);
       line-height: 1.7;
-      overflow-x: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-    button, a { -webkit-tap-highlight-color: transparent; }
-
-    .container {
-      width: min(1160px, calc(100% - 48px));
-      margin-inline: auto;
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      content: "";
+      opacity: .34;
+      background-image:
+        radial-gradient(1px 1px at 8% 14%, white 50%, transparent 100%),
+        radial-gradient(2px 2px at 72% 26%, #9bdcff 50%, transparent 100%),
+        radial-gradient(1px 1px at 34% 60%, white 50%, transparent 100%),
+        radial-gradient(1px 1px at 87% 78%, white 50%, transparent 100%),
+        radial-gradient(2px 2px at 16% 88%, #78bfff 50%, transparent 100%),
+        radial-gradient(1px 1px at 60% 92%, white 50%, transparent 100%);
+      background-size: 310px 290px, 410px 370px, 270px 310px, 350px 400px, 430px 330px, 290px 390px;
+      animation: starDrift 70s linear infinite;
     }
 
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(5, 9, 20, 0.86);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(18px);
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .nav-inner {
-      min-height: 76px;
-      display: flex;
-      justify-content: space-between;
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible, a:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 5px;
+    }
+
+    .page-shell {
+      width: min(1180px, calc(100% - 44px));
+      margin: 0 auto;
+    }
+
+    .back-row {
+      padding-top: 26px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .back-button {
+      display: inline-flex;
       align-items: center;
-      gap: 24px;
-    }
-
-    .logo {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.45rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      white-space: nowrap;
-    }
-
-    .logo span { color: var(--accent-light); }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 25px;
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    .nav-links a:hover,
-    .nav-links a[aria-current="page"] {
+      gap: 10px;
+      padding: 10px 17px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(7, 23, 44, .7);
       color: var(--text);
+      font-size: .88rem;
+      font-weight: 600;
+      transition: border-color .25s, background .25s, transform .25s;
+    }
+
+    .back-button:hover {
+      transform: translateX(-4px);
+      border-color: var(--accent);
+      background: rgba(22, 69, 116, .55);
+    }
+
+    .back-arrow {
+      color: var(--accent);
+      font-size: 1.15rem;
     }
 
     .hero {
-      min-height: 600px;
-      padding: 86px 0 76px;
+      min-height: 690px;
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1.02fr .98fr;
       align-items: center;
-      gap: 48px;
+      gap: 26px;
+      padding: 56px 0 84px;
+      position: relative;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      animation: fadeUp .85s both;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      color: var(--accent-light);
-      text-transform: uppercase;
-      letter-spacing: 2.5px;
-      font-size: 0.73rem;
+      color: var(--accent-bright);
+      font-size: .76rem;
+      letter-spacing: .19em;
       font-weight: 700;
+      text-transform: uppercase;
     }
 
     .eyebrow::before {
       content: "";
-      width: 24px;
+      width: 25px;
       height: 1px;
       background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
     }
 
     h1, h2, h3 {
-      font-family: "Space Grotesk", sans-serif;
-      line-height: 1.15;
-      margin-top: 0;
+      font-family: var(--display);
+      line-height: 1.13;
+      letter-spacing: -.04em;
     }
 
     h1 {
-      font-size: clamp(3.5rem, 7vw, 6.3rem);
-      letter-spacing: -5px;
-      margin: 23px 0;
+      margin: 22px 0 18px;
+      font-size: clamp(4.1rem, 9vw, 7.4rem);
+      font-weight: 700;
+      line-height: .95;
+      background: linear-gradient(120deg, #fff 10%, #a8dfff 48%, #438ff5 90%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 34px rgba(68, 166, 255, .12));
     }
 
-    h1 span {
-      display: block;
-      color: var(--accent-light);
+    .hero-subtitle {
+      color: var(--accent-bright);
+      font-family: var(--display);
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      margin-bottom: 20px;
     }
 
-    .hero-copy > p {
-      max-width: 560px;
+    .hero-description {
+      max-width: 530px;
       color: var(--muted);
-      font-size: 1.04rem;
+      font-size: 1.02rem;
+      line-height: 1.9;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 13px;
+      gap: 12px;
       margin-top: 30px;
     }
 
-    .btn {
+    .button {
+      min-height: 47px;
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      min-height: 47px;
-      padding: 0 20px;
+      gap: 9px;
+      padding: 12px 19px;
+      border-radius: 9px;
       border: 1px solid var(--border);
-      border-radius: 7px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: transform 0.25s, background 0.25s;
+      font-weight: 700;
+      font-size: .88rem;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
     }
 
-    .btn:hover { transform: translateY(-3px); }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
+    .button:hover {
+      transform: translateY(-3px);
       border-color: var(--accent);
+      box-shadow: 0 10px 30px var(--glow);
     }
 
-    .btn-secondary { background: rgba(255,255,255,0.025); }
+    .button-primary {
+      color: #041426;
+      background: linear-gradient(110deg, #b9eaff, #4baaff);
+      border-color: transparent;
+    }
 
-    .hero-art {
-      position: relative;
-      min-height: 410px;
+    .button-secondary {
+      background: rgba(8, 25, 47, .65);
+      color: var(--text);
+    }
+
+    .hero-visual {
+      min-height: 460px;
       display: grid;
       place-items: center;
+      position: relative;
       isolation: isolate;
+      animation: fadeIn 1.3s both;
     }
 
-    .stars, .stars::before, .stars::after {
-      position: absolute;
-      inset: 0;
-      content: "";
-      pointer-events: none;
-      background-image:
-        radial-gradient(1px 1px at 15% 18%, #fff 80%, transparent),
-        radial-gradient(2px 2px at 78% 22%, #9fbaff 80%, transparent),
-        radial-gradient(1px 1px at 63% 77%, #fff 80%, transparent),
-        radial-gradient(1px 1px at 25% 70%, #b5caff 80%, transparent),
-        radial-gradient(1px 1px at 88% 63%, #fff 80%, transparent),
-        radial-gradient(1px 1px at 48% 10%, #fff 80%, transparent);
-      opacity: 0.8;
-    }
-
-    .stars::before {
-      transform: translate(16px, 25px) scale(0.8);
-      opacity: 0.5;
+    .planet-stage {
+      width: min(100%, 475px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      position: relative;
     }
 
     .orbit {
       position: absolute;
-      width: min(100%, 420px);
-      aspect-ratio: 1;
-      border: 1px solid rgba(111, 157, 255, 0.18);
+      width: 97%;
+      height: 43%;
+      border: 1px solid rgba(105, 194, 255, .23);
       border-radius: 50%;
-      transform: rotate(-24deg) scaleY(0.48);
+      transform: rotate(-24deg);
     }
 
-    .orbit-two {
-      width: min(91%, 380px);
-      border-color: rgba(111, 157, 255, 0.12);
-      transform: rotate(30deg) scaleY(0.55);
+    .orbit.orbit-two {
+      width: 115%;
+      height: 58%;
+      transform: rotate(58deg);
+      border-color: rgba(105, 194, 255, .12);
     }
 
-    .planet {
+    .planet-halo {
+      position: absolute;
+      width: 76%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: #1474db;
+      filter: blur(65px);
+      opacity: .27;
+      animation: haloPulse 5s ease-in-out infinite;
+    }
+
+    .neptune {
+      width: 67%;
+      aspect-ratio: 1;
       position: relative;
-      width: clamp(220px, 27vw, 310px);
-      aspect-ratio: 1;
-      border-radius: 50%;
       overflow: hidden;
+      border-radius: 50%;
       background:
-        radial-gradient(ellipse at 31% 25%, rgba(177, 222, 255, 0.95), transparent 12%),
-        linear-gradient(165deg, transparent 18%, rgba(8, 30, 103, 0.2) 19%, transparent 25%),
-        repeating-linear-gradient(
-          176deg,
-          #3375e5 0 8px,
-          #1f51bd 9px 15px,
-          #478ff5 16px 23px,
-          #1645a9 24px 31px,
-          #2866d7 32px 39px
-        );
+        radial-gradient(ellipse at 28% 21%, rgba(185, 229, 255, .85), transparent 7%),
+        radial-gradient(ellipse at 30% 29%, rgba(103, 186, 255, .85), transparent 18%),
+        radial-gradient(ellipse at 75% 62%, rgba(1, 35, 127, .9), transparent 35%),
+        radial-gradient(ellipse at 39% 47%, #1688ed 0%, #0963cf 38%, #073aa3 67%, #03194f 100%);
       box-shadow:
-        inset -45px -20px 65px rgba(0, 4, 30, 0.8),
-        inset 22px 10px 45px rgba(124, 192, 255, 0.25),
-        0 0 80px rgba(45, 98, 255, 0.28);
-      animation: float 7s ease-in-out infinite;
+        inset -30px -18px 45px rgba(0, 5, 38, .9),
+        inset 13px 9px 22px rgba(161, 225, 255, .32),
+        0 0 32px rgba(35, 136, 255, .6),
+        0 0 95px rgba(22, 113, 255, .22);
+      animation: planetFloat 7s ease-in-out infinite;
+      transform: rotate(-15deg);
     }
 
-    .planet::before {
+    .neptune::before {
       content: "";
       position: absolute;
       inset: 0;
-      border-radius: 50%;
+      border-radius: inherit;
+      opacity: .8;
       background:
-        radial-gradient(ellipse at 67% 39%, transparent 0 8%, rgba(5, 20, 69, 0.75) 8.5% 10%, transparent 10.5%),
-        linear-gradient(100deg, transparent 40%, rgba(0, 4, 28, 0.5) 100%);
+        repeating-linear-gradient(
+          174deg,
+          transparent 0 10px,
+          rgba(96, 189, 255, .19) 12px,
+          rgba(5, 46, 137, .38) 16px,
+          transparent 22px 34px
+        );
+      mix-blend-mode: screen;
+      animation: bands 20s linear infinite;
     }
 
-    .planet::after {
+    .neptune::after {
       content: "";
       position: absolute;
-      width: 100%;
-      height: 34%;
-      top: 41%;
-      left: -10%;
-      transform: rotate(-12deg);
-      background: linear-gradient(
-        180deg,
-        transparent,
-        rgba(117, 177, 255, 0.17) 30%,
-        rgba(5, 20, 71, 0.34) 65%,
-        transparent
-      );
-      filter: blur(5px);
+      width: 92%;
+      height: 100%;
+      top: 0;
+      left: -14%;
+      border-radius: 50%;
+      background: linear-gradient(90deg, rgba(0, 4, 27, .78), transparent 55%, rgba(121, 208, 255, .13));
+    }
+
+    .planet-glint {
+      position: absolute;
+      z-index: 2;
+      width: 20%;
+      height: 7%;
+      top: 25%;
+      left: 17%;
+      border-radius: 50%;
+      background: rgba(180, 230, 255, .65);
+      filter: blur(14px);
+      transform: rotate(-35deg);
     }
 
     .planet-label {
       position: absolute;
-      bottom: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--accent-light);
-      font-size: 0.72rem;
-      letter-spacing: 3px;
-      white-space: nowrap;
+      right: 0;
+      bottom: 8%;
+      padding: 12px 15px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(4, 19, 39, .83);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .25);
     }
 
-    .section { padding: 76px 0; }
-
-    .section-head {
-      max-width: 720px;
-      margin-bottom: 35px;
+    .planet-label strong {
+      display: block;
+      font-family: var(--display);
+      font-size: .92rem;
     }
 
-    .section-head h2 {
-      font-size: clamp(2rem, 4vw, 3.1rem);
-      letter-spacing: -1.5px;
-      margin: 13px 0;
+    .planet-label span {
+      color: var(--muted);
+      font-size: .74rem;
     }
 
-    .section-head p, .muted { color: var(--muted); }
+    .floating-coordinate {
+      position: absolute;
+      top: 8%;
+      left: -1%;
+      color: rgba(154, 205, 255, .7);
+      font-family: monospace;
+      font-size: .73rem;
+      letter-spacing: .06em;
+      line-height: 1.9;
+    }
 
-    .facts-grid {
+    .section {
+      padding: 82px 0;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 36px;
+    }
+
+    .section-heading h2 {
+      margin: 14px 0 15px;
+      font-size: clamp(2rem, 4vw, 3.35rem);
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    .stats-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
     }
 
-    .fact {
-      padding: 23px;
-      background: linear-gradient(145deg, rgba(19, 36, 65, 0.8), rgba(9, 17, 33, 0.8));
+    .stat-card {
+      min-height: 155px;
+      padding: 23px 19px;
       border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-
-    .fact-label {
-      display: block;
-      color: var(--muted);
-      font-size: 0.78rem;
-      margin-bottom: 12px;
-    }
-
-    .fact strong {
-      display: block;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.15rem, 2vw, 1.7rem);
-      line-height: 1.3;
-    }
-
-    .fact small {
-      display: block;
-      color: var(--muted);
-      margin-top: 8px;
-      font-size: 0.77rem;
-    }
-
-    .content-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-    }
-
-    .info-card {
-      padding: 29px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      transition: transform 0.3s, border-color 0.3s;
-    }
-
-    .info-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(99, 140, 255, 0.45);
-    }
-
-    .card-number {
-      display: inline-block;
-      color: var(--accent-light);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 2px;
-      margin-bottom: 15px;
-    }
-
-    .info-card h3 { font-size: 1.35rem; margin-bottom: 13px; }
-    .info-card p { color: var(--muted); margin-bottom: 0; }
-
-    .highlight {
-      padding: 37px;
       border-radius: 15px;
-      border: 1px solid rgba(99, 140, 255, 0.27);
-      background:
-        radial-gradient(ellipse at 95% 0%, rgba(59, 104, 230, 0.18), transparent 50%),
-        var(--surface);
-    }
-
-    .highlight h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
-    .highlight p { color: var(--muted); max-width: 850px; }
-
-    .tag-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 23px;
-    }
-
-    .tag {
-      padding: 7px 12px;
-      color: var(--accent-light);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      font-size: 0.8rem;
-    }
-
-    .timeline {
-      border-left: 1px solid rgba(99, 140, 255, 0.4);
-      margin-left: 8px;
-      padding-left: 26px;
-    }
-
-    .timeline-item {
+      background: linear-gradient(145deg, rgba(21, 55, 94, .53), rgba(5, 19, 39, .7));
       position: relative;
-      padding: 0 0 27px;
+      overflow: hidden;
+      transition: transform .3s, border-color .3s, background .3s;
     }
 
-    .timeline-item:last-child { padding-bottom: 0; }
-
-    .timeline-item::before {
+    .stat-card::after {
       content: "";
       position: absolute;
-      left: -32px;
-      top: 8px;
-      width: 11px;
-      height: 11px;
-      background: var(--accent);
-      border: 3px solid var(--bg);
+      right: -32px;
+      bottom: -48px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
-      box-shadow: 0 0 15px var(--glow);
+      background: var(--glow);
+      filter: blur(30px);
     }
 
-    .timeline-item strong {
+    .stat-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(92, 189, 255, .55);
+      background: linear-gradient(145deg, rgba(24, 73, 122, .6), rgba(5, 19, 39, .8));
+    }
+
+    .stat-label {
       display: block;
-      color: var(--accent-light);
-      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: .78rem;
+      margin-bottom: 13px;
     }
 
-    .timeline-item p { color: var(--muted); margin: 0; }
+    .stat-value {
+      display: block;
+      color: var(--accent-bright);
+      font-family: var(--display);
+      font-size: clamp(1.2rem, 2.4vw, 1.8rem);
+      font-weight: 700;
+      line-height: 1.25;
+    }
 
-    .source-list {
+    .stat-note {
+      display: block;
+      color: #7e9ab8;
+      font-size: .75rem;
+      margin-top: 8px;
+    }
+
+    .feature-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 17px;
     }
 
-    .source-link {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 17px 19px;
-      background: var(--surface);
+    .feature-card {
+      min-height: 245px;
+      padding: 27px;
+      position: relative;
+      overflow: hidden;
       border: 1px solid var(--border);
-      border-radius: 9px;
-      color: var(--text);
-      transition: border-color 0.2s, background 0.2s;
+      border-radius: 16px;
+      background: var(--panel);
+      transition: transform .3s, border-color .3s;
     }
 
-    .source-link:hover {
-      border-color: var(--accent);
-      background: var(--surface-light);
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(91, 183, 255, .52);
     }
 
-    .source-link span { color: var(--accent-light); }
+    .feature-number {
+      color: var(--accent);
+      font-family: var(--display);
+      font-size: .78rem;
+      letter-spacing: .15em;
+    }
 
-    .planet-nav {
+    .feature-card h3 {
+      font-size: 1.35rem;
+      margin: 22px 0 12px;
+      letter-spacing: -.025em;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .feature-line {
+      width: 46px;
+      height: 2px;
+      margin-top: 23px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .highlight-panel {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      align-items: center;
+      padding: clamp(25px, 5vw, 52px);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background:
+        radial-gradient(ellipse at 10% 80%, rgba(20, 112, 223, .16), transparent 45%),
+        linear-gradient(145deg, rgba(13, 38, 72, .8), rgba(5, 18, 36, .85));
+      overflow: hidden;
+      position: relative;
+    }
+
+    .highlight-panel h2 {
+      font-size: clamp(2rem, 4vw, 3.15rem);
+      margin: 15px 0 18px;
+    }
+
+    .highlight-panel p {
+      color: var(--muted);
+    }
+
+    .highlight-art {
+      min-height: 270px;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .storm-orbit {
+      width: min(100%, 300px);
+      aspect-ratio: 1.2;
+      border: 1px solid rgba(99, 185, 255, .24);
+      border-radius: 50%;
+      transform: rotate(-22deg);
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .storm-orbit::before,
+    .storm-orbit::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(99, 185, 255, .14);
+      border-radius: 50%;
+      inset: 15%;
+    }
+
+    .storm-orbit::after {
+      inset: 29%;
+      border-color: rgba(99, 185, 255, .2);
+    }
+
+    .storm-core {
+      width: 110px;
+      height: 72px;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at 36% 30%, #c5edff 0%, #65b9ff 18%, #1673d6 48%, #07336e 80%);
+      box-shadow: 0 0 28px rgba(46, 152, 255, .45), inset -12px -9px 17px rgba(0, 15, 53, .7);
+      animation: stormPulse 5s ease-in-out infinite;
+      transform: rotate(-24deg);
+      z-index: 1;
+    }
+
+    .highlight-caption {
+      position: absolute;
+      bottom: 0;
+      color: var(--accent-bright);
+      font-family: monospace;
+      font-size: .74rem;
+      letter-spacing: .12em;
+    }
+
+    .moons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 15px;
     }
 
-    .planet-nav a {
-      padding: 23px;
-      background: var(--surface);
+    .moon-card {
+      padding: 22px;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      transition: border-color 0.2s;
+      border-radius: 15px;
+      background: rgba(8, 25, 48, .65);
+      transition: border-color .25s, transform .25s;
     }
 
-    .planet-nav a:hover { border-color: var(--accent); }
+    .moon-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
 
-    .planet-nav small {
-      display: block;
+    .moon-orb {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      margin-bottom: 19px;
+      background: radial-gradient(circle at 32% 28%, #e0e7ef, #8998ad 42%, #344359 75%, #101b30);
+      box-shadow: inset -8px -6px 12px rgba(0, 0, 0, .5), 0 0 22px rgba(110, 178, 255, .12);
+    }
+
+    .moon-orb.triton {
+      background: radial-gradient(circle at 32% 25%, #f0d6c7, #bd988c 43%, #655d71 75%, #1c263d);
+    }
+
+    .moon-orb.nereid {
+      background: radial-gradient(circle at 30% 25%, #ddd9d4, #928d99 43%, #343b4f 76%, #11182a);
+    }
+
+    .moon-orb.proteus {
+      background: radial-gradient(circle at 30% 30%, #b9b8ba, #696d7a 45%, #282f43 78%, #11172a);
+    }
+
+    .moon-card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 8px;
+    }
+
+    .moon-card p {
       color: var(--muted);
+      font-size: .84rem;
+    }
+
+    .mission-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .mission-item {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      align-items: center;
+      gap: 22px;
+      padding: 22px 24px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(8, 25, 48, .63);
+      transition: border-color .25s, transform .25s;
+    }
+
+    .mission-item:hover {
+      transform: translateX(4px);
+      border-color: var(--accent);
+    }
+
+    .mission-year {
+      color: var(--accent);
+      font-family: var(--display);
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+
+    .mission-item h3 {
+      font-size: 1.13rem;
       margin-bottom: 5px;
     }
 
-    .planet-nav strong {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 1.1rem;
+    .mission-item p {
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .mission-link {
+      color: var(--accent-bright);
+      font-size: .84rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .research-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: rgba(8, 25, 48, .55);
+    }
+
+    .research-index {
+      flex: 0 0 35px;
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      color: var(--accent-bright);
+      background: rgba(47, 137, 230, .15);
+      border: 1px solid var(--border);
+      font-family: var(--display);
+      font-size: .8rem;
+    }
+
+    .research-item h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+      letter-spacing: -.015em;
+    }
+
+    .research-item p {
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .resources {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 27px;
+    }
+
+    .resource-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(8, 25, 48, .72);
+      color: var(--accent-bright);
+      font-size: .88rem;
+      font-weight: 600;
+      transition: border-color .25s, transform .25s;
+    }
+
+    .resource-link:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .closing {
+      padding: 48px 25px;
+      margin: 30px 0 70px;
+      text-align: center;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background:
+        radial-gradient(ellipse at 50% 120%, rgba(40, 132, 255, .22), transparent 65%),
+        rgba(7, 23, 44, .7);
+    }
+
+    .closing h2 {
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      margin-bottom: 13px;
+    }
+
+    .closing p {
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto 24px;
     }
 
     footer {
-      padding: 35px 0;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 0.85rem;
+      padding: 24px 0 32px;
+      border-top: 1px solid rgba(91, 183, 255, .12);
+      color: #7f9bb8;
+      font-size: .82rem;
     }
 
     .footer-inner {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 15px;
     }
 
-    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-brand {
+      color: var(--accent-bright);
+      font-family: var(--display);
+      font-weight: 700;
+      letter-spacing: .16em;
+    }
 
     .reveal {
       opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+      transform: translateY(24px);
+      transition: opacity .75s ease, transform .75s ease;
     }
 
     .reveal.visible {
@@ -501,408 +782,660 @@
       transform: translateY(0);
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-13px); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes planetFloat {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -13px; }
+    }
+
+    @keyframes haloPulse {
+      0%, 100% { opacity: .19; transform: scale(.94); }
+      50% { opacity: .34; transform: scale(1.08); }
+    }
+
+    @keyframes bands {
+      from { background-position-y: 0; }
+      to { background-position-y: 170px; }
+    }
+
+    @keyframes stormPulse {
+      0%, 100% { transform: rotate(-24deg) scale(1); }
+      50% { transform: rotate(-18deg) scale(1.08); }
+    }
+
+    @keyframes starDrift {
+      from { background-position: 0 0; }
+      to { background-position: 310px 580px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
-        animation-duration: 0.01ms !important;
+        animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
+        transition-duration: .01ms !important;
       }
-      .reveal { opacity: 1; transform: none; }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
     }
 
-    @media (max-width: 850px) {
-      .hero { grid-template-columns: 1fr; padding-top: 65px; gap: 15px; }
-      .hero-art { min-height: 350px; }
-      .facts-grid { grid-template-columns: repeat(2, 1fr); }
-      .nav-inner { align-items: flex-start; flex-direction: column; padding: 17px 0; gap: 13px; }
-      .nav-links { gap: 16px; }
+    @media (max-width: 900px) {
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding-top: 65px;
+        gap: 5px;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-description {
+        margin-inline: auto;
+      }
+
+      .eyebrow {
+        justify-content: center;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        min-height: 420px;
+      }
+
+      .planet-stage {
+        width: min(88%, 420px);
+      }
+
+      .stats-grid, .moons-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .highlight-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .highlight-art {
+        min-height: 235px;
+      }
     }
 
-    @media (max-width: 560px) {
-      .container { width: min(100% - 30px, 1160px); }
-      .nav-links { gap: 12px; font-size: 0.79rem; }
-      h1 { letter-spacing: -2.5px; }
-      .hero { min-height: auto; padding: 58px 0 35px; }
-      .hero-art { min-height: 300px; }
-      .planet { width: 225px; }
-      .section { padding: 54px 0; }
-      .facts-grid, .content-grid, .source-list, .planet-nav { grid-template-columns: 1fr; }
-      .fact, .info-card, .highlight { padding: 23px; }
-      .fact strong { font-size: 1.45rem; }
+    @media (max-width: 600px) {
+      .page-shell {
+        width: min(100% - 30px, 1180px);
+      }
+
+      .back-row {
+        padding-top: 18px;
+      }
+
+      .hero {
+        padding-top: 55px;
+        padding-bottom: 35px;
+      }
+
+      h1 {
+        font-size: clamp(3.6rem, 17vw, 5.2rem);
+      }
+
+      .hero-description {
+        font-size: .94rem;
+      }
+
+      .hero-visual {
+        min-height: 330px;
+      }
+
+      .planet-stage {
+        width: 91%;
+      }
+
+      .floating-coordinate {
+        top: 3%;
+        left: 0;
+        font-size: .59rem;
+      }
+
+      .planet-label {
+        right: -2px;
+        bottom: 2%;
+        padding: 9px 11px;
+      }
+
+      .section {
+        padding: 55px 0;
+      }
+
+      .stats-grid {
+        gap: 10px;
+      }
+
+      .stat-card {
+        min-height: 132px;
+        padding: 17px 14px;
+      }
+
+      .feature-grid, .research-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card {
+        min-height: auto;
+        padding: 23px;
+      }
+
+      .moons-grid {
+        gap: 10px;
+      }
+
+      .moon-card {
+        padding: 17px;
+      }
+
+      .mission-item {
+        grid-template-columns: 1fr auto;
+        gap: 9px 14px;
+        padding: 18px;
+      }
+
+      .mission-year {
+        grid-column: 1 / -1;
+      }
+
+      .mission-item > div:nth-child(2) {
+        grid-column: 1;
+      }
+
+      .mission-link {
+        grid-column: 2;
+        grid-row: 2;
+      }
+
+      .highlight-panel {
+        padding: 25px 20px;
+        gap: 18px;
+      }
+
+      .highlight-art {
+        min-height: 210px;
+      }
+
+      .storm-orbit {
+        width: 90%;
+      }
+
+      .resources {
+        flex-direction: column;
+      }
+
+      .resource-link {
+        justify-content: center;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .closing {
+        padding: 36px 20px;
+        margin-bottom: 45px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <header class="navbar">
-    <div class="container nav-inner">
-      <a class="logo" href="index.html" aria-label="COSMOS home">COS<span>M</span>OS</a>
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="planets.html" aria-current="page">Planets</a>
-        <a href="missions.html">Missions</a>
-        <a href="research.html">Research</a>
-        <a href="about.html">About</a>
-      </nav>
+  <div class="page-shell">
+
+    <div class="back-row">
+      <a class="back-button" href="./planets.html">
+        <span class="back-arrow" aria-hidden="true">←</span>
+        Back to Planets
+      </a>
     </div>
-  </header>
 
-  <main>
-    <section class="container hero">
-      <div class="hero-copy reveal">
-        <div class="eyebrow">Planet Explorer / 08</div>
-        <h1>Neptune <span>The Distant Ice Giant</span></h1>
-        <p>
-          Deep blue, extraordinarily distant, and swept by some of the fastest
-          winds measured on any planet, Neptune is a world of mysteries at the
-          outer edge of our planetary neighborhood.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#overview">Explore Neptune ↓</a>
-          <a class="btn btn-secondary" href="#missions">Discover Voyager 2</a>
+    <main>
+      <section class="hero" aria-labelledby="planet-title">
+        <div class="hero-copy">
+          <span class="eyebrow">Outer Solar System / Ice Giant</span>
+          <h1 id="planet-title">NEPTUNE</h1>
+          <p class="hero-subtitle">The Blue Frontier</p>
+          <p class="hero-description">
+            Far beyond the orbit of Uranus lies a world of deep blue clouds,
+            supersonic winds and mysterious storms. Neptune is a distant ice
+            giant that continues to challenge our understanding of planetary
+            atmospheres and the outer Solar System.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#planet-facts">Explore Neptune <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="#missions">Explore Missions <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
-      </div>
 
-      <div class="hero-art reveal" role="img" aria-label="Stylized blue Neptune with atmospheric bands">
-        <div class="stars"></div>
-        <div class="orbit"></div>
-        <div class="orbit orbit-two"></div>
-        <div class="planet"></div>
-        <div class="planet-label">30 AU FROM THE SUN</div>
-      </div>
-    </section>
-
-    <section class="container section" id="overview">
-      <div class="section-head reveal">
-        <div class="eyebrow">At a glance</div>
-        <h2>A world far beyond the familiar</h2>
-        <p>
-          Neptune is the eighth planet from the Sun. It is classified as an
-          ice giant because its interior contains materials such as water,
-          ammonia, and methane under extreme pressure—not because it is a
-          frozen ball of ordinary surface ice.
-        </p>
-      </div>
-
-      <div class="facts-grid">
-        <article class="fact reveal">
-          <span class="fact-label">Average distance from Sun</span>
-          <strong>4.5 billion km</strong>
-          <small>Approximately 30 astronomical units</small>
-        </article>
-        <article class="fact reveal">
-          <span class="fact-label">Planetary diameter</span>
-          <strong>49,244 km</strong>
-          <small>About four times Earth's diameter</small>
-        </article>
-        <article class="fact reveal">
-          <span class="fact-label">Length of a day</span>
-          <strong>~16 hours</strong>
-          <small>One rotation on its axis</small>
-        </article>
-        <article class="fact reveal">
-          <span class="fact-label">Length of a year</span>
-          <strong>165 Earth years</strong>
-          <small>One orbit around the Sun</small>
-        </article>
-      </div>
-    </section>
-
-    <section class="container section">
-      <div class="section-head reveal">
-        <div class="eyebrow">Inside the planet</div>
-        <h2>What makes Neptune extraordinary?</h2>
-        <p>
-          Its blue atmosphere is only the beginning. Deep beneath the clouds
-          are extreme pressures, unusual chemistry, and a powerful source of
-          internal energy.
-        </p>
-      </div>
-
-      <div class="content-grid">
-        <article class="info-card reveal">
-          <span class="card-number">01 / ATMOSPHERE</span>
-          <h3>A blue world of gas</h3>
-          <p>
-            Neptune's atmosphere is primarily hydrogen and helium, with
-            methane and other trace compounds. Methane absorbs much of the
-            red light in sunlight, contributing to Neptune's blue appearance.
-            Atmospheric particles and other processes also influence its
-            exact color.
-          </p>
-        </article>
-
-        <article class="info-card reveal">
-          <span class="card-number">02 / EXTREME WEATHER</span>
-          <h3>Powerful winds and dark spots</h3>
-          <p>
-            Neptune has exceptionally fast atmospheric winds, with measured
-            speeds reaching roughly 2,000 km/h in some conditions. Large dark
-            storms have been observed, but these features can form, change,
-            and disappear over time.
-          </p>
-        </article>
-
-        <article class="info-card reveal">
-          <span class="card-number">03 / INTERIOR</span>
-          <h3>A hot, high-pressure interior</h3>
-          <p>
-            Scientists think Neptune has a small rocky core surrounded by
-            a deep, hot, dense fluid rich in water, ammonia, and methane.
-            The conditions are so extreme that these materials behave very
-            differently from their familiar forms on Earth.
-          </p>
-        </article>
-
-        <article class="info-card reveal">
-          <span class="card-number">04 / INTERNAL ENERGY</span>
-          <h3>More than sunlight</h3>
-          <p>
-            Neptune emits more energy than it receives from the Sun. Its
-            internal heat is thought to help drive atmospheric activity.
-            How energy moves through the interior and atmosphere remains an
-            important subject of planetary research.
-          </p>
-        </article>
-
-        <article class="info-card reveal">
-          <span class="card-number">05 / MAGNETIC FIELD</span>
-          <h3>A tilted magnetic field</h3>
-          <p>
-            Neptune's magnetic field is tilted significantly relative to its
-            rotation axis and is offset from the planet's center. Voyager 2
-            measurements revealed a complex magnetic environment unlike
-            Earth's simple dipole-field picture.
-          </p>
-        </article>
-
-        <article class="info-card reveal">
-          <span class="card-number">06 / TEMPERATURE</span>
-          <h3>A frigid distant world</h3>
-          <p>
-            Neptune receives very little sunlight. Temperatures near the
-            visible cloud tops are around −200°C, although actual
-            temperatures vary with altitude, location, and atmospheric
-            conditions.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section class="container section">
-      <div class="highlight reveal">
-        <div class="eyebrow">A hidden system</div>
-        <h2>Rings, moons, and a remarkable companion</h2>
-        <p>
-          Neptune has a faint ring system made of narrow rings, dusty material,
-          and brighter clumps known as ring arcs. Its moons are diverse, but
-          one stands apart: Triton, a large moon that travels around Neptune
-          in the direction opposite to the planet's rotation.
-        </p>
-        <p>
-          Triton's unusual retrograde orbit suggests that Neptune captured it
-          from the outer Solar System, possibly from the population of icy
-          objects beyond Neptune. Voyager 2 observed active nitrogen geysers
-          on Triton's surface in 1989.
-        </p>
-        <div class="tag-list">
-          <span class="tag">Faint rings</span>
-          <span class="tag">Triton</span>
-          <span class="tag">Retrograde orbit</span>
-          <span class="tag">Nitrogen geysers</span>
-          <span class="tag">Outer Solar System</span>
+        <div class="hero-visual" aria-label="Stylized animated blue Neptune">
+          <div class="planet-stage">
+            <div class="orbit"></div>
+            <div class="orbit orbit-two"></div>
+            <div class="planet-halo"></div>
+            <div class="neptune" role="img" aria-label="Illustration of Neptune's blue atmosphere">
+              <div class="planet-glint"></div>
+            </div>
+            <div class="floating-coordinate">
+              PLANETARY OBJECT: N-008<br>
+              REGION: OUTER SYSTEM<br>
+              STATUS: ACTIVE RESEARCH
+            </div>
+            <div class="planet-label">
+              <strong>NEPTUNE / 08</strong>
+              <span>30 AU from the Sun, approximately</span>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="container section" id="missions">
-      <div class="section-head reveal">
-        <div class="eyebrow">Human exploration</div>
-        <h2>One historic visit</h2>
-        <p>
-          Neptune is so far from Earth that detailed close-up observations
-          remain rare. The Voyager 2 flyby transformed our understanding of
-          the planet, its rings, and its moons.
-        </p>
-      </div>
-
-      <div class="timeline reveal">
-        <div class="timeline-item">
-          <strong>1846 — Neptune is discovered</strong>
+      <section class="section reveal" id="planet-facts">
+        <div class="section-heading">
+          <span class="eyebrow">Planetary database</span>
+          <h2>Neptune at a glance</h2>
           <p>
-            Astronomers identified Neptune after mathematical predictions
-            helped direct observations toward its location. Its discovery
-            became a landmark in mathematical astronomy.
+            The eighth planet from the Sun is a cold, dynamic world with a
+            powerful atmosphere and an unexpectedly active weather system.
           </p>
         </div>
-        <div class="timeline-item">
-          <strong>1989 — Voyager 2 reaches Neptune</strong>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <span class="stat-label">Mean distance from Sun</span>
+            <strong class="stat-value">4.5 billion km</strong>
+            <span class="stat-note">About 30 AU on average</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-label">Planetary diameter</span>
+            <strong class="stat-value">49,528 km</strong>
+            <span class="stat-note">Approximately equatorial diameter</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-label">One Neptune year</span>
+            <strong class="stat-value">165 Earth years</strong>
+            <span class="stat-note">One orbit around the Sun</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-label">Known moons</span>
+            <strong class="stat-value">16</strong>
+            <span class="stat-note">Confirmed natural satellites</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-label">Atmospheric winds</span>
+            <strong class="stat-value">2,000+ km/h</strong>
+            <span class="stat-note">Some of the fastest in the Solar System</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-label">Cloud-top temperature</span>
+            <strong class="stat-value">Around −200°C</strong>
+            <span class="stat-note">Varies with altitude and conditions</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-label">Planet classification</span>
+            <strong class="stat-value">Ice Giant</strong>
+            <span class="stat-note">Not a solid-surface world</span>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-label">Discovery</span>
+            <strong class="stat-value">1846</strong>
+            <span class="stat-note">Identified through mathematical prediction and observation</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <span class="eyebrow">A world of extremes</span>
+          <h2>Inside the blue giant</h2>
           <p>
-            NASA's Voyager 2 spacecraft made the only close flyby of Neptune
-            so far, revealing cloud bands, dark storms, rings, and new details
-            about the planet's moons.
+            Neptune may look calm from a distance, but its atmosphere and
+            interior contain some of the most extreme conditions among the planets.
           </p>
         </div>
-        <div class="timeline-item">
-          <strong>Today — Observations from afar</strong>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-number">01 / ATMOSPHERE</span>
+            <h3>A deep blue atmosphere</h3>
+            <p>
+              Hydrogen and helium dominate Neptune's atmosphere, with methane
+              also present. Methane absorbs red light, contributing to the
+              planet's blue appearance. Other atmospheric factors also influence
+              its exact color.
+            </p>
+            <div class="feature-line"></div>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">02 / WEATHER</span>
+            <h3>Violent planetary winds</h3>
+            <p>
+              Neptune's atmosphere hosts extremely fast winds and changing cloud
+              patterns. Despite receiving little sunlight, it remains a dynamic
+              world with powerful weather systems.
+            </p>
+            <div class="feature-line"></div>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">03 / INTERIOR</span>
+            <h3>An ice giant's interior</h3>
+            <p>
+              Beneath its atmosphere, Neptune is thought to contain a hot,
+              dense interior rich in water, ammonia and methane under extreme
+              pressure. These materials behave very differently from ordinary ice.
+            </p>
+            <div class="feature-line"></div>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">04 / ORBIT</span>
+            <h3>A distant solar orbit</h3>
+            <p>
+              Neptune takes roughly 165 Earth years to complete one trip around
+              the Sun. Its great distance makes it a key world for understanding
+              the farthest reaches of our planetary system.
+            </p>
+            <div class="feature-line"></div>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">05 / RINGS</span>
+            <h3>Dark, faint rings</h3>
+            <p>
+              Neptune has a faint ring system made of dusty material. Some of
+              its rings contain brighter clumps known as ring arcs, which make
+              this distant system especially intriguing.
+            </p>
+            <div class="feature-line"></div>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-number">06 / MAGNETISM</span>
+            <h3>A tilted magnetic field</h3>
+            <p>
+              Neptune's magnetic field is strongly tilted relative to its
+              rotation axis and offset from the planet's center. Its unusual
+              geometry offers clues about the planet's deep interior.
+            </p>
+            <div class="feature-line"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="highlight-panel">
+          <div>
+            <span class="eyebrow">Atmospheric phenomenon</span>
+            <h2>Dark storms in a blue world</h2>
+            <p>
+              Neptune can develop enormous dark vortices in its atmosphere.
+              Voyager 2 observed the Great Dark Spot during its 1989 flyby.
+              Unlike Jupiter's long-lived Great Red Spot, Neptune's dark spots
+              can appear and disappear over time.
+            </p>
+            <p style="margin-top: 14px;">
+              Studying these storms helps scientists understand how heat,
+              atmospheric circulation and chemistry shape ice giant planets.
+            </p>
+          </div>
+
+          <div class="highlight-art" aria-label="Abstract illustration of a dark atmospheric storm">
+            <div class="storm-orbit">
+              <div class="storm-core"></div>
+            </div>
+            <span class="highlight-caption">ATMOSPHERIC SYSTEM / NEPTUNE</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal" id="moons">
+        <div class="section-heading">
+          <span class="eyebrow">Natural satellites</span>
+          <h2>Meet Neptune's moons</h2>
           <p>
-            Telescopes, including the Hubble Space Telescope and the James
-            Webb Space Telescope, continue to study Neptune's atmosphere,
-            seasonal changes, and dynamic weather.
+            Neptune's moons have varied histories, from a large captured
+            satellite with a retrograde orbit to smaller bodies traveling
+            closer to the planet.
           </p>
         </div>
-        <div class="timeline-item">
-          <strong>Future — Possible dedicated missions</strong>
+
+        <div class="moons-grid">
+          <article class="moon-card">
+            <div class="moon-orb triton" aria-hidden="true"></div>
+            <h3>Triton</h3>
+            <p>
+              Neptune's largest moon follows a retrograde orbit, suggesting
+              it was captured from the outer Solar System. Voyager 2 observed
+              nitrogen geysers on its surface.
+            </p>
+          </article>
+
+          <article class="moon-card">
+            <div class="moon-orb" aria-hidden="true"></div>
+            <h3>Nereid</h3>
+            <p>
+              Nereid follows an unusually elongated orbit. Its distant path
+              makes it one of Neptune's most distinctive known satellites.
+            </p>
+          </article>
+
+          <article class="moon-card">
+            <div class="moon-orb proteus" aria-hidden="true"></div>
+            <h3>Proteus</h3>
+            <p>
+              Proteus is one of Neptune's largest known moons. Its irregular
+              shape and heavily cratered surface provide clues to its history.
+            </p>
+          </article>
+
+          <article class="moon-card">
+            <div class="moon-orb nereid" aria-hidden="true"></div>
+            <h3>Hippocamp</h3>
+            <p>
+              A small inner moon discovered in images from the Hubble Space
+              Telescope. It may be connected to material ejected from a larger moon.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="missions">
+        <div class="section-heading">
+          <span class="eyebrow">Humanity's exploration</span>
+          <h2>Missions to Neptune</h2>
           <p>
-            Scientists have proposed future Neptune-orbiter and atmospheric
-            probe concepts. These are proposals and planning concepts, not
-            confirmation that a dedicated Neptune mission is currently
-            travelling to the planet.
+            Neptune has been explored at close range by only one spacecraft.
+            Telescopes continue to reveal changes in its atmosphere from Earth
+            and from space.
           </p>
         </div>
-      </div>
-    </section>
 
-    <section class="container section">
-      <div class="section-head reveal">
-        <div class="eyebrow">Science questions</div>
-        <h2>What do we still need to discover?</h2>
+        <div class="mission-list">
+          <article class="mission-item">
+            <div class="mission-year">1989</div>
+            <div>
+              <h3>Voyager 2</h3>
+              <p>
+                The first and only spacecraft to fly past Neptune. It studied
+                the planet's atmosphere, rings, magnetic field and moons,
+                including Triton.
+              </p>
+            </div>
+            <a class="mission-link" href="https://science.nasa.gov/mission/voyager/" target="_blank" rel="noopener noreferrer">Mission details ↗</a>
+          </article>
+
+          <article class="mission-item">
+            <div class="mission-year">Ongoing</div>
+            <div>
+              <h3>Hubble Space Telescope</h3>
+              <p>
+                Observes atmospheric activity, cloud changes and the planet's
+                dynamic weather from space.
+              </p>
+            </div>
+            <a class="mission-link" href="https://science.nasa.gov/mission/hubble/" target="_blank" rel="noopener noreferrer">Mission details ↗</a>
+          </article>
+
+          <article class="mission-item">
+            <div class="mission-year">Ongoing</div>
+            <div>
+              <h3>James Webb Space Telescope</h3>
+              <p>
+                Uses infrared observations to investigate Neptune's atmosphere,
+                clouds, rings and thermal properties.
+              </p>
+            </div>
+            <a class="mission-link" href="https://science.nasa.gov/mission/webb/" target="_blank" rel="noopener noreferrer">Mission details ↗</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-heading">
+          <span class="eyebrow">Frontiers of science</span>
+          <h2>What scientists still want to know</h2>
+          <p>
+            Neptune remains one of the least explored planets. Future dedicated
+            missions could answer questions that remote observations cannot fully resolve.
+          </p>
+        </div>
+
+        <div class="research-grid">
+          <article class="research-item">
+            <div class="research-index">01</div>
+            <div>
+              <h3>What drives its extreme winds?</h3>
+              <p>
+                Researchers are investigating how internal heat and atmospheric
+                circulation maintain Neptune's powerful weather.
+              </p>
+            </div>
+          </article>
+
+          <article class="research-item">
+            <div class="research-index">02</div>
+            <div>
+              <h3>How do dark spots form?</h3>
+              <p>
+                Tracking atmospheric vortices can reveal how storms develop,
+                change shape and eventually disappear.
+              </p>
+            </div>
+          </article>
+
+          <article class="research-item">
+            <div class="research-index">03</div>
+            <div>
+              <h3>What lies beneath the clouds?</h3>
+              <p>
+                Models of Neptune's interior aim to explain its composition,
+                heat flow, magnetic field and unusual physical conditions.
+              </p>
+            </div>
+          </article>
+
+          <article class="research-item">
+            <div class="research-index">04</div>
+            <div>
+              <h3>Why is Triton so unusual?</h3>
+              <p>
+                Studying Triton's geology and atmosphere could reveal how it
+                formed and became part of Neptune's system.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div class="resources">
+          <a class="resource-link" href="https://science.nasa.gov/neptune/" target="_blank" rel="noopener noreferrer">NASA Neptune Overview ↗</a>
+          <a class="resource-link" href="https://science.nasa.gov/mission/voyager/" target="_blank" rel="noopener noreferrer">Voyager Mission Archive ↗</a>
+          <a class="resource-link" href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener noreferrer">Explore the Solar System ↗</a>
+        </div>
+      </section>
+
+      <section class="closing reveal">
+        <span class="eyebrow">Continue your journey</span>
+        <h2>The universe is still waiting.</h2>
         <p>
-          A single flyby cannot answer every question about a distant giant
-          planet. Future observations could reveal how Neptune works from
-          its deep interior to its outermost atmosphere.
+          From the familiar worlds near the Sun to the mysterious ice giants
+          at its edge, every planet offers another piece of our cosmic story.
         </p>
+        <a class="button button-primary" href="./planets.html">Return to Planet Explorer <span aria-hidden="true">→</span></a>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <span class="footer-brand">COSMOS</span>
+        <span>Explore the Universe · Neptune Planet Profile</span>
+        <span>© <span id="currentYear"></span> COSMOS</span>
       </div>
-
-      <div class="content-grid">
-        <article class="info-card reveal">
-          <span class="card-number">QUESTION 01</span>
-          <h3>How does Neptune's interior work?</h3>
-          <p>
-            What materials are present deep inside, and how do extreme
-            pressure and temperature affect their behavior?
-          </p>
-        </article>
-
-        <article class="info-card reveal">
-          <span class="card-number">QUESTION 02</span>
-          <h3>Why is its weather so powerful?</h3>
-          <p>
-            How do internal heat, sunlight, atmospheric chemistry, and
-            circulation combine to create such fast winds and changing storms?
-          </p>
-        </article>
-
-        <article class="info-card reveal">
-          <span class="card-number">QUESTION 03</span>
-          <h3>How did Triton become a moon?</h3>
-          <p>
-            Could Triton's capture have reshaped Neptune's original moon
-            system, and what can its surface reveal about the distant
-            Kuiper Belt?
-          </p>
-        </article>
-
-        <article class="info-card reveal">
-          <span class="card-number">QUESTION 04</span>
-          <h3>How did Neptune form?</h3>
-          <p>
-            What does Neptune tell us about the migration of planets, the
-            early Solar System, and the formation of ice giants around other
-            stars?
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section class="container section">
-      <div class="section-head reveal">
-        <div class="eyebrow">Keep exploring</div>
-        <h2>Explore the Solar System</h2>
-        <p>
-          Continue through the planets or return to the main COSMOS explorer.
-        </p>
-      </div>
-
-      <div class="planet-nav reveal">
-        <a href="uranus.html">
-          <small>← Previous planet</small>
-          <strong>Uranus</strong>
-        </a>
-        <a href="planets.html">
-          <small>Return to the explorer →</small>
-          <strong>All Eight Planets</strong>
-        </a>
-      </div>
-    </section>
-
-    <section class="container section" id="sources">
-      <div class="section-head reveal">
-        <div class="eyebrow">Trusted science</div>
-        <h2>Official sources and further reading</h2>
-        <p>
-          Explore information from NASA and its science missions for more
-          details about Neptune and the outer Solar System.
-        </p>
-      </div>
-
-      <div class="source-list reveal">
-        <a class="source-link" href="https://science.nasa.gov/neptune/" target="_blank" rel="noopener noreferrer">
-          NASA Science — Neptune <span>↗</span>
-        </a>
-        <a class="source-link" href="https://science.nasa.gov/mission/voyager/" target="_blank" rel="noopener noreferrer">
-          NASA — Voyager Mission <span>↗</span>
-        </a>
-        <a class="source-link" href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener noreferrer">
-          NASA — Solar System Exploration <span>↗</span>
-        </a>
-        <a class="source-link" href="https://science.nasa.gov/mission/webb/" target="_blank" rel="noopener noreferrer">
-          NASA — James Webb Space Telescope <span>↗</span>
-        </a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <a class="logo" href="index.html">COS<span>M</span>OS</a>
-      <div>Explore beyond what we know.</div>
-      <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="planets.html">Planets</a>
-        <a href="missions.html">Missions</a>
-        <a href="research.html">Research</a>
-      </div>
-    </div>
-  </footer>
+    </footer>
+  </div>
 
   <script>
     (() => {
-      const elements = document.querySelectorAll(".reveal");
+      "use strict";
 
-      if (!("IntersectionObserver" in window)) {
-        elements.forEach(element => element.classList.add("visible"));
-        return;
+      const yearElement = document.getElementById("currentYear");
+
+      if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
       }
 
-      const observer = new IntersectionObserver((entries, currentObserver) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            currentObserver.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.12
-      });
+      const revealElements = document.querySelectorAll(".reveal");
 
-      elements.forEach(element => observer.observe(element));
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries, activeObserver) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              activeObserver.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: "0px 0px -35px 0px"
+        });
+
+        revealElements.forEach((element) => observer.observe(element));
+      } else {
+        revealElements.forEach((element) => element.classList.add("visible"));
+      }
     })();
   </script>
 </body>
