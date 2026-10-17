@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#090b13">
-  <meta name="description" content="Explore Jupiter, the Solar System's largest planet. Discover its atmosphere, Great Red Spot, giant moons, and space missions.">
-  <title>Jupiter | COSMOS — Explore the Universe</title>
+  <meta name="theme-color" content="#080b16">
+  <meta name="description" content="Explore Jupiter through an immersive animated space experience. Discover its Great Red Spot, giant moons, atmosphere, and robotic missions.">
+  <title>Jupiter — The Giant | COSMOS</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,388 +14,619 @@
 
   <style>
     :root {
-      --bg: #090b13;
-      --surface: #111521;
-      --surface-2: #171c2b;
-      --text: #f5f2eb;
-      --muted: #a2a8b8;
-      --accent: #e6b77a;
-      --accent-2: #d78d58;
-      --line: rgba(255,255,255,.10);
-      --radius: 22px;
+      color-scheme: dark;
+      --bg: #080b16;
+      --panel: #101626;
+      --text: #f4f6ff;
+      --muted: #9aa6c2;
+      --gold: #ffcc83;
+      --orange: #e7a16c;
+      --cyan: #69e0ff;
+      --violet: #9b83ff;
+      --border: rgba(144,174,230,.15);
+      --border-hover: rgba(255,204,131,.48);
+      --body: "DM Sans", sans-serif;
+      --heading: "Space Grotesk", sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 95px;
+      scroll-padding-top: 28px;
     }
 
     body {
       margin: 0;
-      background:
-        radial-gradient(ellipse at 80% 8%, rgba(173,111,65,.11), transparent 35%),
-        var(--bg);
-      color: var(--text);
-      font-family: "DM Sans", sans-serif;
-      line-height: 1.7;
+      min-height: 100vh;
       overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 12% 8%, rgba(52,88,165,.15), transparent 36%),
+        radial-gradient(ellipse at 95% 43%, rgba(190,116,54,.10), transparent 35%),
+        var(--bg);
+      font-family: var(--body);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a { color: inherit; text-decoration: none; }
+    a { color: inherit; }
+    a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 5px; }
+    ::selection { color: #050b16; background: var(--gold); }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: var(--heading); }
     button, a { -webkit-tap-highlight-color: transparent; }
 
-    .container {
+    /* Animated deep-space background */
+
+    .space-background {
+      position: fixed;
+      z-index: -3;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      background-image:
+        radial-gradient(1px 1px at 12% 24%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 72% 13%, #d7eaff 50%, transparent 100%),
+        radial-gradient(2px 2px at 84% 68%, #b7d9ff 50%, transparent 100%),
+        radial-gradient(1px 1px at 35% 82%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 57% 47%, #ffe0b9 50%, transparent 100%);
+      background-size: 290px 260px, 370px 320px, 420px 360px, 330px 280px, 250px 230px;
+      animation: starDrift 100s linear infinite;
+    }
+
+    .space-background::before,
+    .space-background::after {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .23;
+    }
+
+    .space-background::before {
+      background: radial-gradient(ellipse, rgba(48,105,200,.28), transparent 65%);
+      animation: nebulaDrift 26s ease-in-out infinite alternate;
+    }
+
+    .space-background::after {
+      background: radial-gradient(ellipse, rgba(220,132,65,.15), transparent 60%);
+      animation: nebulaDrift 34s ease-in-out infinite alternate-reverse;
+    }
+
+    .stars {
+      position: fixed;
+      z-index: -2;
+      inset: 0;
+      pointer-events: none;
+      opacity: .38;
+      background-image: radial-gradient(2px 2px at 20% 30%, white 45%, transparent 55%);
+      background-size: 180px 180px;
+      animation: twinkle 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes starDrift {
+      from { background-position: 0 0; }
+      to { background-position: 0 1200px; }
+    }
+
+    @keyframes nebulaDrift {
+      from { transform: translate(-3%,-2%) rotate(0) scale(1); }
+      to { transform: translate(4%,3%) rotate(15deg) scale(1.13); }
+    }
+
+    @keyframes twinkle {
+      from { opacity: .18; }
+      to { opacity: .48; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes planetFloat {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-12px) rotate(2deg); }
+    }
+
+    @keyframes planetGlow {
+      0%, 100% { filter: drop-shadow(0 0 22px rgba(224,156,99,.16)); }
+      50% { filter: drop-shadow(0 0 44px rgba(255,184,111,.32)); }
+    }
+
+    @keyframes orbitSpin {
+      from { transform: translate(-50%,-50%) rotate(-22deg); }
+      to { transform: translate(-50%,-50%) rotate(338deg); }
+    }
+
+    @keyframes orbitSpinReverse {
+      from { transform: translate(-50%,-50%) rotate(35deg); }
+      to { transform: translate(-50%,-50%) rotate(-325deg); }
+    }
+
+    @keyframes spotDrift {
+      0%, 100% { transform: translateY(0) rotate(-12deg); }
+      50% { transform: translateY(5px) rotate(-8deg); }
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { opacity: .55; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes ringPulse {
+      0%, 100% { opacity: .45; }
+      50% { opacity: .9; }
+    }
+
+    /* Layout and Back button */
+
+    .page-shell {
       width: min(1160px, calc(100% - 44px));
       margin-inline: auto;
+      padding-bottom: 70px;
     }
 
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(9,11,19,.86);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--line);
+    .back-row {
+      padding-top: 27px;
+      animation: fadeUp .65s ease both;
     }
 
-    .nav-inner {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .logo {
+    .back-button {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      letter-spacing: 3px;
-      font-size: 19px;
+      gap: 11px;
+      min-height: 45px;
+      padding: 10px 17px;
+      border: 1px solid rgba(255,204,131,.25);
+      border-radius: 12px;
+      color: #f2dfc5;
+      background: rgba(255,204,131,.055);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 600;
+      transition: transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
     }
 
-    .logo-mark {
-      width: 30px;
-      height: 30px;
-      border: 1px solid var(--accent);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: var(--accent);
-      font-size: 15px;
+    .back-arrow {
+      font-size: 1.15rem;
+      transition: transform .25s ease;
     }
 
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 25px;
-      color: var(--muted);
-      font-size: 13px;
+    .back-button:hover {
+      color: var(--gold);
+      border-color: rgba(255,204,131,.7);
+      background: rgba(255,204,131,.11);
+      box-shadow: 0 0 24px rgba(255,204,131,.09);
+      transform: translateX(-3px);
     }
 
-    .nav-links a { transition: color .2s; }
-    .nav-links a:hover,
-    .nav-links a.active { color: var(--accent); }
+    .back-button:hover .back-arrow { transform: translateX(-4px); }
+
+    /* Hero */
 
     .hero {
-      min-height: 620px;
+      position: relative;
       display: grid;
-      grid-template-columns: 1.08fr .92fr;
+      grid-template-columns: minmax(0,1.08fr) minmax(300px,.92fr);
       align-items: center;
-      gap: 35px;
-      padding-block: 80px 70px;
+      gap: 25px;
+      min-height: 500px;
+      margin-top: 23px;
+      padding: clamp(27px,5vw,62px);
+      overflow: hidden;
+      isolation: isolate;
+      border: 1px solid var(--border);
+      border-radius: 27px;
+      background:
+        radial-gradient(ellipse at 82% 42%, rgba(255,190,103,.12), transparent 38%),
+        radial-gradient(ellipse at 100% 100%, rgba(139,92,246,.12), transparent 43%),
+        linear-gradient(135deg, rgba(24,29,48,.98), rgba(8,11,24,.98) 76%);
+      box-shadow: 0 24px 80px rgba(0,0,0,.3), 0 0 45px rgba(255,190,103,.035);
+      animation: fadeUp .8s ease both;
     }
+
+    .hero::before {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      opacity: .45;
+      background-image:
+        radial-gradient(1px 1px at 13% 24%, #fff 50%, transparent 100%),
+        radial-gradient(2px 2px at 67% 19%, #ffe2b3 50%, transparent 100%),
+        radial-gradient(1px 1px at 42% 76%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 90% 62%, #c5eaff 50%, transparent 100%);
+      background-size: 170px 150px, 240px 190px, 200px 170px, 260px 220px;
+    }
+
+    .hero-copy { position: relative; z-index: 2; }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      color: var(--accent);
-      font-size: 11px;
+      margin-bottom: 15px;
+      color: var(--gold);
+      font-size: .73rem;
       font-weight: 700;
-      letter-spacing: 2.8px;
+      letter-spacing: .17em;
       text-transform: uppercase;
     }
 
     .eyebrow::before {
+      width: 24px;
+      height: 2px;
       content: "";
-      width: 27px;
-      height: 1px;
-      background: var(--accent);
+      background: var(--gold);
+      box-shadow: 0 0 12px rgba(255,204,131,.6);
     }
 
-    h1, h2, h3, p { margin-top: 0; }
-
-    h1, h2, h3 {
-      font-family: "Space Grotesk", sans-serif;
-      line-height: 1.13;
+    .hero h1 {
+      max-width: 680px;
+      margin-bottom: 20px;
+      font-size: clamp(2.8rem,5.7vw,5rem);
+      line-height: 1.05;
+      letter-spacing: -.055em;
     }
 
-    h1 {
-      margin: 23px 0 20px;
-      font-size: clamp(54px, 8vw, 94px);
-      letter-spacing: -5px;
-    }
-
-    h1 span {
+    .gradient-text {
       display: block;
-      color: var(--accent);
+      color: transparent;
+      background: linear-gradient(105deg,#fff7eb 4%,#ffcc83 48%,#e69b68 75%,#69e0ff 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
     }
 
-    .hero-copy {
-      max-width: 560px;
-      color: var(--muted);
-      font-size: 16px;
+    .hero-description {
+      max-width: 610px;
+      margin-bottom: 25px;
+      color: #b8c3d9;
+      font-size: 1rem;
       line-height: 1.9;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 13px;
-      margin-top: 30px;
-    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; }
 
-    .btn {
-      min-height: 47px;
-      padding: 12px 19px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
+    .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      gap: 9px;
+      min-height: 45px;
+      padding: 11px 17px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      text-decoration: none;
+      font-size: .87rem;
       font-weight: 700;
-      transition: transform .2s, background .2s, border-color .2s;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
     }
 
-    .btn:hover { transform: translateY(-3px); }
+    .button:hover { transform: translateY(-3px); }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #19130d;
-      border-color: var(--accent);
+    .button-primary {
+      color: #171006;
+      background: linear-gradient(110deg,#ffe4b3,#ffbd70);
+      box-shadow: 0 0 22px rgba(255,190,103,.13);
     }
 
-    .btn-secondary { background: rgba(255,255,255,.035); }
-    .btn-secondary:hover { border-color: var(--accent); }
+    .button-primary:hover { box-shadow: 0 0 30px rgba(255,190,103,.3); }
+
+    .button-secondary {
+      color: #d7e5ff;
+      border-color: var(--border);
+      background: rgba(255,255,255,.035);
+    }
+
+    .button-secondary:hover { border-color: var(--border-hover); }
+
+    /* Animated Jupiter visual */
 
     .hero-visual {
       position: relative;
-      min-height: 440px;
       display: grid;
       place-items: center;
+      min-width: 0;
+      min-height: 360px;
       isolation: isolate;
+    }
+
+    .planet-aura {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: rgba(215,141,88,.17);
+      filter: blur(48px);
+      animation: glowPulse 6s ease-in-out infinite;
     }
 
     .orbit {
       position: absolute;
-      width: min(100%, 420px);
-      aspect-ratio: 1;
-      border: 1px solid rgba(230,183,122,.17);
+      top: 50%;
+      left: 50%;
+      width: 330px;
+      height: 155px;
+      border: 1px solid rgba(255,204,131,.35);
       border-radius: 50%;
-      transform: rotate(-22deg) scaleY(.65);
+      transform: translate(-50%,-50%) rotate(-22deg);
+      animation: orbitSpin 35s linear infinite;
     }
 
-    .orbit::before,
-    .orbit::after {
-      content: "";
+    .orbit-two {
+      width: 385px;
+      height: 205px;
+      border-color: rgba(105,224,255,.23);
+      animation: orbitSpinReverse 48s linear infinite;
+    }
+
+    .orbit-three {
+      width: 245px;
+      height: 290px;
+      border-color: rgba(164,139,255,.19);
+      animation: ringPulse 8s ease-in-out infinite;
+    }
+
+    .orbit-dot {
       position: absolute;
+      top: 7%;
+      left: 22%;
       width: 7px;
       height: 7px;
-      background: var(--accent);
       border-radius: 50%;
-      box-shadow: 0 0 18px var(--accent);
+      background: var(--gold);
+      box-shadow: 0 0 15px var(--gold);
     }
-
-    .orbit::before { top: 12%; left: 20%; }
-    .orbit::after { bottom: 15%; right: 13%; width: 4px; height: 4px; }
 
     .planet {
       position: relative;
-      width: min(72vw, 310px);
+      z-index: 2;
+      width: clamp(150px,18vw,220px);
       aspect-ratio: 1;
       border-radius: 50%;
       overflow: hidden;
       background:
-        radial-gradient(ellipse at 23% 20%, rgba(255,255,255,.65), transparent 10%),
+        radial-gradient(ellipse at 25% 17%,rgba(255,255,255,.52),transparent 11%),
         repeating-linear-gradient(
           178deg,
-          #d6b78f 0 13px,
-          #f1d9b3 14px 25px,
-          #a96e4b 26px 36px,
-          #e8c79b 37px 51px,
-          #c48b62 52px 61px,
-          #f1d7ac 62px 77px,
-          #956347 78px 87px
+          #d6b78f 0 10px,
+          #f1d9b3 11px 20px,
+          #a96e4b 21px 29px,
+          #e8c79b 30px 43px,
+          #c48b62 44px 52px,
+          #f1d7ac 53px 64px,
+          #956347 65px 73px,
+          #d6ae80 74px 84px
         );
       box-shadow:
-        inset -38px -16px 60px rgba(20,12,12,.82),
-        inset 15px 8px 30px rgba(255,255,255,.16),
-        0 0 85px rgba(205,140,91,.16);
-      animation: float 7s ease-in-out infinite;
+        inset -32px -19px 38px rgba(20,12,12,.78),
+        inset 12px 8px 24px rgba(255,255,255,.17),
+        0 0 42px rgba(205,140,91,.23);
+      animation: planetFloat 7s ease-in-out infinite, planetGlow 6s ease-in-out infinite;
     }
 
     .planet::before {
-      content: "";
       position: absolute;
       top: 46%;
       left: 53%;
       width: 24%;
       height: 12%;
+      content: "";
       border-radius: 50%;
       transform: rotate(-12deg);
-      background:
-        radial-gradient(ellipse at 35% 35%, #d5a17b 0 18%, #a84c37 40%, #6e3029 75%);
-      box-shadow: inset 0 3px 6px rgba(255,230,190,.3);
-      opacity: .94;
+      background: radial-gradient(ellipse at 35% 35%,#d5a17b 0 18%,#a84c37 40%,#6e3029 75%);
+      box-shadow: inset 0 3px 6px rgba(255,230,190,.3), 0 0 9px rgba(168,76,55,.2);
+      animation: spotDrift 5s ease-in-out infinite;
     }
 
     .planet::after {
-      content: "";
       position: absolute;
       inset: 0;
-      border-radius: 50%;
-      background: linear-gradient(100deg, transparent 38%, rgba(0,0,0,.14) 58%, rgba(0,0,0,.8) 100%);
+      content: "";
+      border-radius: inherit;
+      background: linear-gradient(100deg,transparent 38%,rgba(0,0,0,.14) 58%,rgba(0,0,0,.8) 100%);
+    }
+
+    .hero-note {
+      position: absolute;
+      top: 4%;
+      left: 0;
+      color: #d9c7a6;
+      font-family: var(--heading);
+      font-size: .62rem;
+      letter-spacing: .13em;
+      animation: glowPulse 4s ease-in-out infinite;
     }
 
     .visual-label {
       position: absolute;
       right: 0;
-      bottom: 24px;
+      bottom: 0;
       padding: 13px 16px;
-      background: rgba(17,21,33,.9);
-      border: 1px solid var(--line);
+      border: 1px solid var(--border);
       border-radius: 12px;
+      background: rgba(17,21,33,.9);
       backdrop-filter: blur(12px);
     }
 
     .visual-label strong {
       display: block;
-      font-family: "Space Grotesk", sans-serif;
-      color: var(--accent);
+      color: var(--gold);
+      font-family: var(--heading);
       font-size: 19px;
     }
 
-    .visual-label small { color: var(--muted); font-size: 11px; }
+    .visual-label small { color: var(--muted); font-size: .68rem; }
 
-    .hero-note {
-      position: absolute;
-      top: 35px;
-      left: 0;
-      color: var(--muted);
-      font-size: 11px;
-      letter-spacing: 1px;
-    }
-
-    .section { padding-block: 76px; }
-
-    .section-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 25px;
-      margin-bottom: 30px;
-    }
-
-    .section-heading h2 {
-      margin: 12px 0 0;
-      font-size: clamp(30px, 4vw, 43px);
-      letter-spacing: -1.7px;
-    }
-
-    .section-heading p {
-      max-width: 440px;
-      margin-bottom: 0;
-      color: var(--muted);
-      font-size: 13px;
-    }
+    /* Facts */
 
     .facts-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 13px;
+      grid-template-columns: repeat(4,minmax(0,1fr));
+      gap: 14px;
+      margin: 24px 0 62px;
     }
 
-    .fact {
-      padding: 23px;
-      background: linear-gradient(145deg, var(--surface-2), var(--surface));
-      border: 1px solid var(--line);
+    .fact-card {
+      position: relative;
+      min-width: 0;
+      padding: 21px;
+      overflow: hidden;
+      border: 1px solid var(--border);
       border-radius: 15px;
-      transition: transform .25s, border-color .25s;
+      background:
+        radial-gradient(circle at 100% 0%,rgba(255,204,131,.075),transparent 55%),
+        rgba(255,255,255,.025);
+      transition: transform .3s ease,border-color .3s ease,background .3s ease;
     }
 
-    .fact:hover { transform: translateY(-5px); border-color: rgba(230,183,122,.45); }
-
-    .fact-label {
-      color: var(--muted);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1.3px;
+    .fact-card::after {
+      position: absolute;
+      right: -30px;
+      bottom: -45px;
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      content: "";
+      background: rgba(255,204,131,.055);
+      filter: blur(25px);
+      transition: background .3s ease;
     }
 
-    .fact-value {
-      margin-top: 11px;
-      color: var(--accent);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(21px, 2.5vw, 29px);
-      font-weight: 600;
-      line-height: 1.25;
-    }
+    .fact-card:hover { transform: translateY(-5px); border-color: var(--border-hover); }
+    .fact-card:hover::after { background: rgba(255,204,131,.15); }
 
-    .fact small { display: block; margin-top: 7px; color: var(--muted); font-size: 11px; }
+    .fact-label { display: block; margin-bottom: 8px; color: var(--muted); font-size: .76rem; }
+    .fact-card strong { display: block; font-family: var(--heading); font-size: clamp(1rem,1.8vw,1.35rem); line-height: 1.4; overflow-wrap: anywhere; }
 
-    .content-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
+    /* Content sections */
 
-    .info-card {
-      padding: 28px;
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-    }
+    .section { margin-top: 65px; scroll-margin-top: 25px; }
+    .section-heading { max-width: 800px; margin-bottom: 26px; }
 
-    .card-number {
-      color: var(--accent);
-      font-size: 11px;
-      letter-spacing: 2px;
+    .section-number {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--gold);
+      font-size: .72rem;
       font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
     }
 
-    .info-card h3 { margin: 15px 0 12px; font-size: 23px; }
-    .info-card p { margin-bottom: 0; color: var(--muted); font-size: 14px; }
+    .section-heading h2 {
+      margin-bottom: 12px;
+      font-size: clamp(1.85rem,4vw,2.8rem);
+      line-height: 1.17;
+      letter-spacing: -.04em;
+    }
+
+    .section-heading p { margin-bottom: 0; color: var(--muted); line-height: 1.9; }
+
+    .panel {
+      min-width: 0;
+      padding: clamp(22px,3.7vw,32px);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background:
+        radial-gradient(ellipse at 100% 0%,rgba(255,204,131,.035),transparent 48%),
+        linear-gradient(145deg,rgba(19,28,47,.96),rgba(8,13,26,.97));
+      box-shadow: 0 15px 50px rgba(0,0,0,.09);
+      transition: border-color .3s ease,transform .3s ease;
+    }
+
+    .panel:hover { border-color: rgba(144,174,230,.25); }
+    .panel h3 { margin-bottom: 14px; font-size: 1.2rem; }
+    .panel p, .panel li { color: #b8c3d9; font-size: .93rem; line-height: 1.9; }
+    .panel p:last-child { margin-bottom: 0; }
+    .panel strong { color: #edf2ff; }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0,1.1fr) minmax(0,.9fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .discoveries-grid {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 17px;
+    }
+
+    .discovery-card {
+      position: relative;
+      min-width: 0;
+      padding: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background:
+        radial-gradient(circle at 100% 0%,rgba(255,204,131,.08),transparent 48%),
+        linear-gradient(145deg,rgba(19,28,47,.94),rgba(8,13,26,.97));
+      transition: transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+    }
+
+    .discovery-card::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      content: "";
+      background: linear-gradient(90deg,var(--gold),var(--cyan));
+      transition: width .35s ease;
+    }
+
+    .discovery-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,204,131,.4);
+      box-shadow: 0 15px 38px rgba(0,0,0,.18);
+    }
+
+    .discovery-card:hover::before { width: 100%; }
+    .discovery-number { display: block; margin-bottom: 16px; color: var(--gold); font-family: var(--heading); font-size: .73rem; font-weight: 700; letter-spacing: .1em; }
+    .discovery-card h3 { margin-bottom: 10px; font-size: 1.05rem; line-height: 1.45; }
+    .discovery-card p { margin-bottom: 0; color: var(--muted); font-size: .88rem; line-height: 1.85; }
 
     .highlight {
-      margin-top: 20px;
-      padding: 23px 25px;
-      border: 1px solid rgba(230,183,122,.25);
-      border-left: 3px solid var(--accent);
-      background: linear-gradient(90deg, rgba(230,183,122,.09), transparent);
+      margin-top: 24px;
+      padding: 25px 26px;
+      border: 1px solid rgba(255,204,131,.2);
+      border-left: 3px solid var(--gold);
       border-radius: 0 14px 14px 0;
+      background: rgba(255,204,131,.035);
     }
 
-    .highlight strong { display: block; margin-bottom: 6px; color: var(--accent); }
-    .highlight p { margin: 0; color: var(--muted); font-size: 13px; }
+    .highlight h3 { margin-bottom: 9px; font-size: 1.08rem; }
+    .highlight strong { display: block; margin-bottom: 6px; color: var(--gold); }
+    .highlight p { margin-bottom: 0; color: #c0cadc; font-size: .92rem; line-height: 1.9; }
+
+    /* Jupiter's moons */
 
     .moon-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(4,minmax(0,1fr));
       gap: 14px;
     }
 
     .moon-card {
       padding: 22px 19px;
-      background: var(--surface);
-      border: 1px solid var(--line);
+      border: 1px solid var(--border);
       border-radius: 17px;
+      background: linear-gradient(145deg,rgba(19,28,47,.96),rgba(8,13,26,.97));
+      transition: transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+    }
+
+    .moon-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,204,131,.4);
+      box-shadow: 0 12px 32px rgba(0,0,0,.2);
     }
 
     .moon-art {
@@ -404,113 +635,197 @@
       height: 66px;
       margin-bottom: 19px;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 25%, #eee5d0, #a6a09a 47%, #4e5159 100%);
-      box-shadow: inset -10px -6px 17px rgba(0,0,0,.5);
+      box-shadow: inset -10px -6px 17px rgba(0,0,0,.5),0 0 22px rgba(184,199,230,.08);
+      animation: planetFloat 7s ease-in-out infinite;
     }
 
-    .moon-art.io {
-      background: radial-gradient(circle at 30% 25%, #fff0a1, #d59b45 48%, #74402b);
+    .moon-art.io { background: radial-gradient(circle at 30% 25%,#fff0a1,#d59b45 48%,#74402b); }
+    .moon-art.europa { background: repeating-linear-gradient(130deg,#e8dfc7 0 5px,#a99c88 6px 8px,#e2d7c1 9px 14px); }
+    .moon-art.ganymede { background: radial-gradient(circle at 35% 25%,#cfc4a8,#77736a 48%,#393b45); }
+    .moon-art.callisto { background: radial-gradient(circle at 32% 25%,#a49b91,#625b56 45%,#282b32); }
+
+    .moon-card h3 { margin: 0 0 7px; font-size: 1.08rem; }
+    .moon-card p { margin: 0; color: var(--muted); font-size: .82rem; line-height: 1.8; }
+
+    /* Mission timeline */
+
+    .timeline { display: grid; gap: 0; }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 112px minmax(0,1fr);
+      gap: 19px;
+      padding-bottom: 30px;
     }
 
-    .moon-art.europa {
-      background: repeating-linear-gradient(130deg, #e8dfc7 0 5px, #a99c88 6px 8px, #e2d7c1 9px 14px);
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-year { color: var(--gold); font-family: var(--heading); font-size: .9rem; font-weight: 700; }
+
+    .timeline-content {
+      position: relative;
+      min-width: 0;
+      padding: 0 0 0 23px;
+      border-left: 1px solid rgba(255,204,131,.24);
     }
 
-    .moon-art.ganymede {
-      background: radial-gradient(circle at 35% 25%, #cfc4a8, #77736a 48%, #393b45);
+    .timeline-content::before {
+      position: absolute;
+      top: 6px;
+      left: -5px;
+      width: 9px;
+      height: 9px;
+      border: 2px solid #0d1424;
+      border-radius: 50%;
+      content: "";
+      background: var(--gold);
+      box-shadow: 0 0 13px rgba(255,204,131,.55);
     }
 
-    .moon-art.callisto {
-      background: radial-gradient(circle at 32% 25%, #a49b91, #625b56 45%, #282b32);
-    }
-
-    .moon-card h3 { margin: 0 0 7px; font-size: 18px; }
-    .moon-card p { color: var(--muted); font-size: 12px; margin: 0; }
+    .timeline-content h3 { margin-bottom: 7px; font-size: 1.04rem; }
+    .timeline-content p { margin-bottom: 0; color: var(--muted); font-size: .9rem; line-height: 1.85; }
 
     .mission-list { display: grid; gap: 12px; }
 
     .mission {
       display: grid;
-      grid-template-columns: 105px 1fr;
+      grid-template-columns: 105px minmax(0,1fr);
       gap: 20px;
       padding: 22px 24px;
-      background: var(--surface);
-      border: 1px solid var(--line);
+      border: 1px solid var(--border);
       border-radius: 15px;
+      background: linear-gradient(145deg,rgba(19,28,47,.96),rgba(8,13,26,.97));
+      transition: transform .3s ease,border-color .3s ease;
     }
 
-    .mission-year {
-      color: var(--accent);
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 20px;
-      font-weight: 700;
-    }
+    .mission:hover { transform: translateX(4px); border-color: rgba(255,204,131,.36); }
+    .mission-year { color: var(--gold); font-family: var(--heading); font-size: 1.05rem; font-weight: 700; }
+    .mission h3 { margin: 0 0 7px; font-size: 1.05rem; }
+    .mission p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.85; }
 
-    .mission h3 { margin: 0 0 7px; font-size: 18px; }
-    .mission p { margin: 0; color: var(--muted); font-size: 13px; }
-
-    .question-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
+    .question-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
 
     .question {
       padding: 22px;
-      border: 1px solid var(--line);
+      border: 1px solid var(--border);
       border-radius: 15px;
-      background: linear-gradient(140deg, rgba(230,183,122,.07), var(--surface));
+      background: linear-gradient(140deg,rgba(255,204,131,.07),rgba(16,22,38,.96));
+      transition: transform .3s ease,border-color .3s ease;
     }
 
-    .question span { color: var(--accent); font-size: 12px; font-weight: 700; }
-    .question h3 { margin: 12px 0 0; font-size: 17px; }
+    .question:hover { transform: translateY(-4px); border-color: rgba(255,204,131,.35); }
+    .question span { color: var(--gold); font-size: .73rem; font-weight: 700; }
+    .question h3 { margin: 12px 0 0; font-size: 1.02rem; line-height: 1.5; }
 
-    .sources {
+    .sources { display: flex; flex-wrap: wrap; gap: 11px; }
+
+    .source-link, .bottom-navigation a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 15px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      color: #bdc9e1;
+      background: rgba(255,255,255,.025);
+      font-size: .84rem;
+      text-decoration: none;
+      transition: color .22s ease,border-color .22s ease,background .22s ease,transform .22s ease;
+    }
+
+    .source-link:hover, .bottom-navigation a:hover {
+      color: var(--gold);
+      border-color: rgba(255,204,131,.38);
+      background: rgba(255,204,131,.045);
+      transform: translateY(-2px);
+    }
+
+    .bottom-navigation {
       display: flex;
       flex-wrap: wrap;
       gap: 11px;
+      margin-top: 56px;
+      padding-top: 27px;
+      border-top: 1px solid var(--border);
     }
 
-    .source-link {
-      padding: 12px 16px;
-      border: 1px solid var(--line);
-      border-radius: 9px;
+    .bottom-navigation a { flex: 0 1 auto; }
+
+    .site-footer {
+      width: min(1160px,calc(100% - 44px));
+      margin: 0 auto;
+      padding: 25px 0 32px;
+      border-top: 1px solid var(--border);
       color: var(--muted);
-      font-size: 12px;
-      transition: color .2s, border-color .2s;
+      font-size: .83rem;
     }
 
-    .source-link:hover { color: var(--accent); border-color: var(--accent); }
-
-    .planet-nav {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-block: 55px 80px;
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
-    .planet-nav a {
-      padding: 23px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: var(--surface);
-      transition: border-color .2s, transform .2s;
+    .footer-inner p { margin: 0; }
+
+    /* Scroll reveal */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);
     }
 
-    .planet-nav a:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .planet-nav a:last-child { text-align: right; }
-    .planet-nav small { display: block; color: var(--muted); font-size: 11px; }
-    .planet-nav strong { display: block; margin-top: 5px; font-family: "Space Grotesk", sans-serif; font-size: 20px; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .08s; }
+    .reveal-delay-2 { transition-delay: .16s; }
+    .reveal-delay-3 { transition-delay: .24s; }
 
-    footer { border-top: 1px solid var(--line); padding: 28px 0; color: var(--muted); font-size: 12px; }
-    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: minmax(0,1fr); gap: 8px; }
+      .hero-copy { max-width: 750px; }
+      .hero-visual { min-height: 330px; }
+      .two-column { grid-template-columns: minmax(0,1fr); }
+      .discoveries-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .question-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
 
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 620px) {
+      .page-shell, .site-footer { width: min(100% - 28px,1160px); }
+      .back-row { padding-top: 18px; }
+      .hero { min-height: auto; margin-top: 17px; padding: 25px 21px; border-radius: 21px; }
+      .hero h1 { font-size: clamp(2.45rem,11vw,3.7rem); }
+      .hero-description { font-size: .94rem; }
+      .hero-actions .button { flex: 1 1 145px; }
+      .hero-visual { min-height: 280px; margin-top: 8px; }
+      .orbit { width: 245px; height: 118px; }
+      .orbit-two { width: 290px; height: 155px; }
+      .orbit-three { width: 200px; height: 235px; }
+      .hero-note { top: 0; font-size: .52rem; }
+      .visual-label { right: 0; bottom: 0; }
+      .facts-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin-bottom: 48px; }
+      .fact-card { padding: 17px; }
+      .section { margin-top: 49px; }
+      .section-heading h2 { font-size: 1.9rem; }
+      .discoveries-grid, .question-grid { grid-template-columns: minmax(0,1fr); }
+      .discovery-card { padding: 22px; }
+      .moon-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+      .moon-card { padding: 18px 15px; }
+      .timeline-item { grid-template-columns: 76px minmax(0,1fr); gap: 10px; }
+      .timeline-content { padding-left: 17px; }
+      .mission { grid-template-columns: minmax(0,1fr); gap: 6px; padding: 19px; }
+      .highlight { padding: 21px; }
+      .bottom-navigation { flex-direction: column; }
+      .bottom-navigation a { width: 100%; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(-3deg); }
-      50% { transform: translateY(-13px) rotate(2deg); }
+    @media (max-width: 370px) {
+      .facts-grid, .moon-grid { grid-template-columns: minmax(0,1fr); }
+      .hero-actions { flex-direction: column; }
+      .timeline-item { grid-template-columns: 68px minmax(0,1fr); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -522,85 +837,55 @@
       }
       .reveal { opacity: 1; transform: none; }
     }
-
-    @media (max-width: 850px) {
-      .nav-inner { padding-block: 15px; align-items: flex-start; }
-      .nav-links { justify-content: flex-end; gap: 12px 17px; }
-      .hero { grid-template-columns: 1fr; padding-top: 65px; }
-      .hero-visual { min-height: 370px; }
-      .planet { width: 270px; }
-      .facts-grid { grid-template-columns: repeat(2, 1fr); }
-      .moon-grid { grid-template-columns: repeat(2, 1fr); }
-      .question-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 560px) {
-      .container { width: min(100% - 30px, 1160px); }
-      .nav-inner { display: block; }
-      .logo { margin-bottom: 12px; }
-      .nav-links { justify-content: flex-start; gap: 10px 17px; font-size: 12px; }
-      .hero { padding-block: 54px 35px; gap: 10px; }
-      h1 { letter-spacing: -3px; }
-      .hero-copy { font-size: 14px; }
-      .hero-visual { min-height: 330px; }
-      .planet { width: 235px; }
-      .orbit { width: 300px; }
-      .hero-note { top: 10px; }
-      .visual-label { right: 0; bottom: 8px; }
-      .section { padding-block: 50px; }
-      .section-heading { display: block; }
-      .section-heading p { margin-top: 14px; }
-      .facts-grid { gap: 9px; }
-      .fact { padding: 16px; }
-      .content-grid, .question-grid { grid-template-columns: 1fr; }
-      .info-card { padding: 22px; }
-      .moon-grid { gap: 9px; }
-      .moon-card { padding: 17px 14px; }
-      .mission { grid-template-columns: 1fr; gap: 6px; padding: 19px; }
-      .planet-nav strong { font-size: 17px; }
-      .footer-inner { align-items: flex-start; flex-direction: column; }
-    }
   </style>
 </head>
 
 <body>
-  <header class="nav">
-    <div class="container nav-inner">
-      <a class="logo" href="index.html" aria-label="COSMOS homepage">
-        <span class="logo-mark">✳</span> COSMOS
+  <div class="space-background" aria-hidden="true"></div>
+  <div class="stars" aria-hidden="true"></div>
+
+  <main class="page-shell">
+
+    <div class="back-row">
+      <a class="back-button" href="planets.html">
+        <span class="back-arrow" aria-hidden="true">&larr;</span>
+        <span>Back to Planets</span>
       </a>
-
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="planets.html" class="active">Planets</a>
-        <a href="missions.html">Missions</a>
-        <a href="research.html">Research</a>
-        <a href="about.html">About</a>
-      </nav>
     </div>
-  </header>
 
-  <main>
-    <section class="container hero">
-      <div class="hero-content">
-        <div class="eyebrow">Planet Explorer / 05</div>
-        <h1>Jupiter<span>The Giant.</span></h1>
-        <p class="hero-copy">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="planet-title">
+      <div class="hero-copy">
+        <span class="eyebrow">Planet Explorer / 05</span>
+
+        <h1 id="planet-title">
+          Jupiter:
+          <span class="gradient-text">The Giant.</span>
+        </h1>
+
+        <p class="hero-description">
           A world of colossal storms, striped clouds and a powerful magnetic field.
           Jupiter is the largest planet in our Solar System—and its icy moons may
           hold clues to whether life-friendly environments exist beyond Earth.
         </p>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#overview">Explore Jupiter ↓</a>
-          <a class="btn btn-secondary" href="#missions">Discover its missions ↗</a>
+          <a class="button button-primary" href="#overview">
+            Explore Jupiter <span aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="button button-secondary" href="#missions">
+            Discover Its Missions
+          </a>
         </div>
       </div>
 
-      <div class="hero-visual" aria-label="Stylized illustration of Jupiter">
-        <div class="hero-note">5TH PLANET FROM THE SUN · GAS GIANT</div>
-        <div class="orbit"></div>
+      <div class="hero-visual" role="img" aria-label="Stylized Jupiter with atmospheric bands, Great Red Spot and glowing orbital rings">
+        <div class="planet-aura"></div>
+        <div class="orbit"><span class="orbit-dot"></span></div>
+        <div class="orbit orbit-two"></div>
+        <div class="orbit orbit-three"></div>
         <div class="planet"></div>
+        <span class="hero-note">5TH PLANET FROM THE SUN · GAS GIANT</span>
         <div class="visual-label">
           <strong>142,984 km</strong>
           <small>Approximate equatorial diameter</small>
@@ -608,130 +893,174 @@
       </div>
     </section>
 
-    <section class="container section reveal" id="overview">
+    <!-- FACTS -->
+    <section class="facts-grid" aria-label="Jupiter facts">
+      <article class="fact-card reveal">
+        <span class="fact-label">Solar distance</span>
+        <strong>778.5 million km</strong>
+      </article>
+      <article class="fact-card reveal reveal-delay-1">
+        <span class="fact-label">Diameter</span>
+        <strong>142,984 km</strong>
+      </article>
+      <article class="fact-card reveal reveal-delay-2">
+        <span class="fact-label">Day length</span>
+        <strong>9.9 hours</strong>
+      </article>
+      <article class="fact-card reveal reveal-delay-3">
+        <span class="fact-label">Year length</span>
+        <strong>11.86 Earth years</strong>
+      </article>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="section reveal" id="overview">
       <div class="section-heading">
-        <div>
-          <div class="eyebrow">At a glance</div>
-          <h2>Jupiter by the numbers</h2>
-        </div>
-        <p>Jupiter is so massive that it contains more than twice the mass of all the other Solar System planets combined.</p>
+        <span class="section-number">01 / At a Glance</span>
+        <h2>Jupiter by the Numbers</h2>
+        <p>
+          Jupiter is so massive that it contains more than twice the mass
+          of all the other Solar System planets combined.
+        </p>
       </div>
 
-      <div class="facts-grid">
-        <article class="fact">
-          <div class="fact-label">Solar distance</div>
-          <div class="fact-value">778.5M km</div>
-          <small>Average distance from the Sun</small>
+      <div class="two-column">
+        <article class="panel">
+          <h3>A Planet of Extraordinary Scale</h3>
+          <p>
+            Jupiter is the fifth planet from the Sun and the largest planet in
+            the Solar System. Its enormous atmosphere, rapid rotation and strong
+            gravity make it one of the most complex worlds for planetary scientists
+            to investigate.
+          </p>
+          <p>
+            Unlike Earth, Jupiter has no known solid surface on which a spacecraft
+            could land. Its visible cloud tops are the upper layers of a deep
+            atmosphere dominated by hydrogen and helium.
+          </p>
         </article>
-        <article class="fact">
-          <div class="fact-label">Diameter</div>
-          <div class="fact-value">142,984 km</div>
-          <small>Approximately 11 Earth diameters</small>
-        </article>
-        <article class="fact">
-          <div class="fact-label">Day length</div>
-          <div class="fact-value">9.9 hours</div>
-          <small>One of the shortest planetary days</small>
-        </article>
-        <article class="fact">
-          <div class="fact-label">Year length</div>
-          <div class="fact-value">11.86 years</div>
-          <small>One orbit around the Sun</small>
-        </article>
+
+        <aside class="panel">
+          <h3>Quick Planet Profile</h3>
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-year">Type</div>
+              <div class="timeline-content">
+                <h3>Gas Giant</h3>
+                <p>A massive planet composed primarily of hydrogen and helium.</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-year">Orbit</div>
+              <div class="timeline-content">
+                <h3>11.86 Earth Years</h3>
+                <p>One full revolution around the Sun takes nearly twelve Earth years.</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-year">Rotation</div>
+              <div class="timeline-content">
+                <h3>About 9.9 Hours</h3>
+                <p>Its rapid rotation contributes to Jupiter's flattened shape and powerful atmospheric circulation.</p>
+              </div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-year">System</div>
+              <div class="timeline-content">
+                <h3>Many Natural Satellites</h3>
+                <p>Jupiter's moons include worlds with volcanoes, icy surfaces and possible subsurface oceans.</p>
+              </div>
+            </article>
+          </div>
+        </aside>
       </div>
     </section>
 
-    <section class="container section reveal">
+    <!-- ATMOSPHERE -->
+    <section class="section reveal" id="atmosphere">
       <div class="section-heading">
-        <div>
-          <div class="eyebrow">Inside the giant</div>
-          <h2>A planet without a solid surface</h2>
-        </div>
+        <span class="section-number">02 / Inside the Giant</span>
+        <h2>A Planet Without a Solid Surface</h2>
         <p>Jupiter's visible clouds are only the upper layers of a vast, deep atmosphere.</p>
       </div>
 
-      <div class="content-grid">
-        <article class="info-card">
-          <div class="card-number">01 / ATMOSPHERE</div>
-          <h3>Clouds of hydrogen and helium</h3>
+      <div class="discoveries-grid">
+        <article class="discovery-card">
+          <span class="discovery-number">01 / ATMOSPHERE</span>
+          <h3>Clouds of Hydrogen and Helium</h3>
           <p>
-            Jupiter's atmosphere consists mostly of hydrogen and helium, with smaller
-            amounts of methane, ammonia, water vapour and other compounds. Its pale
-            zones and darker belts are shaped by powerful winds, chemistry and
-            differences in cloud altitude.
+            Jupiter's atmosphere consists mostly of hydrogen and helium, with
+            smaller amounts of methane, ammonia, water vapour and other compounds.
+            Its pale zones and darker belts are shaped by powerful winds, chemistry
+            and differences in cloud altitude.
           </p>
         </article>
 
-        <article class="info-card">
-          <div class="card-number">02 / THE GREAT RED SPOT</div>
-          <h3>A storm larger than Earth</h3>
+        <article class="discovery-card">
+          <span class="discovery-number">02 / GREAT RED SPOT</span>
+          <h3>A Storm Larger Than Earth</h3>
           <p>
-            The Great Red Spot is a giant, long-lived anticyclonic storm in Jupiter's
-            southern hemisphere. It has been observed for centuries, although its
-            size and appearance have changed over time. Scientists study it to
-            understand how enormous planetary storms form and evolve.
+            The Great Red Spot is a giant, long-lived anticyclonic storm in
+            Jupiter's southern hemisphere. It has been observed for centuries,
+            although its size and appearance have changed over time.
           </p>
         </article>
 
-        <article class="info-card">
-          <div class="card-number">03 / INTERIOR</div>
-          <h3>Pressure beyond imagination</h3>
+        <article class="discovery-card">
+          <span class="discovery-number">03 / INTERIOR</span>
+          <h3>Pressure Beyond Imagination</h3>
           <p>
-            Deeper inside Jupiter, pressure rises until hydrogen behaves like an
-            electrically conducting metallic fluid. Scientists are still investigating
-            the planet's deep interior and the nature of its central region, which
-            may be diffuse rather than a simple compact core.
+            Deeper inside Jupiter, pressure rises until hydrogen behaves like
+            an electrically conducting metallic fluid. Scientists are still
+            investigating the planet's deep interior and central region.
           </p>
         </article>
 
-        <article class="info-card">
-          <div class="card-number">04 / MAGNETOSPHERE</div>
-          <h3>A powerful magnetic environment</h3>
+        <article class="discovery-card">
+          <span class="discovery-number">04 / MAGNETOSPHERE</span>
+          <h3>A Powerful Magnetic Environment</h3>
           <p>
             Jupiter has the strongest planetary magnetic field in the Solar System.
-            It traps charged particles and creates intense radiation belts. This
-            environment affects the planet's moons and makes spacecraft operations
-            near Jupiter a significant engineering challenge.
+            It traps charged particles and creates intense radiation belts that
+            make spacecraft operations a major engineering challenge.
           </p>
         </article>
 
-        <article class="info-card">
-          <div class="card-number">05 / RINGS</div>
-          <h3>Faint rings in the dark</h3>
+        <article class="discovery-card">
+          <span class="discovery-number">05 / RINGS</span>
+          <h3>Faint Rings in the Dark</h3>
           <p>
-            Jupiter has a faint ring system made primarily of dust. The rings are
-            much less conspicuous than Saturn's and are replenished by material
-            knocked off small inner moons by impacts.
+            Jupiter has a faint ring system made primarily of dust. The rings
+            are much less conspicuous than Saturn's and are replenished by
+            material knocked off small inner moons by impacts.
           </p>
         </article>
 
-        <article class="info-card">
-          <div class="card-number">06 / WEATHER</div>
-          <h3>Winds, waves and giant vortices</h3>
+        <article class="discovery-card">
+          <span class="discovery-number">06 / WEATHER</span>
+          <h3>Winds, Waves and Giant Vortices</h3>
           <p>
-            Jupiter's atmosphere contains jet streams, turbulent cloud systems and
-            storms of many sizes. Because Jupiter releases more energy than it
-            receives from sunlight, heat rising from its interior also helps drive
-            its atmospheric activity.
+            Jupiter's atmosphere contains jet streams, turbulent cloud systems
+            and storms of many sizes. Heat rising from its interior also helps
+            drive its atmospheric activity.
           </p>
         </article>
       </div>
 
-      <div class="highlight">
-        <strong>Did you know?</strong>
+      <aside class="highlight">
+        <h3>Did You Know?</h3>
         <p>
-          Jupiter rotates so quickly that its shape is slightly flattened at the
-          poles and bulges around the equator.
+          Jupiter rotates so quickly that its shape is slightly flattened at
+          the poles and bulges around the equator.
         </p>
-      </div>
+      </aside>
     </section>
 
-    <section class="container section reveal" id="moons">
+    <!-- MOONS -->
+    <section class="section reveal" id="moons">
       <div class="section-heading">
-        <div>
-          <div class="eyebrow">Worlds of their own</div>
-          <h2>Meet the four Galilean moons</h2>
-        </div>
+        <span class="section-number">03 / Worlds of Their Own</span>
+        <h2>Meet the Four Galilean Moons</h2>
         <p>Galileo Galilei observed these four large moons in 1610. Each is a different kind of world.</p>
       </div>
 
@@ -739,131 +1068,143 @@
         <article class="moon-card">
           <div class="moon-art io" aria-hidden="true"></div>
           <h3>Io</h3>
-          <p>A volcanically active world, powered by tidal heating as Jupiter and neighbouring moons tug on it.</p>
+          <p>
+            A volcanically active world, powered by tidal heating as Jupiter
+            and neighbouring moons tug on it.
+          </p>
         </article>
 
         <article class="moon-card">
           <div class="moon-art europa" aria-hidden="true"></div>
           <h3>Europa</h3>
-          <p>An icy moon with strong evidence for a salty ocean beneath its frozen surface—an important target in the search for habitable environments.</p>
+          <p>
+            An icy moon with strong evidence for a salty ocean beneath its
+            frozen surface—an important target in the search for habitable environments.
+          </p>
         </article>
 
         <article class="moon-card">
           <div class="moon-art ganymede" aria-hidden="true"></div>
           <h3>Ganymede</h3>
-          <p>The largest moon in the Solar System. It has its own intrinsic magnetic field and evidence of a subsurface ocean.</p>
+          <p>
+            The largest moon in the Solar System. It has its own intrinsic
+            magnetic field and evidence of a subsurface ocean.
+          </p>
         </article>
 
         <article class="moon-card">
           <div class="moon-art callisto" aria-hidden="true"></div>
           <h3>Callisto</h3>
-          <p>A heavily cratered ancient world that may also contain a hidden ocean beneath its icy exterior.</p>
+          <p>
+            A heavily cratered ancient world that may also contain a hidden
+            ocean beneath its icy exterior.
+          </p>
         </article>
       </div>
 
-      <div class="highlight">
-        <strong>Could an ocean moon support life?</strong>
+      <aside class="highlight">
+        <h3>Could an Ocean Moon Support Life?</h3>
         <p>
-          Europa, Ganymede and Callisto are important targets for studying hidden
-          oceans. Scientists have not discovered life there; they are investigating
-          whether conditions suitable for life might exist.
+          Europa, Ganymede and Callisto are important targets for studying
+          hidden oceans. Scientists have not discovered life there; they are
+          investigating whether conditions suitable for life might exist.
         </p>
-      </div>
+      </aside>
     </section>
 
-    <section class="container section reveal" id="missions">
+    <!-- MISSIONS -->
+    <section class="section reveal" id="missions">
       <div class="section-heading">
-        <div>
-          <div class="eyebrow">Robotic explorers</div>
-          <h2>How we explore Jupiter</h2>
-        </div>
+        <span class="section-number">04 / Robotic Explorers</span>
+        <h2>How We Explore Jupiter</h2>
         <p>Every spacecraft adds a new piece to our understanding of the giant planet and its moons.</p>
       </div>
 
-      <div class="mission-list">
-        <article class="mission">
-          <div class="mission-year">1973–75</div>
-          <div>
-            <h3>Pioneer 10 and Pioneer 11</h3>
-            <p>
-              Pioneer 10 made the first close spacecraft encounter with Jupiter in
-              1973. Pioneer 11 followed in 1974, returning observations that helped
-              prepare the way for later missions.
-            </p>
-          </div>
-        </article>
+      <div class="panel">
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-year">1973–75</div>
+            <div class="timeline-content">
+              <h3>Pioneer 10 and Pioneer 11</h3>
+              <p>
+                Pioneer 10 made the first close spacecraft encounter with Jupiter
+                in 1973. Pioneer 11 followed in 1974, returning observations that
+                helped prepare the way for later missions.
+              </p>
+            </div>
+          </article>
 
-        <article class="mission">
-          <div class="mission-year">1979</div>
-          <div>
-            <h3>Voyager 1 and Voyager 2</h3>
-            <p>
-              The Voyager flybys revealed remarkable details of Jupiter's clouds,
-              rings and moons, including Io's active volcanoes.
-            </p>
-          </div>
-        </article>
+          <article class="timeline-item">
+            <div class="timeline-year">1979</div>
+            <div class="timeline-content">
+              <h3>Voyager 1 and Voyager 2</h3>
+              <p>
+                The Voyager flybys revealed remarkable details of Jupiter's clouds,
+                rings and moons, including Io's active volcanoes.
+              </p>
+            </div>
+          </article>
 
-        <article class="mission">
-          <div class="mission-year">1995–2003</div>
-          <div>
-            <h3>Galileo</h3>
-            <p>
-              NASA's Galileo spacecraft orbited Jupiter, studied its large moons and
-              delivered an atmospheric probe into the planet's clouds in 1995.
-              Its mission ended in 2003 with a controlled plunge into Jupiter.
-            </p>
-          </div>
-        </article>
+          <article class="timeline-item">
+            <div class="timeline-year">1995–2003</div>
+            <div class="timeline-content">
+              <h3>Galileo</h3>
+              <p>
+                NASA's Galileo spacecraft orbited Jupiter, studied its large moons
+                and delivered an atmospheric probe into the planet's clouds in 1995.
+                Its mission ended in 2003 with a controlled plunge into Jupiter.
+              </p>
+            </div>
+          </article>
 
-        <article class="mission">
-          <div class="mission-year">2016–present*</div>
-          <div>
-            <h3>Juno</h3>
-            <p>
-              NASA's Juno spacecraft entered Jupiter orbit in 2016. It investigates
-              the planet's gravity, magnetic field, deep atmosphere, auroras and
-              interior structure, while also observing its moons.
-            </p>
-          </div>
-        </article>
+          <article class="timeline-item">
+            <div class="timeline-year">2016–present*</div>
+            <div class="timeline-content">
+              <h3>Juno</h3>
+              <p>
+                NASA's Juno spacecraft entered Jupiter orbit in 2016. It investigates
+                the planet's gravity, magnetic field, deep atmosphere, auroras and
+                interior structure, while also observing its moons.
+              </p>
+            </div>
+          </article>
 
-        <article class="mission">
-          <div class="mission-year">2030 planned</div>
-          <div>
-            <h3>Europa Clipper — NASA</h3>
-            <p>
-              Launched in October 2024, Europa Clipper is travelling toward Jupiter.
-              It is planned to arrive in 2030 and make repeated close flybys of
-              Europa to investigate its ice shell, ocean and potential habitability.
-            </p>
-          </div>
-        </article>
+          <article class="timeline-item">
+            <div class="timeline-year">2030 planned</div>
+            <div class="timeline-content">
+              <h3>Europa Clipper — NASA</h3>
+              <p>
+                Launched in October 2024, Europa Clipper is travelling toward Jupiter.
+                It is planned to arrive in 2030 and make repeated close flybys of
+                Europa to investigate its ice shell, ocean and potential habitability.
+              </p>
+            </div>
+          </article>
 
-        <article class="mission">
-          <div class="mission-year">2031 planned</div>
-          <div>
-            <h3>JUICE — European Space Agency</h3>
-            <p>
-              ESA's Jupiter Icy Moons Explorer launched in 2023. Its planned
-              arrival in 2031 will begin a detailed study of Jupiter and its
-              icy moons, with a major focus on Ganymede.
-            </p>
-          </div>
-        </article>
+          <article class="timeline-item">
+            <div class="timeline-year">2031 planned</div>
+            <div class="timeline-content">
+              <h3>JUICE — European Space Agency</h3>
+              <p>
+                ESA's Jupiter Icy Moons Explorer launched in 2023. Its planned
+                arrival in 2031 will begin a detailed study of Jupiter and its
+                icy moons, with a major focus on Ganymede.
+              </p>
+            </div>
+          </article>
+        </div>
       </div>
 
-      <p style="margin-top:15px;color:var(--muted);font-size:11px;">
+      <p style="margin-top:15px;color:var(--muted);font-size:.76rem;">
         *Mission status and future arrival dates can change. Future dates are mission plans, not completed events.
       </p>
     </section>
 
-    <section class="container section reveal" id="research">
+    <!-- RESEARCH -->
+    <section class="section reveal" id="research">
       <div class="section-heading">
-        <div>
-          <div class="eyebrow">The unknown</div>
-          <h2>Questions scientists are asking</h2>
-        </div>
+        <span class="section-number">05 / The Unknown</span>
+        <h2>Questions Scientists Are Asking</h2>
         <p>Jupiter is a natural laboratory for understanding giant planets across the universe.</p>
       </div>
 
@@ -895,62 +1236,104 @@
       </div>
     </section>
 
-    <section class="container section reveal">
+    <!-- SOURCES -->
+    <section class="section reveal" id="sources">
       <div class="section-heading">
-        <div>
-          <div class="eyebrow">Explore the evidence</div>
-          <h2>Trusted science sources</h2>
-        </div>
+        <span class="section-number">06 / Explore the Evidence</span>
+        <h2>Trusted Science Sources</h2>
         <p>Continue exploring with official mission and science websites.</p>
       </div>
 
-      <div class="sources">
-        <a class="source-link" href="https://science.nasa.gov/jupiter/" target="_blank" rel="noopener noreferrer">NASA — Jupiter ↗</a>
-        <a class="source-link" href="https://science.nasa.gov/mission/juno/" target="_blank" rel="noopener noreferrer">NASA — Juno Mission ↗</a>
-        <a class="source-link" href="https://science.nasa.gov/mission/europa-clipper/" target="_blank" rel="noopener noreferrer">NASA — Europa Clipper ↗</a>
-        <a class="source-link" href="https://www.esa.int/Science_Exploration/Space_Science/Juice" target="_blank" rel="noopener noreferrer">ESA — JUICE ↗</a>
-        <a class="source-link" href="https://science.nasa.gov/solar-system/moons/jupiter-moons/" target="_blank" rel="noopener noreferrer">NASA — Jupiter's Moons ↗</a>
+      <div class="panel">
+        <h3>Official Mission Resources</h3>
+        <p>
+          Use these official science resources to learn more about Jupiter,
+          its moons and the spacecraft exploring the Jovian system.
+        </p>
+
+        <div class="sources" style="margin-top:20px;">
+          <a class="source-link" href="https://science.nasa.gov/jupiter/" target="_blank" rel="noopener noreferrer">NASA — Jupiter ↗</a>
+          <a class="source-link" href="https://science.nasa.gov/mission/juno/" target="_blank" rel="noopener noreferrer">NASA — Juno Mission ↗</a>
+          <a class="source-link" href="https://science.nasa.gov/mission/europa-clipper/" target="_blank" rel="noopener noreferrer">NASA — Europa Clipper ↗</a>
+          <a class="source-link" href="https://www.esa.int/Science_Exploration/Space_Science/Juice" target="_blank" rel="noopener noreferrer">ESA — JUICE ↗</a>
+          <a class="source-link" href="https://science.nasa.gov/solar-system/moons/jupiter-moons/" target="_blank" rel="noopener noreferrer">NASA — Jupiter's Moons ↗</a>
+        </div>
       </div>
     </section>
 
-    <nav class="container planet-nav" aria-label="Browse planets">
-      <a href="mars.html">
-        <small>← Previous planet</small>
-        <strong>Mars</strong>
-      </a>
-      <a href="saturn.html">
-        <small>Next planet →</small>
-        <strong>Saturn</strong>
-      </a>
+    <!-- PLANET NAVIGATION -->
+    <nav class="bottom-navigation reveal" aria-label="Planet navigation">
+      <a href="mars.html">&larr; Explore Mars</a>
+      <a href="planets.html">All Planets</a>
+      <a href="saturn.html">Explore Saturn &rarr;</a>
     </nav>
+
   </main>
 
-  <footer>
-    <div class="container footer-inner">
-      <a class="logo" href="index.html"><span class="logo-mark">✳</span> COSMOS</a>
-      <span>Explore. Understand. Discover.</span>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; <span id="currentYear">2026</span> COSMOS. Explore beyond the known.</p>
       <span>Educational project · Space science</span>
     </div>
   </footer>
 
   <script>
     (() => {
-      const revealItems = document.querySelectorAll(".reveal");
+      "use strict";
+
+      // Automatically update the footer year.
+      const yearElement = document.getElementById("currentYear");
+
+      if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+      }
+
+      // Reveal cards and sections smoothly as they enter the viewport.
+      const revealElements = document.querySelectorAll(
+        ".reveal, .fact-card, .discovery-card, .moon-card, .mission, .question"
+      );
 
       if ("IntersectionObserver" in window) {
         const observer = new IntersectionObserver((entries, currentObserver) => {
-          entries.forEach(entry => {
+          entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
+              entry.target.classList.add("is-visible");
               currentObserver.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.12 });
+        }, {
+          threshold: 0.12,
+          rootMargin: "0px 0px -30px 0px"
+        });
 
-        revealItems.forEach(item => observer.observe(item));
+        revealElements.forEach((element) => {
+          element.classList.add("reveal");
+          observer.observe(element);
+        });
       } else {
-        revealItems.forEach(item => item.classList.add("visible"));
+        revealElements.forEach((element) => {
+          element.classList.add("is-visible");
+        });
       }
+
+      // Smooth in-page navigation with reduced-motion support.
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+          const targetId = link.getAttribute("href");
+          const target = targetId ? document.querySelector(targetId) : null;
+
+          if (target) {
+            event.preventDefault();
+
+            target.scrollIntoView({
+              behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                ? "auto"
+                : "smooth",
+              block: "start"
+            });
+          }
+        });
+      });
     })();
   </script>
 </body>
