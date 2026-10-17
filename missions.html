@@ -17,19 +17,106 @@
 
   <style>
     /* =========================================
-       COSMOS MISSIONS PAGE
+       COSMOS — ANIMATED SPACE MISSIONS
     ========================================= */
 
-    .missions-page {
-      padding-bottom: 60px;
-      min-height: 70vh;
+    :root {
+      --mission-cyan: #69e0ff;
+      --mission-blue: #718cff;
+      --mission-purple: #a58bff;
+      --mission-bg: #080b16;
+      --mission-muted: #aab6d1;
     }
 
-    /* Header and mobile navigation compatibility */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      position: relative;
+      isolation: isolate;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 10% 15%, rgba(59, 92, 190, .15), transparent 35%),
+        radial-gradient(ellipse at 90% 45%, rgba(103, 54, 183, .13), transparent 32%),
+        radial-gradient(ellipse at 48% 95%, rgba(22, 153, 203, .09), transparent 35%);
+      animation: cosmicBackground 16s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .2;
+      background-image:
+        radial-gradient(1px 1px at 8% 18%, #fff, transparent),
+        radial-gradient(1px 1px at 23% 72%, #8deaff, transparent),
+        radial-gradient(1.5px 1.5px at 41% 28%, #fff, transparent),
+        radial-gradient(1px 1px at 64% 62%, #a4b7ff, transparent),
+        radial-gradient(1.5px 1.5px at 83% 17%, #fff, transparent),
+        radial-gradient(1px 1px at 91% 78%, #8deaff, transparent),
+        radial-gradient(1px 1px at 52% 88%, #fff, transparent);
+      background-size: 280px 260px;
+      animation: backgroundStars 55s linear infinite;
+    }
+
+    @keyframes cosmicBackground {
+      from { opacity: .65; transform: scale(1); }
+      to { opacity: 1; transform: scale(1.07); }
+    }
+
+    @keyframes backgroundStars {
+      from { background-position: 0 0; }
+      to { background-position: 280px -260px; }
+    }
+
+    .missions-page {
+      min-height: 70vh;
+      padding-bottom: 60px;
+    }
+
+    /* HEADER — TEXT LOGO ONLY */
 
     .topbar {
       position: relative;
       z-index: 1000;
+    }
+
+    .topbar .brand {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    /* Hide the COSMOS logo icon completely */
+    .topbar .brand-mark {
+      display: none !important;
+    }
+
+    .topbar .brand > span:not(.brand-mark) {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      letter-spacing: .16em;
+      background: linear-gradient(100deg, #fff, #69e0ff 55%, #a58bff);
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: brandShimmer 6s linear infinite;
+    }
+
+    @keyframes brandShimmer {
+      to { background-position: 200% center; }
     }
 
     .topbar .menu-toggle {
@@ -42,9 +129,9 @@
       width: 44px;
       height: 44px;
       padding: 10px;
-      border: 1px solid rgba(105, 224, 255, 0.3);
+      border: 1px solid rgba(105,224,255,.3);
       border-radius: 12px;
-      background: rgba(10, 18, 36, 0.85);
+      background: rgba(10,18,36,.85);
       cursor: pointer;
     }
 
@@ -53,8 +140,8 @@
       width: 20px;
       height: 2px;
       border-radius: 2px;
-      background: #69e0ff;
-      transition: transform 0.25s ease, opacity 0.25s ease;
+      background: var(--mission-cyan);
+      transition: transform .25s ease, opacity .25s ease;
     }
 
     .topbar .menu-toggle.open span:first-child,
@@ -94,12 +181,10 @@
         max-height: calc(100vh - 110px);
         overflow-y: auto;
         padding: 14px;
-        border: 1px solid rgba(105, 224, 255, 0.2);
+        border: 1px solid rgba(105,224,255,.23);
         border-radius: 18px;
-        background: rgba(7, 12, 27, 0.98);
-        box-shadow:
-          0 18px 55px rgba(0, 0, 0, 0.45),
-          0 0 30px rgba(105, 224, 255, 0.06);
+        background: rgba(7,12,27,.98);
+        box-shadow: 0 18px 55px #0008, 0 0 30px #69e0ff12;
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
       }
@@ -109,6 +194,7 @@
       .topbar .nav-menu.show,
       .topbar .nav-menu.active {
         display: flex !important;
+        animation: navReveal .25s ease both;
       }
 
       .topbar .nav-menu a {
@@ -124,57 +210,149 @@
       .topbar .nav-menu a:hover,
       .topbar .nav-menu a.active,
       .topbar .nav-menu a[aria-current="page"] {
-        color: #69e0ff;
-        background: rgba(105, 224, 255, 0.09);
+        color: var(--mission-cyan);
+        background: rgba(105,224,255,.09);
       }
     }
 
-    /* Hero */
+    @keyframes navReveal {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* HERO */
 
     .missions-hero {
-      margin-top: 36px;
       position: relative;
+      margin-top: 48px;
+      padding: 12px 0 8px;
+      animation: heroEnter .9s cubic-bezier(.2,.7,.2,1) both;
+    }
+
+    .missions-hero::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: -55px;
+      left: -80px;
+      width: min(580px, 95vw);
+      height: 330px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(ellipse, rgba(71,109,255,.12), transparent 68%);
+      filter: blur(20px);
+      animation: heroGlow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroEnter {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heroGlow {
+      from { opacity: .45; transform: translate(-12px, 0) scale(.95); }
+      to { opacity: 1; transform: translate(24px, 12px) scale(1.1); }
+    }
+
+    .missions-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 18px;
+      color: var(--mission-cyan);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+    }
+
+    .missions-eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--mission-cyan);
+      box-shadow: 0 0 12px var(--mission-cyan);
     }
 
     .missions-hero h1 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(2.3rem, 5vw, 4rem);
-      line-height: 1.12;
-      letter-spacing: -0.045em;
       max-width: 900px;
+      margin: 0 0 22px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1.08;
+      letter-spacing: -.055em;
+      text-wrap: balance;
+    }
+
+    .gradient-text {
+      display: inline;
+      color: transparent;
+      background: linear-gradient(100deg, #fff 5%, #69e0ff 38%, #a58bff 72%, #fff);
+      background-size: 220% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: titleShimmer 7s linear infinite;
+    }
+
+    @keyframes titleShimmer {
+      to { background-position: 220% center; }
     }
 
     .missions-hero > p {
       max-width: 760px;
-      line-height: 1.8;
+      color: var(--mission-muted);
+      line-height: 1.9;
+      font-size: 1rem;
     }
 
-    /* Statistics */
+    /* STATISTICS */
 
     .missions-stats {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0,1fr));
       gap: 16px;
-      margin: 34px 0;
+      margin: 38px 0;
     }
 
     .missions-stat {
+      position: relative;
+      isolation: isolate;
       min-width: 0;
-      padding: 22px;
-      border: 1px solid rgba(105, 224, 255, 0.15);
+      overflow: hidden;
+      padding: 24px;
+      border: 1px solid rgba(105,224,255,.16);
       border-radius: 18px;
-      background:
-        linear-gradient(
-          145deg,
-          rgba(105, 224, 255, 0.07),
-          rgba(139, 92, 246, 0.035)
-        );
-      transition: border-color 0.25s ease, transform 0.25s ease;
+      background: linear-gradient(145deg, rgba(105,224,255,.07), rgba(139,92,246,.04));
+      backdrop-filter: blur(10px);
+      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+      animation: statEnter .75s ease both;
+    }
+
+    .missions-stat:nth-child(2) { animation-delay: .12s; }
+    .missions-stat:nth-child(3) { animation-delay: .24s; }
+
+    .missions-stat::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 20%, rgba(105,224,255,.1) 48%, transparent 72%);
+      transform: translateX(-120%);
+      transition: transform .8s ease;
+    }
+
+    .missions-stat:hover::before {
+      transform: translateX(120%);
     }
 
     .missions-stat:hover {
-      transform: translateY(-4px);
-      border-color: rgba(105, 224, 255, 0.38);
+      transform: translateY(-6px);
+      border-color: rgba(105,224,255,.45);
+      box-shadow: 0 12px 35px rgba(0,0,0,.2), 0 0 25px rgba(105,224,255,.06);
+    }
+
+    @keyframes statEnter {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .missions-stat strong,
@@ -184,24 +362,25 @@
 
     .missions-stat strong {
       margin-bottom: 8px;
+      color: var(--mission-cyan);
       font-family: "Space Grotesk", sans-serif;
       font-size: clamp(1.05rem, 2vw, 1.5rem);
-      color: #69e0ff;
     }
 
     .missions-stat span {
-      color: #aab6d1;
-      font-size: 0.9rem;
+      color: var(--mission-muted);
+      font-size: .9rem;
       line-height: 1.6;
     }
 
-    /* Search */
+    /* SEARCH */
 
     .missions-controls {
       display: flex;
       flex-direction: column;
       gap: 14px;
-      margin: 38px 0 20px;
+      margin: 42px 0 20px;
+      animation: heroEnter .8s .2s ease both;
     }
 
     .missions-search-wrap {
@@ -213,9 +392,9 @@
       content: "SEARCH";
       position: absolute;
       top: 50%;
-      left: 15px;
+      left: 16px;
       transform: translateY(-50%);
-      color: #69e0ff;
+      color: var(--mission-cyan);
       font-size: 9px;
       font-weight: 700;
       letter-spacing: 1px;
@@ -225,27 +404,26 @@
     #missionSearch {
       box-sizing: border-box;
       width: 100%;
-      min-height: 52px;
-      padding: 14px 16px 14px 76px;
-      border: 1px solid rgba(105, 224, 255, 0.2);
+      min-height: 54px;
+      padding: 14px 16px 14px 78px;
+      border: 1px solid rgba(105,224,255,.2);
       border-radius: 13px;
       outline: none;
       color: #f4f6ff;
-      background: rgba(13, 21, 40, 0.8);
+      background: rgba(13,21,40,.8);
       font: inherit;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
     }
 
-    #missionSearch::placeholder {
-      color: #7887a7;
-    }
+    #missionSearch::placeholder { color: #7887a7; }
 
     #missionSearch:focus {
-      border-color: rgba(105, 224, 255, 0.7);
-      box-shadow: 0 0 0 3px rgba(105, 224, 255, 0.08);
+      border-color: rgba(105,224,255,.75);
+      background: rgba(13,21,40,.98);
+      box-shadow: 0 0 0 3px rgba(105,224,255,.08), 0 0 25px rgba(105,224,255,.08);
     }
 
-    /* Filter buttons */
+    /* FILTERS */
 
     .missions-filters {
       display: flex;
@@ -255,36 +433,33 @@
     }
 
     .missions-filter {
-      min-height: 38px;
-      padding: 9px 14px;
-      border: 1px solid rgba(145, 164, 204, 0.2);
+      min-height: 39px;
+      padding: 9px 15px;
+      border: 1px solid rgba(145,164,204,.2);
       border-radius: 999px;
       color: #b6c1da;
-      background: rgba(13, 21, 40, 0.75);
+      background: rgba(13,21,40,.75);
       font: inherit;
-      font-size: 0.82rem;
+      font-size: .82rem;
       cursor: pointer;
-      transition:
-        color 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
+      transition: color .22s ease, border-color .22s ease, background .22s ease, transform .22s ease, box-shadow .22s ease;
     }
 
     .missions-filter:hover {
-      color: #f4f6ff;
-      border-color: rgba(105, 224, 255, 0.45);
+      color: #fff;
+      border-color: rgba(105,224,255,.5);
+      transform: translateY(-2px);
     }
 
     .missions-filter.active,
     .missions-filter[aria-pressed="true"] {
       color: #f4f6ff;
-      border-color: rgba(105, 224, 255, 0.55);
-      background: rgba(105, 224, 255, 0.12);
-      box-shadow: 0 0 18px rgba(105, 224, 255, 0.07);
+      border-color: rgba(105,224,255,.6);
+      background: rgba(105,224,255,.13);
+      box-shadow: 0 0 20px rgba(105,224,255,.08), inset 0 0 12px rgba(105,224,255,.025);
     }
 
-    /* Results information */
+    /* RESULTS */
 
     .missions-results {
       display: flex;
@@ -292,61 +467,79 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 10px;
-      margin: 25px 0 18px;
+      margin: 26px 0 18px;
       color: #96a4c2;
-      font-size: 0.88rem;
+      font-size: .88rem;
       line-height: 1.6;
     }
 
-    .missions-results strong {
-      color: #69e0ff;
-    }
+    .missions-results strong { color: var(--mission-cyan); }
 
-    /* Mission grid */
+    /* MISSION GRID */
 
     .missions-page .missions-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0,1fr));
       align-items: stretch;
       gap: 22px;
     }
 
-    .missions-page .missions-grid[hidden] {
-      display: none !important;
-    }
+    .missions-page .missions-grid[hidden] { display: none !important; }
 
     .missions-page .mission-card {
+      position: relative;
       display: flex;
       flex-direction: column;
       min-width: 0;
       overflow: hidden;
-      border: 1px solid rgba(125, 151, 205, 0.16);
+      border: 1px solid rgba(125,151,205,.17);
       border-radius: 20px;
-      background: linear-gradient(
-        155deg,
-        rgba(19, 29, 52, 0.95),
-        rgba(8, 13, 27, 0.98)
-      );
-      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.14);
-      transition:
-        transform 0.28s ease,
-        border-color 0.28s ease,
-        box-shadow 0.28s ease;
+      background: linear-gradient(155deg, rgba(19,29,52,.96), rgba(8,13,27,.98));
+      box-shadow: 0 12px 35px rgba(0,0,0,.14);
+      transform: translateZ(0);
+      transition: transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s ease, box-shadow .35s ease;
+      animation: cardReveal .7s both;
     }
+
+    .mission-card:nth-child(2) { animation-delay: .06s; }
+    .mission-card:nth-child(3) { animation-delay: .12s; }
+    .mission-card:nth-child(4) { animation-delay: .18s; }
+    .mission-card:nth-child(5) { animation-delay: .24s; }
+    .mission-card:nth-child(6) { animation-delay: .30s; }
+    .mission-card:nth-child(7) { animation-delay: .36s; }
+    .mission-card:nth-child(8) { animation-delay: .42s; }
+    .mission-card:nth-child(9) { animation-delay: .48s; }
+
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .missions-page .mission-card::before {
+      content: "";
+      position: absolute;
+      z-index: 5;
+      top: 0;
+      left: -130%;
+      width: 70%;
+      height: 1px;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, var(--mission-cyan), #fff, transparent);
+      box-shadow: 0 0 15px var(--mission-cyan);
+      transition: left .65s ease;
+    }
+
+    .missions-page .mission-card:hover::before { left: 150%; }
 
     .missions-page .mission-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(105, 224, 255, 0.38);
-      box-shadow:
-        0 18px 42px rgba(0, 0, 0, 0.26),
-        0 0 24px rgba(105, 224, 255, 0.055);
+      transform: translateY(-7px);
+      border-color: rgba(105,224,255,.48);
+      box-shadow: 0 20px 45px rgba(0,0,0,.3), 0 0 25px rgba(105,224,255,.07);
     }
 
-    .missions-page .mission-card[hidden] {
-      display: none !important;
-    }
+    .missions-page .mission-card[hidden] { display: none !important; }
 
-    /* CSS-generated mission artwork */
+    /* ARTWORK */
 
     .mission-card-art {
       position: relative;
@@ -360,122 +553,146 @@
       content: "";
       position: absolute;
       inset: 0;
-      z-index: 0;
+      z-index: 1;
       pointer-events: none;
-      background: linear-gradient(
-        180deg,
-        transparent 45%,
-        rgba(5, 9, 20, 0.72) 100%
-      );
+      background: linear-gradient(180deg, transparent 35%, rgba(5,9,20,.72) 100%);
     }
 
     .mission-card-art::before {
       content: "";
       position: absolute;
-      z-index: 0;
+      z-index: 2;
       width: 140%;
       height: 140%;
       top: -20%;
       left: -20%;
       pointer-events: none;
-      opacity: 0.35;
+      opacity: .5;
       background-image:
-        radial-gradient(circle, rgba(255,255,255,.85) 0.7px, transparent 1px),
-        radial-gradient(circle, rgba(105,224,255,.75) 0.8px, transparent 1.2px);
+        radial-gradient(circle, rgba(255,255,255,.9) .7px, transparent 1px),
+        radial-gradient(circle, rgba(105,224,255,.8) .8px, transparent 1.2px);
       background-size: 57px 53px, 91px 87px;
       background-position: 0 0, 25px 32px;
-      animation: missionStarDrift 28s linear infinite;
+      animation: missionStarDrift 24s linear infinite;
     }
 
     @keyframes missionStarDrift {
-      from { transform: translate3d(0, 0, 0); }
-      to { transform: translate3d(22px, -16px, 0); }
+      from { transform: translate3d(0,0,0); }
+      to { transform: translate3d(35px,-25px,0); }
+    }
+
+    .mission-card-art .art-orbit {
+      position: absolute;
+      z-index: 0;
+      top: 50%;
+      left: 72%;
+      width: 130px;
+      height: 45px;
+      border: 1px solid rgba(193,218,255,.35);
+      border-radius: 50%;
+      transform: translate(-50%,-50%) rotate(-25deg);
+      box-shadow: 0 0 15px rgba(105,224,255,.08);
+      animation: orbitPulse 5s ease-in-out infinite alternate;
+    }
+
+    .mission-card-art .art-orbit.orbit-two {
+      width: 160px;
+      height: 65px;
+      transform: translate(-50%,-50%) rotate(25deg);
+      border-color: rgba(165,139,255,.28);
+      animation-delay: -2s;
+    }
+
+    @keyframes orbitPulse {
+      from { opacity: .3; }
+      to { opacity: .85; }
     }
 
     .mission-card-art.art-moon {
       background:
         radial-gradient(circle at 72% 46%, #e5e9ff 0, #9ba8cf 9%, #444e70 18%, transparent 19%),
-        radial-gradient(ellipse at 20% 20%, rgba(105, 224, 255, .18), transparent 50%),
-        linear-gradient(140deg, #172545, #080d1b);
+        radial-gradient(ellipse at 20% 20%, rgba(105,224,255,.2), transparent 50%),
+        linear-gradient(140deg,#172545,#080d1b);
     }
 
     .mission-card-art.art-deep {
       background:
-        radial-gradient(circle at 70% 45%, rgba(181, 154, 255, .55), transparent 5%),
-        radial-gradient(ellipse at 70% 45%, rgba(139, 92, 246, .22), transparent 35%),
-        radial-gradient(ellipse at 20% 20%, rgba(105, 224, 255, .15), transparent 40%),
-        linear-gradient(140deg, #17152f, #080b18);
+        radial-gradient(circle at 72% 45%, rgba(181,154,255,.8), transparent 5%),
+        radial-gradient(ellipse at 72% 45%, rgba(139,92,246,.3), transparent 35%),
+        radial-gradient(ellipse at 20% 20%, rgba(105,224,255,.15), transparent 40%),
+        linear-gradient(140deg,#17152f,#080b18);
     }
 
     .mission-card-art.art-mars {
       background:
         radial-gradient(circle at 72% 46%, #e88b61 0, #a94e3f 12%, #542d3b 22%, transparent 23%),
-        radial-gradient(ellipse at 15% 20%, rgba(255, 160, 111, .16), transparent 45%),
-        linear-gradient(140deg, #271725, #0b0d1c);
+        radial-gradient(ellipse at 15% 20%, rgba(255,160,111,.18), transparent 45%),
+        linear-gradient(140deg,#271725,#0b0d1c);
     }
 
     .mission-card-art.art-jupiter {
       background:
         radial-gradient(ellipse at 72% 48%, #d9bd91 0, #9e785c 13%, #59465a 23%, transparent 24%),
-        radial-gradient(ellipse at 25% 20%, rgba(105, 224, 255, .15), transparent 42%),
-        linear-gradient(140deg, #20203c, #090d1b);
+        radial-gradient(ellipse at 25% 20%, rgba(105,224,255,.15), transparent 42%),
+        linear-gradient(140deg,#20203c,#090d1b);
     }
 
     .mission-card-art.art-telescope {
       background:
-        radial-gradient(circle at 72% 38%, rgba(105, 224, 255, .65), transparent 2%),
-        radial-gradient(circle at 70% 40%, rgba(105, 224, 255, .2), transparent 18%),
-        radial-gradient(ellipse at 20% 70%, rgba(181, 154, 255, .15), transparent 40%),
-        linear-gradient(140deg, #121e3b, #080b18);
+        radial-gradient(circle at 72% 38%, rgba(105,224,255,.85), transparent 2%),
+        radial-gradient(circle at 70% 40%, rgba(105,224,255,.22), transparent 18%),
+        radial-gradient(ellipse at 20% 70%, rgba(181,154,255,.18), transparent 40%),
+        linear-gradient(140deg,#121e3b,#080b18);
     }
 
     .mission-card-art.art-solar {
       background:
         radial-gradient(circle at 72% 44%, #fff1ad 0, #ffbd65 8%, #ef784d 17%, transparent 18%),
-        radial-gradient(ellipse at 20% 25%, rgba(255, 180, 100, .15), transparent 42%),
-        linear-gradient(140deg, #2b1b30, #090b19);
+        radial-gradient(ellipse at 72% 44%, rgba(255,132,76,.24), transparent 32%),
+        radial-gradient(ellipse at 20% 25%, rgba(255,180,100,.15), transparent 42%),
+        linear-gradient(140deg,#2b1b30,#090b19);
     }
 
     .mission-card-art.art-outer {
       background:
         radial-gradient(circle at 72% 44%, #d4dfff 0, #899dca 7%, #424f83 14%, transparent 15%),
-        radial-gradient(ellipse at 20% 20%, rgba(181, 154, 255, .18), transparent 42%),
-        linear-gradient(140deg, #171b3b, #080b18);
+        radial-gradient(ellipse at 20% 20%, rgba(181,154,255,.18), transparent 42%),
+        linear-gradient(140deg,#171b3b,#080b18);
     }
 
     .mission-card-art.art-sample {
       background:
-        radial-gradient(circle at 70% 42%, rgba(105, 224, 255, .45), transparent 8%),
-        radial-gradient(circle at 70% 42%, rgba(105, 224, 255, .12), transparent 28%),
-        radial-gradient(ellipse at 20% 75%, rgba(181, 154, 255, .18), transparent 42%),
-        linear-gradient(140deg, #112637, #080b18);
+        radial-gradient(circle at 70% 42%, rgba(105,224,255,.6), transparent 8%),
+        radial-gradient(circle at 70% 42%, rgba(105,224,255,.16), transparent 28%),
+        radial-gradient(ellipse at 20% 75%, rgba(181,154,255,.18), transparent 42%),
+        linear-gradient(140deg,#112637,#080b18);
     }
 
     .mission-art-number {
       position: absolute;
-      z-index: 2;
+      z-index: 3;
       top: 15px;
       left: 17px;
-      color: rgba(225, 236, 255, 0.8);
+      color: rgba(225,236,255,.85);
       font-family: "Space Grotesk", sans-serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.12em;
+      font-size: .8rem;
+      letter-spacing: .12em;
     }
 
     .mission-art-label {
       position: absolute;
-      z-index: 2;
+      z-index: 3;
       bottom: 15px;
       left: 17px;
-      color: rgba(226, 236, 255, 0.9);
+      color: rgba(226,236,255,.95);
       font-family: "Space Grotesk", sans-serif;
-      font-size: 0.68rem;
+      font-size: .68rem;
       font-weight: 600;
-      letter-spacing: 0.16em;
+      letter-spacing: .16em;
       text-transform: uppercase;
     }
 
-    /* Mission card content */
+    /* CARD CONTENT */
 
     .mission-card-content {
       display: flex;
@@ -488,10 +705,10 @@
       display: inline-block;
       align-self: flex-start;
       margin-bottom: 10px;
-      color: #69e0ff;
-      font-size: 0.66rem;
+      color: var(--mission-cyan);
+      font-size: .66rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: .12em;
       line-height: 1.5;
     }
 
@@ -499,16 +716,21 @@
       margin: 0 0 12px;
       color: #f4f6ff;
       font-family: "Space Grotesk", sans-serif;
-      font-size: clamp(1.15rem, 2vw, 1.4rem);
+      font-size: clamp(1.15rem,2vw,1.4rem);
       line-height: 1.3;
       overflow-wrap: anywhere;
+      transition: color .25s ease;
+    }
+
+    .mission-card:hover .mission-card-content h2 {
+      color: var(--mission-cyan);
     }
 
     .mission-card-content p {
       flex: 1;
       margin: 0 0 22px;
-      color: #aab6d1;
-      font-size: 0.91rem;
+      color: var(--mission-muted);
+      font-size: .91rem;
       line-height: 1.8;
     }
 
@@ -520,40 +742,41 @@
       gap: 12px;
       margin-top: auto;
       padding-top: 15px;
-      border-top: 1px solid rgba(145, 164, 204, 0.14);
+      border-top: 1px solid rgba(145,164,204,.14);
     }
 
     .mission-year {
       color: #8796b7;
-      font-size: 0.78rem;
+      font-size: .78rem;
     }
 
     .mission-details-link {
-      color: #69e0ff;
-      font-size: 0.82rem;
+      position: relative;
+      color: var(--mission-cyan);
+      font-size: .82rem;
       font-weight: 700;
       text-decoration: none;
-      transition: color 0.2s ease;
+      transition: color .2s ease, letter-spacing .2s ease;
     }
 
     .mission-details-link:hover {
-      color: #ffffff;
+      color: #fff;
+      letter-spacing: .025em;
     }
 
-    /* Empty search state */
+    /* EMPTY STATE */
 
     .missions-empty {
       margin: 24px 0;
       padding: 38px 20px;
-      border: 1px solid rgba(105, 224, 255, 0.18);
+      border: 1px solid rgba(105,224,255,.18);
       border-radius: 18px;
       text-align: center;
-      background: rgba(13, 21, 40, 0.65);
+      background: rgba(13,21,40,.65);
+      animation: heroEnter .3s ease both;
     }
 
-    .missions-empty[hidden] {
-      display: none !important;
-    }
+    .missions-empty[hidden] { display: none !important; }
 
     .missions-empty h2 {
       margin-top: 0;
@@ -561,7 +784,7 @@
     }
 
     .missions-empty p {
-      color: #aab6d1;
+      color: var(--mission-muted);
       line-height: 1.7;
     }
 
@@ -570,16 +793,18 @@
       cursor: pointer;
     }
 
-    /* Information note */
+    /* INFORMATION NOTE */
 
     .missions-note {
-      margin-top: 34px;
-      padding: 20px 22px;
-      border-left: 3px solid #69e0ff;
+      position: relative;
+      margin-top: 36px;
+      padding: 22px;
+      border: 1px solid rgba(105,224,255,.12);
+      border-left: 3px solid var(--mission-cyan);
       border-radius: 0 13px 13px 0;
-      color: #aab6d1;
-      background: rgba(105, 224, 255, 0.045);
-      font-size: 0.9rem;
+      color: var(--mission-muted);
+      background: linear-gradient(100deg, rgba(105,224,255,.055), rgba(139,92,246,.025));
+      font-size: .9rem;
       line-height: 1.8;
     }
 
@@ -589,29 +814,30 @@
       color: #eaf7ff;
     }
 
-    /* Bottom navigation */
+    /* BOTTOM NAVIGATION AND FOOTER */
 
     .missions-bottom {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 14px;
-      margin-top: 34px;
+      margin-top: 36px;
       padding-top: 22px;
-      border-top: 1px solid rgba(145, 164, 204, 0.15);
+      border-top: 1px solid rgba(145,164,204,.15);
     }
 
-    .missions-bottom a {
-      color: #69e0ff;
-      font-size: 0.88rem;
+    .missions-bottom a,
+    .footer-links a {
+      color: var(--mission-cyan);
+      font-size: .88rem;
       text-decoration: none;
+      transition: color .2s ease;
     }
 
-    .missions-bottom a:hover {
-      color: #ffffff;
+    .missions-bottom a:hover,
+    .footer-links a:hover {
+      color: #fff;
     }
-
-    /* Footer */
 
     .missions-page ~ .footer {
       margin-top: 20px;
@@ -624,45 +850,40 @@
       padding: 0;
       margin: -1px;
       overflow: hidden;
-      clip: rect(0, 0, 0, 0);
+      clip: rect(0,0,0,0);
       white-space: nowrap;
       border: 0;
     }
 
-    /* Responsive layout */
+    /* RESPONSIVE */
 
     @media (max-width: 1000px) {
       .missions-page .missions-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2,minmax(0,1fr));
       }
     }
 
     @media (max-width: 650px) {
-      .missions-hero {
-        margin-top: 26px;
+      .missions-hero { margin-top: 28px; }
+
+      .missions-hero h1 {
+        font-size: clamp(2.35rem,11vw,3.5rem);
       }
 
       .missions-stats {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: minmax(0,1fr);
         gap: 12px;
       }
 
-      .missions-stat {
-        padding: 18px;
-      }
+      .missions-stat { padding: 19px; }
 
       .missions-page .missions-grid {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: minmax(0,1fr);
         gap: 18px;
       }
 
-      .mission-card-art {
-        min-height: 175px;
-      }
-
-      .mission-card-content {
-        padding: 18px;
-      }
+      .mission-card-art { min-height: 180px; }
+      .mission-card-content { padding: 18px; }
 
       .missions-results {
         align-items: flex-start;
@@ -676,15 +897,28 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .mission-card-art::before {
-        animation: none;
+      html { scroll-behavior: auto; }
+
+      body::before,
+      body::after,
+      .topbar .brand > span:not(.brand-mark),
+      .missions-hero,
+      .missions-hero::before,
+      .gradient-text,
+      .missions-stat,
+      .missions-controls,
+      .mission-card,
+      .mission-card-art::before,
+      .mission-card-art .art-orbit,
+      .missions-empty {
+        animation: none !important;
       }
 
       .missions-page *,
       .missions-page *::before,
-      .missions-page *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
+      .missions-page *::after,
+      .topbar * {
+        transition-duration: .01ms !important;
       }
     }
   </style>
@@ -692,38 +926,34 @@
 
 <body>
 
-  <!-- HEADER -->
- 
-<!-- COSMOS MAIN NAVIGATION -->
-<header class="topbar">
-  <a class="brand" href="./index.html" aria-label="COSMOS Home">
-    <span class="brand-mark" aria-hidden="true">C</span>
-    <span>COSMOS</span>
-  </a>
+  <!-- COSMOS MAIN NAVIGATION -->
+  <header class="topbar">
+    <a class="brand" href="./index.html" aria-label="COSMOS Home">
+      <span>COSMOS</span>
+    </a>
 
-  <button
-    class="menu-toggle"
-    id="menuToggle"
-    type="button"
-    aria-label="Toggle navigation"
-    aria-controls="cosmosNav"
-    aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      type="button"
+      aria-label="Toggle navigation"
+      aria-controls="cosmosNav"
+      aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-  <nav class="nav-menu" id="cosmosNav" aria-label="Main navigation">
-    <a href="./index.html">Home</a>
-    <a href="./planets.html">Planets</a>
-    <a href="./search.html">Search</a>
-    <a href="./missions.html" class="active" aria-current="page">Missions</a>
-    <a href="./research.html">Research</a>
-    <a href="./black-hole.html">Black Hole Observatory</a>
-    <a href="./about.html">About COSMOS</a>
-  </nav>
-</header>
-
+    <nav class="nav-menu" id="cosmosNav" aria-label="Main navigation">
+      <a href="./index.html">Home</a>
+      <a href="./planets.html">Planets</a>
+      <a href="./search.html">Search</a>
+      <a href="./missions.html" class="active" aria-current="page">Missions</a>
+      <a href="./research.html">Research</a>
+      <a href="./black-hole.html">Black Hole Observatory</a>
+      <a href="./about.html">About COSMOS</a>
+    </nav>
+  </header>
 
   <main class="missions-page cosmos-shell">
 
@@ -768,7 +998,6 @@
         <label class="visually-hidden" for="missionSearch">
           Search space missions
         </label>
-
         <input
           id="missionSearch"
           class="missions-search"
@@ -798,17 +1027,15 @@
 
       <article class="mission-card" data-category="human" data-search="apollo 11 moon landing nasa astronauts lunar human spaceflight">
         <div class="mission-card-art art-moon">
+          <span class="art-orbit"></span>
+          <span class="art-orbit orbit-two"></span>
           <span class="mission-art-number">01</span>
           <span class="mission-art-label">Lunar Exploration</span>
         </div>
         <div class="mission-card-content">
           <span class="mission-category">HUMAN SPACEFLIGHT</span>
           <h2>Apollo Program</h2>
-          <p>
-            Discover NASA's historic lunar exploration program and Apollo 11,
-            the mission that first carried humans to the surface of the Moon
-            in July 1969.
-          </p>
+          <p>Discover NASA's historic lunar exploration program and Apollo 11, the mission that first carried humans to the surface of the Moon in July 1969.</p>
           <div class="mission-card-footer">
             <span class="mission-year">1961–1972</span>
             <a class="mission-details-link" href="./apollo.html">Explore Mission &rarr;</a>
@@ -818,17 +1045,15 @@
 
       <article class="mission-card" data-category="deep-space" data-search="voyager 1 voyager 2 interstellar space nasa outer planets">
         <div class="mission-card-art art-deep">
+          <span class="art-orbit"></span>
+          <span class="art-orbit orbit-two"></span>
           <span class="mission-art-number">02</span>
           <span class="mission-art-label">Interstellar Journey</span>
         </div>
         <div class="mission-card-content">
           <span class="mission-category">DEEP SPACE</span>
           <h2>Voyager Program</h2>
-          <p>
-            Follow the twin Voyager spacecraft as they explored the outer
-            planets and continued their journeys into interstellar space,
-            carrying messages from Earth.
-          </p>
+          <p>Follow the twin Voyager spacecraft as they explored the outer planets and continued their journeys into interstellar space, carrying messages from Earth.</p>
           <div class="mission-card-footer">
             <span class="mission-year">Launched in 1977</span>
             <a class="mission-details-link" href="./voyager.html">Explore Mission &rarr;</a>
@@ -838,17 +1063,15 @@
 
       <article class="mission-card" data-category="planetary" data-search="mars rovers curiosity perseverance spirit opportunity red planet robotic exploration">
         <div class="mission-card-art art-mars">
+          <span class="art-orbit"></span>
+          <span class="art-orbit orbit-two"></span>
           <span class="mission-art-number">03</span>
           <span class="mission-art-label">The Red Planet</span>
         </div>
         <div class="mission-card-content">
           <span class="mission-category">PLANETARY EXPLORATION</span>
           <h2>Mars Rovers</h2>
-          <p>
-            Explore robotic vehicles that study Martian rocks, climate and
-            ancient environments while searching for evidence that Mars
-            may once have supported microbial life.
-          </p>
+          <p>Explore robotic vehicles that study Martian rocks, climate and ancient environments while searching for evidence that Mars may once have supported microbial life.</p>
           <div class="mission-card-footer">
             <span class="mission-year">1997–Present</span>
             <a class="mission-details-link" href="./mars-rovers.html">Explore Mission &rarr;</a>
@@ -858,17 +1081,15 @@
 
       <article class="mission-card" data-category="planetary" data-search="juno nasa jupiter atmosphere magnetic field gravity gas giant">
         <div class="mission-card-art art-jupiter">
+          <span class="art-orbit"></span>
+          <span class="art-orbit orbit-two"></span>
           <span class="mission-art-number">04</span>
           <span class="mission-art-label">Jupiter System</span>
         </div>
         <div class="mission-card-content">
           <span class="mission-category">PLANETARY EXPLORATION</span>
           <h2>Juno Mission</h2>
-          <p>
-            Investigate Jupiter's deep atmosphere, powerful magnetic field,
-            gravity and internal structure to understand how the Solar
-            System's largest planet formed.
-          </p>
+          <p>Investigate Jupiter's deep atmosphere, powerful magnetic field, gravity and internal structure to understand how the Solar System's largest planet formed.</p>
           <div class="mission-card-footer">
             <span class="mission-year">Launched in 2011</span>
             <a class="mission-details-link" href="./juno.html">Explore Mission &rarr;</a>
@@ -878,17 +1099,15 @@
 
       <article class="mission-card" data-category="telescopes" data-search="hubble space telescope galaxies nebulae stars universe astronomy observatory">
         <div class="mission-card-art art-telescope">
+          <span class="art-orbit"></span>
+          <span class="art-orbit orbit-two"></span>
           <span class="mission-art-number">05</span>
           <span class="mission-art-label">Cosmic Observatory</span>
         </div>
         <div class="mission-card-content">
           <span class="mission-category">SPACE TELESCOPES</span>
           <h2>Hubble Space Telescope</h2>
-          <p>
-            See how observations from Hubble transformed astronomy through
-            detailed views of distant galaxies, star-forming nebulae,
-            exoplanet atmospheres and the expanding universe.
-          </p>
+          <p>See how observations from Hubble transformed astronomy through detailed views of distant galaxies, star-forming nebulae, exoplanet atmospheres and the expanding universe.</p>
           <div class="mission-card-footer">
             <span class="mission-year">Launched in 1990</span>
             <a class="mission-details-link" href="./hubble.html">Explore Mission &rarr;</a>
@@ -898,17 +1117,15 @@
 
       <article class="mission-card" data-category="telescopes" data-search="james webb space telescope jwst infrared galaxies exoplanets early universe nasa esa csa">
         <div class="mission-card-art art-deep">
+          <span class="art-orbit"></span>
+          <span class="art-orbit orbit-two"></span>
           <span class="mission-art-number">06</span>
           <span class="mission-art-label">Infrared Astronomy</span>
         </div>
         <div class="mission-card-content">
           <span class="mission-category">SPACE TELESCOPES</span>
           <h2>James Webb Space Telescope</h2>
-          <p>
-            Explore the infrared observatory studying early galaxies,
-            stellar nurseries, planetary systems and the atmospheres
-            of distant worlds.
-          </p>
+          <p>Explore the infrared observatory studying early galaxies, stellar nurseries, planetary systems and the atmospheres of distant worlds.</p>
           <div class="mission-card-footer">
             <span class="mission-year">Launched in 2021</span>
             <a class="mission-details-link" href="./jwst.html">Explore Mission &rarr;</a>
@@ -918,17 +1135,15 @@
 
       <article class="mission-card" data-category="planetary" data-search="parker solar probe sun solar wind corona nasa heliophysics">
         <div class="mission-card-art art-solar">
+          <span class="art-orbit"></span>
+          <span class="art-orbit orbit-two"></span>
           <span class="mission-art-number">07</span>
           <span class="mission-art-label">Into the Corona</span>
         </div>
         <div class="mission-card-content">
           <span class="mission-category">SOLAR EXPLORATION</span>
           <h2>Parker Solar Probe</h2>
-          <p>
-            Study the Sun's outer atmosphere at close range to investigate
-            the solar wind, energetic particles and the processes that
-            heat the solar corona.
-          </p>
+          <p>Study the Sun's outer atmosphere at close range to investigate the solar wind, energetic particles and the processes that heat the solar corona.</p>
           <div class="mission-card-footer">
             <span class="mission-year">Launched in 2018</span>
             <a class="mission-details-link" href="./parker-solar-probe.html">Explore Mission &rarr;</a>
@@ -938,17 +1153,15 @@
 
       <article class="mission-card" data-category="deep-space" data-search="new horizons pluto kuiper belt dwarf planet nasa outer solar system">
         <div class="mission-card-art art-outer">
+          <span class="art-orbit"></span>
+          <span class="art-orbit orbit-two"></span>
           <span class="mission-art-number">08</span>
           <span class="mission-art-label">Outer Solar System</span>
         </div>
         <div class="mission-card-content">
           <span class="mission-category">DEEP SPACE</span>
           <h2>New Horizons</h2>
-          <p>
-            Journey beyond the giant planets with the spacecraft that
-            delivered humanity's first close-up views of Pluto and
-            explored a distant Kuiper Belt object.
-          </p>
+          <p>Journey beyond the giant planets with the spacecraft that delivered humanity's first close-up views of Pluto and explored a distant Kuiper Belt object.</p>
           <div class="mission-card-footer">
             <span class="mission-year">Launched in 2006</span>
             <a class="mission-details-link" href="./new-horizons.html">Explore Mission &rarr;</a>
@@ -958,17 +1171,15 @@
 
       <article class="mission-card" data-category="sample" data-search="osiris rex bennu asteroid sample return nasa asteroid science">
         <div class="mission-card-art art-sample">
+          <span class="art-orbit"></span>
+          <span class="art-orbit orbit-two"></span>
           <span class="mission-art-number">09</span>
           <span class="mission-art-label">Asteroid Samples</span>
         </div>
         <div class="mission-card-content">
           <span class="mission-category">SAMPLE RETURN</span>
           <h2>OSIRIS-REx</h2>
-          <p>
-            Learn how NASA collected material from asteroid Bennu and
-            returned it to Earth, giving scientists an opportunity to
-            investigate the early Solar System.
-          </p>
+          <p>Learn how NASA collected material from asteroid Bennu and returned it to Earth, giving scientists an opportunity to investigate the early Solar System.</p>
           <div class="mission-card-footer">
             <span class="mission-year">2016–2023</span>
             <a class="mission-details-link" href="./osiris-rex.html">Explore Mission &rarr;</a>
@@ -1016,10 +1227,10 @@
     </div>
   </footer>
 
-  <!-- Shared COSMOS JavaScript: load only once -->
+  <!-- Shared COSMOS JavaScript -->
   <script src="./app.js" defer></script>
 
-  <!-- Mission search and filters -->
+  <!-- Mission search and category filters -->
   <script>
     (() => {
       "use strict";
@@ -1045,18 +1256,16 @@
 
           cards.forEach((card) => {
             const category = card.dataset.category || "";
-            const searchableText = (
-              (card.dataset.search || "") + " " + card.textContent
-            ).toLowerCase();
+            const searchableText =
+              ((card.dataset.search || "") + " " + card.textContent).toLowerCase();
 
             const matchesFilter =
               activeFilter === "all" || category === activeFilter;
 
             const matchesSearch =
-              query.length === 0 || searchableText.includes(query);
+              !query || searchableText.includes(query);
 
             const isVisible = matchesFilter && matchesSearch;
-
             card.hidden = !isVisible;
 
             if (isVisible) visibleCount++;
@@ -1072,7 +1281,6 @@
 
           filterButtons.forEach((button) => {
             const isActive = button === selectedButton;
-
             button.classList.toggle("active", isActive);
             button.setAttribute("aria-pressed", String(isActive));
           });
@@ -1086,16 +1294,13 @@
 
           filterButtons.forEach((button) => {
             const isActive = button.dataset.filter === "all";
-
             button.classList.toggle("active", isActive);
             button.setAttribute("aria-pressed", String(isActive));
           });
 
           updateMissions();
 
-          if (shouldFocus) {
-            searchInput.focus();
-          }
+          if (shouldFocus) searchInput.focus();
         }
 
         filterButtons.forEach((button) => {
