@@ -5,72 +5,565 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080b16">
+  <meta name="description" content="Explore planets, space missions, scientific research and black holes across our universe with COSMOS.">
 
   <title>COSMOS — Explore the Universe</title>
 
-  <meta
-    name="description"
-    content="Explore planets, space missions, scientific research and black holes across our universe with COSMOS."
-  >
-
   <link rel="icon" type="image/png" href="./favicon.png">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
 
-  <!-- Home navigation styles -->
   <style>
+    /* =========================================
+       COSMOS HOME — CINEMATIC ANIMATION SYSTEM
+       Scoped to the home page where possible
+    ========================================= */
+
+    :root {
+      --cosmos-cyan: #69e0ff;
+      --cosmos-blue: #729cff;
+      --cosmos-purple: #9b8cff;
+      --cosmos-line: rgba(135, 174, 255, .18);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      overflow-x: hidden;
+      background-color: #080b16;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 15% 15%, rgba(40, 78, 155, .22), transparent 38%),
+        radial-gradient(ellipse at 85% 28%, rgba(85, 49, 153, .18), transparent 34%),
+        radial-gradient(ellipse at 50% 100%, rgba(22, 108, 150, .14), transparent 42%);
+      background-size: 160% 160%;
+      animation: cosmicNebula 24s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .22;
+      background-image:
+        radial-gradient(1px 1px at 12% 18%, #fff 50%, transparent 100%),
+        radial-gradient(2px 2px at 34% 72%, #b8d6ff 50%, transparent 100%),
+        radial-gradient(1px 1px at 76% 28%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 89% 76%, #c8d8ff 50%, transparent 100%),
+        radial-gradient(2px 2px at 57% 46%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 22% 87%, #a4dfff 50%, transparent 100%);
+      background-size: 280px 260px, 360px 340px, 310px 290px, 390px 360px, 430px 400px, 340px 320px;
+      animation: starfieldDrift 100s linear infinite;
+    }
+
+    .cosmos-shell {
+      position: relative;
+      isolation: isolate;
+    }
+
+    /* Soft ambient light behind the page */
+
+    .cosmos-shell::before {
+      content: "";
+      position: absolute;
+      top: 140px;
+      right: -220px;
+      width: 420px;
+      height: 420px;
+      z-index: -1;
+      pointer-events: none;
+      border-radius: 50%;
+      background: rgba(75, 112, 255, .09);
+      filter: blur(100px);
+      animation: ambientFloat 14s ease-in-out infinite alternate;
+    }
+
+    /* HEADER */
+
     .topbar {
       position: relative;
       z-index: 1000;
+      animation: headerReveal .8s ease both;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      transition: color .3s ease, text-shadow .3s ease;
+    }
+
+    /* Hide the old decorative brand mark */
+    .brand-mark {
+      display: none !important;
+    }
+
+    .brand:hover {
+      color: var(--cosmos-cyan);
+      text-shadow: 0 0 18px rgba(105, 224, 255, .45);
     }
 
     .menu-toggle {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 5px;
-      width: 44px;
-      height: 44px;
-      min-width: 44px;
-      padding: 10px;
-      border: 1px solid rgba(105, 224, 255, 0.35);
-      border-radius: 12px;
-      background: rgba(16, 22, 38, 0.95);
-      cursor: pointer;
-      flex-shrink: 0;
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+    }
+
+    .menu-toggle:hover {
+      transform: scale(1.05);
+      border-color: var(--cosmos-cyan);
+      box-shadow: 0 0 20px rgba(105, 224, 255, .15);
+    }
+
+    .menu-toggle.open span,
+    .menu-toggle.is-open span {
+      background: var(--cosmos-cyan);
+    }
+
+    /* Supports either class convention in the existing app.js */
+    #cosmosNav.is-open,
+    #cosmosNav.open {
+      animation: menuReveal .25s ease both;
+    }
+
+    #cosmosNav a {
+      transition:
+        color .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+    }
+
+    #cosmosNav a:hover {
+      transform: translateX(3px);
+    }
+
+    /* HERO */
+
+    .dashboard {
       position: relative;
-      z-index: 10002;
     }
 
-    .menu-toggle span {
-      display: block;
-      width: 20px;
-      height: 2px;
-      background: #69e0ff;
-      border-radius: 3px;
-      transition: transform 0.25s ease, opacity 0.25s ease;
+    .eyebrow {
+      animation: fadeSlideUp .8s .1s both;
     }
 
-    .menu-toggle.open span:first-child {
-      transform: translateY(7px) rotate(45deg);
+    .status-dot {
+      position: relative;
+      box-shadow: 0 0 10px rgba(105, 224, 255, .7);
+      animation: statusPulse 2.5s ease-in-out infinite;
     }
 
-    .menu-toggle.open span:nth-child(2) {
+    .status-dot::after {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border: 1px solid rgba(105, 224, 255, .45);
+      border-radius: 50%;
+      animation: statusRipple 2.2s ease-out infinite;
+    }
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: heroReveal 1s cubic-bezier(.2, .7, .2, 1) both;
+    }
+
+    .hero h1 {
+      animation: titleReveal 1s .1s cubic-bezier(.2, .7, .2, 1) both;
+    }
+
+    .hero h1 span {
+      display: inline-block;
+      background: linear-gradient(
+        100deg,
+        #f4f6ff 0%,
+        #b8d6ff 30%,
+        #69e0ff 60%,
+        #a79aff 100%
+      );
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientTravel 8s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 22px rgba(105, 160, 255, .12));
+    }
+
+    .hero-copy {
+      animation: fadeSlideUp .9s .3s both;
+    }
+
+    .actions {
+      animation: fadeSlideUp .9s .45s both;
+    }
+
+    .actions .button {
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease,
+        background .3s ease;
+    }
+
+    .actions .button::before {
+      content: "";
+      position: absolute;
+      top: -60%;
+      left: -120%;
+      width: 65%;
+      height: 220%;
+      pointer-events: none;
+      transform: rotate(22deg);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.17), transparent);
+      transition: left .65s ease;
+    }
+
+    .actions .button:hover::before {
+      left: 150%;
+    }
+
+    .actions .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .actions .button-primary:hover {
+      box-shadow: 0 0 30px rgba(105, 180, 255, .25);
+    }
+
+    .actions .button-secondary:hover {
+      border-color: rgba(105, 224, 255, .65);
+      box-shadow: 0 0 24px rgba(105, 224, 255, .1);
+    }
+
+    /* SPACE ILLUSTRATION */
+
+    .space-art {
+      position: relative;
+      isolation: isolate;
+      perspective: 900px;
+      animation: artReveal 1.2s .15s cubic-bezier(.2, .7, .2, 1) both;
+    }
+
+    .space-art::before {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      z-index: -1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(82, 108, 255, .17), transparent 68%);
+      filter: blur(18px);
+      animation: artGlow 7s ease-in-out infinite alternate;
+    }
+
+    .space-art .planet-art {
+      position: relative;
+      z-index: 2;
+      transform-style: preserve-3d;
+      will-change: transform;
+      animation: planetHover 8s ease-in-out infinite;
+      box-shadow:
+        inset -28px -15px 45px rgba(0, 0, 0, .7),
+        inset 10px 8px 25px rgba(255, 255, 255, .23),
+        0 0 35px rgba(87, 141, 255, .24),
+        0 0 85px rgba(87, 141, 255, .12);
+    }
+
+    .space-art .planet-art::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background:
+        radial-gradient(ellipse at 32% 30%, rgba(255,255,255,.55), transparent 17%),
+        radial-gradient(ellipse at 70% 62%, rgba(17,34,95,.5), transparent 40%),
+        linear-gradient(135deg, transparent 35%, rgba(4, 9, 35, .4));
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .space-art .planet-art::after {
+      content: "";
+      position: absolute;
+      top: 44%;
+      left: -28%;
+      width: 156%;
+      height: 29%;
+      border: 2px solid rgba(160, 192, 255, .8);
+      border-left-color: rgba(105, 224, 255, .7);
+      border-right-color: rgba(178, 150, 255, .75);
+      border-radius: 50%;
+      transform: rotate(-23deg) rotateX(62deg);
+      box-shadow:
+        0 0 10px rgba(105, 224, 255, .3),
+        inset 0 0 10px rgba(105, 224, 255, .1);
+      animation: ringGlow 5s ease-in-out infinite alternate;
+    }
+
+    .space-art .orbit {
+      animation: orbitRotate 24s linear infinite;
+      transform-origin: center;
+    }
+
+    .space-art .orbit-two {
+      animation: orbitRotateReverse 32s linear infinite;
+    }
+
+    .space-art .star {
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 8px #fff, 0 0 18px rgba(105, 224, 255, .75);
+      animation: starTwinkle 3s ease-in-out infinite alternate;
+    }
+
+    .space-art .star-two { animation-delay: .6s; }
+    .space-art .star-three { animation-delay: 1.1s; }
+    .space-art .star-four { animation-delay: 1.7s; }
+    .space-art .star-five { animation-delay: 2.1s; }
+
+    .art-label {
+      animation: labelFloat 6s ease-in-out infinite;
+    }
+
+    /* DASHBOARD CARDS */
+
+    .dashboard-grid {
+      perspective: 1200px;
+    }
+
+    .dash-card {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      transform: translateZ(0);
+      animation: cardReveal .8s cubic-bezier(.2, .7, .2, 1) both;
+      transition:
+        transform .35s cubic-bezier(.2, .7, .2, 1),
+        border-color .35s ease,
+        box-shadow .35s ease,
+        background .35s ease;
+    }
+
+    .dash-card:nth-child(1) { animation-delay: .12s; }
+    .dash-card:nth-child(2) { animation-delay: .2s; }
+    .dash-card:nth-child(3) { animation-delay: .28s; }
+    .dash-card:nth-child(4) { animation-delay: .36s; }
+    .dash-card:nth-child(5) { animation-delay: .44s; }
+    .dash-card:nth-child(6) { animation-delay: .52s; }
+
+    .dash-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      z-index: -1;
+      width: 75%;
+      height: 100%;
+      pointer-events: none;
+      background: linear-gradient(110deg, transparent, rgba(105, 224, 255, .055), transparent);
+      transition: left .7s ease;
+    }
+
+    .dash-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 12%;
+      right: 12%;
+      height: 1px;
       opacity: 0;
+      background: linear-gradient(90deg, transparent, var(--cosmos-cyan), transparent);
+      transition: opacity .35s ease;
     }
 
-    .menu-toggle.open span:last-child {
-      transform: translateY(-7px) rotate(-45deg);
+    .dash-card:hover {
+      transform: translateY(-7px) scale(1.012);
+      border-color: rgba(105, 224, 255, .42);
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, .2),
+        0 0 26px rgba(105, 224, 255, .075);
+      background-color: rgba(105, 150, 255, .045);
     }
+
+    .dash-card:hover::before {
+      left: 150%;
+    }
+
+    .dash-card:hover::after {
+      opacity: 1;
+    }
+
+    .card-icon {
+      transition:
+        transform .35s ease,
+        color .35s ease,
+        text-shadow .35s ease;
+    }
+
+    .dash-card:hover .card-icon {
+      color: var(--cosmos-cyan);
+      transform: translateY(-3px) scale(1.12);
+      text-shadow: 0 0 20px rgba(105, 224, 255, .35);
+    }
+
+    .card-arrow {
+      transition: transform .3s ease, color .3s ease;
+    }
+
+    .dash-card:hover .card-arrow {
+      color: var(--cosmos-cyan);
+      transform: translate(3px, -3px);
+    }
+
+    .dash-card h2 {
+      transition: color .3s ease;
+    }
+
+    .dash-card:hover h2 {
+      color: #d9f7ff;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      animation: fadeSlideUp .9s .55s both;
+    }
+
+    .footer-links a {
+      transition: color .25s ease, text-shadow .25s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--cosmos-cyan);
+      text-shadow: 0 0 12px rgba(105, 224, 255, .3);
+    }
+
+    /* KEYFRAMES */
+
+    @keyframes cosmicNebula {
+      0% { background-position: 0% 20%; transform: scale(1); }
+      50% { background-position: 100% 70%; }
+      100% { background-position: 20% 100%; transform: scale(1.04); }
+    }
+
+    @keyframes starfieldDrift {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-90px, 55px, 0); }
+    }
+
+    @keyframes ambientFloat {
+      from { transform: translate3d(0, -25px, 0) scale(.9); opacity: .45; }
+      to { transform: translate3d(-90px, 65px, 0) scale(1.2); opacity: .85; }
+    }
+
+    @keyframes headerReveal {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes menuReveal {
+      from { opacity: 0; transform: translateY(-7px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heroReveal {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes titleReveal {
+      from { opacity: 0; transform: translateY(24px); filter: blur(6px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    @keyframes gradientTravel {
+      from { background-position: 0% center; }
+      to { background-position: 100% center; }
+    }
+
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .55; }
+    }
+
+    @keyframes statusRipple {
+      0% { transform: scale(.65); opacity: .8; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+
+    @keyframes artReveal {
+      from { opacity: 0; transform: translateY(18px) scale(.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes artGlow {
+      from { transform: scale(.88); opacity: .5; }
+      to { transform: scale(1.12); opacity: 1; }
+    }
+
+    @keyframes planetHover {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-12px) rotate(2deg); }
+    }
+
+    @keyframes orbitRotate {
+      from { transform: rotate(0deg) rotateX(58deg); }
+      to { transform: rotate(360deg) rotateX(58deg); }
+    }
+
+    @keyframes orbitRotateReverse {
+      from { transform: rotate(360deg) rotateX(68deg); }
+      to { transform: rotate(0deg) rotateX(68deg); }
+    }
+
+    @keyframes ringGlow {
+      from { filter: brightness(.8); }
+      to { filter: brightness(1.35); }
+    }
+
+    @keyframes starTwinkle {
+      from { opacity: .35; transform: scale(.7); }
+      to { opacity: 1; transform: scale(1.25); }
+    }
+
+    @keyframes labelFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(26px) scale(.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* MOBILE NAVIGATION */
 
     @media (max-width: 760px) {
       .topbar {
@@ -81,12 +574,19 @@
         align-items: center;
         justify-content: space-between;
         z-index: 10000 !important;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background: rgba(8, 11, 22, .88);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
       }
 
       .menu-toggle {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
+        position: relative;
+        z-index: 10002;
       }
 
       #cosmosNav {
@@ -105,16 +605,17 @@
         flex-direction: column !important;
         align-items: stretch !important;
         gap: 6px !important;
-        background: rgba(8, 11, 22, 0.98) !important;
-        border: 1px solid rgba(105, 224, 255, 0.25);
+        background: rgba(8, 11, 22, .98) !important;
+        border: 1px solid rgba(105, 224, 255, .25);
         border-radius: 14px;
-        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 18px 45px rgba(0, 0, 0, .4), 0 0 25px rgba(105, 224, 255, .06);
         backdrop-filter: blur(18px);
         -webkit-backdrop-filter: blur(18px);
         z-index: 10001 !important;
       }
 
-      #cosmosNav.is-open {
+      #cosmosNav.is-open,
+      #cosmosNav.open {
         display: flex !important;
       }
 
@@ -131,14 +632,43 @@
 
       #cosmosNav a:hover,
       #cosmosNav a:focus-visible {
-        background: rgba(80, 150, 255, 0.15);
+        background: rgba(80, 150, 255, .15);
         outline: none;
+      }
+
+      .space-art {
+        margin-top: 25px;
+      }
+
+      .dash-card:hover {
+        transform: translateY(-3px);
       }
     }
 
+    @media (max-width: 480px) {
+      .hero h1 span {
+        display: inline;
+      }
+
+      .space-art .planet-art {
+        animation-duration: 10s;
+      }
+
+      .dash-card {
+        animation-duration: .65s;
+      }
+    }
+
+    /* ACCESSIBILITY: KEEP THE PAGE COMFORTABLE TO USE */
+
     @media (prefers-reduced-motion: reduce) {
-      .menu-toggle span {
-        transition: none;
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
       }
     }
   </style>
@@ -147,11 +677,8 @@
 <body>
   <div class="cosmos-shell">
 
-    <!-- HEADER / NAVIGATION -->
     <header class="topbar">
-
       <a class="brand" href="./index.html" aria-label="COSMOS Home">
-        <span class="brand-mark" aria-hidden="true">✳</span>
         <span>COSMOS</span>
       </a>
 
@@ -168,11 +695,7 @@
         <span></span>
       </button>
 
-      <nav
-        class="nav"
-        id="cosmosNav"
-        aria-label="Main navigation"
-      >
+      <nav class="nav" id="cosmosNav" aria-label="Main navigation">
         <a href="./index.html" aria-current="page">Home</a>
         <a href="./planets.html">Planets</a>
         <a href="./search.html">Search</a>
@@ -181,10 +704,8 @@
         <a href="./black-hole.html">Black Hole Observatory</a>
         <a class="nav-cta" href="./about.html">About COSMOS ↗</a>
       </nav>
-
     </header>
 
-    <!-- MAIN DASHBOARD -->
     <main class="dashboard">
 
       <div class="eyebrow">
@@ -192,11 +713,8 @@
         YOUR UNIVERSE, ONE DESTINATION
       </div>
 
-      <!-- HERO -->
       <section class="hero" aria-labelledby="hero-title">
-
         <div class="hero-content">
-
           <h1 id="hero-title">
             Beyond
             <span>the known.</span>
@@ -209,7 +727,6 @@
           </p>
 
           <div class="actions">
-
             <a class="button button-primary" href="./planets.html">
               Explore Planets
               <span aria-hidden="true">↗</span>
@@ -219,16 +736,10 @@
               Discover Missions
               <span aria-hidden="true">→</span>
             </a>
-
           </div>
         </div>
 
-        <!-- Decorative space illustration -->
-        <div
-          class="space-art"
-          role="img"
-          aria-label="Decorative illustration of a ringed planet"
-        >
+        <div class="space-art" role="img" aria-label="Decorative illustration of a ringed planet">
           <span class="star star-one"></span>
           <span class="star star-two"></span>
           <span class="star star-three"></span>
@@ -244,10 +755,8 @@
             One universe to discover.
           </div>
         </div>
-
       </section>
 
-      <!-- DASHBOARD CARDS -->
       <section class="dashboard-grid" aria-label="Explore COSMOS">
 
         <a class="dash-card" href="./planets.html">
@@ -255,7 +764,6 @@
             <span class="card-icon" aria-hidden="true">◎</span>
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
-
           <div>
             <h2>Planet Explorer</h2>
             <p>Explore all eight planets and their unique worlds.</p>
@@ -267,7 +775,6 @@
             <span class="card-icon" aria-hidden="true">⌁</span>
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
-
           <div>
             <h2>Space Missions</h2>
             <p>Discover spacecraft, expeditions and discoveries.</p>
@@ -279,7 +786,6 @@
             <span class="card-icon" aria-hidden="true">⌘</span>
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
-
           <div>
             <h2>Scientific Research</h2>
             <p>Explore planetary science and open questions.</p>
@@ -291,12 +797,9 @@
             <span class="card-icon" aria-hidden="true">◉</span>
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
-
           <div>
             <h2>Black Hole Observatory</h2>
-            <p>
-              Explore event horizons, extreme gravity and black hole science.
-            </p>
+            <p>Explore event horizons, extreme gravity and black hole science.</p>
           </div>
         </a>
 
@@ -305,12 +808,9 @@
             <span class="card-icon" aria-hidden="true">⌕</span>
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
-
           <div>
             <h2>Global Search + Favorites</h2>
-            <p>
-              Find content across COSMOS and keep track of your favorites.
-            </p>
+            <p>Find content across COSMOS and keep track of your favorites.</p>
           </div>
         </a>
 
@@ -319,7 +819,6 @@
             <span class="card-icon" aria-hidden="true">✧</span>
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
-
           <div>
             <h2>About COSMOS</h2>
             <p>Learn about our universe exploration project.</p>
@@ -329,9 +828,7 @@
       </section>
     </main>
 
-    <!-- FOOTER -->
     <footer class="footer">
-
       <span>
         © <span data-current-year>2026</span>
         COSMOS · Explore. Understand. Discover.
@@ -344,13 +841,10 @@
         <a href="./research.html">Research</a>
         <a href="./black-hole.html">Black Holes</a>
       </div>
-
     </footer>
 
   </div>
 
-  <!-- Load shared JavaScript once only -->
   <script src="./app.js" defer></script>
-
 </body>
 </html>
