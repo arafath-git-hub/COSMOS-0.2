@@ -4,354 +4,1915 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore the spacecraft, telescopes, robotics, and technologies that help humanity study the universe.">
-  <title>Space Technology | COSMOS</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#070b18">
+  <meta name="description" content="Explore space technology, spacecraft engineering, propulsion, satellites, robotics, space habitats and the technologies enabling humanity's exploration of the universe.">
+  <title>Space Technology | COSMOS Research</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    .research-detail {
-      width: min(1100px, calc(100% - 40px));
-      margin: auto;
-      padding: 38px 0 70px;
-      color: #edf4ff;
+    :root {
+      --bg: #070b18;
+      --bg-soft: #0b1225;
+      --panel: rgba(15, 25, 47, 0.78);
+      --panel-solid: #101a30;
+      --text: #f1f6ff;
+      --muted: #9aaac5;
+      --accent: #65e4ff;
+      --accent-2: #8e9bff;
+      --accent-3: #54ffc8;
+      --border: rgba(137, 178, 255, 0.17);
+      --glow: rgba(76, 208, 255, 0.18);
+      --radius: 22px;
+      --max-width: 1240px;
     }
 
-    .research-detail a { color: #65e4df; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    .detail-back {
-      display: inline-block;
-      margin-bottom: 26px;
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 28px;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(25, 91, 145, 0.2), transparent 43%),
+        radial-gradient(ellipse at 100% 38%, rgba(66, 64, 160, 0.11), transparent 36%),
+        var(--bg);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.7;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      content: "";
+      opacity: 0.24;
+      background-image:
+        radial-gradient(1px 1px at 8% 16%, white 50%, transparent 100%),
+        radial-gradient(1px 1px at 31% 71%, #9edfff 50%, transparent 100%),
+        radial-gradient(2px 2px at 73% 23%, white 50%, transparent 100%),
+        radial-gradient(1px 1px at 87% 78%, white 50%, transparent 100%),
+        radial-gradient(1px 1px at 48% 42%, #9aaaff 50%, transparent 100%),
+        radial-gradient(1px 1px at 19% 88%, white 50%, transparent 100%);
+      background-size: 290px 260px, 370px 310px, 430px 390px,
+        340px 360px, 400px 280px, 350px 330px;
+    }
+
+    a {
+      color: inherit;
       text-decoration: none;
     }
 
-    .detail-hero {
-      padding: clamp(24px, 5vw, 48px);
-      border: 1px solid #263d56;
-      border-radius: 16px;
-      background:
-        radial-gradient(ellipse at 85% 15%, rgba(80, 90, 210, .2), transparent 45%),
-        linear-gradient(135deg, #101b30, #0a1323);
+    button, input {
+      font: inherit;
     }
 
-    .detail-eyebrow {
-      color: #55dcd7;
-      font-size: .76rem;
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 44px));
+      margin-inline: auto;
+    }
+
+    .reading-progress {
+      position: fixed;
+      z-index: 100;
+      inset: 0 auto auto 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    .back-row {
+      padding-top: 28px;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(12, 22, 41, 0.8);
+      color: #dceaff;
+      font-size: 0.88rem;
+      transition: 0.25s ease;
+    }
+
+    .back-button:hover {
+      transform: translateX(-4px);
+      border-color: rgba(101, 228, 255, 0.65);
+      background: rgba(37, 91, 124, 0.24);
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      align-items: center;
+      gap: 38px;
+      min-height: 560px;
+      padding-block: 48px 62px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      animation: enter-up 0.9s ease both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-size: 0.76rem;
       font-weight: 700;
-      letter-spacing: 2px;
+      letter-spacing: 0.19em;
       text-transform: uppercase;
     }
 
-    .detail-hero h1 {
-      margin: 12px 0;
-      font-size: clamp(2.2rem, 6vw, 4rem);
-      letter-spacing: -1.5px;
+    .eyebrow::before {
+      width: 25px;
+      height: 1px;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      content: "";
     }
 
-    .detail-hero p,
-    .detail-section p,
-    .detail-section li {
-      color: #aab8ce;
-      font-size: .97rem;
-      line-height: 1.85;
+    h1, h2, h3, h4 {
+      font-family: "Space Grotesk", sans-serif;
+      line-height: 1.15;
     }
 
-    .detail-section { margin-top: 36px; }
-
-    .detail-section h2 {
-      margin-bottom: 14px;
-      font-size: clamp(1.4rem, 3vw, 1.9rem);
+    h1 {
+      max-width: 690px;
+      font-size: clamp(2.8rem, 6.3vw, 5.6rem);
+      font-weight: 700;
+      letter-spacing: -0.065em;
     }
 
-    .detail-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 18px;
+    .gradient-text {
+      color: transparent;
+      background: linear-gradient(105deg, #ffffff 5%, #7ce9ff 43%, #9aa6ff 82%);
+      background-clip: text;
+      -webkit-background-clip: text;
     }
 
-    .detail-card {
-      padding: 22px;
-      border: 1px solid #263d56;
-      border-radius: 12px;
-      background: linear-gradient(145deg, #101b2d, #0b1424);
-      transition: transform .2s ease, border-color .2s ease;
+    .hero-description {
+      max-width: 620px;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.9;
     }
 
-    .detail-card:hover {
-      transform: translateY(-4px);
-      border-color: #55dcd7;
-    }
-
-    .detail-card h3 {
-      margin-top: 0;
-      font-size: 1.05rem;
-    }
-
-    .detail-card p {
-      margin-bottom: 0;
-      font-size: .88rem;
-    }
-
-    .detail-list { padding-left: 22px; }
-
-    .detail-links {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
+      margin-top: 29px;
     }
 
-    .detail-link {
-      display: inline-block;
-      padding: 10px 14px;
-      border: 1px solid #2a5263;
-      border-radius: 8px;
-      text-decoration: none;
+    .primary-button,
+    .secondary-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: transform 0.25s, border-color 0.25s, background 0.25s;
     }
 
-    .detail-link:hover {
-      border-color: #55dcd7;
-      background: #122239;
+    .primary-button {
+      color: #06101d;
+      background: linear-gradient(110deg, #7cecff, #9caeff);
+      box-shadow: 0 0 28px rgba(101, 228, 255, 0.15);
     }
 
-    @media (max-width: 760px) {
-      .detail-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .secondary-button {
+      border-color: var(--border);
+      color: var(--text);
+      background: rgba(15, 25, 47, 0.75);
     }
 
-    @media (max-width: 520px) {
-      .research-detail {
-        width: calc(100% - 28px);
-        padding-top: 25px;
+    .primary-button:hover,
+    .secondary-button:hover {
+      transform: translateY(-3px);
+    }
+
+    .secondary-button:hover {
+      border-color: var(--accent);
+    }
+
+    .hero-art {
+      position: relative;
+      display: grid;
+      min-height: 420px;
+      place-items: center;
+      isolation: isolate;
+      animation: enter-up 1s 0.15s ease both;
+    }
+
+    .art-halo {
+      position: absolute;
+      width: min(100%, 410px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(101, 228, 255, 0.16);
+      border-radius: 50%;
+      box-shadow: 0 0 75px rgba(43, 144, 230, 0.08), inset 0 0 55px rgba(64, 150, 255, 0.04);
+      animation: halo-pulse 5s ease-in-out infinite;
+    }
+
+    .art-orbit {
+      position: absolute;
+      width: 94%;
+      aspect-ratio: 1;
+      border: 1px solid rgba(119, 191, 255, 0.3);
+      border-radius: 50%;
+      transform: rotate(-24deg) scaleY(0.37);
+      animation: orbit-spin 24s linear infinite;
+    }
+
+    .art-orbit::before,
+    .art-orbit::after {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 18px var(--accent);
+      content: "";
+    }
+
+    .art-orbit::before {
+      top: 15%;
+      left: 17%;
+    }
+
+    .art-orbit::after {
+      right: 10%;
+      bottom: 20%;
+      width: 6px;
+      height: 6px;
+      background: var(--accent-2);
+      box-shadow: 0 0 15px var(--accent-2);
+    }
+
+    .satellite-scene {
+      position: relative;
+      z-index: 2;
+      width: 270px;
+      height: 270px;
+      animation: satellite-float 5s ease-in-out infinite;
+    }
+
+    .satellite-core {
+      position: absolute;
+      top: 83px;
+      left: 91px;
+      width: 88px;
+      height: 103px;
+      overflow: hidden;
+      border: 1px solid rgba(226, 246, 255, 0.65);
+      border-radius: 12px;
+      background: linear-gradient(135deg, #e1f4ff, #698bb5 48%, #263d65);
+      box-shadow: 0 0 40px rgba(101, 228, 255, 0.2);
+      transform: rotate(-12deg);
+    }
+
+    .satellite-core::before {
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(12, 37, 67, 0.5);
+      border-radius: 5px;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent 0 10px,
+        rgba(10, 32, 60, 0.48) 10px 12px
+      );
+      content: "";
+    }
+
+    .satellite-core::after {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, rgba(255,255,255,0.4), transparent 45%);
+      content: "";
+    }
+
+    .solar-panel {
+      position: absolute;
+      top: 101px;
+      width: 70px;
+      height: 68px;
+      border: 2px solid #83cfff;
+      background:
+        linear-gradient(90deg, transparent 47%, rgba(180, 232, 255, 0.6) 49%, transparent 52%),
+        linear-gradient(0deg, transparent 47%, rgba(180, 232, 255, 0.6) 49%, transparent 52%),
+        repeating-linear-gradient(90deg, #142b67 0 10px, #254d95 10px 20px);
+      box-shadow: 0 0 18px rgba(84, 177, 255, 0.24);
+      transform: rotate(-12deg);
+    }
+
+    .panel-left {
+      left: 14px;
+    }
+
+    .panel-right {
+      right: 14px;
+    }
+
+    .antenna {
+      position: absolute;
+      top: 55px;
+      left: 130px;
+      width: 2px;
+      height: 35px;
+      background: #dceeff;
+      transform: rotate(-12deg);
+    }
+
+    .antenna::after {
+      position: absolute;
+      top: -8px;
+      left: -6px;
+      width: 13px;
+      height: 13px;
+      border: 1px solid #dceeff;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 15px var(--accent);
+      content: "";
+    }
+
+    .signal {
+      position: absolute;
+      top: 22px;
+      left: 124px;
+      width: 24px;
+      height: 24px;
+      border: 1px solid rgba(101, 228, 255, 0.8);
+      border-radius: 50%;
+      animation: signal-wave 2s ease-out infinite;
+    }
+
+    .signal:nth-child(2) {
+      animation-delay: 0.65s;
+    }
+
+    .art-label {
+      position: absolute;
+      z-index: 3;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: rgba(7, 13, 29, 0.86);
+      color: #ccecff;
+      font-size: 0.73rem;
+      letter-spacing: 0.07em;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.15);
+    }
+
+    .label-one {
+      top: 17%;
+      right: 0;
+    }
+
+    .label-two {
+      bottom: 17%;
+      left: 0;
+    }
+
+    .label-three {
+      right: 7%;
+      bottom: 7%;
+    }
+
+    .section {
+      padding-block: 55px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 26px;
+    }
+
+    .section-kicker {
+      margin-bottom: 9px;
+      color: var(--accent);
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+      letter-spacing: -0.045em;
+    }
+
+    .section-description {
+      max-width: 620px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .metric-card {
+      position: relative;
+      overflow: hidden;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: linear-gradient(145deg, rgba(18, 37, 65, 0.7), rgba(10, 18, 35, 0.85));
+    }
+
+    .metric-card::after {
+      position: absolute;
+      top: -35px;
+      right: -30px;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--glow);
+      filter: blur(30px);
+      content: "";
+    }
+
+    .metric-number {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--accent);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 0.83rem;
+    }
+
+    .topic-toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      margin: 27px 0 22px;
+    }
+
+    .search-wrap {
+      position: relative;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      min-height: 52px;
+      padding: 13px 16px 13px 45px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      outline: none;
+      background: rgba(13, 24, 44, 0.85);
+      color: var(--text);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-wrap input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(101, 228, 255, 0.08);
+    }
+
+    .search-wrap input::placeholder {
+      color: #7185a5;
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      left: 16px;
+      color: var(--accent);
+      transform: translateY(-50%);
+    }
+
+    .result-count {
+      display: flex;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.83rem;
+      white-space: nowrap;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 24px;
+    }
+
+    .filter-button {
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(12, 21, 39, 0.8);
+      color: #b8c8e1;
+      cursor: pointer;
+      font-size: 0.81rem;
+      transition: 0.2s ease;
+    }
+
+    .filter-button:hover,
+    .filter-button.active {
+      border-color: rgba(101, 228, 255, 0.65);
+      background: rgba(47, 142, 177, 0.17);
+      color: #dffaff;
+    }
+
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .topic-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 246px;
+      overflow: hidden;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: linear-gradient(150deg, rgba(17, 30, 54, 0.87), rgba(10, 17, 33, 0.9));
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .topic-card::before {
+      position: absolute;
+      top: -75px;
+      right: -70px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(72, 198, 255, 0.09);
+      filter: blur(25px);
+      content: "";
+      transition: background 0.3s;
+    }
+
+    .topic-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(101, 228, 255, 0.52);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.2), 0 0 24px rgba(73, 196, 255, 0.05);
+    }
+
+    .topic-card:hover::before {
+      background: rgba(72, 198, 255, 0.17);
+    }
+
+    .topic-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 17px;
+    }
+
+    .topic-index {
+      color: #6384ab;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+    }
+
+    .topic-tag {
+      padding: 5px 9px;
+      border: 1px solid rgba(101, 228, 255, 0.17);
+      border-radius: 999px;
+      background: rgba(101, 228, 255, 0.07);
+      color: var(--accent);
+      font-size: 0.68rem;
+      font-weight: 600;
+    }
+
+    .topic-card h3 {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 10px;
+      font-size: 1.14rem;
+      letter-spacing: -0.025em;
+    }
+
+    .topic-card p {
+      position: relative;
+      z-index: 1;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    .topic-link {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      width: fit-content;
+      margin-top: auto;
+      padding-top: 18px;
+      color: #9beaff;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .topic-link span {
+      transition: transform 0.2s;
+    }
+
+    .topic-link:hover span {
+      transform: translateX(4px);
+    }
+
+    .empty-state {
+      display: none;
+      padding: 38px 20px;
+      border: 1px dashed var(--border);
+      border-radius: 17px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .empty-state.show {
+      display: block;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-card {
+      padding: 27px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--panel);
+    }
+
+    .feature-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.25rem;
+    }
+
+    .feature-card > p {
+      margin-bottom: 18px;
+      color: var(--muted);
+      font-size: 0.91rem;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      list-style: none;
+    }
+
+    .feature-list li {
+      display: grid;
+      grid-template-columns: 10px 1fr;
+      gap: 11px;
+      color: #c3d1e7;
+      font-size: 0.88rem;
+    }
+
+    .feature-list li::before {
+      width: 7px;
+      height: 7px;
+      margin-top: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(101, 228, 255, 0.5);
+      content: "";
+    }
+
+    .comparison {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(11, 19, 37, 0.84);
+    }
+
+    .comparison-header,
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .comparison-header {
+      background: rgba(44, 96, 140, 0.15);
+    }
+
+    .comparison-cell {
+      padding: 17px 19px;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      color: #c6d4e8;
+      font-size: 0.87rem;
+    }
+
+    .comparison-cell:last-child {
+      border-right: 0;
+    }
+
+    .comparison-header .comparison-cell {
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .comparison-row:last-child .comparison-cell {
+      border-bottom: 0;
+    }
+
+    .comparison-row .comparison-cell:first-child {
+      color: #eef4ff;
+      font-weight: 600;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 0;
+      max-width: 900px;
+      margin-inline: auto;
+    }
+
+    .timeline::before {
+      position: absolute;
+      top: 12px;
+      bottom: 12px;
+      left: 101px;
+      width: 1px;
+      background: linear-gradient(var(--accent), rgba(142, 155, 255, 0.12));
+      content: "";
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 48px;
+      padding-bottom: 29px;
+    }
+
+    .timeline-year {
+      color: var(--accent);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .timeline-content {
+      position: relative;
+      padding: 0 0 0 23px;
+    }
+
+    .timeline-content::before {
+      position: absolute;
+      top: 7px;
+      left: -3px;
+      width: 9px;
+      height: 9px;
+      border: 2px solid var(--bg);
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+      content: "";
+    }
+
+    .timeline-content h3 {
+      margin-bottom: 6px;
+      font-size: 1.02rem;
+    }
+
+    .timeline-content p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .fact-card {
+      padding: 21px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(140deg, rgba(18, 36, 62, 0.65), rgba(10, 17, 32, 0.88));
+    }
+
+    .fact-label {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--accent-3);
+      font-size: 0.71rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .fact-card p {
+      color: #c1cee2;
+      font-size: 0.89rem;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 11px;
+      max-width: 920px;
+    }
+
+    .faq-item {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(14, 24, 44, 0.8);
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      width: 100%;
+      padding: 18px 20px;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .faq-symbol {
+      flex-shrink: 0;
+      color: var(--accent);
+      font-size: 1.3rem;
+      transition: transform 0.25s;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 20px 19px;
+      color: var(--muted);
+      font-size: 0.91rem;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+      animation: enter-up 0.25s ease both;
+    }
+
+    .faq-item.open .faq-symbol {
+      transform: rotate(45deg);
+    }
+
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .resource-link {
+      display: flex;
+      flex-direction: column;
+      min-height: 125px;
+      padding: 19px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(14, 24, 44, 0.78);
+      transition: transform 0.22s, border-color 0.22s;
+    }
+
+    .resource-link:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+
+    .resource-link strong {
+      margin-bottom: 7px;
+      color: #e5f3ff;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 0.98rem;
+    }
+
+    .resource-link span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .resource-link .external {
+      margin-top: auto;
+      padding-top: 10px;
+      color: var(--accent);
+      font-size: 0.78rem;
+    }
+
+    .closing-panel {
+      position: relative;
+      overflow: hidden;
+      margin-block: 48px 75px;
+      padding: clamp(28px, 5vw, 52px);
+      border: 1px solid rgba(101, 228, 255, 0.24);
+      border-radius: 25px;
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(88, 110, 255, 0.17), transparent 42%),
+        linear-gradient(120deg, rgba(17, 42, 66, 0.85), rgba(11, 19, 39, 0.92));
+    }
+
+    .closing-panel h2 {
+      max-width: 680px;
+    }
+
+    .closing-panel p {
+      max-width: 680px;
+      margin-top: 15px;
+      color: var(--muted);
+    }
+
+    .closing-panel .primary-button {
+      margin-top: 24px;
+    }
+
+    footer {
+      padding: 23px 0 32px;
+      border-top: 1px solid rgba(137, 178, 255, 0.1);
+      color: #7789a7;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes enter-up {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes satellite-float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(2deg); }
+    }
+
+    @keyframes orbit-spin {
+      from { transform: rotate(-24deg) scaleY(0.37); }
+      to { transform: rotate(336deg) scaleY(0.37); }
+    }
+
+    @keyframes halo-pulse {
+      0%, 100% { opacity: 0.65; transform: scale(0.98); }
+      50% { opacity: 1; transform: scale(1.04); }
+    }
+
+    @keyframes signal-wave {
+      0% { transform: scale(0.5); opacity: 0.9; }
+      100% { transform: scale(3.3); opacity: 0; }
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr 0.8fr;
+        gap: 10px;
       }
 
-      .detail-grid { grid-template-columns: 1fr; }
-      .detail-card { padding: 18px; }
+      .hero-art {
+        min-height: 350px;
+      }
+
+      .topic-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .fact-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width: min(100% - 30px, var(--max-width));
+      }
+
+      .back-row {
+        padding-top: 18px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 54px;
+        padding-bottom: 28px;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 13vw, 4.5rem);
+      }
+
+      .hero-description {
+        font-size: 0.95rem;
+      }
+
+      .hero-art {
+        min-height: 335px;
+        margin-top: 4px;
+      }
+
+      .satellite-scene {
+        transform: scale(0.87);
+      }
+
+      .label-one {
+        right: 2%;
+      }
+
+      .section {
+        padding-block: 39px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .topic-toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .result-count {
+        min-height: 20px;
+      }
+
+      .topic-grid,
+      .feature-grid,
+      .resources-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topic-card {
+        min-height: 220px;
+      }
+
+      .comparison-cell {
+        padding: 12px 9px;
+        font-size: 0.75rem;
+        overflow-wrap: anywhere;
+      }
+
+      .comparison-header .comparison-cell {
+        font-size: 0.73rem;
+      }
+
+      .timeline::before {
+        left: 71px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 53px 1fr;
+        gap: 18px;
+      }
+
+      .timeline-year {
+        font-size: 0.8rem;
+      }
+
+      .timeline-content {
+        padding-left: 18px;
+      }
+
+      .fact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .closing-panel {
+        margin-block: 30px 48px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions a {
+        width: 100%;
+      }
+
+      .art-label {
+        font-size: 0.65rem;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
 </head>
 
 <body>
-  <main class="research-detail">
-    <a class="detail-back" href="research.html">← Back to Research</a>
+  <div class="reading-progress" id="readingProgress"></div>
 
-    <section class="detail-hero">
-      <div class="detail-eyebrow">Research Field 09</div>
-      <h1>Space Technology</h1>
-      <p>
-        Space technology makes it possible to explore distant worlds, observe
-        the universe, communicate across enormous distances, and study Earth
-        from orbit. Discover the machines and engineering that turn scientific
-        questions into real space missions.
-      </p>
-    </section>
+  <div class="container">
+    <div class="back-row">
+      <a class="back-button" href="./research.html">
+        <span aria-hidden="true">←</span>
+        Back to Research
+      </a>
+    </div>
 
-    <section class="detail-section">
-      <h2>What Is Space Technology?</h2>
-      <p>
-        Space technology includes the spacecraft, instruments, computers,
-        communication systems, launch vehicles, and robotic systems designed
-        to operate in space. These systems must work in demanding conditions,
-        including extreme temperatures, radiation, and long periods without
-        direct human assistance.
-      </p>
-      <p>
-        Engineers and scientists work together to design reliable equipment,
-        test it on Earth, launch it safely, and receive useful data from
-        missions millions or even billions of kilometres away.
-      </p>
-    </section>
+    <header class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">COSMOS Research / Engineering the Unknown</div>
+        <h1>Beyond Earth.<br><span class="gradient-text">Built by Science.</span></h1>
+        <p class="hero-description">
+          Discover the technologies that make space exploration possible.
+          From powerful rocket engines and autonomous spacecraft to satellite
+          networks, planetary robots and future space habitats, explore how
+          humanity engineers its way into the universe.
+        </p>
 
-    <section class="detail-section">
-      <h2>Major Areas of Space Technology</h2>
+        <div class="hero-actions">
+          <a class="primary-button" href="#topic-library">Explore Technologies <span aria-hidden="true">↘</span></a>
+          <a class="secondary-button" href="#mission-timeline">Technology Timeline</a>
+        </div>
+      </div>
 
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>🚀 Launch Vehicles</h3>
-          <p>
-            Rockets carry satellites, scientific instruments, crewed
-            spacecraft, and robotic explorers beyond Earth's atmosphere.
-          </p>
+      <div class="hero-art" aria-label="Animated illustration of a futuristic communications satellite">
+        <div class="art-halo"></div>
+        <div class="art-orbit"></div>
+
+        <div class="satellite-scene">
+          <div class="signal"></div>
+          <div class="signal"></div>
+          <div class="solar-panel panel-left"></div>
+          <div class="solar-panel panel-right"></div>
+          <div class="antenna"></div>
+          <div class="satellite-core"></div>
+        </div>
+
+        <div class="art-label label-one">DEEP SPACE NETWORK</div>
+        <div class="art-label label-two">AUTONOMOUS SYSTEMS</div>
+        <div class="art-label label-three">SOLAR POWER</div>
+      </div>
+    </header>
+
+    <section class="section reveal" aria-label="Space technology overview">
+      <div class="metrics">
+        <article class="metric-card">
+          <span class="metric-number">01</span>
+          <span class="metric-label">Launch and propulsion systems</span>
         </article>
-
-        <article class="detail-card">
-          <h3>🛰️ Satellites</h3>
-          <p>
-            Satellites support weather forecasting, navigation,
-            telecommunications, Earth observation, and scientific research.
-          </p>
+        <article class="metric-card">
+          <span class="metric-number">02</span>
+          <span class="metric-label">Robotics and autonomous exploration</span>
         </article>
-
-        <article class="detail-card">
-          <h3>🔭 Space Telescopes</h3>
-          <p>
-            Telescopes in space observe wavelengths that Earth's atmosphere
-            can block or distort, helping us study stars, galaxies, and planets.
-          </p>
+        <article class="metric-card">
+          <span class="metric-number">03</span>
+          <span class="metric-label">Communication and navigation</span>
         </article>
-
-        <article class="detail-card">
-          <h3>🤖 Robotic Explorers</h3>
-          <p>
-            Rovers, landers, orbiters, and robotic arms explore places that
-            are difficult or dangerous for humans to reach.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>📡 Communication Systems</h3>
-          <p>
-            Antennas and radio systems transmit commands to spacecraft and
-            return images, measurements, and other scientific data to Earth.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>🧭 Navigation and Guidance</h3>
-          <p>
-            Sensors, onboard computers, and control systems help spacecraft
-            maintain their orientation and follow planned trajectories.
-          </p>
+        <article class="metric-card">
+          <span class="metric-number">04</span>
+          <span class="metric-label">Life support and future habitats</span>
         </article>
       </div>
     </section>
 
-    <section class="detail-section">
-      <h2>How Does a Spacecraft Work?</h2>
-      <ul class="detail-list">
-        <li>
-          <strong>Power:</strong> Solar panels or other power systems provide
-          electricity for onboard equipment.
-        </li>
-        <li>
-          <strong>Instruments:</strong> Cameras, spectrometers, and sensors
-          collect scientific observations.
-        </li>
-        <li>
-          <strong>Communication:</strong> Antennas send information to Earth
-          and receive commands from mission controllers.
-        </li>
-        <li>
-          <strong>Thermal control:</strong> Insulation, radiators, and heaters
-          help keep sensitive equipment within safe operating temperatures.
-        </li>
-        <li>
-          <strong>Flight control:</strong> Thrusters, reaction wheels, and
-          navigation systems help control movement and orientation.
-        </li>
-        <li>
-          <strong>Onboard computing:</strong> Computers manage spacecraft
-          operations and can respond to certain problems automatically.
-        </li>
-      </ul>
-    </section>
+    <main>
+      <section class="section reveal" id="topic-library">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">Technology Explorer</div>
+            <h2>Explore the systems behind spaceflight</h2>
+            <p class="section-description">
+              Search the technology library or select a category to discover
+              the engineering principles, applications and challenges behind
+              modern space exploration.
+            </p>
+          </div>
+        </div>
 
-    <section class="detail-section">
-      <h2>Technologies That Changed Space Exploration</h2>
+        <div class="topic-toolbar">
+          <div class="search-wrap">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input id="topicSearch" type="search" placeholder="Search propulsion, satellites, robotics..." aria-label="Search space technology topics">
+          </div>
+          <div class="result-count" id="resultCount" aria-live="polite">18 technologies</div>
+        </div>
 
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Hubble Space Telescope</h3>
-          <p>
-            Launched in 1990, Hubble has produced detailed observations of
-            planets, nebulae, stars, and galaxies.
-          </p>
-        </article>
+        <div class="filters" role="group" aria-label="Filter technologies">
+          <button class="filter-button active" data-filter="all" aria-pressed="true">All Technologies</button>
+          <button class="filter-button" data-filter="propulsion" aria-pressed="false">Propulsion</button>
+          <button class="filter-button" data-filter="spacecraft" aria-pressed="false">Spacecraft</button>
+          <button class="filter-button" data-filter="robotics" aria-pressed="false">Robotics</button>
+          <button class="filter-button" data-filter="communication" aria-pressed="false">Communication</button>
+          <button class="filter-button" data-filter="future" aria-pressed="false">Future Systems</button>
+        </div>
 
-        <article class="detail-card">
-          <h3>James Webb Space Telescope</h3>
-          <p>
-            Webb observes mainly infrared light, helping scientists investigate
-            early galaxies, star formation, and planetary atmospheres.
-          </p>
-        </article>
+        <div class="topic-grid" id="topicGrid">
+          <article class="topic-card" data-category="propulsion" data-search="rockets launch vehicles orbital velocity payload engines">
+            <div class="topic-top"><span class="topic-index">TECH / 01</span><span class="topic-tag">Propulsion</span></div>
+            <h3>Rocket Launch Systems</h3>
+            <p>Learn how launch vehicles generate thrust, overcome gravity and deliver payloads into space.</p>
+            <a class="topic-link" href="https://www.nasa.gov/humans-in-space/space-launch-system/" target="_blank" rel="noopener noreferrer">Explore launch systems <span>↗</span></a>
+          </article>
 
-        <article class="detail-card">
-          <h3>Mars Rovers</h3>
-          <p>
-            Robotic vehicles such as Curiosity and Perseverance examine Martian
-            rocks, soil, climate, and evidence of ancient environments.
-          </p>
-        </article>
+          <article class="topic-card" data-category="propulsion" data-search="chemical rocket engines liquid solid combustion thrust">
+            <div class="topic-top"><span class="topic-index">TECH / 02</span><span class="topic-tag">Propulsion</span></div>
+            <h3>Chemical Rocket Engines</h3>
+            <p>Understand how propellants release energy and produce high-speed exhaust to create thrust.</p>
+            <a class="topic-link" href="https://www.nasa.gov/learning-resources/" target="_blank" rel="noopener noreferrer">Study rocket science <span>↗</span></a>
+          </article>
 
-        <article class="detail-card">
-          <h3>Voyager Spacecraft</h3>
-          <p>
-            Voyager 1 and Voyager 2 explored the outer planets and continue
-            transmitting limited scientific information from interstellar space.
-          </p>
-        </article>
+          <article class="topic-card" data-category="propulsion" data-search="ion propulsion electric thrusters xenon deep space low thrust">
+            <div class="topic-top"><span class="topic-index">TECH / 03</span><span class="topic-tag">Propulsion</span></div>
+            <h3>Electric and Ion Propulsion</h3>
+            <p>Explore electric thrusters that accelerate charged particles for efficient long-duration missions.</p>
+            <a class="topic-link" href="https://www.nasa.gov/" target="_blank" rel="noopener noreferrer">Explore NASA research <span>↗</span></a>
+          </article>
 
-        <article class="detail-card">
-          <h3>Reusable Rockets</h3>
-          <p>
-            Reusing certain rocket components can reduce the need to build
-            entirely new hardware for every launch.
-          </p>
-        </article>
+          <article class="topic-card" data-category="propulsion" data-search="solar sail photons light pressure propulsion sail spacecraft">
+            <div class="topic-top"><span class="topic-index">TECH / 04</span><span class="topic-tag">Propulsion</span></div>
+            <h3>Solar Sails</h3>
+            <p>Discover how sunlight's momentum can propel a spacecraft without conventional onboard propellant.</p>
+            <a class="topic-link" href="https://www.planetary.org/" target="_blank" rel="noopener noreferrer">Explore solar sailing <span>↗</span></a>
+          </article>
 
-        <article class="detail-card">
-          <h3>Autonomous Systems</h3>
-          <p>
-            Spacecraft use onboard software and sensors to perform tasks when
-            communication delays make constant control from Earth impractical.
-          </p>
-        </article>
-      </div>
-    </section>
+          <article class="topic-card" data-category="spacecraft" data-search="satellites orbit payload Earth observation weather imaging">
+            <div class="topic-top"><span class="topic-index">TECH / 05</span><span class="topic-tag">Spacecraft</span></div>
+            <h3>Artificial Satellites</h3>
+            <p>Explore the orbiting platforms used for weather forecasting, Earth observation and scientific research.</p>
+            <a class="topic-link" href="https://science.nasa.gov/earth/" target="_blank" rel="noopener noreferrer">Explore Earth science <span>↗</span></a>
+          </article>
 
-    <section class="detail-section">
-      <h2>Why Space Technology Matters</h2>
-      <p>
-        Space technology expands scientific knowledge and also provides
-        practical benefits on Earth. Satellite systems support disaster
-        monitoring, weather observations, environmental research, and global
-        communication. Technologies developed for space can also inspire
-        advances in materials, sensors, robotics, and computing.
-      </p>
-    </section>
+          <article class="topic-card" data-category="spacecraft" data-search="spacecraft design structure thermal control radiation shielding">
+            <div class="topic-top"><span class="topic-index">TECH / 06</span><span class="topic-tag">Spacecraft</span></div>
+            <h3>Spacecraft Engineering</h3>
+            <p>Learn how structures, electronics, thermal control and radiation protection work together.</p>
+            <a class="topic-link" href="https://www.nasa.gov/" target="_blank" rel="noopener noreferrer">Explore spacecraft engineering <span>↗</span></a>
+          </article>
 
-    <section class="detail-section">
-      <h2>Explore More</h2>
-      <div class="detail-links">
-        <a class="detail-link" href="missions.html">Explore Space Missions →</a>
-        <a class="detail-link" href="planets.html">Explore the Planets →</a>
-        <a class="detail-link" href="research.html">All Research Topics →</a>
-      </div>
-    </section>
+          <article class="topic-card" data-category="spacecraft" data-search="solar arrays batteries power management electricity spacecraft">
+            <div class="topic-top"><span class="topic-index">TECH / 07</span><span class="topic-tag">Spacecraft</span></div>
+            <h3>Space Power Systems</h3>
+            <p>Understand solar arrays, batteries and power electronics that keep spacecraft operating.</p>
+            <a class="topic-link" href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener noreferrer">Explore space missions <span>↗</span></a>
+          </article>
 
-    <section class="detail-section">
-      <h2>Learn from Official Sources</h2>
-      <div class="detail-links">
-        <a class="detail-link"
-           href="https://science.nasa.gov/"
-           target="_blank" rel="noopener noreferrer">
-          NASA Science
-        </a>
-        <a class="detail-link"
-           href="https://www.nasa.gov/"
-           target="_blank" rel="noopener noreferrer">
-          NASA Official Website
-        </a>
-        <a class="detail-link"
-           href="https://science.nasa.gov/mission/webb/"
-           target="_blank" rel="noopener noreferrer">
-          James Webb Space Telescope
-        </a>
-      </div>
-    </section>
-  </main>
+          <article class="topic-card" data-category="spacecraft" data-search="thermal control heat radiators insulation cryogenic spacecraft">
+            <div class="topic-top"><span class="topic-index">TECH / 08</span><span class="topic-tag">Spacecraft</span></div>
+            <h3>Thermal Control</h3>
+            <p>Discover how spacecraft manage extreme heating and cooling using insulation, radiators and heaters.</p>
+            <a class="topic-link" href="https://science.nasa.gov/" target="_blank" rel="noopener noreferrer">Explore NASA science <span>↗</span></a>
+          </article>
 
-  <footer>
-    <p>© COSMOS | Explore. Discover. Understand.</p>
-  </footer>
+          <article class="topic-card" data-category="robotics" data-search="Mars rover robotic arm autonomous navigation sample collection">
+            <div class="topic-top"><span class="topic-index">TECH / 09</span><span class="topic-tag">Robotics</span></div>
+            <h3>Planetary Rovers</h3>
+            <p>See how robotic vehicles investigate planetary surfaces, analyze rocks and navigate unfamiliar terrain.</p>
+            <a class="topic-link" href="https://science.nasa.gov/mission/mars-2020-perseverance/" target="_blank" rel="noopener noreferrer">Explore Perseverance <span>↗</span></a>
+          </article>
 
-  <script src="app.js" defer></script>
+          <article class="topic-card" data-category="robotics" data-search="robotic arms manipulators space station servicing assembly">
+            <div class="topic-top"><span class="topic-index">TECH / 10</span><span class="topic-tag">Robotics</span></div>
+            <h3>Robotic Arms</h3>
+            <p>Explore robotic manipulators used to move cargo, support astronauts and handle objects in orbit.</p>
+            <a class="topic-link" href="https://www.asc-csa.gc.ca/eng/iss/canadarm2/" target="_blank" rel="noopener noreferrer">Explore Canadarm2 <span>↗</span></a>
+          </article>
+
+          <article class="topic-card" data-category="robotics" data-search="autonomous navigation artificial intelligence onboard computers">
+            <div class="topic-top"><span class="topic-index">TECH / 11</span><span class="topic-tag">Robotics</span></div>
+            <h3>Autonomous Spacecraft</h3>
+            <p>Learn how onboard software helps spacecraft navigate, detect hazards and make limited decisions independently.</p>
+            <a class="topic-link" href="https://www.nasa.gov/" target="_blank" rel="noopener noreferrer">Explore autonomous missions <span>↗</span></a>
+          </article>
+
+          <article class="topic-card" data-category="communication" data-search="deep space network radio antennas signal delay telemetry">
+            <div class="topic-top"><span class="topic-index">TECH / 12</span><span class="topic-tag">Communication</span></div>
+            <h3>Deep Space Communication</h3>
+            <p>Discover how large antennas exchange commands and scientific data with distant spacecraft.</p>
+            <a class="topic-link" href="https://deepspace.jpl.nasa.gov/" target="_blank" rel="noopener noreferrer">Explore Deep Space Network <span>↗</span></a>
+          </article>
+
+          <article class="topic-card" data-category="communication" data-search="laser optical communications infrared high data rate space">
+            <div class="topic-top"><span class="topic-index">TECH / 13</span><span class="topic-tag">Communication</span></div>
+            <h3>Laser Communications</h3>
+            <p>Understand how optical communication can send large amounts of data using focused beams of light.</p>
+            <a class="topic-link" href="https://www.nasa.gov/" target="_blank" rel="noopener noreferrer">Explore optical technology <span>↗</span></a>
+          </article>
+
+          <article class="topic-card" data-category="communication" data-search="GPS GNSS navigation timing satellite constellation">
+            <div class="topic-top"><span class="topic-index">TECH / 14</span><span class="topic-tag">Communication</span></div>
+            <h3>Satellite Navigation</h3>
+            <p>Explore how satellite timing signals help receivers estimate position, velocity and time.</p>
+            <a class="topic-link" href="https://www.gps.gov/" target="_blank" rel="noopener noreferrer">Explore GPS technology <span>↗</span></a>
+          </article>
+
+          <article class="topic-card" data-category="future" data-search="space habitats life support oxygen water recycling astronauts">
+            <div class="topic-top"><span class="topic-index">TECH / 15</span><span class="topic-tag">Future Systems</span></div>
+            <h3>Space Habitats</h3>
+            <p>Investigate pressurized living spaces, environmental control and the systems needed for human missions.</p>
+            <a class="topic-link" href="https://www.nasa.gov/international-space-station/" target="_blank" rel="noopener noreferrer">Explore the space station <span>↗</span></a>
+          </article>
+
+          <article class="topic-card" data-category="future" data-search="life support oxygen carbon dioxide water recycling closed loop">
+            <div class="topic-top"><span class="topic-index">TECH / 16</span><span class="topic-tag">Future Systems</span></div>
+            <h3>Life-Support Systems</h3>
+            <p>Learn how spacecraft manage breathable air, water recovery, temperature and waste.</p>
+            <a class="topic-link" href="https://www.nasa.gov/" target="_blank" rel="noopener noreferrer">Explore human spaceflight <span>↗</span></a>
+          </article>
+
+          <article class="topic-card" data-category="future" data-search="in situ resource utilization ISRU Moon Mars oxygen water fuel">
+            <div class="topic-top"><span class="topic-index">TECH / 17</span><span class="topic-tag">Future Systems</span></div>
+            <h3>Using Local Space Resources</h3>
+            <p>Explore technologies designed to extract and process local materials for future lunar and Mars missions.</p>
+            <a class="topic-link" href="https://www.nasa.gov/" target="_blank" rel="noopener noreferrer">Explore ISRU concepts <span>↗</span></a>
+          </article>
+
+          <article class="topic-card" data-category="future" data-search="in space manufacturing 3D printing materials microgravity construction">
+            <div class="topic-top"><span class="topic-index">TECH / 18</span><span class="topic-tag">Future Systems</span></div>
+            <h3>In-Space Manufacturing</h3>
+            <p>Discover research into 3D printing, material processing and manufacturing in microgravity.</p>
+            <a class="topic-link" href="https://www.nasa.gov/" target="_blank" rel="noopener noreferrer">Explore future manufacturing <span>↗</span></a>
+          </article>
+        </div>
+
+        <div class="empty-state" id="emptyState">
+          No matching technologies found. Try another search term or select a different category.
+        </div>
+      </section>
+
+      <section class="section reveal" id="engineering">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">Engineering Challenges</div>
+            <h2>Why building for space is different</h2>
+            <p class="section-description">
+              Space systems must work in an environment where repairs are difficult,
+              resources are limited and failure can end a mission.
+            </p>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>Surviving the Space Environment</h3>
+            <p>Engineers design systems to tolerate hazards that ordinary terrestrial equipment rarely encounters.</p>
+            <ul class="feature-list">
+              <li><span><strong>Vacuum:</strong> Materials and mechanisms must operate without normal atmospheric pressure.</span></li>
+              <li><span><strong>Temperature extremes:</strong> Thermal control prevents components from overheating or freezing.</span></li>
+              <li><span><strong>Radiation:</strong> Electronics and crews require appropriate shielding and fault protection.</span></li>
+              <li><span><strong>Micrometeoroids:</strong> Spacecraft may need protective layers against high-speed impacts.</span></li>
+            </ul>
+          </article>
+
+          <article class="feature-card">
+            <h3>Operating Far from Earth</h3>
+            <p>Distance changes how spacecraft are controlled, supplied and maintained.</p>
+            <ul class="feature-list">
+              <li><span><strong>Communication delay:</strong> Distant spacecraft cannot always respond immediately to Earth-based commands.</span></li>
+              <li><span><strong>Limited power:</strong> Solar energy becomes less available farther from the Sun.</span></li>
+              <li><span><strong>Reliability:</strong> Systems need testing, redundancy and fault recovery before launch.</span></li>
+              <li><span><strong>Autonomy:</strong> Onboard systems help handle time-critical events when Earth is too far away.</span></li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="propulsion-comparison">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">Propulsion Lab</div>
+            <h2>Different ways to move through space</h2>
+            <p class="section-description">
+              No single propulsion technology is best for every mission.
+              Engineers choose based on thrust, efficiency, journey time and mission requirements.
+            </p>
+          </div>
+        </div>
+
+        <div class="comparison">
+          <div class="comparison-header">
+            <div class="comparison-cell">Technology</div>
+            <div class="comparison-cell">Main characteristic</div>
+            <div class="comparison-cell">Potential applications</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-cell">Chemical rockets</div>
+            <div class="comparison-cell">Very high thrust</div>
+            <div class="comparison-cell">Launches and major manoeuvres</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-cell">Electric propulsion</div>
+            <div class="comparison-cell">High propellant efficiency, usually low thrust</div>
+            <div class="comparison-cell">Satellite manoeuvres and deep-space missions</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-cell">Solar sails</div>
+            <div class="comparison-cell">Uses photon momentum without conventional propellant for thrust</div>
+            <div class="comparison-cell">Specialized long-duration missions</div>
+          </div>
+          <div class="comparison-row">
+            <div class="comparison-cell">Nuclear propulsion concepts</div>
+            <div class="comparison-cell">Potential use of nuclear energy for propulsion or onboard power</div>
+            <div class="comparison-cell">Future deep-space mission studies</div>
+          </div>
+        </div>
+
+        <p class="section-description" style="margin-top: 14px;">
+          Important: electric propulsion is efficient but generally cannot replace
+          high-thrust chemical rockets for every phase of a mission. Nuclear propulsion
+          concepts also differ widely in design and maturity.
+        </p>
+      </section>
+
+      <section class="section reveal" id="mission-timeline">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">Milestones</div>
+            <h2>A timeline of space technology</h2>
+            <p class="section-description">
+              Key developments that transformed spaceflight, satellite services and robotic exploration.
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-year">1957</div>
+            <div class="timeline-content">
+              <h3>Sputnik 1</h3>
+              <p>The first artificial Earth satellite demonstrated that an object could be placed into orbit.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-year">1961</div>
+            <div class="timeline-content">
+              <h3>First Human in Space</h3>
+              <p>Yuri Gagarin's orbital flight marked a major milestone in crewed spacecraft engineering.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-year">1969</div>
+            <div class="timeline-content">
+              <h3>Apollo 11 Moon Landing</h3>
+              <p>Human lunar exploration demonstrated advanced launch, navigation, landing and life-support capabilities.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-year">1977</div>
+            <div class="timeline-content">
+              <h3>Voyager Missions</h3>
+              <p>Voyager 1 and Voyager 2 began journeys that expanded knowledge of the outer planets and interstellar space.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-year">1981</div>
+            <div class="timeline-content">
+              <h3>Space Shuttle Era</h3>
+              <p>The first Space Shuttle orbital mission introduced a reusable crewed spacecraft system, although its operations were complex and costly.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-year">1998</div>
+            <div class="timeline-content">
+              <h3>International Space Station Assembly Begins</h3>
+              <p>International partners began assembling a long-term orbital laboratory for science and human spaceflight research.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-year">2000s</div>
+            <div class="timeline-content">
+              <h3>Reusable Rocket Development Advances</h3>
+              <p>New launch-system approaches accelerated research into recovering and reusing rocket hardware.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-year">2015</div>
+            <div class="timeline-content">
+              <h3>First Orbital-Class Booster Landing by SpaceX</h3>
+              <p>Falcon 9's first-stage landing demonstrated a major step toward routinely recovering an orbital-class rocket booster.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-year">2021</div>
+            <div class="timeline-content">
+              <h3>James Webb Space Telescope Launch</h3>
+              <p>JWST demonstrated advanced deployable observatory engineering, including a large segmented mirror and sunshield.</p>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-year">2022</div>
+            <div class="timeline-content">
+              <h3>DART Asteroid Impact Test</h3>
+              <p>NASA's DART mission changed the orbit of Dimorphos around Didymos, demonstrating a planetary-defence technique.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="technology-facts">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">Engineering Notes</div>
+            <h2>Facts worth knowing</h2>
+          </div>
+        </div>
+
+        <div class="fact-grid">
+          <article class="fact-card">
+            <span class="fact-label">Orbital Mechanics</span>
+            <p>A spacecraft in orbit is continuously falling toward Earth while moving sideways fast enough to keep missing the surface.</p>
+          </article>
+
+          <article class="fact-card">
+            <span class="fact-label">Vacuum</span>
+            <p>Space is not perfectly empty. It contains particles, radiation, magnetic fields and other forms of energy and matter.</p>
+          </article>
+
+          <article class="fact-card">
+            <span class="fact-label">Communication</span>
+            <p>Radio signals travel at the speed of light, but messages across interplanetary distances still experience significant delays.</p>
+          </article>
+
+          <article class="fact-card">
+            <span class="fact-label">Power</span>
+            <p>Solar panels can generate electricity in space, but available sunlight decreases with the square of distance from the Sun.</p>
+          </article>
+
+          <article class="fact-card">
+            <span class="fact-label">Reliability</span>
+            <p>Spacecraft are extensively tested because maintenance and replacement are often impossible after launch.</p>
+          </article>
+
+          <article class="fact-card">
+            <span class="fact-label">Robotics</span>
+            <p>Robotic missions can explore places where human presence would be difficult, dangerous or currently impractical.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="faq">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">Knowledge Base</div>
+            <h2>Frequently asked questions</h2>
+            <p class="section-description">Quick explanations of common questions about space technology.</p>
+          </div>
+        </div>
+
+        <div class="faq-list">
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What is space technology?</span><span class="faq-symbol">+</span>
+            </button>
+            <div class="faq-answer">Space technology includes the spacecraft, launch vehicles, instruments, software, communication networks and other systems used to explore space and operate beyond Earth's atmosphere.</div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Why do rockets need so much fuel?</span><span class="faq-symbol">+</span>
+            </button>
+            <div class="faq-answer">Rockets must accelerate their payload and much of their own mass. They also carry propellant that will be expelled during flight. The mass of propellant and the required change in velocity make launch a demanding engineering problem.</div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>How do spacecraft communicate with Earth?</span><span class="faq-symbol">+</span>
+            </button>
+            <div class="faq-answer">Spacecraft commonly use radio systems and antennas to transmit scientific data and receive commands. Large ground antennas and coordinated networks help maintain contact with distant missions.</div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Can a spacecraft move without air?</span><span class="faq-symbol">+</span>
+            </button>
+            <div class="faq-answer">Yes. A rocket produces thrust by expelling propellant. It does not need to push against air. This follows Newton's third law of motion and conservation of momentum.</div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What is the difference between a rocket and a satellite?</span><span class="faq-symbol">+</span>
+            </button>
+            <div class="faq-answer">A rocket is a propulsion system or launch vehicle that provides thrust. A satellite is an object placed in orbit around a celestial body. Rockets can carry satellites into orbit.</div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Why are ion engines useful for some missions?</span><span class="faq-symbol">+</span></button>
+            <div class="faq-answer">Ion engines accelerate charged particles and can use propellant very efficiently. Their thrust is generally low, so they are particularly useful for missions that can accelerate gradually over long periods.</div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>How do rovers navigate on Mars?</span><span class="faq-symbol">+</span></button>
+            <div class="faq-answer">Mars rovers use combinations of cameras, onboard computers, navigation software, wheel control and ground-team planning. Some systems can identify hazards and choose safer short routes autonomously.</div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>How do spacecraft get electricity?</span><span class="faq-symbol">+</span></button>
+            <div class="faq-answer">Many spacecraft use solar arrays and rechargeable batteries. Missions operating far from the Sun or in environments with limited sunlight may use other power systems, including radioisotope power sources.</div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What is a reusable rocket?</span><span class="faq-symbol">+</span></button>
+            <div class="faq-answer">A reusable rocket has one or more components designed to return and fly again after inspection and refurbishment. Reuse can reduce some costs, but recovery, maintenance and operations still require resources.</div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Can humans live permanently in space?</span><span class="faq-symbol">+</span></button>
+            <div class="faq-answer">Humans can live in space habitats for extended periods, but long-term settlement requires reliable life support, radiation protection, medical care, food production, maintenance and safe transportation. Many challenges remain.</div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What is in-situ resource utilization?</span><span class="faq-symbol">+</span></button>
+            <div class="faq-answer">In-situ resource utilization, or ISRU, means using resources available at a destination, such as lunar soil or water ice, to support exploration instead of transporting every material from Earth. Many applications remain under development or testing.</div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Which subjects help someone study space technology?</span><span class="faq-symbol">+</span></button>
+            <div class="faq-answer">Physics, mathematics, computer science and engineering are useful foundations. Relevant specializations include aerospace, mechanical, electrical, materials, robotics and software engineering, as well as planetary science and astronomy.</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" id="resources">
+        <div class="section-heading">
+          <div>
+            <div class="section-kicker">Further Research</div>
+            <h2>Explore trusted space resources</h2>
+            <p class="section-description">
+              Continue learning through official space agencies, technical mission pages and scientific organizations.
+            </p>
+          </div>
+        </div>
+
+        <div class="resources-grid">
+          <a class="resource-link" href="https://www.nasa.gov/" target="_blank" rel="noopener noreferrer">
+            <strong>NASA</strong>
+            <span>Space missions, engineering, exploration and research.</span>
+            <span class="external">Visit NASA ↗</span>
+          </a>
+
+          <a class="resource-link" href="https://www.esa.int/" target="_blank" rel="noopener noreferrer">
+            <strong>European Space Agency</strong>
+            <span>European missions, spacecraft systems and technology development.</span>
+            <span class="external">Visit ESA ↗</span>
+          </a>
+
+          <a class="resource-link" href="https://www.jpl.nasa.gov/" target="_blank" rel="noopener noreferrer">
+            <strong>NASA Jet Propulsion Laboratory</strong>
+            <span>Robotic exploration, spacecraft engineering and mission operations.</span>
+            <span class="external">Visit JPL ↗</span>
+          </a>
+
+          <a class="resource-link" href="https://www.nasa.gov/international-space-station/" target="_blank" rel="noopener noreferrer">
+            <strong>International Space Station</strong>
+            <span>Human spaceflight, microgravity research and orbital systems.</span>
+            <span class="external">Explore ISS ↗</span>
+          </a>
+
+          <a class="resource-link" href="https://deepspace.jpl.nasa.gov/" target="_blank" rel="noopener noreferrer">
+            <strong>Deep Space Network</strong>
+            <span>How ground antennas communicate with interplanetary spacecraft.</span>
+            <span class="external">Explore DSN ↗</span>
+          </a>
+
+          <a class="resource-link" href="https://www.nasa.gov/learning-resources/" target="_blank" rel="noopener noreferrer">
+            <strong>NASA Learning Resources</strong>
+            <span>Educational material for learning about space and engineering.</span>
+            <span class="external">Start learning ↗</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="closing-panel reveal">
+        <div class="section-kicker">The Next Frontier</div>
+        <h2>Space exploration begins with better questions — and better engineering.</h2>
+        <p>
+          From the first launch vehicle to autonomous interplanetary spacecraft,
+          every breakthrough builds on physics, experimentation and careful design.
+          The next generation of explorers will need all three.
+        </p>
+        <a class="primary-button" href="./research.html">Return to Research <span aria-hidden="true">→</span></a>
+      </section>
+    </main>
+
+    <footer>
+      <p>COSMOS Research · Space Technology</p>
+      <p>Educational content. External resources belong to their respective organizations.</p>
+    </footer>
+  </div>
+
+  <button id="backToTop" type="button" aria-label="Back to top" style="
+    position:fixed;right:20px;bottom:20px;z-index:50;
+    width:44px;height:44px;border:1px solid rgba(101,228,255,.35);
+    border-radius:14px;background:rgba(10,20,38,.94);color:#8deaff;
+    font-size:1.25rem;cursor:pointer;opacity:0;pointer-events:none;
+    transform:translateY(8px);transition:opacity .2s,transform .2s;
+  ">↑</button>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const searchInput = document.getElementById("topicSearch");
+      const topicCards = [...document.querySelectorAll(".topic-card")];
+      const filterButtons = [...document.querySelectorAll(".filter-button")];
+      const resultCount = document.getElementById("resultCount");
+      const emptyState = document.getElementById("emptyState");
+      const progressBar = document.getElementById("readingProgress");
+      const backToTop = document.getElementById("backToTop");
+
+      let activeFilter = "all";
+
+      function updateTopics() {
+        const query = searchInput.value.trim().toLowerCase();
+        let visibleCount = 0;
+
+        topicCards.forEach((card) => {
+          const category = card.dataset.category || "";
+          const searchableText = (
+            (card.dataset.search || "") + " " + card.textContent
+          ).toLowerCase();
+
+          const matchesCategory =
+            activeFilter === "all" || category === activeFilter;
+
+          const matchesSearch =
+            !query || searchableText.includes(query);
+
+          const visible = matchesCategory && matchesSearch;
+
+          card.hidden = !visible;
+
+          if (visible) visibleCount++;
+        });
+
+        resultCount.textContent =
+          visibleCount + (visibleCount === 1 ? " technology" : " technologies");
+
+        emptyState.classList.toggle("show", visibleCount === 0);
+      }
+
+      searchInput.addEventListener("input", updateTopics);
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          activeFilter = button.dataset.filter || "all";
+
+          filterButtons.forEach((item) => {
+            const active = item === button;
+            item.classList.toggle("active", active);
+            item.setAttribute("aria-pressed", String(active));
+          });
+
+          updateTopics();
+        });
+      });
+
+      document.querySelectorAll(".faq-question").forEach((button) => {
+        button.addEventListener("click", () => {
+          const item = button.closest(".faq-item");
+          const wasOpen = item.classList.contains("open");
+
+          item.classList.toggle("open", !wasOpen);
+          button.setAttribute("aria-expanded", String(!wasOpen));
+        });
+      });
+
+      function updateScrollUI() {
+        const scrollableHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+
+        const progress = scrollableHeight > 0
+          ? (window.scrollY / scrollableHeight) * 100
+          : 0;
+
+        progressBar.style.width = Math.min(100, Math.max(0, progress)) + "%";
+
+        const showButton = window.scrollY > 500;
+        backToTop.style.opacity = showButton ? "1" : "0";
+        backToTop.style.pointerEvents = showButton ? "auto" : "none";
+        backToTop.style.transform = showButton
+          ? "translateY(0)"
+          : "translateY(8px)";
+      }
+
+      window.addEventListener("scroll", updateScrollUI, { passive: true });
+
+      backToTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      const revealElements = document.querySelectorAll(".reveal");
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries, currentObserver) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              currentObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.08 });
+
+        revealElements.forEach((element) => observer.observe(element));
+      } else {
+        revealElements.forEach((element) => element.classList.add("visible"));
+      }
+
+      updateTopics();
+      updateScrollUI();
+    })();
+  </script>
 </body>
 </html>
