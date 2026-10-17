@@ -11,7 +11,110 @@
   <link rel="icon" type="image/png" href="./favicon.png">
   <link rel="stylesheet" href="./search.css">
   <script src="./search.js" defer></script>
+
+  <style>
+    /* COSMOS universal navigation fix */
+    .topbar {
+      position: relative;
+      z-index: 1000;
+    }
+
+    .menu-toggle {
+      display: flex !important;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      width: 46px;
+      height: 46px;
+      padding: 10px;
+      flex-shrink: 0;
+      cursor: pointer;
+      color: #fff;
+      background: rgba(10, 18, 42, 0.88);
+      border: 1px solid rgba(100, 210, 255, 0.45);
+      border-radius: 12px;
+      position: relative;
+      z-index: 1002;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 21px;
+      height: 2px;
+      min-height: 2px;
+      background: #75e5ff;
+      border-radius: 5px;
+      transition: transform 0.25s ease, opacity 0.2s ease;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:first-child {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:last-child {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .main-nav,
+    .main-nav.nav {
+      z-index: 1001;
+    }
+
+    @media (max-width: 100000px) {
+      .topbar {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .menu-toggle {
+        margin-left: auto;
+      }
+
+      .main-nav,
+      .main-nav.nav {
+        display: none;
+        width: 100%;
+        flex-basis: 100%;
+      }
+
+      .main-nav.is-open,
+      .main-nav.nav.is-open {
+        display: flex !important;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        margin-top: 12px;
+        padding: 14px;
+        background: rgba(5, 10, 28, 0.98);
+        border: 1px solid rgba(100, 210, 255, 0.24);
+        border-radius: 14px;
+        box-shadow: 0 16px 45px rgba(0, 0, 0, 0.4);
+      }
+
+      .main-nav.is-open a,
+      .main-nav.nav.is-open a {
+        display: block;
+        width: 100%;
+        padding: 12px 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .menu-toggle span {
+        transition: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <div class="space-background" aria-hidden="true">
     <div class="nebula nebula-one"></div>
@@ -140,7 +243,6 @@
       </div>
 
       <div id="activeStatus" class="active-status" hidden></div>
-
       <div id="resultsGrid" class="results-grid" aria-live="polite"></div>
 
       <div id="emptyState" class="empty-state" hidden>
@@ -157,13 +259,11 @@
 
     <section class="bottom-banner">
       <div class="banner-icon" aria-hidden="true">✧</div>
-
       <div>
         <p class="eyebrow">THE UNIVERSE IS WAITING</p>
         <h2>Keep looking up.</h2>
         <p>Every discovery starts with a question.</p>
       </div>
-
       <a href="./planets.html" class="banner-link">
         Explore planets <span>↗</span>
       </a>
@@ -195,23 +295,25 @@
         toggle.setAttribute("aria-label", "Close navigation menu");
       };
 
-      toggle.addEventListener("click", () => {
+      toggle.addEventListener("click", (event) => {
+        event.stopPropagation();
         const isOpen = toggle.getAttribute("aria-expanded") === "true";
-        isOpen ? closeMenu() : openMenu();
+        if (isOpen) closeMenu();
+        else openMenu();
       });
 
-      menu.querySelectorAll("a").forEach(link => {
+      menu.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", closeMenu);
       });
 
-      document.addEventListener("keydown", event => {
+      document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
           closeMenu();
           toggle.focus();
         }
       });
 
-      document.addEventListener("click", event => {
+      document.addEventListener("click", (event) => {
         if (!menu.contains(event.target) && !toggle.contains(event.target)) {
           closeMenu();
         }
