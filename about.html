@@ -4,44 +4,82 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Learn about COSMOS, a space exploration project designed to make planetary science and astronomy easier to explore.">
-  <meta name="theme-color" content="#050914">
+  <meta name="description" content="Discover COSMOS, a futuristic educational space exploration experience covering planets, astronomy, scientific research, and space missions.">
+  <meta name="theme-color" content="#050714">
 
-  <title>About COSMOS | Explore the Universe</title>
+  <title>About COSMOS | Beyond the Known Universe</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="./styles.css">
 
   <style>
+    /* =====================================================
+       COSMOS // ABOUT EXPERIENCE
+       Cinematic graphics | Ambient motion | Responsive UI
+    ===================================================== */
+
     :root {
-      --bg: #050914;
-      --surface: #0b1324;
-      --surface2: #101d33;
-      --text: #edf5ff;
-      --muted: #9cacc4;
-      --accent: #f2c078;
-      --border: rgba(242, 192, 120, .17);
+      --bg: #050714;
+      --bg-deep: #03050e;
+      --surface: rgba(12, 19, 39, .78);
+      --surface-solid: #0c1327;
+      --surface-light: #111e37;
+      --text: #f1f6ff;
+      --muted: #9baac4;
+      --gold: #ffd18b;
+      --gold-bright: #fff0c7;
+      --cyan: #79eaff;
+      --violet: #a99bff;
+      --border: rgba(151, 180, 255, .16);
+      --gold-border: rgba(255, 209, 139, .24);
+      --max-width: 1180px;
     }
 
-    * {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
     }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 90px;
+      scroll-padding-top: 100px;
+      background: var(--bg);
     }
 
     body {
       margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
       background:
-        radial-gradient(ellipse at 75% 0%, rgba(178, 112, 48, .14), transparent 40%),
+        radial-gradient(ellipse at 50% -20%, rgba(79, 89, 181, .17), transparent 50%),
+        radial-gradient(ellipse at 0% 35%, rgba(22, 113, 154, .08), transparent 36%),
         var(--bg);
       color: var(--text);
       font-family: "DM Sans", sans-serif;
-      line-height: 1.7;
+      line-height: 1.75;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .2;
+      background-image:
+        radial-gradient(1px 1px at 8% 12%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 21% 68%, #b8d5ff 50%, transparent 100%),
+        radial-gradient(2px 2px at 46% 27%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 72% 16%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 84% 72%, #9cecff 50%, transparent 100%),
+        radial-gradient(2px 2px at 94% 39%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 39% 89%, #fff 50%, transparent 100%);
+      background-size: 390px 330px;
+      animation: backgroundDrift 90s linear infinite;
     }
 
     a {
@@ -49,50 +87,144 @@
       text-decoration: none;
     }
 
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    ::selection {
+      color: #050714;
+      background: var(--gold);
+    }
+
     .container {
-      width: min(1160px, calc(100% - 40px));
+      width: min(var(--max-width), calc(100% - 44px));
       margin-inline: auto;
     }
 
-    /* =====================================
-       COSMOS COMPACT HAMBURGER NAVIGATION
-    ===================================== */
+    .section {
+      position: relative;
+      padding-block: 88px;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 35px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--gold);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 27px;
+      height: 1px;
+      background: currentColor;
+      box-shadow: 0 0 12px currentColor;
+    }
+
+    h1,
+    h2,
+    h3,
+    .logo {
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    h2 {
+      margin: 14px 0;
+      font-size: clamp(2rem, 4.5vw, 3.5rem);
+      line-height: 1.13;
+      letter-spacing: -1.8px;
+    }
+
+    .section-head > p {
+      max-width: 690px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    /* PROGRESS INDICATOR */
+
+    .scroll-progress {
+      position: fixed;
+      z-index: 2000;
+      inset: 0 auto auto 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--violet), var(--gold));
+      box-shadow: 0 0 14px rgba(121, 234, 255, .6);
+      pointer-events: none;
+    }
+
+    /* NAVIGATION */
 
     .navbar {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(5, 9, 20, .9);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(5, 7, 20, .78);
+      border-bottom: 1px solid rgba(144, 169, 226, .13);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
     }
 
     .nav {
-      min-height: 74px;
+      position: relative;
       display: flex;
+      min-height: 76px;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      position: relative;
-    }
-
-    .logo,
-    h1,
-    h2,
-    h3 {
-      font-family: "Space Grotesk", sans-serif;
     }
 
     .logo {
-      font-size: 1.4rem;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      font-size: 1.25rem;
       font-weight: 700;
-      letter-spacing: 3px;
-      white-space: nowrap;
+      letter-spacing: 3.2px;
     }
 
-    .logo span {
-      color: var(--accent);
+    .logo-mark {
+      position: relative;
+      display: grid;
+      width: 35px;
+      height: 35px;
+      place-items: center;
+      border: 1px solid rgba(255, 209, 139, .38);
+      border-radius: 11px;
+      color: var(--gold);
+      background: linear-gradient(145deg, rgba(255, 209, 139, .12), rgba(121, 234, 255, .06));
+      box-shadow: 0 0 24px rgba(255, 209, 139, .07);
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: -5px;
+      border: 1px solid rgba(255, 209, 139, .12);
+      border-radius: 14px;
+      animation: logoPulse 3s ease-in-out infinite;
+    }
+
+    .logo span:last-child {
+      color: var(--gold);
     }
 
     .menu-toggle {
@@ -101,20 +233,27 @@
       align-items: center;
       justify-content: center;
       gap: 5px;
-      width: 44px;
-      height: 44px;
+      width: 45px;
+      height: 45px;
       padding: 10px;
       margin-left: auto;
       flex-shrink: 0;
       cursor: pointer;
-      color: #fff;
-      background: rgba(7, 15, 35, .9);
-      border: 1px solid rgba(100, 210, 255, .4);
-      border-radius: 10px;
+      color: white;
+      background: rgba(14, 24, 46, .9);
+      border: 1px solid rgba(121, 234, 255, .32);
+      border-radius: 12px;
       position: relative;
       z-index: 1002;
       visibility: visible !important;
       opacity: 1 !important;
+      transition: border-color .25s, box-shadow .25s, background .25s;
+    }
+
+    .menu-toggle:hover {
+      border-color: var(--cyan);
+      background: rgba(121, 234, 255, .09);
+      box-shadow: 0 0 22px rgba(121, 234, 255, .12);
     }
 
     .menu-toggle span {
@@ -122,9 +261,9 @@
       width: 21px;
       height: 2px;
       flex-shrink: 0;
-      background: #75e5ff;
-      border-radius: 4px;
-      transition: transform .25s ease, opacity .2s ease;
+      background: var(--cyan);
+      border-radius: 5px;
+      transition: transform .25s, opacity .2s;
     }
 
     .menu-toggle[aria-expanded="true"] span:first-child {
@@ -144,337 +283,1072 @@
       position: absolute;
       top: calc(100% + 10px);
       right: 0;
-      left: auto;
-      width: 260px;
+      width: 285px;
       max-width: calc(100vw - 32px);
-      max-height: min(75vh, 520px);
+      max-height: min(76vh, 570px);
       overflow-y: auto;
       flex-direction: column;
       align-items: stretch;
-      gap: 4px;
+      gap: 5px;
       padding: 12px;
       margin: 0;
-      font-size: .9rem;
       color: var(--muted);
-      background: rgba(5, 10, 28, .98);
-      border: 1px solid rgba(100, 210, 255, .3);
-      border-radius: 14px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, .45);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      background: rgba(5, 9, 24, .97);
+      border: 1px solid rgba(121, 234, 255, .25);
+      border-radius: 17px;
+      box-shadow: 0 24px 65px rgba(0, 0, 0, .48), 0 0 35px rgba(121, 234, 255, .04);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       z-index: 1001;
     }
 
     .links.is-open {
       display: flex !important;
+      animation: menuAppear .23s ease both;
     }
 
     .links a {
       display: block;
       width: 100%;
-      padding: 11px 12px;
-      border-radius: 8px;
-      transition: background .2s ease, color .2s ease;
+      padding: 11px 13px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      font-size: .88rem;
+      transition: color .2s, background .2s, border-color .2s, transform .2s;
     }
 
     .links a:hover,
     .links a.active {
       color: #fff;
-      background: rgba(90, 210, 255, .09);
+      background: rgba(121, 234, 255, .075);
+      border-color: rgba(121, 234, 255, .13);
+      transform: translateX(3px);
     }
 
     .links a.nav-feature {
-      color: #86e8ff;
+      color: var(--cyan);
     }
 
     .links a.nav-cta {
-      color: var(--accent);
+      color: var(--gold);
     }
 
-    /* =====================================
-       ABOUT PAGE CONTENT
-    ===================================== */
+    /* HERO */
 
     .hero {
-      padding: 100px 0 80px;
+      position: relative;
       display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 35px;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr);
       align-items: center;
+      gap: 20px;
+      min-height: 680px;
+      padding-block: 68px 82px;
+      isolation: isolate;
     }
 
-    .eyebrow {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 2.5px;
-      font-size: .75rem;
+    .hero::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 550px;
+      height: 550px;
+      left: -340px;
+      top: 5%;
+      border-radius: 50%;
+      background: rgba(62, 109, 211, .09);
+      filter: blur(90px);
+      pointer-events: none;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 5;
+      padding-block: 20px;
+    }
+
+    .hero-copy .eyebrow {
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      max-width: 720px;
+      margin: 18px 0 23px;
+      font-size: clamp(3.5rem, 7.5vw, 6.7rem);
       font-weight: 700;
+      line-height: .99;
+      letter-spacing: -5px;
     }
 
-    h1 {
-      font-size: clamp(3.2rem, 7vw, 6rem);
-      letter-spacing: -4px;
-      line-height: 1.03;
-      margin: 20px 0;
-    }
-
-    h1 span {
+    .hero h1 .line {
       display: block;
-      color: var(--accent);
     }
 
-    .lead,
-    .section-head p {
-      color: var(--muted);
-      font-size: 1.04rem;
-      max-width: 680px;
+    .hero h1 .gradient-text {
+      padding-bottom: .08em;
+      background: linear-gradient(100deg, #fff4dc 2%, #ffd18b 30%, #b8d5ff 70%, #80eaff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% auto;
+      animation: gradientFlow 7s linear infinite;
     }
 
-    .actions {
+    .hero-description {
+      max-width: 590px;
+      color: #a7b5ce;
+      font-size: 1.02rem;
+      line-height: 1.95;
+    }
+
+    .hero-actions {
       display: flex;
-      gap: 12px;
       flex-wrap: wrap;
-      margin-top: 27px;
+      gap: 13px;
+      margin-top: 31px;
     }
 
     .btn {
-      padding: 12px 18px;
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      display: inline-block;
-      font-size: .9rem;
+      position: relative;
+      isolation: isolate;
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      padding: 12px 19px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 209, 139, .25);
+      border-radius: 11px;
+      background: rgba(12, 21, 42, .76);
+      color: #e8f2ff;
+      font-size: .88rem;
       font-weight: 600;
-      transition: transform .2s ease, border-color .2s ease;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      transform: translateX(-120%) skewX(-20deg);
+      background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .16), transparent);
+      transition: transform .55s;
+    }
+
+    .btn:hover::before {
+      transform: translateX(120%) skewX(-20deg);
     }
 
     .btn:hover {
-      transform: translateY(-2px);
-      border-color: var(--accent);
+      transform: translateY(-3px);
+      border-color: var(--gold);
+      box-shadow: 0 10px 28px rgba(255, 209, 139, .1);
     }
 
-    .primary {
-      background: #98662e;
-      border-color: #98662e;
-      color: #fff;
+    .btn-primary {
+      color: #16101a;
+      background: linear-gradient(120deg, #ffe4ad, #dba45c);
+      border-color: #ffe2ab;
+      box-shadow: 0 6px 26px rgba(255, 209, 139, .12);
     }
+
+    .btn-primary:hover {
+      color: #050714;
+      box-shadow: 0 12px 36px rgba(255, 209, 139, .22);
+    }
+
+    .hero-caption {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 33px;
+      color: #8393af;
+      font-size: .77rem;
+      letter-spacing: .3px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: #7ef0ca;
+      box-shadow: 0 0 12px rgba(126, 240, 202, .75);
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+
+    /* CINEMATIC PLANET GRAPHIC */
 
     .visual {
-      min-height: 350px;
+      position: relative;
+      display: grid;
+      min-height: 490px;
+      place-items: center;
+      isolation: isolate;
+      perspective: 1000px;
+    }
+
+    .visual::before {
+      content: "";
+      position: absolute;
+      z-index: -3;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: rgba(190, 125, 64, .13);
+      filter: blur(80px);
+      animation: nebulaBreath 8s ease-in-out infinite;
+    }
+
+    .visual::after {
+      content: "";
+      position: absolute;
+      z-index: -3;
+      width: 240px;
+      height: 240px;
+      right: 1%;
+      bottom: 5%;
+      border-radius: 50%;
+      background: rgba(82, 116, 232, .1);
+      filter: blur(75px);
+      animation: nebulaBreath 10s ease-in-out infinite reverse;
+    }
+
+    .planet-stage {
+      position: relative;
+      width: min(100%, 490px);
+      aspect-ratio: 1;
       display: grid;
       place-items: center;
-      position: relative;
-      overflow: hidden;
+      animation: stageFloat 8s ease-in-out infinite;
+      transform-style: preserve-3d;
     }
 
     .orbit {
       position: absolute;
-      width: 330px;
-      height: 330px;
-      border: 1px solid rgba(242, 192, 120, .28);
+      width: 92%;
+      height: 33%;
+      left: 4%;
+      top: 34%;
+      border: 1px solid rgba(255, 219, 159, .5);
       border-radius: 50%;
-      transform: rotate(-25deg) scaleY(.42);
-      animation: orbit-spin 24s linear infinite;
+      transform: rotate(-28deg);
+      box-shadow: 0 0 15px rgba(255, 209, 139, .04);
+      animation: orbitSpin 20s linear infinite;
     }
 
-    .orbit.two {
-      width: 410px;
-      height: 410px;
-      transform: rotate(35deg) scaleY(.4);
-      border-color: rgba(242, 192, 120, .13);
-      animation-duration: 34s;
+    .orbit::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      top: 15%;
+      left: 10%;
+      border-radius: 50%;
+      background: #fff1c8;
+      box-shadow: 0 0 12px #ffd18b, 0 0 27px #ffd18b;
+    }
+
+    .orbit-two {
+      width: 105%;
+      height: 45%;
+      left: -2%;
+      top: 27%;
+      transform: rotate(55deg);
+      border-color: rgba(121, 234, 255, .25);
+      animation-duration: 31s;
       animation-direction: reverse;
     }
 
-    .sun {
-      width: 200px;
-      height: 200px;
+    .orbit-two::after {
+      width: 5px;
+      height: 5px;
+      top: 80%;
+      left: 17%;
+      background: var(--cyan);
+      box-shadow: 0 0 14px var(--cyan);
+    }
+
+    .orbit-three {
+      width: 80%;
+      height: 80%;
+      left: 10%;
+      top: 10%;
+      border: 1px dashed rgba(177, 185, 255, .19);
+      transform: rotateX(65deg);
+      animation: orbitSpin 48s linear infinite;
+    }
+
+    .planet-aura {
+      position: absolute;
+      width: 66%;
+      aspect-ratio: 1;
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 25%, #fff8db, #ffd68b 18%, #df8d4d 50%, #743d40 78%);
-      box-shadow: inset -35px -25px 50px #050914, 0 0 70px rgba(242, 192, 120, .2);
-      animation: float 7s ease-in-out infinite;
+      background: rgba(255, 181, 89, .14);
+      filter: blur(35px);
+      animation: auraPulse 5s ease-in-out infinite;
     }
 
-    .section {
-      padding: 70px 0;
+    .sun {
+      position: relative;
+      z-index: 2;
+      width: 45%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at 28% 20%, rgba(255, 255, 241, .98) 0%, rgba(255, 226, 172, .98) 9%, transparent 29%),
+        radial-gradient(ellipse at 35% 30%, #ffdf9a 0%, #e9a05c 31%, #a8594c 62%, #492b50 83%, #171d39 100%);
+      box-shadow:
+        inset -26px -18px 36px rgba(1, 4, 17, .82),
+        inset 8px 7px 22px rgba(255, 248, 213, .26),
+        0 0 38px rgba(255, 187, 106, .19),
+        0 0 95px rgba(255, 157, 85, .13);
+      animation: planetRotate 42s linear infinite;
     }
 
-    .section-head {
-      margin-bottom: 30px;
+    .sun::before {
+      content: "";
+      position: absolute;
+      inset: -2%;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 221, 169, .48);
+      box-shadow: 0 0 18px rgba(255, 192, 112, .16);
     }
 
-    .section-head h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      letter-spacing: -1.5px;
-      margin: 12px 0;
+    .sun::after {
+      content: "";
+      position: absolute;
+      inset: 8% 10% 9% 5%;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at 72% 36%, transparent 0 19%, rgba(99, 50, 58, .23) 20% 22%, transparent 23%),
+        radial-gradient(ellipse at 34% 68%, rgba(111, 52, 59, .3) 0 8%, transparent 9%),
+        radial-gradient(ellipse at 66% 76%, rgba(80, 45, 60, .34) 0 11%, transparent 12%);
+      mix-blend-mode: multiply;
     }
 
-    .grid {
+    .planet-label {
+      position: absolute;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 12px;
+      border: 1px solid rgba(154, 182, 255, .19);
+      border-radius: 10px;
+      background: rgba(5, 9, 24, .7);
+      color: #d4e3fa;
+      font-size: .7rem;
+      letter-spacing: .7px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+      backdrop-filter: blur(12px);
+      animation: labelFloat 5s ease-in-out infinite;
+    }
+
+    .planet-label span {
+      color: var(--gold);
+      font-size: 1rem;
+    }
+
+    .label-one {
+      top: 13%;
+      right: 2%;
+    }
+
+    .label-two {
+      left: 0;
+      bottom: 20%;
+      animation-delay: -2s;
+    }
+
+    .label-three {
+      right: 5%;
+      bottom: 11%;
+      animation-delay: -3s;
+    }
+
+    .visual-spark {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #fff2d2;
+      box-shadow: 0 0 12px 2px rgba(255, 221, 160, .8);
+      animation: sparkle 3s ease-in-out infinite;
+    }
+
+    .spark-one { top: 14%; left: 20%; }
+    .spark-two { top: 27%; right: 12%; animation-delay: -1s; }
+    .spark-three { bottom: 19%; left: 22%; animation-delay: -2s; }
+    .spark-four { bottom: 30%; right: 20%; animation-delay: -1.5s; }
+
+    /* SIGNAL / METRICS */
+
+    .signal-strip {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 17px;
-    }
-
-    .card {
-      padding: 26px;
-      background: linear-gradient(145deg, var(--surface2), var(--surface));
+      gap: 1px;
+      overflow: hidden;
       border: 1px solid var(--border);
-      border-radius: 13px;
-      transition: transform .25s ease, border-color .25s ease;
+      border-radius: 17px;
+      background: rgba(133, 168, 228, .12);
+      box-shadow: 0 15px 55px rgba(0, 0, 0, .12);
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(242, 192, 120, .5);
+    .signal {
+      position: relative;
+      min-height: 130px;
+      padding: 25px;
+      background: linear-gradient(145deg, rgba(16, 26, 49, .96), rgba(7, 12, 28, .97));
+      transition: background .3s;
     }
 
-    .num {
-      color: var(--accent);
-      font-size: .75rem;
-      letter-spacing: 2px;
+    .signal:hover {
+      background: linear-gradient(145deg, rgba(26, 42, 72, .98), rgba(10, 20, 41, .98));
     }
 
-    .card h3 {
-      font-size: 1.25rem;
-      margin: 12px 0;
+    .signal strong {
+      display: block;
+      color: var(--gold);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      line-height: 1.2;
+      letter-spacing: -1px;
     }
 
-    .card p {
-      color: var(--muted);
-      font-size: .94rem;
-    }
-
-    .card > a {
-      display: inline-block;
+    .signal span {
+      display: block;
       margin-top: 8px;
-      color: var(--accent);
+      color: var(--muted);
+      font-size: .8rem;
     }
+
+    /* PURPOSE */
 
     .feature {
-      padding: 36px;
-      border: 1px solid var(--border);
-      border-radius: 15px;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: clamp(27px, 5vw, 53px);
+      border: 1px solid var(--gold-border);
+      border-radius: 23px;
       background:
-        radial-gradient(ellipse at 100% 0%, rgba(242, 192, 120, .13), transparent 55%),
-        var(--surface);
+        radial-gradient(ellipse at 100% 0%, rgba(255, 194, 112, .12), transparent 45%),
+        radial-gradient(ellipse at 0% 100%, rgba(121, 234, 255, .055), transparent 40%),
+        linear-gradient(145deg, rgba(15, 24, 46, .95), rgba(7, 12, 27, .95));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .035);
+    }
+
+    .feature::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 270px;
+      height: 270px;
+      right: -130px;
+      bottom: -180px;
+      border: 1px solid rgba(255, 209, 139, .2);
+      border-radius: 50%;
+      box-shadow: 0 0 0 25px rgba(255, 209, 139, .025), 0 0 0 55px rgba(255, 209, 139, .02);
+      animation: orbitSpin 40s linear infinite;
+    }
+
+    .feature h2 {
+      max-width: 750px;
     }
 
     .feature p {
-      color: var(--muted);
+      position: relative;
+      z-index: 1;
       max-width: 850px;
+      color: #aab9d1;
+      font-size: .98rem;
+      line-height: 1.95;
     }
+
+    /* EXPLORE CARDS */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 19px;
+    }
+
+    .card {
+      --card-color: var(--gold);
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      min-width: 0;
+      min-height: 340px;
+      flex-direction: column;
+      align-items: flex-start;
+      overflow: hidden;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: linear-gradient(145deg, rgba(16, 28, 51, .94), rgba(7, 13, 29, .96));
+      transition: transform .35s, border-color .35s, box-shadow .35s, background .35s;
+    }
+
+    .card:nth-child(2) {
+      --card-color: var(--cyan);
+    }
+
+    .card:nth-child(3) {
+      --card-color: var(--violet);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 190px;
+      height: 190px;
+      top: -120px;
+      right: -100px;
+      border: 1px solid color-mix(in srgb, var(--card-color) 25%, transparent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 20px color-mix(in srgb, var(--card-color) 3%, transparent);
+      transition: transform .5s;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 160px;
+      height: 160px;
+      right: -90px;
+      bottom: -100px;
+      border-radius: 50%;
+      background: var(--card-color);
+      filter: blur(75px);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: color-mix(in srgb, var(--card-color) 55%, transparent);
+      box-shadow: 0 25px 55px rgba(0, 0, 0, .24), 0 0 35px color-mix(in srgb, var(--card-color) 6%, transparent);
+      background: linear-gradient(145deg, rgba(22, 39, 68, .97), rgba(8, 15, 32, .98));
+    }
+
+    .card:hover::before {
+      transform: scale(1.3) rotate(20deg);
+    }
+
+    .card:hover::after {
+      opacity: .11;
+    }
+
+    .card-number {
+      color: var(--card-color);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+    }
+
+    .card-graphic {
+      position: relative;
+      display: grid;
+      width: 68px;
+      height: 68px;
+      place-items: center;
+      margin: 25px 0 17px;
+      border: 1px solid color-mix(in srgb, var(--card-color) 30%, transparent);
+      border-radius: 19px;
+      background: color-mix(in srgb, var(--card-color) 7%, transparent);
+      color: var(--card-color);
+      transition: transform .35s, box-shadow .35s;
+    }
+
+    .card-graphic svg {
+      width: 31px;
+      height: 31px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .card:hover .card-graphic {
+      transform: rotate(-6deg) scale(1.08);
+      box-shadow: 0 0 25px color-mix(in srgb, var(--card-color) 12%, transparent);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.32rem;
+      line-height: 1.35;
+      letter-spacing: -.5px;
+    }
+
+    .card p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: .89rem;
+      line-height: 1.9;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: auto;
+      color: var(--card-color);
+      font-size: .83rem;
+      font-weight: 700;
+      transition: gap .25s;
+    }
+
+    .card-link span {
+      transition: transform .25s;
+    }
+
+    .card:hover .card-link {
+      gap: 15px;
+    }
+
+    .card:hover .card-link span {
+      transform: translateX(3px);
+    }
+
+    /* PRINCIPLES */
 
     .values {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 15px;
     }
 
     .value {
-      padding: 22px;
-      border-left: 2px solid var(--accent);
-      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+      padding: 25px 25px 25px 29px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: linear-gradient(135deg, rgba(16, 27, 49, .88), rgba(8, 13, 29, .92));
+      transition: transform .3s, border-color .3s, background .3s;
+    }
+
+    .value::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--cyan));
+      transform: scaleY(.25);
+      transform-origin: top;
+      transition: transform .35s;
+    }
+
+    .value:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 209, 139, .3);
+      background: linear-gradient(135deg, rgba(21, 35, 62, .94), rgba(8, 14, 30, .96));
+    }
+
+    .value:hover::before {
+      transform: scaleY(1);
     }
 
     .value h3 {
-      font-size: 1.1rem;
       margin: 0 0 8px;
+      font-size: 1.12rem;
     }
 
     .value p {
-      color: var(--muted);
       margin: 0;
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.9;
     }
+
+    /* SCIENCE CALLOUT */
+
+    .science-banner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 30px;
+      overflow: hidden;
+      padding: clamp(26px, 4vw, 42px);
+      border: 1px solid rgba(121, 234, 255, .19);
+      border-radius: 20px;
+      background:
+        radial-gradient(ellipse at 100% 0%, rgba(121, 234, 255, .1), transparent 50%),
+        linear-gradient(130deg, rgba(13, 24, 46, .96), rgba(7, 12, 27, .97));
+    }
+
+    .science-banner h2 {
+      font-size: clamp(1.7rem, 3.3vw, 2.6rem);
+    }
+
+    .science-banner p {
+      max-width: 740px;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .science-symbol {
+      display: grid;
+      width: 105px;
+      height: 105px;
+      place-items: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(121, 234, 255, .24);
+      border-radius: 50%;
+      color: var(--cyan);
+      background: radial-gradient(circle, rgba(121, 234, 255, .12), transparent 72%);
+      box-shadow: 0 0 35px rgba(121, 234, 255, .07), inset 0 0 20px rgba(121, 234, 255, .05);
+      animation: symbolGlow 4s ease-in-out infinite;
+    }
+
+    .science-symbol svg {
+      width: 47px;
+      height: 47px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.2;
+    }
+
+    /* RESOURCES */
 
     .sources {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
     }
 
     .source {
-      padding: 16px 18px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 9px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      transition: border-color .2s ease;
+      gap: 16px;
+      min-width: 0;
+      padding: 19px 21px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(12, 20, 39, .77);
+      transition: transform .25s, border-color .25s, background .25s;
     }
 
     .source:hover {
-      border-color: var(--accent);
+      transform: translateY(-3px);
+      border-color: rgba(255, 209, 139, .38);
+      background: rgba(22, 34, 58, .9);
     }
 
-    .source span {
-      color: var(--accent);
+    .source span:last-child {
+      color: var(--gold);
+      font-size: 1.1rem;
+      transition: transform .25s;
     }
+
+    .source:hover span:last-child {
+      transform: translate(3px, -3px);
+    }
+
+    .source small {
+      display: block;
+      color: #8293af;
+      font-size: .75rem;
+    }
+
+    /* FOOTER */
 
     footer {
-      padding: 30px 0;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      font-size: .86rem;
+      margin-top: 40px;
+      border-top: 1px solid rgba(151, 180, 255, .13);
+      background: rgba(3, 5, 15, .55);
     }
 
     .foot {
       display: flex;
-      justify-content: space-between;
+      min-height: 110px;
       align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 22px;
+      padding-block: 25px;
+    }
+
+    .footer-tagline {
+      color: var(--muted);
+      font-size: .83rem;
     }
 
     .footlinks {
       display: flex;
-      gap: 17px;
       flex-wrap: wrap;
+      gap: 17px;
     }
+
+    .footlinks a {
+      color: #95a5bf;
+      font-size: .8rem;
+      transition: color .2s;
+    }
+
+    .footlinks a:hover {
+      color: var(--gold);
+    }
+
+    .back-top {
+      position: fixed;
+      right: 23px;
+      bottom: 23px;
+      z-index: 800;
+      display: grid;
+      width: 45px;
+      height: 45px;
+      place-items: center;
+      border: 1px solid rgba(255, 209, 139, .27);
+      border-radius: 13px;
+      background: rgba(8, 15, 31, .88);
+      color: var(--gold);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity .25s, transform .25s, border-color .25s;
+      backdrop-filter: blur(12px);
+    }
+
+    .back-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .back-top:hover {
+      border-color: var(--gold);
+    }
+
+    /* REVEAL ANIMATIONS */
 
     .reveal {
       opacity: 0;
-      transform: translateY(18px);
-      transition: opacity .65s ease, transform .65s ease;
+      transform: translateY(30px);
+      transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1);
+      transition-delay: var(--delay, 0ms);
     }
 
     .reveal.visible {
       opacity: 1;
-      transform: none;
+      transform: translateY(0);
     }
 
-    @keyframes float {
-      50% {
-        transform: translateY(-12px);
+    .hero-copy .reveal {
+      transform: translateY(18px);
+    }
+
+    .hero-copy .reveal.visible {
+      transform: translateY(0);
+    }
+
+    /* KEYFRAMES */
+
+    @keyframes backgroundDrift {
+      from { background-position: 0 0; }
+      to { background-position: 390px 330px; }
+    }
+
+    @keyframes logoPulse {
+      0%, 100% { transform: scale(.96); opacity: .35; }
+      50% { transform: scale(1.1); opacity: .9; }
+    }
+
+    @keyframes menuAppear {
+      from { opacity: 0; transform: translateY(-7px) scale(.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes gradientFlow {
+      to { background-position: 200% center; }
+    }
+
+    @keyframes statusPulse {
+      0%, 100% { opacity: .55; box-shadow: 0 0 7px rgba(126, 240, 202, .4); }
+      50% { opacity: 1; box-shadow: 0 0 16px rgba(126, 240, 202, .95); }
+    }
+
+    @keyframes stageFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-13px) rotate(.7deg); }
+    }
+
+    @keyframes orbitSpin {
+      from { rotate: 0deg; }
+      to { rotate: 360deg; }
+    }
+
+    @keyframes planetRotate {
+      from { filter: brightness(1); }
+      50% { filter: brightness(1.1); }
+      to { filter: brightness(1); }
+    }
+
+    @keyframes auraPulse {
+      0%, 100% { transform: scale(.92); opacity: .65; }
+      50% { transform: scale(1.12); opacity: 1; }
+    }
+
+    @keyframes nebulaBreath {
+      0%, 100% { transform: scale(.9); opacity: .6; }
+      50% { transform: scale(1.12); opacity: 1; }
+    }
+
+    @keyframes labelFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes sparkle {
+      0%, 100% { transform: scale(.7); opacity: .3; }
+      50% { transform: scale(1.7); opacity: 1; }
+    }
+
+    @keyframes symbolGlow {
+      0%, 100% { box-shadow: 0 0 25px rgba(121, 234, 255, .04), inset 0 0 15px rgba(121, 234, 255, .03); }
+      50% { box-shadow: 0 0 42px rgba(121, 234, 255, .12), inset 0 0 24px rgba(121, 234, 255, .08); }
+    }
+
+    /* RESPONSIVE */
+
+    @media (min-width: 1300px) {
+      .hero {
+        min-height: 740px;
       }
     }
 
-    @keyframes orbit-spin {
-      from {
-        rotate: 0deg;
-      }
-      to {
-        rotate: 360deg;
-      }
-    }
-
-    @media (max-width: 850px) {
+    @media (max-width: 950px) {
       .hero {
         grid-template-columns: 1fr;
-        padding-top: 60px;
+        gap: 0;
+        padding-top: 72px;
+      }
+
+      .hero-copy {
+        max-width: 760px;
+      }
+
+      .visual {
+        min-height: 420px;
+        margin-top: 10px;
+      }
+
+      .planet-stage {
+        width: min(100%, 430px);
       }
 
       .grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card {
+        min-height: 320px;
+      }
+
+      .science-banner {
+        grid-template-columns: 1fr auto;
       }
     }
 
-    @media (max-width: 560px) {
+    @media (max-width: 620px) {
       .container {
         width: calc(100% - 30px);
       }
 
-      h1 {
-        letter-spacing: -2px;
+      .section {
+        padding-block: 59px;
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .logo {
+        font-size: 1.1rem;
+        letter-spacing: 2.4px;
+      }
+
+      .logo-mark {
+        width: 32px;
+        height: 32px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 56px;
+        padding-bottom: 34px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.15rem, 14vw, 5rem);
+        letter-spacing: -3px;
+      }
+
+      .hero-description {
+        font-size: .94rem;
+      }
+
+      .hero-actions {
+        gap: 10px;
+      }
+
+      .btn {
+        padding: 11px 14px;
+        font-size: .82rem;
+      }
+
+      .hero-caption {
+        font-size: .7rem;
+      }
+
+      .visual {
+        min-height: 340px;
+      }
+
+      .planet-stage {
+        width: min(100%, 350px);
+      }
+
+      .planet-label {
+        padding: 7px 9px;
+        font-size: .59rem;
+      }
+
+      .label-one {
+        right: 0;
+      }
+
+      .label-two {
+        left: -1%;
+        bottom: 17%;
+      }
+
+      .label-three {
+        right: 0;
+        bottom: 7%;
+      }
+
+      .signal-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .signal {
+        min-height: 0;
+        padding: 20px 23px;
+      }
+
+      .signal strong {
+        font-size: 1.7rem;
       }
 
       .grid,
@@ -483,21 +1357,49 @@
         grid-template-columns: 1fr;
       }
 
-      .section {
-        padding: 48px 0;
+      .card {
+        min-height: 0;
+        padding: 24px;
       }
 
-      .visual {
-        min-height: 250px;
-      }
-
-      .sun {
-        width: 160px;
-        height: 160px;
+      .card-graphic {
+        margin-top: 20px;
       }
 
       .feature {
-        padding: 24px;
+        border-radius: 17px;
+      }
+
+      .science-banner {
+        grid-template-columns: 1fr;
+      }
+
+      .science-symbol {
+        width: 75px;
+        height: 75px;
+      }
+
+      .science-symbol svg {
+        width: 34px;
+        height: 34px;
+      }
+
+      .foot {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 17px;
+        padding-block: 28px;
+      }
+
+      .footlinks {
+        gap: 14px;
+      }
+
+      .back-top {
+        right: 14px;
+        bottom: 14px;
+        width: 41px;
+        height: 41px;
       }
     }
 
@@ -505,290 +1407,536 @@
       *,
       *::before,
       *::after {
-        animation: none !important;
-        transition: none !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
       }
 
       .reveal {
         opacity: 1;
         transform: none;
       }
+
+      .back-top {
+        transition: none;
+      }
     }
   </style>
 </head>
 
-<body>
+<body id="top">
 
-<header class="navbar">
-  <div class="container nav">
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-    <a class="logo" href="./index.html" aria-label="COSMOS home">
-      COS<span>M</span>OS
-    </a>
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <div class="container nav">
 
-    <button
-      class="menu-toggle"
-      id="menuToggle"
-      type="button"
-      aria-label="Open navigation menu"
-      aria-expanded="false"
-      aria-controls="cosmosNav"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+      <a class="logo" href="./index.html" aria-label="COSMOS home">
+        <span class="logo-mark" aria-hidden="true">✦</span>
+        <span>COS<span>M</span>OS</span>
+      </a>
 
-    <nav class="links" id="cosmosNav" aria-label="Main navigation">
-      <a href="./index.html">Home</a>
-      <a href="./planets.html">Planets</a>
-      <a href="./search.html">Global Search + Favorites</a>
-      <a href="./missions.html">Space Missions</a>
-      <a href="./research.html">Research</a>
-      <a href="./black-hole.html" class="nav-feature">Black Hole Observatory</a>
-      <a class="active nav-cta" aria-current="page" href="./about.html">About COSMOS</a>
-    </nav>
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="cosmosNav"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-  </div>
-</header>
+      <nav class="links" id="cosmosNav" aria-label="Main navigation">
+        <a href="./index.html">Home</a>
+        <a href="./planets.html">Planets</a>
+        <a href="./search.html">Global Search + Favorites</a>
+        <a href="./missions.html">Space Missions</a>
+        <a href="./research.html">Research</a>
+        <a href="./black-hole.html" class="nav-feature">Black Hole Observatory</a>
+        <a class="active nav-cta" aria-current="page" href="./about.html">About COSMOS</a>
+      </nav>
 
-<main>
-  <section class="container hero">
-    <div class="reveal">
-      <div class="eyebrow">A universe of discovery</div>
-      <h1>About <span>COSMOS</span></h1>
+    </div>
+  </header>
 
-      <p class="lead">
-        COSMOS is a space exploration website designed to make astronomy and planetary science easier to discover. Explore planets, learn about historic missions, and investigate the questions that continue to inspire scientists.
-      </p>
+  <main>
 
-      <div class="actions">
-        <a class="btn primary" href="./planets.html">Start exploring →</a>
-        <a class="btn" href="#purpose">Our purpose</a>
+    <!-- CINEMATIC HERO -->
+    <section class="container hero">
+
+      <div class="hero-copy">
+        <div class="eyebrow reveal">A universe of discovery</div>
+
+        <h1 class="reveal">
+          <span class="line">Beyond the</span>
+          <span class="line gradient-text">Known Universe.</span>
+        </h1>
+
+        <p class="hero-description reveal">
+          COSMOS is an immersive space exploration experience built to make
+          astronomy, planetary science, and the wonders of the universe easier
+          to discover. Follow the evidence, explore distant worlds, and
+          investigate the questions that continue to challenge humanity.
+        </p>
+
+        <div class="hero-actions reveal">
+          <a class="btn btn-primary" href="./planets.html">
+            Begin Exploration <span aria-hidden="true">↗</span>
+          </a>
+          <a class="btn" href="#purpose">
+            Discover COSMOS <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+
+        <div class="hero-caption reveal">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>SCIENCE · EXPLORATION · HUMAN CURIOSITY</span>
+        </div>
       </div>
-    </div>
 
-    <div class="visual reveal" role="img" aria-label="Stylized golden planet with orbital rings">
-      <div class="orbit"></div>
-      <div class="orbit two"></div>
-      <div class="sun"></div>
-    </div>
-  </section>
+      <!-- CSS-GENERATED PLANET: NO HEAVY 3D MODEL REQUIRED -->
+      <div class="visual" role="img" aria-label="An animated golden planet surrounded by luminous orbital rings">
 
-  <section class="container section" id="purpose">
-    <div class="feature reveal">
-      <div class="eyebrow">Our purpose</div>
-      <h2>Making space easier to explore</h2>
+        <div class="planet-stage">
+          <div class="orbit orbit-three"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="orbit"></div>
+          <div class="planet-aura"></div>
+          <div class="sun"></div>
 
-      <p>
-        The universe can feel enormous and complicated. COSMOS organizes space-related topics into clear, accessible sections so visitors can explore one idea at a time—from the planets in our Solar System to distant galaxies and unanswered questions about the cosmos.
-      </p>
+          <span class="visual-spark spark-one"></span>
+          <span class="visual-spark spark-two"></span>
+          <span class="visual-spark spark-three"></span>
+          <span class="visual-spark spark-four"></span>
 
-      <p>
-        The project combines educational explanations, mission histories, scientific concepts, and links to trusted sources. It is intended as a learning resource and a starting point for further exploration, not a replacement for original scientific publications or mission data.
-      </p>
-    </div>
-  </section>
+          <div class="planet-label label-one">
+            <span aria-hidden="true">◉</span>
+            COSMIC DISCOVERY
+          </div>
 
-  <section class="container section">
-    <div class="section-head reveal">
-      <div class="eyebrow">What you can explore</div>
-      <h2>Four ways into the cosmos</h2>
-      <p>Move between different areas of space science using the main navigation.</p>
-    </div>
+          <div class="planet-label label-two">
+            <span aria-hidden="true">⌁</span>
+            EXPLORE WORLDS
+          </div>
 
-    <div class="grid">
-      <article class="card reveal">
-        <span class="num">01 / WORLDS</span>
-        <h3>Planet Explorer</h3>
-        <p>
-          Discover the eight planets through individual pages covering their properties, atmospheres, interiors, moons, missions, and open scientific questions.
-        </p>
-        <a href="./planets.html">Explore the planets →</a>
-      </article>
+          <div class="planet-label label-three">
+            <span aria-hidden="true">✧</span>
+            SEEK ANSWERS
+          </div>
+        </div>
 
-      <article class="card reveal">
-        <span class="num">02 / JOURNEYS</span>
-        <h3>Space Missions</h3>
-        <p>
-          Learn how spacecraft, landers, rovers, and telescopes collect evidence and expand humanity's knowledge of space.
-        </p>
-        <a href="./missions.html">Explore missions →</a>
-      </article>
-
-      <article class="card reveal">
-        <span class="num">03 / QUESTIONS</span>
-        <h3>Scientific Research</h3>
-        <p>
-          Explore astrobiology, exoplanets, black holes, planetary science, and some of the biggest unanswered questions in astronomy.
-        </p>
-        <a href="./research.html">Explore research →</a>
-      </article>
-    </div>
-  </section>
-
-  <section class="container section">
-    <div class="section-head reveal">
-      <div class="eyebrow">What guides the project</div>
-      <h2>Our principles</h2>
-      <p>
-        Good science communication should help people become curious, ask better questions, and understand what evidence can—and cannot—tell us.
-      </p>
-    </div>
-
-    <div class="values">
-      <article class="value reveal">
-        <h3>Scientific accuracy</h3>
-        <p>Present established findings carefully, distinguish hypotheses from confirmed observations, and link to reputable scientific resources.</p>
-      </article>
-
-      <article class="value reveal">
-        <h3>Accessible learning</h3>
-        <p>Explain complex topics in clear language without losing the important scientific meaning.</p>
-      </article>
-
-      <article class="value reveal">
-        <h3>Curiosity first</h3>
-        <p>Encourage visitors to ask questions, compare evidence, and continue learning beyond a single page.</p>
-      </article>
-
-      <article class="value reveal">
-        <h3>Continuous improvement</h3>
-        <p>Science changes as new observations arrive. Educational content should be reviewed and updated when reliable new information becomes available.</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="container section">
-    <div class="feature reveal">
-      <div class="eyebrow">A note on science</div>
-      <h2>Explore. Question. Discover.</h2>
-
-      <p>
-        Space science is an ongoing process. Some facts are well established, while other ideas remain under investigation. COSMOS encourages readers to look at the evidence, check original sources, and stay open to new discoveries.
-      </p>
-
-      <p>
-        Unless a page explicitly states otherwise, COSMOS is an independent educational project and is not an official NASA or ESA website. Mission names and agency resources belong to their respective organizations.
-      </p>
-
-      <div class="actions">
-        <a class="btn primary" href="https://science.nasa.gov/" target="_blank" rel="noopener noreferrer">Visit NASA Science ↗</a>
-        <a class="btn" href="https://www.esa.int/Science_Exploration" target="_blank" rel="noopener noreferrer">Visit ESA ↗</a>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="container section">
-    <div class="section-head reveal">
-      <div class="eyebrow">Trusted resources</div>
-      <h2>Continue your journey</h2>
-      <p>
-        Use these scientific organizations for mission updates, images, research explainers, and verified discoveries.
-      </p>
-    </div>
+    <!-- PROJECT SNAPSHOT -->
+    <section class="container" aria-label="COSMOS overview">
+      <div class="signal-strip reveal">
+        <div class="signal">
+          <strong>Explore</strong>
+          <span>Worlds, planetary systems, and distant galaxies</span>
+        </div>
+        <div class="signal">
+          <strong>Understand</strong>
+          <span>Scientific ideas explained through accessible learning</span>
+        </div>
+        <div class="signal">
+          <strong>Discover</strong>
+          <span>Space missions, evidence, and unanswered questions</span>
+        </div>
+      </div>
+    </section>
 
-    <div class="sources reveal">
-      <a class="source" href="https://science.nasa.gov/" target="_blank" rel="noopener noreferrer">
-        NASA Science <span>↗</span>
+    <!-- PURPOSE -->
+    <section class="container section" id="purpose">
+      <div class="feature reveal">
+        <div class="eyebrow">Our mission</div>
+        <h2>Making the universe easier to explore.</h2>
+
+        <p>
+          The universe is vast, complex, and full of unanswered questions.
+          COSMOS organizes space-related subjects into accessible sections so
+          visitors can explore one idea at a time—from the planets in our Solar
+          System to distant galaxies and the physics of extreme environments.
+        </p>
+
+        <p>
+          The project brings together educational explanations, mission
+          histories, scientific concepts, and links to trusted resources. It is
+          designed as a starting point for learning and further investigation,
+          not a replacement for original scientific publications or mission data.
+        </p>
+      </div>
+    </section>
+
+    <!-- EXPLORATION AREAS -->
+    <section class="container section">
+      <div class="section-head reveal">
+        <div class="eyebrow">Choose your destination</div>
+        <h2>Three gateways into space.</h2>
+        <p>
+          Every discovery begins with a question. Choose an area and begin
+          exploring the science, history, and evidence behind our universe.
+        </p>
+      </div>
+
+      <div class="grid">
+
+        <article class="card reveal" style="--delay: 0ms">
+          <span class="card-number">01 / WORLDS</span>
+
+          <div class="card-graphic" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <circle cx="16" cy="16" r="7"></circle>
+              <ellipse cx="16" cy="16" rx="14" ry="5.5" transform="rotate(-25 16 16)"></ellipse>
+              <circle cx="26" cy="10" r="1.7" fill="currentColor" stroke="none"></circle>
+            </svg>
+          </div>
+
+          <h3>Planet Explorer</h3>
+          <p>
+            Explore the eight planets through individual guides to their
+            atmospheres, interiors, surfaces, moons, and scientific mysteries.
+          </p>
+
+          <a class="card-link" href="./planets.html">
+            Explore the planets <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="card reveal" style="--delay: 100ms">
+          <span class="card-number">02 / JOURNEYS</span>
+
+          <div class="card-graphic" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <path d="M16 3 20 12 29 16 20 20 16 29 12 20 3 16 12 12Z"></path>
+              <circle cx="16" cy="16" r="3"></circle>
+              <path d="m23 5 1 3 3 1-3 1-1 3-1-3-3-1 3-1Z"></path>
+            </svg>
+          </div>
+
+          <h3>Space Missions</h3>
+          <p>
+            Discover the spacecraft, landers, rovers, and telescopes that
+            collect evidence and expand our knowledge of space.
+          </p>
+
+          <a class="card-link" href="./missions.html">
+            Explore missions <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+        <article class="card reveal" style="--delay: 200ms">
+          <span class="card-number">03 / QUESTIONS</span>
+
+          <div class="card-graphic" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <circle cx="13" cy="13" r="8"></circle>
+              <path d="m19 19 8 8"></path>
+              <path d="M10 11a3 3 0 0 1 6 0c0 2-3 2-3 5"></path>
+              <path d="M13 19h.01"></path>
+            </svg>
+          </div>
+
+          <h3>Scientific Research</h3>
+          <p>
+            Investigate exoplanets, astrobiology, black holes, galaxies, solar
+            physics, and the questions scientists are still trying to answer.
+          </p>
+
+          <a class="card-link" href="./research.html">
+            Explore research <span aria-hidden="true">→</span>
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- PRINCIPLES -->
+    <section class="container section">
+      <div class="section-head reveal">
+        <div class="eyebrow">The foundation</div>
+        <h2>Built around curiosity and evidence.</h2>
+        <p>
+          Good science communication helps people ask better questions,
+          evaluate evidence, and understand both what we know and what remains
+          uncertain.
+        </p>
+      </div>
+
+      <div class="values">
+
+        <article class="value reveal">
+          <h3>Scientific accuracy</h3>
+          <p>
+            Present established findings carefully, distinguish hypotheses
+            from confirmed observations, and point readers toward reputable
+            scientific resources.
+          </p>
+        </article>
+
+        <article class="value reveal">
+          <h3>Accessible learning</h3>
+          <p>
+            Explain complex subjects in clear language without losing their
+            important scientific meaning or context.
+          </p>
+        </article>
+
+        <article class="value reveal">
+          <h3>Curiosity first</h3>
+          <p>
+            Encourage visitors to ask questions, compare evidence, and keep
+            learning beyond a single page.
+          </p>
+        </article>
+
+        <article class="value reveal">
+          <h3>Continuous improvement</h3>
+          <p>
+            New observations can change our understanding. Educational content
+            should evolve as reliable scientific knowledge advances.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SCIENCE STATEMENT -->
+    <section class="container section">
+      <div class="science-banner reveal">
+
+        <div>
+          <div class="eyebrow">A commitment to science</div>
+          <h2>Explore. Question. Discover.</h2>
+
+          <p>
+            Space science is an ongoing process. Some findings are well
+            established, while other ideas remain under investigation. COSMOS
+            encourages readers to examine evidence, consult original sources,
+            and stay open to new discoveries.
+          </p>
+
+          <p>
+            COSMOS is an independent educational project and is not an official
+            NASA or ESA website. Agency names, mission names, and linked
+            resources belong to their respective organizations.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://science.nasa.gov/" target="_blank" rel="noopener noreferrer">
+              NASA Science ↗
+            </a>
+            <a class="btn" href="https://www.esa.int/Science_Exploration" target="_blank" rel="noopener noreferrer">
+              Explore ESA ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="science-symbol" aria-hidden="true">
+          <svg viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="4"></circle>
+            <ellipse cx="24" cy="24" rx="21" ry="9" transform="rotate(-30 24 24)"></ellipse>
+            <ellipse cx="24" cy="24" rx="21" ry="9" transform="rotate(55 24 24)"></ellipse>
+            <circle cx="40" cy="12" r="2" fill="currentColor" stroke="none"></circle>
+          </svg>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TRUSTED RESOURCES -->
+    <section class="container section">
+      <div class="section-head reveal">
+        <div class="eyebrow">Go beyond COSMOS</div>
+        <h2>Continue your journey.</h2>
+        <p>
+          Explore these scientific organizations for mission updates,
+          observations, educational material, and verified discoveries.
+        </p>
+      </div>
+
+      <div class="sources">
+
+        <a class="source reveal" href="https://science.nasa.gov/" target="_blank" rel="noopener noreferrer">
+          <span>
+            NASA Science
+            <small>Space science and discoveries</small>
+          </span>
+          <span aria-hidden="true">↗</span>
+        </a>
+
+        <a class="source reveal" href="https://www.esa.int/Science_Exploration" target="_blank" rel="noopener noreferrer">
+          <span>
+            European Space Agency
+            <small>European space exploration</small>
+          </span>
+          <span aria-hidden="true">↗</span>
+        </a>
+
+        <a class="source reveal" href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener noreferrer">
+          <span>
+            Solar System Exploration
+            <small>Planets, moons, and small bodies</small>
+          </span>
+          <span aria-hidden="true">↗</span>
+        </a>
+
+        <a class="source reveal" href="https://science.nasa.gov/universe/" target="_blank" rel="noopener noreferrer">
+          <span>
+            Universe Exploration
+            <small>Stars, galaxies, and cosmology</small>
+          </span>
+          <span aria-hidden="true">↗</span>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container foot">
+
+      <a class="logo" href="./index.html" aria-label="COSMOS home">
+        <span class="logo-mark" aria-hidden="true">✦</span>
+        <span>COS<span>M</span>OS</span>
       </a>
 
-      <a class="source" href="https://www.esa.int/Science_Exploration" target="_blank" rel="noopener noreferrer">
-        European Space Agency <span>↗</span>
-      </a>
+      <span class="footer-tagline">Explore beyond what we know.</span>
 
-      <a class="source" href="https://science.nasa.gov/solar-system/" target="_blank" rel="noopener noreferrer">
-        Solar System Exploration <span>↗</span>
-      </a>
+      <nav class="footlinks" aria-label="Footer navigation">
+        <a href="./index.html">Home</a>
+        <a href="./planets.html">Planets</a>
+        <a href="./missions.html">Missions</a>
+        <a href="./research.html">Research</a>
+      </nav>
 
-      <a class="source" href="https://science.nasa.gov/universe/" target="_blank" rel="noopener noreferrer">
-        Universe Exploration <span>↗</span>
-      </a>
     </div>
-  </section>
-</main>
+  </footer>
 
-<footer>
-  <div class="container foot">
-    <a class="logo" href="./index.html">COS<span>M</span>OS</a>
-    <span>Explore beyond what we know.</span>
+  <a class="back-top" id="backTop" href="#top" aria-label="Back to top">
+    ↑
+  </a>
 
-    <div class="footlinks">
-      <a href="./index.html">Home</a>
-      <a href="./planets.html">Planets</a>
-      <a href="./missions.html">Missions</a>
-      <a href="./research.html">Research</a>
-    </div>
-  </div>
-</footer>
+  <script>
+    (() => {
+      "use strict";
 
-<script>
-(() => {
-  const toggle = document.getElementById("menuToggle");
-  const menu = document.getElementById("cosmosNav");
+      const toggle = document.getElementById("menuToggle");
+      const menu = document.getElementById("cosmosNav");
+      const progress = document.getElementById("scrollProgress");
+      const backTop = document.getElementById("backTop");
 
-  if (toggle && menu) {
-    const closeMenu = () => {
-      menu.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-      toggle.setAttribute("aria-label", "Open navigation menu");
-    };
+      /* Mobile navigation */
+      if (toggle && menu) {
+        const closeMenu = () => {
+          menu.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.setAttribute("aria-label", "Open navigation menu");
+        };
 
-    const openMenu = () => {
-      menu.classList.add("is-open");
-      toggle.setAttribute("aria-expanded", "true");
-      toggle.setAttribute("aria-label", "Close navigation menu");
-    };
+        const openMenu = () => {
+          menu.classList.add("is-open");
+          toggle.setAttribute("aria-expanded", "true");
+          toggle.setAttribute("aria-label", "Close navigation menu");
+        };
 
-    toggle.addEventListener("click", (event) => {
-      event.stopPropagation();
+        toggle.addEventListener("click", (event) => {
+          event.stopPropagation();
 
-      const isOpen = toggle.getAttribute("aria-expanded") === "true";
+          if (toggle.getAttribute("aria-expanded") === "true") {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
 
-      if (isOpen) {
-        closeMenu();
+        menu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", closeMenu);
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+            closeMenu();
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            closeMenu();
+            toggle.focus();
+          }
+        });
+
+        window.addEventListener("resize", () => {
+          if (window.innerWidth > 900) {
+            closeMenu();
+          }
+        });
+      }
+
+      /* Scroll reveal */
+      const revealItems = document.querySelectorAll(".reveal");
+
+      if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: "0px 0px -35px 0px"
+        });
+
+        revealItems.forEach((item) => revealObserver.observe(item));
       } else {
-        openMenu();
+        revealItems.forEach((item) => item.classList.add("visible"));
       }
-    });
 
-    menu.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", closeMenu);
-    });
+      /* Scroll progress and back-to-top */
+      let ticking = false;
 
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeMenu();
-      }
-    });
+      const updateScrollUI = () => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const percentage = scrollable > 0
+          ? (window.scrollY / scrollable) * 100
+          : 0;
 
-    document.addEventListener("click", (event) => {
-      if (!menu.contains(event.target) && !toggle.contains(event.target)) {
-        closeMenu();
-      }
-    });
-  }
+        if (progress) {
+          progress.style.width = percentage + "%";
+        }
 
-  const items = document.querySelectorAll(".reveal");
+        if (backTop) {
+          backTop.classList.toggle("visible", window.scrollY > 500);
+        }
 
-  if (!("IntersectionObserver" in window)) {
-    items.forEach((item) => item.classList.add("visible"));
-    return;
-  }
+        ticking = false;
+      };
 
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateScrollUI);
+          ticking = true;
+        }
+      }, { passive: true });
 
-  items.forEach((item) => observer.observe(item));
-})();
-</script>
+      updateScrollUI();
+
+      /* Current year */
+      document.querySelectorAll("[data-current-year]").forEach((element) => {
+        element.textContent = new Date().getFullYear();
+      });
+    })();
+  </script>
 
 </body>
 </html>
