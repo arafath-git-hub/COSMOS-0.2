@@ -4,214 +4,775 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore astrobiology, the origin of life, habitable environments, and the search for life beyond Earth.">
-  <title>Astrobiology | COSMOS</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#090613">
+  <title>Astrology | COSMOS</title>
+  <meta name="description" content="Explore the history, zodiac signs, celestial symbolism, and cultural traditions of astrology.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    .research-detail{width:min(1100px,calc(100% - 40px));margin:auto;padding:38px 0 70px;color:#edf4ff}
-    .research-detail a{color:#65e4df}
-    .detail-back{display:inline-block;margin-bottom:26px;text-decoration:none}
-    .detail-hero{padding:clamp(24px,5vw,48px);border:1px solid #263d56;border-radius:16px;background:radial-gradient(ellipse at 90% 10%,rgba(50,170,145,.17),transparent 45%),linear-gradient(135deg,#101b30,#0a1323)}
-    .detail-eyebrow{color:#55dcd7;font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-    .detail-hero h1{margin:12px 0;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-1.5px}
-    .detail-hero p,.detail-section p,.detail-section li{color:#aab8ce;font-size:.97rem;line-height:1.85}
-    .detail-hero p{max-width:720px;margin-bottom:0}
-    .detail-section{margin-top:36px}
-    .detail-section h2{margin-bottom:14px;font-size:clamp(1.4rem,3vw,1.9rem)}
-    .detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
-    .detail-card{padding:22px;border:1px solid #263d56;border-radius:12px;background:linear-gradient(145deg,#101b2d,#0b1424)}
-    .detail-card h3{margin-top:0;font-size:1.05rem}
-    .detail-card p{margin-bottom:0;font-size:.88rem}
-    .detail-list{padding-left:22px}
-    .detail-links{display:flex;flex-wrap:wrap;gap:12px}
-    .detail-link{display:inline-block;padding:10px 14px;border:1px solid #2a5263;border-radius:8px;text-decoration:none}
-    .detail-link:hover{border-color:#55dcd7;background:#122239}
-    @media(max-width:760px){.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(max-width:520px){.research-detail{width:calc(100% - 28px);padding-top:25px}.detail-grid{grid-template-columns:1fr}.detail-card{padding:18px}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+    :root {
+      --bg: #090613;
+      --panel: rgba(22, 15, 39, .84);
+      --gold: #ffd58a;
+      --violet: #b69aff;
+      --pink: #ed9bff;
+      --text: #faf5ff;
+      --muted: #b2a5c8;
+      --border: rgba(191, 155, 255, .2);
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 25px; }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.75;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 15% 15%, rgba(114, 54, 166, .22), transparent 40%),
+        radial-gradient(ellipse at 85% 35%, rgba(174, 97, 143, .12), transparent 38%),
+        radial-gradient(ellipse at 50% 100%, rgba(55, 47, 128, .18), transparent 45%),
+        #090613;
+      animation: nebula 14s ease-in-out infinite alternate;
+    }
+
+    #stars {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .shell {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .back-row {
+      padding-top: 26px;
+      animation: fadeDown .8s both;
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      background: rgba(19, 12, 33, .78);
+      color: #f4eaff;
+      font-size: .9rem;
+      transition: .3s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .back span { color: var(--gold); }
+
+    .back:hover {
+      transform: translateX(-5px);
+      border-color: var(--gold);
+      box-shadow: 0 0 25px rgba(255, 213, 138, .12);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 35px;
+      min-height: 610px;
+      padding: 65px 0 75px;
+    }
+
+    .hero-copy { animation: fadeUp .9s .1s both; }
+
+    .eyebrow, .kicker {
+      color: var(--gold);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 23px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      box-shadow: 0 0 12px var(--gold);
+    }
+
+    h1, h2, h3 { font-family: "Space Grotesk", sans-serif; line-height: 1.15; }
+
+    h1 {
+      font-size: clamp(3.4rem, 7vw, 6.4rem);
+      font-weight: 600;
+      letter-spacing: -.065em;
+    }
+
+    h1 span {
+      display: block;
+      color: transparent;
+      background: linear-gradient(100deg, #fff6dd, #ffd58a 35%, #c4a4ff 75%, #f4aaff);
+      background-size: 200% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: textFlow 7s linear infinite;
+    }
+
+    .description {
+      max-width: 560px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.95;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 11px 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: .9rem;
+      font-weight: 700;
+      transition: .3s ease;
+    }
+
+    .primary {
+      border-color: transparent;
+      background: linear-gradient(110deg, #8d63d5, #b27ad7);
+      box-shadow: 0 8px 28px rgba(156, 98, 220, .2);
+      color: white;
+    }
+
+    .secondary { background: rgba(24, 16, 42, .75); }
+
+    .button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(181, 130, 255, .2);
+    }
+
+    .secondary:hover { border-color: var(--gold); }
+
+    .hero-art {
+      position: relative;
+      display: grid;
+      min-height: 430px;
+      place-items: center;
+      animation: fadeUp 1s .3s both;
+    }
+
+    .aura {
+      position: absolute;
+      width: 82%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(155, 98, 231, .2), rgba(104, 66, 171, .06) 45%, transparent 70%);
+      filter: blur(12px);
+      animation: auraPulse 5s ease-in-out infinite alternate;
+    }
+
+    .celestial {
+      position: relative;
+      display: grid;
+      width: min(100%, 410px);
+      aspect-ratio: 1;
+      place-items: center;
+      animation: float 7s ease-in-out infinite;
+    }
+
+    .ring {
+      position: absolute;
+      width: 100%;
+      height: 39%;
+      border: 1px solid rgba(220, 183, 255, .35);
+      border-radius: 50%;
+      transform: rotate(-35deg);
+      box-shadow: 0 0 20px rgba(186, 136, 255, .06);
+    }
+
+    .ring.two {
+      width: 116%;
+      height: 52%;
+      border-color: rgba(255, 213, 138, .24);
+      transform: rotate(45deg);
+      animation: ringSpin 24s linear infinite;
+    }
+
+    .ring.three {
+      width: 75%;
+      height: 108%;
+      border-color: rgba(178, 148, 255, .18);
+      transform: rotate(55deg);
+    }
+
+    .orb {
+      position: relative;
+      width: 48%;
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 50%;
+      background:
+        radial-gradient(ellipse at 28% 25%, rgba(255,255,255,.85), transparent 4%),
+        radial-gradient(ellipse at 32% 30%, #ffdbb4, #c78bdc 27%, transparent 45%),
+        radial-gradient(ellipse at 72% 70%, #6335a0, transparent 42%),
+        linear-gradient(135deg, #e7bbff, #8b55c8 52%, #25133f);
+      box-shadow:
+        inset -30px -18px 42px rgba(13, 5, 30, .85),
+        inset 10px 8px 24px rgba(255, 255, 255, .2),
+        0 0 38px rgba(186, 128, 255, .32),
+        0 0 100px rgba(159, 93, 239, .13);
+    }
+
+    .orb::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      border-radius: 50%;
+      background: repeating-linear-gradient(
+        25deg,
+        transparent 0 18px,
+        rgba(255, 221, 172, .12) 19px 22px,
+        transparent 23px 38px
+      );
+      filter: blur(2px);
+      animation: surface 20s linear infinite;
+    }
+
+    .orb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: linear-gradient(110deg, rgba(255,255,255,.22), transparent 36%, rgba(10,0,25,.72) 85%);
+    }
+
+    .orbiting-moon {
+      position: absolute;
+      top: 15%;
+      right: 10%;
+      width: 9%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, #fff2d5, #c3a1e8 55%, #503a76);
+      box-shadow: 0 0 18px rgba(255, 220, 167, .4);
+      animation: moonFloat 6s ease-in-out infinite alternate;
+    }
+
+    .orbiting-star {
+      position: absolute;
+      left: 9%;
+      bottom: 19%;
+      width: 10px;
+      height: 10px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      box-shadow: 0 0 16px var(--gold);
+      animation: twinkle 2.4s ease-in-out infinite alternate;
+    }
+
+    .art-label {
+      position: absolute;
+      right: 0;
+      bottom: 17px;
+      padding: 12px 15px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: rgba(15, 9, 28, .82);
+      backdrop-filter: blur(12px);
+    }
+
+    .art-label strong {
+      display: block;
+      color: #fff1d1;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .9rem;
+    }
+
+    .art-label small { color: var(--muted); font-size: .75rem; }
+
+    .section {
+      padding: 76px 0;
+      border-top: 1px solid rgba(185, 147, 255, .1);
+    }
+
+    .section-head {
+      max-width: 700px;
+      margin-bottom: 33px;
+    }
+
+    .section-head h2 {
+      margin-top: 12px;
+      font-size: clamp(2rem, 4.5vw, 3.35rem);
+      letter-spacing: -.045em;
+    }
+
+    .section-head p {
+      margin-top: 15px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .card {
+      --accent: #c5a2ff;
+      position: relative;
+      min-height: 220px;
+      overflow: hidden;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background:
+        radial-gradient(ellipse at 100% 0, rgba(153, 104, 225, .12), transparent 58%),
+        linear-gradient(145deg, rgba(27, 17, 45, .9), rgba(12, 8, 24, .95));
+      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -50px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: .08;
+      filter: blur(35px);
+      transition: .4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      border-color: color-mix(in srgb, var(--accent), transparent 30%);
+      box-shadow: 0 20px 45px rgba(0,0,0,.25), 0 0 25px rgba(180,130,255,.07);
+    }
+
+    .card:hover::before { opacity: .22; transform: scale(1.35); }
+
+    .number {
+      display: block;
+      margin-bottom: 24px;
+      color: var(--accent);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: .78rem;
+      letter-spacing: .13em;
+    }
+
+    .card h3 { margin-bottom: 11px; font-size: 1.17rem; }
+    .card p { color: var(--muted); font-size: .9rem; line-height: 1.85; }
+
+    .line {
+      width: 35px;
+      height: 2px;
+      margin-top: 20px;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+      transition: width .4s;
+    }
+
+    .card:hover .line { width: 72px; }
+
+    .note-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      padding: clamp(24px, 5vw, 48px);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background:
+        radial-gradient(ellipse at 0 0, rgba(132, 81, 195, .15), transparent 58%),
+        rgba(17, 10, 30, .8);
+    }
+
+    .note-panel h2 {
+      margin: 12px 0 18px;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    }
+
+    .note-panel p { color: var(--muted); }
+
+    .note-list { display: grid; gap: 15px; align-content: center; }
+
+    .note-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(192, 157, 255, .12);
+    }
+
+    .note-item:last-child { border-bottom: 0; padding-bottom: 0; }
+
+    .dot {
+      flex: 0 0 8px;
+      width: 8px;
+      height: 8px;
+      margin-top: 9px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 12px var(--gold);
+    }
+
+    .note-item strong { display: block; margin-bottom: 3px; font-size: .94rem; }
+    .note-item span:last-child { color: var(--muted); font-size: .86rem; }
+
+    .banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+      margin: 70px 0;
+      padding: 34px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(110deg, rgba(86, 47, 130, .26), rgba(38, 24, 69, .3));
+    }
+
+    .banner h2 { margin-top: 9px; font-size: clamp(1.5rem, 3vw, 2.2rem); }
+    .banner p { max-width: 640px; margin-top: 9px; color: var(--muted); font-size: .92rem; }
+
+    footer {
+      padding: 25px 0 35px;
+      border-top: 1px solid rgba(185, 147, 255, .1);
+      color: #857899;
+      font-size: .82rem;
+      text-align: center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(23px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes nebula { from { filter: hue-rotate(0); } to { filter: hue-rotate(16deg); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes textFlow { to { background-position: 200% center; } }
+    @keyframes auraPulse { from { transform: scale(.9); opacity: .65; } to { transform: scale(1.1); opacity: 1; } }
+    @keyframes float { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-13px) rotate(2deg); } }
+    @keyframes surface { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+    @keyframes ringSpin { from { transform: rotate(45deg); } to { transform: rotate(405deg); } }
+    @keyframes moonFloat { from { transform: translate(-10px, 10px); } to { transform: translate(15px, -9px); } }
+    @keyframes twinkle { from { opacity: .4; scale: .75; } to { opacity: 1; scale: 1.2; } }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr .8fr; gap: 10px; }
+      .hero-art { min-height: 330px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 650px) {
+      .shell { width: calc(100% - 30px); }
+      .back-row { padding-top: 18px; }
+      .hero { grid-template-columns: 1fr; padding: 60px 0 42px; }
+      h1 { font-size: clamp(3.2rem, 15vw, 5rem); }
+      .hero-art { min-height: 330px; margin-top: 12px; }
+      .celestial { width: min(83vw, 340px); }
+      .art-label { right: 0; bottom: 0; }
+      .section { padding: 57px 0; }
+      .grid { grid-template-columns: 1fr; }
+      .card { min-height: 185px; }
+      .number { margin-bottom: 17px; }
+      .note-panel { grid-template-columns: 1fr; gap: 25px; }
+      .banner { align-items: flex-start; flex-direction: column; margin: 52px 0; padding: 25px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 
 <body>
+  <canvas id="stars" aria-hidden="true"></canvas>
 
-  <main class="research-detail">
-    <a class="detail-back" href="research.html">← Back to Research</a>
+  <div class="shell">
+    <div class="back-row">
+      <a class="back" href="./research.html"><span aria-hidden="true">←</span> Back to Research</a>
+    </div>
 
-    <section class="detail-hero">
-      <span class="detail-eyebrow">Research Field 02</span>
-      <h1>Astrobiology</h1>
-      <p>
-        Investigate life's origins, the conditions that allow organisms to
-        survive, and the possibility of life beyond Earth.
-      </p>
-    </section>
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">COSMOS Research Division</div>
+          <h1><span>Astrology</span><span>&amp; The Zodiac</span></h1>
 
-    <section class="detail-section">
-      <h2>What Is Astrobiology?</h2>
-      <p>
-        Astrobiology is an interdisciplinary field that studies the origin,
-        evolution, distribution, and future of life in the universe.
-        It combines biology, chemistry, geology, planetary science, and
-        astronomy to investigate whether life could exist beyond Earth.
-      </p>
-      <p>
-        Earth is currently the only world known to support life. By studying
-        organisms in extreme environments and examining other planetary
-        environments, scientists can better understand what life may require.
-      </p>
-    </section>
-
-    <section class="detail-section">
-      <h2>Major Research Areas</h2>
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Origins of Life</h3>
-          <p>
-            Explore how simple chemical substances may have developed into
-            increasingly complex systems capable of supporting life.
+          <p class="description">
+            Explore the history of astrology, the twelve zodiac signs, celestial symbolism,
+            and the traditions different cultures developed to interpret the sky.
+            Discover how these ideas influenced art, calendars, mythology, and human history.
           </p>
-        </article>
 
-        <article class="detail-card">
-          <h3>Habitability</h3>
+          <div class="actions">
+            <a class="button primary" href="#topics">Explore Topics <span aria-hidden="true">↗</span></a>
+            <a class="button secondary" href="#history">Discover Its History</a>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-label="Stylized celestial artwork">
+          <div class="aura"></div>
+          <div class="celestial">
+            <div class="ring two"></div>
+            <div class="ring three"></div>
+            <div class="ring"></div>
+            <div class="orb"></div>
+            <div class="orbiting-moon"></div>
+            <div class="orbiting-star"></div>
+          </div>
+          <div class="art-label">
+            <strong>Celestial Traditions</strong>
+            <small>History · Symbolism · Culture</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="topics">
+        <div class="section-head reveal">
+          <div class="kicker">Explore The Subject</div>
+          <h2>A tradition written in the stars</h2>
           <p>
-            Investigate liquid water, chemical ingredients, energy sources,
-            and environmental stability on planets and moons.
+            Astrology has taken many forms across history. These topics explore its
+            symbols, cultural roots, and place in human society—not scientifically
+            established predictions about personality or future events.
           </p>
-        </article>
+        </div>
 
-        <article class="detail-card">
-          <h3>Biosignatures</h3>
+        <div class="grid">
+          <article class="card reveal" style="--accent:#ffd58a">
+            <span class="number">TOPIC / 01</span>
+            <h3>The Twelve Zodiac Signs</h3>
+            <p>Explore Aries through Pisces and learn how the twelve signs developed within zodiac traditions.</p>
+            <div class="line"></div>
+          </article>
+
+          <article class="card reveal" style="--accent:#c1a1ff">
+            <span class="number">TOPIC / 02</span>
+            <h3>History of Astrology</h3>
+            <p>Trace astrological traditions through ancient Mesopotamia, the Hellenistic world, and later cultures.</p>
+            <div class="line"></div>
+          </article>
+
+          <article class="card reveal" style="--accent:#ff9ccf">
+            <span class="number">TOPIC / 03</span>
+            <h3>Birth Charts</h3>
+            <p>Understand how traditional birth charts map celestial positions at a particular time and place.</p>
+            <div class="line"></div>
+          </article>
+
+          <article class="card reveal" style="--accent:#8be8ff">
+            <span class="number">TOPIC / 04</span>
+            <h3>Planets in Astrology</h3>
+            <p>Learn the symbolic meanings assigned to planets within different astrological systems.</p>
+            <div class="line"></div>
+          </article>
+
+          <article class="card reveal" style="--accent:#b4f2a4">
+            <span class="number">TOPIC / 05</span>
+            <h3>Astrology Across Cultures</h3>
+            <p>Compare traditions such as Western, Indian, and Chinese astrology and their distinct frameworks.</p>
+            <div class="line"></div>
+          </article>
+
+          <article class="card reveal" style="--accent:#e2aaff">
+            <span class="number">TOPIC / 06</span>
+            <h3>Astronomy vs Astrology</h3>
+            <p>Understand the difference between astronomy as a scientific discipline and astrology as a cultural belief system.</p>
+            <div class="line"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="history">
+        <div class="note-panel reveal">
+          <div>
+            <div class="kicker">Context Matters</div>
+            <h2>Sky observation and human belief.</h2>
+            <p>
+              For much of history, observing celestial movements was closely connected
+              with calendars, religion, navigation, and interpretations of earthly events.
+              Over time, astronomy and astrology developed into different disciplines.
+            </p>
+          </div>
+
+          <div class="note-list">
+            <div class="note-item">
+              <span class="dot"></span>
+              <div>
+                <strong>Historical Importance</strong>
+                <span>Astrological systems influenced literature, royal courts, calendars, and cultural traditions.</span>
+              </div>
+            </div>
+
+            <div class="note-item">
+              <span class="dot"></span>
+              <div>
+                <strong>Symbolic Interpretations</strong>
+                <span>Zodiac signs and planetary placements carry meanings within particular traditions.</span>
+              </div>
+            </div>
+
+            <div class="note-item">
+              <span class="dot"></span>
+              <div>
+                <strong>Scientific Evidence</strong>
+                <span>Astrology's claims about predicting personality or life events have not been reliably demonstrated by scientific testing.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="banner reveal">
+        <div>
+          <div class="kicker">Explore The Universe</div>
+          <h2>Study the sky from another perspective.</h2>
           <p>
-            Search for possible signs of biological activity while checking
-            whether non-biological processes could explain the same evidence.
+            Discover planets, moons, and real celestial phenomena through the
+            scientific study of astronomy.
           </p>
-        </article>
+        </div>
+        <a class="button primary" href="./planets.html">Explore Planets <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
 
-        <article class="detail-card">
-          <h3>Extreme Life on Earth</h3>
-          <p>
-            Study microorganisms that survive in hot springs, acidic waters,
-            deep rocks, deserts, and other extreme environments.
-          </p>
-        </article>
+    <footer>
+      <p>Astrology &amp; The Zodiac · COSMOS Research</p>
+    </footer>
+  </div>
 
-        <article class="detail-card">
-          <h3>Ocean Worlds</h3>
-          <p>
-            Examine icy moons that may contain liquid oceans beneath their
-            surfaces and investigate their potential habitability.
-          </p>
-        </article>
+  <script>
+    (() => {
+      const canvas = document.getElementById("stars");
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
 
-        <article class="detail-card">
-          <h3>Life Beyond the Solar System</h3>
-          <p>
-            Study exoplanets and their atmospheres to understand whether
-            distant worlds may have conditions compatible with life.
-          </p>
-        </article>
-      </div>
-    </section>
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let stars = [];
+      let width = 0;
+      let height = 0;
+      let frame = null;
 
-    <section class="detail-section">
-      <h2>Where Do Scientists Search?</h2>
-      <ul class="detail-list">
-        <li>
-          <strong>Mars:</strong> Ancient environments may have been suitable
-          for microbial life, making preserved rocks important research targets.
-        </li>
-        <li>
-          <strong>Europa:</strong> Jupiter's icy moon is believed to have a
-          subsurface ocean beneath its frozen crust.
-        </li>
-        <li>
-          <strong>Enceladus:</strong> Saturn's moon releases plumes of material
-          from an underground ocean into space.
-        </li>
-        <li>
-          <strong>Exoplanets:</strong> Scientists study distant planetary
-          atmospheres for clues about their environments.
-        </li>
-        <li>
-          <strong>Earth:</strong> Microorganisms and ancient rocks help
-          researchers understand the limits and history of life.
-        </li>
-      </ul>
-    </section>
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + "px";
+        canvas.style.height = height + "px";
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    <section class="detail-section">
-      <h2>How Is the Research Conducted?</h2>
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Robotic Exploration</h3>
-          <p>
-            Rovers, orbiters, and spacecraft examine environments and collect
-            measurements that cannot easily be obtained from Earth.
-          </p>
-        </article>
+        const count = Math.min(145, Math.floor(width * height / 8500));
+        stars = Array.from({ length: count }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: Math.random() * 1.2 + .25,
+          a: Math.random() * .55 + .2,
+          speed: Math.random() * .16 + .025,
+          phase: Math.random() * Math.PI * 2
+        }));
 
-        <article class="detail-card">
-          <h3>Laboratory Experiments</h3>
-          <p>
-            Researchers test how organic molecules behave under different
-            temperatures, pressures, radiation levels, and chemical conditions.
-          </p>
-        </article>
+        draw(0);
+      }
 
-        <article class="detail-card">
-          <h3>Telescope Observations</h3>
-          <p>
-            Astronomers analyze the light passing through or emitted by
-            exoplanet atmospheres to investigate their composition.
-          </p>
-        </article>
-      </div>
-    </section>
+      function draw(time) {
+        ctx.clearRect(0, 0, width, height);
 
-    <section class="detail-section">
-      <h2>Important Scientific Questions</h2>
-      <ul class="detail-list">
-        <li>How did life first emerge on Earth?</li>
-        <li>Could microbial life have existed on ancient Mars?</li>
-        <li>Could subsurface oceans on icy moons support living organisms?</li>
-        <li>What evidence would be convincing proof of life beyond Earth?</li>
-        <li>How can scientists distinguish a real biosignature from a false positive?</li>
-      </ul>
-    </section>
+        stars.forEach(star => {
+          const pulse = reducedMotion ? 1 : .72 + Math.sin(time * .001 + star.phase) * .28;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(231, 213, 255, ${star.a * pulse})`;
+          ctx.fill();
 
-    <section class="detail-section">
-      <h2>Explore Related Research</h2>
-      <div class="detail-links">
-        <a class="detail-link" href="planetary-science.html">Planetary Science</a>
-        <a class="detail-link" href="exoplanets.html">Exoplanets</a>
-      </div>
-    </section>
+          if (!reducedMotion) {
+            star.y -= star.speed;
+            if (star.y < -2) {
+              star.y = height + 2;
+              star.x = Math.random() * width;
+            }
+          }
+        });
 
-    <section class="detail-section">
-      <h2>Official Resources</h2>
-      <p>
-        <a href="https://science.nasa.gov/astrobiology/"
-           target="_blank" rel="noopener noreferrer">
-          NASA Astrobiology ↗
-        </a>
-      </p>
-      <p>
-        <a href="https://science.nasa.gov/solar-system/mars/"
-           target="_blank" rel="noopener noreferrer">
-          NASA Mars Science ↗
-        </a>
-      </p>
-    </section>
+        if (!reducedMotion) frame = requestAnimationFrame(draw);
+      }
 
-    <a class="detail-back" href="research.html">← Back to All Research Fields</a>
-  </main>
+      window.addEventListener("resize", resize, { passive: true });
+      resize();
 
-  <footer>
-    <p>© COSMOS — Exploring the Universe</p>
-  </footer>
+      const revealItems = document.querySelectorAll(".reveal");
 
-  <script src="app.js" defer></script>
+      if ("IntersectionObserver" in window && !reducedMotion) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: .12 });
+
+        revealItems.forEach(item => observer.observe(item));
+      } else {
+        revealItems.forEach(item => item.classList.add("visible"));
+      }
+
+      window.addEventListener("pagehide", () => {
+        if (frame !== null) cancelAnimationFrame(frame);
+      }, { once: true });
+    })();
+  </script>
 </body>
 </html>
