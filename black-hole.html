@@ -14,7 +14,6 @@
     :root {
       --bg: #050816;
       --panel: rgba(11, 19, 39, .88);
-      --panel-light: #101b35;
       --border: rgba(99, 151, 255, .22);
       --blue: #4ba6ff;
       --cyan: #52e5ff;
@@ -30,7 +29,7 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 90px;
+      scroll-padding-top: 100px;
     }
 
     body {
@@ -65,22 +64,25 @@
     button, input { font: inherit; }
     button { color: inherit; }
 
-    button:focus-visible, a:focus-visible, input:focus-visible {
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
       outline: 2px solid var(--cyan);
       outline-offset: 4px;
     }
 
+    /* HEADER */
+
     .topbar {
-      min-height: 74px;
+      min-height: 76px;
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 1000;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 24px;
+      gap: 18px;
       padding: 12px 4%;
-      background: rgba(4, 8, 22, .9);
+      background: rgba(4, 8, 22, .96);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
@@ -90,6 +92,7 @@
       align-items: center;
       gap: 12px;
       min-width: max-content;
+      margin-right: auto;
     }
 
     .brand-symbol {
@@ -117,55 +120,114 @@
       margin-top: 2px;
     }
 
-    .nav {
+    /* Hamburger is intentionally visible on desktop AND mobile. */
+
+    .menu-toggle {
+      width: 46px;
+      height: 46px;
+      flex: 0 0 46px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 7px;
+      justify-content: center;
+      gap: 5px;
+      padding: 0;
+      border: 1px solid rgba(82, 229, 255, .4);
+      border-radius: 11px;
+      background: rgba(16, 27, 53, .95);
+      cursor: pointer;
+      position: relative;
+      z-index: 1002;
+      transition: background .2s, border-color .2s, box-shadow .2s;
+    }
+
+    .menu-toggle:hover {
+      background: rgba(28, 64, 111, .95);
+      border-color: var(--cyan);
+      box-shadow: 0 0 20px rgba(82, 229, 255, .15);
+    }
+
+    .menu-toggle span {
+      width: 20px;
+      height: 2px;
+      flex: 0 0 2px;
+      display: block;
+      border-radius: 2px;
+      background: var(--cyan);
+      transition: transform .22s, opacity .22s;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:first-child {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:last-child {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .nav {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 4%;
+      width: min(310px, 92vw);
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 5px;
+      padding: 12px;
+      border: 1px solid rgba(82, 229, 255, .3);
+      border-radius: 15px;
+      background: rgba(5, 12, 29, .98);
+      box-shadow: 0 20px 55px rgba(0, 0, 0, .5), 0 0 28px rgba(53, 131, 255, .1);
+      backdrop-filter: blur(20px);
+      z-index: 1001;
+    }
+
+    .nav.open { display: flex; animation: menuIn .2s ease-out; }
+
+    @keyframes menuIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .nav a {
-      padding: 10px 13px;
+      display: block;
+      padding: 12px 14px;
       color: #c5d5f1;
+      border: 1px solid transparent;
       border-radius: 10px;
       font-size: 13px;
-      transition: .2s;
+      transition: color .2s, background .2s, border-color .2s;
     }
 
-    .nav a:hover, .nav a.active {
+    .nav a:hover,
+    .nav a.active,
+    .nav a.current {
       color: var(--cyan);
+      border-color: rgba(65, 157, 255, .3);
       background: rgba(47, 112, 255, .13);
     }
 
-    .nav .current {
-      color: var(--cyan);
-      border: 1px solid rgba(65, 157, 255, .4);
-      background: rgba(22, 78, 171, .18);
-    }
-
-    .menu-toggle {
-      display: none;
-      border: 1px solid var(--border);
-      background: var(--panel);
-      border-radius: 10px;
-      padding: 9px 12px;
-      cursor: pointer;
-    }
+    /* PAGE LAYOUT */
 
     .layout {
       display: grid;
       grid-template-columns: 225px minmax(0, 1fr);
-      min-height: calc(100vh - 74px);
+      min-height: calc(100vh - 76px);
     }
 
     .sidebar {
+      min-width: 0;
       padding: 27px 15px;
       border-right: 1px solid var(--border);
       background: rgba(4, 9, 23, .52);
     }
 
-    .side-heading {
-      padding: 0 12px 19px;
-    }
+    .side-heading { padding: 0 12px 19px; }
 
     .side-heading h2 {
       margin: 0 0 6px;
@@ -178,10 +240,7 @@
       color: var(--muted);
     }
 
-    .side-links {
-      display: grid;
-      gap: 7px;
-    }
+    .side-links { display: grid; gap: 7px; }
 
     .side-links a {
       display: flex;
@@ -197,12 +256,14 @@
 
     .side-links a span {
       width: 22px;
+      flex-shrink: 0;
       color: var(--blue);
       text-align: center;
       font-size: 18px;
     }
 
-    .side-links a:hover, .side-links a.active {
+    .side-links a:hover,
+    .side-links a.active {
       color: #fff;
       border-color: rgba(62, 133, 255, .35);
       background: linear-gradient(100deg, rgba(32, 89, 205, .3), rgba(15, 43, 95, .14));
@@ -283,14 +344,18 @@
       position: absolute;
       inset: 0;
       display: block;
+      touch-action: none;
+      cursor: grab;
     }
+
+    #spaceCanvas:active { cursor: grabbing; }
 
     .stage-title {
       position: absolute;
       top: 19px;
       left: 20px;
       z-index: 3;
-      max-width: 68%;
+      max-width: 65%;
       pointer-events: none;
     }
 
@@ -304,6 +369,7 @@
       margin-top: 5px;
       color: var(--muted);
       font-size: 11px;
+      line-height: 1.5;
     }
 
     .stage-tools {
@@ -315,7 +381,8 @@
       gap: 7px;
     }
 
-    .stage-tools button, .tool-button {
+    .stage-tools button,
+    .tool-button {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -323,13 +390,14 @@
       border: 1px solid transparent;
       border-radius: 10px;
       color: #c4d5f1;
-      background: rgba(5, 12, 29, .75);
+      background: rgba(5, 12, 29, .85);
       font-size: 11px;
       cursor: pointer;
       transition: .2s;
     }
 
-    .stage-tools button:hover, .stage-tools button.selected {
+    .stage-tools button:hover,
+    .stage-tools button.selected {
       border-color: rgba(65, 154, 255, .55);
       color: var(--cyan);
       background: rgba(24, 70, 150, .4);
@@ -359,7 +427,7 @@
 
     .drag-hint {
       color: #b7c8e4;
-      background: rgba(4, 10, 25, .78);
+      background: rgba(4, 10, 25, .85);
       border: 1px solid var(--border);
       padding: 10px 12px;
       border-radius: 10px;
@@ -379,7 +447,7 @@
       border-radius: 50%;
       border: 1px solid rgba(66, 146, 255, .4);
       color: var(--cyan);
-      background: rgba(5, 12, 29, .88);
+      background: rgba(5, 12, 29, .9);
       cursor: pointer;
       font-size: 18px;
     }
@@ -462,11 +530,7 @@
     .fact-row:nth-child(3) .fact-icon { color: var(--orange); }
     .fact-row:nth-child(4) .fact-icon { color: #ff727c; }
 
-    .fact-label {
-      display: block;
-      color: #c1d1ed;
-      font-size: 12px;
-    }
+    .fact-label { display: block; color: #c1d1ed; font-size: 12px; }
 
     .fact-value {
       display: block;
@@ -480,6 +544,7 @@
       margin-top: 3px;
       color: var(--muted);
       font-size: 10px;
+      line-height: 1.5;
     }
 
     .did-you-know {
@@ -564,396 +629,373 @@
       margin: 4px 0 0;
       font-size: 10px;
       color: var(--muted);
+      line-height: 1.5;
     }
 
-    .card-body { padding: 15px; }
+    .card-body { padding: 16px; }
 
     .label-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 10px;
-      font-size: 11px;
-      color: #c2d2ed;
+      margin-bottom: 14px;
+      font-size: 12px;
+      color: #c5d5f1;
     }
 
     .value-pill {
-      min-width: 43px;
-      text-align: center;
-      padding: 6px 9px;
       color: var(--cyan);
-      border-radius: 9px;
-      background: rgba(44, 91, 195, .2);
-      border: 1px solid rgba(65, 154, 255, .3);
-      font: 600 14px "Space Grotesk", sans-serif;
+      background: rgba(82, 229, 255, .09);
+      border: 1px solid rgba(82, 229, 255, .25);
+      padding: 5px 9px;
+      border-radius: 8px;
+      font-weight: 700;
     }
 
     input[type="range"] {
       width: 100%;
-      margin: 19px 0 8px;
-      accent-color: var(--blue);
+      accent-color: var(--cyan);
       cursor: pointer;
     }
 
     .range-scale {
       display: flex;
       justify-content: space-between;
+      gap: 6px;
+      margin-top: 7px;
       color: var(--muted);
-      font-size: 10px;
+      font-size: 9px;
     }
 
     .metrics {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 7px;
+      gap: 9px;
       margin-top: 20px;
     }
 
     .metric {
-      min-width: 0;
-      padding: 10px 7px;
-      border: 1px solid rgba(99, 151, 255, .2);
+      padding: 11px;
+      border: 1px solid rgba(99, 151, 255, .15);
       border-radius: 10px;
-      background: rgba(21, 37, 71, .48);
+      background: rgba(7, 15, 34, .7);
     }
 
     .metric span {
       display: block;
       color: var(--muted);
-      font-size: 9px;
-      line-height: 1.4;
+      font-size: 10px;
     }
 
     .metric strong {
       display: block;
-      margin-top: 6px;
+      margin-top: 5px;
       color: var(--cyan);
-      font: 600 12px "Space Grotesk", sans-serif;
+      font: 600 14px "Space Grotesk", sans-serif;
     }
 
-    .metric:nth-child(2) strong { color: #a7b9ff; }
-    .metric:nth-child(3) strong { color: #d5a5ff; }
-
     .formula-note {
-      margin: 13px 0 0;
+      margin: 15px 0 0;
       color: var(--muted);
       font-size: 10px;
-      line-height: 1.6;
+      line-height: 1.75;
     }
 
     .lens-visual {
+      height: 145px;
       position: relative;
-      height: 116px;
       overflow: hidden;
-      border-radius: 11px;
-      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(99, 151, 255, .16);
+      border-radius: 12px;
       background:
-        radial-gradient(ellipse at 50% 50%, transparent 10%, rgba(68, 129, 255, .17) 12%, transparent 20%),
-        radial-gradient(ellipse at 50% 50%, #060a16 0 10%, transparent 11%),
-        radial-gradient(ellipse at 50% 50%, rgba(125, 183, 255, .8) 0 1px, transparent 2px),
-        #071126;
-      margin-bottom: 12px;
+        radial-gradient(circle at 50% 50%, rgba(93, 95, 255, .15), transparent 40%),
+        #050b1b;
+    }
+
+    .lens-visual::before,
+    .lens-visual::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 65px;
+      border: 1px solid rgba(82, 229, 255, .65);
+      border-radius: 50%;
+      transform: rotate(-25deg);
+      box-shadow: 0 0 15px rgba(82, 229, 255, .2);
+      animation: lensRotate 8s linear infinite;
+    }
+
+    .lens-visual::after {
+      width: 110px;
+      height: 100px;
+      border-color: rgba(161, 108, 255, .75);
+      transform: rotate(30deg);
+      animation-direction: reverse;
+    }
+
+    @keyframes lensRotate {
+      to { rotate: 360deg; }
     }
 
     .lens-ring {
       position: absolute;
-      width: 105px;
-      height: 65px;
+      width: 75px;
+      height: 75px;
+      border: 3px solid #ffb56b;
+      border-left-color: transparent;
+      border-right-color: #7a8cff;
       border-radius: 50%;
-      border: 2px solid #7ac8ff;
-      box-shadow: 0 0 10px #278eff, inset 0 0 12px #278eff;
-      top: 25px;
-      left: calc(50% - 52px);
-      transform: rotate(-20deg);
-      animation: lensTurn 8s linear infinite;
-    }
-
-    .lens-ring::after {
-      content: "";
-      position: absolute;
-      inset: -8px;
-      border: 1px solid rgba(180, 118, 255, .65);
-      border-radius: 50%;
-      transform: rotate(38deg);
+      box-shadow: 0 0 22px rgba(255, 147, 75, .35);
     }
 
     .lens-center {
-      position: absolute;
-      width: 33px;
-      height: 33px;
+      width: 27px;
+      height: 27px;
+      position: relative;
+      z-index: 2;
       border-radius: 50%;
-      top: 41px;
-      left: calc(50% - 16px);
       background: #000;
-      box-shadow: 0 0 8px #fff, 0 0 17px #7b8dff;
-    }
-
-    @keyframes lensTurn {
-      to { transform: rotate(340deg); }
+      box-shadow: 0 0 0 5px rgba(0, 0, 0, .45), 0 0 20px #4b65b9;
     }
 
     .segmented {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 5px;
-      margin-bottom: 12px;
+      margin-top: 13px;
     }
 
     .segmented button {
-      flex: 1;
-      min-width: 65px;
       padding: 8px 5px;
       border: 1px solid var(--border);
       border-radius: 8px;
-      background: rgba(8, 18, 39, .85);
-      color: var(--muted);
-      font-size: 10px;
+      background: rgba(7, 15, 34, .75);
+      color: #b7c9e8;
+      font-size: 9px;
       cursor: pointer;
     }
 
     .segmented button.active {
       color: var(--cyan);
-      border-color: var(--blue);
-      background: rgba(25, 83, 175, .25);
+      border-color: rgba(82, 229, 255, .5);
+      background: rgba(47, 112, 255, .14);
     }
 
     .explain-text {
-      color: #aebfdd;
+      color: var(--muted);
       font-size: 11px;
-      line-height: 1.7;
-      margin: 0;
+      line-height: 1.75;
+      margin: 14px 0 0;
     }
 
-    .type-list { display: grid; gap: 9px; }
+    .type-list { display: grid; gap: 8px; }
 
     .type-button {
-      display: grid;
-      grid-template-columns: 48px minmax(0, 1fr) 18px;
-      align-items: center;
-      gap: 10px;
       width: 100%;
+      display: grid;
+      grid-template-columns: 27px minmax(0, 1fr) 12px;
+      align-items: center;
+      gap: 9px;
       text-align: left;
-      padding: 9px;
-      color: var(--text);
-      border: 1px solid var(--border);
+      padding: 11px;
+      border: 1px solid rgba(99, 151, 255, .15);
       border-radius: 11px;
-      background: rgba(8, 18, 39, .58);
+      background: rgba(7, 15, 34, .62);
       cursor: pointer;
       transition: .2s;
     }
 
-    .type-button:hover, .type-button.active {
-      border-color: rgba(77, 165, 255, .65);
-      background: rgba(24, 69, 139, .23);
+    .type-button:hover,
+    .type-button.active {
+      border-color: rgba(82, 229, 255, .4);
+      background: rgba(28, 64, 111, .25);
     }
 
     .type-orb {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      border-radius: 10px;
-      background: radial-gradient(circle, #000 24%, #1377d4 28%, #102344 52%, #050b1a 75%);
-      box-shadow: inset 0 0 16px rgba(68, 160, 255, .3);
+      width: 23px;
+      height: 23px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #fff0c0, #ff8a45 30%, #7e2b79 55%, #050816 75%);
+      box-shadow: 0 0 12px rgba(255, 138, 69, .25);
     }
 
     .type-button:nth-child(2) .type-orb {
-      background: radial-gradient(circle, #000 24%, #ff9d45 29%, #382042 55%, #050b1a 76%);
+      background: radial-gradient(circle at 35% 30%, #e5e7ff, #a16cff 35%, #263f94 65%, #050816 75%);
     }
 
     .type-button:nth-child(3) .type-orb {
-      background: radial-gradient(circle, #000 24%, #d26cff 29%, #382042 55%, #050b1a 76%);
+      background: radial-gradient(circle at 35% 30%, #c8f7ff, #4ba6ff 35%, #24316d 65%, #050816 75%);
     }
 
     .type-button strong {
       display: block;
       font-size: 11px;
-      font-weight: 600;
     }
 
     .type-button small {
       display: block;
       margin-top: 4px;
       color: var(--muted);
-      font-size: 10px;
-      line-height: 1.4;
-    }
-
-    .type-button .arrow {
-      color: var(--blue);
-      font-size: 19px;
-    }
-
-    .discovery-list { display: grid; }
-
-    .discovery {
-      display: grid;
-      grid-template-columns: 34px minmax(0, 1fr);
-      gap: 10px;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(99, 151, 255, .13);
-    }
-
-    .discovery:last-child { border-bottom: 0; }
-
-    .discovery-icon {
-      width: 32px;
-      height: 32px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: rgba(43, 89, 157, .18);
-      border: 1px solid var(--border);
-      font-size: 15px;
-    }
-
-    .discovery strong {
-      display: block;
-      font-size: 11px;
-    }
-
-    .discovery p {
-      margin: 4px 0 0;
-      color: var(--muted);
-      font-size: 10px;
+      font-size: 9px;
       line-height: 1.5;
     }
 
+    .type-button .arrow { color: var(--cyan); }
+
+    .discovery-list { display: grid; gap: 14px; }
+
+    .discovery {
+      display: grid;
+      grid-template-columns: 30px minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .discovery-icon {
+      width: 29px;
+      height: 29px;
+      display: grid;
+      place-items: center;
+      color: var(--cyan);
+      border: 1px solid rgba(82, 229, 255, .25);
+      background: rgba(82, 229, 255, .06);
+      border-radius: 9px;
+    }
+
+    .discovery strong { font-size: 11px; }
+
+    .discovery p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.65;
+    }
+
     .wide-section {
-      margin-top: 20px;
+      margin-top: 18px;
       padding: clamp(18px, 3vw, 30px);
-      scroll-margin-top: 95px;
     }
 
     .wide-heading {
       display: flex;
       justify-content: space-between;
-      align-items: end;
-      gap: 18px;
-      margin-bottom: 20px;
+      align-items: start;
+      gap: 20px;
+      margin-bottom: 22px;
     }
 
     .wide-heading h2 {
       margin: 7px 0;
-      font: 600 clamp(20px, 2.5vw, 27px) "Space Grotesk", sans-serif;
+      font: 600 clamp(20px, 2vw, 27px) "Space Grotesk", sans-serif;
     }
 
     .wide-heading p {
-      max-width: 650px;
+      max-width: 700px;
       margin: 0;
       color: var(--muted);
       font-size: 12px;
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
-    .type-details {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 13px;
-    }
-
-    .type-detail {
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      background: rgba(7, 16, 35, .65);
-    }
-
-    .type-detail .type-label {
-      color: var(--blue);
-      font-size: 10px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .type-detail h3 {
-      margin: 9px 0;
-      font: 600 17px "Space Grotesk", sans-serif;
-    }
-
-    .type-detail p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.75;
-      margin: 0;
-    }
-
+    .type-details,
     .fact-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 13px;
+      gap: 14px;
     }
 
+    .type-detail,
     .fact-card {
-      padding: 17px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: rgba(7, 16, 35, .65);
+      padding: 19px;
+      border: 1px solid rgba(99, 151, 255, .17);
+      border-radius: 13px;
+      background: rgba(5, 12, 29, .64);
+      transition: transform .25s, border-color .25s;
     }
 
-    .fact-card .number {
+    .type-detail:hover,
+    .fact-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(82, 229, 255, .42);
+    }
+
+    .type-label {
       color: var(--cyan);
-      font: 700 25px "Space Grotesk", sans-serif;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
+    .type-detail h3,
     .fact-card h3 {
-      margin: 10px 0 7px;
-      font-size: 13px;
+      margin: 11px 0 8px;
+      font: 600 15px "Space Grotesk", sans-serif;
     }
 
+    .type-detail p,
     .fact-card p {
       margin: 0;
       color: var(--muted);
-      font-size: 11px;
-      line-height: 1.75;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .number {
+      color: rgba(82, 229, 255, .65);
+      font: 700 27px "Space Grotesk", sans-serif;
     }
 
     .notice {
-      margin-top: 16px;
-      padding: 13px 15px;
-      border-left: 3px solid var(--blue);
-      border-radius: 0 9px 9px 0;
-      background: rgba(31, 73, 145, .13);
-      color: var(--muted);
+      margin-top: 20px;
+      padding: 15px 17px;
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 10px 10px 0;
+      color: #b7c9e8;
+      background: rgba(82, 229, 255, .05);
       font-size: 11px;
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
     .footer {
-      padding: 22px 4%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
       flex-wrap: wrap;
-      gap: 12px;
+      padding: 23px 4%;
       border-top: 1px solid var(--border);
       color: var(--muted);
       font-size: 11px;
+      background: rgba(4, 8, 22, .7);
     }
 
-    .footer strong {
-      color: var(--blue);
-      letter-spacing: 1px;
+    .footer strong { color: var(--cyan); }
+
+    .footer a {
+      color: var(--cyan);
+      transition: color .2s;
     }
 
-    .footer a:hover { color: var(--cyan); }
+    .footer a:hover { color: white; }
 
     .toast {
       position: fixed;
-      z-index: 100;
-      bottom: 20px;
       left: 50%;
-      transform: translate(-50%, 20px);
+      bottom: 22px;
+      z-index: 2000;
+      max-width: calc(100vw - 30px);
+      padding: 12px 18px;
+      border: 1px solid rgba(82, 229, 255, .35);
+      border-radius: 11px;
+      color: var(--text);
+      background: rgba(7, 18, 40, .96);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, .4);
+      font-size: 12px;
       opacity: 0;
       pointer-events: none;
-      padding: 12px 18px;
-      border: 1px solid rgba(82, 229, 255, .4);
-      border-radius: 11px;
-      background: #0b1932;
-      color: var(--cyan);
-      font-size: 12px;
-      transition: .25s;
+      transform: translate(-50%, 12px);
+      transition: opacity .2s, transform .2s;
     }
 
     .toast.show {
@@ -961,68 +1003,69 @@
       transform: translate(-50%, 0);
     }
 
-    @media (min-width: 1500px) {
-      .layout { grid-template-columns: 245px minmax(0, 1fr); }
-      .blackhole-stage { min-height: 465px; }
-    }
+    /* RESPONSIVE */
 
     @media (max-width: 1200px) {
-      .nav a { padding: 9px 8px; font-size: 12px; }
-      .layout { grid-template-columns: 190px minmax(0, 1fr); }
-      .hero-grid { grid-template-columns: minmax(0, 1.4fr) minmax(245px, .8fr); }
+      .layout { grid-template-columns: 205px minmax(0, 1fr); }
+      .hero-grid { grid-template-columns: minmax(0, 1.3fr) minmax(250px, .9fr); }
       .content-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .blackhole-stage { min-height: 390px; }
     }
 
     @media (max-width: 900px) {
-      .topbar { flex-wrap: wrap; }
-      .menu-toggle { display: block; }
-      .nav {
-        display: none;
-        width: 100%;
-        order: 3;
-        flex-wrap: wrap;
-        padding-top: 10px;
-        border-top: 1px solid var(--border);
-      }
-      .nav.open { display: flex; }
-      .nav a { flex: 1 1 auto; text-align: center; }
       .layout { grid-template-columns: 1fr; }
       .sidebar {
-        padding: 12px 15px;
         border-right: 0;
         border-bottom: 1px solid var(--border);
+        padding: 16px;
       }
-      .side-heading { padding-bottom: 10px; }
-      .side-links { display: flex; overflow-x: auto; padding-bottom: 4px; }
-      .side-links a { flex: 0 0 auto; white-space: nowrap; }
+      .side-heading { padding: 0 4px 12px; }
+      .side-links {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .side-links a {
+        padding: 10px;
+        font-size: 11px;
+      }
       .quote { display: none; }
-      main { padding-top: 20px; }
       .hero-grid { grid-template-columns: 1fr; }
-      .right-stack { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .right-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: auto; }
     }
 
     @media (max-width: 600px) {
-      .topbar { padding: 12px 15px; gap: 12px; }
+      .topbar { padding: 10px 4%; min-height: 68px; }
+      .brand-symbol { width: 38px; height: 38px; }
       .brand-name { font-size: 21px; }
-      .brand-symbol { width: 37px; height: 37px; }
-      main { padding: 20px 12px 30px; }
+      .brand-sub { font-size: 8px; letter-spacing: 1.5px; }
+      .menu-toggle { width: 43px; height: 43px; flex-basis: 43px; }
+      .layout { min-height: calc(100vh - 68px); }
+      main { padding: 22px 13px 32px; }
+      .side-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .side-links a { font-size: 10px; gap: 7px; }
       .blackhole-stage { min-height: 360px; }
-      .stage-title { top: 13px; left: 13px; }
-      .stage-title strong { font-size: 12px; }
-      .stage-title span { font-size: 10px; }
-      .stage-tools { top: auto; bottom: 67px; right: 10px; }
-      .stage-tools button { padding: 6px; font-size: 0; }
-      .stage-tools .dot { font-size: 11px; }
+      .stage-title { top: 13px; left: 13px; max-width: 58%; }
+      .stage-title strong { font-size: 13px; }
+      .stage-title span { font-size: 9px; }
+      .stage-tools { top: 12px; right: 10px; gap: 5px; }
+      .stage-tools button { padding: 6px; font-size: 9px; gap: 5px; }
+      .stage-tools .dot { width: 17px; height: 17px; }
       .stage-bottom { left: 10px; right: 10px; bottom: 10px; }
-      .drag-hint { font-size: 9px; padding: 7px; }
+      .drag-hint { padding: 7px 9px; font-size: 9px; }
       .zoom-tools button { width: 32px; height: 32px; }
       .right-stack { grid-template-columns: 1fr; }
       .content-grid { grid-template-columns: 1fr; }
       .type-details, .fact-grid { grid-template-columns: 1fr; }
-      .wide-heading { align-items: start; flex-direction: column; }
-      .panel-header { padding: 14px; }
-      .footer { justify-content: center; text-align: center; }
+      .wide-section { padding: 17px; }
+      .footer { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (max-width: 380px) {
+      .brand { gap: 8px; }
+      .brand-name { font-size: 18px; }
+      .brand-sub { letter-spacing: 1px; }
+      .stage-tools button { max-width: 125px; }
+      .stage-tools { right: 7px; }
+      .stage-title { max-width: 53%; }
+      .segmented button { font-size: 8px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1030,6 +1073,7 @@
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
       }
     }
   </style>
@@ -1037,7 +1081,7 @@
 
 <body>
   <header class="topbar">
-    <a class="brand" href="index.html" aria-label="COSMOS home">
+    <a class="brand" href="./index.html" aria-label="COSMOS home">
       <div class="brand-symbol" aria-hidden="true">◉</div>
       <div>
         <div class="brand-name">COSMOS</div>
@@ -1045,17 +1089,19 @@
       </div>
     </a>
 
-    <nav class="nav" id="mainNav" aria-label="Main navigation">
-      <a href="index.html">Home</a>
-      <a href="planets.html">Planets</a>
-      <a href="missions.html">Missions</a>
-      <a href="research.html">Research</a>
-      <a href="search.html">Search</a>
-      <a class="current" href="black-hole.html" aria-current="page">Black Hole</a>
+    <nav class="nav" id="cosmosNav" aria-label="Main navigation">
+      <a href="./index.html">Home</a>
+      <a href="./planets.html">Planets</a>
+      <a href="./search.html">Global Search</a>
+      <a href="./missions.html">Missions</a>
+      <a href="./research.html">Research</a>
+      <a class="current" href="./black-hole.html" aria-current="page">Black Hole Observatory</a>
+      <a href="./about.html">About</a>
     </nav>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
-      ☰ Menu
+    <button class="menu-toggle" id="menuToggle" type="button"
+      aria-label="Open navigation menu" aria-expanded="false" aria-controls="cosmosNav">
+      <span></span><span></span><span></span>
     </button>
   </header>
 
@@ -1067,12 +1113,12 @@
       </div>
 
       <nav class="side-links" aria-label="Observatory sections">
-        <a class="active" href="#overview"><span>⌂</span>Overview</a>
-        <a href="#explorer"><span>⌕</span>Black Hole Explorer</a>
-        <a href="#gravity-lab"><span>♧</span>Gravity Lab</a>
-        <a href="#relativity"><span>◎</span>Relativity Visualizer</a>
-        <a href="#types"><span>✳</span>Black Hole Types</a>
-        <a href="#discoveries"><span>◇</span>Facts &amp; Discoveries</a>
+        <a class="active" href="#overview"><span aria-hidden="true">⌂</span>Overview</a>
+        <a href="#explorer"><span aria-hidden="true">⌕</span>Black Hole Explorer</a>
+        <a href="#gravity-lab"><span aria-hidden="true">♧</span>Gravity Lab</a>
+        <a href="#relativity"><span aria-hidden="true">◎</span>Relativity Visualizer</a>
+        <a href="#types"><span aria-hidden="true">✳</span>Black Hole Types</a>
+        <a href="#discoveries"><span aria-hidden="true">◇</span>Facts &amp; Discoveries</a>
       </nav>
 
       <div class="quote">
@@ -1100,10 +1146,10 @@
             </div>
 
             <div class="stage-tools" aria-label="Visualization modes">
-              <button class="selected" data-mode="disk"><span class="dot">◉</span> Accretion Disk</button>
-              <button data-mode="horizon"><span class="dot">○</span> Event Horizon</button>
-              <button data-mode="lens"><span class="dot">◎</span> Gravitational Lens</button>
-              <button data-mode="stars"><span class="dot">✳</span> Background Stars</button>
+              <button class="selected" type="button" data-mode="disk"><span class="dot">◉</span> Accretion Disk</button>
+              <button type="button" data-mode="horizon"><span class="dot">○</span> Event Horizon</button>
+              <button type="button" data-mode="lens"><span class="dot">◎</span> Gravitational Lens</button>
+              <button type="button" data-mode="stars"><span class="dot">✳</span> Background Stars</button>
             </div>
 
             <div class="stage-bottom">
@@ -1112,9 +1158,9 @@
                 <span>Use + and − to zoom</span>
               </div>
               <div class="zoom-tools">
-                <button id="zoomOut" aria-label="Zoom out">−</button>
-                <button id="zoomIn" aria-label="Zoom in">+</button>
-                <button id="resetView" aria-label="Reset visualization">↺</button>
+                <button id="zoomOut" type="button" aria-label="Zoom out">−</button>
+                <button id="zoomIn" type="button" aria-label="Zoom in">+</button>
+                <button id="resetView" type="button" aria-label="Reset visualization">↺</button>
               </div>
             </div>
           </div>
@@ -1124,7 +1170,7 @@
           <section class="panel" id="explorer">
             <div class="panel-header">
               <div style="display:flex;align-items:center;gap:11px">
-                <div class="panel-icon">◎</div>
+                <div class="panel-icon" aria-hidden="true">◎</div>
                 <div>
                   <h2>Black Hole Explorer</h2>
                   <p>Explore the physics behind black holes</p>
@@ -1134,7 +1180,7 @@
 
             <div class="facts-list">
               <div class="fact-row">
-                <div class="fact-icon">◉</div>
+                <div class="fact-icon" aria-hidden="true">◉</div>
                 <div>
                   <span class="fact-label">Black Hole Mass</span>
                   <strong class="fact-value" id="massFact">10 M☉</strong>
@@ -1142,7 +1188,7 @@
                 </div>
               </div>
               <div class="fact-row">
-                <div class="fact-icon">◌</div>
+                <div class="fact-icon" aria-hidden="true">◌</div>
                 <div>
                   <span class="fact-label">Schwarzschild Radius</span>
                   <strong class="fact-value" id="radiusFact">29.5 km</strong>
@@ -1150,7 +1196,7 @@
                 </div>
               </div>
               <div class="fact-row">
-                <div class="fact-icon">◉</div>
+                <div class="fact-icon" aria-hidden="true">◉</div>
                 <div>
                   <span class="fact-label">Event Horizon</span>
                   <strong class="fact-value" id="horizonFact">29.5 km</strong>
@@ -1158,7 +1204,7 @@
                 </div>
               </div>
               <div class="fact-row">
-                <div class="fact-icon">♨</div>
+                <div class="fact-icon" aria-hidden="true">♨</div>
                 <div>
                   <span class="fact-label">Accretion Disk</span>
                   <strong class="fact-value">Extremely hot</strong>
@@ -1183,43 +1229,24 @@
         </div>
       </section>
 
-      <section class="content-grid">
+      <section class="content-grid" aria-label="Interactive black hole tools">
         <article class="panel content-card" id="gravity-lab">
           <div class="card-title">
-            <div class="symbol">♧</div>
-            <div>
-              <h2>Gravity Lab</h2>
-              <p>Change mass and explore its effect</p>
-            </div>
+            <div class="symbol" aria-hidden="true">♧</div>
+            <div><h2>Gravity Lab</h2><p>Change mass and explore its effect</p></div>
           </div>
-
           <div class="card-body">
             <div class="label-row">
               <label for="massSlider">Mass (solar masses)</label>
               <output class="value-pill" id="massOutput" for="massSlider">10</output>
             </div>
-
-            <input id="massSlider" type="range" min="1" max="1000" value="10" step="1">
-
-            <div class="range-scale">
-              <span>1 M☉</span><span>500 M☉</span><span>1,000 M☉</span>
-            </div>
-
+            <input id="massSlider" type="range" min="1" max="1000000" value="10" step="1">
+            <div class="range-scale"><span>1 M☉</span><span>500,000 M☉</span><span>1,000,000 M☉</span></div>
             <div class="metrics">
-              <div class="metric">
-                <span>Schwarzschild radius</span>
-                <strong id="radiusMetric">29.5 km</strong>
-              </div>
-              <div class="metric">
-                <span>Mass category</span>
-                <strong id="categoryMetric">Stellar</strong>
-              </div>
-              <div class="metric">
-                <span>Light escape</span>
-                <strong>Impossible*</strong>
-              </div>
+              <div class="metric"><span>Schwarzschild radius</span><strong id="radiusMetric">29.5 km</strong></div>
+              <div class="metric"><span>Mass category</span><strong id="categoryMetric">Stellar</strong></div>
+              <div class="metric"><span>Light escape</span><strong>Impossible*</strong></div>
             </div>
-
             <p class="formula-note">
               *Inside the event horizon. Radius uses the non-rotating black hole
               approximation: Rₛ ≈ 2.95 km × mass in solar masses.
@@ -1229,25 +1256,18 @@
 
         <article class="panel content-card" id="relativity">
           <div class="card-title">
-            <div class="symbol">◎</div>
-            <div>
-              <h2>Relativity Visualizer</h2>
-              <p>A simplified view of gravitational lensing</p>
-            </div>
+            <div class="symbol" aria-hidden="true">◎</div>
+            <div><h2>Relativity Visualizer</h2><p>A simplified view of gravitational lensing</p></div>
           </div>
-
           <div class="card-body">
             <div class="lens-visual" aria-label="Animated illustration of gravitational lensing">
-              <div class="lens-ring"></div>
-              <div class="lens-center"></div>
+              <div class="lens-ring"></div><div class="lens-center"></div>
             </div>
-
             <div class="segmented" id="lensControls">
-              <button class="active" data-lens="bending">Light Bending</button>
-              <button data-lens="ring">Einstein Ring</button>
-              <button data-lens="images">Multiple Images</button>
+              <button class="active" type="button" data-lens="bending">Light Bending</button>
+              <button type="button" data-lens="ring">Einstein Ring</button>
+              <button type="button" data-lens="images">Multiple Images</button>
             </div>
-
             <p class="explain-text" id="lensDescription" aria-live="polite">
               Massive objects curve spacetime. Light from a distant source can
               bend around them, making the source appear distorted.
@@ -1257,79 +1277,50 @@
 
         <article class="panel content-card">
           <div class="card-title">
-            <div class="symbol">✳</div>
-            <div>
-              <h2>Black Hole Types</h2>
-              <p>Different masses and origins</p>
-            </div>
+            <div class="symbol" aria-hidden="true">✳</div>
+            <div><h2>Black Hole Types</h2><p>Different masses and origins</p></div>
           </div>
-
           <div class="card-body">
             <div class="type-list">
-              <button class="type-button active" data-type="stellar">
-                <span class="type-orb"></span>
-                <span>
-                  <strong>Stellar-mass</strong>
-                  <small>Formed from the collapse of massive stars</small>
-                </span>
-                <span class="arrow">›</span>
+              <button class="type-button active" type="button" data-type="stellar">
+                <span class="type-orb" aria-hidden="true"></span>
+                <span><strong>Stellar-mass</strong><small>Formed from the collapse of massive stars</small></span>
+                <span class="arrow" aria-hidden="true">›</span>
               </button>
-
-              <button class="type-button" data-type="intermediate">
-                <span class="type-orb"></span>
-                <span>
-                  <strong>Intermediate-mass</strong>
-                  <small>A middle mass range; formation remains under study</small>
-                </span>
-                <span class="arrow">›</span>
+              <button class="type-button" type="button" data-type="intermediate">
+                <span class="type-orb" aria-hidden="true"></span>
+                <span><strong>Intermediate-mass</strong><small>A middle mass range; formation remains under study</small></span>
+                <span class="arrow" aria-hidden="true">›</span>
               </button>
-
-              <button class="type-button" data-type="supermassive">
-                <span class="type-orb"></span>
-                <span>
-                  <strong>Supermassive</strong>
-                  <small>Found at the centers of many galaxies</small>
-                </span>
-                <span class="arrow">›</span>
+              <button class="type-button" type="button" data-type="supermassive">
+                <span class="type-orb" aria-hidden="true"></span>
+                <span><strong>Supermassive</strong><small>Found at the centers of many galaxies</small></span>
+                <span class="arrow" aria-hidden="true">›</span>
               </button>
             </div>
             <p class="formula-note" id="typeSummary" aria-live="polite">
-              Stellar-mass black holes can form when the core of a massive star
-              collapses at the end of its life.
+              Stellar-mass black holes can form when the core of a massive star collapses at the end of its life.
             </p>
           </div>
         </article>
 
         <article class="panel content-card" id="discoveries">
           <div class="card-title">
-            <div class="symbol">◇</div>
-            <div>
-              <h2>Facts &amp; Discoveries</h2>
-              <p>Milestones in black hole science</p>
-            </div>
+            <div class="symbol" aria-hidden="true">◇</div>
+            <div><h2>Facts &amp; Discoveries</h2><p>Milestones in black hole science</p></div>
           </div>
-
           <div class="card-body discovery-list">
             <div class="discovery">
-              <div class="discovery-icon">◉</div>
-              <div>
-                <strong>First black hole image</strong>
-                <p>The Event Horizon Telescope collaboration released the image of M87* in 2019.</p>
-              </div>
+              <div class="discovery-icon" aria-hidden="true">◉</div>
+              <div><strong>First black hole image</strong><p>The Event Horizon Telescope collaboration released the image of M87* in 2019.</p></div>
             </div>
             <div class="discovery">
-              <div class="discovery-icon">〰</div>
-              <div>
-                <strong>Gravitational waves</strong>
-                <p>LIGO announced the first direct detection from merging black holes in 2016.</p>
-              </div>
+              <div class="discovery-icon" aria-hidden="true">〰</div>
+              <div><strong>Gravitational waves</strong><p>LIGO announced the first direct detection from merging black holes in 2016.</p></div>
             </div>
             <div class="discovery">
-              <div class="discovery-icon">✦</div>
-              <div>
-                <strong>Our galaxy's center</strong>
-                <p>Sagittarius A* is the supermassive black hole at the center of the Milky Way.</p>
-              </div>
+              <div class="discovery-icon" aria-hidden="true">✦</div>
+              <div><strong>Our galaxy's center</strong><p>Sagittarius A* is the supermassive black hole at the center of the Milky Way.</p></div>
             </div>
           </div>
         </article>
@@ -1340,42 +1331,24 @@
           <div>
             <div class="section-kicker">Know your universe</div>
             <h2>Inside the Black Hole Family</h2>
-            <p>
-              Black holes are classified in part by mass. Their origins and
-              growth histories are active areas of astronomical research.
-            </p>
+            <p>Black holes are classified in part by mass. Their origins and growth histories are active areas of astronomical research.</p>
           </div>
         </div>
-
         <div class="type-details">
           <article class="type-detail">
             <span class="type-label">Category 01</span>
             <h3>Stellar-mass Black Holes</h3>
-            <p>
-              These can form when a sufficiently massive star exhausts its
-              nuclear fuel and its core collapses. Astronomers detect them
-              through their effects on nearby matter, stars and spacetime.
-            </p>
+            <p>These can form when a sufficiently massive star exhausts its nuclear fuel and its core collapses. Astronomers detect them through their effects on nearby matter, stars and spacetime.</p>
           </article>
-
           <article class="type-detail">
             <span class="type-label">Category 02</span>
             <h3>Intermediate-mass Black Holes</h3>
-            <p>
-              These occupy a mass range between typical stellar-mass and
-              supermassive black holes. Their population, formation pathways
-              and evolutionary role remain important research questions.
-            </p>
+            <p>These occupy a mass range between typical stellar-mass and supermassive black holes. Their population, formation pathways and evolutionary role remain important research questions.</p>
           </article>
-
           <article class="type-detail">
             <span class="type-label">Category 03</span>
             <h3>Supermassive Black Holes</h3>
-            <p>
-              These contain millions to billions of solar masses and are
-              found in the centers of many galaxies. Their growth is linked
-              to the evolution of galaxies and energetic active galactic nuclei.
-            </p>
+            <p>These contain millions to billions of solar masses and are found in the centers of many galaxies. Their growth is linked to galaxy evolution and energetic active galactic nuclei.</p>
           </article>
         </div>
       </section>
@@ -1388,41 +1361,22 @@
             <p>Explore some key ideas that help scientists investigate these extreme objects.</p>
           </div>
         </div>
-
         <div class="fact-grid">
           <article class="fact-card">
-            <div class="number">01</div>
-            <h3>The Event Horizon</h3>
-            <p>
-              The event horizon is a boundary beyond which signals cannot
-              escape to distant observers. It is not a solid surface.
-            </p>
+            <div class="number">01</div><h3>The Event Horizon</h3>
+            <p>The event horizon is a boundary beyond which signals cannot escape to distant observers. It is not a solid surface.</p>
           </article>
-
           <article class="fact-card">
-            <div class="number">02</div>
-            <h3>Gravitational Lensing</h3>
-            <p>
-              Gravity curves the path of light. A black hole can distort
-              images of background objects and produce ring-like features.
-            </p>
+            <div class="number">02</div><h3>Gravitational Lensing</h3>
+            <p>Gravity curves the path of light. A black hole can distort images of background objects and produce ring-like features.</p>
           </article>
-
           <article class="fact-card">
-            <div class="number">03</div>
-            <h3>Accretion Disks</h3>
-            <p>
-              Gas and dust can heat up as they orbit and spiral toward a
-              black hole, releasing radiation that telescopes can detect.
-            </p>
+            <div class="number">03</div><h3>Accretion Disks</h3>
+            <p>Gas and dust can heat up as they orbit and spiral toward a black hole, releasing radiation that telescopes can detect.</p>
           </article>
         </div>
-
         <div class="notice">
-          Scientific note: the animated black hole on this page is an educational
-          illustration, not a live telescope feed or a fully relativistic simulation.
-          Actual black hole appearance depends on mass, spin, viewing angle and
-          surrounding material.
+          Scientific note: the animated black hole on this page is an educational illustration, not a live telescope feed or a fully relativistic simulation. Actual black hole appearance depends on mass, spin, viewing angle and surrounding material.
         </div>
       </section>
     </main>
@@ -1431,7 +1385,7 @@
   <footer class="footer">
     <div><strong>◉ COSMOS</strong> &nbsp; | &nbsp; Astronomy Explorer</div>
     <div>Explore the universe, one discovery at a time.</div>
-    <div><a href="index.html">Return to COSMOS Home ↗</a></div>
+    <div><a href="./index.html">Return to COSMOS Home ↗</a></div>
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1443,34 +1397,60 @@
       const $ = (selector, root = document) => root.querySelector(selector);
       const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-      // Mobile navigation
+      /* Header navigation: works on desktop and mobile. */
       const menuToggle = $("#menuToggle");
-      const mainNav = $("#mainNav");
+      const cosmosNav = $("#cosmosNav");
 
-      menuToggle.addEventListener("click", () => {
-        const opened = mainNav.classList.toggle("open");
-        menuToggle.setAttribute("aria-expanded", String(opened));
-      });
+      function closeMenu() {
+        if (!menuToggle || !cosmosNav) return;
+        cosmosNav.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+      }
 
-      $$("#mainNav a").forEach(link => {
-        link.addEventListener("click", () => {
-          mainNav.classList.remove("open");
-          menuToggle.setAttribute("aria-expanded", "false");
+      if (menuToggle && cosmosNav) {
+        menuToggle.addEventListener("click", event => {
+          event.stopPropagation();
+          const opened = cosmosNav.classList.toggle("open");
+          menuToggle.setAttribute("aria-expanded", String(opened));
+          menuToggle.setAttribute(
+            "aria-label",
+            opened ? "Close navigation menu" : "Open navigation menu"
+          );
         });
-      });
 
-      // Toast messages
+        cosmosNav.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", closeMenu);
+        });
+
+        document.addEventListener("click", event => {
+          if (
+            cosmosNav.classList.contains("open") &&
+            !cosmosNav.contains(event.target) &&
+            !menuToggle.contains(event.target)
+          ) {
+            closeMenu();
+          }
+        });
+
+        document.addEventListener("keydown", event => {
+          if (event.key === "Escape") closeMenu();
+        });
+      }
+
+      /* Toast messages */
       let toastTimer;
 
       function showToast(message) {
         const toast = $("#toast");
+        if (!toast) return;
         toast.textContent = message;
         toast.classList.add("show");
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
       }
 
-      // Black hole mass calculations
+      /* Black hole mass calculations */
       const massSlider = $("#massSlider");
       const massOutput = $("#massOutput");
       const radiusMetric = $("#radiusMetric");
@@ -1492,38 +1472,45 @@
       }
 
       function updateMass() {
+        if (!massSlider) return;
+
         const mass = Number(massSlider.value);
         const radius = 2.953 * mass;
         const radiusText = `${formatNumber(radius)} km`;
 
-        massOutput.value = formatNumber(mass);
-        massOutput.textContent = formatNumber(mass);
-        radiusMetric.textContent = radiusText;
-        categoryMetric.textContent = getCategory(mass);
-        massFact.textContent = `${formatNumber(mass)} M☉`;
-        radiusFact.textContent = radiusText;
-        horizonFact.textContent = radiusText;
+        if (massOutput) {
+          massOutput.value = formatNumber(mass);
+          massOutput.textContent = formatNumber(mass);
+        }
+        if (radiusMetric) radiusMetric.textContent = radiusText;
+        if (categoryMetric) categoryMetric.textContent = getCategory(mass);
+        if (massFact) massFact.textContent = `${formatNumber(mass)} M☉`;
+        if (radiusFact) radiusFact.textContent = radiusText;
+        if (horizonFact) horizonFact.textContent = radiusText;
 
         const know = $("#didYouKnowText");
-        if (mass < 30) {
-          know.textContent =
-            "A stellar-mass black hole can have only a few times the Sun's mass, yet its event horizon is measured in kilometres.";
-        } else if (mass < 500) {
-          know.textContent =
-            "For a non-rotating black hole, the Schwarzschild radius grows directly in proportion to its mass.";
-        } else {
-          know.textContent =
-            "Black holes with hundreds or thousands of solar masses would have event horizons far larger than those of ordinary stellar-mass black holes.";
+        if (know) {
+          if (mass < 30) {
+            know.textContent = "A stellar-mass black hole can have only a few times the Sun's mass, yet its event horizon is measured in kilometres.";
+          } else if (mass < 500) {
+            know.textContent = "For a non-rotating black hole, the Schwarzschild radius grows directly in proportion to its mass.";
+          } else if (mass < 100000) {
+            know.textContent = "Intermediate-mass black holes occupy a range between ordinary stellar-mass black holes and supermassive objects.";
+          } else {
+            know.textContent = "Supermassive black holes can contain millions or billions of solar masses and are found in the centres of many galaxies.";
+          }
         }
       }
 
-      massSlider.addEventListener("input", updateMass);
-      updateMass();
+      if (massSlider) {
+        massSlider.addEventListener("input", updateMass);
+        updateMass();
+      }
 
-      // Visualization canvas
+      /* Animated black hole canvas */
       const canvas = $("#spaceCanvas");
-      const ctx = canvas.getContext("2d");
       const stage = $("#blackholeStage");
+      const ctx = canvas ? canvas.getContext("2d") : null;
 
       let width = 0;
       let height = 0;
@@ -1535,8 +1522,6 @@
       let stars = [];
       let dragging = false;
       let lastPointerX = 0;
-      let lastPointerY = 0;
-      let pointerMoved = false;
 
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -1545,6 +1530,8 @@
       }
 
       function resizeCanvas() {
+        if (!canvas || !stage || !ctx) return;
+
         const rect = stage.getBoundingClientRect();
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
@@ -1555,13 +1542,16 @@
         canvas.height = Math.round(height * dpr);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        stars = Array.from({ length: Math.min(180, Math.floor(width * height / 2600)) }, () => ({
-          x: Math.random() * width,
-          y: Math.random() * height,
-          size: randomBetween(.35, 1.6),
-          alpha: randomBetween(.15, .85),
-          phase: randomBetween(0, Math.PI * 2)
-        }));
+        stars = Array.from(
+          { length: Math.min(180, Math.floor(width * height / 2600)) },
+          () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            size: randomBetween(.35, 1.6),
+            alpha: randomBetween(.15, .85),
+            phase: randomBetween(0, Math.PI * 2)
+          })
+        );
 
         drawScene(performance.now());
       }
@@ -1598,24 +1588,22 @@
         ctx.translate(cx, cy);
         ctx.rotate(rotation);
 
-        // Distant luminous clouds
         const cloud = ctx.createRadialGradient(0, 0, r * .6, 0, 0, r * 3.4);
         cloud.addColorStop(0, "rgba(33, 56, 125, 0)");
         cloud.addColorStop(.45, "rgba(48, 48, 140, .11)");
         cloud.addColorStop(.72, "rgba(81, 55, 150, .08)");
         cloud.addColorStop(1, "rgba(5, 10, 25, 0)");
+
         ctx.fillStyle = cloud;
         ctx.beginPath();
         ctx.ellipse(0, 0, r * 3.4, r * 2.2, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Gravitational lensing rings
         if (mode === "lens" || mode === "disk" || mode === "horizon") {
           ellipseGlow(0, 0, r * 1.45, r * .53, "#6aa8ff", 18, .52);
           ellipseGlow(0, 0, r * 1.28, r * .45, "#c3a4ff", 12, .42);
         }
 
-        // Accretion disk, drawn as many glowing orbital strands
         if (mode === "disk" || mode === "lens") {
           const colors = ["#ff4c31", "#ff7c32", "#ffc16b", "#fff1b2", "#9c8dff"];
 
@@ -1639,7 +1627,6 @@
             ctx.restore();
           }
 
-          // Bright central band
           const band = ctx.createLinearGradient(-r * 2.5, 0, r * 2.5, 0);
           band.addColorStop(0, "rgba(255, 95, 30, 0)");
           band.addColorStop(.22, "rgba(255, 111, 42, .48)");
@@ -1653,13 +1640,13 @@
           ctx.ellipse(0, 0, r * 2.65, r * .09, 0, 0, Math.PI * 2);
           ctx.fill();
 
-          // Small sparks around the disk
           if (!reducedMotion) {
             for (let i = 0; i < 28; i++) {
               const angle = t * (i % 2 ? 1 : -1) + i * 2.399;
               const orbit = r * (1.3 + (i % 9) * .14);
               const sx = Math.cos(angle) * orbit;
               const sy = Math.sin(angle) * orbit * .4;
+
               ctx.fillStyle = i % 3 ? "#ffbd6e" : "#a5dfff";
               ctx.globalAlpha = .35 + .65 * Math.abs(Math.sin(t * 4 + i));
               ctx.fillRect(sx, sy, 1.5, 1.5);
@@ -1667,7 +1654,6 @@
           }
         }
 
-        // Black event horizon
         const hole = ctx.createRadialGradient(-r * .2, -r * .2, r * .1, 0, 0, r * 1.12);
         hole.addColorStop(0, "#000");
         hole.addColorStop(.82, "#000");
@@ -1691,11 +1677,11 @@
 
         ctx.restore();
 
-        // Additional background stars mode
         if (mode === "stars") {
           ctx.save();
           ctx.strokeStyle = "rgba(115, 173, 255, .35)";
           ctx.lineWidth = 1;
+
           for (let i = 0; i < 12; i++) {
             const x = (i * 83 + time * .01) % width;
             const y = (i * 47 + 20) % height;
@@ -1706,13 +1692,13 @@
             ctx.lineTo(x, y + 5);
             ctx.stroke();
           }
+
           ctx.restore();
         }
       }
 
       function drawScene(time) {
         if (!ctx || !width || !height) return;
-
         ctx.clearRect(0, 0, width, height);
         drawStars(time);
         drawBlackHole(time);
@@ -1733,7 +1719,7 @@
       }
 
       function startAnimation() {
-        if (!animationFrame) {
+        if (!animationFrame && !reducedMotion) {
           animationFrame = requestAnimationFrame(animate);
         }
       }
@@ -1746,11 +1732,8 @@
       }
 
       document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-          stopAnimation();
-        } else {
-          startAnimation();
-        }
+        if (document.hidden) stopAnimation();
+        else startAnimation();
       });
 
       const modes = {
@@ -1782,69 +1765,62 @@
         });
       });
 
-      $("#zoomIn").addEventListener("click", () => {
+      const zoomIn = $("#zoomIn");
+      const zoomOut = $("#zoomOut");
+      const resetView = $("#resetView");
+
+      if (zoomIn) zoomIn.addEventListener("click", () => {
         zoom = Math.min(1.6, zoom + .12);
         drawScene(performance.now());
       });
 
-      $("#zoomOut").addEventListener("click", () => {
+      if (zoomOut) zoomOut.addEventListener("click", () => {
         zoom = Math.max(.55, zoom - .12);
         drawScene(performance.now());
       });
 
-      $("#resetView").addEventListener("click", () => {
+      if (resetView) resetView.addEventListener("click", () => {
         zoom = 1;
         rotation = 0;
         mode = "disk";
+
         $$("[data-mode]").forEach(button => {
           button.classList.toggle("selected", button.dataset.mode === "disk");
         });
+
         $("#stageModeTitle").textContent = modes.disk.title;
         $("#stageModeDescription").textContent = modes.disk.description;
         drawScene(performance.now());
         showToast("Visualization reset");
       });
 
-      // Pointer drag rotates the illustration
-      canvas.addEventListener("pointerdown", event => {
-        dragging = true;
-        pointerMoved = false;
-        lastPointerX = event.clientX;
-        lastPointerY = event.clientY;
-        canvas.setPointerCapture(event.pointerId);
-      });
+      /* Drag to rotate the view */
+      if (canvas) {
+        canvas.addEventListener("pointerdown", event => {
+          dragging = true;
+          lastPointerX = event.clientX;
+          if (canvas.setPointerCapture) canvas.setPointerCapture(event.pointerId);
+        });
 
-      canvas.addEventListener("pointermove", event => {
-        if (!dragging) return;
+        canvas.addEventListener("pointermove", event => {
+          if (!dragging) return;
+          const dx = event.clientX - lastPointerX;
+          rotation += dx * .004;
+          lastPointerX = event.clientX;
+          drawScene(performance.now());
+        });
 
-        const dx = event.clientX - lastPointerX;
-        const dy = event.clientY - lastPointerY;
-
-        if (Math.abs(dx) + Math.abs(dy) > 0) pointerMoved = true;
-
-        rotation += dx * .004;
-        lastPointerX = event.clientX;
-        lastPointerY = event.clientY;
-
-        drawScene(performance.now());
-      });
-
-      function endDrag() {
-        dragging = false;
+        function endDrag() { dragging = false; }
+        canvas.addEventListener("pointerup", endDrag);
+        canvas.addEventListener("pointercancel", endDrag);
+        canvas.addEventListener("lostpointercapture", endDrag);
       }
 
-      canvas.addEventListener("pointerup", endDrag);
-      canvas.addEventListener("pointercancel", endDrag);
-      canvas.addEventListener("lostpointercapture", endDrag);
-
-      // Gravitational lensing explanation controls
+      /* Gravitational lensing controls */
       const lensDescriptions = {
-        bending:
-          "Massive objects curve spacetime. Light from a distant source can bend around them, making the source appear distorted.",
-        ring:
-          "When a background source, lens and observer are closely aligned, the lensed light can form a ring-like image called an Einstein ring.",
-        images:
-          "Light can travel along different paths around a massive object. This can produce multiple images of the same distant source."
+        bending: "Massive objects curve spacetime. Light from a distant source can bend around them, making the source appear distorted.",
+        ring: "When a background source, lens and observer are closely aligned, the lensed light can form a ring-like image called an Einstein ring.",
+        images: "Light can travel along different paths around a massive object. This can produce multiple images of the same distant source."
       };
 
       $$("#lensControls button").forEach(button => {
@@ -1854,25 +1830,23 @@
         });
       });
 
-      // Black hole type information
+      /* Black hole type information */
       const typeSummaries = {
-        stellar:
-          "Stellar-mass black holes can form when the core of a massive star collapses at the end of its life.",
-        intermediate:
-          "Intermediate-mass black holes lie between stellar-mass and supermassive black holes. Their origins and population are still being investigated.",
-        supermassive:
-          "Supermassive black holes contain millions to billions of solar masses and are found in the centers of many galaxies."
+        stellar: "Stellar-mass black holes can form when the core of a massive star collapses at the end of its life.",
+        intermediate: "Intermediate-mass black holes lie between stellar-mass and supermassive black holes. Their origins and population are still being investigated.",
+        supermassive: "Supermassive black holes contain millions to billions of solar masses and are found in the centers of many galaxies."
       };
 
       $$(".type-button").forEach(button => {
         button.addEventListener("click", () => {
           $$(".type-button").forEach(item => item.classList.toggle("active", item === button));
           $("#typeSummary").textContent = typeSummaries[button.dataset.type];
-          showToast(button.querySelector("strong").textContent + " selected");
+          const heading = button.querySelector("strong");
+          showToast((heading ? heading.textContent : "Black hole type") + " selected");
         });
       });
 
-      // Keep the section navigation highlight in sync
+      /* Sidebar section highlighting */
       const sideLinks = $$(".side-links a");
       const sections = sideLinks
         .map(link => $(link.getAttribute("href")))
@@ -1900,19 +1874,17 @@
         sections.forEach(section => observer.observe(section));
       }
 
-      // Initialize and resize the canvas
-      if ("ResizeObserver" in window) {
-        new ResizeObserver(resizeCanvas).observe(stage);
-      } else {
-        window.addEventListener("resize", resizeCanvas);
-      }
+      /* Canvas initialization */
+      if (stage && canvas && ctx) {
+        if ("ResizeObserver" in window) {
+          new ResizeObserver(resizeCanvas).observe(stage);
+        } else {
+          window.addEventListener("resize", resizeCanvas);
+        }
 
-      resizeCanvas();
-
-      if (!reducedMotion) {
+        resizeCanvas();
         startAnimation();
       }
-
     })();
   </script>
 </body>
