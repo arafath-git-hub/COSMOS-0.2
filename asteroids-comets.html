@@ -2,311 +2,1504 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore asteroids, comets, meteoroids, meteors, meteorites, near-Earth objects, and planetary defense.">
-  <title>Asteroids &amp; Comets | COSMOS</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070b18">
+<meta name="description" content="Explore asteroids, comets, near-Earth objects, meteor showers and planetary defense with COSMOS.">
+<title>Asteroids &amp; Comets | COSMOS</title>
 
-  <style>
-    .research-detail{width:min(1100px,calc(100% - 40px));margin:auto;padding:38px 0 70px;color:#edf4ff}
-    .research-detail a{color:#65e4df}
-    .detail-back{display:inline-block;margin-bottom:26px;text-decoration:none}
-    .detail-hero{padding:clamp(24px,5vw,48px);border:1px solid #263d56;border-radius:16px;background:radial-gradient(ellipse at 85% 15%,rgba(70,145,180,.22),transparent 45%),linear-gradient(135deg,#101b30,#0a1323)}
-    .detail-eyebrow{color:#65e4df;font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-    .detail-hero h1{margin:12px 0;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-1.5px}
-    .detail-hero p,.detail-section p,.detail-section li{color:#aab8ce;font-size:.97rem;line-height:1.85}
-    .detail-hero p{max-width:740px;margin-bottom:0}
-    .detail-section{margin-top:36px}
-    .detail-section h2{margin-bottom:14px;font-size:clamp(1.4rem,3vw,1.9rem)}
-    .detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
-    .detail-card{padding:22px;border:1px solid #263d56;border-radius:12px;background:linear-gradient(145deg,#101b2d,#0b1424)}
-    .detail-card h3{margin-top:0;font-size:1.05rem}
-    .detail-card p{margin-bottom:0;font-size:.88rem}
-    .detail-list{padding-left:22px}
-    .detail-links{display:flex;flex-wrap:wrap;gap:12px}
-    .detail-link{display:inline-block;padding:10px 14px;border:1px solid #2a5263;border-radius:8px;text-decoration:none}
-    .detail-link:hover{border-color:#65e4df;background:#122239}
-    .fact-panel{margin-top:18px;padding:20px;border-left:3px solid #65e4df;border-radius:0 10px 10px 0;background:#0e1b2b}
-    .fact-panel p{margin:0}
-    @media(max-width:760px){.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(max-width:520px){.research-detail{width:calc(100% - 28px);padding-top:25px}.detail-grid{grid-template-columns:1fr}.detail-card{padding:18px}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
-  </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #070b18;
+  --panel: rgba(17, 25, 43, .86);
+  --text: #f3f6ff;
+  --muted: #a4b0c8;
+  --accent: #84e5d1;
+  --cyan: #82dfff;
+  --gold: #ffc78d;
+  --purple: #b4a2ff;
+  --line: rgba(132, 229, 209, .18);
+  --glow: rgba(132, 229, 209, .13);
+  --radius: 20px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 25px;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 75% 10%, rgba(34, 112, 120, .17), transparent 33%),
+    radial-gradient(ellipse at 8% 50%, rgba(74, 70, 145, .13), transparent 32%),
+    var(--bg);
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .43;
+  background-image:
+    radial-gradient(1px 1px at 13% 18%, #fff 99%, transparent),
+    radial-gradient(1px 1px at 75% 28%, #9de9ff 99%, transparent),
+    radial-gradient(2px 2px at 48% 74%, #fff 99%, transparent),
+    radial-gradient(1px 1px at 89% 85%, #a4ffe5 99%, transparent);
+  background-size: 270px 290px, 340px 350px, 310px 330px, 390px 370px;
+  animation: starDrift 90s linear infinite;
+}
+
+a { color: inherit; }
+button, input { font: inherit; }
+::selection { background: rgba(132, 229, 209, .28); }
+
+.progress {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--accent), var(--gold));
+  box-shadow: 0 0 14px var(--accent);
+}
+
+.back-link {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  margin: 23px clamp(15px, 6vw, 85px);
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(13, 20, 37, .8);
+  color: #d8fff5;
+  text-decoration: none;
+  font-size: .87rem;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(12px);
+  transition: .25s;
+}
+
+.back-link:hover {
+  transform: translateX(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 0 24px var(--glow);
+}
+
+.container {
+  width: min(1120px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .17em;
+  font-size: .72rem;
+  font-weight: 700;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 28px;
+  align-items: center;
+  min-height: 590px;
+  padding: 35px 0 85px;
+}
+
+.hero-copy { position: relative; z-index: 1; }
+
+.hero h1 {
+  margin: 20px 0;
+  font: 700 clamp(3rem, 7.3vw, 6.2rem)/.99 "Space Grotesk", sans-serif;
+  letter-spacing: -.075em;
+}
+
+.hero h1 span {
+  display: block;
+  color: transparent;
+  background: linear-gradient(105deg, #f5fff9, #84e5d1 40%, #82dfff 70%, #ffc78d);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.hero-copy > p {
+  max-width: 550px;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 27px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 17px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: .87rem;
+  transition: .25s;
+}
+
+.btn-primary {
+  color: #071b1b;
+  background: linear-gradient(110deg, #a9f4dc, #82dfff);
+  border-color: transparent;
+}
+
+.btn-secondary { background: rgba(255,255,255,.035); }
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 27px var(--glow);
+}
+
+/* CSS-only comet illustration */
+
+.space-stage {
+  position: relative;
+  isolation: isolate;
+  min-height: 390px;
+  display: grid;
+  place-items: center;
+}
+
+.space-stage::before,
+.space-stage::after {
+  content: "";
+  position: absolute;
+  width: 330px;
+  height: 330px;
+  border: 1px solid rgba(132, 229, 209, .17);
+  border-radius: 50%;
+  animation: orbit 38s linear infinite;
+}
+
+.space-stage::after {
+  width: 400px;
+  height: 400px;
+  border-style: dashed;
+  border-color: rgba(130, 223, 255, .12);
+  animation-direction: reverse;
+  animation-duration: 55s;
+}
+
+.asteroid {
+  position: absolute;
+  width: 125px;
+  height: 103px;
+  border-radius: 39% 61% 48% 52% / 51% 35% 65% 49%;
+  background:
+    radial-gradient(circle at 28% 25%, rgba(255,255,255,.21) 0 3%, transparent 4%),
+    radial-gradient(circle at 70% 64%, #202a35 0 5%, transparent 6%),
+    radial-gradient(circle at 39% 65%, #111925 0 8%, transparent 9%),
+    radial-gradient(circle at 64% 25%, #69717a 0 3%, transparent 4%),
+    linear-gradient(145deg, #737c83, #343e4c 48%, #141c2b);
+  box-shadow: inset -14px -15px 22px rgba(0,0,0,.45),
+              inset 7px 5px 12px rgba(255,255,255,.09),
+              0 0 25px rgba(130, 223, 255, .12);
+  transform: rotate(-22deg);
+  animation: asteroidFloat 7s ease-in-out infinite;
+}
+
+.asteroid::before,
+.asteroid::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(10, 16, 26, .58);
+  box-shadow: inset 2px 3px 4px rgba(0,0,0,.5);
+}
+
+.asteroid::before {
+  width: 22px;
+  height: 15px;
+  top: 27px;
+  left: 23px;
+  transform: rotate(22deg);
+}
+
+.asteroid::after {
+  width: 15px;
+  height: 12px;
+  right: 20px;
+  bottom: 22px;
+}
+
+.comet {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 25%;
+  left: 17%;
+  border-radius: 50%;
+  background: #fff9e8;
+  box-shadow: 0 0 13px 5px rgba(255, 235, 181, .8),
+              0 0 35px 15px rgba(130, 223, 255, .25);
+  animation: cometPath 9s ease-in-out infinite;
+}
+
+.comet::before {
+  content: "";
+  position: absolute;
+  width: 155px;
+  height: 34px;
+  top: -5px;
+  right: 9px;
+  border-radius: 50%;
+  transform: rotate(-22deg);
+  transform-origin: right center;
+  background: linear-gradient(90deg, transparent, rgba(130,223,255,.06), rgba(130,223,255,.48), rgba(255,255,255,.3));
+  filter: blur(5px);
+}
+
+.comet::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 13px;
+  top: 6px;
+  right: 12px;
+  border-radius: 50%;
+  transform: rotate(-22deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.55));
+  filter: blur(3px);
+}
+
+.mini-orbit {
+  position: absolute;
+  width: 265px;
+  height: 265px;
+  border: 1px solid rgba(255,199,141,.19);
+  border-radius: 50%;
+  transform: rotate(-25deg) scaleY(.42);
+}
+
+.mini-orbit span {
+  position: absolute;
+  top: 14%;
+  left: 14%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 13px var(--gold);
+}
+
+.stage-label {
+  position: absolute;
+  bottom: 0;
+  color: #b9c9d7;
+  font-size: .7rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+  margin-top: -25px;
+}
+
+.metric {
+  padding: 19px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(17, 25, 43, .86);
+  backdrop-filter: blur(12px);
+}
+
+.metric strong {
+  display: block;
+  color: var(--accent);
+  font: 700 clamp(1.2rem, 2.7vw, 1.9rem) "Space Grotesk", sans-serif;
+  letter-spacing: -.05em;
+}
+
+.metric span { color: var(--muted); font-size: .8rem; }
+
+section { padding: 85px 0 12px; }
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 25px;
+  margin-bottom: 27px;
+}
+
+.section-head h2 {
+  margin: 12px 0 0;
+  font: 600 clamp(2rem, 4vw, 3.1rem)/1.12 "Space Grotesk", sans-serif;
+  letter-spacing: -.055em;
+}
+
+.section-head > p {
+  max-width: 420px;
+  margin: 0;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.grid-3, .topic-grid, .resources {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, rgba(24, 34, 53, .9), rgba(12, 19, 35, .94));
+  padding: 23px;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+
+.panel:hover {
+  transform: translateY(-5px);
+  border-color: rgba(132, 229, 209, .48);
+  box-shadow: 0 16px 40px rgba(0,0,0,.22);
+}
+
+.panel-number {
+  color: var(--cyan);
+  font-size: .73rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+}
+
+.panel h3 {
+  margin: 12px 0 8px;
+  font: 600 1.2rem "Space Grotesk", sans-serif;
+}
+
+.panel p { margin: 0; color: var(--muted); font-size: .88rem; }
+
+.topic-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.search-wrap { flex: 1 1 260px; }
+
+.search-wrap input {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  outline: none;
+  background: rgba(255,255,255,.035);
+  color: var(--text);
+}
+
+.search-wrap input:focus { border-color: var(--accent); }
+.search-wrap input::placeholder { color: #8492aa; }
+
+.filter-btn {
+  cursor: pointer;
+  padding: 9px 13px;
+  color: var(--muted);
+  background: rgba(255,255,255,.025);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: .82rem;
+  transition: .2s;
+}
+
+.filter-btn.active, .filter-btn:hover {
+  color: #dcfff6;
+  border-color: var(--accent);
+  background: rgba(132, 229, 209, .09);
+}
+
+.topic-count { color: var(--muted); font-size: .8rem; }
+
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 190px;
+  padding: 20px;
+}
+
+.topic-card[hidden] { display: none; }
+
+.topic-tag {
+  align-self: flex-start;
+  margin-bottom: 8px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  font-size: .68rem;
+}
+
+.topic-card h3 { margin: 0 0 8px; font-size: 1.08rem; }
+.topic-card p { font-size: .84rem; line-height: 1.65; }
+
+.topic-card .learn {
+  margin-top: auto;
+  padding-top: 14px;
+  color: #b5e9ff;
+  text-decoration: none;
+  font-size: .8rem;
+}
+
+.topic-card .learn:hover { text-decoration: underline; }
+
+.no-results {
+  display: none;
+  padding: 25px;
+  color: var(--muted);
+  text-align: center;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+}
+
+.no-results.show { display: block; }
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.info-list { display: grid; gap: 12px; }
+
+.info-row {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255,255,255,.025);
+}
+
+.info-row strong {
+  display: block;
+  color: var(--cyan);
+  margin-bottom: 4px;
+  font-size: .95rem;
+}
+
+.info-row p { margin: 0; color: var(--muted); font-size: .86rem; }
+
+.callout {
+  margin-top: 17px;
+  padding: 14px 17px;
+  border-left: 2px solid var(--accent);
+  background: rgba(132, 229, 209, .055);
+  color: #c8d9e4;
+  font-size: .86rem;
+}
+
+.timeline {
+  margin: 24px 0 0 9px;
+  padding-left: 27px;
+  border-left: 1px solid rgba(132, 229, 209, .3);
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 26px;
+}
+
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -33px;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 13px var(--accent);
+}
+
+.timeline-item time {
+  color: var(--cyan);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+
+.timeline-item h3 { margin: 5px 0; font-size: 1.05rem; }
+.timeline-item p { margin: 0; color: var(--muted); font-size: .87rem; }
+.timeline-item a { color: #b8eaff; }
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+}
+
+.fact {
+  padding: 19px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: rgba(255,255,255,.025);
+}
+
+.fact strong {
+  display: block;
+  color: var(--accent);
+  margin-bottom: 5px;
+  font-size: .95rem;
+}
+
+.fact p { margin: 0; color: var(--muted); font-size: .86rem; }
+
+.faq-list { display: grid; gap: 10px; }
+
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255,255,255,.022);
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 20px;
+  border: 0;
+  text-align: left;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.faq-question span:last-child {
+  color: var(--accent);
+  font-size: 1.2rem;
+  transition: transform .2s;
+}
+
+.faq-item.open .faq-question span:last-child { transform: rotate(45deg); }
+.faq-answer { display: none; padding: 0 20px 19px; color: var(--muted); font-size: .9rem; }
+.faq-item.open .faq-answer { display: block; }
+
+.resource { display: block; text-decoration: none; }
+.resource small { display: block; color: var(--cyan); margin-bottom: 8px; }
+.resource h3 { margin: 0 0 8px; font-size: 1.04rem; }
+.resource p { font-size: .84rem; }
+.resource .resource-link { display: inline-block; margin-top: 13px; color: #b8eaff; font-size: .8rem; }
+
+footer {
+  width: min(1120px, calc(100% - 40px));
+  margin: 90px auto 0;
+  padding: 25px 0 35px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.back-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 20;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  background: rgba(13, 20, 37, .94);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: .25s;
+}
+
+.back-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes orbit { to { transform: rotate(360deg); } }
+
+@keyframes asteroidFloat {
+  0%, 100% { translate: 0 0; rotate: -4deg; }
+  50% { translate: 0 -10px; rotate: 4deg; }
+}
+
+@keyframes cometPath {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(120px, 95px); }
+}
+
+@keyframes starDrift {
+  from { background-position: 0 0, 0 0, 0 0, 0 0; }
+  to { background-position: 270px 580px, -340px 350px, 310px -330px, 390px 740px; }
+}
+
+@media (max-width: 850px) {
+  .hero { grid-template-columns: 1fr; padding-top: 28px; }
+  .space-stage { min-height: 350px; }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .grid-3, .topic-grid, .resources { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .container { width: calc(100% - 28px); }
+  .back-link { margin: 18px 14px; }
+  .hero { padding: 22px 0 60px; gap: 0; }
+  .hero h1 { font-size: clamp(3rem, 14vw, 4.5rem); }
+  .space-stage { min-height: 290px; }
+  .space-stage::before { width: 260px; height: 260px; }
+  .space-stage::after { width: 300px; height: 300px; }
+  .asteroid { transform: scale(.82) rotate(-22deg); }
+  .section-head { display: block; }
+  .section-head > p { margin-top: 12px; }
+  section { padding-top: 65px; }
+  .grid-3, .topic-grid, .resources, .two-column, .facts-grid { grid-template-columns: 1fr; }
+  .topic-card { min-height: 0; }
+  .filter-btn { font-size: .77rem; padding: 9px 10px; }
+  .panel { padding: 20px; }
+  footer { display: block; }
+  footer p { margin: 8px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
 </head>
 
-<body>
-  
+<body id="top">
+<div class="progress" id="readingProgress" aria-hidden="true"></div>
 
-  <main class="research-detail">
-    <a class="detail-back" href="research.html">← Back to Research</a>
+<a class="back-link" href="./research.html">
+  <span aria-hidden="true">←</span> Back to Research
+</a>
 
-    <section class="detail-hero">
-      <span class="detail-eyebrow">Research Field 08</span>
-      <h1>Asteroids &amp; Comets</h1>
+<main>
+  <header class="hero container">
+    <div class="hero-copy">
+      <span class="eyebrow">COSMOS · Small Solar System Bodies</span>
+      <h1>Asteroids <span>&amp; Comets.</span></h1>
       <p>
-        Explore the small bodies of our Solar System: rocky asteroids,
-        icy comets, meteoroids, and the fragments that sometimes reach
-        Earth's surface. These objects preserve clues about our cosmic past.
+        Discover the ancient remnants of Solar System formation, icy visitors
+        from the outer Solar System, near-Earth objects and the science that
+        helps us understand and monitor these small worlds.
       </p>
-    </section>
-
-    <section class="detail-section">
-      <h2>Small Bodies of the Solar System</h2>
-      <p>
-        Not every object orbiting the Sun is a planet or dwarf planet.
-        Asteroids, comets, and smaller fragments are remnants of the
-        material from which the Solar System formed about 4.6 billion
-        years ago.
-      </p>
-      <p>
-        Studying these objects helps scientists understand planetary
-        formation, the delivery of water and organic compounds, and the
-        impact hazards that can affect planets.
-      </p>
-    </section>
-
-    <section class="detail-section">
-      <h2>Types of Small Solar System Objects</h2>
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Asteroids</h3>
-          <p>
-            Mostly rocky or metallic objects orbiting the Sun. Many are
-            found in the main asteroid belt between Mars and Jupiter.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Comets</h3>
-          <p>
-            Icy bodies that can release gas and dust when warmed by the Sun,
-            creating a glowing coma and sometimes long tails.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Meteoroids</h3>
-          <p>
-            Small pieces of rock or metal moving through space, often
-            produced by asteroid collisions or comet activity.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Meteors</h3>
-          <p>
-            Streaks of light produced when material enters an atmosphere
-            and heats the surrounding gas. They are commonly called
-            shooting stars.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Meteorites</h3>
-          <p>
-            Fragments of natural space objects that survive passage through
-            an atmosphere and reach the ground.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Dwarf Planets</h3>
-          <p>
-            Objects such as Ceres and Pluto that orbit the Sun and are
-            rounded by their own gravity but have not cleared their
-            orbital neighbourhoods.
-          </p>
-        </article>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#topics">Explore Small Worlds <span aria-hidden="true">↘</span></a>
+        <a class="btn btn-secondary" href="#planetary-defense">Planetary Defense</a>
       </div>
+    </div>
 
-      <div class="fact-panel">
+    <div class="space-stage" role="img" aria-label="Stylized asteroid and glowing comet with an animated tail">
+      <div class="mini-orbit"><span></span></div>
+      <div class="asteroid"></div>
+      <div class="comet"></div>
+      <div class="stage-label">Rock · Ice · Dust · Orbit</div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="metrics reveal">
+      <div class="metric">
+        <strong>4.6B</strong>
+        <span>Years since Solar System formation began</span>
+      </div>
+      <div class="metric">
+        <strong>Rocky</strong>
+        <span>Typical composition of asteroids</span>
+      </div>
+      <div class="metric">
+        <strong>Icy</strong>
+        <span>Comets release gas and dust when warmed</span>
+      </div>
+      <div class="metric">
+        <strong>Tracked</strong>
+        <span>Near-Earth objects monitored by astronomers</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="container reveal" id="overview">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">01 / Cosmic Foundations</span>
+        <h2>Ancient pieces of a young Solar System.</h2>
+      </div>
+      <p>
+        Asteroids and comets preserve clues about the material from which
+        planets formed. Their different compositions and orbits help reveal
+        the Solar System's history.
+      </p>
+    </div>
+
+    <div class="grid-3">
+      <article class="panel">
+        <span class="panel-number">01 — ASTEROIDS</span>
+        <h3>Rocky and metallic bodies</h3>
         <p>
-          <strong>Remember:</strong> A meteoroid is the object in space,
-          a meteor is the light phenomenon in an atmosphere, and a meteorite
-          is material that reaches the ground.
+          Asteroids are small Solar System bodies that are commonly rocky or
+          metallic. Many orbit the Sun in the main asteroid belt between Mars
+          and Jupiter.
         </p>
+      </article>
+
+      <article class="panel">
+        <span class="panel-number">02 — COMETS</span>
+        <h3>Icy travellers</h3>
+        <p>
+          Comets contain ice, dust and rocky material. Near the Sun, heating
+          can release gas and dust to form a coma and sometimes spectacular tails.
+        </p>
+      </article>
+
+      <article class="panel">
+        <span class="panel-number">03 — METEOROIDS</span>
+        <h3>Small fragments</h3>
+        <p>
+          Small pieces of rock or metal moving through space are called
+          meteoroids. When one produces a bright streak in an atmosphere, the
+          visible event is a meteor.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="container reveal" id="topics">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">02 / Research Library</span>
+        <h2>Explore small Solar System bodies.</h2>
       </div>
-    </section>
+      <p>
+        Search key topics about asteroids, comets, meteor phenomena, sample
+        return missions and how scientists investigate potential impact hazards.
+      </p>
+    </div>
 
-    <section class="detail-section">
-      <h2>Where Are Asteroids Found?</h2>
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Main Asteroid Belt</h3>
-          <p>
-            A region between Mars and Jupiter containing many rocky bodies
-            orbiting the Sun.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Near-Earth Asteroids</h3>
-          <p>
-            Asteroids whose orbits bring them relatively close to Earth's
-            orbital region. Their paths are monitored by astronomers.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Trojan Asteroids</h3>
-          <p>
-            Asteroids that share a planet's orbit while gathering around
-            stable gravitational regions ahead of or behind the planet.
-          </p>
-        </article>
+    <div class="topic-tools">
+      <div class="search-wrap">
+        <input id="topicSearch" type="search" placeholder="Search asteroids, comets, missions..." aria-label="Search small Solar System body topics">
       </div>
-    </section>
+      <button class="filter-btn active" type="button" data-filter="all">All Topics</button>
+      <button class="filter-btn" type="button" data-filter="asteroids">Asteroids</button>
+      <button class="filter-btn" type="button" data-filter="comets">Comets</button>
+      <button class="filter-btn" type="button" data-filter="meteors">Meteors</button>
+      <button class="filter-btn" type="button" data-filter="missions">Missions</button>
+    </div>
 
-    <section class="detail-section">
-      <h2>Why Do Comets Have Tails?</h2>
-      <p>
-        Many comets contain frozen water and other volatile substances mixed
-        with dust and rocky material. As a comet approaches the Sun, its
-        surface warms and releases gas and dust, forming a cloud called a coma.
-      </p>
-      <p>
-        Sunlight and the solar wind help produce two common tail components:
-        a dust tail and an ion tail. Both generally point away from the Sun,
-        though their shapes and directions can differ.
-      </p>
-    </section>
+    <p class="topic-count" id="topicCount" aria-live="polite">18 topics found</p>
 
-    <section class="detail-section">
-      <h2>Famous Objects</h2>
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Halley's Comet</h3>
-          <p>
-            A famous periodic comet that returns to the inner Solar System
-            roughly every 76 years.
-          </p>
-        </article>
+    <div class="topic-grid" id="topicGrid">
+      <article class="panel topic-card" data-category="asteroids">
+        <span class="topic-tag">Asteroid Regions</span>
+        <h3>Main Asteroid Belt</h3>
+        <p>A broad region between Mars and Jupiter containing many rocky bodies left over from Solar System formation.</p>
+        <a class="learn" href="https://science.nasa.gov/solar-system/asteroids/" target="_blank" rel="noopener noreferrer">Explore NASA science ↗</a>
+      </article>
 
-        <article class="detail-card">
-          <h3>Asteroid Bennu</h3>
-          <p>
-            A near-Earth asteroid sampled by NASA's OSIRIS-REx mission.
-            Its returned samples help scientists investigate early
-            Solar System chemistry.
-          </p>
-        </article>
+      <article class="panel topic-card" data-category="asteroids">
+        <span class="topic-tag">Asteroid Types</span>
+        <h3>Carbon-Rich Asteroids</h3>
+        <p>Dark asteroids rich in carbon-bearing compounds that can preserve clues about early Solar System chemistry.</p>
+        <a class="learn" href="https://science.nasa.gov/solar-system/asteroids/" target="_blank" rel="noopener noreferrer">Study asteroids ↗</a>
+      </article>
 
-        <article class="detail-card">
-          <h3>Comet 67P</h3>
-          <p>
-            The comet studied in detail by ESA's Rosetta mission, which
-            included the Philae lander.
-          </p>
-        </article>
+      <article class="panel topic-card" data-category="asteroids">
+        <span class="topic-tag">Asteroid Types</span>
+        <h3>Metal-Rich Asteroids</h3>
+        <p>Some asteroids contain substantial metal, offering clues about the materials and processes that shaped early planetary bodies.</p>
+        <a class="learn" href="https://science.nasa.gov/solar-system/asteroids/" target="_blank" rel="noopener noreferrer">Explore asteroid science ↗</a>
+      </article>
 
-        <article class="detail-card">
-          <h3>Ceres</h3>
-          <p>
-            The largest object in the main asteroid belt and a dwarf
-            planet studied by NASA's Dawn spacecraft.
-          </p>
-        </article>
+      <article class="panel topic-card" data-category="asteroids">
+        <span class="topic-tag">Near-Earth Space</span>
+        <h3>Near-Earth Asteroids</h3>
+        <p>Asteroids whose orbits bring them relatively close to Earth's orbital neighbourhood and therefore receive special monitoring.</p>
+        <a class="learn" href="https://cneos.jpl.nasa.gov/" target="_blank" rel="noopener noreferrer">Explore CNEOS ↗</a>
+      </article>
 
-        <article class="detail-card">
-          <h3>Chicxulub Impactor</h3>
-          <p>
-            The impactor associated with the mass extinction about
-            66 million years ago that ended the age of non-avian dinosaurs.
-          </p>
-        </article>
+      <article class="panel topic-card" data-category="asteroids">
+        <span class="topic-tag">Orbital Dynamics</span>
+        <h3>Trojan Asteroids</h3>
+        <p>Asteroids that share a planet's orbit, often gathering around stable gravitational regions called Lagrange points.</p>
+        <a class="learn" href="https://science.nasa.gov/solar-system/asteroids/" target="_blank" rel="noopener noreferrer">Explore orbital science ↗</a>
+      </article>
 
-        <article class="detail-card">
-          <h3>Interstellar Visitors</h3>
-          <p>
-            Objects such as 1I/'Oumuamua and 2I/Borisov passed through
-            our Solar System after arriving from interstellar space.
-          </p>
-        </article>
+      <article class="panel topic-card" data-category="asteroids missions">
+        <span class="topic-tag">Small Worlds</span>
+        <h3>Asteroid Families</h3>
+        <p>Groups of asteroids with related orbital properties that often formed when larger parent bodies fragmented.</p>
+        <a class="learn" href="https://science.nasa.gov/solar-system/asteroids/" target="_blank" rel="noopener noreferrer">Learn more ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="comets">
+        <span class="topic-tag">Comet Structure</span>
+        <h3>Nucleus and Coma</h3>
+        <p>A comet's nucleus is its solid central body. Solar heating can release gas and dust, creating a surrounding coma.</p>
+        <a class="learn" href="https://science.nasa.gov/solar-system/comets/" target="_blank" rel="noopener noreferrer">Explore comets ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="comets">
+        <span class="topic-tag">Comet Structure</span>
+        <h3>Comet Tails</h3>
+        <p>Dust and ion tails form through different processes. They generally point away from the Sun under the influence of sunlight and the solar wind.</p>
+        <a class="learn" href="https://science.nasa.gov/solar-system/comets/" target="_blank" rel="noopener noreferrer">Study comet tails ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="comets">
+        <span class="topic-tag">Orbital Periods</span>
+        <h3>Short-Period Comets</h3>
+        <p>Comets that return to the inner Solar System on relatively short orbital timescales, often linked to the Kuiper Belt region.</p>
+        <a class="learn" href="https://science.nasa.gov/solar-system/comets/" target="_blank" rel="noopener noreferrer">Explore comet orbits ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="comets">
+        <span class="topic-tag">Distant Reservoirs</span>
+        <h3>Long-Period Comets</h3>
+        <p>Comets with very long orbital periods that may originate from the distant Oort Cloud reservoir.</p>
+        <a class="learn" href="https://science.nasa.gov/solar-system/comets/" target="_blank" rel="noopener noreferrer">Explore distant comets ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="comets missions">
+        <span class="topic-tag">Famous Comet</span>
+        <h3>Halley's Comet</h3>
+        <p>A famous periodic comet visible from Earth that returns to the inner Solar System approximately every 76 years.</p>
+        <a class="learn" href="https://science.nasa.gov/solar-system/comets/" target="_blank" rel="noopener noreferrer">Explore comet science ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="meteors">
+        <span class="topic-tag">Atmospheric Events</span>
+        <h3>Meteors and Fireballs</h3>
+        <p>A meteor is the visible light produced when material enters an atmosphere. Exceptionally bright meteors are often called fireballs.</p>
+        <a class="learn" href="https://science.nasa.gov/solar-system/meteors-meteorites/" target="_blank" rel="noopener noreferrer">Explore meteors ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="meteors">
+        <span class="topic-tag">Meteor Showers</span>
+        <h3>Annual Meteor Showers</h3>
+        <p>Earth crosses streams of debris left by comets and some asteroids, producing predictable meteor showers.</p>
+        <a class="learn" href="https://science.nasa.gov/solar-system/meteors-meteorites/" target="_blank" rel="noopener noreferrer">Learn about meteors ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="meteors">
+        <span class="topic-tag">Impact Evidence</span>
+        <h3>Meteorites</h3>
+        <p>Fragments that survive passage through an atmosphere and reach the ground can preserve evidence of early Solar System materials.</p>
+        <a class="learn" href="https://science.nasa.gov/solar-system/meteors-meteorites/" target="_blank" rel="noopener noreferrer">Explore meteorites ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="missions asteroids">
+        <span class="topic-tag">NASA Mission</span>
+        <h3>OSIRIS-REx</h3>
+        <p>NASA's mission returned samples from asteroid Bennu to Earth for detailed laboratory study.</p>
+        <a class="learn" href="https://science.nasa.gov/mission/osiris-rex/" target="_blank" rel="noopener noreferrer">Explore mission ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="missions asteroids">
+        <span class="topic-tag">NASA Mission</span>
+        <h3>DART</h3>
+        <p>NASA's Double Asteroid Redirection Test demonstrated that a spacecraft impact can change a small asteroid moon's orbit.</p>
+        <a class="learn" href="https://science.nasa.gov/planetary-defense-dart/" target="_blank" rel="noopener noreferrer">Explore DART ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="missions comets">
+        <span class="topic-tag">ESA Mission</span>
+        <h3>Rosetta and Comet 67P</h3>
+        <p>ESA's Rosetta mission studied comet 67P/Churyumov–Gerasimenko up close and deployed the Philae lander.</p>
+        <a class="learn" href="https://www.esa.int/Science_Exploration/Space_Science/Rosetta" target="_blank" rel="noopener noreferrer">Explore Rosetta ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="missions asteroids">
+        <span class="topic-tag">Planetary Defense</span>
+        <h3>Impact-Risk Monitoring</h3>
+        <p>Scientists measure and refine asteroid orbits to identify possible future close approaches and assess impact probabilities.</p>
+        <a class="learn" href="https://cneos.jpl.nasa.gov/" target="_blank" rel="noopener noreferrer">Explore CNEOS ↗</a>
+      </article>
+    </div>
+
+    <div class="no-results" id="noResults">No matching topics found. Try another search or filter.</div>
+  </section>
+
+  <section class="container reveal" id="differences">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">03 / Compare the Objects</span>
+        <h2>Asteroids vs. comets.</h2>
       </div>
-    </section>
-
-    <section class="detail-section">
-      <h2>Planetary Defense</h2>
       <p>
-        Planetary defense is the work of finding, tracking, and characterising
-        asteroids and comets that could pose an impact risk to Earth.
-        Scientists calculate their orbits, improve observations, and study
-        possible ways to reduce future hazards.
+        The distinction is useful, but real small Solar System bodies can be
+        diverse and do not always fit a simple category.
       </p>
-      <ul class="detail-list">
-        <li><strong>Detection:</strong> Search the sky for previously unknown objects.</li>
-        <li><strong>Orbit tracking:</strong> Measure positions over time to refine orbital predictions.</li>
-        <li><strong>Risk assessment:</strong> Estimate the probability and potential consequences of an impact.</li>
-        <li><strong>Deflection research:</strong> Investigate whether a spacecraft could change an object's trajectory.</li>
-      </ul>
-      <p>
-        NASA's DART mission demonstrated that a spacecraft impact can change
-        the orbit of a small asteroid moon. This was a technology test,
-        not a response to an imminent threat to Earth.
-      </p>
-    </section>
+    </div>
 
-    <section class="detail-section">
-      <h2>How Do Scientists Study These Objects?</h2>
-      <ul class="detail-list">
-        <li><strong>Ground-based telescopes:</strong> Track motion, brightness, and colour.</li>
-        <li><strong>Radar observations:</strong> Help measure distances, rotation, shapes, and orbits for suitable nearby objects.</li>
-        <li><strong>Spectroscopy:</strong> Provides clues about surface composition.</li>
-        <li><strong>Spacecraft flybys and orbiters:</strong> Capture close-up observations.</li>
-        <li><strong>Sample-return missions:</strong> Bring material to Earth for detailed laboratory analysis.</li>
-      </ul>
-    </section>
+    <div class="two-column">
+      <article class="panel">
+        <span class="panel-number">ROCKY OR METALLIC</span>
+        <h3>Asteroids</h3>
+        <div class="info-list">
+          <div class="info-row">
+            <strong>Composition</strong>
+            <p>Often rock, metal or carbon-rich material; compositions vary widely.</p>
+          </div>
+          <div class="info-row">
+            <strong>Where found</strong>
+            <p>Many occupy the main asteroid belt, while others have near-Earth or other orbital paths.</p>
+          </div>
+          <div class="info-row">
+            <strong>Activity</strong>
+            <p>Most do not form large comas and tails, although some active asteroids release dust.</p>
+          </div>
+        </div>
+      </article>
 
-    <section class="detail-section">
-      <h2>Questions Scientists Are Investigating</h2>
-      <ul class="detail-list">
-        <li>How did asteroids and comets contribute to the early Solar System?</li>
-        <li>What can their minerals and organic compounds tell us about Earth's history?</li>
-        <li>How many potentially hazardous objects remain undiscovered?</li>
-        <li>Can future missions reliably deflect a dangerous asteroid if needed?</li>
-        <li>What can interstellar objects reveal about other planetary systems?</li>
-      </ul>
-    </section>
+      <article class="panel">
+        <span class="panel-number">ICE, DUST AND ROCK</span>
+        <h3>Comets</h3>
+        <div class="info-list">
+          <div class="info-row">
+            <strong>Composition</strong>
+            <p>Mixtures of ice, dust and rocky material, with properties that vary from comet to comet.</p>
+          </div>
+          <div class="info-row">
+            <strong>Where found</strong>
+            <p>Many originate in distant reservoirs such as the Kuiper Belt or Oort Cloud.</p>
+          </div>
+          <div class="info-row">
+            <strong>Activity</strong>
+            <p>Solar heating can release gas and dust, producing a coma and one or more tails.</p>
+          </div>
+        </div>
+      </article>
+    </div>
 
-    <section class="detail-section">
-      <h2>Explore Related Research</h2>
-      <div class="detail-links">
-        <a class="detail-link" href="planetary-science.html">Planetary Science</a>
-        <a class="detail-link" href="space-technology.html">Space Technology</a>
-        <a class="detail-link" href="solar-physics.html">Solar Physics</a>
+    <div class="callout">
+      These are broad patterns, not absolute rules. Some asteroids show comet-like
+      activity, and some objects have properties that blur the traditional distinction.
+    </div>
+  </section>
+
+  <section class="container reveal" id="planetary-defense">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">04 / Planetary Defense</span>
+        <h2>Finding and tracking near-Earth objects.</h2>
       </div>
-    </section>
-
-    <section class="detail-section">
-      <h2>Official Resources</h2>
       <p>
-        <a href="https://science.nasa.gov/solar-system/asteroids/"
-           target="_blank" rel="noopener noreferrer">
-          NASA — Asteroids ↗
-        </a>
+        Planetary defense combines observation, orbital calculations and
+        international scientific coordination.
       </p>
+    </div>
+
+    <div class="grid-3">
+      <article class="panel">
+        <span class="panel-number">STEP 01</span>
+        <h3>Detect</h3>
+        <p>
+          Telescopes repeatedly image the sky to identify moving objects
+          against the background of distant stars.
+        </p>
+      </article>
+
+      <article class="panel">
+        <span class="panel-number">STEP 02</span>
+        <h3>Calculate</h3>
+        <p>
+          Scientists use observations to estimate an object's orbit, size
+          and possible future approaches. Additional observations improve
+          uncertain measurements.
+        </p>
+      </article>
+
+      <article class="panel">
+        <span class="panel-number">STEP 03</span>
+        <h3>Assess and Prepare</h3>
+        <p>
+          Researchers evaluate potential impact scenarios. Missions such as
+          DART have tested one possible technique for changing an object's orbit.
+        </p>
+      </article>
+    </div>
+
+    <div class="callout">
+      A close approach does not automatically mean an impact threat. Risk
+      assessment depends on the object's measured orbit, uncertainty and
+      future trajectory. Consult current official monitoring data for live assessments.
+    </div>
+  </section>
+
+  <section class="container reveal" id="missions">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">05 / Exploration Milestones</span>
+        <h2>Spacecraft meet small worlds.</h2>
+      </div>
       <p>
-        <a href="https://science.nasa.gov/solar-system/comets/"
-           target="_blank" rel="noopener noreferrer">
-          NASA — Comets ↗
-        </a>
+        Robotic missions have transformed asteroids and comets from distant
+        points of light into worlds that can be mapped and studied directly.
       </p>
+    </div>
+
+    <div class="timeline">
+      <article class="timeline-item">
+        <time>1986</time>
+        <h3>Halley's Comet Encounters</h3>
+        <p>
+          Several spacecraft from different space agencies studied Halley's
+          Comet during its return to the inner Solar System.
+        </p>
+      </article>
+
+      <article class="timeline-item">
+        <time>2001</time>
+        <h3>NEAR Shoemaker at Eros</h3>
+        <p>
+          NASA's NEAR Shoemaker spacecraft completed a historic landing on
+          asteroid Eros after orbiting and studying it.
+        </p>
+      </article>
+
+      <article class="timeline-item">
+        <time>2014</time>
+        <h3>Rosetta at Comet 67P</h3>
+        <p>
+          ESA's Rosetta reached comet 67P and studied its nucleus and activity
+          during its journey around the Sun.
+        </p>
+      </article>
+
+      <article class="timeline-item">
+        <time>2018–2020</time>
+        <h3>Hayabusa2 and Ryugu</h3>
+        <p>
+          JAXA's Hayabusa2 explored asteroid Ryugu and returned samples to Earth.
+        </p>
+      </article>
+
+      <article class="timeline-item">
+        <time>2021–2023</time>
+        <h3>DART and OSIRIS-REx</h3>
+        <p>
+          DART tested asteroid deflection in 2022. OSIRIS-REx returned its
+          Bennu sample capsule to Earth in 2023.
+        </p>
+      </article>
+
+      <article class="timeline-item">
+        <time>Ongoing</time>
+        <h3>Monitoring and Future Exploration</h3>
+        <p>
+          Ground-based surveys and spacecraft continue to study small bodies,
+          improve orbit predictions and investigate the origins of the Solar System.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="container reveal" id="facts">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">06 / Evidence Check</span>
+        <h2>Facts worth knowing.</h2>
+      </div>
       <p>
-        <a href="https://science.nasa.gov/planetary-defense/"
-           target="_blank" rel="noopener noreferrer">
-          NASA — Planetary Defense ↗
-        </a>
+        Small bodies help researchers understand planetary formation and
+        assess natural impact hazards.
       </p>
-    </section>
+    </div>
 
-    <a class="detail-back" href="research.html">← Back to All Research Fields</a>
-  </main>
+    <div class="facts-grid">
+      <article class="fact">
+        <strong>Comet tails do not simply trail behind the comet.</strong>
+        <p>Dust and ion tails are influenced by sunlight and the solar wind, so they generally point away from the Sun.</p>
+      </article>
 
-  <footer>
-    <p>© COSMOS — Exploring the Universe</p>
-  </footer>
+      <article class="fact">
+        <strong>The asteroid belt is mostly empty space.</strong>
+        <p>Although it contains many objects, the distances between individual asteroids are generally enormous.</p>
+      </article>
 
-  <script src="app.js" defer></script>
+      <article class="fact">
+        <strong>Meteors and meteorites are different.</strong>
+        <p>A meteor is the visible atmospheric event. A meteorite is material that survives and reaches the ground.</p>
+      </article>
+
+      <article class="fact">
+        <strong>Not every near-Earth asteroid is hazardous.</strong>
+        <p>Near-Earth describes an orbital relationship; a potential impact requires a separate assessment of the object's trajectory.</p>
+      </article>
+
+      <article class="fact">
+        <strong>Asteroids preserve ancient material.</strong>
+        <p>Some asteroid samples contain primitive material that helps scientists investigate the early Solar System.</p>
+      </article>
+
+      <article class="fact">
+        <strong>Spacecraft can change an asteroid's motion.</strong>
+        <p>NASA's DART mission demonstrated a measurable orbital change after a spacecraft deliberately impacted Dimorphos.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="container reveal" id="faq">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">07 / Knowledge Check</span>
+        <h2>Questions about asteroids and comets.</h2>
+      </div>
+      <p>Understand the difference between small bodies, atmospheric phenomena and impact risks.</p>
+    </div>
+
+    <div class="faq-list">
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What is an asteroid?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          An asteroid is a small Solar System body that orbits the Sun. Many are
+          rocky or metallic, and many occupy the main asteroid belt between Mars and Jupiter.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What is a comet made of?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Comets contain mixtures of ice, dust and rocky material. When a comet
+          approaches the Sun, released gas and dust can form a coma and tails.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Why do comets have tails?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Solar heating releases gas and dust from a comet's surface. Sunlight
+          pressure and the solar wind help shape the tails, which generally point away from the Sun.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Are asteroids and comets the same thing?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          They are different categories of small Solar System bodies, often
+          distinguished by composition and activity. However, some objects
+          display properties that blur the distinction.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What is a near-Earth object?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          A near-Earth object, or NEO, is an asteroid or comet whose orbit brings
+          it into Earth's orbital neighbourhood. NEO status alone does not mean
+          that the object will hit Earth.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What is the difference between a meteor and a meteorite?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          A meteor is the light phenomenon produced when a meteoroid enters an
+          atmosphere. A meteorite is a surviving fragment that reaches the ground.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Can scientists prevent an asteroid impact?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          DART demonstrated that a kinetic impactor can change a small body's
+          orbit. Any real response would depend on advance warning, object
+          characteristics, orbit uncertainty and international planning.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What did OSIRIS-REx discover?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          OSIRIS-REx returned samples from asteroid Bennu in 2023. Laboratory
+          analysis of those samples allows researchers to investigate the
+          asteroid's composition and early Solar System history.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Where do long-period comets come from?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Many long-period comets are thought to originate in the distant Oort
+          Cloud, a vast hypothesised reservoir of icy bodies surrounding the Solar System.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>How do astronomers discover asteroids?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Surveys take repeated images of the sky and search for moving points
+          of light. Follow-up observations help determine an object's orbit and physical properties.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Why are asteroids important to science?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Asteroids preserve clues about planetary formation and early Solar
+          System chemistry. Studying their orbits and composition also helps
+          scientists assess impact hazards.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Where can I check current asteroid information?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          NASA's Center for Near-Earth Object Studies provides orbit and close
+          approach information. Use official scientific monitoring sources for
+          current data rather than relying on unsourced social media claims.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="container reveal" id="resources">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">08 / Further Reading</span>
+        <h2>Continue your research.</h2>
+      </div>
+      <p>
+        Explore official science pages, mission archives and planetary-defense
+        resources from established space agencies.
+      </p>
+    </div>
+
+    <div class="resources">
+      <a class="panel resource" href="https://science.nasa.gov/solar-system/asteroids/" target="_blank" rel="noopener noreferrer">
+        <small>NASA SCIENCE</small>
+        <h3>Asteroids</h3>
+        <p>Learn about asteroid types, regions and exploration.</p>
+        <span class="resource-link">Explore asteroids ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://science.nasa.gov/solar-system/comets/" target="_blank" rel="noopener noreferrer">
+        <small>NASA SCIENCE</small>
+        <h3>Comets</h3>
+        <p>Discover comet structure, activity and orbital behaviour.</p>
+        <span class="resource-link">Explore comets ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://cneos.jpl.nasa.gov/" target="_blank" rel="noopener noreferrer">
+        <small>NASA / JPL</small>
+        <h3>Center for Near-Earth Object Studies</h3>
+        <p>Explore asteroid orbits, close approaches and impact-risk analysis.</p>
+        <span class="resource-link">Visit CNEOS ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://science.nasa.gov/planetary-defense-dart/" target="_blank" rel="noopener noreferrer">
+        <small>NASA MISSION</small>
+        <h3>DART</h3>
+        <p>Learn about the kinetic impact test of asteroid deflection.</p>
+        <span class="resource-link">Explore DART ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://science.nasa.gov/mission/osiris-rex/" target="_blank" rel="noopener noreferrer">
+        <small>NASA MISSION</small>
+        <h3>OSIRIS-REx</h3>
+        <p>Explore the Bennu sample-return mission and its discoveries.</p>
+        <span class="resource-link">Explore OSIRIS-REx ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://www.esa.int/Science_Exploration/Space_Science/Rosetta" target="_blank" rel="noopener noreferrer">
+        <small>EUROPEAN SPACE AGENCY</small>
+        <h3>Rosetta</h3>
+        <p>Explore ESA's mission to comet 67P/Churyumov–Gerasimenko.</p>
+        <span class="resource-link">Explore Rosetta ↗</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>COSMOS · Asteroids &amp; Comets</p>
+  <p>Educational resource · Explore, question, investigate.</p>
+</footer>
+
+<a class="back-top" href="#top" id="backTop" aria-label="Back to top">↑</a>
+
+<script>
+(() => {
+  "use strict";
+
+  const progress = document.getElementById("readingProgress");
+  const backTop = document.getElementById("backTop");
+  const search = document.getElementById("topicSearch");
+  const cards = [...document.querySelectorAll(".topic-card")];
+  const filterButtons = [...document.querySelectorAll(".filter-btn")];
+  const topicCount = document.getElementById("topicCount");
+  const noResults = document.getElementById("noResults");
+
+  let activeFilter = "all";
+
+  function updateScrollUI() {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const percentage = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+
+    progress.style.width = `${Math.min(100, percentage)}%`;
+    backTop.classList.toggle("visible", window.scrollY > 500);
+  }
+
+  window.addEventListener("scroll", updateScrollUI, { passive: true });
+  window.addEventListener("resize", updateScrollUI);
+  updateScrollUI();
+
+  function filterTopics() {
+    const query = search.value.trim().toLowerCase();
+    let visible = 0;
+
+    cards.forEach(card => {
+      const categories = card.dataset.category.split(/\s+/);
+      const categoryMatches = activeFilter === "all" ||
+        categories.includes(activeFilter);
+      const queryMatches = card.textContent.toLowerCase().includes(query);
+      const show = categoryMatches && queryMatches;
+
+      card.hidden = !show;
+      if (show) visible++;
+    });
+
+    topicCount.textContent =
+      `${visible} ${visible === 1 ? "topic" : "topics"} found`;
+
+    noResults.classList.toggle("show", visible === 0);
+  }
+
+  search.addEventListener("input", filterTopics);
+
+  filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      activeFilter = button.dataset.filter;
+
+      filterButtons.forEach(item => {
+        const selected = item === button;
+        item.classList.toggle("active", selected);
+        item.setAttribute("aria-pressed", String(selected));
+      });
+
+      filterTopics();
+    });
+
+    button.setAttribute(
+      "aria-pressed",
+      String(button.classList.contains("active"))
+    );
+  });
+
+  document.querySelectorAll(".faq-question").forEach(button => {
+    button.addEventListener("click", () => {
+      const item = button.closest(".faq-item");
+      const willOpen = !item.classList.contains("open");
+
+      item.classList.toggle("open", willOpen);
+      button.setAttribute("aria-expanded", String(willOpen));
+    });
+  });
+
+  const revealElements = document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    revealElements.forEach(element => observer.observe(element));
+  } else {
+    revealElements.forEach(element => element.classList.add("visible"));
+  }
+})();
+</script>
 </body>
 </html>
