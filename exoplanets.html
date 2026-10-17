@@ -4,244 +4,1734 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore exoplanets, planets beyond our Solar System, and the methods astronomers use to discover distant worlds.">
-  <title>Exoplanets | COSMOS</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#070816">
+
+  <title>Exoplanets | COSMOS Research</title>
+  <meta name="description" content="Explore exoplanets, alien worlds, planetary atmospheres, detection methods, habitable zones, NASA missions and the scientific search for life beyond Earth.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    .research-detail{width:min(1100px,calc(100% - 40px));margin:auto;padding:38px 0 70px;color:#edf4ff}
-    .research-detail a{color:#65e4df}
-    .detail-back{display:inline-block;margin-bottom:26px;text-decoration:none}
-    .detail-hero{padding:clamp(24px,5vw,48px);border:1px solid #263d56;border-radius:16px;background:radial-gradient(ellipse at 90% 10%,rgba(80,90,210,.2),transparent 45%),linear-gradient(135deg,#101b30,#0a1323)}
-    .detail-eyebrow{color:#65e4df;font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-    .detail-hero h1{margin:12px 0;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-1.5px}
-    .detail-hero p,.detail-section p,.detail-section li{color:#aab8ce;font-size:.97rem;line-height:1.85}
-    .detail-hero p{max-width:740px;margin-bottom:0}
-    .detail-section{margin-top:36px}
-    .detail-section h2{margin-bottom:14px;font-size:clamp(1.4rem,3vw,1.9rem)}
-    .detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
-    .detail-card{padding:22px;border:1px solid #263d56;border-radius:12px;background:linear-gradient(145deg,#101b2d,#0b1424)}
-    .detail-card h3{margin-top:0;font-size:1.05rem}
-    .detail-card p{margin-bottom:0;font-size:.88rem}
-    .detail-list{padding-left:22px}
-    .detail-links{display:flex;flex-wrap:wrap;gap:12px}
-    .detail-link{display:inline-block;padding:10px 14px;border:1px solid #2a5263;border-radius:8px;text-decoration:none}
-    .detail-link:hover{border-color:#65e4df;background:#122239}
-    @media(max-width:760px){.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(max-width:520px){.research-detail{width:calc(100% - 28px);padding-top:25px}.detail-grid{grid-template-columns:1fr}.detail-card{padding:18px}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+    :root {
+      --bg: #070816;
+      --bg-soft: #0c1025;
+      --panel: rgba(17, 23, 49, .76);
+      --panel-strong: #10162c;
+      --text: #f3f5ff;
+      --muted: #a0aacb;
+      --cyan: #65edff;
+      --blue: #658bff;
+      --violet: #b18aff;
+      --pink: #ff8cd7;
+      --line: rgba(145, 166, 255, .17);
+      --glow: 0 0 36px rgba(101, 139, 255, .12);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 10% 8%, rgba(65, 64, 160, .19), transparent 32%),
+        radial-gradient(ellipse at 95% 30%, rgba(24, 122, 174, .12), transparent 30%),
+        radial-gradient(ellipse at 50% 80%, rgba(107, 47, 150, .10), transparent 36%),
+        var(--bg);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .25;
+      background-image:
+        radial-gradient(1px 1px at 8% 12%, white 99%, transparent),
+        radial-gradient(1px 1px at 23% 61%, #a8dfff 99%, transparent),
+        radial-gradient(2px 2px at 74% 19%, white 99%, transparent),
+        radial-gradient(1px 1px at 88% 73%, #c4a8ff 99%, transparent),
+        radial-gradient(1px 1px at 42% 86%, white 99%, transparent),
+        radial-gradient(1px 1px at 57% 34%, white 99%, transparent);
+      background-size: 250px 250px, 310px 310px, 370px 370px, 290px 290px, 330px 330px, 410px 410px;
+      animation: starDrift 80s linear infinite;
+    }
+
+    a { color: inherit; }
+    button, input { font: inherit; }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+    ::selection { background: rgba(101, 237, 255, .25); }
+
+    .reading-progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      z-index: 1000;
+      height: 3px;
+      width: 0;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--pink));
+      box-shadow: 0 0 15px rgba(101, 237, 255, .65);
+    }
+
+    .back-wrap {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 22px auto 0;
+      position: relative;
+      z-index: 5;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #dce5ff;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      background: rgba(13, 18, 41, .72);
+      border-radius: 999px;
+      font-size: .88rem;
+      transition: .25s ease;
+      backdrop-filter: blur(14px);
+    }
+
+    .back-link:hover {
+      border-color: rgba(101, 237, 255, .65);
+      color: var(--cyan);
+      transform: translateX(-3px);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 690px;
+      display: grid;
+      align-items: center;
+      isolation: isolate;
+      padding: 76px 20px 90px;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      width: min(var(--max), 100%);
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: .19em;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 25px;
+      height: 1px;
+      background: currentColor;
+      box-shadow: 0 0 10px currentColor;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Space Grotesk", sans-serif;
+      line-height: 1.2;
+      letter-spacing: -.035em;
+    }
+
+    h1 {
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      margin: 22px 0 18px;
+      line-height: .98;
+      font-weight: 700;
+    }
+
+    .gradient-text {
+      display: block;
+      color: transparent;
+      background: linear-gradient(100deg, #fff 5%, var(--cyan) 40%, #a5a0ff 75%, var(--pink));
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      max-width: 630px;
+      font-size: 1.05rem;
+    }
+
+    .hero-copy strong { color: #e8edff; }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 29px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      text-decoration: none;
+      padding: 13px 19px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(20, 29, 61, .7);
+      transition: transform .25s, border-color .25s, background .25s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      border-color: rgba(101, 237, 255, .6);
+    }
+
+    .btn-primary {
+      color: #07111b;
+      font-weight: 700;
+      background: linear-gradient(110deg, var(--cyan), #a8b7ff);
+      border-color: transparent;
+      box-shadow: 0 0 28px rgba(101, 237, 255, .16);
+    }
+
+    .btn-primary:hover { background: linear-gradient(110deg, #a8f6ff, #d2d7ff); }
+
+    .hero-note {
+      font-size: .82rem;
+      color: #7f8bad;
+      margin-top: 20px;
+    }
+
+    .cosmic-stage {
+      min-height: 430px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      perspective: 900px;
+    }
+
+    .stage-halo {
+      position: absolute;
+      width: min(90%, 390px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(87, 82, 214, .22), rgba(36, 145, 211, .08) 45%, transparent 70%);
+      filter: blur(12px);
+      animation: pulseHalo 5s ease-in-out infinite;
+    }
+
+    .orbit {
+      position: absolute;
+      width: 360px;
+      height: 150px;
+      border: 1px solid rgba(127, 168, 255, .4);
+      border-radius: 50%;
+      transform: rotate(-30deg);
+      box-shadow: 0 0 25px rgba(94, 148, 255, .07);
+    }
+
+    .orbit.orbit-two {
+      width: 430px;
+      height: 210px;
+      transform: rotate(35deg);
+      border-color: rgba(181, 137, 255, .24);
+    }
+
+    .orbit.orbit-three {
+      width: 280px;
+      height: 95px;
+      transform: rotate(68deg);
+      border-color: rgba(101, 237, 255, .23);
+    }
+
+    .hero-planet {
+      width: 195px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+      background:
+        radial-gradient(ellipse at 27% 23%, rgba(255,255,255,.85), transparent 5%),
+        radial-gradient(ellipse at 35% 32%, #7fe8ff 0%, #4382dc 18%, #5449b8 42%, #241c58 68%, #100e2d 100%);
+      box-shadow:
+        inset -24px -18px 45px rgba(0,0,0,.7),
+        inset 10px 8px 22px rgba(255,255,255,.15),
+        0 0 30px rgba(95, 143, 255, .42),
+        0 0 90px rgba(110, 87, 255, .22);
+      animation: planetFloat 7s ease-in-out infinite;
+    }
+
+    .hero-planet::before {
+      content: "";
+      position: absolute;
+      inset: 13% 8%;
+      border-radius: 50%;
+      background: repeating-linear-gradient(155deg, transparent 0 14px, rgba(120, 224, 255, .19) 16px 20px, transparent 24px 35px);
+      mix-blend-mode: screen;
+      transform: rotate(-18deg);
+    }
+
+    .hero-planet::after {
+      content: "";
+      position: absolute;
+      inset: -13px;
+      border: 2px solid rgba(123, 215, 255, .34);
+      border-radius: 50%;
+      transform: rotateX(67deg) rotate(-25deg);
+      box-shadow: 0 0 22px rgba(101, 237, 255, .25);
+    }
+
+    .stage-label {
+      position: absolute;
+      z-index: 4;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(8, 13, 32, .82);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      font-size: .76rem;
+      color: #d9e6ff;
+    }
+
+    .stage-label small {
+      display: block;
+      color: var(--muted);
+      font-size: .68rem;
+    }
+
+    .label-top { top: 34px; right: 0; }
+    .label-bottom { bottom: 42px; left: 0; }
+
+    .floating-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 15px var(--cyan);
+    }
+
+    .dot-one { width: 5px; height: 5px; top: 17%; left: 21%; }
+    .dot-two { width: 4px; height: 4px; bottom: 20%; right: 18%; }
+    .dot-three { width: 7px; height: 7px; top: 29%; right: 15%; background: var(--pink); box-shadow: 0 0 15px var(--pink); }
+
+    .section {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 75px 0;
+    }
+
+    .section-head {
+      max-width: 760px;
+      margin-bottom: 30px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 4.4vw, 3.45rem);
+      margin: 12px 0;
+    }
+
+    .section-head p { color: var(--muted); margin: 0; }
+
+    .section-number {
+      display: inline-block;
+      color: var(--cyan);
+      font: 700 .75rem "Space Grotesk", sans-serif;
+      letter-spacing: .15em;
+      margin-bottom: 8px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .stat-card, .panel, .info-card, .method-card, .mission-card, .faq-item {
+      border: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(19, 27, 57, .78), rgba(10, 14, 34, .76));
+      box-shadow: var(--glow);
+      border-radius: var(--radius);
+    }
+
+    .stat-card {
+      padding: 22px;
+      min-height: 150px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::after {
+      content: "";
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      right: -35px;
+      bottom: -45px;
+      background: var(--blue);
+      filter: blur(45px);
+      opacity: .22;
+    }
+
+    .stat-value {
+      font: 700 clamp(1.6rem, 3vw, 2.5rem) "Space Grotesk", sans-serif;
+      color: var(--cyan);
+      display: block;
+      line-height: 1.2;
+    }
+
+    .stat-card p { color: var(--muted); font-size: .87rem; margin: 10px 0 0; }
+
+    .notice {
+      margin-top: 16px;
+      border-left: 2px solid var(--cyan);
+      background: rgba(66, 122, 174, .08);
+      padding: 13px 16px;
+      border-radius: 0 12px 12px 0;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .info-card {
+      padding: 23px;
+      transition: transform .28s, border-color .28s, background .28s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-card:hover, .method-card:hover, .mission-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(101, 237, 255, .42);
+      background: linear-gradient(145deg, rgba(24, 38, 73, .9), rgba(13, 18, 43, .86));
+    }
+
+    .card-index {
+      font: 700 .72rem "Space Grotesk", sans-serif;
+      color: var(--cyan);
+      letter-spacing: .14em;
+    }
+
+    .info-card h3, .method-card h3, .mission-card h3 {
+      font-size: 1.2rem;
+      margin: 12px 0 9px;
+    }
+
+    .info-card p, .method-card p, .mission-card p {
+      color: var(--muted);
+      font-size: .92rem;
+      margin: 0;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      font-size: .72rem;
+      border: 1px solid rgba(140, 163, 255, .2);
+      color: #c7d2f8;
+      background: rgba(105, 126, 255, .08);
+      border-radius: 999px;
+      padding: 4px 9px;
+    }
+
+    .wide-panel {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 30px;
+      align-items: center;
+      padding: clamp(22px, 4vw, 38px);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 0 0, rgba(80, 121, 255, .15), transparent 44%),
+        rgba(14, 19, 42, .82);
+      border: 1px solid var(--line);
+    }
+
+    .wide-panel h3 { font-size: clamp(1.6rem, 3vw, 2.3rem); margin: 8px 0 14px; }
+    .wide-panel p, .wide-panel li { color: var(--muted); }
+    .wide-panel ul { padding-left: 20px; }
+
+    .mini-visual {
+      min-height: 245px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-radius: 20px;
+      background: radial-gradient(circle, rgba(90, 104, 210, .13), rgba(7, 9, 25, .45) 65%);
+    }
+
+    .mini-star {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff 0 5%, #ffe7b0 18%, #ffad58 50%, rgba(255, 123, 59, .05) 72%);
+      box-shadow: 0 0 45px rgba(255, 174, 93, .45), 0 0 95px rgba(255, 125, 75, .22);
+    }
+
+    .mini-orbit {
+      width: 255px;
+      height: 105px;
+      position: absolute;
+      border: 1px solid rgba(129, 177, 255, .45);
+      border-radius: 50%;
+      transform: rotate(-18deg);
+    }
+
+    .mini-planet {
+      position: absolute;
+      width: 17px;
+      height: 17px;
+      top: 47%;
+      right: 18%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 25%, #fff, #8d83ff 30%, #3d358f 75%);
+      box-shadow: 0 0 15px rgba(153, 139, 255, .8);
+      animation: orbitMotion 9s linear infinite;
+    }
+
+    .methods-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .method-card { padding: 24px; transition: .25s ease; }
+    .method-card .method-number {
+      display: inline-grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      background: rgba(101, 237, 255, .09);
+      color: var(--cyan);
+      border: 1px solid rgba(101, 237, 255, .22);
+      font: 700 .85rem "Space Grotesk", sans-serif;
+    }
+
+    .method-card .pros-cons {
+      margin-top: 15px;
+      padding-top: 13px;
+      border-top: 1px solid var(--line);
+      font-size: .83rem;
+      color: #bdc8e7;
+    }
+
+    .method-card .pros-cons strong { color: var(--cyan); }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(11, 15, 36, .78);
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 650px;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 15px 17px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--cyan);
+      font: 600 .83rem "Space Grotesk", sans-serif;
+      background: rgba(70, 93, 180, .09);
+    }
+
+    td { color: var(--muted); font-size: .9rem; }
+    td:first-child { color: #e6eaff; font-weight: 600; }
+    tr:last-child td { border-bottom: 0; }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .comparison .panel { padding: 25px; }
+    .comparison h3 { margin-top: 0; }
+    .comparison p { color: var(--muted); }
+    .comparison .highlight { color: var(--cyan); font-weight: 700; }
+
+    .process-list {
+      counter-reset: steps;
+      display: grid;
+      gap: 12px;
+    }
+
+    .process-step {
+      counter-increment: steps;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 15px;
+      align-items: start;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: rgba(17, 23, 49, .55);
+      border-radius: 16px;
+    }
+
+    .process-step::before {
+      content: counter(steps, decimal-leading-zero);
+      display: grid;
+      place-items: center;
+      height: 42px;
+      border-radius: 12px;
+      color: var(--cyan);
+      background: rgba(101, 237, 255, .08);
+      font: 700 .85rem "Space Grotesk", sans-serif;
+    }
+
+    .process-step h3 { margin: 1px 0 5px; font-size: 1.05rem; }
+    .process-step p { margin: 0; color: var(--muted); font-size: .91rem; }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .mission-card {
+      padding: 22px;
+      transition: .25s ease;
+    }
+
+    .mission-year {
+      color: var(--cyan);
+      font: 700 .8rem "Space Grotesk", sans-serif;
+      letter-spacing: .08em;
+    }
+
+    .mission-status {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: .7rem;
+      color: #cdd7ff;
+      border: 1px solid var(--line);
+    }
+
+    .fact-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .fact {
+      padding: 20px;
+      border-radius: 17px;
+      background: rgba(14, 20, 43, .78);
+      border: 1px solid var(--line);
+    }
+
+    .fact strong {
+      display: block;
+      color: var(--cyan);
+      margin-bottom: 7px;
+      font-family: "Space Grotesk", sans-serif;
+    }
+
+    .fact span { color: var(--muted); font-size: .9rem; }
+
+    .simulator {
+      padding: clamp(20px, 4vw, 34px);
+      border: 1px solid var(--line);
+      border-radius: 25px;
+      background: radial-gradient(ellipse at 50% 0, rgba(81, 104, 214, .14), transparent 70%), rgba(11, 15, 35, .84);
+    }
+
+    .simulator-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .simulator h3 { margin-top: 0; font-size: 1.5rem; }
+    .simulator p { color: var(--muted); }
+
+    .control-group { margin: 18px 0; }
+    .control-group label {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+      color: #dfe7ff;
+      font-size: .88rem;
+    }
+
+    input[type="range"] { width: 100%; accent-color: var(--cyan); cursor: pointer; }
+
+    .sim-visual {
+      min-height: 260px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      background: radial-gradient(circle, rgba(64, 81, 174, .12), transparent 70%);
+      overflow: hidden;
+    }
+
+    .sim-star {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff 0 7%, #ffe7b1 23%, #ffb25f 57%, #c44d3c 80%);
+      box-shadow: 0 0 35px rgba(255, 174, 91, .65), 0 0 80px rgba(255, 126, 74, .25);
+    }
+
+    .sim-orbit {
+      position: absolute;
+      width: 255px;
+      height: 125px;
+      border: 1px dashed rgba(130, 178, 255, .42);
+      border-radius: 50%;
+      transform: rotate(-15deg);
+    }
+
+    .sim-planet {
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      position: absolute;
+      right: calc(50% - 128px);
+      top: calc(50% - 10px);
+      background: radial-gradient(circle at 30% 25%, #fff, #8e9cff 32%, #38378e);
+      box-shadow: 0 0 15px rgba(133, 149, 255, .8);
+      transition: transform .3s, background .3s;
+    }
+
+    .sim-result {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 13px;
+      border: 1px solid rgba(101, 237, 255, .2);
+      background: rgba(101, 237, 255, .05);
+      color: #dceaff;
+      font-size: .9rem;
+    }
+
+    .faq-list { display: grid; gap: 10px; }
+
+    .faq-item { overflow: hidden; }
+
+    .faq-item summary {
+      list-style: none;
+      padding: 19px 22px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #e8edff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: "+";
+      color: var(--cyan);
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .faq-item[open] summary::after { content: "−"; }
+    .faq-answer { padding: 0 22px 20px; color: var(--muted); font-size: .92rem; }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .resource-link {
+      display: block;
+      text-decoration: none;
+      padding: 17px 19px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgba(15, 20, 43, .68);
+      transition: .25s;
+    }
+
+    .resource-link:hover {
+      border-color: rgba(101, 237, 255, .5);
+      transform: translateY(-3px);
+    }
+
+    .resource-link strong { display: block; color: #e7ecff; }
+    .resource-link span { display: block; color: var(--muted); font-size: .83rem; margin-top: 3px; }
+
+    .final-cta {
+      text-align: center;
+      padding: 65px 24px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(ellipse at 50% 0, rgba(101, 139, 255, .18), transparent 65%),
+        rgba(12, 16, 37, .78);
+    }
+
+    .final-cta h2 { font-size: clamp(2rem, 4.5vw, 3.4rem); margin: 12px 0; }
+    .final-cta p { max-width: 650px; margin: 0 auto 23px; color: var(--muted); }
+
+    footer {
+      padding: 30px 20px 45px;
+      text-align: center;
+      color: #7783a8;
+      font-size: .82rem;
+    }
+
+    footer a { color: #b7c9ff; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .no-js .reveal { opacity: 1; transform: none; }
+
+    @keyframes starDrift {
+      from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
+      to { background-position: 250px 500px, -310px 310px, 370px -370px, -290px 580px, 330px -330px, -410px 410px; }
+    }
+
+    @keyframes pulseHalo {
+      0%, 100% { transform: scale(.94); opacity: .7; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+
+    @keyframes planetFloat {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-13px) rotate(5deg); }
+    }
+
+    @keyframes orbitMotion {
+      from { transform: rotate(0deg) translateX(0); }
+      to { transform: rotate(360deg) translateX(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 950px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 15px; }
+      .hero { min-height: auto; padding-top: 65px; }
+      .hero-copy { max-width: 720px; }
+      .cosmic-stage { min-height: 350px; }
+      .content-grid, .mission-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .wide-panel { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 650px) {
+      .back-wrap, .section { width: min(100% - 28px, var(--max)); }
+      .back-wrap { margin-top: 15px; }
+      .hero { padding: 50px 14px 55px; }
+      h1 { font-size: clamp(3rem, 15vw, 5rem); }
+      .hero-copy { font-size: .97rem; }
+      .cosmic-stage { min-height: 300px; }
+      .hero-planet { width: 145px; }
+      .orbit { width: 265px; height: 115px; }
+      .orbit.orbit-two { width: 310px; height: 160px; }
+      .orbit.orbit-three { width: 220px; height: 85px; }
+      .label-top { right: 0; top: 10px; }
+      .label-bottom { left: 0; bottom: 10px; }
+      .section { padding: 50px 0; }
+      .content-grid, .methods-grid, .mission-grid, .comparison,
+      .fact-strip, .resource-grid, .simulator-grid { grid-template-columns: 1fr; }
+      .stats-grid { gap: 10px; }
+      .stat-card { padding: 16px; min-height: 125px; }
+      .info-card, .method-card, .mission-card { padding: 20px; }
+      .sim-visual { min-height: 230px; }
+      .final-cta { padding: 42px 18px; }
+      .btn { width: 100%; }
+      .hero-actions { align-items: stretch; }
+    }
   </style>
 </head>
 
-<body>
-  
+<body class="no-js">
+  <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
 
-  <main class="research-detail">
-    <a class="detail-back" href="research.html">← Back to Research</a>
+  <div class="back-wrap">
+    <a class="back-link" href="./research.html" aria-label="Back to COSMOS Research">
+      <span aria-hidden="true">←</span> Back to Research
+    </a>
+  </div>
 
-    <section class="detail-hero">
-      <span class="detail-eyebrow">Research Field 03</span>
-      <h1>Exoplanets</h1>
-      <p>
-        Discover worlds beyond our Solar System, from giant planets orbiting
-        close to their stars to small rocky planets that may have conditions
-        suitable for life.
-      </p>
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <span class="eyebrow">COSMOS / EXOPLANET RESEARCH</span>
+        <h1>Worlds <span class="gradient-text">Beyond</span> Our Sun</h1>
+        <p class="hero-copy">
+          Beyond our Solar System lies a vast population of distant worlds:
+          scorching gas giants, rocky planets, ocean-world candidates and
+          planets orbiting stars unlike our Sun. <strong>Exoplanet science</strong>
+          investigates how these worlds form, what their atmospheres contain,
+          and whether some might have conditions suitable for life.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#exploration">Begin Exploration <span aria-hidden="true">↘</span></a>
+          <a class="btn" href="#detection">Explore Detection Methods</a>
+        </div>
+        <p class="hero-note">A scientific guide to planets beyond our Solar System.</p>
+      </div>
+
+      <div class="cosmic-stage" role="img" aria-label="Stylized glowing exoplanet surrounded by orbital paths">
+        <div class="stage-halo"></div>
+        <div class="orbit"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="orbit orbit-three"></div>
+        <div class="hero-planet"></div>
+        <div class="floating-dot dot-one"></div>
+        <div class="floating-dot dot-two"></div>
+        <div class="floating-dot dot-three"></div>
+        <div class="stage-label label-top">DISTANT WORLDS<small>Planetary systems beyond the Sun</small></div>
+        <div class="stage-label label-bottom">LIGHT AS EVIDENCE<small>Measure. Analyse. Confirm.</small></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 01 -->
+    <section class="section reveal" id="exploration">
+      <div class="section-head">
+        <span class="section-number">01 / THE BIG PICTURE</span>
+        <h2>A galaxy full of planetary systems</h2>
+        <p>An exoplanet is a planet outside our Solar System. Astronomers study distant planets mostly by measuring the light and motion of their host stars, rather than by seeing their surfaces directly.</p>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card">
+          <span class="stat-value">6,000+</span>
+          <p>Confirmed exoplanets have been documented in modern astronomical catalogues. The total increases as candidates are verified.</p>
+        </article>
+        <article class="stat-card">
+          <span class="stat-value">1995</span>
+          <p>A landmark year: 51 Pegasi b was confirmed orbiting a Sun-like star.</p>
+        </article>
+        <article class="stat-card">
+          <span class="stat-value">4+</span>
+          <p>Major detection approaches reveal different parts of the exoplanet population.</p>
+        </article>
+        <article class="stat-card">
+          <span class="stat-value">Unknown</span>
+          <p>Whether life exists beyond Earth remains an open scientific question.</p>
+        </article>
+      </div>
+
+      <div class="notice">
+        Catalogue counts change as new planets are confirmed. For the current count, consult the
+        <a href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank" rel="noopener noreferrer">NASA Exoplanet Archive</a>.
+        The number shown here is a rounded educational reference, not a live counter.
+      </div>
     </section>
 
-    <section class="detail-section">
-      <h2>What Are Exoplanets?</h2>
-      <p>
-        An exoplanet, or extrasolar planet, is a planet that orbits a star
-        outside our Solar System. Some orbit stars similar to the Sun, while
-        others orbit smaller, cooler stars or even multiple stars.
-      </p>
-      <p>
-        Thousands of exoplanets have been confirmed. They show that planetary
-        systems can be very different from our own, giving astronomers new ways
-        to understand how planets form, evolve, and interact with their stars.
-      </p>
+    <!-- 02 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">02 / FOUNDATIONS</span>
+        <h2>What exactly is an exoplanet?</h2>
+        <p>Planets beyond our Sun are not all miniature versions of Earth. They differ in size, mass, temperature, chemistry, orbit and relationship with their host stars.</p>
+      </div>
+
+      <div class="content-grid">
+        <article class="info-card">
+          <span class="card-index">01 / DEFINITION</span>
+          <h3>Planet beyond the Sun</h3>
+          <p>An exoplanet is a planet orbiting a star other than the Sun, or in some cases a stellar remnant. Astronomers use multiple observations to distinguish planets from stars, brown dwarfs and other signals.</p>
+        </article>
+        <article class="info-card">
+          <span class="card-index">02 / DISTANCE</span>
+          <h3>Light-years away</h3>
+          <p>Many known exoplanets are tens, hundreds or thousands of light-years away. A light-year measures distance: the distance light travels in one year, about 9.46 trillion kilometres.</p>
+        </article>
+        <article class="info-card">
+          <span class="card-index">03 / EVIDENCE</span>
+          <h3>Indirect discovery</h3>
+          <p>A planet can reveal itself by dimming its star, pulling the star slightly, bending background starlight or reflecting and emitting light that telescopes can separate from the star.</p>
+        </article>
+      </div>
     </section>
 
-    <section class="detail-section">
-      <h2>Types of Exoplanets</h2>
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Gas Giants</h3>
-          <p>
-            Massive planets dominated by hydrogen and helium, similar in broad
-            composition to Jupiter and Saturn.
-          </p>
+    <!-- 03 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">03 / PLANETARY CATEGORIES</span>
+        <h2>Different kinds of worlds</h2>
+        <p>Planet categories are useful scientific groupings, not rigid boxes. The boundaries between them depend on mass, radius, composition and how a planet formed and evolved.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Planet type</th><th>General characteristics</th><th>Scientific question</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Terrestrial / rocky</td><td>Relatively small, dense worlds with substantial rock and metal.</td><td>Could the surface or subsurface support liquid water?</td></tr>
+            <tr><td>Super-Earth</td><td>A planet more massive than Earth, often larger in radius; composition can vary.</td><td>Is it rocky, water-rich or wrapped in a thick atmosphere?</td></tr>
+            <tr><td>Mini-Neptune</td><td>Smaller than Neptune, often with a significant gaseous envelope.</td><td>How did its atmosphere and interior evolve?</td></tr>
+            <tr><td>Gas giant</td><td>Large planet dominated by hydrogen and helium, such as Jupiter-like worlds.</td><td>How do giant planets form and migrate?</td></tr>
+            <tr><td>Hot Jupiter</td><td>A giant planet orbiting extremely close to its star.</td><td>How did it reach such a tight orbit, and how does its atmosphere respond?</td></tr>
+            <tr><td>Ice giant analogue</td><td>A planet with substantial heavier volatile materials, potentially unlike Jupiter.</td><td>What are its interior structure and atmospheric chemistry?</td></tr>
+            <tr><td>Free-floating planet</td><td>A planetary-mass object not currently bound to a host star.</td><td>Did it form in isolation or become separated from a system?</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="section reveal">
+      <div class="wide-panel">
+        <div>
+          <span class="section-number">04 / PLANETARY SYSTEMS</span>
+          <h3>Not every solar system looks like ours</h3>
+          <p>Some systems contain multiple planets packed close to their star. Others include giant planets on long, eccentric orbits. Their architectures preserve clues about the conditions in which planets formed and how their orbits changed.</p>
+          <ul>
+            <li>Compact systems can fit several planets inside the orbit of Mercury.</li>
+            <li>Orbital resonances can link the periods of neighbouring planets.</li>
+            <li>Migration and gravitational interactions can rearrange planetary orbits.</li>
+            <li>Some systems contain planets orbiting two stars.</li>
+          </ul>
+        </div>
+        <div class="mini-visual" role="img" aria-label="Illustration of a star and an orbiting planet">
+          <div class="mini-star"></div>
+          <div class="mini-orbit"></div>
+          <div class="mini-planet"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section class="section reveal" id="detection">
+      <div class="section-head">
+        <span class="section-number">05 / HOW WE FIND THEM</span>
+        <h2>Four major detection methods</h2>
+        <p>Every technique has strengths and limitations. Combining methods often provides a more reliable picture of a planet's mass, radius, orbit and physical nature.</p>
+      </div>
+
+      <div class="methods-grid">
+        <article class="method-card">
+          <span class="method-number">01</span>
+          <h3>Transit photometry</h3>
+          <p>When a planet crosses in front of its star from our viewpoint, it blocks a small fraction of starlight. A repeated dip in brightness can reveal the planet's orbital period and help estimate its radius.</p>
+          <div class="pros-cons"><strong>Best for:</strong> Finding planets that pass in front of their stars. <br><strong>Limitation:</strong> The orbit must be aligned suitably with our line of sight.</div>
         </article>
 
-        <article class="detail-card">
-          <h3>Super-Earths</h3>
-          <p>
-            Planets more massive than Earth but smaller than Neptune.
-            Their composition can vary and is not determined by size alone.
-          </p>
+        <article class="method-card">
+          <span class="method-number">02</span>
+          <h3>Radial velocity</h3>
+          <p>A planet's gravity makes its star move around the system's shared centre of mass. Astronomers measure tiny Doppler shifts in stellar spectral lines as the star moves toward and away from us.</p>
+          <div class="pros-cons"><strong>Best for:</strong> Estimating a planet's minimum mass and orbital properties. <br><strong>Limitation:</strong> Stellar activity can imitate or obscure a planet signal.</div>
         </article>
 
-        <article class="detail-card">
-          <h3>Mini-Neptunes</h3>
-          <p>
-            Planets smaller than Neptune that may have thick atmospheres
-            surrounding rocky or icy interiors.
-          </p>
+        <article class="method-card">
+          <span class="method-number">03</span>
+          <h3>Direct imaging</h3>
+          <p>Special instruments and image processing suppress the glare of a host star so a planet's faint light can be detected. Infrared observations are especially useful for some young, hot giant planets.</p>
+          <div class="pros-cons"><strong>Best for:</strong> Studying some planets far from their stars. <br><strong>Limitation:</strong> The star is usually vastly brighter than the planet.</div>
         </article>
 
-        <article class="detail-card">
-          <h3>Rocky Planets</h3>
-          <p>
-            Dense worlds that may have solid surfaces, although their
-            temperatures and atmospheres can vary widely.
-          </p>
+        <article class="method-card">
+          <span class="method-number">04</span>
+          <h3>Gravitational microlensing</h3>
+          <p>Gravity from a foreground star bends and magnifies the light of a background star. A planet around the foreground star can create a brief additional signal in the magnification pattern.</p>
+          <div class="pros-cons"><strong>Best for:</strong> Discovering certain distant planets, including low-mass planets. <br><strong>Limitation:</strong> The event is usually not repeatable, making follow-up difficult.</div>
         </article>
+      </div>
 
-        <article class="detail-card">
+      <div class="notice">
+        Additional methods include astrometry, which measures a star's tiny positional motion, and transit-timing variations, which look for changes in transit times caused by gravitational interactions.
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">06 / FROM SIGNAL TO DISCOVERY</span>
+        <h2>How a planet becomes confirmed</h2>
+        <p>A possible planet signal is only the beginning. Scientists test whether other astronomical effects could explain the observations.</p>
+      </div>
+
+      <div class="process-list">
+        <article class="process-step">
+          <div><h3>Observe the target star</h3><p>A telescope repeatedly measures the star's brightness, spectrum or position, producing a time series of observations.</p></div>
+        </article>
+        <article class="process-step">
+          <div><h3>Find a possible signal</h3><p>Researchers search for repeating brightness dips, periodic Doppler shifts, unusual lensing patterns or a faint companion.</p></div>
+        </article>
+        <article class="process-step">
+          <div><h3>Rule out false positives</h3><p>Binary stars, eclipsing systems, stellar activity, instrumental noise and data-processing effects can imitate planetary signals.</p></div>
+        </article>
+        <article class="process-step">
+          <div><h3>Collect follow-up observations</h3><p>Other telescopes or instruments may measure the same target to test the candidate and improve estimates of its properties.</p></div>
+        </article>
+        <article class="process-step">
+          <div><h3>Estimate physical properties</h3><p>Researchers combine the observations with models of the star and the orbit to estimate quantities such as radius, mass, density and orbital period.</p></div>
+        </article>
+        <article class="process-step">
+          <div><h3>Confirm and publish</h3><p>When the evidence meets scientific standards, the object can be reported as a confirmed planet and added to recognised catalogues.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">07 / READING THE LIGHT</span>
+        <h2>What a transit can tell us</h2>
+        <p>The shape, depth and timing of a transit contain information about a distant planetary system.</p>
+      </div>
+
+      <div class="content-grid">
+        <article class="info-card">
+          <span class="card-index">LIGHT CURVE</span>
+          <h3>Brightness over time</h3>
+          <p>A light curve records how a star's measured brightness changes. A shallow, repeated dip may indicate a planet crossing the stellar disk.</p>
+        </article>
+        <article class="info-card">
+          <span class="card-index">PLANET SIZE</span>
+          <h3>Transit depth</h3>
+          <p>For a simple transit, the fractional drop in light is approximately the square of the planet-to-star radius ratio. Stellar properties are needed for a physical radius estimate.</p>
+        </article>
+        <article class="info-card">
+          <span class="card-index">ORBIT</span>
+          <h3>Repeating intervals</h3>
+          <p>The interval between repeated transits gives the orbital period. With the star's mass and an appropriate orbital model, researchers can estimate the orbit's size.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">08 / ATMOSPHERIC SCIENCE</span>
+        <h2>Reading an alien atmosphere</h2>
+        <p>Atmospheric studies help scientists investigate temperature, clouds, chemistry and how a planet interacts with radiation from its star.</p>
+      </div>
+
+      <div class="comparison">
+        <article class="panel">
+          <h3>Transmission spectroscopy</h3>
+          <p>During a transit, a small amount of starlight passes through the planet's atmospheric edge. Different molecules absorb different wavelengths, leaving patterns in the observed spectrum.</p>
+          <p><span class="highlight">Can investigate:</span> water vapour, carbon dioxide, methane and other atmospheric constituents when the data and observing conditions allow.</p>
+        </article>
+        <article class="panel">
+          <h3>Emission and eclipse spectroscopy</h3>
+          <p>A planet emits thermal radiation and may reflect starlight. Comparing measurements before, during and after a secondary eclipse can help isolate its contribution to the system's light.</p>
+          <p><span class="highlight">Can investigate:</span> atmospheric temperature, heat redistribution, cloud properties and chemical signatures.</p>
+        </article>
+      </div>
+
+      <div class="notice">
+        Detecting a molecule does not automatically establish that a planet is habitable or inhabited. Scientists assess the strength of the signal, possible alternative explanations, instrument effects and the wider planetary environment.
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">09 / HABITABILITY</span>
+        <h2>What is the habitable zone?</h2>
+        <p>The habitable zone is the range of distances from a star where a planet with suitable atmospheric conditions could potentially maintain liquid water on its surface.</p>
+      </div>
+
+      <div class="content-grid">
+        <article class="info-card">
+          <span class="card-index">CONDITION 01</span>
+          <h3>Energy from the star</h3>
+          <p>A planet's distance and the star's luminosity influence how much energy reaches the planet. The same distance can mean very different conditions around different stars.</p>
+        </article>
+        <article class="info-card">
+          <span class="card-index">CONDITION 02</span>
+          <h3>Atmospheric greenhouse effect</h3>
+          <p>Atmospheric gases, pressure, clouds and circulation can warm or cool a planet. Two planets at similar distances can have very different surface environments.</p>
+        </article>
+        <article class="info-card">
+          <span class="card-index">CONDITION 03</span>
+          <h3>Planetary stability</h3>
+          <p>Atmospheric retention, geological activity, stellar flares, magnetic environment and long-term climate evolution may affect whether liquid water can persist.</p>
+        </article>
+      </div>
+
+      <div class="notice">
+        Being in the habitable zone does not prove a planet has oceans, a breathable atmosphere or life. It identifies a useful starting point for further investigation.
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">10 / A PLANET IS NOT A HABITAT</span>
+        <h2>Earth-like does not mean Earth-identical</h2>
+        <p>Scientists use several measurements to compare a distant planet with Earth, but each measurement answers a different question.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Measurement</th><th>What it tells us</th><th>What it cannot prove alone</th></tr></thead>
+          <tbody>
+            <tr><td>Radius</td><td>Approximate physical size.</td><td>Surface composition or habitability.</td></tr>
+            <tr><td>Mass</td><td>Helps constrain gravity and internal structure.</td><td>Exact composition without additional evidence.</td></tr>
+            <tr><td>Bulk density</td><td>Constrains whether a planet may be rocky, volatile-rich or gas-rich.</td><td>A unique interior model in every case.</td></tr>
+            <tr><td>Equilibrium temperature</td><td>A simplified estimate based on stellar energy and assumptions about reflection and heat redistribution.</td><td>The actual surface temperature.</td></tr>
+            <tr><td>Atmospheric spectrum</td><td>Potential evidence for gases, clouds and thermal structure.</td><td>Life without a broader, carefully tested interpretation.</td></tr>
+            <tr><td>Orbital location</td><td>Helps estimate the energy received from the host star.</td><td>Liquid water or stable climate by itself.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">11 / EXTREME ENVIRONMENTS</span>
+        <h2>Worlds that challenge our expectations</h2>
+        <p>Exoplanet discoveries have revealed that planetary systems can produce environments far more varied than the familiar planets around our Sun.</p>
+      </div>
+
+      <div class="content-grid">
+        <article class="info-card">
+          <span class="card-index">EXTREME HEAT</span>
           <h3>Hot Jupiters</h3>
-          <p>
-            Large gas giants that orbit extremely close to their stars,
-            completing an orbit in a relatively short time.
-          </p>
+          <p>These giant planets orbit very close to their stars. Their intense irradiation can produce expanded atmospheres, strong temperature contrasts and complex atmospheric circulation.</p>
         </article>
-
-        <article class="detail-card">
-          <h3>Ocean Worlds</h3>
-          <p>
-            Possible water-rich worlds that may contain deep oceans beneath
-            their surfaces or within thick outer layers.
-          </p>
+        <article class="info-card">
+          <span class="card-index">LOW DENSITY</span>
+          <h3>Inflated planets</h3>
+          <p>Some gas giants have radii larger than simple expectations for their mass. Intense stellar heating and internal energy processes are among the factors scientists investigate.</p>
         </article>
-      </div>
-    </section>
-
-    <section class="detail-section">
-      <h2>How Do Astronomers Find Exoplanets?</h2>
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Transit Method</h3>
-          <p>
-            A planet passes in front of its star and causes a tiny, repeating
-            dip in the star's observed brightness.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Radial Velocity</h3>
-          <p>
-            Astronomers measure small shifts in a star's spectrum caused by
-            the gravitational pull of an orbiting planet.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Direct Imaging</h3>
-          <p>
-            Special instruments block or reduce a star's glare to capture
-            light from certain planets directly.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Gravitational Microlensing</h3>
-          <p>
-            A star's gravity bends and magnifies light from a more distant
-            background star; a planet can add a detectable signal.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Astrometry</h3>
-          <p>
-            Scientists measure tiny movements in a star's position on the sky
-            that can reveal the influence of an orbiting planet.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Atmosphere Studies</h3>
-          <p>
-            During suitable observations, starlight passing through a planet's
-            atmosphere can reveal clues about its chemical composition.
-          </p>
+        <article class="info-card">
+          <span class="card-index">ORBITAL EXTREMES</span>
+          <h3>Eccentric worlds</h3>
+          <p>Planets on elongated orbits may experience large changes in received stellar energy. Their climates and internal heating can differ greatly from planets on nearly circular orbits.</p>
         </article>
       </div>
     </section>
 
-    <section class="detail-section">
-      <h2>The Habitable Zone</h2>
-      <p>
-        The habitable zone is the range of distances from a star where a
-        planet with suitable atmospheric conditions could potentially maintain
-        liquid water on its surface. Being inside this zone does not prove
-        that a planet has water or life.
-      </p>
-      <p>
-        Scientists also consider atmospheric composition, planetary geology,
-        magnetic activity, radiation, and the history of the planet's climate
-        when evaluating its potential habitability.
-      </p>
-    </section>
+    <!-- 12 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">12 / SYSTEM ARCHITECTURE</span>
+        <h2>Multi-planet systems and orbital resonance</h2>
+        <p>When multiple planets orbit one star, their gravitational interactions can reveal how a system evolved.</p>
+      </div>
 
-    <section class="detail-section">
-      <h2>Notable Exoplanet Missions</h2>
-      <ul class="detail-list">
-        <li><strong>Kepler:</strong> Revealed that planets are common around stars in our galaxy.</li>
-        <li><strong>TESS:</strong> Searches large areas of the sky for planets transiting nearby bright stars.</li>
-        <li><strong>James Webb Space Telescope:</strong> Studies selected exoplanet atmospheres and other distant objects.</li>
-      </ul>
-    </section>
-
-    <section class="detail-section">
-      <h2>Questions Scientists Are Investigating</h2>
-      <ul class="detail-list">
-        <li>How common are Earth-sized rocky planets?</li>
-        <li>What are the atmospheres of distant planets made of?</li>
-        <li>Can scientists identify reliable signs of habitability?</li>
-        <li>How do planetary systems form and change over time?</li>
-        <li>Could any exoplanet support life as we know it?</li>
-      </ul>
-    </section>
-
-    <section class="detail-section">
-      <h2>Explore Related Research</h2>
-      <div class="detail-links">
-        <a class="detail-link" href="astrobiology.html">Astrobiology</a>
-        <a class="detail-link" href="planetary-science.html">Planetary Science</a>
-        <a class="detail-link" href="cosmology.html">Cosmology</a>
+      <div class="content-grid">
+        <article class="info-card">
+          <h3>Orbital resonance</h3>
+          <p>Two planets are in a mean-motion resonance when their orbital periods are close to a ratio of small whole numbers, such as 2:1. Repeated gravitational interactions can become especially important.</p>
+        </article>
+        <article class="info-card">
+          <h3>Transit timing variations</h3>
+          <p>If a transiting planet arrives slightly earlier or later than predicted, another planet's gravity may be responsible. These variations can help reveal additional planets and constrain their masses.</p>
+        </article>
+        <article class="info-card">
+          <h3>Planet migration</h3>
+          <p>Planets may move from their formation locations through interactions with a protoplanetary disk or with other planets. Migration helps explain compact systems and some giant planets close to their stars.</p>
+        </article>
       </div>
     </section>
 
-    <section class="detail-section">
-      <h2>Official Resources</h2>
-      <p>
-        <a href="https://science.nasa.gov/exoplanets/"
-           target="_blank" rel="noopener noreferrer">
-          NASA Exoplanet Exploration ↗
-        </a>
-      </p>
-      <p>
-        <a href="https://science.nasa.gov/mission/tess/"
-           target="_blank" rel="noopener noreferrer">
-          NASA TESS Mission ↗
-        </a>
-      </p>
-      <p>
-        <a href="https://science.nasa.gov/mission/kepler/"
-           target="_blank" rel="noopener noreferrer">
-          NASA Kepler Mission ↗
-        </a>
-      </p>
+    <!-- 13 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">13 / FORMATION</span>
+        <h2>How do exoplanets form?</h2>
+        <p>Planets grow from material surrounding young stars. Observations of young systems, disks and mature planetary systems help test models of this process.</p>
+      </div>
+
+      <div class="process-list">
+        <article class="process-step">
+          <div><h3>A cloud collapses</h3><p>Gravity causes part of a cold molecular cloud to collapse, forming a young star and a surrounding disk of gas and dust.</p></div>
+        </article>
+        <article class="process-step">
+          <div><h3>Dust grains collide</h3><p>Small solid particles can stick together and grow into larger bodies, although collisions can also fragment or erode them.</p></div>
+        </article>
+        <article class="process-step">
+          <div><h3>Planetesimals and planetary embryos develop</h3><p>Gravitational interactions help some solid bodies grow. The details depend on disk conditions and the available material.</p></div>
+        </article>
+        <article class="process-step">
+          <div><h3>Planets gather material</h3><p>Growing cores can accrete solids and, under suitable conditions, capture large amounts of surrounding gas.</p></div>
+        </article>
+        <article class="process-step">
+          <div><h3>The system evolves</h3><p>Disk dispersal, migration, collisions and gravitational scattering reshape planetary orbits and atmospheres over time.</p></div>
+        </article>
+      </div>
     </section>
 
-    <a class="detail-back" href="research.html">← Back to All Research Fields</a>
+    <!-- 14 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">14 / THE SEARCH FOR LIFE</span>
+        <h2>Could an exoplanet support life?</h2>
+        <p>Astrobiology investigates the conditions and processes that could allow life to originate and persist. Exoplanet observations contribute evidence, but no life beyond Earth has been confirmed.</p>
+      </div>
+
+      <div class="content-grid">
+        <article class="info-card">
+          <h3>Liquid water</h3>
+          <p>Water is essential for all known life on Earth. Researchers investigate whether planetary conditions could permit liquid water, while recognising that life elsewhere might not follow every terrestrial pattern.</p>
+        </article>
+        <article class="info-card">
+          <h3>Atmospheric biosignatures</h3>
+          <p>Certain gases may be interesting if they appear together in a context where biological processes are plausible. Each candidate must be evaluated against non-biological explanations.</p>
+        </article>
+        <article class="info-card">
+          <h3>False positives and false negatives</h3>
+          <p>Geology, stellar radiation and atmospheric chemistry can produce gases that resemble potential biosignatures. Life may also exist without producing a detectable signal in a distant spectrum.</p>
+        </article>
+      </div>
+
+      <div class="notice">
+        A possible biosignature is not a discovery of life. Strong conclusions require multiple lines of evidence, robust models and independent scientific scrutiny.
+      </div>
+    </section>
+
+    <!-- 15 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">15 / STELLAR ENVIRONMENTS</span>
+        <h2>The host star matters</h2>
+        <p>A planet's environment depends not only on its own properties but also on the star it orbits.</p>
+      </div>
+
+      <div class="content-grid">
+        <article class="info-card">
+          <h3>Red dwarfs</h3>
+          <p>Small, cool stars are common targets in exoplanet studies. Their habitable zones lie relatively close to the star, but stellar flares and high-energy radiation can complicate atmospheric evolution.</p>
+        </article>
+        <article class="info-card">
+          <h3>Sun-like stars</h3>
+          <p>Studying planets around stars similar to the Sun helps scientists compare other planetary systems with our own. Accurate stellar age, radius and mass measurements are important for interpreting planets.</p>
+        </article>
+        <article class="info-card">
+          <h3>Stellar activity</h3>
+          <p>Starspots, flares and magnetic activity can change brightness and spectral lines. Researchers must separate these effects from planetary signals, especially when looking for small planets.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 16 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">16 / MEASUREMENT CHALLENGES</span>
+        <h2>Why exoplanet research is difficult</h2>
+        <p>Most exoplanets are tiny, faint and close in apparent position to a much brighter star. The observed signal must be separated from noise and other physical effects.</p>
+      </div>
+
+      <div class="fact-strip">
+        <div class="fact">
+          <strong>Stellar glare</strong>
+          <span>A star can outshine its planet by an enormous factor, making direct imaging technically demanding.</span>
+        </div>
+        <div class="fact">
+          <strong>Instrument precision</strong>
+          <span>Small brightness and wavelength changes require careful calibration, stable instruments and repeated observations.</span>
+        </div>
+        <div class="fact">
+          <strong>Model uncertainty</strong>
+          <span>Different combinations of atmosphere, clouds and surface properties may explain similar observations.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 17 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">17 / INTERACTIVE LAB</span>
+        <h2>Explore a simplified transit signal</h2>
+        <p>Adjust the planet-to-star size ratio and imagine a planet crossing the face of its star. This educational model demonstrates the approximate relationship between relative size and transit depth.</p>
+      </div>
+
+      <div class="simulator">
+        <div class="simulator-grid">
+          <div>
+            <h3>Transit depth model</h3>
+            <p>For a simple, central transit across a uniformly bright stellar disk, the approximate fractional depth is:</p>
+            <p><strong>Transit depth ≈ (planet radius / star radius)²</strong></p>
+
+            <div class="control-group">
+              <label for="planetRatio">Planet / star radius <span id="ratioLabel">0.10</span></label>
+              <input id="planetRatio" type="range" min="0.02" max="0.25" step="0.01" value="0.10">
+            </div>
+
+            <div class="control-group">
+              <label for="brightness">Illustrative stellar brightness <span id="brightnessLabel">100%</span></label>
+              <input id="brightness" type="range" min="70" max="100" step="1" value="100">
+            </div>
+
+            <button class="btn btn-primary" id="resetModel" type="button">Reset Model</button>
+          </div>
+
+          <div>
+            <div class="sim-visual" aria-label="Illustration of a planet crossing in front of a star">
+              <div class="sim-star" id="simStar"></div>
+              <div class="sim-orbit"></div>
+              <div class="sim-planet" id="simPlanet"></div>
+            </div>
+            <div class="sim-result" id="simResult" aria-live="polite">
+              Approximate transit depth: 1.00%. This simplified result is illustrative, not a measurement of a real planet.
+            </div>
+          </div>
+        </div>
+        <div class="notice">Real transit curves also depend on limb darkening, orbital inclination, starspots, planet atmosphere, instrument noise and the geometry of the orbit.</div>
+      </div>
+    </section>
+
+    <!-- 18 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">18 / LANDMARK DISCOVERIES</span>
+        <h2>Discoveries that changed planetary science</h2>
+        <p>Each milestone expanded the range of worlds known to exist and improved the tools scientists use to study them.</p>
+      </div>
+
+      <div class="mission-grid">
+        <article class="mission-card">
+          <span class="mission-year">1992</span>
+          <h3>Planets around a pulsar</h3>
+          <p>Alex Wolszczan and Dale Frail reported planets orbiting the pulsar PSR B1257+12, demonstrating that planetary systems can exist around stellar remnants.</p>
+          <span class="mission-status">Historical milestone</span>
+        </article>
+        <article class="mission-card">
+          <span class="mission-year">1995</span>
+          <h3>51 Pegasi b</h3>
+          <p>Michel Mayor and Didier Queloz announced the discovery of a planet orbiting a Sun-like star. The hot Jupiter challenged earlier expectations about where giant planets could be found.</p>
+          <span class="mission-status">Landmark discovery</span>
+        </article>
+        <article class="mission-card">
+          <span class="mission-year">2009–2018</span>
+          <h3>Kepler Space Telescope</h3>
+          <p>Kepler measured stellar brightness with high precision and revealed that planets are common, including many smaller than Neptune.</p>
+          <span class="mission-status">Mission completed</span>
+        </article>
+        <article class="mission-card">
+          <span class="mission-year">2018–PRESENT</span>
+          <h3>TESS</h3>
+          <p>The Transiting Exoplanet Survey Satellite searches large areas of the sky for transiting planets, especially around relatively bright, nearby stars suitable for follow-up.</p>
+          <span class="mission-status">Mission active</span>
+        </article>
+        <article class="mission-card">
+          <span class="mission-year">2021–PRESENT</span>
+          <h3>James Webb Space Telescope</h3>
+          <p>JWST uses infrared observations to investigate the atmospheres of selected exoplanets and to study planets and disks in their formation environments.</p>
+          <span class="mission-status">Mission active</span>
+        </article>
+        <article class="mission-card">
+          <span class="mission-year">2019–PRESENT</span>
+          <h3>CHEOPS</h3>
+          <p>ESA's CHEOPS makes precise observations of known exoplanets, improving measurements of their sizes and helping constrain their bulk densities when mass data are available.</p>
+          <span class="mission-status">Mission active</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- 19 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">19 / NEXT-GENERATION RESEARCH</span>
+        <h2>What comes next?</h2>
+        <p>Future and ongoing observatories will improve the statistics of known planets and investigate their atmospheres, host stars and system histories.</p>
+      </div>
+
+      <div class="content-grid">
+        <article class="info-card">
+          <h3>Atmospheric surveys</h3>
+          <p>Large, consistent samples of planetary spectra can help researchers compare atmospheric chemistry across planet sizes, temperatures and stellar environments.</p>
+          <div class="tag-row"><span class="tag">Spectroscopy</span><span class="tag">Chemistry</span></div>
+        </article>
+        <article class="info-card">
+          <h3>Better planet statistics</h3>
+          <p>More complete surveys can reveal how frequently planets occur around different kinds of stars and help identify biases in detection methods.</p>
+          <div class="tag-row"><span class="tag">Population studies</span><span class="tag">Statistics</span></div>
+        </article>
+        <article class="info-card">
+          <h3>Direct imaging technology</h3>
+          <p>Coronagraphs and future starlight-blocking concepts aim to make it easier to detect faint planets beside bright stars and eventually study selected terrestrial worlds.</p>
+          <div class="tag-row"><span class="tag">Optics</span><span class="tag">Future missions</span></div>
+        </article>
+      </div>
+
+      <div class="notice">
+        Mission launch dates and capabilities can change. Consult official agency pages for the latest mission status instead of relying on an old schedule.
+      </div>
+    </section>
+
+    <!-- 20 -->
+    <section class="section reveal">
+      <div class="section-head">
+        <span class="section-number">20 / SCIENCE FAQ</span>
+        <h2>Frequently asked questions</h2>
+        <p>Quick answers to common questions about distant planets and the search for life.</p>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Have scientists found a second Earth?</summary>
+          <div class="faq-answer">Scientists have found rocky exoplanets and planets with some Earth-like properties. However, no known exoplanet has been shown to be a complete Earth twin with confirmed oceans, a suitable atmosphere and life.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Can we see an exoplanet with our own eyes?</summary>
+          <div class="faq-answer">No confirmed exoplanet is visible to the unaided human eye as a separate planet. A small number have been directly imaged using specialised astronomical instruments, while most are discovered through their effects on starlight or stellar motion.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How do scientists know a planet exists if they cannot photograph it?</summary>
+          <div class="faq-answer">Repeated and consistent signals can reveal a planet. Scientists test alternative explanations, collect follow-up data and compare independent methods before confirming a discovery.</div>
+        </details>
+        <details class="faq-item">
+          <summary>What is the difference between a planet candidate and a confirmed planet?</summary>
+          <div class="faq-answer">A candidate is a signal that may be caused by a planet but needs additional analysis or validation. A confirmed planet has passed the relevant scientific tests for a planetary interpretation.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Can a planet outside the habitable zone have life?</summary>
+          <div class="faq-answer">The conventional habitable zone is based mainly on possible surface liquid water. Other environments, such as subsurface oceans heated by internal energy, are also considered in broader astrobiology research. Neither possibility establishes that life is present.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Can James Webb detect life on an exoplanet?</summary>
+          <div class="faq-answer">JWST can study selected exoplanet atmospheres and search for chemical signatures. Interpreting a possible biosignature is difficult, and no confirmed detection of extraterrestrial life has been made.</div>
+        </details>
+        <details class="faq-item">
+          <summary>How long would it take to travel to an exoplanet?</summary>
+          <div class="faq-answer">Travel time depends on distance and spacecraft speed. Even the nearest known exoplanet systems are several light-years away, far beyond the reach of current conventional spacecraft for human travel on practical timescales.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Are all exoplanets orbiting normal stars?</summary>
+          <div class="faq-answer">No. Planets have been found around pulsars and other unusual stellar systems, and astronomers also investigate free-floating planetary-mass objects that are not currently bound to a star.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Why are super-Earths and mini-Neptunes important?</summary>
+          <div class="faq-answer">These size categories are common in exoplanet surveys but have no direct equivalent among the eight planets of our Solar System. Understanding their composition and atmospheric evolution helps explain how planetary systems develop.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Where can I find current exoplanet data?</summary>
+          <div class="faq-answer">The NASA Exoplanet Archive provides confirmed planet catalogues, candidate information, observational data and research tools. The European Space Agency and individual observatory teams also publish mission data and research results.</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- Research resources -->
+    <section class="section reveal" id="resources">
+      <div class="section-head">
+        <span class="section-number">RESEARCH LIBRARY</span>
+        <h2>Continue with scientific sources</h2>
+        <p>Use official scientific resources to check current statistics, read discoveries and explore real observational data.</p>
+      </div>
+
+      <div class="resource-grid">
+        <a class="resource-link" href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank" rel="noopener noreferrer">
+          <strong>NASA Exoplanet Archive ↗</strong>
+          <span>Confirmed planets, catalogues and research data.</span>
+        </a>
+        <a class="resource-link" href="https://science.nasa.gov/exoplanets/" target="_blank" rel="noopener noreferrer">
+          <strong>NASA Exoplanet Exploration ↗</strong>
+          <span>Planet science, discoveries and educational material.</span>
+        </a>
+        <a class="resource-link" href="https://science.nasa.gov/exoplanets/how-we-find-and-characterize/" target="_blank" rel="noopener noreferrer">
+          <strong>How We Find and Characterize Planets ↗</strong>
+          <span>Detection methods and atmospheric characterisation.</span>
+        </a>
+        <a class="resource-link" href="https://science.nasa.gov/mission/tess/" target="_blank" rel="noopener noreferrer">
+          <strong>NASA TESS Mission ↗</strong>
+          <span>Surveying the sky for transiting exoplanets.</span>
+        </a>
+        <a class="resource-link" href="https://science.nasa.gov/mission/kepler/" target="_blank" rel="noopener noreferrer">
+          <strong>NASA Kepler Mission ↗</strong>
+          <span>The mission that transformed planet statistics.</span>
+        </a>
+        <a class="resource-link" href="https://science.nasa.gov/mission/webb/" target="_blank" rel="noopener noreferrer">
+          <strong>James Webb Space Telescope ↗</strong>
+          <span>Infrared astronomy and exoplanet atmospheres.</span>
+        </a>
+        <a class="resource-link" href="https://www.esa.int/Science_Exploration/Space_Science/Cheops" target="_blank" rel="noopener noreferrer">
+          <strong>ESA CHEOPS ↗</strong>
+          <span>Precise measurements of known exoplanets.</span>
+        </a>
+        <a class="resource-link" href="https://www.esa.int/Science_Exploration/Space_Science/Plato" target="_blank" rel="noopener noreferrer">
+          <strong>ESA PLATO ↗</strong>
+          <span>Official mission information and status updates.</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="final-cta">
+        <span class="eyebrow">THE UNIVERSE IS STILL UNFOLDING</span>
+        <h2>Every signal opens a new world.</h2>
+        <p>Exoplanet research connects physics, chemistry, astronomy and astrobiology. The next discovery may change our understanding of how planets form, evolve and become suitable for life.</p>
+        <div class="hero-actions" style="justify-content:center">
+          <a class="btn btn-primary" href="./planets.html">Explore the Planets</a>
+          <a class="btn" href="./research.html">Return to Research</a>
+          <a class="btn" href="#top">Back to Top ↑</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>© COSMOS — Exploring the Universe</p>
+    <p>COSMOS · Exoplanet Research</p>
+    <p>Educational content based on published astronomy research and official space-agency resources.</p>
+    <p><a href="./research.html">Research</a> · <a href="./index.html">COSMOS Home</a></p>
+    <p>Last page revision: <span id="pageYear"></span></p>
   </footer>
 
-  <script src="app.js" defer></script>
+  <script>
+    document.body.classList.remove("no-js");
+
+    // Current year
+    const pageYear = document.getElementById("pageYear");
+    if (pageYear) pageYear.textContent = new Date().getFullYear();
+
+    // Reading progress
+    const progressBar = document.getElementById("readingProgress");
+
+    function updateReadingProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+      if (progressBar) {
+        progressBar.style.width = Math.min(100, Math.max(0, progress)) + "%";
+      }
+    }
+
+    window.addEventListener("scroll", updateReadingProgress, { passive: true });
+    window.addEventListener("resize", updateReadingProgress);
+    updateReadingProgress();
+
+    // Scroll reveal, with a fallback for browsers without IntersectionObserver.
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      revealItems.forEach(item => revealObserver.observe(item));
+    } else {
+      revealItems.forEach(item => item.classList.add("visible"));
+    }
+
+    // Educational transit-depth model
+    const ratioInput = document.getElementById("planetRatio");
+    const brightnessInput = document.getElementById("brightness");
+    const ratioLabel = document.getElementById("ratioLabel");
+    const brightnessLabel = document.getElementById("brightnessLabel");
+    const resultBox = document.getElementById("simResult");
+    const simPlanet = document.getElementById("simPlanet");
+    const simStar = document.getElementById("simStar");
+    const resetButton = document.getElementById("resetModel");
+
+    function updateTransitModel() {
+      if (!ratioInput || !brightnessInput || !resultBox) return;
+
+      const ratio = Number(ratioInput.value);
+      const brightness = Number(brightnessInput.value);
+      const depth = ratio * ratio * 100;
+
+      if (ratioLabel) ratioLabel.textContent = ratio.toFixed(2);
+      if (brightnessLabel) brightnessLabel.textContent = brightness + "%";
+
+      if (simPlanet) {
+        const size = Math.max(7, ratio * 90);
+        simPlanet.style.width = size + "px";
+        simPlanet.style.height = size + "px";
+        simPlanet.style.transform = "translateY(" + ((100 - brightness) * 0.25) + "px)";
+      }
+
+      if (simStar) {
+        simStar.style.opacity = String(brightness / 100);
+      }
+
+      resultBox.textContent =
+        "Approximate transit depth: " + depth.toFixed(2) +
+        "%. Illustrative brightness setting: " + brightness +
+        "%. This simplified model is not a measurement of a real planet.";
+    }
+
+    if (ratioInput) ratioInput.addEventListener("input", updateTransitModel);
+    if (brightnessInput) brightnessInput.addEventListener("input", updateTransitModel);
+
+    if (resetButton) {
+      resetButton.addEventListener("click", () => {
+        if (ratioInput) ratioInput.value = "0.10";
+        if (brightnessInput) brightnessInput.value = "100";
+        updateTransitModel();
+      });
+    }
+
+    updateTransitModel();
+
+    // Open one FAQ at a time for easier reading.
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    faqItems.forEach(item => {
+      item.addEventListener("toggle", () => {
+        if (!item.open) return;
+        faqItems.forEach(other => {
+          if (other !== item) other.open = false;
+        });
+      });
+    });
+  </script>
 </body>
 </html>
