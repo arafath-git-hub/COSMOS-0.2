@@ -1,12 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080b16">
-  <meta name="description" content="Explore Mercury, the smallest planet in the Solar System, with COSMOS.">
-  <title>Mercury — Planet Profile | COSMOS</title>
+
+  <title>Mercury | COSMOS</title>
+  <meta name="description" content="Explore Mercury, the smallest planet and closest world to the Sun, through its cratered surface, extreme temperatures, scientific mysteries and exploration missions.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,667 +14,1506 @@
 
   <style>
     :root {
-      color-scheme: dark;
       --bg: #080b16;
       --panel: #101626;
+      --panel2: #151c2d;
       --text: #f4f6ff;
-      --muted: #9aa6bd;
-      --accent: #c6cbd8;
-      --line: rgba(255,255,255,.09);
+      --muted: #9aa6bf;
+      --accent: #d7a17b;
+      --accent-light: #f4c6a2;
+      --accent-rgb: 215, 161, 123;
+      --border: rgba(215, 161, 123, .2);
+      --glow: rgba(215, 161, 123, .12);
+      --max-width: 1180px;
     }
 
-    * { box-sizing: border-box; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 25px;
+    }
 
     body {
-      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
       background:
-        radial-gradient(ellipse at 78% 8%, #292a3c 0%, transparent 34%),
+        radial-gradient(ellipse at 78% 8%, rgba(178, 102, 55, .13), transparent 35%),
+        radial-gradient(ellipse at 10% 45%, rgba(65, 84, 130, .09), transparent 35%),
         var(--bg);
       color: var(--text);
       font-family: "DM Sans", sans-serif;
+      line-height: 1.7;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    .shell {
-      width: min(1250px, 100%);
-      margin: auto;
-      padding: 24px clamp(18px, 4vw, 52px) 45px;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .42;
+      background-image:
+        radial-gradient(1px 1px at 8% 12%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 72% 28%, #fff 50%, transparent 100%),
+        radial-gradient(2px 2px at 45% 66%, #eab18a 50%, transparent 100%),
+        radial-gradient(1px 1px at 88% 82%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 25% 90%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 60% 8%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 15% 52%, #fff 50%, transparent 100%);
+      background-size: 370px 300px;
+      animation: starDrift 90s linear infinite;
     }
 
-    .topbar {
-      display: flex;
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 44px));
+      margin-inline: auto;
+    }
+
+    /* TOP BACK BUTTON */
+
+    .back-button-wrap {
+      width: min(var(--max-width), calc(100% - 44px));
+      margin: 22px auto 0;
+      position: relative;
+      z-index: 5;
+      animation: slideIn .7s ease both;
+    }
+
+    .back-button {
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 18px;
-      padding-bottom: 22px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      font: 700 22px "Space Grotesk", sans-serif;
-      letter-spacing: 2px;
-    }
-
-    .brand-mark {
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      border: 1px solid #aeb8d2;
-      border-radius: 50%;
-      color: #e0e6f4;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 21px;
-    }
-
-    nav a {
-      color: var(--muted);
+      gap: 10px;
+      padding: 10px 16px;
+      border: 1px solid rgba(var(--accent-rgb), .34);
+      border-radius: 9px;
+      background: rgba(var(--accent-rgb), .045);
+      color: var(--accent-light);
       font-size: 13px;
+      font-weight: 600;
+      transition: background .25s, border-color .25s, transform .25s, box-shadow .25s;
     }
 
-    nav a:hover { color: white; }
-
-    .breadcrumb {
-      display: flex;
-      gap: 9px;
-      flex-wrap: wrap;
-      margin: 26px 0;
-      color: var(--muted);
-      font-size: 12px;
+    .back-button:hover {
+      background: rgba(var(--accent-rgb), .13);
+      border-color: var(--accent);
+      transform: translateX(-4px);
+      box-shadow: 0 0 25px rgba(var(--accent-rgb), .09);
     }
 
-    .breadcrumb a:hover { color: white; }
+    .back-arrow {
+      font-size: 19px;
+      line-height: 1;
+    }
+
+    /* HERO */
 
     .hero {
+      min-height: 550px;
       display: grid;
-      grid-template-columns: 1.1fr .9fr;
+      grid-template-columns: 1.05fr .95fr;
       align-items: center;
-      gap: 30px;
-      min-height: 400px;
-      padding: 20px 0 42px;
+      gap: 25px;
+      padding-top: 45px;
+      padding-bottom: 55px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: contentIn .9s ease both;
     }
 
     .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
       color: var(--accent);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 2.4px;
+      letter-spacing: 3px;
       text-transform: uppercase;
     }
 
-    h1 {
-      margin: 17px 0 12px;
-      font: 600 clamp(58px, 8vw, 100px)/1 "Space Grotesk", sans-serif;
-      letter-spacing: -4px;
+    .eyebrow::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
     }
 
-    .subtitle {
-      color: #c2c9d9;
-      font: 500 20px "Space Grotesk", sans-serif;
+    .hero h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(62px, 8vw, 105px);
+      line-height: .98;
+      letter-spacing: -5px;
+      font-weight: 700;
     }
 
-    .hero-copy {
-      max-width: 580px;
-      margin-top: 20px;
+    .hero h1 span {
+      display: block;
+      margin-top: 14px;
+      color: var(--accent);
+      text-shadow: 0 0 35px rgba(var(--accent-rgb), .2);
+    }
+
+    .hero-description {
+      max-width: 520px;
+      margin: 27px 0;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.95;
     }
 
-    .hero-art {
-      position: relative;
-      min-height: 310px;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      background: radial-gradient(ellipse at center, #55556b28, transparent 68%);
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    .hero-art::before,
-    .hero-art::after {
-      content: "";
+    .button {
+      display: inline-flex;
+      min-height: 45px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: .25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #1a110b;
+      box-shadow: 0 0 25px rgba(var(--accent-rgb), .12);
+    }
+
+    .button-primary:hover {
+      background: var(--accent-light);
+      box-shadow: 0 0 30px rgba(var(--accent-rgb), .23);
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, .025);
+      color: var(--text);
+    }
+
+    .button-secondary:hover {
+      background: var(--glow);
+      border-color: var(--accent);
+    }
+
+    /* MERCURY ILLUSTRATION */
+
+    .hero-visual {
+      min-height: 400px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      perspective: 1000px;
+      isolation: isolate;
+      animation: visualIn 1.2s ease both;
+    }
+
+    .planet-aura {
       position: absolute;
-      width: 310px;
-      height: 100px;
-      border: 1px solid #d2d9eb20;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(var(--accent-rgb), .16);
+      filter: blur(80px);
+      animation: auraPulse 5s ease-in-out infinite;
+    }
+
+    .mercury-system {
+      position: relative;
+      width: min(100%, 440px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      animation: planetFloat 7s ease-in-out infinite;
+    }
+
+    .orbit {
+      position: absolute;
+      width: 105%;
+      height: 54%;
+      border: 1px solid rgba(var(--accent-rgb), .2);
       border-radius: 50%;
       transform: rotate(-25deg);
     }
 
-    .hero-art::after {
-      width: 260px;
-      height: 70px;
-      transform: rotate(35deg);
+    .orbit-two {
+      width: 120%;
+      height: 66%;
+      border-color: rgba(142, 170, 221, .11);
+      transform: rotate(28deg);
     }
 
-    .mercury-sphere {
+    .mercury-planet {
       position: relative;
-      z-index: 1;
-      width: clamp(175px, 23vw, 250px);
+      z-index: 2;
+      width: 48%;
       aspect-ratio: 1;
+      overflow: hidden;
       border-radius: 50%;
       background:
-        radial-gradient(circle at 23% 25%, #dedbd4 0 3%, transparent 4%),
-        radial-gradient(circle at 66% 36%, #555660 0 5%, transparent 6%),
-        radial-gradient(circle at 42% 65%, #c0bdb6 0 4%, transparent 5%),
-        radial-gradient(circle at 70% 72%, #5d5d68 0 3%, transparent 4%),
-        radial-gradient(circle at 30% 70%, #8b8b91 0 6%, transparent 7%),
-        radial-gradient(circle at 34% 29%, #d2d0c9, #93939a 42%, #555763 72%, #242736);
+        radial-gradient(ellipse at 32% 27%, rgba(255, 235, 208, .4), transparent 22%),
+        radial-gradient(circle at 65% 64%, #77716d 0 3%, transparent 4%),
+        radial-gradient(circle at 35% 60%, #aaa19a 0 5%, transparent 6%),
+        radial-gradient(circle at 55% 30%, #5e5956 0 4%, transparent 5%),
+        radial-gradient(circle at 70% 40%, #bbb0a6 0 3%, transparent 4%),
+        radial-gradient(circle at 25% 73%, #635f5c 0 6%, transparent 7%),
+        radial-gradient(circle at 48% 78%, #99908a 0 5%, transparent 6%),
+        repeating-radial-gradient(circle at 35% 40%, #8f8984 0 5px, #77716d 7px, #9f9891 11px, #706b67 16px);
       box-shadow:
-        inset -28px -18px 42px #080910,
-        inset 10px 8px 25px #ffffff20,
-        0 0 65px #b9bfd31b;
-      animation: float 7s ease-in-out infinite;
+        inset -28px -10px 38px rgba(0, 0, 0, .8),
+        inset 10px 3px 24px rgba(255, 232, 209, .22),
+        0 0 55px rgba(var(--accent-rgb), .16);
+      animation: mercuryRotate 40s linear infinite;
     }
 
-    .hero-label {
+    .mercury-planet::before {
+      content: "";
       position: absolute;
-      right: 0;
-      bottom: 12px;
+      inset: 0;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 28% 32%, transparent 0 5px, rgba(35, 32, 30, .7) 6px 8px, transparent 9px),
+        radial-gradient(circle at 62% 24%, transparent 0 3px, rgba(35, 32, 30, .65) 4px 6px, transparent 7px),
+        radial-gradient(circle at 65% 65%, transparent 0 7px, rgba(35, 32, 30, .65) 8px 10px, transparent 11px),
+        radial-gradient(circle at 40% 70%, transparent 0 4px, rgba(35, 32, 30, .7) 5px 7px, transparent 8px),
+        linear-gradient(100deg, transparent 28%, rgba(0, 0, 0, .12) 60%, rgba(0, 0, 0, .8));
+    }
+
+    .mercury-planet::after {
+      content: "";
+      position: absolute;
+      top: 18%;
+      left: 18%;
+      width: 22%;
+      height: 22%;
+      border: 2px solid rgba(48, 43, 40, .4);
+      border-radius: 50%;
+      box-shadow:
+        55px 80px 0 -8px rgba(45, 41, 38, .6),
+        30px 18px 0 -12px rgba(45, 41, 38, .7),
+        -4px 75px 0 -10px rgba(45, 41, 38, .65);
+    }
+
+    .sunlight {
+      position: absolute;
+      top: 5%;
+      right: 5%;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: rgba(255, 155, 77, .18);
+      filter: blur(35px);
+      animation: sunPulse 4s ease-in-out infinite;
+    }
+
+    .visual-label {
+      position: absolute;
+      right: -1%;
+      bottom: 8%;
+      z-index: 5;
       padding: 12px 15px;
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      background: #101626dc;
-      color: var(--muted);
-      font-size: 11px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(10, 14, 26, .88);
       backdrop-filter: blur(10px);
     }
 
-    .hero-label strong {
+    .visual-label strong {
       display: block;
-      color: white;
-      font-size: 13px;
-      margin-bottom: 4px;
+      color: var(--accent);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
     }
 
-    .facts {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      background: #ffffff04;
-      overflow: hidden;
-    }
-
-    .fact {
-      padding: 21px;
-      border-right: 1px solid var(--line);
-    }
-
-    .fact:last-child { border-right: 0; }
-
-    .fact span {
+    .visual-label span {
       display: block;
       color: var(--muted);
-      font-size: 11px;
-      margin-bottom: 9px;
+      font-size: 10px;
     }
 
-    .fact strong {
-      font: 600 clamp(16px, 2vw, 22px) "Space Grotesk", sans-serif;
+    /* SECTION STRUCTURE */
+
+    .section {
+      padding-top: 45px;
+      padding-bottom: 65px;
     }
 
     .section-heading {
-      margin: 55px 0 22px;
+      max-width: 720px;
+      margin-bottom: 30px;
     }
 
-    .section-heading .eyebrow { margin-bottom: 10px; }
-
-    h2 {
-      margin: 0;
-      font: 600 clamp(25px, 4vw, 36px) "Space Grotesk", sans-serif;
-      letter-spacing: -.8px;
+    .section-heading h2 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.15;
+      letter-spacing: -1.5px;
     }
+
+    .section-heading h2 span {
+      color: var(--accent);
+    }
+
+    .section-heading > p:last-child {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* PLANET FACTS */
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .stat-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 142px;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: linear-gradient(145deg, rgba(var(--accent-rgb), .06), rgba(16, 22, 38, .8));
+      transition: transform .3s, border-color .3s, box-shadow .3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(var(--accent-rgb), .5);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .2);
+    }
+
+    .stat-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      display: block;
+      color: var(--accent-light);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(22px, 3vw, 31px);
+      line-height: 1.25;
+    }
+
+    .stat-note {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* OVERVIEW */
 
     .overview-grid {
       display: grid;
-      grid-template-columns: 1.3fr .7fr;
-      gap: 17px;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 24px;
     }
 
-    .panel {
-      padding: clamp(20px, 3vw, 30px);
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      background: linear-gradient(145deg, #ffffff08, #ffffff02);
+    .glass-panel {
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(18, 27, 45, .9), rgba(11, 16, 29, .84));
     }
 
-    .panel h3 {
-      margin: 0 0 14px;
-      font: 600 19px "Space Grotesk", sans-serif;
+    .glass-panel h3 {
+      margin-bottom: 13px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
     }
 
-    .panel p {
-      margin: 0 0 14px;
+    .glass-panel p {
+      margin-bottom: 14px;
       color: var(--muted);
-      font-size: 13px;
-      line-height: 1.95;
+      font-size: 14px;
     }
 
-    .panel p:last-child { margin-bottom: 0; }
-
-    .quick-list {
-      display: grid;
-      gap: 0;
+    .glass-panel p:last-child {
+      margin-bottom: 0;
     }
 
-    .quick-row {
+    .detail-list {
+      list-style: none;
+    }
+
+    .detail-list li {
       display: flex;
       justify-content: space-between;
-      gap: 12px;
-      padding: 13px 0;
-      border-bottom: 1px solid var(--line);
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .065);
       font-size: 12px;
     }
 
-    .quick-row:last-child { border-bottom: 0; }
+    .detail-list li:last-child {
+      border-bottom: 0;
+    }
 
-    .quick-row span { color: var(--muted); }
+    .detail-list span:first-child {
+      color: var(--muted);
+    }
 
-    .quick-row strong {
+    .detail-list span:last-child {
       text-align: right;
+      color: var(--text);
       font-weight: 600;
     }
 
-    .detail-grid {
+    /* FEATURES */
+
+    .features-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 17px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
     }
 
-    .mission-card {
+    .feature-card {
+      min-height: 200px;
+      padding: 25px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 17px;
+      background: rgba(16, 22, 38, .75);
+      transition: transform .3s, border-color .3s, background .3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(var(--accent-rgb), .4);
+      background: rgba(22, 29, 45, .9);
+    }
+
+    .feature-number {
+      display: block;
+      margin-bottom: 17px;
+      color: var(--accent);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 10px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 19px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* SURFACE */
+
+    .surface-layout {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .surface-visual {
+      min-height: 290px;
       position: relative;
       overflow: hidden;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background:
+        radial-gradient(ellipse at center, rgba(var(--accent-rgb), .16), transparent 65%),
+        rgba(12, 17, 30, .8);
+    }
+
+    .surface-disc {
+      width: 190px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 25% 28%, transparent 0 9px, rgba(30, 28, 27, .7) 10px 13px, transparent 14px),
+        radial-gradient(circle at 65% 62%, transparent 0 13px, rgba(30, 28, 27, .65) 14px 17px, transparent 18px),
+        radial-gradient(circle at 45% 75%, transparent 0 5px, rgba(30, 28, 27, .65) 6px 9px, transparent 10px),
+        repeating-radial-gradient(circle at 40% 40%, #a49a91 0 8px, #817a75 10px, #655f5b 17px, #a29a92 23px);
+      box-shadow:
+        inset -30px -10px 35px rgba(0, 0, 0, .8),
+        inset 12px 5px 20px rgba(255, 233, 213, .17),
+        0 0 45px rgba(var(--accent-rgb), .12);
+      animation: mercuryRotate 50s linear infinite;
+    }
+
+    .surface-copy {
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(145deg, rgba(18, 27, 45, .9), rgba(11, 16, 29, .84));
+    }
+
+    .surface-copy h3 {
+      margin-bottom: 13px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 23px;
+    }
+
+    .surface-copy p {
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .surface-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* MISSION */
+
+    .mission-panel {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 25px;
+      padding: 35px;
+      border: 1px solid rgba(var(--accent-rgb), .28);
+      border-radius: 20px;
+      background:
+        radial-gradient(ellipse at 90% 50%, rgba(var(--accent-rgb), .12), transparent 45%),
+        linear-gradient(120deg, rgba(17, 24, 41, .95), rgba(12, 17, 30, .95));
     }
 
     .mission-tag {
       display: inline-block;
       margin-bottom: 14px;
-      padding: 6px 9px;
-      border: 1px solid #c6cbd82c;
-      border-radius: 5px;
-      color: #d4d9e6;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--accent);
       font-size: 10px;
-      letter-spacing: 1px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
     }
 
-    .mission-meta {
-      display: block;
-      margin-top: 14px;
-      color: #d3d9e8;
-      font-size: 11px;
+    .mission-panel h3 {
+      margin-bottom: 12px;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 28px;
     }
 
-    .callout {
-      margin-top: 17px;
-      padding: 23px;
-      border-left: 3px solid #aab5ce;
-      border-radius: 0 10px 10px 0;
-      background: #ffffff06;
+    .mission-panel p {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 14px;
     }
 
-    .callout p {
-      margin: 10px 0 0;
+    /* RESEARCH QUESTIONS */
+
+    .question-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 13px;
+    }
+
+    .question {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      padding: 19px;
+      border: 1px solid rgba(255, 255, 255, .075);
+      border-radius: 13px;
+      background: rgba(16, 22, 38, .7);
+    }
+
+    .question-mark {
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(var(--accent-rgb), .1);
+      color: var(--accent);
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+    }
+
+    .question p {
+      padding-top: 2px;
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.9;
     }
 
-    .sources a {
-      color: #c6d7ff;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
+    /* SOURCES */
 
-    footer {
+    .sources {
       display: flex;
-      justify-content: space-between;
       flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 55px;
-      padding-top: 20px;
-      border-top: 1px solid var(--line);
-      color: #8391aa;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .source-link {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--accent-light);
+      font-size: 12px;
+      font-weight: 600;
+      transition: .25s ease;
+    }
+
+    .source-link:hover {
+      border-color: var(--accent);
+      background: var(--glow);
+    }
+
+    /* PLANET NAVIGATION */
+
+    .planet-navigation {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .planet-link {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: rgba(16, 22, 38, .7);
+      transition: transform .25s, border-color .25s;
+    }
+
+    .planet-link:hover {
+      transform: translateY(-4px);
+      border-color: rgba(var(--accent-rgb), .5);
+    }
+
+    .planet-link small {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .planet-link strong {
+      color: var(--accent-light);
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 22px;
+    }
+
+    .planet-link span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* FOOTER */
+
+    .site-footer {
+      margin-top: 30px;
+      padding: 28px 0;
+      border-top: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .footer-brand {
+      color: var(--accent);
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .footer-inner p {
+      color: var(--muted);
       font-size: 11px;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-9px); }
+    /* SCROLL REVEAL */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .7s ease, transform .7s ease;
     }
 
-    @media (max-width: 760px) {
-      .hero { grid-template-columns: 1fr; gap: 0; }
-      .hero-art { min-height: 270px; }
-      .facts { grid-template-columns: repeat(2, 1fr); }
-      .fact:nth-child(2) { border-right: 0; }
-      .fact:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-      .overview-grid, .detail-grid { grid-template-columns: 1fr; }
-      h1 { letter-spacing: -2px; }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    @media (max-width: 450px) {
-      .shell { padding: 18px; }
-      nav { gap: 13px; }
-      .hero { padding-top: 10px; }
-      .fact { padding: 16px; }
-      .hero-label { right: 2px; }
+    /* ANIMATIONS */
+
+    @keyframes starDrift {
+      from { background-position: 0 0; }
+      to { background-position: 370px 300px; }
+    }
+
+    @keyframes auraPulse {
+      0%, 100% {
+        opacity: .65;
+        transform: scale(.92);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.08);
+      }
+    }
+
+    @keyframes planetFloat {
+      0%, 100% {
+        transform: translateY(0) rotate(0);
+      }
+      50% {
+        transform: translateY(-12px) rotate(1deg);
+      }
+    }
+
+    @keyframes mercuryRotate {
+      from { filter: brightness(.95); }
+      50% { filter: brightness(1.07); }
+      to { filter: brightness(.95); }
+    }
+
+    @keyframes sunPulse {
+      0%, 100% {
+        opacity: .6;
+        transform: scale(.9);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.12);
+      }
+    }
+
+    @keyframes contentIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes visualIn {
+      from {
+        opacity: 0;
+        transform: scale(.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 1000px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding-top: 50px;
+      }
+
+      .hero-content {
+        text-align: center;
+      }
+
+      .hero-content .eyebrow {
+        justify-content: center;
+      }
+
+      .hero-description {
+        margin-inline: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        min-height: 350px;
+      }
+
+      .mercury-system {
+        max-width: 380px;
+      }
+
+      .overview-grid,
+      .surface-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .mission-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .mission-panel .button {
+        justify-self: start;
+      }
+
+      .surface-visual {
+        min-height: 260px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container,
+      .back-button-wrap {
+        width: calc(100% - 30px);
+      }
+
+      .back-button-wrap {
+        margin-top: 15px;
+      }
+
+      .hero {
+        padding-top: 40px;
+        padding-bottom: 35px;
+      }
+
+      .hero h1 {
+        font-size: clamp(53px, 14vw, 76px);
+        letter-spacing: -3px;
+      }
+
+      .hero-description {
+        font-size: 13px;
+      }
+
+      .hero-visual {
+        min-height: 275px;
+      }
+
+      .mercury-system {
+        max-width: 300px;
+      }
+
+      .planet-aura {
+        width: 220px;
+        height: 220px;
+      }
+
+      .visual-label {
+        right: 0;
+        bottom: 0;
+        padding: 9px 11px;
+      }
+
+      .section {
+        padding-top: 30px;
+        padding-bottom: 45px;
+      }
+
+      .section-heading h2 {
+        font-size: 32px;
+      }
+
+      .stats-grid {
+        gap: 10px;
+      }
+
+      .stat-card {
+        min-height: 120px;
+        padding: 16px;
+      }
+
+      .stat-value {
+        font-size: 22px;
+      }
+
+      .stat-label {
+        font-size: 9px;
+      }
+
+      .glass-panel,
+      .surface-copy {
+        padding: 21px;
+      }
+
+      .features-grid,
+      .question-list,
+      .planet-navigation {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card {
+        min-height: auto;
+      }
+
+      .mission-panel {
+        padding: 23px;
+      }
+
+      .mission-panel h3 {
+        font-size: 24px;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
+      *,
+      *::before,
+      *::after {
         scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="shell">
 
-    <header class="topbar">
-      <a class="brand" href="index.html">
-        <span class="brand-mark" aria-hidden="true">✳</span>
-        <span>COSMOS</span>
-      </a>
-
-      <nav aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="planets.html">Planets</a>
-        <a href="missions.html">Missions</a>
-        <a href="research.html">Research</a>
-        <a href="about.html">About</a>
-      </nav>
-    </header>
-
-    <div class="breadcrumb">
-      <a href="index.html">Home</a>
-      <span>/</span>
-      <a href="planets.html">Planets</a>
-      <span>/</span>
-      <span>Mercury</span>
-    </div>
-
-    <main>
-      <section class="hero">
-        <div>
-          <div class="eyebrow">01 / INNER SOLAR SYSTEM</div>
-          <h1>Mercury</h1>
-          <div class="subtitle">The smallest planet.</div>
-
-          <p class="hero-copy">
-            Mercury is the closest planet to the Sun and the smallest
-            of the eight planets. Its ancient, cratered surface preserves
-            evidence of billions of years of impacts. Despite its proximity
-            to the Sun, Mercury is not the hottest planet—that distinction
-            belongs to Venus, whose dense atmosphere traps heat.
-          </p>
-        </div>
-
-        <div class="hero-art" role="img" aria-label="Stylized illustration of Mercury">
-          <div class="mercury-sphere"></div>
-          <div class="hero-label">
-            <strong>Mercury</strong>
-            A world of extremes
-          </div>
-        </div>
-      </section>
-
-      <section class="facts" aria-label="Mercury key facts">
-        <div class="fact">
-          <span>MEAN DIAMETER</span>
-          <strong>4,879 km</strong>
-        </div>
-        <div class="fact">
-          <span>MEAN DISTANCE FROM SUN</span>
-          <strong>57.9 million km</strong>
-        </div>
-        <div class="fact">
-          <span>ORBITAL PERIOD</span>
-          <strong>88 Earth days</strong>
-        </div>
-        <div class="fact">
-          <span>NATURAL MOONS</span>
-          <strong>0</strong>
-        </div>
-      </section>
-
-      <section>
-        <div class="section-heading">
-          <div class="eyebrow">PLANET PROFILE</div>
-          <h2>Understanding Mercury</h2>
-        </div>
-
-        <div class="overview-grid">
-          <article class="panel">
-            <h3>Overview</h3>
-            <p>
-              Mercury is a terrestrial planet with a large metallic core
-              relative to its overall size. Its surface resembles the
-              Moon in many ways, with impact craters, ancient plains and
-              long cliffs formed as the planet gradually cooled and
-              contracted.
-            </p>
-            <p>
-              Because Mercury has almost no substantial atmosphere,
-              it cannot retain heat effectively. Daytime temperatures
-              can reach about 430°C, while nighttime temperatures can
-              fall to around −180°C. Its slow rotation and long solar day
-              contribute to its unusual thermal environment.
-            </p>
-            <p>
-              Scientists study Mercury to understand how rocky planets
-              form, how their interiors evolve, and how intense solar
-              radiation affects worlds close to their stars.
-            </p>
-          </article>
-
-          <aside class="panel">
-            <h3>Quick facts</h3>
-            <div class="quick-list">
-              <div class="quick-row"><span>Planet type</span><strong>Terrestrial</strong></div>
-              <div class="quick-row"><span>Mean radius</span><strong>2,440 km</strong></div>
-              <div class="quick-row"><span>Surface gravity</span><strong>3.7 m/s²</strong></div>
-              <div class="quick-row"><span>Rotation period</span><strong>About 59 days</strong></div>
-              <div class="quick-row"><span>Atmosphere</span><strong>Extremely thin exosphere</strong></div>
-              <div class="quick-row"><span>Rings</span><strong>None known</strong></div>
-              <div class="quick-row"><span>Known moons</span><strong>0</strong></div>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section>
-        <div class="section-heading">
-          <div class="eyebrow">SCIENCE & GEOLOGY</div>
-          <h2>A planet of extremes</h2>
-        </div>
-
-        <div class="detail-grid">
-          <article class="panel">
-            <h3>Surface and geology</h3>
-            <p>
-              Mercury's surface is covered with craters formed by
-              collisions with asteroids and comets. The Caloris Basin
-              is one of its largest known impact structures. Long,
-              steep scarps cross parts of the planet, evidence that
-              Mercury contracted as its interior cooled.
-            </p>
-          </article>
-
-          <article class="panel">
-            <h3>Interior and magnetic field</h3>
-            <p>
-              Mercury has an unusually large iron-rich core. Measurements
-              indicate that it possesses a global magnetic field, much
-              weaker than Earth's. Studying the field helps researchers
-              investigate the planet's interior and its partially liquid
-              outer core.
-            </p>
-          </article>
-
-          <article class="panel">
-            <h3>Exosphere and temperature</h3>
-            <p>
-              Mercury's exosphere is extremely sparse and is not like
-              Earth's atmosphere. Atoms are supplied and removed by
-              processes including solar radiation, micrometeoroid impacts
-              and interactions with the surface. With little insulation,
-              the surface experiences extreme temperature changes.
-            </p>
-          </article>
-
-          <article class="panel">
-            <h3>Water ice and polar craters</h3>
-            <p>
-              Some permanently shadowed craters near Mercury's poles
-              contain evidence of water ice. Although the planet is close
-              to the Sun, crater floors that never receive direct sunlight
-              can remain extremely cold. This makes Mercury an important
-              world for studying volatile materials.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section>
-        <div class="section-heading">
-          <div class="eyebrow">EXPLORATION HISTORY</div>
-          <h2>Missions to Mercury</h2>
-        </div>
-
-        <div class="detail-grid">
-          <article class="panel mission-card">
-            <span class="mission-tag">NASA · 1974–1975</span>
-            <h3>Mariner 10</h3>
-            <p>
-              Mariner 10 was the first spacecraft to visit Mercury.
-              During three flybys, it photographed portions of the
-              planet's surface and gathered important data about its
-              magnetic field and extremely thin exosphere. Its observations
-              transformed Mercury from a poorly known world into a planet
-              that scientists could study in detail.
-            </p>
-            <span class="mission-meta">Mission status: Completed</span>
-          </article>
-
-          <article class="panel mission-card">
-            <span class="mission-tag">NASA · 2004–2015</span>
-            <h3>MESSENGER</h3>
-            <p>
-              MESSENGER became the first spacecraft to orbit Mercury in
-              2011. It mapped the planet extensively, measured its magnetic
-              field and chemical composition, and provided evidence of
-              water ice in permanently shadowed polar regions. The mission
-              ended in 2015 when the spacecraft impacted Mercury.
-            </p>
-            <span class="mission-meta">Mission status: Completed</span>
-          </article>
-
-          <article class="panel mission-card">
-            <span class="mission-tag">ESA / JAXA</span>
-            <h3>BepiColombo</h3>
-            <p>
-              BepiColombo is a joint mission of the European Space Agency
-              and the Japan Aerospace Exploration Agency. Its spacecraft
-              are designed to investigate Mercury's interior, surface,
-              exosphere and magnetosphere. The mission uses a complex
-              series of planetary flybys before entering its planned
-              operational orbits.
-            </p>
-            <span class="mission-meta">Mission status: En route; check official updates</span>
-          </article>
-
-          <article class="panel mission-card">
-            <span class="mission-tag">WHY IT MATTERS</span>
-            <h3>What missions reveal</h3>
-            <p>
-              Spacecraft measurements help scientists test theories
-              about Mercury's unusually large core, magnetic field,
-              geological history and polar ice. Combining images,
-              spectroscopy and gravity measurements allows researchers
-              to investigate how Mercury formed and how rocky planets
-              change over time.
-            </p>
-            <span class="mission-meta">Research field: Planetary science</span>
-          </article>
-        </div>
-      </section>
-
-      <section>
-        <div class="section-heading">
-          <div class="eyebrow">OPEN QUESTIONS</div>
-          <h2>What are scientists investigating?</h2>
-        </div>
-
-        <div class="panel">
-          <p>
-            Mercury still presents major scientific questions. Why is its
-            metallic core so large compared with the planet's total size?
-            How did its magnetic field evolve? What is the composition of
-            its permanently shadowed polar deposits, and how much water
-            ice do they contain? How have volcanic activity, impacts and
-            contraction shaped the surface through geological time?
-          </p>
-          <p>
-            Data from earlier missions and the BepiColombo mission are
-            helping scientists investigate these questions. New
-            measurements can refine existing models and reveal details
-            that earlier spacecraft could not observe.
-          </p>
-        </div>
-      </section>
-
-      <section>
-        <div class="section-heading">
-          <div class="eyebrow">CONTINUE EXPLORING</div>
-          <h2>Explore another world</h2>
-        </div>
-
-        <div class="detail-grid">
-          <a class="panel" href="venus.html">
-            <h3>Venus →</h3>
-            <p>Explore the hottest planet and its dense carbon dioxide atmosphere.</p>
-          </a>
-          <a class="panel" href="planets.html">
-            <h3>All Planets →</h3>
-            <p>Return to the Planet Explorer and choose another world.</p>
-          </a>
-        </div>
-      </section>
-
-      <section class="callout sources">
-        <div class="eyebrow">SCIENTIFIC SOURCES</div>
-        <h3>Continue your research</h3>
-        <p>
-          <a href="https://science.nasa.gov/mercury/" target="_blank" rel="noopener noreferrer">NASA Science — Mercury</a>
-          &nbsp;·&nbsp;
-          <a href="https://solarsystem.nasa.gov/planets/mercury/overview/" target="_blank" rel="noopener noreferrer">NASA Solar System — Mercury</a>
-          &nbsp;·&nbsp;
-          <a href="https://www.esa.int/Science_Exploration/Space_Science/BepiColombo" target="_blank" rel="noopener noreferrer">ESA — BepiColombo</a>
-        </p>
-      </section>
-    </main>
-
-    <footer>
-      <span>© 2026 COSMOS · Explore. Understand. Discover.</span>
-      <a href="planets.html">← Back to Planet Explorer</a>
-    </footer>
-
+  <!-- TOP BACK BUTTON: NO HEADER OR NAVBAR -->
+  <div class="back-button-wrap">
+    <a href="./planets.html" class="back-button">
+      <span class="back-arrow" aria-hidden="true">←</span>
+      <span>Back to Planets</span>
+    </a>
   </div>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="container hero">
+      <div class="hero-content">
+        <p class="eyebrow">Solar System / Planet 01</p>
+
+        <h1>
+          Mercury
+          <span>The Swift World</span>
+        </h1>
+
+        <p class="hero-description">
+          The smallest planet and the closest world to the Sun. Mercury is a
+          heavily cratered rocky planet with extreme temperatures, an ancient
+          surface and a surprisingly complex geological history.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#overview">
+            Explore Mercury <span aria-hidden="true">↘</span>
+          </a>
+
+          <a class="button button-secondary" href="#missions">
+            Discover Missions <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual" role="img" aria-label="Stylized illustration of Mercury's rocky cratered surface">
+        <div class="planet-aura"></div>
+        <div class="sunlight"></div>
+
+        <div class="mercury-system">
+          <div class="orbit"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="mercury-planet"></div>
+        </div>
+
+        <div class="visual-label">
+          <strong>TERRESTRIAL PLANET</strong>
+          <span>Mercury System</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FACTS -->
+    <section class="container section reveal" id="overview">
+      <div class="section-heading">
+        <p class="eyebrow">Planetary Profile</p>
+        <h2>Mercury at a <span>Glance</span></h2>
+        <p>
+          Essential facts about the smallest planet, from its rapid orbit
+          around the Sun to its extraordinary temperature extremes.
+        </p>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card">
+          <span class="stat-label">Distance from Sun</span>
+          <strong class="stat-value">57.9M km</strong>
+          <span class="stat-note">Average orbital distance</span>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-label">Planet Diameter</span>
+          <strong class="stat-value">4,879 km</strong>
+          <span class="stat-note">Approximate diameter</span>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-label">Orbital Period</span>
+          <strong class="stat-value">88 Days</strong>
+          <span class="stat-note">One Mercury year</span>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-label">Known Moons</span>
+          <strong class="stat-value">0</strong>
+          <span class="stat-note">No natural satellites</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- OVERVIEW -->
+    <section class="container section reveal">
+      <div class="section-heading">
+        <p class="eyebrow">Inside the Planet</p>
+        <h2>Understanding <span>Mercury</span></h2>
+        <p>
+          Despite its small size, Mercury preserves important clues about
+          the formation and evolution of rocky planets.
+        </p>
+      </div>
+
+      <div class="overview-grid">
+        <article class="glass-panel">
+          <h3>A Small World with a Large Iron Core</h3>
+
+          <p>
+            Mercury is a terrestrial planet made of rock and metal. A large
+            metallic core occupies much of its interior, making Mercury
+            unusually dense for its size.
+          </p>
+
+          <p>
+            Its ancient surface is covered in impact craters, broad plains and
+            long cliffs. These features record billions of years of collisions
+            and gradual changes to the planet's crust.
+          </p>
+
+          <p>
+            Mercury also has a global magnetic field, although it is much weaker
+            than Earth's. Scientists use this field to investigate the planet's
+            interior and its interaction with the solar wind.
+          </p>
+        </article>
+
+        <article class="glass-panel">
+          <h3>Planetary Data</h3>
+
+          <ul class="detail-list">
+            <li><span>Planet Type</span><span>Terrestrial</span></li>
+            <li><span>Position</span><span>1st from the Sun</span></li>
+            <li><span>Rotation Period</span><span>About 58.6 Earth days</span></li>
+            <li><span>Orbital Period</span><span>88 Earth days</span></li>
+            <li><span>Atmosphere</span><span>Extremely thin exosphere</span></li>
+            <li><span>Natural Moons</span><span>None</span></li>
+            <li><span>Global Magnetic Field</span><span>Present</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="container section reveal" id="features">
+      <div class="section-heading">
+        <p class="eyebrow">World of Extremes</p>
+        <h2>What Makes Mercury <span>Unique?</span></h2>
+        <p>
+          Mercury's unusual orbit, ancient terrain and extreme environment
+          make it one of the most fascinating rocky planets.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <span class="feature-number">01 / ORBIT</span>
+          <h3>The Fastest Orbit</h3>
+          <p>
+            Mercury travels around the Sun in only 88 Earth days. Its average
+            orbital speed is about 47 kilometres per second, faster than that
+            of any other planet.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-number">02 / TEMPERATURE</span>
+          <h3>Extreme Temperature Swings</h3>
+          <p>
+            Daytime temperatures can reach about 430°C, while nighttime
+            temperatures may fall to around −180°C because the planet has
+            almost no atmosphere to retain heat.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-number">03 / GEOLOGY</span>
+          <h3>An Ancient Cratered Surface</h3>
+          <p>
+            Countless impact craters cover Mercury. The Caloris Basin is one
+            of its largest known impact structures, created by an enormous
+            collision early in the planet's history.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-number">04 / INTERIOR</span>
+          <h3>A Massive Metallic Core</h3>
+          <p>
+            Mercury has a proportionally large iron-rich core. Its structure
+            provides clues about how terrestrial planets formed and evolved.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-number">05 / MAGNETISM</span>
+          <h3>A Global Magnetic Field</h3>
+          <p>
+            Mercury has a weak intrinsic magnetic field. Studying its
+            magnetosphere helps scientists understand the planet's interior
+            and the effects of the solar wind.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-number">06 / ICE</span>
+          <h3>Water Ice Near the Sun</h3>
+          <p>
+            Permanently shadowed craters near Mercury's poles contain evidence
+            of water ice. Some crater floors remain cold despite the planet's
+            proximity to the Sun.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SURFACE -->
+    <section class="container section reveal" id="surface">
+      <div class="section-heading">
+        <p class="eyebrow">Geological Landscape</p>
+        <h2>A Surface Shaped by <span>Time</span></h2>
+        <p>
+          Mercury's landscape preserves a record of ancient impacts,
+          volcanic activity and the slow contraction of its interior.
+        </p>
+      </div>
+
+      <div class="surface-layout">
+        <div class="surface-visual" role="img" aria-label="Stylized close-up illustration of Mercury's cratered terrain">
+          <div class="surface-disc"></div>
+        </div>
+
+        <article class="surface-copy">
+          <h3>A World of Craters and Cliffs</h3>
+
+          <p>
+            Mercury's surface resembles Earth's Moon in many ways. It is
+            heavily cratered, with older regions preserving evidence of
+            collisions from the early Solar System.
+          </p>
+
+          <p>
+            Large impact basins, smooth volcanic plains and long lobate scarps
+            reveal a complicated geological past. The scarps formed as Mercury's
+            interior cooled and the planet contracted.
+          </p>
+
+          <p>
+            At the poles, deep craters can remain permanently shaded. Spacecraft
+            observations indicate that water ice is preserved in some of these
+            extremely cold regions.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ATMOSPHERE -->
+    <section class="container section reveal" id="atmosphere">
+      <div class="section-heading">
+        <p class="eyebrow">The Space Environment</p>
+        <h2>Mercury's Thin <span>Exosphere</span></h2>
+        <p>
+          Mercury does not have a substantial atmosphere like Earth.
+          Instead, it is surrounded by an extremely thin exosphere.
+        </p>
+      </div>
+
+      <div class="overview-grid">
+        <article class="glass-panel">
+          <h3>Almost a Vacuum</h3>
+
+          <p>
+            Atoms near Mercury can be released from the surface by sunlight,
+            energetic particles and impacts from tiny meteoroids. These atoms
+            form a very thin exosphere rather than a dense atmosphere.
+          </p>
+
+          <p>
+            Because the exosphere is so thin, it cannot efficiently transport
+            heat from the sunlit side to the dark side. This contributes to
+            Mercury's extreme temperature differences.
+          </p>
+        </article>
+
+        <article class="glass-panel">
+          <h3>Environmental Conditions</h3>
+
+          <ul class="detail-list">
+            <li><span>Daytime High</span><span>About 430°C</span></li>
+            <li><span>Nighttime Low</span><span>About −180°C</span></li>
+            <li><span>Atmosphere</span><span>Very thin exosphere</span></li>
+            <li><span>Surface Liquid Water</span><span>Not stable</span></li>
+            <li><span>Polar Water Ice</span><span>Evidence detected</span></li>
+            <li><span>Solar Radiation</span><span>Very intense</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- MISSIONS -->
+    <section class="container section reveal" id="missions">
+      <div class="section-heading">
+        <p class="eyebrow">Robotic Exploration</p>
+        <h2>Humanity's Journey to <span>Mercury</span></h2>
+        <p>
+          Reaching Mercury is difficult because a spacecraft must manage the
+          Sun's strong gravity and intense radiation environment.
+        </p>
+      </div>
+
+      <article class="mission-panel">
+        <div>
+          <span class="mission-tag">Major Exploration Mission</span>
+          <h3>MESSENGER</h3>
+          <p>
+            NASA's MESSENGER spacecraft became the first spacecraft to orbit
+            Mercury in 2011. It mapped the planet, studied its magnetic field
+            and exosphere, and gathered evidence about polar water ice. The
+            mission concluded in 2015 when the spacecraft impacted Mercury.
+          </p>
+        </div>
+
+        <a class="button button-primary" href="./missions.html">
+          Explore Missions <span aria-hidden="true">↗</span>
+        </a>
+      </article>
+
+      <div class="overview-grid" style="margin-top: 18px;">
+        <article class="glass-panel">
+          <h3>Mariner 10</h3>
+          <p>
+            NASA's Mariner 10 spacecraft flew past Mercury three times in
+            1974–1975. It returned the first close-up images of the planet
+            and discovered its weak magnetic field.
+          </p>
+        </article>
+
+        <article class="glass-panel">
+          <h3>BepiColombo</h3>
+          <p>
+            The European Space Agency and Japan Aerospace Exploration Agency
+            developed BepiColombo to investigate Mercury's surface, interior,
+            magnetic field and interaction with the solar wind. Its mission
+            will expand our understanding of this difficult-to-reach world.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section class="container section reveal" id="research">
+      <div class="section-heading">
+        <p class="eyebrow">Open Questions</p>
+        <h2>Mercury's Unsolved <span>Mysteries</span></h2>
+        <p>
+          Despite decades of exploration, Mercury still holds important
+          questions for planetary scientists.
+        </p>
+      </div>
+
+      <div class="question-list">
+        <article class="question">
+          <span class="question-mark">?</span>
+          <p>
+            Why does Mercury have such a large metallic core relative to
+            the size of the planet?
+          </p>
+        </article>
+
+        <article class="question">
+          <span class="question-mark">?</span>
+          <p>
+            How did water ice survive in permanently shadowed polar craters
+            so close to the Sun?
+          </p>
+        </article>
+
+        <article class="question">
+          <span class="question-mark">?</span>
+          <p>
+            How did Mercury's magnetic field form, and how has it changed
+            over the planet's history?
+          </p>
+        </article>
+
+        <article class="question">
+          <span class="question-mark">?</span>
+          <p>
+            What can Mercury's ancient surface tell us about the early
+            formation of the Solar System?
+          </p>
+        </article>
+      </div>
+
+      <div class="sources">
+        <a class="source-link" href="https://science.nasa.gov/mercury/" target="_blank" rel="noopener noreferrer">NASA Mercury</a>
+        <a class="source-link" href="https://science.nasa.gov/mission/messenger/" target="_blank" rel="noopener noreferrer">NASA MESSENGER</a>
+        <a class="source-link" href="https://www.esa.int/Science_Exploration/Space_Science/BepiColombo" target="_blank" rel="noopener noreferrer">ESA BepiColombo</a>
+        <a class="source-link" href="https://science.nasa.gov/solar-system/planets/mercury/" target="_blank" rel="noopener noreferrer">Solar System Science</a>
+      </div>
+    </section>
+
+    <!-- OTHER PLANETS -->
+    <section class="container section reveal">
+      <div class="section-heading">
+        <p class="eyebrow">Continue Exploring</p>
+        <h2>Your Next <span>Destination</span></h2>
+        <p>
+          Continue your journey through the inner Solar System.
+        </p>
+      </div>
+
+      <div class="planet-navigation">
+        <a class="planet-link" href="./planets.html">
+          <small>Return To</small>
+          <strong>Planet Explorer</strong>
+          <span>Explore all the planets in our Solar System</span>
+        </a>
+
+        <a class="planet-link" href="./venus.html">
+          <small>Next Planet</small>
+          <strong>Venus</strong>
+          <span>The scorching world beneath thick clouds</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a href="./index.html" class="footer-brand">COSMOS</a>
+      <p>Exploring the universe, one discovery at a time.</p>
+      <p>© <span id="currentYear"></span> COSMOS</p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      // Automatically update the copyright year.
+      const yearElement = document.getElementById("currentYear");
+
+      if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+      }
+
+      // Reveal sections as they enter the viewport.
+      const revealElements = document.querySelectorAll(".reveal");
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          (entries, currentObserver) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                currentObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+
+        revealElements.forEach((element) => {
+          observer.observe(element);
+        });
+      } else {
+        revealElements.forEach((element) => {
+          element.classList.add("visible");
+        });
+      }
+    })();
+  </script>
+
 </body>
 </html>
