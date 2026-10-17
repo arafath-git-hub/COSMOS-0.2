@@ -2,348 +2,1451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore galaxies, nebulae, star formation, stellar evolution, supernovae, neutron stars, and the life cycles of stars.">
-  <title>Galaxies &amp; Stars | COSMOS</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080916">
+<meta name="description" content="Explore galaxies, stellar evolution, nebulae, supernovae and the science of stars with COSMOS.">
+<title>Galaxies &amp; Stars | COSMOS</title>
 
-  <style>
-    .research-detail{width:min(1100px,calc(100% - 40px));margin:auto;padding:38px 0 70px;color:#edf4ff}
-    .research-detail a{color:#65e4df}
-    .detail-back{display:inline-block;margin-bottom:26px;text-decoration:none}
-    .detail-hero{padding:clamp(24px,5vw,48px);border:1px solid #263d56;border-radius:16px;background:radial-gradient(ellipse at 85% 15%,rgba(113,77,220,.23),transparent 45%),linear-gradient(135deg,#101b30,#0a1323)}
-    .detail-eyebrow{color:#65e4df;font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-    .detail-hero h1{margin:12px 0;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-1.5px}
-    .detail-hero p,.detail-section p,.detail-section li{color:#aab8ce;font-size:.97rem;line-height:1.85}
-    .detail-hero p{max-width:740px;margin-bottom:0}
-    .detail-section{margin-top:36px}
-    .detail-section h2{margin-bottom:14px;font-size:clamp(1.4rem,3vw,1.9rem)}
-    .detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
-    .detail-card{padding:22px;border:1px solid #263d56;border-radius:12px;background:linear-gradient(145deg,#101b2d,#0b1424)}
-    .detail-card h3{margin-top:0;font-size:1.05rem}
-    .detail-card p{margin-bottom:0;font-size:.88rem}
-    .detail-list{padding-left:22px}
-    .detail-links{display:flex;flex-wrap:wrap;gap:12px}
-    .detail-link{display:inline-block;padding:10px 14px;border:1px solid #2a5263;border-radius:8px;text-decoration:none}
-    .detail-link:hover{border-color:#65e4df;background:#122239}
-    .fact-panel{margin-top:18px;padding:20px;border-left:3px solid #65e4df;border-radius:0 10px 10px 0;background:#0e1b2b}
-    .fact-panel p{margin:0}
-    @media(max-width:760px){.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(max-width:520px){.research-detail{width:calc(100% - 28px);padding-top:25px}.detail-grid{grid-template-columns:1fr}.detail-card{padding:18px}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
-  </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #080916;
+  --panel: rgba(19, 20, 43, .82);
+  --text: #f5f3ff;
+  --muted: #a7a9c5;
+  --accent: #a996ff;
+  --cyan: #79dcff;
+  --pink: #fa91e8;
+  --gold: #ffd38b;
+  --line: rgba(169, 150, 255, .19);
+  --glow: rgba(140, 113, 255, .18);
+  --radius: 21px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 75px;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 78% 9%, rgba(90, 49, 145, .2), transparent 32%),
+    radial-gradient(ellipse at 8% 38%, rgba(35, 91, 143, .13), transparent 30%),
+    var(--bg);
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .4;
+  background-image:
+    radial-gradient(1px 1px at 12% 17%, #fff 99%, transparent),
+    radial-gradient(1px 1px at 72% 31%, #c4baff 99%, transparent),
+    radial-gradient(2px 2px at 41% 78%, #fff 99%, transparent),
+    radial-gradient(1px 1px at 87% 83%, #83dcff 99%, transparent),
+    radial-gradient(1px 1px at 24% 59%, #fff 99%, transparent);
+  background-size: 280px 280px, 340px 340px, 310px 310px,
+                   390px 390px, 250px 250px;
+  animation: starsDrift 100s linear infinite;
+}
+
+a { color: inherit; }
+button, input { font: inherit; }
+
+::selection {
+  background: rgba(169, 150, 255, .32);
+}
+
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  z-index: 1000;
+  background: linear-gradient(90deg, var(--cyan), var(--accent), var(--pink));
+  box-shadow: 0 0 15px var(--accent);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 23px clamp(16px, 6vw, 85px);
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(15, 16, 35, .78);
+  color: #ded7ff;
+  text-decoration: none;
+  font-size: .87rem;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(12px);
+  transition: .25s ease;
+}
+
+.back-link:hover {
+  transform: translateX(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 0 25px var(--glow);
+}
+
+.container {
+  width: min(1120px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: .72rem;
+  font-weight: 700;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.hero {
+  min-height: 605px;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 30px;
+  padding: 40px 0 88px;
+}
+
+.hero-copy { position: relative; z-index: 1; }
+
+.hero h1 {
+  margin: 20px 0;
+  font: 700 clamp(3.1rem, 7.5vw, 6.4rem)/.99 "Space Grotesk", sans-serif;
+  letter-spacing: -.075em;
+}
+
+.hero h1 span {
+  display: block;
+  color: transparent;
+  background: linear-gradient(105deg, #f6f0ff 2%, #b7a6ff 40%, #79dcff 72%, #f8a8e9);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.hero-copy > p {
+  max-width: 550px;
+  color: var(--muted);
+  font-size: 1.03rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 27px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 17px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: .88rem;
+  transition: .25s ease;
+}
+
+.btn-primary {
+  color: #111027;
+  border-color: transparent;
+  background: linear-gradient(110deg, #b8a9ff, #83ddff);
+}
+
+.btn-secondary { background: rgba(255,255,255,.035); }
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 28px var(--glow);
+}
+
+/* Animated galaxy illustration */
+
+.galaxy-stage {
+  min-height: 410px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  isolation: isolate;
+}
+
+.galaxy-stage::before,
+.galaxy-stage::after {
+  content: "";
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border: 1px solid rgba(169, 150, 255, .19);
+  border-radius: 50%;
+  animation: orbit 36s linear infinite;
+}
+
+.galaxy-stage::after {
+  width: 410px;
+  height: 410px;
+  border-style: dashed;
+  border-color: rgba(121, 220, 255, .13);
+  animation-direction: reverse;
+  animation-duration: 58s;
+}
+
+.galaxy {
+  width: clamp(220px, 31vw, 330px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: relative;
+  transform: rotate(-24deg);
+  background:
+    radial-gradient(ellipse at center,
+      #fff 0%, #d8caff 3%, #a58aff 8%,
+      rgba(151, 117, 255, .65) 15%,
+      transparent 35%),
+    repeating-radial-gradient(ellipse at center,
+      transparent 0 12px,
+      rgba(155, 135, 255, .11) 13px 15px,
+      transparent 17px 23px);
+  box-shadow: 0 0 45px rgba(140, 113, 255, .2);
+  animation: galaxyFloat 7s ease-in-out infinite;
+}
+
+.galaxy::before,
+.galaxy::after {
+  content: "";
+  position: absolute;
+  inset: 14% -8%;
+  border-radius: 50%;
+  border: 12px solid rgba(137, 119, 255, .24);
+  border-left-color: rgba(121, 220, 255, .52);
+  border-right-color: rgba(250, 145, 232, .5);
+  transform: rotate(-30deg) scaleY(.38);
+  filter: blur(4px);
+}
+
+.galaxy::after {
+  inset: 23% -17%;
+  border-width: 5px;
+  border-color: rgba(121, 220, 255, .3);
+  transform: rotate(27deg) scaleY(.33);
+  filter: blur(2px);
+}
+
+.galaxy-core {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  left: calc(50% - 14px);
+  top: calc(50% - 14px);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 20px 10px rgba(198, 180, 255, .65),
+              0 0 65px 25px rgba(140, 113, 255, .45);
+}
+
+.galaxy-label {
+  position: absolute;
+  bottom: 1px;
+  color: #c4bddf;
+  font-size: .7rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.galaxy-orbit {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 1px solid rgba(121, 220, 255, .2);
+  animation: orbit 20s linear infinite;
+}
+
+.galaxy-orbit span {
+  position: absolute;
+  left: 4%;
+  top: 25%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 15px var(--cyan);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
+}
+
+.metric {
+  padding: 19px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(20, 19, 42, .84);
+  backdrop-filter: blur(12px);
+}
+
+.metric strong {
+  display: block;
+  color: var(--cyan);
+  font: 700 clamp(1.25rem, 3vw, 2rem) "Space Grotesk", sans-serif;
+  letter-spacing: -.05em;
+}
+
+.metric span { color: var(--muted); font-size: .8rem; }
+
+section { padding: 88px 0 12px; }
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 25px;
+  margin-bottom: 28px;
+}
+
+.section-head h2 {
+  font: 600 clamp(2rem, 4vw, 3.15rem)/1.12 "Space Grotesk", sans-serif;
+  letter-spacing: -.055em;
+  margin: 12px 0 0;
+}
+
+.section-head > p {
+  max-width: 410px;
+  color: var(--muted);
+  font-size: .9rem;
+  margin: 0;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: linear-gradient(145deg, rgba(28, 26, 57, .88), rgba(14, 16, 34, .92));
+  padding: 24px;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+}
+
+.panel:hover {
+  transform: translateY(-5px);
+  border-color: rgba(169, 150, 255, .48);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, .2);
+}
+
+.panel-number {
+  color: var(--cyan);
+  font-size: .74rem;
+  letter-spacing: .14em;
+  font-weight: 700;
+}
+
+.panel h3 {
+  margin: 12px 0 8px;
+  font: 600 1.22rem "Space Grotesk", sans-serif;
+}
+
+.panel p { color: var(--muted); font-size: .9rem; margin: 0; }
+
+.topic-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.search-wrap { flex: 1 1 260px; }
+
+.search-wrap input {
+  width: 100%;
+  padding: 13px 15px;
+  color: var(--text);
+  background: rgba(255,255,255,.035);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  outline: none;
+}
+
+.search-wrap input:focus { border-color: var(--accent); }
+.search-wrap input::placeholder { color: #8587a9; }
+
+.filter-btn {
+  cursor: pointer;
+  padding: 9px 13px;
+  color: var(--muted);
+  background: rgba(255,255,255,.025);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: .82rem;
+  transition: .2s;
+}
+
+.filter-btn.active, .filter-btn:hover {
+  color: #e5ddff;
+  border-color: var(--accent);
+  background: rgba(169, 150, 255, .1);
+}
+
+.topic-count { color: var(--muted); font-size: .8rem; }
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px;
+}
+
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 190px;
+  padding: 21px;
+}
+
+.topic-card[hidden] { display: none; }
+
+.topic-tag {
+  align-self: flex-start;
+  color: var(--cyan);
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 8px;
+}
+
+.topic-card h3 { font-size: 1.08rem; margin: 0 0 8px; }
+.topic-card p { font-size: .84rem; line-height: 1.65; }
+
+.topic-card .learn {
+  color: #c9bdff;
+  font-size: .8rem;
+  text-decoration: none;
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+.topic-card .learn:hover { text-decoration: underline; }
+
+.no-results {
+  display: none;
+  padding: 28px;
+  color: var(--muted);
+  text-align: center;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+}
+
+.no-results.show { display: block; }
+
+.lifecycle {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
+}
+
+.life-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 225px;
+}
+
+.life-card::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  right: -30px;
+  bottom: -35px;
+  border-radius: 50%;
+  background: var(--life-color, #a996ff);
+  opacity: .12;
+  filter: blur(12px);
+}
+
+.life-card small {
+  color: var(--life-color, var(--cyan));
+  text-transform: uppercase;
+  font-size: .7rem;
+  letter-spacing: .12em;
+}
+
+.life-card h3 { margin-top: 12px; }
+
+.life-card:nth-child(1) { --life-color: #80dcff; }
+.life-card:nth-child(2) { --life-color: #b9a5ff; }
+.life-card:nth-child(3) { --life-color: #ffb7a5; }
+.life-card:nth-child(4) { --life-color: #ffda8d; }
+
+.note {
+  margin-top: 16px;
+  padding: 14px 17px;
+  border-left: 2px solid var(--accent);
+  background: rgba(169, 150, 255, .06);
+  color: #c8c8e2;
+  font-size: .87rem;
+}
+
+.timeline {
+  margin: 25px 0 0 9px;
+  padding-left: 27px;
+  border-left: 1px solid rgba(169, 150, 255, .32);
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 27px;
+}
+
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: -33px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 14px var(--accent);
+}
+
+.timeline-item time {
+  color: var(--cyan);
+  font-weight: 700;
+  font-size: .76rem;
+  letter-spacing: .1em;
+}
+
+.timeline-item h3 { margin: 5px 0; font-size: 1.05rem; }
+.timeline-item p { margin: 0; color: var(--muted); font-size: .87rem; }
+.timeline-item a { color: #cbbfff; }
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+}
+
+.fact {
+  padding: 19px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: rgba(255,255,255,.025);
+}
+
+.fact strong {
+  display: block;
+  color: var(--cyan);
+  margin-bottom: 5px;
+  font-size: .95rem;
+}
+
+.fact p { margin: 0; color: var(--muted); font-size: .86rem; }
+
+.faq-list { display: grid; gap: 10px; }
+
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255,255,255,.022);
+  overflow: hidden;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  padding: 18px 20px;
+  border: 0;
+  text-align: left;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.faq-question span:last-child {
+  color: var(--cyan);
+  font-size: 1.2rem;
+  transition: transform .2s;
+}
+
+.faq-item.open .faq-question span:last-child { transform: rotate(45deg); }
+
+.faq-answer {
+  display: none;
+  padding: 0 20px 19px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.faq-item.open .faq-answer { display: block; }
+
+.resources {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px;
+}
+
+.resource {
+  display: block;
+  text-decoration: none;
+}
+
+.resource small {
+  display: block;
+  color: var(--cyan);
+  margin-bottom: 8px;
+}
+
+.resource h3 { margin: 0 0 8px; font-size: 1.04rem; }
+.resource p { margin: 0; font-size: .84rem; }
+
+.resource .resource-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #cbbfff;
+  font-size: .8rem;
+}
+
+footer {
+  width: min(1120px, calc(100% - 40px));
+  margin: 95px auto 0;
+  padding: 25px 0 35px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.back-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 20;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--cyan);
+  background: rgba(18, 18, 40, .93);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: .25s;
+}
+
+.back-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes orbit { to { transform: rotate(360deg); } }
+@keyframes galaxyFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -9px; }
+}
+@keyframes starsDrift {
+  from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0; }
+  to { background-position: 280px 560px, -340px 340px, 310px -310px, 390px 780px, -250px 250px; }
+}
+
+@media (max-width: 850px) {
+  .hero { grid-template-columns: 1fr; padding-top: 30px; }
+  .galaxy-stage { min-height: 370px; }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+  .grid-3, .topic-grid, .resources { grid-template-columns: repeat(2, 1fr); }
+  .lifecycle { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .container { width: calc(100% - 28px); }
+  .back-link { margin: 18px 14px; }
+  .hero { padding: 25px 0 65px; gap: 5px; }
+  .hero h1 { font-size: clamp(3rem, 14vw, 4.5rem); }
+  .galaxy-stage { min-height: 300px; }
+  .galaxy { width: 220px; }
+  .galaxy-orbit { width: 235px; height: 235px; }
+  .galaxy-stage::before { width: 255px; height: 255px; }
+  .galaxy-stage::after { width: 290px; height: 290px; }
+  .section-head { display: block; }
+  .section-head > p { margin-top: 13px; }
+  section { padding-top: 68px; }
+  .grid-3, .topic-grid, .lifecycle, .facts-grid, .resources { grid-template-columns: 1fr; }
+  .topic-card { min-height: 0; }
+  .panel { padding: 21px; }
+  .filter-btn { font-size: .78rem; padding: 9px 10px; }
+  footer { display: block; }
+  footer p { margin: 8px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
 </head>
 
-<body>
- 
-  <main class="research-detail">
-    <a class="detail-back" href="research.html">← Back to Research</a>
+<body id="top">
+<div class="progress" id="readingProgress" aria-hidden="true"></div>
 
-    <section class="detail-hero">
-      <span class="detail-eyebrow">Research Field 07</span>
-      <h1>Galaxies &amp; Stars</h1>
+<a class="back-link" href="./research.html">
+  <span aria-hidden="true">←</span> Back to Research
+</a>
+
+<main>
+  <header class="hero container">
+    <div class="hero-copy">
+      <span class="eyebrow">COSMOS · Deep Space Research</span>
+      <h1>Galaxies <span>&amp; Stars.</span></h1>
       <p>
-        Journey through vast collections of stars, glowing clouds of gas,
-        and the life cycles of the objects that illuminate the Universe.
-        Discover how stars form, evolve, and sometimes end in spectacular events.
+        From stellar nurseries to colossal galaxies, discover how stars are
+        born, how they evolve and how billions of stellar systems shape the
+        observable universe.
       </p>
-    </section>
-
-    <section class="detail-section">
-      <h2>What Is a Galaxy?</h2>
-      <p>
-        A galaxy is a gravitationally bound system containing stars, gas,
-        dust, stellar remnants, and dark matter. Galaxies can contain
-        millions to trillions of stars and vary greatly in size and shape.
-      </p>
-      <p>
-        Our Solar System belongs to the Milky Way, a barred spiral galaxy.
-        The Sun is only one star among the enormous population of stars
-        in our galaxy.
-      </p>
-    </section>
-
-    <section class="detail-section">
-      <h2>Types of Galaxies</h2>
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Spiral Galaxies</h3>
-          <p>
-            These galaxies have a central region and spiral arms containing
-            stars, gas, and dust. The Milky Way is a barred spiral galaxy.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Elliptical Galaxies</h3>
-          <p>
-            These range from nearly spherical to elongated shapes and often
-            contain older stellar populations with relatively little cold gas.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Irregular Galaxies</h3>
-          <p>
-            These lack a clear spiral or elliptical structure and can be
-            shaped by interactions, collisions, and ongoing star formation.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Lenticular Galaxies</h3>
-          <p>
-            These galaxies have a central bulge and disk but generally lack
-            prominent spiral arms.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Dwarf Galaxies</h3>
-          <p>
-            Smaller galaxies that may orbit larger galaxies or exist on
-            their own, with varied histories and stellar populations.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Galaxy Groups &amp; Clusters</h3>
-          <p>
-            Galaxies are often found in groups and massive clusters connected
-            by gravity and embedded within larger cosmic structures.
-          </p>
-        </article>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#topics">Explore the Universe <span aria-hidden="true">↘</span></a>
+        <a class="btn btn-secondary" href="#lifecycle">Stellar Life Cycle</a>
       </div>
-    </section>
+    </div>
 
-    <section class="detail-section">
-      <h2>What Is a Star?</h2>
-      <p>
-        A star is a massive, luminous object made mostly of hot plasma.
-        During most of its life, it releases energy through nuclear fusion
-        in its core. Its mass strongly influences its temperature, brightness,
-        lifetime, and final stage.
-      </p>
-    </section>
-
-    <section class="detail-section">
-      <h2>How Do Stars Form?</h2>
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>1. Molecular Cloud</h3>
-          <p>
-            Stars begin in cold, dense regions of gas and dust where gravity
-            can cause material to collapse.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>2. Protostar</h3>
-          <p>
-            As the collapsing material gathers, its centre heats up and
-            develops into a young protostar.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>3. Main Sequence</h3>
-          <p>
-            When stable hydrogen fusion begins in the core, the star enters
-            the main-sequence stage of its life.
-          </p>
-        </article>
+    <div class="galaxy-stage" role="img" aria-label="Stylized animated spiral galaxy with glowing core and spiral arms">
+      <div class="galaxy-orbit"><span></span></div>
+      <div class="galaxy">
+        <div class="galaxy-core"></div>
       </div>
-    </section>
+      <div class="galaxy-label">Stars · Nebulae · Galaxies</div>
+    </div>
+  </header>
 
-    <section class="detail-section">
-      <h2>The Life Cycle of Stars</h2>
-      <p>
-        Stars do not all follow the same ending. Their later evolution
-        depends strongly on their initial mass and on whether they interact
-        with a companion star.
-      </p>
-
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Low- and Intermediate-Mass Stars</h3>
-          <p>
-            After the main sequence, these stars expand into giants.
-            Many eventually shed their outer layers, leaving a white dwarf.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Massive Stars</h3>
-          <p>
-            Massive stars can develop heavier elements in their interiors
-            and may end their lives in a core-collapse supernova.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>White Dwarfs</h3>
-          <p>
-            Dense stellar remnants that no longer sustain normal core
-            fusion and gradually cool over time.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Neutron Stars</h3>
-          <p>
-            Extremely dense remnants formed from the collapsed cores of
-            certain massive stars.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Supernovae</h3>
-          <p>
-            Powerful stellar explosions that can disperse newly formed
-            elements into surrounding space.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Black Holes</h3>
-          <p>
-            Under suitable conditions, the collapsed core of a massive
-            star can form a black hole.
-          </p>
-        </article>
+  <div class="container">
+    <div class="metrics reveal">
+      <div class="metric">
+        <strong>~13.8B</strong>
+        <span>Years since the Big Bang</span>
       </div>
+      <div class="metric">
+        <strong>~100–400B</strong>
+        <span>Estimated Milky Way stars</span>
+      </div>
+      <div class="metric">
+        <strong>8 min 20 sec</strong>
+        <span>Sunlight travel time to Earth</span>
+      </div>
+      <div class="metric">
+        <strong>Billions</strong>
+        <span>Of galaxies in the observable universe</span>
+      </div>
+    </div>
+  </div>
 
-      <div class="fact-panel">
+  <section class="container reveal" id="overview">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">01 / Cosmic Foundations</span>
+        <h2>Two scales of the universe.</h2>
+      </div>
+      <p>
+        Stars are the engines of many cosmic processes. Galaxies gather stars,
+        gas, dust and dark matter into vast gravitational systems.
+      </p>
+    </div>
+
+    <div class="grid-3">
+      <article class="panel">
+        <span class="panel-number">01 — STARS</span>
+        <h3>Stellar engines</h3>
         <p>
-          <strong>Key idea:</strong> A star's mass is one of the main factors
-          that determines its evolution. Not every massive star produces
-          the same remnant, and not every supernova creates a black hole.
+          Stars form from collapsing clouds of gas and dust. Many spend most
+          of their lives fusing hydrogen into helium in their cores.
         </p>
+      </article>
+
+      <article class="panel">
+        <span class="panel-number">02 — GALAXIES</span>
+        <h3>Cosmic cities</h3>
+        <p>
+          Galaxies contain stars, stellar remnants, interstellar gas and dust.
+          Their structures and histories are shaped by gravity and cosmic evolution.
+        </p>
+      </article>
+
+      <article class="panel">
+        <span class="panel-number">03 — EVOLUTION</span>
+        <h3>A changing universe</h3>
+        <p>
+          Stars create and distribute many chemical elements. Stellar explosions,
+          gas flows and galaxy mergers help shape later generations of stars.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="container reveal" id="topics">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">02 / Research Library</span>
+        <h2>Explore stellar science.</h2>
       </div>
-    </section>
-
-    <section class="detail-section">
-      <h2>Nebulae: Stellar Nurseries and Remnants</h2>
       <p>
-        A nebula is a cloud of gas and dust in space. Some nebulae are places
-        where stars form, while others are material expelled by dying stars
-        or debris left by stellar explosions.
+        Search the library to explore galaxy structures, stellar evolution,
+        cosmic explosions and the methods astronomers use to study them.
       </p>
+    </div>
 
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Emission Nebulae</h3>
-          <p>
-            Gas glows after being energised by nearby hot stars or other
-            energetic sources.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Reflection Nebulae</h3>
-          <p>
-            Dust scatters and reflects light from nearby stars rather than
-            producing most of its own visible light.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Dark Nebulae</h3>
-          <p>
-            Dense clouds of dust block visible light from objects behind
-            them and may contain star-forming regions.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Planetary Nebulae</h3>
-          <p>
-            Glowing shells of gas expelled by certain dying stars.
-            Despite the name, they are unrelated to planets forming.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Supernova Remnants</h3>
-          <p>
-            Expanding debris and shocked gas left behind by a supernova
-            explosion.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Star-Forming Regions</h3>
-          <p>
-            Dense areas inside molecular clouds where gravity can gather
-            gas into new stars and planetary systems.
-          </p>
-        </article>
+    <div class="topic-tools">
+      <div class="search-wrap">
+        <input id="topicSearch" type="search" placeholder="Search galaxies and stars..." aria-label="Search galaxies and stars topics">
       </div>
-    </section>
+      <button class="filter-btn active" type="button" data-filter="all">All Topics</button>
+      <button class="filter-btn" type="button" data-filter="stars">Stars</button>
+      <button class="filter-btn" type="button" data-filter="galaxies">Galaxies</button>
+      <button class="filter-btn" type="button" data-filter="events">Cosmic Events</button>
+      <button class="filter-btn" type="button" data-filter="research">Research</button>
+    </div>
 
-    <section class="detail-section">
-      <h2>How Do Astronomers Study Galaxies and Stars?</h2>
-      <ul class="detail-list">
-        <li><strong>Optical telescopes:</strong> Capture visible light from stars, nebulae, and galaxies.</li>
-        <li><strong>Infrared astronomy:</strong> Reveals cooler objects and can observe through some dusty regions.</li>
-        <li><strong>Spectroscopy:</strong> Helps identify chemical elements, temperatures, and motion.</li>
-        <li><strong>Radio astronomy:</strong> Studies gas, magnetic activity, pulsars, and other radio-emitting sources.</li>
-        <li><strong>Space telescopes:</strong> Observe wavelengths that Earth's atmosphere absorbs or distorts.</li>
-        <li><strong>Stellar surveys:</strong> Measure the positions, distances, and properties of large numbers of stars.</li>
-      </ul>
-    </section>
+    <p class="topic-count" id="topicCount" aria-live="polite">18 topics found</p>
 
-    <section class="detail-section">
-      <h2>Questions Scientists Are Investigating</h2>
-      <ul class="detail-list">
-        <li>How did the first stars and galaxies form?</li>
-        <li>How do galaxies grow through mergers and star formation?</li>
-        <li>How are elements created and distributed by stars?</li>
-        <li>What controls the formation and evolution of planetary systems?</li>
-        <li>How do central black holes influence their host galaxies?</li>
-      </ul>
-    </section>
+    <div class="topic-grid" id="topicGrid">
+      <article class="panel topic-card" data-category="stars">
+        <span class="topic-tag">Stellar Birth</span>
+        <h3>Nebulae</h3>
+        <p>Clouds of gas and dust that can serve as stellar nurseries or reveal material left by dying stars.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/stars/" target="_blank" rel="noopener noreferrer">Explore NASA science ↗</a>
+      </article>
 
-    <section class="detail-section">
-      <h2>Explore Related Research</h2>
-      <div class="detail-links">
-        <a class="detail-link" href="black-holes.html">Black Holes</a>
-        <a class="detail-link" href="cosmology.html">Cosmology</a>
-        <a class="detail-link" href="solar-physics.html">Solar Physics</a>
-        <a class="detail-link" href="exoplanets.html">Exoplanets</a>
+      <article class="panel topic-card" data-category="stars">
+        <span class="topic-tag">Stellar Birth</span>
+        <h3>Protostars</h3>
+        <p>Young forming stars that gather mass from their surroundings before stable hydrogen fusion begins.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/stars/" target="_blank" rel="noopener noreferrer">Study stellar formation ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="stars research">
+        <span class="topic-tag">Stellar Physics</span>
+        <h3>Main-Sequence Stars</h3>
+        <p>Stars that generate much of their energy by fusing hydrogen into helium in their cores.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/stars/" target="_blank" rel="noopener noreferrer">Explore stars ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="stars">
+        <span class="topic-tag">Stellar Evolution</span>
+        <h3>Red Giants</h3>
+        <p>Expanded, cooler-surfaced stars that develop as their internal fuel supply and structure change.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/stars/" target="_blank" rel="noopener noreferrer">Learn stellar evolution ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="stars">
+        <span class="topic-tag">Stellar Remnants</span>
+        <h3>White Dwarfs</h3>
+        <p>Dense remnants left by many low- and intermediate-mass stars after their outer layers are shed.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/stars/" target="_blank" rel="noopener noreferrer">Explore stellar remnants ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="stars events">
+        <span class="topic-tag">Stellar Remnants</span>
+        <h3>Neutron Stars</h3>
+        <p>Extremely dense objects formed in some stellar-collapse events, containing matter under extraordinary conditions.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/stars/" target="_blank" rel="noopener noreferrer">Explore compact objects ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="events stars">
+        <span class="topic-tag">Cosmic Explosion</span>
+        <h3>Supernovae</h3>
+        <p>Powerful stellar explosions that can disperse newly formed elements and reshape their surrounding environments.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/stars/" target="_blank" rel="noopener noreferrer">Explore stellar explosions ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="events stars">
+        <span class="topic-tag">Stellar Evolution</span>
+        <h3>Stellar-Mass Black Holes</h3>
+        <p>Black holes that can form when the cores of sufficiently massive stars collapse under gravity.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/black-holes/" target="_blank" rel="noopener noreferrer">Explore black holes ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="stars research">
+        <span class="topic-tag">Stellar Systems</span>
+        <h3>Binary Stars</h3>
+        <p>Two stars gravitationally bound in orbit around their shared centre of mass, offering clues about stellar masses.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/stars/" target="_blank" rel="noopener noreferrer">Study stellar systems ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="galaxies">
+        <span class="topic-tag">Galaxy Types</span>
+        <h3>Spiral Galaxies</h3>
+        <p>Galaxies with disks and spiral structure, often containing gas, dust and regions of ongoing star formation.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/galaxies/" target="_blank" rel="noopener noreferrer">Explore galaxies ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="galaxies">
+        <span class="topic-tag">Galaxy Types</span>
+        <h3>Elliptical Galaxies</h3>
+        <p>Galaxies with smooth, rounded or elongated shapes and often relatively little cold star-forming gas.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/galaxies/" target="_blank" rel="noopener noreferrer">Explore galaxy types ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="galaxies">
+        <span class="topic-tag">Galaxy Types</span>
+        <h3>Irregular Galaxies</h3>
+        <p>Galaxies without a clear spiral or elliptical appearance, sometimes shaped by interactions and disturbed gas.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/galaxies/" target="_blank" rel="noopener noreferrer">Study irregular galaxies ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="galaxies">
+        <span class="topic-tag">Our Galaxy</span>
+        <h3>The Milky Way</h3>
+        <p>Our home galaxy, a barred spiral containing the Solar System and hundreds of billions of stars by common estimates.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/galaxies/" target="_blank" rel="noopener noreferrer">Explore the Milky Way ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="galaxies events">
+        <span class="topic-tag">Galaxy Evolution</span>
+        <h3>Galaxy Mergers</h3>
+        <p>Interactions between galaxies that can rearrange their structures, drive gas inward and trigger new star formation.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/galaxies/" target="_blank" rel="noopener noreferrer">Explore galaxy evolution ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="galaxies research">
+        <span class="topic-tag">Cosmic Structure</span>
+        <h3>Galaxy Clusters</h3>
+        <p>Large gravitationally bound systems of galaxies, hot gas and dark matter.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/galaxies/" target="_blank" rel="noopener noreferrer">Study cosmic structure ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="galaxies research">
+        <span class="topic-tag">Galaxy Centres</span>
+        <h3>Supermassive Black Holes</h3>
+        <p>Enormous black holes found at the centres of many large galaxies, sometimes powering bright active galactic nuclei.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/black-holes/" target="_blank" rel="noopener noreferrer">Explore black holes ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="stars research">
+        <span class="topic-tag">Planetary Systems</span>
+        <h3>Exoplanets and Their Stars</h3>
+        <p>Studying host stars helps researchers understand planetary environments and interpret exoplanet observations.</p>
+        <a class="learn" href="https://science.nasa.gov/exoplanets/" target="_blank" rel="noopener noreferrer">Explore exoplanets ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="research galaxies stars">
+        <span class="topic-tag">Astronomical Methods</span>
+        <h3>Stellar Spectroscopy</h3>
+        <p>Analysing starlight reveals clues about temperature, composition, motion and physical conditions.</p>
+        <a class="learn" href="https://science.nasa.gov/universe/stars/" target="_blank" rel="noopener noreferrer">Explore stellar science ↗</a>
+      </article>
+    </div>
+
+    <div class="no-results" id="noResults">No matching topics found. Try another search or filter.</div>
+  </section>
+
+  <section class="container reveal" id="lifecycle">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">03 / Stellar Evolution</span>
+        <h2>A star's life story.</h2>
       </div>
-    </section>
-
-    <section class="detail-section">
-      <h2>Official Resources</h2>
       <p>
-        <a href="https://science.nasa.gov/universe/galaxies/"
-           target="_blank" rel="noopener noreferrer">
-          NASA — Galaxies ↗
-        </a>
+        A star's mass is one of the most important factors determining its
+        evolution and final state.
       </p>
+    </div>
+
+    <div class="lifecycle">
+      <article class="panel life-card">
+        <small>Stage 01</small>
+        <h3>Nebula</h3>
+        <p>Gravity causes parts of a cold gas-and-dust cloud to collapse and form dense regions.</p>
+      </article>
+
+      <article class="panel life-card">
+        <small>Stage 02</small>
+        <h3>Protostar</h3>
+        <p>A growing young object heats up as material falls inward. It may still be surrounded by a disk.</p>
+      </article>
+
+      <article class="panel life-card">
+        <small>Stage 03</small>
+        <h3>Main Sequence</h3>
+        <p>Hydrogen fusion provides energy for a long-lived phase of stellar evolution.</p>
+      </article>
+
+      <article class="panel life-card">
+        <small>Stage 04</small>
+        <h3>Different Endings</h3>
+        <p>Many stars leave white dwarfs; sufficiently massive stars can undergo core collapse, producing neutron stars or black holes.</p>
+      </article>
+    </div>
+
+    <div class="note">
+      This is a simplified overview. Stellar evolution differs significantly
+      with initial mass, chemical composition, rotation and interactions with
+      companion stars.
+    </div>
+  </section>
+
+  <section class="container reveal" id="missions">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">04 / Observing the Cosmos</span>
+        <h2>Telescopes that expand our view.</h2>
+      </div>
       <p>
-        <a href="https://science.nasa.gov/universe/stars/"
-           target="_blank" rel="noopener noreferrer">
-          NASA — Stars ↗
-        </a>
+        Different telescopes observe different wavelengths and cosmic eras,
+        helping scientists piece together how stars and galaxies evolve.
       </p>
+    </div>
+
+    <div class="timeline">
+      <article class="timeline-item">
+        <time>1990</time>
+        <h3>Hubble Space Telescope</h3>
+        <p>
+          Hubble has transformed research into star formation, galaxy structure,
+          stellar explosions and the expansion history of the universe.
+          <a href="https://science.nasa.gov/mission/hubble/" target="_blank" rel="noopener noreferrer">Mission details ↗</a>
+        </p>
+      </article>
+
+      <article class="timeline-item">
+        <time>1999</time>
+        <h3>Chandra X-ray Observatory</h3>
+        <p>
+          Chandra observes high-energy phenomena, including supernova remnants,
+          hot gas in galaxy clusters and matter near compact objects.
+          <a href="https://chandra.harvard.edu/" target="_blank" rel="noopener noreferrer">Mission details ↗</a>
+        </p>
+      </article>
+
+      <article class="timeline-item">
+        <time>2021</time>
+        <h3>James Webb Space Telescope</h3>
+        <p>
+          Webb's infrared observations help astronomers investigate early
+          galaxies, star-forming regions and planetary systems.
+          <a href="https://science.nasa.gov/mission/webb/" target="_blank" rel="noopener noreferrer">Mission details ↗</a>
+        </p>
+      </article>
+
+      <article class="timeline-item">
+        <time>Ongoing</time>
+        <h3>Many Observatories, One Universe</h3>
+        <p>
+          Ground-based telescopes, radio arrays and space observatories
+          complement one another to investigate cosmic objects across the
+          electromagnetic spectrum.
+          <a href="https://science.nasa.gov/universe/" target="_blank" rel="noopener noreferrer">Explore NASA Universe ↗</a>
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="container reveal" id="facts">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">05 / Evidence Check</span>
+        <h2>Cosmic facts to remember.</h2>
+      </div>
       <p>
-        <a href="https://science.nasa.gov/mission/hubble/"
-           target="_blank" rel="noopener noreferrer">
-          NASA — Hubble Space Telescope ↗
-        </a>
+        Astronomy combines observations, physical theory and uncertainty-aware
+        estimates to understand objects far beyond our reach.
       </p>
-    </section>
+    </div>
 
-    <a class="detail-back" href="research.html">← Back to All Research Fields</a>
-  </main>
+    <div class="facts-grid">
+      <article class="fact">
+        <strong>Stars have different colours.</strong>
+        <p>A star's colour provides information about its surface temperature; blue stars are generally hotter than red stars.</p>
+      </article>
 
-  <footer>
-    <p>© COSMOS — Exploring the Universe</p>
-  </footer>
+      <article class="fact">
+        <strong>Not every star ends in a supernova.</strong>
+        <p>Many low- and intermediate-mass stars shed their outer layers and leave white dwarfs.</p>
+      </article>
 
-  <script src="app.js" defer></script>
+      <article class="fact">
+        <strong>Galaxies contain more than stars.</strong>
+        <p>They also contain gas, dust, stellar remnants and dark matter.</p>
+      </article>
+
+      <article class="fact">
+        <strong>Looking far away means looking back in time.</strong>
+        <p>Light takes time to travel, so distant galaxies are observed as they were when their light began its journey.</p>
+      </article>
+
+      <article class="fact">
+        <strong>Most heavy elements have cosmic histories.</strong>
+        <p>Many elements are formed through stellar processes, stellar explosions and compact-object mergers.</p>
+      </article>
+
+      <article class="fact">
+        <strong>Visible galaxies are only part of the story.</strong>
+        <p>Observations across radio, infrared, visible, ultraviolet, X-ray and gamma-ray wavelengths reveal different physical processes.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="container reveal" id="faq">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">06 / Knowledge Check</span>
+        <h2>Questions about stars and galaxies.</h2>
+      </div>
+      <p>Answers to common questions about the objects that populate our universe.</p>
+    </div>
+
+    <div class="faq-list">
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What is the difference between a star and a galaxy?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          A star is a luminous astronomical object held together by gravity.
+          A galaxy is a much larger gravitational system containing stars,
+          gas, dust and dark matter.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>How are stars born?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Stars form when dense regions within clouds of gas and dust collapse
+          under gravity. The central object heats up, and sustained hydrogen
+          fusion eventually begins if conditions are sufficient.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>How many stars are in the Milky Way?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Estimates commonly place the number at roughly 100–400 billion.
+          The exact number is uncertain because many stars are faint, distant
+          or obscured by interstellar dust.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What determines how long a star lives?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Initial mass is a major factor. Massive stars consume their nuclear
+          fuel much faster and generally have shorter lives than lower-mass stars.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What is a supernova?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          A supernova is an extremely energetic stellar explosion. Some result
+          from the core collapse of massive stars; others involve white dwarfs
+          in particular binary-star systems.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What is the difference between a neutron star and a black hole?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          A neutron star is an extremely compact stellar remnant with a physical
+          surface. A black hole has an event horizon, beyond which light cannot
+          escape to distant observers.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What types of galaxies exist?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Common broad categories include spiral, elliptical and irregular
+          galaxies. Real galaxies can have complex structures and may not fit
+          neatly into a single category.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Are all stars inside galaxies?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Most stars belong to galaxies, but some stars can be found between
+          galaxies after being displaced from their original systems.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>How do astronomers measure the distance to stars?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          For many nearby stars, astronomers use parallax: the apparent shift
+          in a star's position as Earth moves around the Sun. Other methods
+          extend distance measurements farther into the universe.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Why do galaxies collide if space is so large?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Gravity draws galaxies toward one another. Their stars rarely collide
+          directly because distances between stars are enormous, although
+          gas clouds and galaxy structures can interact strongly.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What can a star's spectrum tell us?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Spectral lines can reveal chemical composition, temperature,
+          line-of-sight motion and clues about magnetic fields and other
+          physical conditions.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>How can beginners explore galaxies and stars?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Start with stellar evolution, gravity, light and the electromagnetic
+          spectrum. Use public images and educational material from NASA and ESA,
+          then learn how astronomers infer properties from observations.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="container reveal" id="resources">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">07 / Further Reading</span>
+        <h2>Explore trusted resources.</h2>
+      </div>
+      <p>
+        Continue your research with established astronomy agencies and
+        observatories.
+      </p>
+    </div>
+
+    <div class="resources">
+      <a class="panel resource" href="https://science.nasa.gov/universe/galaxies/" target="_blank" rel="noopener noreferrer">
+        <small>NASA SCIENCE</small>
+        <h3>Galaxies</h3>
+        <p>Learn about galaxy types, structures and evolution.</p>
+        <span class="resource-link">Explore galaxies ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://science.nasa.gov/universe/stars/" target="_blank" rel="noopener noreferrer">
+        <small>NASA SCIENCE</small>
+        <h3>Stars</h3>
+        <p>Explore how stars form, evolve and reach their final stages.</p>
+        <span class="resource-link">Explore stars ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://science.nasa.gov/mission/webb/" target="_blank" rel="noopener noreferrer">
+        <small>NASA MISSION</small>
+        <h3>James Webb Space Telescope</h3>
+        <p>Discover infrared observations of distant galaxies and stellar nurseries.</p>
+        <span class="resource-link">Explore Webb ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://science.nasa.gov/mission/hubble/" target="_blank" rel="noopener noreferrer">
+        <small>NASA MISSION</small>
+        <h3>Hubble Space Telescope</h3>
+        <p>Explore decades of observations of stars and galaxies.</p>
+        <span class="resource-link">Explore Hubble ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://science.nasa.gov/universe/" target="_blank" rel="noopener noreferrer">
+        <small>NASA SCIENCE</small>
+        <h3>The Universe</h3>
+        <p>Read about cosmic origins, structures and ongoing discoveries.</p>
+        <span class="resource-link">Explore the universe ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://www.esa.int/Science_Exploration/Space_Science" target="_blank" rel="noopener noreferrer">
+        <small>EUROPEAN SPACE AGENCY</small>
+        <h3>ESA Space Science</h3>
+        <p>Explore European space missions and astronomy research.</p>
+        <span class="resource-link">Visit ESA ↗</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>COSMOS · Galaxies &amp; Stars</p>
+  <p>Educational resource · Explore, question, investigate.</p>
+</footer>
+
+<a class="back-top" href="#top" id="backTop" aria-label="Back to top">↑</a>
+
+<script>
+(() => {
+  "use strict";
+
+  const progress = document.getElementById("readingProgress");
+  const backTop = document.getElementById("backTop");
+  const search = document.getElementById("topicSearch");
+  const cards = [...document.querySelectorAll(".topic-card")];
+  const filterButtons = [...document.querySelectorAll(".filter-btn")];
+  const topicCount = document.getElementById("topicCount");
+  const noResults = document.getElementById("noResults");
+
+  let activeFilter = "all";
+
+  function updateScrollUI() {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const percentage = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+
+    progress.style.width = `${Math.min(100, percentage)}%`;
+    backTop.classList.toggle("visible", window.scrollY > 500);
+  }
+
+  window.addEventListener("scroll", updateScrollUI, { passive: true });
+  window.addEventListener("resize", updateScrollUI);
+  updateScrollUI();
+
+  function filterTopics() {
+    const query = search.value.trim().toLowerCase();
+    let visible = 0;
+
+    cards.forEach(card => {
+      const categories = card.dataset.category.split(/\s+/);
+      const categoryMatches = activeFilter === "all" ||
+        categories.includes(activeFilter);
+      const queryMatches = card.textContent.toLowerCase().includes(query);
+      const show = categoryMatches && queryMatches;
+
+      card.hidden = !show;
+      if (show) visible++;
+    });
+
+    topicCount.textContent =
+      `${visible} ${visible === 1 ? "topic" : "topics"} found`;
+
+    noResults.classList.toggle("show", visible === 0);
+  }
+
+  search.addEventListener("input", filterTopics);
+
+  filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      activeFilter = button.dataset.filter;
+
+      filterButtons.forEach(item => {
+        const selected = item === button;
+        item.classList.toggle("active", selected);
+        item.setAttribute("aria-pressed", String(selected));
+      });
+
+      filterTopics();
+    });
+
+    button.setAttribute(
+      "aria-pressed",
+      String(button.classList.contains("active"))
+    );
+  });
+
+  document.querySelectorAll(".faq-question").forEach(button => {
+    button.addEventListener("click", () => {
+      const item = button.closest(".faq-item");
+      const willOpen = !item.classList.contains("open");
+
+      item.classList.toggle("open", willOpen);
+      button.setAttribute("aria-expanded", String(willOpen));
+    });
+  });
+
+  const revealElements = document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    revealElements.forEach(element => observer.observe(element));
+  } else {
+    revealElements.forEach(element => element.classList.add("visible"));
+  }
+})();
+</script>
 </body>
 </html>
