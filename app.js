@@ -1,7 +1,8 @@
 
 /* ==========================================
    COSMOS — Global JavaScript
-   Compatible with index.html and other pages
+   Home | Planets | Missions | Research
+   GitHub Pages compatible
    ========================================== */
 
 "use strict";
@@ -41,7 +42,10 @@ function updateCurrentYear() {
 /* ---------- 3. Active Navigation ---------- */
 
 function initActiveNavigation() {
-  const links = $$(".nav a, .nav-links a, .nav-menu a, nav ul a");
+  const links = $$(
+    "header nav a, .main-nav a, .nav-links a, " +
+    ".nav-menu a, .links a, .nav a, nav ul a"
+  );
 
   if (!links.length) return;
 
@@ -51,13 +55,22 @@ function initActiveNavigation() {
   links.forEach((link) => {
     const href = link.getAttribute("href");
 
-    if (!href || href.startsWith("#")) return;
+    if (
+      !href ||
+      href.startsWith("#") ||
+      href.startsWith("javascript:")
+    ) {
+      return;
+    }
 
     try {
       const url = new URL(href, window.location.href);
       const linkFile = url.pathname.split("/").pop() || "index.html";
 
-      if (url.origin === window.location.origin && linkFile === currentFile) {
+      if (
+        url.origin === window.location.origin &&
+        linkFile.toLowerCase() === currentFile.toLowerCase()
+      ) {
         link.classList.add("active");
         link.setAttribute("aria-current", "page");
       } else {
@@ -67,86 +80,195 @@ function initActiveNavigation() {
           link.removeAttribute("aria-current");
         }
       }
-    } catch {
-      // Ignore invalid URLs.
+    } catch (error) {
+      console.warn("COSMOS: Invalid navigation URL.", href);
     }
   });
 }
 
-/* ---------- 4. Mobile Navigation ---------- */
+/* ---------- 4. Responsive Navigation ---------- */
 
-function initMobileNavigation() {
-  const toggle =
-    $("#menuToggle") ||
-    $("#navToggle") ||
-    $(".menu-toggle") ||
-    $(".nav-toggle") ||
-    $("[data-menu-toggle]");
+function findNavigationForToggle(toggle) {
+  // First preference: navigation referenced by aria-controls.
+  const controlledId = toggle.getAttribute("aria-controls");
 
-  const navigation =
-    $("#navMenu") ||
-    $("#navLinks") ||
-    $(".nav-menu") ||
-    $(".nav-links") ||
-    $("[data-navigation]");
+  if (controlledId) {
+    const controlledElement = document.getElementById(controlledId);
 
-  if (!toggle || !navigation) return;
+    if (controlledElement) return controlledElement;
+  }
 
-  const closeMenu = () => {
-    navigation.classList.remove("open", "active", "show");
-    toggle.classList.remove("open", "active");
-    toggle.setAttribute("aria-expanded", "false");
-  };
-
-  toggle.setAttribute("aria-expanded", "false");
-
-  toggle.addEventListener("click", () => {
-    const isOpen =
-      navigation.classList.contains("open") ||
-      navigation.classList.contains("active") ||
-      navigation.classList.contains("show");
-
-    closeMenu();
-
-    if (!isOpen) {
-      navigation.classList.add("open");
-      toggle.classList.add("open");
-      toggle.setAttribute("aria-expanded", "true");
-    }
-  });
-
-  $$("a", navigation).forEach((link) => {
-    link.addEventListener("click", closeMenu);
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeMenu();
-  });
-
-  document.addEventListener("click", (event) => {
-    if (
-      !navigation.contains(event.target) &&
-      !toggle.contains(event.target)
-    ) {
-      closeMenu();
-    }
-  });
-}
-
-/* ---------- 5. Search ---------- */
-
-function initCardSearch() {
-  const inputs = [
-    ...$$("[data-search-input]"),
-    ...$("#searchInput") ? [$("#searchInput")] : [],
-    ...$("#planetSearch") ? [$("#planetSearch")] : [],
-    ...$("#missionSearch") ? [$("#missionSearch")] : [],
-    ...$("#researchSearch") ? [$("#researchSearch")] : []
+  // Support the common navigation IDs used across COSMOS pages.
+  const knownIds = [
+    "cosmosNav",
+    "mainNav",
+    "navMenu",
+    "navLinks",
+    "navList"
   ];
 
-  const searchInputs = [...new Set(inputs)];
+  for (const id of knownIds) {
+    const element = document.getElementById(id);
 
-  const cards = [
+    if (element) {
+      const sameHeader =
+        !toggle.closest("header") ||
+        toggle.closest("header").contains(element);
+
+      if (sameHeader) return element;
+    }
+  }
+
+  // Search within the same header before searching the whole page.
+  const header = toggle.closest("header");
+
+  const navigationSelector = [
+    "nav.main-nav",
+    "nav.nav-menu",
+    "nav.nav-links",
+    "nav.links",
+    "nav#mainNav",
+    "nav#cosmosNav",
+    "nav#navMenu",
+    "nav#navLinks",
+    "nav[aria-label='Main navigation']",
+    "nav"
+  ].join(", ");
+
+  if (header) {
+    const headerNavigation = $(navigationSelector, header);
+
+    if (headerNavigation) return headerNavigation;
+  }
+
+  // Fallback for pages whose navigation sits outside a header.
+  return (
+    $(navigationSelector) ||
+    $(".main-nav") ||
+    $(".nav-menu") ||
+    $(".nav-links") ||
+    $(".links")
+  );
+}
+
+function initMobileNavigation() {
+  const toggles = $$(
+    "#menuToggle, #navToggle, .menu-toggle, " +
+    ".nav-toggle, [data-menu-toggle]"
+  );
+
+  if (!toggles.length) return;
+
+  toggles.forEach((toggle) => {
+    // Prevent duplicate listeners if initialization runs again.
+    if (toggle.dataset.cosmosMenuInitialized === "true") return;
+
+    const navigation = findNavigationForToggle(toggle);
+
+    if (!navigation) {
+      console.warn(
+        "COSMOS: Navigation not found for menu button.",
+        toggle
+      );
+      return;
+    }
+
+    toggle.dataset.cosmosMenuInitialized = "true";
+
+    if (!toggle.hasAttribute("aria-expanded")) {
+      toggle.setAttribute("aria-expanded", "false");
+    }
+
+    if (!toggle.hasAttribute("aria-label")) {
+      toggle.setAttribute("aria-label", "Open navigation menu");
+    }
+
+    const initiallyOpen =
+      navigation.classList.contains("is-open") ||
+      navigation.classList.contains("open") ||
+      navigation.classList.contains("show");
+
+    toggle.setAttribute("aria-expanded", String(initiallyOpen));
+
+    function isOpen() {
+      return (
+        navigation.classList.contains("is-open") ||
+        navigation.classList.contains("open") ||
+        navigation.classList.contains("show") ||
+        navigation.classList.contains("active")
+      );
+    }
+
+    function setMenuState(open) {
+      // Multiple class names support the different COSMOS page styles.
+      navigation.classList.toggle("is-open", open);
+      navigation.classList.toggle("open", open);
+      navigation.classList.toggle("show", open);
+      navigation.classList.toggle("active", open);
+
+      toggle.classList.toggle("open", open);
+      toggle.classList.toggle("active", open);
+
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute(
+        "aria-label",
+        open ? "Close navigation menu" : "Open navigation menu"
+      );
+
+      // Keep keyboard navigation consistent with the menu state.
+      if (open) {
+        navigation.removeAttribute("inert");
+      } else {
+        navigation.removeAttribute("inert");
+      }
+    }
+
+    toggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      setMenuState(!isOpen());
+    });
+
+    navigation.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        setMenuState(false);
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && isOpen()) {
+        setMenuState(false);
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        isOpen() &&
+        !navigation.contains(event.target) &&
+        !toggle.contains(event.target)
+      ) {
+        setMenuState(false);
+      }
+    });
+
+    // Close the menu when switching to a wider layout.
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900 && isOpen()) {
+        setMenuState(false);
+      }
+    });
+
+    // Keep the button state synchronized with the actual menu state.
+    setMenuState(isOpen());
+  });
+}
+
+/* ---------- 5. Shared Card Collection ---------- */
+
+function getSearchableCards() {
+  return [
     ...new Set([
       ...$$("[data-searchable]"),
       ...$$(".planet-card"),
@@ -156,10 +278,29 @@ function initCardSearch() {
       ...$$(".content-card")
     ])
   ];
+}
+
+/* ---------- 6. Card Search ---------- */
+
+function initCardSearch() {
+  const inputs = [
+    ...$$("[data-search-input]"),
+    $("#searchInput"),
+    $("#planetSearch"),
+    $("#missionSearch"),
+    $("#researchSearch")
+  ].filter(Boolean);
+
+  const searchInputs = [...new Set(inputs)];
+  const cards = getSearchableCards();
 
   if (!searchInputs.length || !cards.length) return;
 
   searchInputs.forEach((input) => {
+    if (input.dataset.cosmosSearchInitialized === "true") return;
+
+    input.dataset.cosmosSearchInitialized = "true";
+
     input.addEventListener("input", () => {
       const query = input.value.trim().toLowerCase();
       let visibleCount = 0;
@@ -205,7 +346,7 @@ function updateSearchStatus(count) {
   }
 }
 
-/* ---------- 6. Category Filters ---------- */
+/* ---------- 7. Category Filters ---------- */
 
 function initCategoryFilters() {
   const buttons = $$(
@@ -214,16 +355,7 @@ function initCategoryFilters() {
 
   if (!buttons.length) return;
 
-  const cards = [
-    ...new Set([
-      ...$$("[data-searchable]"),
-      ...$$(".planet-card"),
-      ...$$(".mission-card"),
-      ...$$(".research-card"),
-      ...$$(".info-card"),
-      ...$$(".content-card")
-    ])
-  ];
+  const cards = getSearchableCards();
 
   if (!cards.length) return;
 
@@ -273,6 +405,10 @@ function initCategoryFilters() {
   }
 
   buttons.forEach((button) => {
+    if (button.dataset.cosmosFilterInitialized === "true") return;
+
+    button.dataset.cosmosFilterInitialized = "true";
+
     button.addEventListener("click", () => {
       activeFilter = (
         button.dataset.filter ||
@@ -294,14 +430,18 @@ function initCategoryFilters() {
     });
   });
 
-  if (searchInput) {
+  if (
+    searchInput &&
+    searchInput.dataset.cosmosFilterSearchInitialized !== "true"
+  ) {
+    searchInput.dataset.cosmosFilterSearchInitialized = "true";
     searchInput.addEventListener("input", applyFilters);
   }
 
   applyFilters();
 }
 
-/* ---------- 7. Scroll Reveal ---------- */
+/* ---------- 8. Scroll Reveal ---------- */
 
 function initScrollReveal() {
   const elements = $$(
@@ -339,7 +479,7 @@ function initScrollReveal() {
   elements.forEach((element) => observer.observe(element));
 }
 
-/* ---------- 8. Back to Top ---------- */
+/* ---------- 9. Back to Top ---------- */
 
 function initBackToTop() {
   let button =
@@ -376,6 +516,10 @@ function initBackToTop() {
     document.body.appendChild(button);
   }
 
+  if (button.dataset.cosmosBackToTopInitialized === "true") return;
+
+  button.dataset.cosmosBackToTopInitialized = "true";
+
   button.addEventListener("click", () => {
     window.scrollTo({
       top: 0,
@@ -397,10 +541,14 @@ function initBackToTop() {
   updateButton();
 }
 
-/* ---------- 9. Clickable Cards ---------- */
+/* ---------- 10. Clickable Cards ---------- */
 
 function initClickableCards() {
   $$("[data-card-link]").forEach((card) => {
+    if (card.dataset.cosmosCardInitialized === "true") return;
+
+    card.dataset.cosmosCardInitialized = "true";
+
     const navigate = () => {
       const destination = card.dataset.cardLink;
 
@@ -437,10 +585,14 @@ function initClickableCards() {
   });
 }
 
-/* ---------- 10. FAQ Accordion ---------- */
+/* ---------- 11. FAQ Accordion ---------- */
 
 function initFAQ() {
   $$(".faq-question, [data-faq-toggle]").forEach((button) => {
+    if (button.dataset.cosmosFAQInitialized === "true") return;
+
+    button.dataset.cosmosFAQInitialized = "true";
+
     button.addEventListener("click", () => {
       const answerId = button.getAttribute("aria-controls");
 
@@ -460,10 +612,14 @@ function initFAQ() {
   });
 }
 
-/* ---------- 11. Copy Buttons ---------- */
+/* ---------- 12. Copy Buttons ---------- */
 
 function initCopyButtons() {
   $$("[data-copy]").forEach((button) => {
+    if (button.dataset.cosmosCopyInitialized === "true") return;
+
+    button.dataset.cosmosCopyInitialized = "true";
+
     button.addEventListener("click", async () => {
       const text = button.dataset.copy;
 
@@ -485,10 +641,14 @@ function initCopyButtons() {
   });
 }
 
-/* ---------- 12. Image Fallback ---------- */
+/* ---------- 13. Image Fallback ---------- */
 
 function initImageFallbacks() {
   $$("img").forEach((image) => {
+    if (image.dataset.cosmosImageInitialized === "true") return;
+
+    image.dataset.cosmosImageInitialized = "true";
+
     image.addEventListener("error", () => {
       image.classList.add("image-unavailable");
       image.setAttribute("data-image-error", "true");
@@ -501,10 +661,14 @@ function initImageFallbacks() {
   });
 }
 
-/* ---------- 13. Smooth Anchor Scrolling ---------- */
+/* ---------- 14. Smooth Anchor Scrolling ---------- */
 
 function initSmoothAnchors() {
   $$('a[href^="#"]').forEach((link) => {
+    if (link.dataset.cosmosAnchorInitialized === "true") return;
+
+    link.dataset.cosmosAnchorInitialized = "true";
+
     link.addEventListener("click", (event) => {
       const href = link.getAttribute("href");
 
@@ -528,7 +692,7 @@ function initSmoothAnchors() {
   });
 }
 
-/* ---------- 14. Page Loading State ---------- */
+/* ---------- 15. Page Loading State ---------- */
 
 function initPageLoadedState() {
   document.documentElement.classList.add("js-enabled");
@@ -547,7 +711,7 @@ function initPageLoadedState() {
   }
 }
 
-/* ---------- 15. Global Error Reporting ---------- */
+/* ---------- 16. Global Error Reporting ---------- */
 
 window.addEventListener("error", (event) => {
   console.error("COSMOS JavaScript error:", event.message);
@@ -557,7 +721,7 @@ window.addEventListener("unhandledrejection", (event) => {
   console.error("COSMOS asynchronous error:", event.reason);
 });
 
-/* ---------- 16. Initialize ---------- */
+/* ---------- 17. Initialize All Features ---------- */
 
 onReady(() => {
   const initializers = [
@@ -589,60 +753,3 @@ onReady(() => {
 
   console.info("COSMOS JavaScript initialized successfully.");
 });
-
-/* COSMOS — EMERGENCY HAMBURGER VISIBILITY FIX */
-
-@media (max-width: 760px) {
-  header.topbar,
-  .topbar {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    position: sticky !important;
-    top: 0;
-    z-index: 9999 !important;
-  }
-
-  header.topbar button.menu-toggle,
-  header.topbar #menuToggle,
-  header.topbar #navToggle,
-  .topbar .menu-toggle,
-  .topbar .nav-toggle,
-  .topbar #menuToggle,
-  .topbar #navToggle {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    position: relative !important;
-    z-index: 10001 !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 5px !important;
-    width: 44px !important;
-    height: 44px !important;
-    min-width: 44px !important;
-    padding: 10px !important;
-    margin-left: auto !important;
-    border: 1px solid #526a9f !important;
-    border-radius: 12px !important;
-    color: #f4f6ff !important;
-    background: #101626 !important;
-    cursor: pointer !important;
-  }
-
-  header.topbar button.menu-toggle span,
-  header.topbar #menuToggle span,
-  header.topbar #navToggle span,
-  .topbar .menu-toggle span,
-  .topbar .nav-toggle span {
-    display: block !important;
-    width: 20px !important;
-    height: 2px !important;
-    min-height: 2px !important;
-    background: #69e0ff !important;
-    border-radius: 3px !important;
-    opacity: 1 !important;
-  }
-}
