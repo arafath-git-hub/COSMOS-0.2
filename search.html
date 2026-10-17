@@ -13,7 +13,11 @@
   <script src="./search.js" defer></script>
 
   <style>
-    /* COSMOS universal navigation fix */
+    /* =========================================
+       COSMOS COMPACT NAVIGATION
+       Compatible with search.css and search.js
+    ========================================= */
+
     .topbar {
       position: relative;
       z-index: 1000;
@@ -25,17 +29,18 @@
       align-items: center;
       justify-content: center;
       gap: 5px;
-      width: 46px;
-      height: 46px;
+      width: 44px;
+      height: 44px;
       padding: 10px;
+      margin-left: auto;
       flex-shrink: 0;
       cursor: pointer;
-      color: #fff;
-      background: rgba(10, 18, 42, 0.88);
-      border: 1px solid rgba(100, 210, 255, 0.45);
-      border-radius: 12px;
       position: relative;
       z-index: 1002;
+      color: #ffffff;
+      background: rgba(7, 15, 35, 0.9);
+      border: 1px solid rgba(100, 210, 255, 0.4);
+      border-radius: 10px;
       visibility: visible !important;
       opacity: 1 !important;
     }
@@ -44,9 +49,9 @@
       display: block;
       width: 21px;
       height: 2px;
-      min-height: 2px;
+      flex-shrink: 0;
       background: #75e5ff;
-      border-radius: 5px;
+      border-radius: 4px;
       transition: transform 0.25s ease, opacity 0.2s ease;
     }
 
@@ -64,47 +69,49 @@
 
     .main-nav,
     .main-nav.nav {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      left: auto;
+      width: 260px;
+      max-width: calc(100vw - 32px);
+      height: auto;
+      max-height: min(75vh, 520px);
+      overflow-y: auto;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 4px;
+      padding: 12px;
+      margin: 0;
+      background: rgba(5, 10, 28, 0.97);
+      border: 1px solid rgba(100, 210, 255, 0.3);
+      border-radius: 14px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       z-index: 1001;
     }
 
-    @media (max-width: 100000px) {
-      .topbar {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-      }
+    .main-nav.is-open,
+    .main-nav.nav.is-open {
+      display: flex !important;
+    }
 
-      .menu-toggle {
-        margin-left: auto;
-      }
+    .main-nav a,
+    .main-nav.nav a {
+      display: block;
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
 
-      .main-nav,
-      .main-nav.nav {
-        display: none;
-        width: 100%;
-        flex-basis: 100%;
-      }
-
-      .main-nav.is-open,
-      .main-nav.nav.is-open {
-        display: flex !important;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 4px;
-        margin-top: 12px;
-        padding: 14px;
-        background: rgba(5, 10, 28, 0.98);
-        border: 1px solid rgba(100, 210, 255, 0.24);
-        border-radius: 14px;
-        box-shadow: 0 16px 45px rgba(0, 0, 0, 0.4);
-      }
-
-      .main-nav.is-open a,
-      .main-nav.nav.is-open a {
-        display: block;
-        width: 100%;
-        padding: 12px 14px;
-      }
+    .main-nav a:hover,
+    .main-nav.nav a:hover {
+      background: rgba(90, 210, 255, 0.1);
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -243,6 +250,7 @@
       </div>
 
       <div id="activeStatus" class="active-status" hidden></div>
+
       <div id="resultsGrid" class="results-grid" aria-live="polite"></div>
 
       <div id="emptyState" class="empty-state" hidden>
@@ -259,11 +267,13 @@
 
     <section class="bottom-banner">
       <div class="banner-icon" aria-hidden="true">✧</div>
+
       <div>
         <p class="eyebrow">THE UNIVERSE IS WAITING</p>
         <h2>Keep looking up.</h2>
         <p>Every discovery starts with a question.</p>
       </div>
+
       <a href="./planets.html" class="banner-link">
         Explore planets <span>↗</span>
       </a>
@@ -297,9 +307,14 @@
 
       toggle.addEventListener("click", (event) => {
         event.stopPropagation();
+
         const isOpen = toggle.getAttribute("aria-expanded") === "true";
-        if (isOpen) closeMenu();
-        else openMenu();
+
+        if (isOpen) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
       });
 
       menu.querySelectorAll("a").forEach((link) => {
@@ -309,7 +324,6 @@
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
           closeMenu();
-          toggle.focus();
         }
       });
 
