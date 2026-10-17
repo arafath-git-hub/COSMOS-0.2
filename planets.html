@@ -25,9 +25,13 @@
       --glow: rgba(104,157,255,.16);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
@@ -38,6 +42,8 @@
         radial-gradient(ellipse at 85% 0%, #1c2b54 0%, transparent 35%),
         radial-gradient(ellipse at 0% 55%, #111c37 0%, transparent 35%),
         var(--bg);
+      background-size: 150% 150%;
+      animation: cosmosBackground 22s ease-in-out infinite alternate;
     }
 
     body::before {
@@ -53,7 +59,13 @@
         radial-gradient(2px 2px at 45% 80%, #a8c7ff 50%, transparent 100%),
         radial-gradient(1px 1px at 90% 70%, white 50%, transparent 100%),
         radial-gradient(1px 1px at 25% 60%, white 50%, transparent 100%);
-      background-size: 280px 240px, 350px 300px, 420px 360px, 300px 280px, 390px 320px;
+      background-size:
+        280px 240px,
+        350px 300px,
+        420px 360px,
+        300px 280px,
+        390px 320px;
+      animation: starDrift 65s linear infinite;
     }
 
     a {
@@ -79,24 +91,20 @@
       border-bottom: 1px solid var(--line);
     }
 
+    /* Logo icon removed */
+
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 11px;
       font: 700 22px "Space Grotesk", sans-serif;
       letter-spacing: 2px;
       white-space: nowrap;
+      transition: color .3s ease, text-shadow .3s ease;
     }
 
-    .brand-mark {
-      width: 39px;
-      height: 39px;
-      display: grid;
-      place-items: center;
-      border: 1px solid #7796d9;
-      border-radius: 50%;
-      color: var(--accent);
-      box-shadow: 0 0 20px #769cff25, inset 0 0 14px #769cff14;
+    .brand:hover {
+      color: var(--cyan);
+      text-shadow: 0 0 18px #72e5ff65;
     }
 
     .menu-toggle {
@@ -113,13 +121,18 @@
       border-radius: 9px;
       background: #a8c7ff09;
       cursor: pointer;
-      transition: border-color .25s, background .25s, box-shadow .25s;
+      transition:
+        border-color .3s ease,
+        background .3s ease,
+        box-shadow .3s ease,
+        transform .3s ease;
     }
 
     .menu-toggle:hover {
       background: #a8c7ff18;
       border-color: #a8c7ff85;
       box-shadow: 0 0 18px #769cff18;
+      transform: scale(1.05);
     }
 
     .menu-toggle span {
@@ -219,7 +232,7 @@
     .intro {
       position: relative;
       padding: 75px 0 38px;
-      animation: fade-up .7s ease both;
+      animation: fade-up .8s ease both;
     }
 
     .eyebrow {
@@ -239,6 +252,7 @@
       height: 1px;
       background: var(--cyan);
       box-shadow: 0 0 10px var(--cyan);
+      animation: lineGlow 3s ease-in-out infinite alternate;
     }
 
     h1 {
@@ -251,6 +265,7 @@
     h1 span {
       color: var(--accent);
       text-shadow: 0 0 35px #8ab3ff30;
+      animation: textGlow 5s ease-in-out infinite alternate;
     }
 
     .intro p {
@@ -331,21 +346,25 @@
       border: 1px solid var(--line);
       border-radius: 13px;
       background: linear-gradient(145deg, #ffffff08, #ffffff02 65%);
-      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
-      animation: fade-up .65s ease both;
+      transition:
+        transform .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+      animation: cardReveal .8s cubic-bezier(.2, .7, .2, 1) both;
+      will-change: transform, opacity;
     }
 
-    .planet-card:nth-child(2) { animation-delay: .04s; }
-    .planet-card:nth-child(3) { animation-delay: .08s; }
-    .planet-card:nth-child(4) { animation-delay: .12s; }
-    .planet-card:nth-child(5) { animation-delay: .16s; }
-    .planet-card:nth-child(6) { animation-delay: .20s; }
-    .planet-card:nth-child(7) { animation-delay: .24s; }
-    .planet-card:nth-child(8) { animation-delay: .28s; }
+    .planet-card:nth-child(2) { animation-delay: .06s; }
+    .planet-card:nth-child(3) { animation-delay: .12s; }
+    .planet-card:nth-child(4) { animation-delay: .18s; }
+    .planet-card:nth-child(5) { animation-delay: .24s; }
+    .planet-card:nth-child(6) { animation-delay: .30s; }
+    .planet-card:nth-child(7) { animation-delay: .36s; }
+    .planet-card:nth-child(8) { animation-delay: .42s; }
 
     .planet-card:hover {
-      transform: translateY(-6px);
-      border-color: #a8c7ff60;
+      transform: translateY(-7px);
+      border-color: #a8c7ff70;
       box-shadow: 0 15px 45px #0003, 0 0 24px var(--glow);
     }
 
@@ -367,6 +386,7 @@
       border: 1px solid #ffffff12;
       border-radius: 50%;
       transform: rotate(-20deg);
+      animation: orbitDrift 12s ease-in-out infinite alternate;
     }
 
     .planet-visual::after {
@@ -377,6 +397,7 @@
       border: 1px solid #ffffff0c;
       border-radius: 50%;
       transform: rotate(30deg);
+      animation: orbitDrift 15s ease-in-out infinite alternate-reverse;
     }
 
     .planet-number {
@@ -399,12 +420,15 @@
         inset -20px -12px 28px #0009,
         inset 8px 7px 19px #ffffff20,
         0 0 32px var(--planet-glow);
-      transition: transform .5s ease;
-      animation: planet-float 6s ease-in-out infinite;
+      transition: transform .5s ease, filter .5s ease;
+      animation: planetFloat 6s ease-in-out infinite;
+      transform-origin: center;
+      will-change: transform;
     }
 
     .planet-card:hover .planet {
       transform: scale(1.09) rotate(7deg);
+      filter: brightness(1.12);
       animation-play-state: paused;
     }
 
@@ -433,12 +457,30 @@
 
     .jupiter {
       --planet-glow: #e6b38d30;
-      background: repeating-linear-gradient(0deg, #c68d67 0 9px, #e8c7a0 10px 19px, #93644d 20px 25px);
+      background: repeating-linear-gradient(
+        0deg,
+        #c68d67 0 9px,
+        #e8c7a0 10px 19px,
+        #93644d 20px 25px
+      );
+      background-size: 100% 150%;
+      animation:
+        planetFloat 6s ease-in-out infinite,
+        atmosphereFlow 16s linear infinite;
     }
 
     .saturn {
       --planet-glow: #d8bd8130;
-      background: repeating-linear-gradient(0deg, #f1dbad 0 12px, #b49a6e 13px 19px, #dfc89a 20px 26px);
+      background: repeating-linear-gradient(
+        0deg,
+        #f1dbad 0 12px,
+        #b49a6e 13px 19px,
+        #dfc89a 20px 26px
+      );
+      background-size: 100% 150%;
+      animation:
+        planetFloat 6s ease-in-out infinite,
+        atmosphereFlow 16s linear infinite;
     }
 
     .saturn::after {
@@ -452,6 +494,7 @@
       border-right-color: #7c6a50;
       border-radius: 50%;
       transform: rotate(-20deg);
+      animation: saturnRingGlow 5s ease-in-out infinite alternate;
     }
 
     .uranus {
@@ -550,9 +593,17 @@
       color: var(--muted);
       font-size: 12px;
       line-height: 1.9;
+      transition: border-color .35s ease, box-shadow .35s ease;
     }
 
-    .note strong { color: #dce7ff; }
+    .note:hover {
+      border-left-color: var(--cyan);
+      box-shadow: 0 0 25px #72e5ff0b;
+    }
+
+    .note strong {
+      color: #dce7ff;
+    }
 
     /* BLACK HOLE FEATURE */
 
@@ -570,6 +621,12 @@
       background:
         radial-gradient(ellipse at 85% 50%, #443a872b, transparent 42%),
         linear-gradient(125deg, #11172a, #0b1020);
+      transition: border-color .35s ease, box-shadow .35s ease;
+    }
+
+    .black-hole-feature:hover {
+      border-color: #8c83ff70;
+      box-shadow: 0 0 28px #8c83ff0d;
     }
 
     .feature-kicker {
@@ -602,12 +659,13 @@
       border-radius: 7px;
       color: #e0ddff;
       font-size: 11px;
-      transition: background .25s, box-shadow .25s;
+      transition: background .25s, box-shadow .25s, transform .25s;
     }
 
     .feature-link:hover {
       background: #9a8cff16;
       box-shadow: 0 0 22px #9a8cff18;
+      transform: translateY(-2px);
     }
 
     .black-hole-art {
@@ -629,7 +687,7 @@
       border-radius: 50%;
       transform: rotate(-28deg) scaleY(.45);
       box-shadow: 0 0 25px #9a8cff1c;
-      animation: ring-spin 12s linear infinite;
+      animation: ringSpin 12s linear infinite;
     }
 
     .black-hole-art::after {
@@ -646,6 +704,7 @@
       border-radius: 50%;
       background: #02030a;
       box-shadow: 0 0 25px #000, 0 0 40px #8576ff3b;
+      animation: blackHolePulse 4s ease-in-out infinite;
     }
 
     /* FOOTER */
@@ -662,45 +721,156 @@
       font-size: 11px;
     }
 
-    @keyframes fade-up {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* ANIMATIONS */
+
+    @keyframes cosmosBackground {
+      0% { background-position: 0% 0%; }
+      50% { background-position: 100% 45%; }
+      100% { background-position: 35% 100%; }
     }
 
-    @keyframes planet-float {
+    @keyframes starDrift {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-35px, 25px, 0); }
+    }
+
+    @keyframes fade-up {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes cardReveal {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes planetFloat {
       0%, 100% { translate: 0 0; }
       50% { translate: 0 -5px; }
     }
 
-    @keyframes ring-spin {
+    @keyframes orbitDrift {
+      from { scale: 1; opacity: .6; }
+      to { scale: 1.08; opacity: 1; }
+    }
+
+    @keyframes lineGlow {
+      from { opacity: .55; }
+      to {
+        opacity: 1;
+        box-shadow: 0 0 14px var(--cyan);
+      }
+    }
+
+    @keyframes textGlow {
+      from { text-shadow: 0 0 20px #8ab3ff20; }
+      to { text-shadow: 0 0 38px #8ab3ff65; }
+    }
+
+    @keyframes atmosphereFlow {
+      from { background-position: 0 0; }
+      to { background-position: 0 150px; }
+    }
+
+    @keyframes saturnRingGlow {
+      from { filter: brightness(.9); }
+      to { filter: brightness(1.25); }
+    }
+
+    @keyframes ringSpin {
       from { rotate: 0deg; }
       to { rotate: 360deg; }
     }
 
+    @keyframes blackHolePulse {
+      0%, 100% {
+        box-shadow: 0 0 25px #000, 0 0 35px #8576ff25;
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 30px #000, 0 0 55px #8576ff65;
+        transform: scale(1.06);
+      }
+    }
+
+    /* RESPONSIVE */
+
     @media (max-width: 1100px) {
-      .planet-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .planet-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 850px) {
-      .planet-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .black-hole-feature { grid-template-columns: 1fr; }
-      .black-hole-art { display: none; }
+      .planet-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .black-hole-feature {
+        grid-template-columns: 1fr;
+      }
+
+      .black-hole-art {
+        display: none;
+      }
     }
 
     @media (max-width: 520px) {
-      .shell { padding: 18px; }
-      .topbar { gap: 15px; }
-      .intro { padding-top: 48px; }
-      h1 { letter-spacing: -1.8px; }
-      .planet-grid { grid-template-columns: 1fr; }
-      .planet-visual { min-height: 215px; }
-      .planet-info p { min-height: 0; }
-      .black-hole-feature { padding: 21px; }
-      footer { flex-direction: column; }
+      .shell {
+        padding: 18px;
+      }
+
+      .topbar {
+        gap: 15px;
+      }
+
+      .intro {
+        padding-top: 48px;
+      }
+
+      h1 {
+        letter-spacing: -1.8px;
+      }
+
+      .planet-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .planet-visual {
+        min-height: 215px;
+      }
+
+      .planet-info p {
+        min-height: 0;
+      }
+
+      .black-hole-feature {
+        padding: 21px;
+      }
+
+      footer {
+        flex-direction: column;
+      }
     }
 
+    /* ACCESSIBILITY */
+
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         animation: none !important;
         transition: none !important;
         scroll-behavior: auto !important;
@@ -714,7 +884,6 @@
 
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="COSMOS Home">
-        <span class="brand-mark" aria-hidden="true">✳</span>
         <span>COSMOS</span>
       </a>
 
@@ -745,7 +914,9 @@
     <main>
       <section class="intro">
         <div class="eyebrow">THE SOLAR SYSTEM / EXPLORER</div>
+
         <h1>Worlds beyond <span>our own.</span></h1>
+
         <p>
           Eight planets. Eight extraordinary worlds.
           From the scorched surface of Mercury to the distant
