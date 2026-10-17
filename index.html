@@ -8,120 +8,195 @@
 
   <title>COSMOS — Explore the Universe</title>
 
+  <meta
+    name="description"
+    content="Explore planets, space missions, scientific research and black holes across our universe with COSMOS."
+  >
+
   <link rel="icon" type="image/png" href="./favicon.png">
-  <meta name="description" content="Explore planets, space missions, scientific research and black holes across our universe with COSMOS.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
-<style>
-@media (max-width: 760px) {
-  #menuToggle,
-  .menu-toggle {
-    display: flex !important;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    position: relative;
-    z-index: 10001;
-    flex-shrink: 0;
-  }
+  <link rel="stylesheet" href="./styles.css">
 
-  #menuToggle span,
-  .menu-toggle span {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background: #ffffff;
-    border-radius: 5px;
-  }
+  <!-- Home navigation styles -->
+  <style>
+    .topbar {
+      position: relative;
+      z-index: 1000;
+    }
 
-  #cosmosNav {
-    display: none;
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    right: 0;
-    width: 100%;
-    padding: 18px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    background: rgba(8, 11, 22, 0.97);
-    border: 1px solid rgba(100, 180, 255, 0.25);
-    border-radius: 14px;
-    backdrop-filter: blur(18px);
-    z-index: 10000;
-  }
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      padding: 10px;
+      border: 1px solid rgba(105, 224, 255, 0.35);
+      border-radius: 12px;
+      background: rgba(16, 22, 38, 0.95);
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 10002;
+    }
 
-  #cosmosNav.is-open {
-    display: flex !important;
-  }
+    .menu-toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #69e0ff;
+      border-radius: 3px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
 
-  #cosmosNav a {
-    display: block;
-    padding: 12px 14px;
-    color: #f4f6ff;
-    text-decoration: none;
-    border-radius: 8px;
-  }
+    .menu-toggle.open span:first-child {
+      transform: translateY(7px) rotate(45deg);
+    }
 
-  #cosmosNav a:hover,
-  #cosmosNav a:focus {
-    background: rgba(80, 150, 255, 0.15);
-  }
-}
-</style>
+    .menu-toggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.open span:last-child {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    @media (max-width: 760px) {
+      .topbar {
+        position: sticky !important;
+        top: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 10000 !important;
+      }
+
+      .menu-toggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+
+      #cosmosNav {
+        display: none !important;
+        position: absolute !important;
+        top: calc(100% + 10px) !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: min(75vh, 520px);
+        overflow-y: auto;
+        box-sizing: border-box;
+        padding: 14px !important;
+        margin: 0 !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 6px !important;
+        background: rgba(8, 11, 22, 0.98) !important;
+        border: 1px solid rgba(105, 224, 255, 0.25);
+        border-radius: 14px;
+        box-shadow: 0 18px 45px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        z-index: 10001 !important;
+      }
+
+      #cosmosNav.is-open {
+        display: flex !important;
+      }
+
+      #cosmosNav a {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 14px;
+        border-radius: 9px;
+        color: #f4f6ff;
+        text-decoration: none;
+        white-space: normal;
+      }
+
+      #cosmosNav a:hover,
+      #cosmosNav a:focus-visible {
+        background: rgba(80, 150, 255, 0.15);
+        outline: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .menu-toggle span {
+        transition: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
   <div class="cosmos-shell">
 
-  
-<header class="topbar">
-  <a class="brand" href="index.html" aria-label="COSMOS Home">
-    <span class="brand-mark" aria-hidden="true">✳</span>
-    <span>COSMOS</span>
-  </a>
+    <!-- HEADER / NAVIGATION -->
+    <header class="topbar">
 
-  <button
-    class="menu-toggle"
-    id="menuToggle"
-    type="button"
-    aria-label="Open navigation menu"
-    aria-expanded="false"
-    aria-controls="cosmosNav"
-  >
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+      <a class="brand" href="./index.html" aria-label="COSMOS Home">
+        <span class="brand-mark" aria-hidden="true">✳</span>
+        <span>COSMOS</span>
+      </a>
 
-  <nav class="nav" id="cosmosNav" aria-label="Main navigation">
-    <a href="index.html" aria-current="page">Home</a>
-    <a href="planets.html">Planets</a>
-    <a href="search.html">Search</a>
-    <a href="missions.html">Missions</a>
-    <a href="research.html">Research</a>
-    <a href="black-hole.html">Black Hole Observatory</a>
-    <a class="nav-cta" href="about.html">About COSMOS ↗</a>
-  </nav>
-</header>
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="cosmosNav"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
+      <nav
+        class="nav"
+        id="cosmosNav"
+        aria-label="Main navigation"
+      >
+        <a href="./index.html" aria-current="page">Home</a>
+        <a href="./planets.html">Planets</a>
+        <a href="./search.html">Search</a>
+        <a href="./missions.html">Missions</a>
+        <a href="./research.html">Research</a>
+        <a href="./black-hole.html">Black Hole Observatory</a>
+        <a class="nav-cta" href="./about.html">About COSMOS ↗</a>
+      </nav>
 
+    </header>
+
+    <!-- MAIN DASHBOARD -->
     <main class="dashboard">
+
       <div class="eyebrow">
         <span class="status-dot"></span>
         YOUR UNIVERSE, ONE DESTINATION
       </div>
 
+      <!-- HERO -->
       <section class="hero" aria-labelledby="hero-title">
+
         <div class="hero-content">
+
           <h1 id="hero-title">
             Beyond
             <span>the known.</span>
@@ -134,94 +209,117 @@
           </p>
 
           <div class="actions">
-            <a class="button button-primary" href="planets.html">
-              Explore Planets <span aria-hidden="true">↗</span>
+
+            <a class="button button-primary" href="./planets.html">
+              Explore Planets
+              <span aria-hidden="true">↗</span>
             </a>
 
-            <a class="button button-secondary" href="missions.html">
-              Discover Missions <span aria-hidden="true">→</span>
+            <a class="button button-secondary" href="./missions.html">
+              Discover Missions
+              <span aria-hidden="true">→</span>
             </a>
+
           </div>
         </div>
 
-        <div class="space-art" role="img" aria-label="Decorative illustration of a ringed planet">
+        <!-- Decorative space illustration -->
+        <div
+          class="space-art"
+          role="img"
+          aria-label="Decorative illustration of a ringed planet"
+        >
           <span class="star star-one"></span>
           <span class="star star-two"></span>
           <span class="star star-three"></span>
           <span class="star star-four"></span>
           <span class="star star-five"></span>
+
           <div class="orbit"></div>
           <div class="orbit orbit-two"></div>
           <div class="planet-art"></div>
+
           <div class="art-label">
             <strong>Infinite possibilities.</strong>
             One universe to discover.
           </div>
         </div>
+
       </section>
 
+      <!-- DASHBOARD CARDS -->
       <section class="dashboard-grid" aria-label="Explore COSMOS">
 
-        <a class="dash-card" href="planets.html">
+        <a class="dash-card" href="./planets.html">
           <div class="card-top">
             <span class="card-icon" aria-hidden="true">◎</span>
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
+
           <div>
             <h2>Planet Explorer</h2>
             <p>Explore all eight planets and their unique worlds.</p>
           </div>
         </a>
 
-        <a class="dash-card" href="missions.html">
+        <a class="dash-card" href="./missions.html">
           <div class="card-top">
             <span class="card-icon" aria-hidden="true">⌁</span>
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
+
           <div>
             <h2>Space Missions</h2>
             <p>Discover spacecraft, expeditions and discoveries.</p>
           </div>
         </a>
 
-        <a class="dash-card" href="research.html">
+        <a class="dash-card" href="./research.html">
           <div class="card-top">
             <span class="card-icon" aria-hidden="true">⌘</span>
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
+
           <div>
             <h2>Scientific Research</h2>
             <p>Explore planetary science and open questions.</p>
           </div>
         </a>
 
-        <a class="dash-card" href="black-hole.html">
+        <a class="dash-card" href="./black-hole.html">
           <div class="card-top">
             <span class="card-icon" aria-hidden="true">◉</span>
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
+
           <div>
             <h2>Black Hole Observatory</h2>
-            <p>Explore event horizons, extreme gravity and black hole science.</p>
+            <p>
+              Explore event horizons, extreme gravity and black hole science.
+            </p>
           </div>
         </a>
 
-        <a class="dash-card" href="search.html">
+        <a class="dash-card" href="./search.html">
           <div class="card-top">
             <span class="card-icon" aria-hidden="true">⌕</span>
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
+
           <div>
             <h2>Global Search + Favorites</h2>
-            <p>Find content across COSMOS and keep track of your favorites.</p>
+            <p>
+              Find content across COSMOS and keep track of your favorites.
+            </p>
           </div>
         </a>
 
-        <a class="dash-card" href="about.html">
+        <a class="dash-card" href="./about.html">
           <div class="card-top">
             <span class="card-icon" aria-hidden="true">✧</span>
             <span class="card-arrow" aria-hidden="true">↗</span>
           </div>
+
           <div>
             <h2>About COSMOS</h2>
             <p>Learn about our universe exploration project.</p>
@@ -231,57 +329,28 @@
       </section>
     </main>
 
+    <!-- FOOTER -->
     <footer class="footer">
-      <span>© <span data-current-year>2026</span> COSMOS · Explore. Understand. Discover.</span>
+
+      <span>
+        © <span data-current-year>2026</span>
+        COSMOS · Explore. Understand. Discover.
+      </span>
+
       <div class="footer-links">
-        <a href="planets.html">Planets</a>
-        <a href="search.html">Search</a>
-        <a href="missions.html">Missions</a>
-        <a href="research.html">Research</a>
-        <a href="black-hole.html">Black Holes</a>
+        <a href="./planets.html">Planets</a>
+        <a href="./search.html">Search</a>
+        <a href="./missions.html">Missions</a>
+        <a href="./research.html">Research</a>
+        <a href="./black-hole.html">Black Holes</a>
       </div>
+
     </footer>
 
   </div>
 
-  <script src="app.js" defer></script>
+  <!-- Load shared JavaScript once only -->
+  <script src="./app.js" defer></script>
 
-  <script>
-    (() => {
-      const toggle = document.querySelector(".menu-toggle");
-      const menu = document.querySelector("#cosmosNav");
-
-      if (!toggle || !menu) return;
-
-      function setMenu(open) {
-        toggle.setAttribute("aria-expanded", String(open));
-        toggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
-        menu.classList.toggle("is-open", open);
-        document.body.classList.toggle("menu-open", open);
-      }
-
-      toggle.addEventListener("click", () => {
-        setMenu(toggle.getAttribute("aria-expanded") !== "true");
-      });
-
-      menu.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => setMenu(false));
-      });
-
-      document.addEventListener("keydown", event => {
-        if (event.key === "Escape") setMenu(false);
-      });
-
-      document.addEventListener("click", event => {
-        if (!menu.contains(event.target) && !toggle.contains(event.target)) {
-          setMenu(false);
-        }
-      });
-
-      window.addEventListener("resize", () => {
-        if (window.innerWidth > 760) setMenu(false);
-      });
-    })();
-  </script>
 </body>
 </html>
