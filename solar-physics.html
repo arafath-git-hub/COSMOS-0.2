@@ -2,332 +2,1437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explore solar physics, the Sun's layers, sunspots, solar flares, coronal mass ejections, solar wind, and space weather.">
-  <title>Solar Physics | COSMOS</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090812">
+<meta name="description" content="Explore solar physics, the Sun's magnetic field, solar flares, space weather and the science behind our nearest star.">
+<title>Solar Physics | COSMOS</title>
 
-  <style>
-    .research-detail{width:min(1100px,calc(100% - 40px));margin:auto;padding:38px 0 70px;color:#edf4ff}
-    .research-detail a{color:#65e4df}
-    .detail-back{display:inline-block;margin-bottom:26px;text-decoration:none}
-    .detail-hero{padding:clamp(24px,5vw,48px);border:1px solid #4a382b;border-radius:16px;background:radial-gradient(ellipse at 85% 15%,rgba(255,151,50,.23),transparent 45%),linear-gradient(135deg,#211a25,#0a1323)}
-    .detail-eyebrow{color:#ffbd70;font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-    .detail-hero h1{margin:12px 0;font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-1.5px}
-    .detail-hero p,.detail-section p,.detail-section li{color:#aab8ce;font-size:.97rem;line-height:1.85}
-    .detail-hero p{max-width:740px;margin-bottom:0}
-    .detail-section{margin-top:36px}
-    .detail-section h2{margin-bottom:14px;font-size:clamp(1.4rem,3vw,1.9rem)}
-    .detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
-    .detail-card{padding:22px;border:1px solid #3c3944;border-radius:12px;background:linear-gradient(145deg,#191b2b,#0b1424)}
-    .detail-card h3{margin-top:0;font-size:1.05rem}
-    .detail-card p{margin-bottom:0;font-size:.88rem}
-    .detail-list{padding-left:22px}
-    .detail-links{display:flex;flex-wrap:wrap;gap:12px}
-    .detail-link{display:inline-block;padding:10px 14px;border:1px solid #2a5263;border-radius:8px;text-decoration:none}
-    .detail-link:hover{border-color:#65e4df;background:#122239}
-    .fact-panel{margin-top:18px;padding:20px;border-left:3px solid #ffbd70;border-radius:0 10px 10px 0;background:#191b29}
-    .fact-panel p{margin:0}
-    @media(max-width:760px){.detail-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(max-width:520px){.research-detail{width:calc(100% - 28px);padding-top:25px}.detail-grid{grid-template-columns:1fr}.detail-card{padding:18px}}
-    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
-  </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #090812;
+  --panel: rgba(22, 17, 29, .78);
+  --panel2: #17121e;
+  --text: #fff7ee;
+  --muted: #b6a9b7;
+  --orange: #ff9d46;
+  --gold: #ffd16a;
+  --coral: #ff5e63;
+  --line: rgba(255, 177, 91, .17);
+  --glow: rgba(255, 126, 50, .18);
+  --radius: 22px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 80% 4%, rgba(120, 49, 50, .16), transparent 32%),
+    radial-gradient(ellipse at 10% 36%, rgba(91, 45, 93, .12), transparent 32%),
+    var(--bg);
+  color: var(--text);
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: .28;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, #fff 99%, transparent),
+    radial-gradient(1px 1px at 72% 15%, #ffd7a2 99%, transparent),
+    radial-gradient(1px 1px at 40% 64%, #fff 99%, transparent),
+    radial-gradient(2px 2px at 85% 74%, #ffb16a 99%, transparent),
+    radial-gradient(1px 1px at 23% 88%, #fff 99%, transparent),
+    radial-gradient(1px 1px at 56% 42%, #fff 99%, transparent);
+  background-size: 260px 260px, 340px 340px, 290px 290px,
+                   400px 400px, 330px 330px, 280px 280px;
+  animation: starDrift 90s linear infinite;
+}
+
+a { color: inherit; }
+button, input { font: inherit; }
+
+button, a { -webkit-tap-highlight-color: transparent; }
+
+::selection {
+  background: rgba(255, 157, 70, .3);
+  color: white;
+}
+
+.progress {
+  position: fixed;
+  inset: 0 auto auto 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--coral), var(--orange), var(--gold));
+  z-index: 1000;
+  box-shadow: 0 0 15px var(--orange);
+}
+
+.back-link {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 24px clamp(18px, 6vw, 90px);
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(20, 15, 24, .78);
+  color: #ffe0bb;
+  text-decoration: none;
+  font-size: .88rem;
+  transition: .25s ease;
+  backdrop-filter: blur(12px);
+}
+
+.back-link:hover {
+  border-color: var(--orange);
+  transform: translateX(-4px);
+  box-shadow: 0 0 25px var(--glow);
+}
+
+.container {
+  width: min(1120px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: .19em;
+  font-size: .72rem;
+  font-weight: 700;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 23px;
+  height: 1px;
+  background: var(--orange);
+  box-shadow: 0 0 8px var(--orange);
+}
+
+.hero {
+  min-height: 610px;
+  padding: 45px 0 90px;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items: center;
+  gap: 30px;
+}
+
+.hero-copy { position: relative; z-index: 1; }
+
+.hero h1 {
+  margin: 20px 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(3.1rem, 7.3vw, 6.6rem);
+  line-height: .99;
+  letter-spacing: -.075em;
+  font-weight: 700;
+}
+
+.hero h1 span {
+  display: block;
+  color: transparent;
+  background: linear-gradient(100deg, #fff3d8 3%, #ffbd6d 42%, #ff625c 80%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  filter: drop-shadow(0 0 28px rgba(255, 113, 49, .14));
+}
+
+.hero p {
+  max-width: 560px;
+  color: var(--muted);
+  font-size: 1.03rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: .88rem;
+  transition: .25s ease;
+}
+
+.btn-primary {
+  color: #241309;
+  background: linear-gradient(110deg, #ffb35e, #ff765c);
+  border-color: transparent;
+}
+
+.btn-secondary { background: rgba(255,255,255,.035); }
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px var(--glow);
+}
+
+.sun-stage {
+  min-height: 410px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  isolation: isolate;
+}
+
+.sun-stage::before,
+.sun-stage::after {
+  content: "";
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border: 1px solid rgba(255, 173, 80, .16);
+  border-radius: 50%;
+  animation: orbit 35s linear infinite;
+}
+
+.sun-stage::after {
+  width: 420px;
+  height: 420px;
+  border-style: dashed;
+  border-color: rgba(255, 118, 78, .12);
+  animation-direction: reverse;
+  animation-duration: 55s;
+}
+
+.sun {
+  width: clamp(185px, 25vw, 270px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: relative;
+  background:
+    radial-gradient(circle at 34% 30%, #fff4a9 0 3%, transparent 12%),
+    radial-gradient(ellipse at 70% 65%, #ff672f 0, transparent 39%),
+    radial-gradient(ellipse at 35% 67%, #ffbd39 0, transparent 40%),
+    radial-gradient(circle at 43% 39%, #fff0a2 0, #ffb42f 35%, #ff702b 67%, #a82626 100%);
+  box-shadow:
+    0 0 25px #ff9d46,
+    0 0 70px rgba(255, 120, 37, .52),
+    0 0 150px rgba(255, 89, 47, .22);
+  animation: sunPulse 5s ease-in-out infinite;
+}
+
+.sun::before {
+  content: "";
+  position: absolute;
+  inset: -17px;
+  border: 2px solid rgba(255, 176, 74, .55);
+  border-radius: 47% 53% 49% 51%;
+  box-shadow: 0 0 30px rgba(255, 146, 57, .4);
+  animation: corona 12s linear infinite;
+}
+
+.sun::after {
+  content: "";
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 25% 38%, rgba(157, 38, 27, .58) 0 4%, transparent 5%),
+    radial-gradient(ellipse at 67% 27%, rgba(184, 44, 25, .43) 0 7%, transparent 8%),
+    radial-gradient(ellipse at 62% 69%, rgba(190, 48, 21, .43) 0 5%, transparent 6%),
+    radial-gradient(ellipse at 30% 74%, rgba(255, 239, 138, .6) 0 5%, transparent 6%);
+  filter: blur(2px);
+}
+
+.sun-orbit {
+  position: absolute;
+  width: 330px;
+  height: 330px;
+  border: 1px solid rgba(255, 205, 121, .25);
+  border-radius: 50%;
+  animation: orbit 18s linear infinite;
+}
+
+.sun-orbit span {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  top: 49%;
+  left: -5px;
+  background: var(--gold);
+  box-shadow: 0 0 18px var(--gold);
+}
+
+.sun-caption {
+  position: absolute;
+  bottom: 2px;
+  color: #e7b991;
+  font-size: .73rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: -26px;
+  position: relative;
+  z-index: 3;
+}
+
+.metric {
+  border: 1px solid var(--line);
+  background: rgba(24, 18, 28, .83);
+  border-radius: 16px;
+  padding: 19px;
+  backdrop-filter: blur(14px);
+}
+
+.metric strong {
+  display: block;
+  color: var(--gold);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  letter-spacing: -.05em;
+}
+
+.metric span { color: var(--muted); font-size: .8rem; }
+
+section { padding: 90px 0 15px; }
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 25px;
+  margin-bottom: 28px;
+}
+
+.section-head h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: -.055em;
+  margin: 12px 0 0;
+}
+
+.section-head p {
+  max-width: 410px;
+  margin: 0;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.panel {
+  background: linear-gradient(145deg, rgba(31, 23, 34, .9), rgba(17, 15, 24, .92));
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 25px;
+  transition: border-color .3s, transform .3s, box-shadow .3s;
+}
+
+.panel:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 169, 90, .42);
+  box-shadow: 0 16px 40px rgba(0,0,0,.18);
+}
+
+.panel-number {
+  color: var(--orange);
+  font-size: .75rem;
+  letter-spacing: .15em;
+  font-weight: 700;
+}
+
+.panel h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.25rem;
+  margin: 12px 0 8px;
+}
+
+.panel p { color: var(--muted); font-size: .9rem; margin: 0; }
+
+.topic-tools {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 24px 0;
+}
+
+.search-wrap {
+  flex: 1 1 260px;
+  position: relative;
+}
+
+.search-wrap input {
+  width: 100%;
+  color: var(--text);
+  background: rgba(255,255,255,.035);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  outline: none;
+}
+
+.search-wrap input:focus { border-color: var(--orange); }
+
+.search-wrap input::placeholder { color: #8e8191; }
+
+.filter-btn {
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: var(--muted);
+  background: rgba(255,255,255,.025);
+  border: 1px solid var(--line);
+  transition: .2s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  color: #ffe2bf;
+  border-color: var(--orange);
+  background: rgba(255, 157, 70, .09);
+}
+
+.topic-count { color: var(--muted); font-size: .8rem; margin: 0 0 14px; }
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px;
+}
+
+.topic-card {
+  padding: 21px;
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+}
+
+.topic-card[hidden] { display: none; }
+
+.topic-tag {
+  display: inline-block;
+  align-self: flex-start;
+  color: var(--gold);
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 8px;
+}
+
+.topic-card h3 { font-size: 1.08rem; margin: 0 0 8px; }
+
+.topic-card p { font-size: .84rem; line-height: 1.65; }
+
+.topic-card .learn {
+  margin-top: auto;
+  padding-top: 14px;
+  color: #ffc58c;
+  font-size: .8rem;
+  text-decoration: none;
+}
+
+.topic-card .learn:hover { text-decoration: underline; }
+
+.no-results {
+  display: none;
+  padding: 30px;
+  color: var(--muted);
+  text-align: center;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+}
+
+.no-results.show { display: block; }
+
+.science-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.science-panel h3 { margin-top: 0; }
+
+.science-panel ul {
+  padding-left: 19px;
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.science-panel li { margin: 9px 0; }
+
+.callout {
+  margin-top: 16px;
+  border-left: 2px solid var(--orange);
+  padding: 13px 16px;
+  background: rgba(255, 157, 70, .055);
+  color: #e7d1c1;
+  font-size: .88rem;
+}
+
+.timeline {
+  position: relative;
+  margin: 30px 0 0 9px;
+  padding-left: 28px;
+  border-left: 1px solid rgba(255, 170, 90, .3);
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 27px;
+}
+
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -34px;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  background: var(--orange);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(255, 157, 70, .7);
+}
+
+.timeline-item time {
+  color: var(--gold);
+  font-size: .77rem;
+  letter-spacing: .1em;
+  font-weight: 700;
+}
+
+.timeline-item h3 { margin: 5px 0; font-size: 1.05rem; }
+
+.timeline-item p { margin: 0; color: var(--muted); font-size: .87rem; }
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 13px;
+}
+
+.fact {
+  padding: 19px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: rgba(255,255,255,.025);
+}
+
+.fact strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--gold);
+  font-size: .95rem;
+}
+
+.fact p { margin: 0; color: var(--muted); font-size: .86rem; }
+
+.faq-list { display: grid; gap: 10px; }
+
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255,255,255,.022);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: left;
+  padding: 18px 20px;
+  border: 0;
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.faq-question span:last-child {
+  color: var(--orange);
+  font-size: 1.2rem;
+  transition: transform .2s;
+}
+
+.faq-item.open .faq-question span:last-child { transform: rotate(45deg); }
+
+.faq-answer {
+  display: none;
+  padding: 0 20px 19px;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.faq-item.open .faq-answer { display: block; }
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px;
+}
+
+.resource {
+  display: block;
+  text-decoration: none;
+}
+
+.resource small {
+  display: block;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.resource h3 { margin: 0 0 8px; font-size: 1.03rem; }
+
+.resource p { margin: 0; font-size: .84rem; }
+
+.resource .resource-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #ffc58c;
+  font-size: .8rem;
+}
+
+footer {
+  width: min(1120px, calc(100% - 40px));
+  margin: 100px auto 0;
+  padding: 25px 0 35px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.back-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  background: rgba(23, 17, 26, .92);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: .25s;
+  z-index: 20;
+}
+
+.back-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes orbit { to { transform: rotate(360deg); } }
+@keyframes corona {
+  0% { transform: rotate(0deg) scale(1); border-radius: 47% 53% 49% 51%; }
+  50% { transform: rotate(180deg) scale(1.035); border-radius: 53% 47% 51% 49%; }
+  100% { transform: rotate(360deg) scale(1); border-radius: 47% 53% 49% 51%; }
+}
+@keyframes sunPulse {
+  0%, 100% { transform: scale(1); filter: saturate(1); }
+  50% { transform: scale(1.025); filter: saturate(1.15); }
+}
+@keyframes starDrift {
+  from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
+  to { background-position: 260px 520px, -340px 340px, 290px -290px, 400px 800px, -330px 330px, 280px -560px; }
+}
+
+@media (max-width: 850px) {
+  .hero { grid-template-columns: 1fr; padding-top: 30px; }
+  .hero-copy { max-width: 700px; }
+  .sun-stage { min-height: 380px; }
+  .overview-grid, .topic-grid { grid-template-columns: repeat(2, 1fr); }
+  .resource-grid { grid-template-columns: repeat(2, 1fr); }
+  .metrics { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .container { width: min(100% - 28px, 1120px); }
+  .back-link { margin: 18px 14px; }
+  .hero { padding: 24px 0 65px; gap: 8px; }
+  .hero h1 { font-size: clamp(3rem, 14vw, 4.7rem); }
+  .sun-stage { min-height: 310px; }
+  .sun { width: 175px; }
+  .sun-orbit { width: 235px; height: 235px; }
+  .sun-stage::before { width: 250px; height: 250px; }
+  .sun-stage::after { width: 290px; height: 290px; }
+  .sun-caption { bottom: 0; font-size: .62rem; }
+  .metrics { gap: 9px; }
+  .metric { padding: 15px; }
+  section { padding-top: 70px; }
+  .section-head { display: block; }
+  .section-head p { margin-top: 13px; }
+  .overview-grid, .topic-grid, .science-layout,
+  .facts-grid, .resource-grid { grid-template-columns: 1fr; }
+  .panel { padding: 21px; }
+  .topic-card { min-height: 0; }
+  .filter-btn { padding: 9px 11px; font-size: .8rem; }
+  footer { display: block; }
+  footer p { margin: 8px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
 </head>
 
-<body>
+<body id="top">
+<div class="progress" id="readingProgress" aria-hidden="true"></div>
 
+<a class="back-link" href="./research.html">
+  <span aria-hidden="true">←</span> Back to Research
+</a>
 
-  <main class="research-detail">
-    <a class="detail-back" href="research.html">← Back to Research</a>
-
-    <section class="detail-hero">
-      <span class="detail-eyebrow">Research Field 06</span>
-      <h1>Solar Physics</h1>
+<main>
+  <header class="hero container">
+    <div class="hero-copy">
+      <span class="eyebrow">COSMOS · Stellar Research</span>
+      <h1>Inside the <span>Sun.</span></h1>
       <p>
-        Discover how our star produces energy, generates magnetic activity,
-        and influences the space environment around Earth and throughout
-        the Solar System.
+        Explore the physics of our nearest star: a world of magnetic fields,
+        superheated plasma, explosive eruptions and powerful forces that shape
+        the space surrounding Earth.
       </p>
-    </section>
-
-    <section class="detail-section">
-      <h2>What Is Solar Physics?</h2>
-      <p>
-        Solar physics is the study of the Sun's structure, magnetic fields,
-        atmosphere, and changing activity. The Sun is a star made mostly of
-        hydrogen and helium. Its energy is produced by nuclear fusion in
-        its core, where hydrogen nuclei combine to form helium.
-      </p>
-      <p>
-        Understanding the Sun helps scientists explain how stars work,
-        predict some forms of space weather, and protect satellites,
-        astronauts, communication systems, and electrical infrastructure.
-      </p>
-    </section>
-
-    <section class="detail-section">
-      <h2>Layers of the Sun</h2>
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Core</h3>
-          <p>
-            The central region where nuclear fusion releases the energy
-            that eventually travels outward through the Sun.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Radiative Zone</h3>
-          <p>
-            Energy moves outward mainly through radiation, repeatedly
-            interacting with matter along the way.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Convective Zone</h3>
-          <p>
-            Hot plasma rises and cooler plasma sinks, carrying energy
-            toward the Sun's visible surface.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Photosphere</h3>
-          <p>
-            The visible layer from which most of the sunlight we see
-            directly escapes into space.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Chromosphere</h3>
-          <p>
-            A layer above the photosphere that can be observed especially
-            well using specific wavelengths of light.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Corona</h3>
-          <p>
-            The Sun's extremely hot outer atmosphere, extending millions
-            of kilometres into space and feeding the solar wind.
-          </p>
-        </article>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#topics">Explore Research <span aria-hidden="true">↘</span></a>
+        <a class="btn btn-secondary" href="#missions">Solar Missions</a>
       </div>
-    </section>
+    </div>
 
-    <section class="detail-section">
-      <h2>Solar Activity</h2>
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Sunspots</h3>
-          <p>
-            Darker, cooler regions on the photosphere associated with
-            concentrated magnetic fields. Their numbers change over time.
-          </p>
-        </article>
+    <div class="sun-stage" role="img" aria-label="Stylized animated illustration of the glowing Sun">
+      <div class="sun-orbit"><span></span></div>
+      <div class="sun"></div>
+      <div class="sun-caption">Our nearest star · 1 AU from Earth</div>
+    </div>
+  </header>
 
-        <article class="detail-card">
-          <h3>Solar Flares</h3>
-          <p>
-            Sudden releases of magnetic energy that produce intense
-            radiation across the electromagnetic spectrum.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Coronal Mass Ejections</h3>
-          <p>
-            Large eruptions of magnetised plasma from the Sun's corona.
-            Earth-directed events can disturb Earth's magnetic environment.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Solar Prominences</h3>
-          <p>
-            Large structures of relatively cool, dense plasma held above
-            the Sun's surface by magnetic fields.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Solar Wind</h3>
-          <p>
-            A continuous flow of charged particles escaping from the Sun
-            and travelling through interplanetary space.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Magnetic Reconnection</h3>
-          <p>
-            A process in which magnetic field configurations change,
-            releasing energy and helping drive solar eruptions.
-          </p>
-        </article>
+  <div class="container">
+    <div class="metrics reveal">
+      <div class="metric">
+        <strong>4.6B</strong>
+        <span>Years since formation</span>
       </div>
-    </section>
+      <div class="metric">
+        <strong>~15M °C</strong>
+        <span>Core temperature</span>
+      </div>
+      <div class="metric">
+        <strong>~11 Years</strong>
+        <span>Typical solar cycle</span>
+      </div>
+      <div class="metric">
+        <strong>150M km</strong>
+        <span>Mean Earth–Sun distance</span>
+      </div>
+    </div>
+  </div>
 
-    <section class="detail-section">
-      <h2>The Solar Activity Cycle</h2>
+  <section class="container reveal" id="overview">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">01 / Foundations</span>
+        <h2>What is solar physics?</h2>
+      </div>
       <p>
-        The Sun's magnetic activity follows an approximately 11-year cycle.
-        The number of sunspots and the frequency of many solar eruptions
-        generally rise toward solar maximum and decline toward solar minimum.
-        The cycle is not perfectly regular.
+        Solar physics investigates how the Sun works, how its activity changes,
+        and how our star influences the wider heliosphere.
       </p>
-      <p>
-        During this cycle, the Sun's large-scale magnetic field also changes
-        and reverses polarity around solar maximum. Scientists use sunspot
-        records, spacecraft, and ground-based observatories to track these
-        changes.
-      </p>
+    </div>
 
-      <div class="fact-panel">
+    <div class="overview-grid">
+      <article class="panel">
+        <span class="panel-number">01 — INTERIOR</span>
+        <h3>Energy from the core</h3>
         <p>
-          <strong>Remember:</strong> A solar flare and a coronal mass ejection
-          are different phenomena. A flare is a burst of radiation; a CME is
-          a large expulsion of plasma and magnetic field. They can occur
-          together, but one does not always accompany the other.
+          In the Sun's core, nuclear fusion converts hydrogen into helium.
+          Energy moves outward through the radiative and convective zones
+          before escaping as sunlight and other radiation.
         </p>
+      </article>
+
+      <article class="panel">
+        <span class="panel-number">02 — MAGNETISM</span>
+        <h3>A magnetic star</h3>
+        <p>
+          Electrically conducting plasma and the Sun's rotation help generate
+          complex magnetic fields. Their changing structure powers many
+          forms of solar activity.
+        </p>
+      </article>
+
+      <article class="panel">
+        <span class="panel-number">03 — SPACE WEATHER</span>
+        <h3>Beyond the Sun</h3>
+        <p>
+          Solar wind and eruptions travel through space. When conditions align,
+          they can trigger auroras and disturb satellites, radio links and
+          electrical infrastructure on Earth.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="container reveal" id="topics">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">02 / Knowledge Base</span>
+        <h2>Explore solar science.</h2>
       </div>
-    </section>
-
-    <section class="detail-section">
-      <h2>What Is Space Weather?</h2>
       <p>
-        Space weather describes changing conditions in space caused mainly
-        by solar activity. When energetic particles or solar eruptions
-        interact with Earth's magnetic field and atmosphere, they can produce
-        both beautiful effects and technological challenges.
+        Search the research library to discover the processes, structures and
+        open questions that define modern solar physics.
       </p>
+    </div>
 
-      <div class="detail-grid">
-        <article class="detail-card">
-          <h3>Auroras</h3>
-          <p>
-            Charged particles interacting with gases in Earth's upper
-            atmosphere produce auroras near the polar regions and, during
-            strong geomagnetic storms, sometimes at lower latitudes.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Satellites</h3>
-          <p>
-            Solar activity can increase radiation exposure, interfere with
-            electronics, and affect satellite operations.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Communications</h3>
-          <p>
-            Solar radiation and geomagnetic disturbances can disrupt some
-            radio communications and navigation signals.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Power Grids</h3>
-          <p>
-            Strong geomagnetic storms can induce currents in long conductors
-            and create challenges for electrical power systems.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Astronaut Safety</h3>
-          <p>
-            Solar energetic particle events can increase radiation risks
-            for astronauts beyond Earth's protective environment.
-          </p>
-        </article>
-
-        <article class="detail-card">
-          <h3>Spacecraft Planning</h3>
-          <p>
-            Solar observations help mission teams assess radiation hazards
-            and plan for changing space conditions.
-          </p>
-        </article>
+    <div class="topic-tools">
+      <div class="search-wrap">
+        <input id="topicSearch" type="search" placeholder="Search solar physics topics..." aria-label="Search solar physics topics">
       </div>
-    </section>
+      <button class="filter-btn active" type="button" data-filter="all">All Topics</button>
+      <button class="filter-btn" type="button" data-filter="structure">Structure</button>
+      <button class="filter-btn" type="button" data-filter="activity">Solar Activity</button>
+      <button class="filter-btn" type="button" data-filter="space">Space Weather</button>
+      <button class="filter-btn" type="button" data-filter="research">Research</button>
+    </div>
 
-    <section class="detail-section">
-      <h2>How Do Scientists Study the Sun?</h2>
-      <ul class="detail-list">
-        <li><strong>Solar telescopes:</strong> Observe the Sun in visible light and other wavelengths.</li>
-        <li><strong>Helioseismology:</strong> Uses waves travelling through the Sun to investigate its interior.</li>
-        <li><strong>Magnetograms:</strong> Map magnetic field strength and direction across the solar surface.</li>
-        <li><strong>Spacecraft:</strong> Observe solar radiation, particles, the corona, and the solar wind from space.</li>
-        <li><strong>Computer models:</strong> Simulate solar magnetic fields, plasma behaviour, and eruptive events.</li>
-      </ul>
-    </section>
+    <p class="topic-count" id="topicCount" aria-live="polite">18 topics</p>
 
-    <section class="detail-section">
-      <h2>Important Solar Missions</h2>
-      <ul class="detail-list">
-        <li><strong>Solar Dynamics Observatory (SDO):</strong> Monitors the Sun and its changing activity.</li>
-        <li><strong>Solar and Heliospheric Observatory (SOHO):</strong> Studies the Sun's interior, atmosphere, and solar wind.</li>
-        <li><strong>Parker Solar Probe:</strong> Travels through the Sun's outer atmosphere to investigate its heating and solar wind.</li>
-        <li><strong>Solar Orbiter:</strong> Studies the Sun and its polar regions using a combination of remote sensing and in-situ measurements.</li>
-      </ul>
-    </section>
+    <div class="topic-grid" id="topicGrid">
+      <article class="panel topic-card" data-category="structure">
+        <span class="topic-tag">Structure</span>
+        <h3>The Solar Core</h3>
+        <p>The innermost region where extreme pressure and temperature sustain nuclear fusion.</p>
+        <a class="learn" href="https://science.nasa.gov/sun/facts/" target="_blank" rel="noopener noreferrer">Explore NASA research ↗</a>
+      </article>
 
-    <section class="detail-section">
-      <h2>Questions Scientists Are Investigating</h2>
-      <ul class="detail-list">
-        <li>Why is the Sun's corona much hotter than its visible surface?</li>
-        <li>How are solar flares and coronal mass ejections triggered?</li>
-        <li>How does the solar wind accelerate away from the Sun?</li>
-        <li>How accurately can scientists forecast severe space weather?</li>
-        <li>How will the Sun's activity change over future solar cycles?</li>
-      </ul>
-    </section>
+      <article class="panel topic-card" data-category="structure">
+        <span class="topic-tag">Structure</span>
+        <h3>Radiative Zone</h3>
+        <p>The region where energy is transported outward mainly through the repeated absorption and emission of radiation.</p>
+        <a class="learn" href="https://science.nasa.gov/sun/facts/" target="_blank" rel="noopener noreferrer">Explore solar structure ↗</a>
+      </article>
 
-    <section class="detail-section">
-      <h2>Explore Related Research</h2>
-      <div class="detail-links">
-        <a class="detail-link" href="planetary-science.html">Planetary Science</a>
-        <a class="detail-link" href="space-technology.html">Space Technology</a>
-        <a class="detail-link" href="galaxies-stars.html">Galaxies &amp; Stars</a>
+      <article class="panel topic-card" data-category="structure">
+        <span class="topic-tag">Structure</span>
+        <h3>Convection Zone</h3>
+        <p>Hot plasma rises, cools and sinks, carrying energy toward the visible surface.</p>
+        <a class="learn" href="https://science.nasa.gov/sun/facts/" target="_blank" rel="noopener noreferrer">Study the Sun ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="structure">
+        <span class="topic-tag">Atmosphere</span>
+        <h3>Photosphere</h3>
+        <p>The visible layer from which much of the sunlight we see escapes into space.</p>
+        <a class="learn" href="https://science.nasa.gov/sun/facts/" target="_blank" rel="noopener noreferrer">View solar facts ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="structure">
+        <span class="topic-tag">Atmosphere</span>
+        <h3>Chromosphere</h3>
+        <p>A layer above the photosphere where temperature and plasma conditions change rapidly with height.</p>
+        <a class="learn" href="https://science.nasa.gov/heliophysics/" target="_blank" rel="noopener noreferrer">Explore heliophysics ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="structure research">
+        <span class="topic-tag">Open Question</span>
+        <h3>The Coronal Heating Problem</h3>
+        <p>Why the Sun's outer corona reaches millions of degrees while the photosphere is much cooler remains an active research question.</p>
+        <a class="learn" href="https://science.nasa.gov/mission/parker-solar-probe/" target="_blank" rel="noopener noreferrer">Parker Solar Probe ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="activity">
+        <span class="topic-tag">Magnetism</span>
+        <h3>Sunspots</h3>
+        <p>Relatively cool, dark-looking photospheric regions associated with concentrated magnetic fields.</p>
+        <a class="learn" href="https://spaceplace.nasa.gov/solar-activity/en/" target="_blank" rel="noopener noreferrer">Understand sunspots ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="activity">
+        <span class="topic-tag">Eruptions</span>
+        <h3>Solar Flares</h3>
+        <p>Sudden releases of magnetic energy that produce intense radiation across the electromagnetic spectrum.</p>
+        <a class="learn" href="https://science.nasa.gov/sun/facts/" target="_blank" rel="noopener noreferrer">Explore solar flares ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="activity space">
+        <span class="topic-tag">Eruptions</span>
+        <h3>Coronal Mass Ejections</h3>
+        <p>Large expulsions of magnetized plasma that can disturb Earth's magnetosphere if they arrive in the right conditions.</p>
+        <a class="learn" href="https://science.nasa.gov/sun/facts/" target="_blank" rel="noopener noreferrer">Study CMEs ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="space">
+        <span class="topic-tag">Solar Wind</span>
+        <h3>Solar Wind</h3>
+        <p>A continuous flow of charged particles from the Sun that carries the solar magnetic field throughout the heliosphere.</p>
+        <a class="learn" href="https://science.nasa.gov/mission/parker-solar-probe/" target="_blank" rel="noopener noreferrer">Study solar wind ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="activity">
+        <span class="topic-tag">Solar Cycle</span>
+        <h3>The 11-Year Cycle</h3>
+        <p>Sunspot numbers and many forms of solar activity rise and fall over a cycle averaging about 11 years.</p>
+        <a class="learn" href="https://science.nasa.gov/heliophysics/focus-areas/solar-science/" target="_blank" rel="noopener noreferrer">Explore solar science ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="activity research">
+        <span class="topic-tag">Magnetism</span>
+        <h3>Magnetic Reconnection</h3>
+        <p>A process that changes magnetic-field connectivity and converts magnetic energy into particle energy and heat.</p>
+        <a class="learn" href="https://science.nasa.gov/heliophysics/" target="_blank" rel="noopener noreferrer">Explore heliophysics ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="space">
+        <span class="topic-tag">Space Weather</span>
+        <h3>Geomagnetic Storms</h3>
+        <p>Disturbances in Earth's magnetic environment caused by solar-wind conditions and solar eruptions.</p>
+        <a class="learn" href="https://science.nasa.gov/heliophysics/" target="_blank" rel="noopener noreferrer">Explore space weather ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="space">
+        <span class="topic-tag">Space Weather</span>
+        <h3>Auroras</h3>
+        <p>Natural light displays produced when energetic particles excite gases in Earth's upper atmosphere.</p>
+        <a class="learn" href="https://science.nasa.gov/heliophysics/" target="_blank" rel="noopener noreferrer">Learn the physics ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="research">
+        <span class="topic-tag">Solar Interior</span>
+        <h3>Helioseismology</h3>
+        <p>Scientists study waves travelling through the Sun to infer properties of its otherwise hidden interior.</p>
+        <a class="learn" href="https://science.nasa.gov/mission/soho/" target="_blank" rel="noopener noreferrer">Explore SOHO ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="research">
+        <span class="topic-tag">Observation</span>
+        <h3>Solar Spectroscopy</h3>
+        <p>Analysing the Sun's spectrum reveals information about its composition, temperature, motion and magnetic environment.</p>
+        <a class="learn" href="https://sdo.gsfc.nasa.gov/mission/" target="_blank" rel="noopener noreferrer">Explore SDO ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="research">
+        <span class="topic-tag">Open Question</span>
+        <h3>Energetic Solar Particles</h3>
+        <p>Researchers investigate how some particles are accelerated to very high energies during eruptions and other solar events.</p>
+        <a class="learn" href="https://science.nasa.gov/mission/parker-solar-probe/" target="_blank" rel="noopener noreferrer">Explore Parker data ↗</a>
+      </article>
+
+      <article class="panel topic-card" data-category="research space">
+        <span class="topic-tag">Heliosphere</span>
+        <h3>The Sun's Magnetic Reach</h3>
+        <p>The solar magnetic field carried by the solar wind shapes a vast region of space called the heliosphere.</p>
+        <a class="learn" href="https://science.nasa.gov/heliophysics/focus-areas/solar-science/" target="_blank" rel="noopener noreferrer">Explore the heliosphere ↗</a>
+      </article>
+    </div>
+
+    <div class="no-results" id="noResults">No matching topics found. Try another search term or filter.</div>
+  </section>
+
+  <section class="container reveal" id="methods">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">03 / Scientific Method</span>
+        <h2>How do we study the Sun?</h2>
       </div>
-    </section>
-
-    <section class="detail-section">
-      <h2>Official Resources</h2>
       <p>
-        <a href="https://science.nasa.gov/sun/"
-           target="_blank" rel="noopener noreferrer">
-          NASA — The Sun ↗
-        </a>
+        Solar scientists combine observations from Earth and space with
+        physical models and direct measurements of particles and fields.
       </p>
+    </div>
+
+    <div class="science-layout">
+      <article class="panel science-panel">
+        <h3>Observation and measurement</h3>
+        <ul>
+          <li><strong>Visible-light imaging:</strong> tracks sunspots and surface structures.</li>
+          <li><strong>Ultraviolet and X-ray imaging:</strong> reveals hot plasma and energetic events.</li>
+          <li><strong>Spectroscopy:</strong> measures spectral lines to infer physical conditions.</li>
+          <li><strong>Magnetograms:</strong> map magnetic-field information at the solar surface.</li>
+          <li><strong>In-situ instruments:</strong> measure particles and magnetic fields in space.</li>
+        </ul>
+      </article>
+
+      <article class="panel science-panel">
+        <h3>Models and unanswered questions</h3>
+        <ul>
+          <li>Magnetohydrodynamics models plasma and magnetic-field interactions.</li>
+          <li>Computer simulations test possible mechanisms behind solar eruptions.</li>
+          <li>Helioseismology helps infer internal flows and structures.</li>
+          <li>Space-weather models estimate how solar disturbances may affect Earth.</li>
+          <li>Scientists compare model predictions with observations to refine explanations.</li>
+        </ul>
+        <div class="callout">
+          Scientific models are continually tested against measurements.
+          A useful prediction is not the same as perfect certainty.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="container reveal" id="missions">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">04 / Solar Exploration</span>
+        <h2>Missions observing our star.</h2>
+      </div>
       <p>
-        <a href="https://science.nasa.gov/mission/parker-solar-probe/"
-           target="_blank" rel="noopener noreferrer">
-          NASA — Parker Solar Probe ↗
-        </a>
+        Spacecraft observe the Sun from different distances and wavelengths,
+        giving researchers complementary views of its activity.
       </p>
+    </div>
+
+    <div class="timeline">
+      <article class="timeline-item">
+        <time datetime="1995">1995</time>
+        <h3>SOHO — Solar and Heliospheric Observatory</h3>
+        <p>
+          Launched on December 2, 1995, SOHO studies the Sun's interior,
+          atmosphere and solar wind. It is a joint ESA–NASA mission.
+          <a href="https://science.nasa.gov/mission/soho/" target="_blank" rel="noopener noreferrer">Mission details ↗</a>
+        </p>
+      </article>
+
+      <article class="timeline-item">
+        <time datetime="2010">2010</time>
+        <h3>Solar Dynamics Observatory</h3>
+        <p>
+          SDO observes solar activity in multiple wavelengths to investigate
+          magnetic fields, solar variability and the origins of space weather.
+          <a href="https://sdo.gsfc.nasa.gov/mission/" target="_blank" rel="noopener noreferrer">Mission details ↗</a>
+        </p>
+      </article>
+
+      <article class="timeline-item">
+        <time datetime="2018">2018</time>
+        <h3>Parker Solar Probe</h3>
+        <p>
+          Launched in 2018, Parker Solar Probe travels through the Sun's outer
+          atmosphere and measures the plasma and fields that help researchers
+          understand solar wind and coronal heating.
+          <a href="https://science.nasa.gov/mission/parker-solar-probe/" target="_blank" rel="noopener noreferrer">Mission details ↗</a>
+        </p>
+      </article>
+
+      <article class="timeline-item">
+        <time datetime="2020">2020</time>
+        <h3>Solar Orbiter</h3>
+        <p>
+          The ESA–NASA Solar Orbiter mission studies the Sun up close and
+          investigates its polar regions, magnetic activity and heliosphere.
+          <a href="https://www.esa.int/Science_Exploration/Space_Science/Solar_Orbiter" target="_blank" rel="noopener noreferrer">Mission details ↗</a>
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="container reveal" id="facts">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">05 / Evidence Check</span>
+        <h2>Facts, questions and misconceptions.</h2>
+      </div>
       <p>
-        <a href="https://sdo.gsfc.nasa.gov/"
-           target="_blank" rel="noopener noreferrer">
-          Solar Dynamics Observatory ↗
-        </a>
+        Solar physics distinguishes well-supported observations from
+        unresolved problems and oversimplified claims.
       </p>
-    </section>
+    </div>
 
-    <a class="detail-back" href="research.html">← Back to All Research Fields</a>
-  </main>
+    <div class="facts-grid">
+      <article class="fact">
+        <strong>The Sun is not a solid fireball.</strong>
+        <p>It is primarily hot plasma, a state of matter containing free electrons and ions.</p>
+      </article>
+      <article class="fact">
+        <strong>Sunspots are not holes.</strong>
+        <p>They look dark because they are cooler than their surroundings, not because they are empty.</p>
+      </article>
+      <article class="fact">
+        <strong>The corona is extremely hot.</strong>
+        <p>Its temperature can reach millions of degrees. The exact mechanisms that heat it remain an active research area.</p>
+      </article>
+      <article class="fact">
+        <strong>Solar storms do not all affect Earth equally.</strong>
+        <p>Their effects depend on direction, speed, magnetic structure and Earth's response.</p>
+      </article>
+      <article class="fact">
+        <strong>The solar cycle is not a precise clock.</strong>
+        <p>Activity follows a roughly 11-year pattern, but the duration and strength of individual cycles vary.</p>
+      </article>
+      <article class="fact">
+        <strong>Space weather is a real scientific field.</strong>
+        <p>Monitoring solar activity helps assess risks to satellites, communications, navigation and power systems.</p>
+      </article>
+    </div>
+  </section>
 
-  <footer>
-    <p>© COSMOS — Exploring the Universe</p>
-  </footer>
+  <section class="container reveal" id="faq">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">06 / Knowledge Check</span>
+        <h2>Questions about the Sun.</h2>
+      </div>
+      <p>Clear answers to common questions about our star and its behaviour.</p>
+    </div>
 
-  <script src="app.js" defer></script>
+    <div class="faq-list">
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What is solar physics?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Solar physics is the study of the Sun's structure, energy generation,
+          plasma, magnetic fields, atmosphere, eruptions and influence on space.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>How does the Sun produce energy?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Nuclear fusion in the core converts hydrogen into helium. A small
+          fraction of the mass involved is converted into energy, which
+          ultimately escapes as radiation and particles.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Why is the corona hotter than the photosphere?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          The corona reaches temperatures of millions of degrees, much higher
+          than the photosphere. Magnetic waves, reconnection and related
+          processes are important candidate mechanisms, but their relative
+          contributions remain under investigation.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What is the difference between a solar flare and a CME?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          A flare is a sudden release of energy that produces radiation.
+          A coronal mass ejection is a large expulsion of magnetized plasma.
+          They can occur together, but one does not always accompany the other.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Can solar storms damage technology?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Strong solar events can disturb Earth's magnetic environment and
+          affect satellites, radio communications, navigation systems and
+          power infrastructure. The severity depends on the event and the
+          systems exposed.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Does the Sun have an approximately 11-year cycle?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Yes. Sunspot activity generally rises and falls over about 11 years.
+          The Sun's magnetic polarity also reverses around each activity maximum,
+          so a full magnetic cycle takes roughly 22 years.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What is the solar wind?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          It is a continuous flow of charged particles streaming outward from
+          the Sun. It carries the solar magnetic field through the heliosphere.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Why do scientists send probes close to the Sun?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Close-range measurements let scientists sample particles and magnetic
+          fields before the solar wind has travelled far, helping investigate
+          how the corona is heated and how the solar wind accelerates.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>What is helioseismology?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          It is the study of waves and oscillations on and within the Sun.
+          Their patterns help researchers infer the Sun's internal structure
+          and flows.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Can we predict solar storms exactly?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Scientists can monitor solar activity and estimate the likelihood
+          and potential effects of some events. Exact predictions of the
+          timing, strength and impact of every event remain difficult.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>Is the Sun a typical star?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          The Sun is a middle-aged G-type main-sequence star. It is not the
+          most massive or the smallest kind of star, but it is the nearest
+          star to Earth and therefore the one we can study in greatest detail.
+        </div>
+      </article>
+
+      <article class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">
+          <span>How can beginners start studying solar physics?</span><span>+</span>
+        </button>
+        <div class="faq-answer">
+          Start with basic astronomy, gravity, electromagnetism, waves and
+          thermodynamics. Then explore public solar images and mission
+          resources from NASA and ESA, keeping track of what is measured
+          directly and what is inferred from models.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="container reveal" id="resources">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">07 / Further Reading</span>
+        <h2>Explore trusted resources.</h2>
+      </div>
+      <p>
+        Continue learning from scientific agencies and mission teams that
+        publish solar observations, explanations and research updates.
+      </p>
+    </div>
+
+    <div class="resource-grid">
+      <a class="panel resource" href="https://science.nasa.gov/sun/" target="_blank" rel="noopener noreferrer">
+        <small>NASA SCIENCE</small>
+        <h3>The Sun</h3>
+        <p>Solar facts, imagery, science explainers and mission information.</p>
+        <span class="resource-link">Open NASA Sun resources ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://science.nasa.gov/heliophysics/focus-areas/solar-science/" target="_blank" rel="noopener noreferrer">
+        <small>NASA HELIOPHYSICS</small>
+        <h3>Solar Science</h3>
+        <p>Learn how researchers investigate solar activity and its effects.</p>
+        <span class="resource-link">Explore solar science ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://science.nasa.gov/mission/parker-solar-probe/" target="_blank" rel="noopener noreferrer">
+        <small>NASA MISSION</small>
+        <h3>Parker Solar Probe</h3>
+        <p>Discover close-up investigations of the corona and solar wind.</p>
+        <span class="resource-link">Explore the mission ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://sdo.gsfc.nasa.gov/" target="_blank" rel="noopener noreferrer">
+        <small>NASA / GSFC</small>
+        <h3>Solar Dynamics Observatory</h3>
+        <p>Explore solar imagery and observations across multiple wavelengths.</p>
+        <span class="resource-link">Visit SDO ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://science.nasa.gov/mission/soho/" target="_blank" rel="noopener noreferrer">
+        <small>ESA–NASA</small>
+        <h3>SOHO</h3>
+        <p>Study the Sun's atmosphere, internal structure and solar wind.</p>
+        <span class="resource-link">Visit SOHO mission page ↗</span>
+      </a>
+
+      <a class="panel resource" href="https://www.esa.int/Science_Exploration/Space_Science/Solar_Orbiter" target="_blank" rel="noopener noreferrer">
+        <small>EUROPEAN SPACE AGENCY</small>
+        <h3>Solar Orbiter</h3>
+        <p>Explore observations of the Sun and the space around it.</p>
+        <span class="resource-link">Visit ESA ↗</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>COSMOS · Solar Physics Research</p>
+  <p>Educational resource · Explore, question, investigate.</p>
+</footer>
+
+<a class="back-top" href="#top" id="backTop" aria-label="Back to top">↑</a>
+
+<script>
+(() => {
+  "use strict";
+
+  const progress = document.getElementById("readingProgress");
+  const backTop = document.getElementById("backTop");
+  const search = document.getElementById("topicSearch");
+  const topicCards = [...document.querySelectorAll(".topic-card")];
+  const filterButtons = [...document.querySelectorAll(".filter-btn")];
+  const topicCount = document.getElementById("topicCount");
+  const noResults = document.getElementById("noResults");
+
+  let activeFilter = "all";
+
+  function updateScrollUI() {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const amount = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+
+    progress.style.width = `${Math.min(100, amount)}%`;
+    backTop.classList.toggle("visible", window.scrollY > 500);
+  }
+
+  window.addEventListener("scroll", updateScrollUI, { passive: true });
+  window.addEventListener("resize", updateScrollUI);
+  updateScrollUI();
+
+  function filterTopics() {
+    const query = search.value.trim().toLowerCase();
+    let visible = 0;
+
+    topicCards.forEach(card => {
+      const categories = card.dataset.category.split(/\s+/);
+      const matchesCategory = activeFilter === "all" ||
+        categories.includes(activeFilter);
+      const matchesQuery = card.textContent.toLowerCase().includes(query);
+      const show = matchesCategory && matchesQuery;
+
+      card.hidden = !show;
+      if (show) visible++;
+    });
+
+    topicCount.textContent =
+      `${visible} ${visible === 1 ? "topic" : "topics"} found`;
+    noResults.classList.toggle("show", visible === 0);
+  }
+
+  search.addEventListener("input", filterTopics);
+
+  filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      activeFilter = button.dataset.filter;
+
+      filterButtons.forEach(item => {
+        const selected = item === button;
+        item.classList.toggle("active", selected);
+        item.setAttribute("aria-pressed", String(selected));
+      });
+
+      filterTopics();
+    });
+
+    button.setAttribute(
+      "aria-pressed",
+      String(button.classList.contains("active"))
+    );
+  });
+
+  document.querySelectorAll(".faq-question").forEach(button => {
+    button.addEventListener("click", () => {
+      const item = button.closest(".faq-item");
+      const willOpen = !item.classList.contains("open");
+
+      item.classList.toggle("open", willOpen);
+      button.setAttribute("aria-expanded", String(willOpen));
+    });
+  });
+
+  const revealElements = document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    revealElements.forEach(element => observer.observe(element));
+  } else {
+    revealElements.forEach(element => element.classList.add("visible"));
+  }
+})();
+</script>
 </body>
 </html>
