@@ -1,0 +1,21 @@
+
+{
+  "id": "./index.html",
+  "name": "COSMOS — Explore the Universe",
+  "short_name": "COSMOS",
+  "description": "Explore the universe, planets, space missions and astronomical discoveries.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#080b16",
+  "theme_color": "#080b16",
+  "icons": [
+    {
+      "src": "./cosmos-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
